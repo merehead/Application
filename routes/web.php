@@ -12,5 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.home.home');
 });
+
+Route::get('carer-registration', function () {
+    return 'carer-registration';
+});
+
+Route::get('customer-registration', 'Registration\CustomerRegistrationController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
