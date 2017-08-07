@@ -25,3 +25,12 @@ Route::post('customer-registration/ajax', 'Registration\CustomerRegistrationCont
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+
+Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
+
+    Route::resource('/users','UserController', ['except' => ['show']]);
+
+}
