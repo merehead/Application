@@ -26,6 +26,8 @@ class CreateTempUsersTable extends Migration
             $table->string('nicename', 100)->nullable();
             $table->string('gender', 2)->nullable();
             $table->string('remember_step')->nullable();
+            $table->string('token_step')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

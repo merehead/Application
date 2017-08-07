@@ -19,7 +19,8 @@ Route::get('carer-registration', function () {
     return 'carer-registration';
 });
 
-Route::get('customer-registration', 'Registration\CustomerRegistrationController@index');
+Route::get('customer-registration/{step_token?}', 'Registration\CustomerRegistrationController@index');
+Route::post('customer-registration/ajax', 'Registration\CustomerRegistrationController@ajax');
 
 Auth::routes();
 

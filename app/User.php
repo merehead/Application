@@ -26,4 +26,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token', 'activation_key',
     ];
+
+
+    public function meta()
+    {
+        return $this->hasMany('MetaUser');
+    }
+
+    public function tempUser()
+    {
+        return $this->hasOne('TempUser');
+    }
 }

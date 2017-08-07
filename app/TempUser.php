@@ -25,4 +25,14 @@ class TempUser extends Model
     protected $hidden = [
         'password',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function meta()
+    {
+        return $this->hasMany('MetaUser');
+    }
 }
