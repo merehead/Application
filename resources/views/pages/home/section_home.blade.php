@@ -74,7 +74,7 @@
       <div class="advantages">
         <div class="advantages__item singleAdvantage">
           <div class="singleAdvantage__img">
-            <img src="./dist/img/advantage1.png" alt="">
+            <img src="./dist/img/nik.png" alt="">
           </div>
           <div class="singleAdvantage__info">
             <h2>

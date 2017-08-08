@@ -31,6 +31,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
 
-    Route::resource('/users','UserController', ['except' => ['show']]);
+    Route::get('/', 'AdminController@index')->name('index');
 
-}
+    Route::resource('/user','User\UserController', ['except' => ['show']]);
+
+});
