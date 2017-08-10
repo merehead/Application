@@ -7,5 +7,11 @@
     </div>
     <h2 class="adminProfile__name">Nik Seth</h2>
     <p class="adminProfile__role">admin</p>
-    <a href="#" class="adminProfile__logout">logout</a>
+    <a href="{{ route('logout') }}" class="adminProfile__logout"
+       onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+        Logout
+    </a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+    </form>
 </div>

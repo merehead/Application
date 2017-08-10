@@ -35,16 +35,17 @@ class UserController extends AdminController
         $statusType = $this->siteUsers->getStatusType();
         // getTotals
         $totals = $this->siteUsers->getTotals();
+        // getTotalsByUserType
+        $totalsByUserType = $this->siteUsers->getTotalsByUserType();
+
         // getUserRecords
-
-
-        //dd($profileType,$statusType,$totals);
-        //dd($this->content);
+        $userList = $this->siteUsers->getUserList();
 
         $this->vars = array_add($this->vars,'profileType',$profileType);
         $this->vars = array_add($this->vars,'statusType',$statusType);
         $this->vars = array_add($this->vars,'totals',$totals);
-
+        $this->vars = array_add($this->vars,'totalsByUserType',$totalsByUserType);
+        $this->vars = array_add($this->vars,'userList',$userList);
 
         //dd($this->vars);
 
@@ -105,7 +106,17 @@ class UserController extends AdminController
      */
     public function update(Request $request, $id)
     {
-        //
+        switch ($request->get('action')){
+
+            case 'accept':
+                return $id.' - accept';
+            case 'reject':
+                return $id.' - reject';
+            case 'block':
+                return $id.' - block';
+        }
+
+        dd($request->all(), $id);
     }
 
     /**

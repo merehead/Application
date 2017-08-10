@@ -1,6 +1,104 @@
-@extends('layouts.app')
+@extends(config('settings.theme').'.layouts.login')
 
 @section('content')
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+    <section class="loginSection">
+        <div class="loginLogo">
+            <a href="/" class="loginLogo__item"></a>
+        </div>
+        <div class="loginBox loginBox--set">
+            <div class="login">
+                <div class="login__header">
+                    <h2>set a new password</h2>
+                    <a href="/" class="closeModal">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                <div class="login__body" >
+
+                    <form id="login__form" class="login__form" method="POST" action="{{ route('password.request') }}">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="token" value="{{ $token }}">
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <div class="formField">
+
+                                <div class="fieldWrap">
+                                    {{--<input type="text" class="formItem formItem--input" placeholder="Your Email">--}}
+                                    <input id="email" type="email" class="formItem formItem--input"
+                                           placeholder="Your Email" name="email" value="{{ old('email') }}" required>
+                                    <span class="fieldIco"><i class="fa fa-envelope"></i></span>
+                                </div>
+
+                            </div>
+                            @if ($errors->has('email'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+
+
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <div class="formField">
+                                <h2 class="fieldLabel">new 8password</h2>
+                                <div class="fieldWrap">
+                                    <input id="password" type="password" class="formItem formItem--input" name="password" placeholder="********">
+                                    <span class="fieldIco">
+                  <i class="fa fa-lock"></i>
+                </span>
+                                </div>
+                            </div>
+                            @if ($errors->has('password'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+
+
+                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                            <div class="formField">
+                                <h2 class="fieldLabel">Repeat Password</h2>
+                                <div class="fieldWrap">
+                                    <input id="password-confirm" type="password" class="formItem formItem--input formItem--error" name="password_confirmation"
+                                           placeholder="********">
+                                    <span class="fieldIco">
+                  <i class="fa fa-lock"></i>
+                </span>
+                                </div>
+                            </div>
+                            @if ($errors->has('password_confirmation'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+
+
+                    </form>
+                </div>
+
+                <div class="login__footer">
+
+                    <button class="actionsBtn  actionsBtn--accept actionsBtn--full"
+                            onclick="event.preventDefault();document.getElementById('login__form').submit();">
+                        confirm password
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+@endsection
+
+
+
+{{--@section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -73,4 +171,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection--}}

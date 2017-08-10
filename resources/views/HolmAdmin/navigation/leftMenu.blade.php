@@ -132,33 +132,3 @@
         </li>
     </ul>
 </nav>
-
-
-
-
-
-
-
-
-
-{{--
-<div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-        <div class="panel-collapse collapse in">
-            <div class="list-group">
-                <a href="#" class="list-group-item">Statistic</a>
-                <a href="#" class="list-group-item">Financial</a>
-                <a href="{{route('user.index')}}" class="list-group-item">Profiles management</a>
-                <a href="#" class="list-group-item">Bookings details</a>
-                <a href="#" class="list-group-item">Bookings transaction</a>
-                <a href="#" class="list-group-item">Payouts to purchasers</a>
-                <a href="#" class="list-group-item">Payouts to carers</a>
-                <a href="#" class="list-group-item">Dispute payouts</a>
-                <a href="#" class="list-group-item">Admin's transaction</a>
-                <a href="#" class="list-group-item">Bonuses carers</a>
-                <a href="#" class="list-group-item">Fees management</a>
-                <a href="#" class="list-group-item">Carer's wage's</a>
-            </div>
-        </div>
-    </div>
-</div>--}}
