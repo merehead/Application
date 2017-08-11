@@ -47,7 +47,7 @@
 
                                 <div class="fieldWrap">
                                     {{--<input type="text" class="formItem formItem--input" placeholder="Your Email">--}}
-                                    <input id="email" type="email" class="formItem formItem--input"
+                                    <input id="email" type="email" class="formItem formItem--{{$errors->has('email') ? 'error' : 'input'}}"
                                            placeholder="Your Email" name="email" value="{{ old('email') }}" required>
                                     <span class="fieldIco">
                   <i class="fa fa-envelope"></i>
