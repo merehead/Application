@@ -37,4 +37,23 @@ class User extends Authenticatable
     {
         return $this->hasOne('TempUser');
     }
+
+
+    //--> ivan likhvar 2017 08  11
+
+    public function userPurchaser()
+    {
+        return $this->hasMany('App\Booking','purchaser_id','id');
+    }
+
+    public function userService()
+    {
+        return $this->hasMany('App\Booking','service_user_id','id');
+    }
+
+    public function userCarer()
+    {
+        return $this->hasMany('App\Booking','carer_id','id');
+    }
+    //<--
 }

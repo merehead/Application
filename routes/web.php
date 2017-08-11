@@ -34,5 +34,6 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::get('/', 'AdminController@index')->name('index');
 
     Route::resource('/user','User\UserController', ['except' => ['show']]);
+    Route::resource('/booking','Booking\BookingController', ['except' => ['show']]);
 
 });
