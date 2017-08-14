@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,7 +35,7 @@ class AdminController extends Controller
 
     }
 
-    public function index(){
+    public function index(Request $request){
 
         $this->template = config('settings.theme').'.templates.adminBase';
         $this->title = 'Admin Home page';

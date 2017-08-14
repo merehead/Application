@@ -6,54 +6,42 @@ use App\Appointment;
 use App\Booking;
 use App\Booking_appointment_frequency;
 use App\Booking_appointment_status;
+use App\Http\Controllers\Admin\AdminController;
+
+use App\Http\Controllers\Admin\Repo\Models\Booking\AdminBookings;
 use App\Transaction;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class BookingController extends Controller
+
+class BookingController extends AdminController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    private $booking;
+
+    public function __construct(AdminBookings $booking) {
+        parent::__construct();
+        $this->booking = $booking;
+
+        $this->template = config('settings.theme').'.templates.adminBase';
+    }
+
+    public function index(Request $request)
     {
-        $statuses = Booking_appointment_status::all();
-        $frequencies = Booking_appointment_frequency::all();
-        $transactions = Transaction::all();
-        $bookings = Booking::all();
-        $appointments = Appointment::all();
 
-        $appointment = Appointment::find(1);
+        $input = $request->all();
 
-        $booking = Booking::find(1);
+        $orderBy = 'id';
+        $orderDirection = 'asc';
+        if (isset($input['orderBy'])) {$orderBy = $input['orderBy'];}
 
-        $transaction = Transaction::find(1);
+        $this->title = 'Admin Bookings Details';
 
-        $frequency = Booking_appointment_frequency::find(5);
+        $bookings = $this->booking->get('*', FALSE,  FALSE,  FALSE, [$orderBy,$orderDirection]);
+        $this->vars = array_add($this->vars,'bookings',$bookings);
 
-        $status = Booking_appointment_status::find(2);
+        $this->content = view(config('settings.theme').'.bookingsDetails.bookingsDetails')->with($this->vars)->render();
 
-        $user = User::find(1);
-
-
-        dd($user,$user->userPurchaser,$user->userService,$user->userCarer);
-
-        dd($status,$status->statusAppointments,$status->statusCarerAppointments,$status->statusPurchaserAppointments,$status->statusBookings,$status->statusCarerBookings,$status->statusPurchaserBookings);
-
-        dd($frequency,$frequency->bookings);
-
-        dd($transaction,$transaction->appointments);
-
-        dd($booking,$booking->bookingPurchaser,$booking->bookingServiceUser,$booking->bookingCarer,$booking->frequency,$booking->bookingStatus,$booking->bookingStatusCarer,$booking->bookingStatusPurchaser,$booking->appointments);
-
-        dd($appointment, $appointment->booking,$appointment->transaction,$appointment->appointmentStatus,$appointment->appointmentStatusCarer,$appointment->appointmentStatusPurchaser);
-
-        dd($statuses,$frequencies,$transactions,$bookings,$appointments);
-
-        return 'booking index';
+        return $this->renderOutput();
     }
 
     /**

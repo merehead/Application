@@ -31,6 +31,7 @@
         <a href="#" class="actionsBtn actionsBtn--filter actionsBtn--bigger">
             filter
         </a>
+
         <div class="panelHead__group">
         <a href="#" class="print">
             <i class="fa fa-print" aria-hidden="true"></i>
