@@ -28,7 +28,7 @@
 
                                 <div class="fieldWrap">
                                     {{--<input type="text" class="formItem formItem--input" placeholder="Your Email">--}}
-                                    <input id="email" type="email" class="formItem formItem--{{$errors->has('email') ? 'error' : 'input'}}"
+                                    <input id="email" type="email" class="formItem formItem--input {{$errors->has('email') ? ' formItem--error' : ''}}"
                                            placeholder="Your Email" name="email" value="{{ old('email') }}" required>
                                     <span class="fieldIco"><i class="fa fa-envelope"></i></span>
                                 </div>
@@ -46,7 +46,7 @@
                             <div class="formField">
                                 <h2 class="fieldLabel">new password</h2>
                                 <div class="fieldWrap">
-                                    <input id="password" type="password" class="formItem formItem--{{ $errors->has('password') ? 'error' : 'input' }}" name="password" placeholder="********">
+                                    <input id="password" type="password" class="formItem formItem--input {{ $errors->has('password') ? ' formItem--error' : '' }}" name="password" placeholder="********">
                                     <span class="fieldIco">
                   <i class="fa fa-lock"></i>
                 </span>
@@ -64,7 +64,7 @@
                             <div class="formField">
                                 <h2 class="fieldLabel">Repeat Password</h2>
                                 <div class="fieldWrap">
-                                    <input id="password-confirm" type="password" class="formItem formItem--input formItem--{{ $errors->has('password_confirmation') ? 'error' : 'input' }}" name="password_confirmation"
+                                    <input id="password-confirm" type="password" class="formItem formItem--input {{ $errors->has('password_confirmation') ? ' formItem--error' : '' }}" name="password_confirmation"
                                            placeholder="********">
                                     <span class="fieldIco">
                   <i class="fa fa-lock"></i>

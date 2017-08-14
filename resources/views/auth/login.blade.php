@@ -23,7 +23,9 @@
                             <div class="formField">
                                 <h2 class="fieldLabel">Email</h2>
                                 <div class="fieldWrap">
-                                    <input id="email" type="email" name="email" class="formItem formItem--{{$errors->has('email') ? 'error' : 'input'}}">
+                                    <input id="email" type="email" name="email"
+                                           class="formItem formItem--input {{$errors->has('email') ? ' formItem--error' : ''}}">
+                                    <span class="fieldIco"><i class="fa fa-envelope"></i></span>
                                 </div>
                             </div>
                             @if ($errors->has('email'))
@@ -37,8 +39,10 @@
                                 <h2 class="fieldLabel">Password</h2>
                                 <div class="fieldWrap">
                                     <input id="password" type="password" name="password"
-                                           class="formItem formItem--input formItem--{{$errors->has('password') ? 'error' : 'input'}}error">
+                                           class="formItem formItem--input {{$errors->has('password') ? ' formItem--error' : ''}}">
+                                    <span class="fieldIco"><i class="fa fa-lock"></i></span>
                                 </div>
+
                             </div>
                             @if ($errors->has('password'))
                                 <span class="help-block">

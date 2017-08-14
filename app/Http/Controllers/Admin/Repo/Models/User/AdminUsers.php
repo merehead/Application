@@ -33,7 +33,7 @@ class AdminUsers extends AdminModel
 
     // как бы справочник типов профилей
     public function getProfileType (){
-        return ['1'=>'Purchaser','2'=>'Serves user','3'=>'Carer'];
+        return ['1'=>'Purchaser','2'=>'Service user','3'=>'Carer'];
     }
 
     // как бы справочник статусов
