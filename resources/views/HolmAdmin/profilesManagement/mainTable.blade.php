@@ -20,7 +20,7 @@
             </td>
             <td class="ordninary-td">
                   <span class="td-title td-title--light-brown">
-                    Nta Unswers
+                    Nta Answers
                   </span>
             </td>
             <td class="bigger-td">
@@ -71,7 +71,7 @@
                 case 'EDITED':
                     $rowClass = 'edit';
                     break;
-                case 'CANCELED':
+                case 'CANCELLED':
                     $rowClass = 'canceled';
                     break;
             }
