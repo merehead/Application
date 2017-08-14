@@ -16,7 +16,6 @@ class CreateUserStatusesTable extends Migration
         Schema::create('user_statuses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 64)->nullable();
-            $table->string('css_name', 64)->nullable();
             $table->timestamps();
         });
     }
