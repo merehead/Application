@@ -25,7 +25,7 @@ class servicesTableSeeder extends Seeder
         DB::table('booking_appointment_statuses')->insert(['name' => 'new','css_name' => 'new']);
         DB::table('booking_appointment_statuses')->insert(['name' => 'complete','css_name' => 'complete']);
         DB::table('booking_appointment_statuses')->insert(['name' => 'in progress','css_name' => 'progress']);
-        DB::table('booking_appointment_statuses')->insert(['name' => 'canceled','css_name' => 'canceled']);
+        DB::table('booking_appointment_statuses')->insert(['name' => 'cancelled','css_name' => 'canceled']);
         DB::table('booking_appointment_statuses')->insert(['name' => 'dispute','css_name' => 'dispute']);
         //-----------------------------------------------------------------------------
         DB::table('booking_appointment_frequencies')->insert(['name' => 'undefined']);

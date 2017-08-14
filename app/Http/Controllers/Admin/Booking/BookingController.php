@@ -30,13 +30,13 @@ class BookingController extends AdminController
 
         $input = $request->all();
 
-        $orderBy = 'id';
-        $orderDirection = 'asc';
-        if (isset($input['orderBy'])) {$orderBy = $input['orderBy'];}
+        $filter = FALSE;
+        //$orderDirection = 'desc';
+        if (isset($input['filter'])) {$input['filter'] != 0 ? $filter = ['status_id','=',$input['filter']] : $filter = FALSE;}
 
         $this->title = 'Admin Bookings Details';
 
-        $bookings = $this->booking->get('*', FALSE,  FALSE,  FALSE, [$orderBy,$orderDirection]);
+        $bookings = $this->booking->get('*', FALSE, FALSE,  $filter, ['id','desc']);
         $this->vars = array_add($this->vars,'bookings',$bookings);
 
         $this->content = view(config('settings.theme').'.bookingsDetails.bookingsDetails')->with($this->vars)->render();

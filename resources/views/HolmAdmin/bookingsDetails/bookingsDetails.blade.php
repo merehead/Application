@@ -39,10 +39,11 @@
                                     --Text--
                                 </option>
                             </select>--}}
-                            {!! Form::select('orderBy',['id'=>'Booking ID','frequency_id'=>'Frequency'],null,['class'=>'formItem formItem--select']) !!}
+                            {!! Form::select('filter',['0'=>'ALL','1'=>'NEW','2'=>'COMPLETE','3'=>'IN PROGRESS','4'=>'CANCELLED','5'=>'DISPUTE'],
+                            null,['class'=>'formItem formItem--select']) !!}
                         </div>
 
-                        {!! Form::submit('sort',['class'=>'actionsBtn actionsBtn--filter actionsBtn--bigger']) !!}
+                        {!! Form::submit('filter',['class'=>'actionsBtn actionsBtn--filter actionsBtn--bigger']) !!}
                     </div>
                     {!! Form::close()!!}
 
