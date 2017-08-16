@@ -35,5 +35,6 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
 
     Route::resource('/user','User\UserController', ['except' => ['show']]);
     Route::resource('/booking','Booking\BookingController', ['only' => ['index']]);
+    Route::resource('/dispute-payout','DisputePayout\DisputePayoutController', ['only' => ['index']]);
 
 });

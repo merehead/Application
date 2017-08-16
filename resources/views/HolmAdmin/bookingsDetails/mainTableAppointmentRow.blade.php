@@ -1,6 +1,10 @@
 <tr>
     <td class=" ">
-        <span>{{$appointment->transaction_id}}</span>
+        @if(!empty($appointment->transaction))
+            {{$appointment->transaction->id}}
+        @else
+            <span></span>
+        @endif
     </td>
     <td class=" ">
         {{$appointment->id}}
@@ -13,7 +17,10 @@
 
     </td>
     <td class="">
-        {{$appointment->amount}}
+        {{$appointment->amount_for_purchaser}}
+    </td>
+    <td class="">
+        {{$appointment->amount_for_carer}}
     </td>
     <td class=" ">
         <div class="profStatus profStatus--left">

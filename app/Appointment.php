@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
 {
-    protected $fillable = ['booking_id','transaction_id','date_start','date_end','amount','status_id','carer_status_id','purchaser_status_id'];
+    protected $fillable = ['booking_id','date_start','date_end','amount_for_purchaser','amount_for_carer','status_id','carer_status_id','carer_status_date','purchaser_status_id','purchaser_status_date'];
 
     public function getDateStartAttribute($value)
     {
@@ -25,19 +25,19 @@ class Appointment extends Model
 
     public function transaction()
     {
-        return $this->belongsTo('App\Transaction');
+        return $this->belongsTo('App\AppointmentPayment','id','appointment_id');
     }
 
     public function appointmentStatus ()
     {
-        return $this->belongsTo('App\Booking_appointment_status','status_id','id');
+        return $this->belongsTo('App\AppointmentStatus','status_id','id');
     }
     public function appointmentStatusCarer ()
     {
-        return $this->belongsTo('App\Booking_appointment_status','carer_status_id','id');
+        return $this->belongsTo('App\AppointmentUserStatus','carer_status_id','id');
     }
     public function appointmentStatusPurchaser ()
     {
-        return $this->belongsTo('App\Booking_appointment_status','purchaser_status_id','id');
+        return $this->belongsTo('App\AppointmentUserStatus','purchaser_status_id','id');
     }
 }

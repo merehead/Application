@@ -9,7 +9,7 @@
                     <span>{{$booking->purchaser_id}}</span>
                 </td>
                 <td class="nameField">
-                    <a href="#" class="tableLink">{{$booking->bookingPurchaser->name}}</a>
+                    <a href="#" class="tableLink">{{$booking->bookingPurchaser->fname}}</a>
                 </td>
             </tr>
         </table>
@@ -21,7 +21,7 @@
                     <span>{{$booking->service_user_id}}</span>
                 </td>
                 <td class="nameField">
-                    <a href="#" class="tableLink">{{$booking->bookingServiceUser->name}}</a>
+                    <a href="#" class="tableLink">{{$booking->bookingServiceUser->fname}}</a>
                 </td>
             </tr>
         </table>
@@ -33,7 +33,7 @@
                     <span>{{$booking->carer_id}}</span>
                 </td>
                 <td class="nameField">
-                    <a href="#" class="tableLink">{{$booking->bookingCarer->name}}</a>
+                    <a href="#" class="tableLink">{{$booking->bookingCarer->fname}}</a>
                 </td>
             </tr>
         </table>
@@ -58,16 +58,16 @@
                         <span class="profStatus__item profStatus__item--{{$booking->bookingStatus->css_name}}">{{$booking->bookingStatus->name}}</span>
                     </div>
                 </td>
-                <td class=" ">
+{{--                <td class=" ">
                     <div class="profStatus profStatus--left">
-                        <span class="profStatus__item profStatus__item--{{$booking->bookingStatusCarer->css_name}}">{{$booking->bookingStatusCarer->name}}</span>
+                        <span class="profStatus__item profStatus__item--{{$booking->bookingStatus->css_name}}">{{$booking->bookingStatus->name}}</span>
                     </div>
                 </td>
                 <td class=" ">
                     <div class="profStatus profStatus--left">
-                        <span class="profStatus__item profStatus__item--{{$booking->bookingStatusPurchaser->css_name}}">{{$booking->bookingStatusPurchaser->name}}</span>
+                        <span class="profStatus__item profStatus__item--{{$booking->bookingStatus->css_name}}">{{$booking->bookingStatus->name}}</span>
                     </div>
-                </td>
+                </td>--}}
 
             </tr>
 

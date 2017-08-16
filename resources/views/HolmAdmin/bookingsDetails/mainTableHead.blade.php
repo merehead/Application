@@ -96,12 +96,12 @@
                         <td class=" ">
                             <span class="extraTitle">status</span>
                         </td>
-                        <td class=" ">
+{{--                        <td class=" ">
                             <span class="extraTitle">Carer <br /> booking <br />status</span>
                         </td>
                         <td class=" ">
                             <span class="extraTitle">Purchaser <br /> booking <br />status</span>
-                        </td>
+                        </td>--}}
 
                     </tr>
 
@@ -123,7 +123,10 @@
                             <span class="extraTitle">to</span>
                         </td>
                         <td class="">
-                            <span class="extraTitle">appointment <br /> value</span>
+                            <span class="extraTitle">purchaser <br /> appointment <br /> value</span>
+                        </td>
+                        <td class="">
+                            <span class="extraTitle">carer <br /> appointment <br /> value</span>
                         </td>
                         <td class=" ">
                             <span class="extraTitle">status</span>

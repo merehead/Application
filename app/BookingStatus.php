@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Booking_appointment_frequency extends Model
+class BookingStatus extends Model
 {
     protected $fillable = ['name'];
 
     public function bookings()
     {
-        return $this->hasMany('App\Booking','frequency_id','id');
+        return $this->hasMany('App\Booking','status_id','id');
     }
 }

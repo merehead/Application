@@ -3,49 +3,54 @@
           <span class="categoryTitle__ico">
             <i class="fa fa-user" aria-hidden="true"></i>
           </span>
-                booking details
+                dispute payouts
             </h2>
             <div class="panelHead">
-{{--
                 <div class="filterGroup">
                     <div class="filterBox">
                         <h2 class="filterBox__title themeTitle">
-                            booking details
+                <span class="categoryTitle__ico">
+                  <i class="fa fa-check-square" aria-hidden="true"></i>
+                </span>
+                            dispute payouts
+
                         </h2>
---}}
-{{--                        <div class="formField ">
+                        <div class="formField ">
                 <span class="dateValue">
                   30 JUN 2017
                 </span>
-                        </div>--}}{{--
-
+                        </div>
 
                     </div>
-
-
-
-                </div>
---}}
-
-                <div class="panelHead__group">
-                    {!! Form::open(['method'=>'GET','route'=>'booking.index']) !!}
                     <div class="filterBox">
                         <h2 class="filterBox__title themeTitle">
-                            filter by
+                            £ 1000
+                        </h2>
+                    </div>
+                    <a href="#" class="actionsBtn actionsBtn--filter actionsBtn--bigger">
+                        filter
+                    </a>
+                    <a href="#" class="actionsBtn actionsBtn--filter actionsBtn--bigger">
+                        payout all
+                    </a>
+                </div>
+
+                <div class="panelHead__group">
+                    <div class="filterBox">
+                        <h2 class="filterBox__title themeTitle">
+                            sort by
                         </h2>
                         <div class="formField formField--fixed">
-{{--                            <select class="formItem formItem--select">
+                            <select class="formItem formItem--select">
                                 <option value="#">
                                     --Text--
                                 </option>
-                            </select>--}}
-                            {!! Form::select('filter',['0'=>'ALL','1'=>'NEW','2'=>'COMPLETE','3'=>'IN PROGRESS','4'=>'CANCELLED','5'=>'DISPUTE'],
-                            null,['class'=>'formItem formItem--select']) !!}
+                            </select>
                         </div>
 
-                        {!! Form::submit('filter',['class'=>'actionsBtn actionsBtn--filter actionsBtn--bigger']) !!}
+
                     </div>
-                    {!! Form::close()!!}
+
 
                 </div>
                 <a href="#" class="print">
@@ -53,7 +58,8 @@
                 </a>
 
             </div>
-            @include(config('settings.theme').'.bookingsDetails.mainTable')
+
+            @include(config('settings.theme').'.disputePayouts.mainTable')
+
 
         </div>
-

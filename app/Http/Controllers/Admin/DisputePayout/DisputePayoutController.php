@@ -1,41 +1,41 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Booking;
+namespace App\Http\Controllers\Admin\DisputePayout;
 
-
+use App\Appointment;
 use App\Http\Controllers\Admin\AdminController;
-
-use App\Http\Controllers\Admin\Repo\Models\Booking\AdminBookings;
-
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-
-class BookingController extends AdminController
+class DisputePayoutController extends AdminController
 {
-    private $booking;
 
-    public function __construct(AdminBookings $booking) {
+    private $disputePayout;
+
+    public function __construct(/*AdminBookings $booking*/) {
         parent::__construct();
-        $this->booking = $booking;
+        //$this->booking = $booking;
 
         $this->template = config('settings.theme').'.templates.adminBase';
     }
 
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
+        $this->title = 'Admin Dispute Payout';
 
-        $input = $request->all();
+        $appointments = Appointment::where('status_id', '=', 5)
+            ->orWhere('carer_status_id', '=', 5)
+            ->orWhere('purchaser_status_id', '=', 5)
+            ->get();
+        $this->vars = array_add($this->vars,'appointments',$appointments);
 
-        $filter = FALSE;
-        //$orderDirection = 'desc';
-        if (isset($input['filter'])) {$input['filter'] != 0 ? $filter = ['status_id','=',$input['filter']] : $filter = FALSE;}
-
-        $this->title = 'Admin Bookings Details';
-
-        $bookings = $this->booking->get('*', FALSE, FALSE,  $filter, ['id','desc']);
-        $this->vars = array_add($this->vars,'bookings',$bookings);
-
-        $this->content = view(config('settings.theme').'.bookingsDetails.bookingsDetails')->with($this->vars)->render();
+        $this->content = view(config('settings.theme').'.disputePayouts.disputePayouts')->with($this->vars)->render();
 
         return $this->renderOutput();
     }
