@@ -23,6 +23,11 @@ class Appointment extends Model
         return $this->belongsTo('App\Booking');
     }
 
+    public function disputePayment()
+    {
+        return $this->belongsTo('App\DisputePayment');
+    }
+
     public function transaction()
     {
         return $this->belongsTo('App\AppointmentPayment','id','appointment_id');

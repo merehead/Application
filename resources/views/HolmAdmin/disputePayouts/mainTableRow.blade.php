@@ -89,11 +89,13 @@
         </table>
     </td>
     <td>
+
+
         <div class="actionsGroup">
-            <a href="#" class="actionsBtn actionsBtn--accept actionsBtn--wider">
+            <a href="{{route('DisputePayoutToCarer',[$appointment->booking->purchaser_id,$appointment->amount_for_carer])}}" class="actionsBtn actionsBtn--accept actionsBtn--wider">
                 pay out to carer
             </a>
-            <a href="#" class="actionsBtn actionsBtn--view actionsBtn--wider">
+            <a href="{{route('DisputePayoutToPurchaser',[$appointment->booking->carer_id,$appointment->amount_for_purchaser])}}" class="actionsBtn actionsBtn--view actionsBtn--wider">
                 pay out to purchaser
             </a>
         </div>
