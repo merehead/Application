@@ -6,34 +6,34 @@
                 dispute payouts
             </h2>
             <div class="panelHead">
-                <div class="filterGroup">
-                    <div class="filterBox">
-                        <h2 class="filterBox__title themeTitle">
-                <span class="categoryTitle__ico">
-                  <i class="fa fa-check-square" aria-hidden="true"></i>
-                </span>
-                            dispute payouts
+                {{--   <div class="filterGroup">
+                       <div class="filterBox">
+                           <h2 class="filterBox__title themeTitle">
+                   <span class="categoryTitle__ico">
+                     <i class="fa fa-check-square" aria-hidden="true"></i>
+                   </span>
+                               dispute payouts
 
-                        </h2>
-                        <div class="formField ">
-                <span class="dateValue">
-                  30 JUN 2017
-                </span>
-                        </div>
+                           </h2>
+                           <div class="formField ">
+                   <span class="dateValue">
+                     30 JUN 2017
+                   </span>
+                           </div>
 
-                    </div>
-                    <div class="filterBox">
-                        <h2 class="filterBox__title themeTitle">
-                            £ 1000
-                        </h2>
-                    </div>
-                    <a href="#" class="actionsBtn actionsBtn--filter actionsBtn--bigger">
+                       </div>
+                       <div class="filterBox">
+                           <h2 class="filterBox__title themeTitle">
+                               £ 1000
+                           </h2>
+                       </div>--}}
+{{--                    <a href="#" class="actionsBtn actionsBtn--filter actionsBtn--bigger">
                         filter
-                    </a>
-                    <a href="#" class="actionsBtn actionsBtn--filter actionsBtn--bigger">
+                    </a>--}}
+{{--                    <a href="#" class="actionsBtn actionsBtn--filter actionsBtn--bigger">
                         payout all
                     </a>
-                </div>
+                </div>--}}
 
                 <div class="panelHead__group">
                     <div class="filterBox">
@@ -48,7 +48,9 @@
                             </select>
                         </div>
 
-
+                        <a href="#" class="actionsBtn actionsBtn--filter actionsBtn--bigger">
+                            filter
+                        </a>
                     </div>
 
 

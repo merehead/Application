@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin\AdminSitePayment;
 
+use App\Appointment;
+use App\DisputePayment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Stripe\OAuth;
@@ -10,19 +12,27 @@ use Stripe\Token;
 
 class AdminSitePayment extends Controller
 {
-    public function DisputePayoutToCarer(Request $request,$userId,$amount) {
+    public function DisputePayoutToCarer(Request $request, $appointmentId,$userId,$amount) {
 
-        dd($userId,$amount);
+/*        $app = Appointment::find(7);
+
+        dd($app->disputePayment);*/
+
+        $disputePayment = DisputePayment::create(['name' => 'PAID TO CARER','css_name'=>'new','appointment_id'=>$appointmentId,'amount'=>$amount]);
+
+        //dd($userId,$amount);
 
 
-        return 'DisputePayoutToCarer';
+        return redirect()->back();
     }
 
-    public function DisputePayoutToPurchaser(Request $request,$userId,$amount)
+    public function DisputePayoutToPurchaser(Request $request,$appointmentId,$userId,$amount)
     {
 
 
-        Stripe::setApiKey('sk_test_vvAgM8jjPgxXCqBVuugYzIhg');
+        $disputePayment = DisputePayment::create(['name' => 'PAID TO PURCHASER','css_name'=>'progress','appointment_id'=>$appointmentId,'amount'=>$amount]);
+
+/*        Stripe::setApiKey('sk_test_vvAgM8jjPgxXCqBVuugYzIhg');
 
         $response = NULL;
         $error_response = NULL;
@@ -48,7 +58,7 @@ class AdminSitePayment extends Controller
         if ($error_response)
             return $error_response;
         else
-            return $response;
+            return $response;*/
 
         return redirect()->back();
     }

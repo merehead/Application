@@ -91,22 +91,26 @@
     <td>
 
 
+        @if(empty($appointment->disputePayment))
         <div class="actionsGroup">
-            <a href="{{route('DisputePayoutToCarer',[$appointment->booking->purchaser_id,$appointment->amount_for_carer])}}" class="actionsBtn actionsBtn--accept actionsBtn--wider">
+            <a href="{{route('DisputePayoutToCarer',[$appointment->id,$appointment->booking->purchaser_id,$appointment->amount_for_carer])}}" class="actionsBtn actionsBtn--accept actionsBtn--wider">
                 pay out to carer
             </a>
-            <a href="{{route('DisputePayoutToPurchaser',[$appointment->booking->carer_id,$appointment->amount_for_purchaser])}}" class="actionsBtn actionsBtn--view actionsBtn--wider">
+            <a href="{{route('DisputePayoutToPurchaser',[$appointment->id,$appointment->booking->carer_id,$appointment->amount_for_purchaser])}}" class="actionsBtn actionsBtn--view actionsBtn--wider">
                 pay out to purchaser
             </a>
         </div>
-
+        @endif
     </td>
     <td>
+        @if(!empty($appointment->disputePayment))
         <div class="profStatus profStatus--left">
+{{--
             <span class="profStatus__item profStatus__item--new">PAID TO Purchaser</span>
-            <span class="profStatus__item profStatus__item--progress"> PAID TO Carer</span>
-
+--}}
+            <span class="profStatus__item profStatus__item--{{$appointment->disputePayment->css_name}}">{{$appointment->disputePayment->name}}</span>
         </div>
+        @endif
     </td>
 
 </tr>

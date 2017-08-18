@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DisputePayment extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name','css_name','appointment_id','amount'];
 
     public function appointment()
     {

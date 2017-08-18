@@ -22,7 +22,9 @@ class CreateDisputePaymentsTable extends Migration
         Schema::create('dispute_payments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 64)->nullable();
+            $table->string('css_name', 64)->nullable();
             $table->integer('appointment_id')->nullable()->unsigned();
+            $table->integer('amount')->nullable();
             $table->timestamps();
 
             $table->index('appointment_id');
