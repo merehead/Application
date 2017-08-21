@@ -15,9 +15,7 @@ Route::get('/', function () {
     return view('pages.home.home');
 });
 
-Route::get('carer-registration', function () {
-    return 'carer-registration';
-});
+
 
 Route::get('customer-registration/{step_token?}', 'Registration\CustomerRegistrationController@index');
 Route::post('customer-registration/ajax', 'Registration\CustomerRegistrationController@ajax');
@@ -25,8 +23,8 @@ Route::post('customer-registration/ajax', 'Registration\CustomerRegistrationCont
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-
+//----
+Route::get('carer-registration','CarerRegistrationController@index')->name('CarerRegistration');
 
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
