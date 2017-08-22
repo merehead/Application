@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontController extends Controller
 {
@@ -22,11 +23,11 @@ class FrontController extends Controller
     public function renderOutput() {
         $this->vars = array_add($this->vars,'title',$this->title);
 
-        //$navigation = view(config('settings.theme').'.navigation.leftMenu')->render();
-        //$this->vars = array_add($this->vars,'navigation',$navigation);
+        $header = view(config('settings.frontTheme').'.headers.userRegistrationHeader')->render();
+        $this->vars = array_add($this->vars,'header',$header);
 
-        //$logoInfo = view(config('settings.theme').'.logoInfo.logoInfo')->render();
-        //$this->vars = array_add($this->vars,'logoInfo',$logoInfo);
+        $footer = view(config('settings.frontTheme').'.footers.userRegistrationFooter')->render();
+        $this->vars = array_add($this->vars,'footer',$footer);
 
         $this->vars = array_add($this->vars,'content',$this->content);
 

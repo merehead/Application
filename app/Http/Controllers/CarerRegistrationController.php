@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
-use App\CarersProfile;
-
+use App\Http\Controllers\Repo\CarerRegistration;
+use App\Postcode;
 use Illuminate\Http\Request;
 
 class CarerRegistrationController extends FrontController
@@ -12,30 +11,49 @@ class CarerRegistrationController extends FrontController
 
     private $carersProfile;
 
-    public function __construct(CarersProfile $carersProfile) {
+    public function __construct(CarerRegistration $carersProfile) {
         parent::__construct();
         $this->carersProfile = $carersProfile;
 
-        $this->template = config('settings.frontTheme').'.templates.carerRegistration';
+        $this->template = config('settings.frontTheme').'.templates.userRegistration';
     }
 
 
 
     public function index(){
 
-
         $this->title = 'Carer Registration';
 
 
-        $this->content = view(config('settings.frontTheme').'.bookingsDetails.bookingsDetails')->with($this->vars)->render();
+        //dd($this->user);
 
 
-        $carerProfile = CarersProfile::find(1);
+        $this->vars = array_add($this->vars,'carersProfileID',$this->carersProfile->getID());
+
+        if($this->carersProfile->getNextStep()=='Step4_carerRegistration'){
+            $postcodes = Postcode::all()->pluck('name','id')->toArray();
+            $this->vars = array_add($this->vars,'postcodes',$postcodes);
+        }
+
+        //dd($postcodes);
 
 
+        $step = view(config('settings.frontTheme').'.carerRegistration.'.$this->carersProfile->getNextStep())->with($this->vars)->render();
+        $this->vars = array_add($this->vars,'step',$step);
 
-        dd($carerProfile);
+        $this->content = view(config('settings.frontTheme').'.carerRegistration.carerRegistration')->with($this->vars)->render();
 
-        return 'CarerRegistrationController';
+        return $this->renderOutput();
     }
+
+    public function update(Request $request) {
+
+        //dd($request->all());
+
+        $this->carersProfile->saveStep($request);
+
+        return redirect('/carer-registration');
+
+    }
+
 }

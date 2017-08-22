@@ -25,7 +25,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 //----
 Route::get('carer-registration','CarerRegistrationController@index')->name('CarerRegistration');
-
+Route::post('carer-registration','CarerRegistrationController@update')->name('CarerRegistrationPost');
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
 
