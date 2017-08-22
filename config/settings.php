@@ -9,4 +9,5 @@
 return [
     'theme' => 'HolmAdmin',
     'AdminUserPagination' =>'25',
+    'frontTheme' => 'Holm',
 ];

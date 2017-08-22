@@ -36,23 +36,26 @@
                 </div>--}}
 
                 <div class="panelHead__group">
+                    {!! Form::open(['method'=>'GET','route'=>'dispute-payout.index']) !!}
                     <div class="filterBox">
                         <h2 class="filterBox__title themeTitle">
                             sort by
                         </h2>
                         <div class="formField formField--fixed">
-                            <select class="formItem formItem--select">
+{{--                            <select class="formItem formItem--select">
                                 <option value="#">
                                     --Text--
                                 </option>
-                            </select>
-                        </div>
+                            </select>--}}
+                            {!! Form::select('filter',['0'=>'ALL','1'=>'PAID TO CARER','2'=>'PAID TO PURCHASER','3'=>'NEW'],
+null,['class'=>'formItem formItem--select']) !!}
 
-                        <a href="#" class="actionsBtn actionsBtn--filter actionsBtn--bigger">
-                            filter
-                        </a>
+                        </div>
+                        {!! Form::submit('filter',['class'=>'actionsBtn actionsBtn--filter actionsBtn--bigger']) !!}
+
                     </div>
 
+                    {!! Form::close()!!}
 
                 </div>
                 <a href="#" class="print">

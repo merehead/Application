@@ -29,7 +29,7 @@ class servicesTableSeeder extends Seeder
         DB::table('appointment_statuses')->insert(['name' => 'new','css_name' => 'new']);
         DB::table('appointment_statuses')->insert(['name' => 'in progress','css_name' => 'progress']);
         DB::table('appointment_statuses')->insert(['name' => 'dispute','css_name' => 'dispute']);
-        DB::table('appointment_statuses')->insert(['name' => 'complete','css_name' => 'complete']);
+        DB::table('appointment_statuses')->insert(['name' => 'completed','css_name' => 'complete']);
         DB::table('appointment_statuses')->insert(['name' => 'cancelled','css_name' => 'canceled']);
         DB::table('appointment_statuses')->insert(['name' => 'paid','css_name' => 'canceled']);
         //-----------------------------------------------------------------------------

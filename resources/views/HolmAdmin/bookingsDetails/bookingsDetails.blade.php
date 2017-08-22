@@ -39,7 +39,7 @@
                                     --Text--
                                 </option>
                             </select>--}}
-                            {!! Form::select('filter',['0'=>'ALL','1'=>'NEW','2'=>'COMPLETE','3'=>'IN PROGRESS','4'=>'CANCELLED','5'=>'DISPUTE'],
+                            {!! Form::select('filter',['0'=>'ALL','1'=>'NEW','2'=>'COMPLETED','3'=>'IN PROGRESS','4'=>'CANCELLED','5'=>'DISPUTE'],
                             null,['class'=>'formItem formItem--select']) !!}
                         </div>
 

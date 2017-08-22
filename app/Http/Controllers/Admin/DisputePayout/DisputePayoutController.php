@@ -27,12 +27,22 @@ class DisputePayoutController extends AdminController
      */
     public function index(Request $request)
     {
+
+        $filter = FALSE;
+        $input = $request->all();
+        //$orderDirection = 'desc';
+        if (isset($input['filter'])) {$input['filter'] != 0 ? $filter = ['status_id','=',$input['filter']] : $filter = FALSE;}
+
         $this->title = 'Admin Dispute Payout';
+
 
         $appointments = Appointment::where('status_id', '=', 5)
             ->orWhere('carer_status_id', '=', 5)
             ->orWhere('purchaser_status_id', '=', 5)
             ->get();
+
+
+
         $this->vars = array_add($this->vars,'appointments',$appointments);
 
         $this->content = view(config('settings.theme').'.disputePayouts.disputePayouts')->with($this->vars)->render();
