@@ -38,7 +38,7 @@
     </div>
 
 </div>
-<form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
+<form id="step" method="GET" action="/">
     {{ csrf_field() }}
     <input type="hidden" name="step" value = '21'>
     <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
