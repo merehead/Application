@@ -29,7 +29,39 @@
               <i class="fa fa-twitter"></i>
             </a>
           </div>
-          <div class="loginBox">
+
+          @if (Route::has('login'))
+            <div class="top-right links">
+              @if (Auth::check())
+                <a href="#" class="registeredCarer">
+                  <div class="profilePhoto registeredCarer__img">
+                    <img src="./img/profile4.png" alt="">
+                  </div>
+                  <h2 class="profileName">
+                    Rosie P.
+                  </h2>
+                  <span class="registeredCarer__ico">
+              <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </span>
+                </a>
+              @else
+                <div class="loginBox">
+                  <a href="/login" class=" centeredLink loginBox__link"
+                     onclick="event.preventDefault();document.getElementById('login').style.display = 'block';"
+                  >
+                    Login
+                  </a>
+                  <a href="@yield('sign_up_link', '/customer-registration')" class=" centeredLink loginBox__link loginBox__link--active">
+                    Sign up
+                  </a>
+                </div>
+              @endif
+            </div>
+          @endif
+
+
+
+{{--          <div class="loginBox">
             <a href="/login" class=" centeredLink loginBox__link"
                onclick="event.preventDefault();document.getElementById('login').style.display = 'block';"
             >
@@ -38,7 +70,9 @@
             <a href="@yield('sign_up_link', '/customer-registration')" class=" centeredLink loginBox__link loginBox__link--active">
               Sign up
             </a>
-          </div>
+          </div>--}}
+
+
         </div>
       </div>
 

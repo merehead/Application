@@ -31,14 +31,25 @@
                             <i class="fa fa-twitter"></i>
                         </a>
                     </div>
-                    <div class="loginBox">
+                    <a href="#" class="registeredCarer">
+                        <div class="profilePhoto registeredCarer__img">
+                            <img src="./img/profile4.png" alt="">
+                        </div>
+                        <h2 class="profileName">
+                            Rosie P.
+                        </h2>
+                        <span class="registeredCarer__ico">
+              <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </span>
+                    </a>
+{{--                    <div class="loginBox">
                         <a href="LoginWindow.html" class=" centeredLink loginBox__link">
                             Login
                         </a>
                         <a href="Signup_P_step1.html" class=" centeredLink loginBox__link loginBox__link--active">
                             Sign up
                         </a>
-                    </div>
+                    </div>--}}
                 </div>
             </div>
 
