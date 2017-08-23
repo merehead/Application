@@ -30,7 +30,7 @@
             </a>
           </div>
           <div class="loginBox">
-            <a href="LoginWindow.html" class=" centeredLink loginBox__link">
+            <a href="/login" class=" centeredLink loginBox__link">
               Login
             </a>
             <a href="@yield('sign_up_link', '/customer-registration')" class=" centeredLink loginBox__link loginBox__link--active">

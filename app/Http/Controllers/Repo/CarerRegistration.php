@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Repo;
 
 use App\CarerReference;
 use App\CarersProfile;
+use Illuminate\Support\Facades\Auth;
 
 class CarerRegistration
 {
@@ -22,7 +23,10 @@ class CarerRegistration
 
     public function getID()
     {
-        return $this->model->find(1)->id;;
+
+        $currentUser = Auth::user();
+
+        return $this->model->findOrFail($currentUser->id)->id;
     }
 
     public function getNextStep()
