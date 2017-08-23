@@ -5,7 +5,7 @@
 
 
                     <div class="questionsBox__img">
-                        <img src="./dist/img/Signup_C_step4.jpg" alt="">
+                        <img src="./img/Signup_C_step4.jpg" alt="">
                     </div>
 
 

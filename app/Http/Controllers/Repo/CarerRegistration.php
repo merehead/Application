@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Repo;
 
 
+use App\CarerReference;
 use App\CarersProfile;
 
 class CarerRegistration
@@ -65,7 +66,7 @@ class CarerRegistration
 
         $array=$request->all();
 
-        $carersProfile = $this->model->find($array['carersProfileID']);
+        $carersProfile = $this->model->findOrFail($array['carersProfileID']);
 
         $nextStep = 0;
         switch ($array['step']) {
@@ -108,16 +109,31 @@ class CarerRegistration
 
         switch ($step) {
 
-            case '4' : $this->saveStep4($request);break;
-
+            case '4'    : $this->saveStep4($request);break;
+            case '5'    : $this->saveStep5($request);break;
+            case '5_1'  : $this->saveStep5_1($request);break;
+            case '6'    : $this->saveStep6($request);break;
+            case '8'    : $this->saveStep8($request);break;
+            case '9'    : $this->saveStep9($request);break;
+            case '10'    : $this->saveStep10($request);break;
+            case '11'    : $this->saveStep11($request);break;
+            case '12'    : $this->saveStep12($request);break;
+            case '13'    : $this->saveStep13($request);break;
+            case '14'    : $this->saveStep14($request);break;
+            case '15'    : $this->saveStep15($request);break;
+            case '17'    : $this->saveStep17($request);break;
+            case '18'    : $this->saveStep17($request);break; //step 17 and 18 have the one method
+            case '20'    : $this->saveStep20($request);break;
         }
+
         $this->setNextStep($request);
+
         return;
     }
 
     private function saveStep4($request) {
 
-        $carerProfile = $this->model->find($request->input('carersProfileID'));
+        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
         $carerProfile->first_name       = $request->input('first_name');
         $carerProfile->family_name      = $request->input('family_name');
@@ -132,6 +148,216 @@ class CarerRegistration
         $carerProfile->DoB              = $request->input('DoB');
         $carerProfile->update();
         //dd($request->all());
+
+        return;
+    }
+
+    private function saveStep5($request) {
+
+        $value = 'Yes';
+        if($request->input('criminal_conviction')=='3')
+            $value = 'No';
+
+        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+
+        $carerProfile->criminal_conviction  = $value;
+        $carerProfile->update();
+
+        return;
+    }
+
+    private function saveStep5_1($request) {
+
+
+        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+
+        $carerProfile->criminal_detail  = $request->input('criminal_detail');
+
+        $carerProfile->update();
+
+        return;
+    }
+
+    private function saveStep6($request) {
+
+        //dd($request->all());
+
+        $request->input('DBS')=='1' ? $DBS='Yes' : $DBS='No';
+
+        $request->input('DBS_use')=='1' ? $DBS_use='Yes' : $DBS_use='No';
+
+        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+
+        $carerProfile->DBS  = $DBS;
+        $carerProfile->DBS_use  = $DBS_use;
+        $carerProfile->DBS_identifier  = $request->input('DBS_identifier');
+        $carerProfile->update();
+
+        return;
+    }
+    private function saveStep8($request) {
+
+        //dd($request->all());
+
+        $request->input('driving_licence')=='1' ? $driving_licence='Yes' : $driving_licence='No';
+        $request->input('have_car')=='1' ? $have_car='Yes' : $have_car='No';
+        $request->input('use_car')=='1' ? $use_car='Yes' : $use_car='No';
+
+        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+
+        $carerProfile->driving_licence  = $driving_licence;
+        $carerProfile->have_car  = $have_car;
+        $carerProfile->use_car  = $use_car;
+        $carerProfile->DBS_number  = $request->input('DBS_number');
+
+        $carerProfile->update();
+
+        return;
+    }
+
+    private function saveStep9($request) {
+
+        $serviceTypes = $request->input('serviceType');
+
+        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+
+        foreach ($serviceTypes as $k=>$v) {
+            $carerProfile->ServicesTypes()->attach($k);
+        }
+
+        return;
+    }
+
+    private function saveStep10($request) {
+
+        $assistanceType = $request->input('assistanceType');
+
+        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+
+        foreach ($assistanceType as $k=>$v) {
+            $carerProfile->AssistantsTypes()->attach($k);
+        }
+
+        return;
+    }
+    private function saveStep11($request) {
+
+
+        $request->input('work_at_holiday')=='1' ? $work_at_holiday='Yes' : $work_at_holiday='No';
+        $workingTimes = $request->input('workingTime');
+
+        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+
+        $carerProfile->work_at_holiday  = $work_at_holiday;
+        $carerProfile->work_hours  = $request->input('work_hours');
+
+        $carerProfile->update();
+
+        foreach ($workingTimes as $k=>$v) {
+            $carerProfile->WorkingTimes()->attach($k);
+        }
+
+        return;
+    }
+
+    private function saveStep12($request) {
+
+        //dd($request->all());
+
+        $request->input('work_with_pets')=='1' ? $work_with_pets='Yes' : $work_with_pets='No';
+
+        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+
+        $carerProfile->work_with_pets  = $work_with_pets;
+        $carerProfile->pets_description  = $request->input('pets_description');
+
+        $carerProfile->update();
+
+        return;
+    }
+
+    private function saveStep13($request) {
+
+        //dd($request->all());
+
+
+        $languages = $request->input('languages');
+
+        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+
+        $carerProfile->language_additional  = $request->input('language_additional');
+
+        $carerProfile->update();
+
+        foreach ($languages as $k=>$v) {
+            $carerProfile->Languages()->attach($k);
+        }
+
+        return;
+    }
+
+    private function saveStep14($request) {
+
+        //dd($request->all());
+
+        $request->input('work_UK')=='1' ? $work_UK='Yes' : $work_UK='No';
+        $request->input('work_UK_restriction')=='1' ? $work_UK_restriction='Yes' : $work_UK_restriction='No';
+
+        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+
+        $carerProfile->work_UK  = $work_UK;
+        $carerProfile->work_UK_restriction  = $work_UK_restriction;
+        $carerProfile->pets_description  = $request->input('work_UK_description');
+
+        $carerProfile->update();
+
+        return;
+    }
+    private function saveStep15($request) {
+
+        //dd($request->all());
+
+        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+
+        $carerProfile->work_UK_description  = $request->input('work_UK_description');
+        $carerProfile->description_yourself  = $request->input('description_yourself');
+
+        $carerProfile->update();
+
+        return;
+    }
+
+    private function saveStep17($request) {
+
+        //dd($request->all());
+
+        $reference = new CarerReference();
+
+        $reference->name = $request->input('name');
+        $reference->job_title = $request->input('job_title');
+        $reference->relationship = $request->input('relationship');
+        $reference->phone = $request->input('phone');
+        $reference->email = $request->input('email');
+
+        $reference->save();
+
+        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+        $carerProfile->CarerReferences()->attach($reference->id);
+
+        return;
+    }
+    private function saveStep20($request) {
+
+        //dd($request->all());
+
+        $request->input('have_questions')=='1' ? $have_questions='Yes' : $have_questions='No';
+
+        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+
+        $carerProfile->have_questions  = $request->input('have_questions');
+        $carerProfile->questions  = $request->input('questions');
+
+        $carerProfile->update();
 
         return;
     }

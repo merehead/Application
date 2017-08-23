@@ -5,7 +5,7 @@
 
 
             <div class="questionsBox__img">
-                <img src="./dist/img/Signup_C_step5_1.jpg" alt="">
+                <img src="./img/Signup_C_step5_1.jpg" alt="">
             </div>
 
 
@@ -15,27 +15,38 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
+{{--
             <form class="questionForm">
-
+--}}
+                {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Please can you give further details of your past criminal convictions. Please give details of the nature of the conviction, the date, and any further information you wish to provide.
                         <span>*</span> </h2>
 
                     <div class="inputWrap">
+
+                        {!! Form::textarea('criminal_detail',null,['class'=>'formArea','placeholder'=>' Detailed response']) !!}
+
+
+{{--
                         <textarea class="formArea" placeholder=" Detailed response" ></textarea>
+--}}
+
+
+
                     </div>
 
 
                 </div>
-
-
-            </form>
+            <input type="hidden" name="step" value = '5_1'>
+            <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
+            {!! Form::close()!!}
+{{--            </form>
             <form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
                 {{ csrf_field() }}
-                <input type="hidden" name="step" value = '5_1'>
-                <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
-            </form>
+
+            </form>--}}
         </div>
 
     </div>

@@ -7,7 +7,7 @@
 
 
             <div class="questionsBox__img">
-                <img src="./dist/img/Signup_C_step18.jpg" alt="">
+                <img src="./img/Signup_C_step18.jpg" alt="">
             </div>
 
 
@@ -17,56 +17,46 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
+            {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
+            <div class="formField">
+                <h2 class="formLabel questionForm__label">
+                    Name <span>*</span>
+                </h2>
+                {!! Form::text('name',null,['class'=>'formInput','placeholder'=>'Name']) !!}
+            </div>
 
 
+            <div class="formField">
+                <h2 class="formLabel questionForm__label">
+                    Job title <span>*</span>
+                </h2>
+                {!! Form::text('job_title',null,['class'=>'formInput','placeholder'=>'Job title']) !!}
+            </div>
 
 
+            <div class="formField">
+                <h2 class="formLabel questionForm__label">
+                    Relationship <span>*</span>
+                </h2>
+                {!! Form::text('relationship',null,['class'=>'formInput','placeholder'=>'Relationship']) !!}
+            </div>
+            <div class="formField">
+                <h2 class="formLabel questionForm__label">
+                    Phone <span>*</span>
+                </h2>
+                {!! Form::text('phone',null,['class'=>'formInput','placeholder'=>'Phone']) !!}
+            </div>
+            <div class="formField">
+                <h2 class="formLabel questionForm__label">
+                    Email <span>*</span>
+                </h2>
 
+                {!! Form::text('email',null,['class'=>'formInput','placeholder'=>'Email']) !!}
+            </div>
+            <input type="hidden" name="step" value='18'>
+            <input type="hidden" name="carersProfileID" value= {{$carersProfileID}}>
+            {!! Form::close()!!}
 
-
-                <div class="formField">
-                    <h2 class="formLabel questionForm__label">
-                        Name <span>*</span>
-                    </h2>
-                    <input type="text" class="formInput " placeholder="Name">
-                </div>
-
-
-
-                <div class="formField">
-                    <h2 class="formLabel questionForm__label">
-                        Job title <span>*</span>
-                    </h2>
-                    <input type="text" class="formInput " placeholder="Job title">
-                </div>
-
-
-                <div class="formField">
-                    <h2 class="formLabel questionForm__label">
-                        Relationship <span>*</span>
-                    </h2>
-                    <input type="text" class="formInput " placeholder="Relationship">
-                </div>
-                <div class="formField">
-                    <h2 class="formLabel questionForm__label">
-                        Phone <span>*</span>
-                    </h2>
-                    <input type="text" class="formInput " placeholder="Phone">
-                </div>
-                <div class="formField">
-                    <h2 class="formLabel questionForm__label">
-                        Email <span>*</span>
-                    </h2>
-                    <input type="text" class="formInput " placeholder="Email">
-                </div>
-
-            </form>
-            <form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
-                {{ csrf_field() }}
-                <input type="hidden" name="step" value = '18'>
-                <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
-            </form>
         </div>
 
     </div>

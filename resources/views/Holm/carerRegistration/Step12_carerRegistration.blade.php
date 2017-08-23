@@ -5,7 +5,7 @@
 
 
             <div class="questionsBox__img">
-                <img src="./dist/img/Signup_C_step12.jpg" alt="">
+                <img src="./img/Signup_C_step12.jpg" alt="">
             </div>
 
 
@@ -14,28 +14,15 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
-
-
-
-
+            {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Are you willing to work in homes with pets? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-
-                            <option value="select">Please select</option>
-
-
-
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="it_depends">It depends</option>
-                        </select>
+                        {!! Form::select('work_with_pets',['1'=>'Yes','2'=>'No','3'=>'It depends'],
+null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
 
@@ -48,16 +35,13 @@
                         If it depends, what does it depend upon? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <input type="text" class="formInput " placeholder="Details">
+                        {!! Form::text('pets_description',null,['class'=>'formInput','placeholder'=>'Details']) !!}
+                       {{-- <input type="text" class="formInput " placeholder="Details">--}}
                     </div>
                 </div>
-
-            </form>
-            <form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
-                {{ csrf_field() }}
                 <input type="hidden" name="step" value = '12'>
                 <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
-            </form>
+            {!! Form::close() !!}
         </div>
 
     </div>

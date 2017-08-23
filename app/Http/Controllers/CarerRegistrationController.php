@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\AssistanceType;
 use App\Http\Controllers\Repo\CarerRegistration;
+use App\Language;
 use App\Postcode;
+use App\ServiceType;
+use App\WorkingTime;
 use Illuminate\Http\Request;
 
 class CarerRegistrationController extends FrontController
@@ -25,7 +29,7 @@ class CarerRegistrationController extends FrontController
         $this->title = 'Carer Registration';
 
 
-        //dd($this->user);
+        //dd($this->carersProfile->getNextStep());
 
 
         $this->vars = array_add($this->vars,'carersProfileID',$this->carersProfile->getID());
@@ -35,7 +39,28 @@ class CarerRegistrationController extends FrontController
             $this->vars = array_add($this->vars,'postcodes',$postcodes);
         }
 
-        //dd($postcodes);
+        if($this->carersProfile->getNextStep()=='Step9_carerRegistration'){
+            $serviceTypes = ServiceType::all();
+            $this->vars = array_add($this->vars,'serviceTypes',$serviceTypes);
+        }
+        if($this->carersProfile->getNextStep()=='Step10_carerRegistration'){
+            $assistanceTypes = AssistanceType::all();
+            $this->vars = array_add($this->vars,'assistanceTypes',$assistanceTypes);
+        }
+        if($this->carersProfile->getNextStep()=='Step11_carerRegistration'){
+            $workingTimes = WorkingTime::all();
+            $this->vars = array_add($this->vars,'workingTimes',$workingTimes);
+        }
+        if($this->carersProfile->getNextStep()=='Step13_carerRegistration'){
+            $languages = Language::all();
+            $this->vars = array_add($this->vars,'languages',$languages);
+        }
+
+        if($this->carersProfile->getNextStep()=='Step13_carerRegistration'){
+            $languages = Language::all();
+            $this->vars = array_add($this->vars,'languages',$languages);
+        }
+        //dd($assistanceTypes);
 
 
         $step = view(config('settings.frontTheme').'.carerRegistration.'.$this->carersProfile->getNextStep())->with($this->vars)->render();

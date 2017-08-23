@@ -5,7 +5,7 @@
 
 
             <div class="questionsBox__img">
-                <img src="./dist/img/Signup_C_step8.jpg" alt="">
+                <img src="./img/Signup_C_step8.jpg" alt="">
             </div>
 
 
@@ -14,22 +14,21 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
+           {{-- <form class="questionForm">--}}
+                {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Do you have a full UK/EEA Driving Licence?<span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-
+{{--                        <select class="formSelect">
                             <option value="select">Please select</option>
-
-
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
-                        </select>
+                        </select>--}}
+                        {!! Form::select('driving_licence',['1'=>'Yes','2'=>'No'],
+null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
 
@@ -39,7 +38,8 @@
                         What is your Driving Licence Number?
                     </h2>
                     <div class="inputWrap">
-                        <input type="text" class="formInput " placeholder="Driving licence number">
+                        {{--<input type="text" class="formInput " placeholder="Driving licence number">--}}
+                        {!! Form::text('DBS_number',null,['class'=>'formInput','placeholder'=>'Driving licence number']) !!}
                     </div>
 
 
@@ -85,14 +85,13 @@
                         Do you own a car which you intend to use for work?
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-
+                        {{--<select class="formSelect">
                             <option value="select">Please select</option>
-
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
-                        </select>
+                        </select>--}}
+                        {!! Form::select('have_car',['1'=>'Yes','2'=>'No'],
+null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
 
@@ -102,15 +101,13 @@
                         Would you be interested in using your car to transport clients to the shops or for short trips?<span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-
+{{--                        <select class="formSelect">
                             <option value="select">Please select</option>
-
-
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
-                        </select>
+                        </select>--}}
+                        {!! Form::select('use_car',['1'=>'Yes','2'=>'No'],
+null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
 
@@ -122,12 +119,13 @@
                           </div>
                         </div>
                      -->
-            </form>
-            <form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
+            {{--</form>--}}
+            <input type="hidden" name="step" value = '8'>
+            <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
+            {!! Form::close()!!}
+            {{--<form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
                 {{ csrf_field() }}
-                <input type="hidden" name="step" value = '8'>
-                <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
-            </form>
+            </form>--}}
         </div>
 
     </div>

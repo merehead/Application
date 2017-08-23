@@ -6,7 +6,7 @@
 
 
             <div class="questionsBox__img">
-                <img src="./dist/img/Signup_C_step15.jpg" alt="">
+                <img src="./img/Signup_C_step15.jpg" alt="">
             </div>
 
 
@@ -16,19 +16,13 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
-
-
-
-
-
-
+            {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Please write a couple of sentences about yourself and your experience. This will be used as part of your profile which clients will see. No more than 150 words. <span>*</span>
                     </h2>
-                    <textarea class="formArea" placeholder="Your text"></textarea>
+                    {!! Form::textarea('work_UK_description',null,['class'=>'formArea','placeholder'=>'Your text']) !!}
                 </div>
 
 
@@ -37,18 +31,15 @@
                     <h2 class="formLabel questionForm__label">
                         Please write a short sentence about yourself which sums you up. This will be the first thing clients see. <span>*</span>
                     </h2>
-                    <input type="text" class="formInput " placeholder="Your text">
+                    {!! Form::text('description_yourself',null,['class'=>'formInput','placeholder'=>'Details']) !!}
                 </div>
 
 
-
-
-            </form>
-            <form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
-                {{ csrf_field() }}
                 <input type="hidden" name="step" value = '15'>
                 <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
-            </form>
+
+                {!! Form::close()!!}
+
         </div>
 
     </div>

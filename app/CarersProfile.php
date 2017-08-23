@@ -33,6 +33,6 @@ class CarersProfile extends Model
 
     public function CarerReferences()
     {
-        return $this->belongsToMany('App\carer_profile_reference', 'carer_profile_language', 'carer_profile_id', 'reference_id');
+        return $this->belongsToMany('App\CarerReference', 'carer_profile_reference', 'carer_profile_id', 'reference_id');
     }
 }

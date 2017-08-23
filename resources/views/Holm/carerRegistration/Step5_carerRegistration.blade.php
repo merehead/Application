@@ -5,7 +5,7 @@
 
 
             <div class="questionsBox__img">
-                <img src="./dist/img/Signup_C_step5.jpg" alt="">
+                <img src="./img/Signup_C_step5.jpg" alt="">
             </div>
 
 
@@ -15,7 +15,10 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
+{{--
             <form class="questionForm">
+--}}
+                {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
@@ -25,12 +28,14 @@
 
 
                     <div class="inputWrap">
-                        <select class="formSelect">
+{{--                        <select class="formSelect">
                             <option value="select">Please select</option>
                             <option value="yes1">Yes, but they are very old, and for a minor offence.</option>
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
-                        </select>
+                        </select>--}}
+                        {!! Form::select('criminal_conviction',['1'=>'Yes, but they are very old, and for a minor offence','2'=>'Yes','3'=>'No'],
+null,['class'=>'formInput personalForm__input','placeholder'=>'Further Details']) !!}
                     </div>
 
 
@@ -42,12 +47,16 @@
                           </div>
                         </div>
                      -->
+            <input type="hidden" name="step" value = '5'>
+            <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
+                {!! Form::close()!!}
+{{--
             </form>
+
             <form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
                 {{ csrf_field() }}
-                <input type="hidden" name="step" value = '5'>
-                <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
             </form>
+            --}}
         </div>
 
     </div>

@@ -5,7 +5,7 @@
             <h3> Please ensure you look professional!  </h3>
 
             <div class="questionsBox__img">
-                <img src="./dist/img/Signup_C_step16.jpg" alt="">
+                <img src="./img/Signup_C_step16.jpg" alt="">
             </div>
 
 

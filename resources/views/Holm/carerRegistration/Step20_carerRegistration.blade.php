@@ -5,9 +5,8 @@
 
 
             <div class="questionsBox__img">
-                <img src="./dist/img/Signup_C_step20.jpg" alt="">
+                <img src="./img/Signup_C_step20.jpg" alt="">
             </div>
-
 
 
         </div>
@@ -15,54 +14,30 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
-
-
-
-
-
-                <div class="formField">
-                    <h2 class="formLabel questionForm__label">
-                        Do you have any other questions?
-                    </h2>
-                    <div class="inputWrap">
-                        <select class="formSelect">
-
-
-                            <option value="select">Please select</option>
-
-
-
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-
-                        </select>
-                    </div>
-
-
+            {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
+            <div class="formField">
+                <h2 class="formLabel questionForm__label">
+                    Do you have any other questions?
+                </h2>
+                <div class="inputWrap">
+                    {!! Form::select('have_questions',['1'=>'Yes','2'=>'No'],
+null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                 </div>
 
 
-
-
-
-
-                <div class="formField">
-                    <h2 class="formLabel questionForm__label">
-                        If yes, what questions do you have? We will get back to you as soon as possible with answers.
-                    </h2>
-                    <div class="inputWrap">
-                        <textarea class="formArea" placeholder="Your text"></textarea>
-                    </div>
+            </div>
+            <div class="formField">
+                <h2 class="formLabel questionForm__label">
+                    If yes, what questions do you have? We will get back to you as soon as possible with answers.
+                </h2>
+                <div class="inputWrap">
+                    {!! Form::textarea('questions',null,['class'=>'formArea','placeholder'=>'Your text']) !!}
                 </div>
+            </div>
+            <input type="hidden" name="step" value='20'>
+            <input type="hidden" name="carersProfileID" value= {{$carersProfileID}}>
+            {!! Form::close()!!}
 
-            </form>
-
-            <form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
-                {{ csrf_field() }}
-                <input type="hidden" name="step" value = '20'>
-                <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
-            </form>
 
         </div>
 

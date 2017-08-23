@@ -6,7 +6,7 @@
 
 
             <div class="questionsBox__img">
-                <img src="./dist/img/Signup_C_step6.jpg" alt="">
+                <img src="./img/Signup_C_step6.jpg" alt="">
             </div>
 
 
@@ -16,26 +16,21 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
-
+{{--            <form class="questionForm">--}}
+                {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Do you have an up to date DBS? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-
+{{--                        <select class="formSelect">
                             <option value="select">Please select</option>
-
-
-
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
-                        </select>
+                        </select>--}}
+                        {!! Form::select('DBS',['1'=>'Yes','2'=>'No'],
+null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
-
-
                 </div>
 
                 <div class="formField">
@@ -43,16 +38,13 @@
                         Have you used the new <a href="https://www.gov.uk/dbs-update-service" target="blank" class="underline">DBS update service</a>? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-
-
+{{--                        <select class="formSelect">
                             <option value="select">Please select</option>
-
-
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
-                        </select>
+                        </select>--}}
+                        {!! Form::select('DBS_use',['1'=>'Yes','2'=>'No'],
+null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
 
@@ -66,11 +58,15 @@
                     </h2>
 
                     <div class="inputWrap">
-                        <input type="text" class="formInput " placeholder="Details"></textarea>
+                      {{--  <input type="text" class="formInput " placeholder="Details"></textarea>--}}
+                        {!! Form::text('DBS_identifier',null,['class'=>'formInput','placeholder'=>'Details']) !!}
                     </div>
 
 
                 </div>
+            <input type="hidden" name="step" value = '6'>
+            <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
+            {!! Form::close()!!}
                 <!--
                         <div class="formField formField--margin-top">
                           <div class="inputWrap">
@@ -78,12 +74,11 @@
                           </div>
                         </div>
                      -->
-            </form>
+           {{-- </form>
             <form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
                 {{ csrf_field() }}
-                <input type="hidden" name="step" value = '6'>
-                <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
-            </form>
+
+            </form>--}}
         </div>
 
     </div>
