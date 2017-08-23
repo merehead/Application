@@ -41,7 +41,7 @@ class LoginController extends Controller
         switch ($user->user_type_id) {
             case 1 : return '/';
             case 3 : return '/carer-registration';
-            case 4 : return '/admin';
+            //case 4 : return '/admin';
         }
 
         return '/home';

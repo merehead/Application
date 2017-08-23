@@ -22,7 +22,9 @@
           i am a carer
         </a>
         <div class="loginBox">
-          <a href="LoginWindow.html" class=" centeredLink loginBox__link">
+          <a href="/login" class=" centeredLink loginBox__link"
+             onclick="event.preventDefault();document.getElementById('login').style.display = 'block';"
+          >
             Login
           </a>
           <a href="Signup_P_step1.html" class=" centeredLink loginBox__link loginBox__link--active">

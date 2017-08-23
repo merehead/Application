@@ -29,7 +29,9 @@ class CarerRegistrationController extends FrontController
         $this->title = 'Carer Registration';
 
 
-        //dd($this->carersProfile->getNextStep());
+
+
+        //dd($this->user, $this->carersProfile->getID(),$this->carersProfile->getNextStep());
 
 
         $this->vars = array_add($this->vars,'carersProfileID',$this->carersProfile->getID());

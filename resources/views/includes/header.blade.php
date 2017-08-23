@@ -30,7 +30,9 @@
             </a>
           </div>
           <div class="loginBox">
-            <a href="/login" class=" centeredLink loginBox__link">
+            <a href="/login" class=" centeredLink loginBox__link"
+               onclick="event.preventDefault();document.getElementById('login').style.display = 'block';"
+            >
               Login
             </a>
             <a href="@yield('sign_up_link', '/customer-registration')" class=" centeredLink loginBox__link loginBox__link--active">

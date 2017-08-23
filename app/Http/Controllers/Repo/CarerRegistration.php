@@ -24,15 +24,20 @@ class CarerRegistration
     public function getID()
     {
 
-        $currentUser = Auth::user();
+        //здесь ошибка, т.к. предполагается, что ид-юзера == ид-профиля, что точно не правильно!!!
 
-        return $this->model->findOrFail($currentUser->id)->id;
+        $user = Auth::user();
+
+        return $user->id;
     }
 
     public function getNextStep()
     {
 
-        $currentStep = $this->model->find(1)->registration_progress;
+
+        $user = Auth::user();
+
+        $currentStep = $this->model->find($user->id)->registration_progress; //смотри предыдущую ошибку!!!!
 
         switch ($currentStep) {
             case '0' : $step = 'Step1_carerRegistration';break;
