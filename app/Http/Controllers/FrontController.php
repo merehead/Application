@@ -23,11 +23,7 @@ class FrontController extends Controller
     public function renderOutput() {
         $this->vars = array_add($this->vars,'title',$this->title);
 
-        $header = view(config('settings.frontTheme').'.headers.userRegistrationHeader')->render();
-        $this->vars = array_add($this->vars,'header',$header);
 
-        $footer = view(config('settings.frontTheme').'.footers.userRegistrationFooter')->render();
-        $this->vars = array_add($this->vars,'footer',$footer);
 
         $this->vars = array_add($this->vars,'content',$this->content);
 

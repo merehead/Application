@@ -9,6 +9,7 @@ use App\Postcode;
 use App\ServiceType;
 use App\WorkingTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CarerRegistrationController extends FrontController
 {
@@ -22,50 +23,57 @@ class CarerRegistrationController extends FrontController
         $this->template = config('settings.frontTheme').'.templates.userRegistration';
     }
 
-
-
     public function index(){
 
         $this->title = 'Carer Registration';
+        $header = view(config('settings.frontTheme').'.headers.userRegistrationHeader')->render();
+        $this->vars = array_add($this->vars,'header',$header);
 
+        $footer = view(config('settings.frontTheme').'.footers.userRegistrationFooter')->render();
+        $this->vars = array_add($this->vars,'footer',$footer);
 
+        $user = Auth::user();
 
-
-        //dd($this->user, $this->carersProfile->getID(),$this->carersProfile->getNextStep());
-
-
-        $this->vars = array_add($this->vars,'carersProfileID',$this->carersProfile->getID());
-
-        if($this->carersProfile->getNextStep()=='Step4_carerRegistration'){
-            $postcodes = Postcode::all()->pluck('name','id')->toArray();
-            $this->vars = array_add($this->vars,'postcodes',$postcodes);
+        if (!$user) {
+            //dd('new user');
+            $step = view(config('settings.frontTheme').'.carerRegistration.Step1_carerRegistration')->with($this->vars)->render();
         }
+        else {
 
-        if($this->carersProfile->getNextStep()=='Step9_carerRegistration'){
-            $serviceTypes = ServiceType::all();
-            $this->vars = array_add($this->vars,'serviceTypes',$serviceTypes);
-        }
-        if($this->carersProfile->getNextStep()=='Step10_carerRegistration'){
-            $assistanceTypes = AssistanceType::all();
-            $this->vars = array_add($this->vars,'assistanceTypes',$assistanceTypes);
-        }
-        if($this->carersProfile->getNextStep()=='Step11_carerRegistration'){
-            $workingTimes = WorkingTime::all();
-            $this->vars = array_add($this->vars,'workingTimes',$workingTimes);
-        }
-        if($this->carersProfile->getNextStep()=='Step13_carerRegistration'){
-            $languages = Language::all();
-            $this->vars = array_add($this->vars,'languages',$languages);
-        }
+            //dd($this->user, $this->carersProfile->getID(),$this->carersProfile->getNextStep());
 
-        if($this->carersProfile->getNextStep()=='Step13_carerRegistration'){
-            $languages = Language::all();
-            $this->vars = array_add($this->vars,'languages',$languages);
+            $this->vars = array_add($this->vars, 'carersProfileID', $this->carersProfile->getID());
+
+            if ($this->carersProfile->getNextStep() == 'Step4_carerRegistration') {
+                $postcodes = Postcode::all()->pluck('name', 'id')->toArray();
+                $this->vars = array_add($this->vars, 'postcodes', $postcodes);
+            }
+            if ($this->carersProfile->getNextStep() == 'Step9_carerRegistration') {
+                $serviceTypes = ServiceType::all();
+                $this->vars = array_add($this->vars, 'serviceTypes', $serviceTypes);
+            }
+            if ($this->carersProfile->getNextStep() == 'Step10_carerRegistration') {
+                $assistanceTypes = AssistanceType::all();
+                $this->vars = array_add($this->vars, 'assistanceTypes', $assistanceTypes);
+            }
+            if ($this->carersProfile->getNextStep() == 'Step11_carerRegistration') {
+                $workingTimes = WorkingTime::all();
+                $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
+            }
+            if ($this->carersProfile->getNextStep() == 'Step13_carerRegistration') {
+                $languages = Language::all();
+                $this->vars = array_add($this->vars, 'languages', $languages);
+            }
+
+            if ($this->carersProfile->getNextStep() == 'Step13_carerRegistration') {
+                $languages = Language::all();
+                $this->vars = array_add($this->vars, 'languages', $languages);
+            }
+
+            $step = view(config('settings.frontTheme').'.carerRegistration.'.$this->carersProfile->getNextStep())->with($this->vars)->render();
         }
         //dd($assistanceTypes);
 
-
-        $step = view(config('settings.frontTheme').'.carerRegistration.'.$this->carersProfile->getNextStep())->with($this->vars)->render();
         $this->vars = array_add($this->vars,'step',$step);
 
         $this->content = view(config('settings.frontTheme').'.carerRegistration.carerRegistration')->with($this->vars)->render();
@@ -77,7 +85,9 @@ class CarerRegistrationController extends FrontController
 
         //dd($request->all());
 
-        $this->carersProfile->saveStep($request);
+
+        //if ($request->input('carersProfileID')!=0)
+            $this->carersProfile->saveStep($request);
 
         return redirect('/carer-registration');
 

@@ -1,25 +1,25 @@
 <header class="header">
     <div class="container">
         <div class="headerContainer">
-            <a href="index.html" class="themeLogo">
+            <a href="\" class="themeLogo">
 
             </a>
-            <a href="index.html" class="xsNav">
+            <a href="\" class="xsNav">
         <span class="">
           <i class="fa fa-navicon"></i>
         </span>
             </a>
             <div class="collapseBox">
-                <a href="I_am_Carer_page.html" class="carerSelf">
+                <a href="{{route('ImCarerPage')}}" class="carerSelf">
                     i am a carer
                 </a>
                 <div class="headerNav_container">
                     <div class="headerNav">
-                        <a href="SearchPage.html" class="  headerNav__link">
+                        <a href="" class="  headerNav__link">
                             find a carer
                         </a>
 
-                        <a href="About_Us.html" class=" headerNav__link">
+                        <a href="" class=" headerNav__link">
                             about us
                         </a>
                     </div>
@@ -31,25 +31,34 @@
                             <i class="fa fa-twitter"></i>
                         </a>
                     </div>
-                    <a href="#" class="registeredCarer">
-                        <div class="profilePhoto registeredCarer__img">
-                            <img src="./img/profile4.png" alt="">
-                        </div>
-                        <h2 class="profileName">
-                            Rosie P.
-                        </h2>
-                        <span class="registeredCarer__ico">
+                    @if (Route::has('login'))
+                        <div class="top-right links">
+                            @if (Auth::check())
+                                <a href="#" class="registeredCarer">
+                                    <div class="profilePhoto registeredCarer__img">
+                                        <img src="./img/profile4.png" alt="">
+                                    </div>
+                                    <h2 class="profileName">
+                                        Rosie P.
+                                    </h2>
+                                    <span class="registeredCarer__ico">
               <i class="fa fa-sign-out" aria-hidden="true"></i>
             </span>
-                    </a>
-{{--                    <div class="loginBox">
-                        <a href="LoginWindow.html" class=" centeredLink loginBox__link">
-                            Login
-                        </a>
-                        <a href="Signup_P_step1.html" class=" centeredLink loginBox__link loginBox__link--active">
-                            Sign up
-                        </a>
-                    </div>--}}
+                                </a>
+                            @else
+                                <div class="loginBox">
+                                    <a href="/login" class=" centeredLink loginBox__link"
+                                       onclick="event.preventDefault();document.getElementById('login').style.display = 'block';"
+                                    >
+                                        Login
+                                    </a>
+                                    <a href="/" class=" centeredLink loginBox__link loginBox__link--active">
+                                        Sign up
+                                    </a>
+                                </div>
+                            @endif
+                        </div>
+                    @endif
                 </div>
             </div>
 

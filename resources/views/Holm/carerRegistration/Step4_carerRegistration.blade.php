@@ -23,23 +23,27 @@
                                 Title <span>*</span>
                             </h2>
                             <div class="inputWrap">
-{{--
-                                <input type="text"  class="formInput personalForm__input" placeholder="Mr / Mrs / Miss / Dr / Prof.">
---}}
                                 {!! Form::select('title',['1'=>'Mr','2'=>'Mrs','3'=>'Miss','4'=>'Dr','5'=>'Prof'],
 null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss / Dr / Prof.']) !!}
                             </div>
+                            @if ($errors->has('title'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('title') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                         <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
                                 first Name <span>*</span>
                             </h2>
                             <div class="inputWrap">
-{{--
-                                <input type="text"  class="formInput personalForm__input" placeholder="Your name">
---}}
                                 {!! Form::text('first_name',null,['class'=>'formInput personalForm__input','placeholder'=>'Your name']) !!}
                             </div>
+                            @if ($errors->has('first_name'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('first_name') }}</strong>
+                                    </span>
+                            @endif
                         </div>
 
                         <div class="formField">
@@ -47,26 +51,27 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
                                 Family name <span>*</span>
                             </h2>
                             <div class="inputWrap">
-{{--
-                                <input type="text" disabled="" class="formInput personalForm__input" placeholder="Last name">
---}}
                                 {!! Form::text('family_name',null,['class'=>'formInput personalForm__input','placeholder'=>'Last name']) !!}
                             </div>
+                            @if ($errors->has('family_name'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('family_name') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                         <div class="formField">
                             <h2 class="formLabel personalForm__label">
                                 How do you like to be referred to / called? <span>*</span>
                             </h2>
                             <div class="inputWrap">
-{{--
-                                <input type="text" disabled="" class="formInput personalForm__input" placeholder="Name">
---}}
                                 {!! Form::text('like_name',null,['class'=>'formInput personalForm__input','placeholder'=>'Name']) !!}
                             </div>
+                            @if ($errors->has('like_name'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('like_name') }}</strong>
+                                    </span>
+                            @endif
                         </div>
-
-
-
 
 
                         <div class="formField">
@@ -77,23 +82,22 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
                                 <div href="#" class="gender__item">
 
                                     {!! Form::radio('gender','Male',false, ['class'=>'radio','id'=>'radio1']) !!}
-
-{{--
-                                    <input type="radio" class="radio" id="radio1" name="gender" />
---}}
                                     <label for="radio1"><span> Male</span></label>
 
                                 </div>
                                 <div href="#" class="gender__item">
                                     {!! Form::radio('gender','Female',false, ['class'=>'radio','id'=>'radio2']) !!}
-{{--
-                                    <input type="radio" class="radio" id="radio2" name="gender"/>
---}}
+
                                     <label for="radio2"><span>Female</span></label>
 
                                 </div>
 
                             </div>
+                            @if ($errors->has('gender'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('gender') }}</strong>
+                                    </span>
+                            @endif
                         </div>
 
                         <div class="formField">
@@ -101,9 +105,13 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
                                 Mobile number <span>*</span>
                             </h2>
                             <div class="inputWrap">
-                                {{--<input type="text" disabled="" class="formInput personalForm__input" placeholder="Your mobile number">--}}
                                 {!! Form::text('mobile_number',null,['class'=>'formInput personalForm__input','placeholder'=>'Your mobile number']) !!}
                             </div>
+                            @if ($errors->has('mobile_number'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('mobile_number') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                         <div class="formField">
                             <h2 class="formLabel personalForm__label">
@@ -120,64 +128,77 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
                                 Address <span>*</span>
                             </h2>
                             <div class="inputWrap">
-{{--
-                                <input type="text" disabled="" class="formInput personalForm__input" placeholder="Your address ">
---}}
+
                                 {!! Form::text('address_line1',null,['class'=>'formInput personalForm__input','placeholder'=>'Your address']) !!}
                             </div>
+                            @if ($errors->has('address_line1'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('address_line1') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                         <div class="formField">
                             <h2 class="formLabel personalForm__label">
                                 Address line 2
                             </h2>
                             <div class="inputWrap">
-{{--
-                                <input type="text" disabled="" class="formInput personalForm__input" placeholder="Your address line 2">
---}}
+
                                 {!! Form::text('address_line2',null,['class'=>'formInput personalForm__input','placeholder'=>'Your address line 2']) !!}
                             </div>
+                            @if ($errors->has('address_line2'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('address_line2') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                         <div class="formField">
                             <h2 class="formLabel personalForm__label">
                                 Town <span>*</span>
                             </h2>
                             <div class="inputWrap">
-{{--
-                                <input type="text" disabled="" class="formInput personalForm__input" placeholder="Your town/city">
---}}
+
                                 {!! Form::text('town',null,['class'=>'formInput personalForm__input','placeholder'=>'Your town/city']) !!}
                                 <span class="inputIco personalForm__ico centeredLink">
                   <i class="fa fa-map-marker"></i>
                 </span>
                             </div>
+                            @if ($errors->has('town'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('town') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                         <div class="formField">
                             <h2 class="formLabel personalForm__label">
                                 Postcode <span>*</span>
                             </h2>
                             <div class="inputWrap">
-{{--
-                                <input type="text" disabled="" class="formInput personalForm__input" placeholder=" Your postcode">
---}}
+
                                 {!! Form::select('postcode_id',$postcodes,null,['class'=>'formInput personalForm__input','placeholder'=>'Your postcode']) !!}
 
                             </div>
+                            @if ($errors->has('postcode_id'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('postcode_id') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                         <div class="formField">
                             <h2 class="formLabel personalForm__label">
                                 Date of birth <span>*</span>
                             </h2>
                             <div class="inputWrap">
-                                <!--<input type="text" disabled="" class="formInput personalForm__input" placeholder="Your date of birth ">
-                                   -->
-{{--
-                                <input type="text" class="profileField__input" placeholder="dd/mm/yyyy">
---}}
+
                                 {!! Form::text('DoB',null,['class'=>'profileField__input','placeholder'=>'dd/mm/yyyy']) !!}
                                 <span class="profileField__input-ico centeredLink">
                 <i class="fa fa-calendar" aria-hidden="true"></i>
               </span>
                             </div>
+                            @if ($errors->has('DoB'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('DoB') }}</strong>
+                                    </span>
+                            @endif
                         </div>
 
                     <input type="hidden" name="step" value = '4'>
@@ -185,25 +206,19 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
 
                         {!! Form::close()!!}
 
-{{--
-                    <form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="step" value = '4'>
-                        <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
-                    </form>
---}}
+
                 </div>
 
             </div>
         </div>
         <div class="registrationBtns">
             <div class="registrationBtns__left">
-                <a href="Signup_C_step3.html" class="registrationBtns__item registrationBtns__item--back">
+{{--                <a href="Signup_C_step3.html" class="registrationBtns__item registrationBtns__item--back">
                     <i class="fa fa-arrow-left "></i>back
                 </a>
                 <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
                     continue later
-                </a>
+                </a>--}}
             </div>
 
             <a href="Signup_C_step5.html" class="registrationBtns__item"
@@ -213,5 +228,3 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
                 <i class="fa fa-arrow-right"></i>
             </a>
         </div>
-
-

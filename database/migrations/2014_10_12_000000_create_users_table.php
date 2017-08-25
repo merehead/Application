@@ -17,11 +17,6 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('email', 100)->unique();
             $table->string('password');
-            $table->string('fname', 100);
-            $table->string('lname', 100);
-            $table->string('nicename', 100);
-            $table->string('gender', 2);
-            $table->string('activation_key');
             $table->rememberToken();
             $table->timestamps();
         });

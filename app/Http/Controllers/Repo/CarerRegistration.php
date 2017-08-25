@@ -11,10 +11,14 @@ namespace App\Http\Controllers\Repo;
 
 use App\CarerReference;
 use App\CarersProfile;
+use App\User;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
 
 class CarerRegistration
 {
+    use  ValidatesRequests;
+
     protected $model = FALSE;
 
     public function __construct(CarersProfile $carersProfile) {
@@ -75,7 +79,9 @@ class CarerRegistration
 
         $array=$request->all();
 
-        $carersProfile = $this->model->findOrFail($array['carersProfileID']);
+        $user = Auth::user();
+
+        $carersProfile = $this->model->findOrFail($user->id);
 
         $nextStep = 0;
         switch ($array['step']) {
@@ -117,7 +123,7 @@ class CarerRegistration
         $step = $request->input('step');
 
         switch ($step) {
-
+            case '1'    : $this->saveStep1($request);break;
             case '4'    : $this->saveStep4($request);break;
             case '5'    : $this->saveStep5($request);break;
             case '5_1'  : $this->saveStep5_1($request);break;
@@ -140,7 +146,62 @@ class CarerRegistration
         return;
     }
 
+    private function saveStep1($request) {
+
+
+        $this->validate($request,[
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'referal_code'=>'string|nullable|max:128',
+        ]);
+
+        (isset($request['referal_code']))? $referal_code = $request['referal_code'] : $referal_code = 0;
+
+        $user = User::create([
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+            'referal_code' => $referal_code,
+            'user_type_id' => 3,
+        ]);
+
+
+        if ($user) {
+
+            $carerPrifile = new CarersProfile();
+
+            $carerPrifile->id = $user->id;
+            $carerPrifile->registration_progress = 1;
+            $carerPrifile -> save();
+        }
+
+        if (Auth::attempt(['email' => $user->email, 'password' => $request['password']],TRUE)) {
+            Auth::login($user, true);
+        }
+
+        return;
+    }
+
+
+
     private function saveStep4($request) {
+
+        //dd($request->all());
+
+
+        $this->validate($request,[
+            'title' => 'required|numeric:1',
+            'first_name' => 'required|string|max:128',
+            'family_name' => 'required|string|max:128',
+            'like_name' => 'required|string|max:128',
+            'gender' => 'required|string|max:14',
+            'mobile_number' => 'required',
+            'address_line1'=>'required|string|max:256',
+            'address_line2' => 'nullable|string|max:256',
+            'town' => 'required|string|max:128',
+            'postcode_id' => 'required|integer',
+            'DoB'=>'required|date',
+        ]);
+
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 

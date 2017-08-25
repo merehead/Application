@@ -1,24 +1,24 @@
 <footer class="footer">
     <div class="container">
         <div class="footerNav">
-            <a href="About_Us.html" class="footerNav__item">
+            <a href="" class="footerNav__item">
                 about us
             </a>
-            <a href="Contact_Us.html" class="footerNav__item">
+            <a href="" class="footerNav__item">
                 contact
             </a>
-            <a href="FAQ.html" class="footerNav__item">
+            <a href="" class="footerNav__item">
                 Frequently Asked Questions
             </a>
-            <a href="Blog.html" class="footerNav__item">
+            <a href="" class="footerNav__item">
                 blog
             </a>
         </div>
         <div class="footerContainer">
-            <a href="index.html" class=" themeLogo themeLogo--dark">
+            <a href="\" class=" themeLogo themeLogo--dark">
 
             </a>
-            <a href="I_am_Carer_page.html" class="carerSelf">
+            <a href="{{route('ImCarerPage')}}" class="carerSelf">
                 i am a carer
             </a>
             <div class="loginBox">
@@ -32,16 +32,16 @@
 
             <div class="payment">
                 <a href="" class="payment__item">
-                    <img src="./dist/img/pay1.png" alt="">
+                    <img src="./img/pay1.png" alt="">
                 </a>
                 <a href="" class="payment__item">
-                    <img src="./dist/img/pay2.png" alt="">
+                    <img src="./img/pay2.png" alt="">
                 </a>
                 <a href="" class="payment__item">
-                    <img src="./dist/img/pay3.png" alt="">
+                    <img src="./img/pay3.png" alt="">
                 </a>
                 <a href="" class="payment__item">
-                    <img src="./dist/img/pay4.png" alt="">
+                    <img src="./img/pay4.png" alt="">
                 </a>
             </div>
         </div>
@@ -50,7 +50,7 @@
             <p class="copyright">
                 COPYRIGHT © 2017 Holm. All rights reserved
             </p>
-            <a href="Terms_and_Conditions.html" class="footerExtra__terms">
+            <a href="" class="footerExtra__terms">
                 Terms and Conditions
             </a >
             <div class="footerSocial">
