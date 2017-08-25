@@ -35,8 +35,8 @@ class CarerRegistrationController extends FrontController
         $user = Auth::user();
 
         if (!$user) {
-            //dd('new user');
             $step = view(config('settings.frontTheme').'.carerRegistration.Step1_carerRegistration')->with($this->vars)->render();
+            $this->vars = array_add($this->vars,'activeStep',1);
         }
         else {
 
@@ -70,6 +70,8 @@ class CarerRegistrationController extends FrontController
                 $this->vars = array_add($this->vars, 'languages', $languages);
             }
 
+            $this->vars = array_add($this->vars,'activeStep',$this->carersProfile->getActiveStep($user->id));
+
             $step = view(config('settings.frontTheme').'.carerRegistration.'.$this->carersProfile->getNextStep())->with($this->vars)->render();
         }
         //dd($assistanceTypes);
@@ -85,8 +87,6 @@ class CarerRegistrationController extends FrontController
 
         //dd($request->all());
 
-
-        //if ($request->input('carersProfileID')!=0)
             $this->carersProfile->saveStep($request);
 
         return redirect('/carer-registration');

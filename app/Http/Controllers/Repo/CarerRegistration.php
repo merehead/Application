@@ -181,8 +181,6 @@ class CarerRegistration
         return;
     }
 
-
-
     private function saveStep4($request) {
 
         //dd($request->all());
@@ -431,4 +429,17 @@ class CarerRegistration
 
         return;
     }
+
+    public function getActiveStep($id){
+
+        $activeStep=1;
+
+        $step = $this->model->find($id)->registration_progress;
+
+        if ($step>1)
+            $activeStep=2;
+
+        return $activeStep;
+    }
+
 }
