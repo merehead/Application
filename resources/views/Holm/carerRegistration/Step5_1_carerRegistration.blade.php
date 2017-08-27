@@ -15,9 +15,6 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-{{--
-            <form class="questionForm">
---}}
                 {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
@@ -28,16 +25,13 @@
 
                         {!! Form::textarea('criminal_detail',null,['class'=>'formArea','placeholder'=>' Detailed response']) !!}
 
-
-{{--
-                        <textarea class="formArea" placeholder=" Detailed response" ></textarea>
---}}
-
-
-
                     </div>
 
-
+                    @if ($errors->has('criminal_detail'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('criminal_detail') }}</strong>
+                                    </span>
+                    @endif
                 </div>
             <input type="hidden" name="step" value = '5_1'>
             <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
@@ -53,9 +47,9 @@
 </div>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-        <a href="Signup_C_step5.html" class="registrationBtns__item registrationBtns__item--back">
+{{--        <a href="Signup_C_step5.html" class="registrationBtns__item registrationBtns__item--back">
             <i class="fa fa-arrow-left "></i>back
-        </a>
+        </a>--}}
         <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>

@@ -22,21 +22,29 @@
                     </h2>
                     <div class="inputWrap">
                         {!! Form::select('work_with_pets',['1'=>'Yes','2'=>'No','3'=>'It depends'],
-null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+null,['id'=>'depend-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
-
+                    @if ($errors->has('work_with_pets'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('work_with_pets') }}</strong>
+                                    </span>
+                    @endif
 
                 </div>
 
 
 
-                <div class="formField">
+                <div class="formField depend_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         If it depends, what does it depend upon? <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         {!! Form::text('pets_description',null,['class'=>'formInput','placeholder'=>'Details']) !!}
-                       {{-- <input type="text" class="formInput " placeholder="Details">--}}
+                        @if ($errors->has('pets_description'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('pets_description') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
                 <input type="hidden" name="step" value = '12'>
@@ -48,10 +56,10 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
 </div>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-        <a href="Signup_C_step11.html" class="registrationBtns__item registrationBtns__item--back">
+{{--        <a href="Signup_C_step11.html" class="registrationBtns__item registrationBtns__item--back">
             <i class="fa fa-arrow-left "></i>back
-        </a>
-        <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
+        </a>--}}
+        <a href="/" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>

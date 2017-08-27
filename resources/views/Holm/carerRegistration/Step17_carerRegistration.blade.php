@@ -22,6 +22,11 @@
                     Name <span>*</span>
                 </h2>
                 {!! Form::text('name',null,['class'=>'formInput','placeholder'=>'Name']) !!}
+                @if ($errors->has('name'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                @endif
             </div>
 
 
@@ -30,6 +35,11 @@
                     Job title <span>*</span>
                 </h2>
                 {!! Form::text('job_title',null,['class'=>'formInput','placeholder'=>'Job title']) !!}
+                @if ($errors->has('job_title'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('job_title') }}</strong>
+                                    </span>
+                @endif
             </div>
 
 
@@ -38,12 +48,22 @@
                     Relationship <span>*</span>
                 </h2>
                 {!! Form::text('relationship',null,['class'=>'formInput','placeholder'=>'Relationship']) !!}
+                @if ($errors->has('relationship'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('relationship') }}</strong>
+                                    </span>
+                @endif
             </div>
             <div class="formField">
                 <h2 class="formLabel questionForm__label">
                     Phone <span>*</span>
                 </h2>
                 {!! Form::text('phone',null,['class'=>'formInput','placeholder'=>'Phone']) !!}
+                @if ($errors->has('phone'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                @endif
             </div>
             <div class="formField">
                 <h2 class="formLabel questionForm__label">
@@ -51,6 +71,11 @@
                 </h2>
 
                 {!! Form::text('email',null,['class'=>'formInput','placeholder'=>'Email']) !!}
+                @if ($errors->has('email'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                @endif
             </div>
             <input type="hidden" name="step" value='17'>
             <input type="hidden" name="carersProfileID" value= {{$carersProfileID}}>
@@ -62,10 +87,10 @@
 </div>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-        <a href="Signup_C_step16.html" class="registrationBtns__item registrationBtns__item--back">
+{{--        <a href="Signup_C_step16.html" class="registrationBtns__item registrationBtns__item--back">
             <i class="fa fa-arrow-left "></i>back
-        </a>
-        <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
+        </a>--}}
+        <a href="/" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>

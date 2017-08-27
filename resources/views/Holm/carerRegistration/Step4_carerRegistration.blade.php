@@ -18,7 +18,7 @@
                     {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'personalForm']) !!}
                     {{--<form class="personalForm">--}}
 
-                        <div class="formField">
+                        <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
                                 Title <span>*</span>
                             </h2>
@@ -46,7 +46,7 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
                             @endif
                         </div>
 
-                        <div class="formField">
+                        <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
                                 Family name <span>*</span>
                             </h2>
@@ -59,7 +59,7 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
                                     </span>
                             @endif
                         </div>
-                        <div class="formField">
+                        <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
                                 How do you like to be referred to / called? <span>*</span>
                             </h2>
@@ -74,7 +74,7 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
                         </div>
 
 
-                        <div class="formField">
+                        <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
                                 Gender<span>*</span>
                             </h2>
@@ -100,7 +100,7 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
                             @endif
                         </div>
 
-                        <div class="formField">
+                        <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
                                 Mobile number <span>*</span>
                             </h2>
@@ -113,17 +113,17 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
                                     </span>
                             @endif
                         </div>
-                        <div class="formField">
+                        <div class="formField ">
                             <h2 class="formLabel personalForm__label">
                                 Email address <span>*</span>
                             </h2>
                             <div class="inputWrap">
-                                <input type="text" disabled="disabled" class="formInput personalForm__input" placeholder="Your email">
+                                <input type="text" disabled="disabled" class="formInput personalForm__input" placeholder="{{$user->email}}">
 
                             </div>
                         </div>
 
-                        <div class="formField">
+                        <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
                                 Address <span>*</span>
                             </h2>
@@ -137,7 +137,7 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
                                     </span>
                             @endif
                         </div>
-                        <div class="formField">
+                        <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
                                 Address line 2
                             </h2>
@@ -151,16 +151,16 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
                                     </span>
                             @endif
                         </div>
-                        <div class="formField">
+                        <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
                                 Town <span>*</span>
                             </h2>
                             <div class="inputWrap">
 
                                 {!! Form::text('town',null,['class'=>'formInput personalForm__input','placeholder'=>'Your town/city']) !!}
-                                <span class="inputIco personalForm__ico centeredLink">
+{{--                                <span class="inputIco personalForm__ico centeredLink">
                   <i class="fa fa-map-marker"></i>
-                </span>
+                </span>--}}
                             </div>
                             @if ($errors->has('town'))
                                 <span class="help-block">
@@ -168,7 +168,7 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
                                     </span>
                             @endif
                         </div>
-                        <div class="formField">
+                        <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
                                 Postcode <span>*</span>
                             </h2>
@@ -183,16 +183,16 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
                                     </span>
                             @endif
                         </div>
-                        <div class="formField">
+                        <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
                                 Date of birth <span>*</span>
                             </h2>
                             <div class="inputWrap">
 
-                                {!! Form::text('DoB',null,['class'=>'profileField__input','placeholder'=>'dd/mm/yyyy']) !!}
-                                <span class="profileField__input-ico centeredLink">
+                                {!! Form::text('DoB',null,['id'=>'datepicker','class'=>'profileField__input','placeholder'=>'dd/mm/yyyy']) !!}
+{{--                                <span class="profileField__input-ico centeredLink">
                 <i class="fa fa-calendar" aria-hidden="true"></i>
-              </span>
+              </span>--}}
                             </div>
                             @if ($errors->has('DoB'))
                                 <span class="help-block">

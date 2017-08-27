@@ -47,7 +47,11 @@
 
                     </div>
 
-
+                    @if ($errors->has('workingTime'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('workingTime') }}</strong>
+                                    </span>
+                    @endif
                 </div>
 
 
@@ -64,7 +68,11 @@
 null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
-
+                    @if ($errors->has('work_at_holiday'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('work_at_holiday') }}</strong>
+                                    </span>
+                    @endif
                 </div>
 
 
@@ -83,32 +91,31 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                                 </li>
                             </ul>
                             {!! Form::number('work_hours',null,['class'=>'profileField__number']) !!}
-{{--
-                            <input type="number" class="profileField__number" >
---}}
-                        </div>
 
+
+                        </div>
+                        @if ($errors->has('work_hours'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('work_hours') }}</strong>
+                                    </span>
+                        @endif
 
                     </div>
                 </div>
             <input type="hidden" name="step" value = '11'>
             <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
             {!! Form::close()!!}
-{{--
-            <form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
-                {{ csrf_field() }}
-            </form>
---}}
+
         </div>
 
     </div>
 </div>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-        <a href="Signup_C_step10.html" class="registrationBtns__item registrationBtns__item--back">
+{{--        <a href="Signup_C_step10.html" class="registrationBtns__item registrationBtns__item--back">
             <i class="fa fa-arrow-left "></i>back
-        </a>
-        <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
+        </a>--}}
+        <a href="/" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>

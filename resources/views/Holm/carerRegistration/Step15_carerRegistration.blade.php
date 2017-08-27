@@ -22,7 +22,12 @@
                     <h2 class="formLabel questionForm__label">
                         Please write a couple of sentences about yourself and your experience. This will be used as part of your profile which clients will see. No more than 150 words. <span>*</span>
                     </h2>
-                    {!! Form::textarea('work_UK_description',null,['class'=>'formArea','placeholder'=>'Your text']) !!}
+                    {!! Form::textarea('description_yourself',null,['class'=>'formArea','placeholder'=>'Your text']) !!}
+                    @if ($errors->has('description_yourself'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('description_yourself') }}</strong>
+                                    </span>
+                    @endif
                 </div>
 
 
@@ -31,7 +36,12 @@
                     <h2 class="formLabel questionForm__label">
                         Please write a short sentence about yourself which sums you up. This will be the first thing clients see. <span>*</span>
                     </h2>
-                    {!! Form::text('description_yourself',null,['class'=>'formInput','placeholder'=>'Details']) !!}
+                    {!! Form::text('sentence_yourself',null,['class'=>'formInput','placeholder'=>'Details']) !!}
+                    @if ($errors->has('sentence_yourself'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('sentence_yourself') }}</strong>
+                                    </span>
+                    @endif
                 </div>
 
 
@@ -46,10 +56,10 @@
 </div>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-        <a href="Signup_C_step14_1.html" class="registrationBtns__item registrationBtns__item--back">
+{{--        <a href="Signup_C_step14_1.html" class="registrationBtns__item registrationBtns__item--back">
             <i class="fa fa-arrow-left "></i>back
-        </a>
-        <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
+        </a>--}}
+        <a href="/" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>

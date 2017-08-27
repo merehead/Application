@@ -27,7 +27,11 @@
 null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
-
+                    @if ($errors->has('work_UK'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('work_UK') }}</strong>
+                                    </span>
+                    @endif
                 </div>
 
                 <div class="formField">
@@ -36,22 +40,31 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </h2>
                     <div class="inputWrap">
                         {!! Form::select('work_UK_restriction',['1'=>'Yes','2'=>'No'],
-null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
-
+                    @if ($errors->has('work_UK_restriction'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('work_UK_restriction') }}</strong>
+                                    </span>
+                    @endif
 
                 </div>
 
 
 
 
-                <div class="formField">
+                <div class="hiding formField" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         If yes, what restrictions are there? <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         {!! Form::text('work_UK_description',null,['class'=>'formInput','placeholder'=>'Details']) !!}
                     </div>
+                    @if ($errors->has('work_UK_description'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('work_UK_description') }}</strong>
+                                    </span>
+                    @endif
                 </div>
             <input type="hidden" name="step" value = '14'>
             <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
@@ -63,10 +76,10 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
 </div>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-        <a href="Signup_C_step13.html" class="registrationBtns__item registrationBtns__item--back">
+{{--        <a href="Signup_C_step13.html" class="registrationBtns__item registrationBtns__item--back">
             <i class="fa fa-arrow-left "></i>back
-        </a>
-        <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
+        </a>--}}
+        <a href="/" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>

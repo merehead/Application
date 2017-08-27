@@ -46,6 +46,7 @@ class CarerRegistrationController extends FrontController
 
             if ($this->carersProfile->getNextStep() == 'Step4_carerRegistration') {
                 $postcodes = Postcode::all()->pluck('name', 'id')->toArray();
+                $this->vars = array_add($this->vars, 'user', $this->user);
                 $this->vars = array_add($this->vars, 'postcodes', $postcodes);
             }
             if ($this->carersProfile->getNextStep() == 'Step9_carerRegistration') {

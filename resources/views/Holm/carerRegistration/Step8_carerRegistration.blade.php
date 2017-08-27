@@ -14,7 +14,7 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-           {{-- <form class="questionForm">--}}
+
                 {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
 
                 <div class="formField">
@@ -22,27 +22,31 @@
                         Do you have a full UK/EEA Driving Licence?<span>*</span>
                     </h2>
                     <div class="inputWrap">
-{{--                        <select class="formSelect">
-                            <option value="select">Please select</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>--}}
+
                         {!! Form::select('driving_licence',['1'=>'Yes','2'=>'No'],
 null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
-
+                    @if ($errors->has('driving_licence'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('driving_licence') }}</strong>
+                                    </span>
+                    @endif
                 </div>
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         What is your Driving Licence Number?
                     </h2>
                     <div class="inputWrap">
-                        {{--<input type="text" class="formInput " placeholder="Driving licence number">--}}
+
                         {!! Form::text('DBS_number',null,['class'=>'formInput','placeholder'=>'Driving licence number']) !!}
                     </div>
 
-
+                    @if ($errors->has('DBS_number'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('DBS_number') }}</strong>
+                                    </span>
+                    @endif
                 </div>
 
 
@@ -64,36 +68,20 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
 
                 </div>
 
-
-
-
-
-                <!-- <div class="addContainer ">
-                          <a href="#" class="add add--moreHeight">
-                            <i class="fa fa-plus-circle"></i>
-                              <div class="add__comment add__comment--smaller">
-                              <p>Choose a File or Drag Here</p>
-                              <span>Size limit: 10 MB</span>
-                            </div>
-                          </a>
-                        </div>
-                -->
-
-
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Do you own a car which you intend to use for work?
                     </h2>
                     <div class="inputWrap">
-                        {{--<select class="formSelect">
-                            <option value="select">Please select</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>--}}
+
                         {!! Form::select('have_car',['1'=>'Yes','2'=>'No'],
 null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
-
+                    @if ($errors->has('have_car'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('have_car') }}</strong>
+                                    </span>
+                    @endif
 
                 </div>
                 <div class="formField">
@@ -101,41 +89,32 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                         Would you be interested in using your car to transport clients to the shops or for short trips?<span>*</span>
                     </h2>
                     <div class="inputWrap">
-{{--                        <select class="formSelect">
-                            <option value="select">Please select</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>--}}
+
                         {!! Form::select('use_car',['1'=>'Yes','2'=>'No'],
 null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
-
+                    @if ($errors->has('use_car'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('use_car') }}</strong>
+                                    </span>
+                    @endif
                 </div>
-                <!--
-                        <div class="formField formField--margin-top">
-                          <div class="inputWrap">
-                            <input type="text" class="formInput " placeholder="Further Details">
-                          </div>
-                        </div>
-                     -->
-            {{--</form>--}}
+
             <input type="hidden" name="step" value = '8'>
             <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
             {!! Form::close()!!}
-            {{--<form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
-                {{ csrf_field() }}
-            </form>--}}
+
         </div>
 
     </div>
 </div>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-        <a href="Signup_C_step7.html" class="registrationBtns__item registrationBtns__item--back">
+{{--        <a href="Signup_C_step7.html" class="registrationBtns__item registrationBtns__item--back">
             <i class="fa fa-arrow-left "></i>back
-        </a>
-        <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
+        </a>--}}
+        <a href="/" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>

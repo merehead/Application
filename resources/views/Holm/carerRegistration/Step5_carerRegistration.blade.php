@@ -15,9 +15,7 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-{{--
-            <form class="questionForm">
---}}
+
                 {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
 
                 <div class="formField">
@@ -38,7 +36,11 @@
 null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) !!}
                     </div>
 
-
+                    @if ($errors->has('criminal_conviction'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('criminal_conviction') }}</strong>
+                                    </span>
+                    @endif
                 </div>
                 <!--
                         <div class="formField formField--margin-top">
@@ -50,23 +52,17 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) 
             <input type="hidden" name="step" value = '5'>
             <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
                 {!! Form::close()!!}
-{{--
-            </form>
 
-            <form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
-                {{ csrf_field() }}
-            </form>
-            --}}
         </div>
 
     </div>
 </div>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-        <a href="Signup_C_step4.html" class="registrationBtns__item registrationBtns__item--back">
+{{--        <a href="Signup_C_step4.html" class="registrationBtns__item registrationBtns__item--back">
             <i class="fa fa-arrow-left "></i>back
-        </a>
-        <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
+        </a>--}}
+        <a href="\" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>

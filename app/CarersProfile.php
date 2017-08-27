@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
 class CarersProfile extends Model
@@ -35,4 +36,13 @@ class CarersProfile extends Model
     {
         return $this->belongsToMany('App\CarerReference', 'carer_profile_reference', 'carer_profile_id', 'reference_id');
     }
+
+    public function setDoBAttribute($value)
+    {
+        $date = DateTime::createFromFormat('d/m/Y', $value);
+
+        $this->attributes['DoB'] = $date->format('Y-m-d H:i:s');
+
+    }
+
 }

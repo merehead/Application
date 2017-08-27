@@ -20,19 +20,6 @@
                         What type of service are you looking to provide?  <span>*</span>
                     </h2>
 
-
-{{--                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf1">
-                        <label for="boxf1"> Single / Regular visits</label>
-                    </div>
-                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf2">
-                        <label for="boxf2"> Live in care</label>
-                    </div>
-                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf3">
-                        <label for="boxf3"> Respite care</label>
-                    </div>--}}
                     @foreach($serviceTypes as $serviceType)
                         <div class="checkBox_item">
 
@@ -44,28 +31,27 @@
                         </div>
                     @endforeach
 
-
+                    @if ($errors->has('serviceType'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('serviceType') }}</strong>
+                                    </span>
+                    @endif
                 </div>
                 <input type="hidden" name="step" value = '9'>
                 <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
 
-            {{--</form>--}}
                 {!! Form::close()!!}
-{{--
-            <form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
-                {{ csrf_field() }}
-            </form>
---}}
+
         </div>
 
     </div>
 </div>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-        <a href="Signup_C_step8.html" class="registrationBtns__item registrationBtns__item--back">
+{{--        <a href="Signup_C_step8.html" class="registrationBtns__item registrationBtns__item--back">
             <i class="fa fa-arrow-left "></i>back
-        </a>
-        <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
+        </a>--}}
+        <a href="/" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>

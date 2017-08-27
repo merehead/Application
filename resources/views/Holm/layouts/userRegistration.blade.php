@@ -13,20 +13,73 @@
           rel="stylesheet">
     <link rel="stylesheet" href="css/main.min.css">
     <link rel="stylesheet" href="css/customize.css">
+    <link rel="stylesheet" href="css/cupertino/jquery-ui.min.css">
 </head>
 <body>
 @yield('header')
 @yield('content')
 @yield('footer')
 <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"   >
+
 </script>
+
+
+<script src="{{asset('js/jquery-ui.min.js')}}"></script>
+
 <script>
     $('.footerSocial a, .headerSocial a').click(function(e) {
         e.preventDefault();
         var href = $(this).attr('href');
         window.open(href, '_blank').focus();
     });
+    $( function() {
+        $( "#datepicker" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"dd/mm/yy",
+            showAnim:"slideDown"
+        });
+    } );
+
+    $( document ).ready(function() {
+
+        //alert($("#main-if").val());
+
+        if($("#main-if").val()==1){
+            {$(".hiding").show( )}
+        }
+        if($("#depend-if").val()==3){
+            {$(".depend_hiding").show( )}
+        }
+
+    });
+
+    $(function(){
+        $("#main-if").change(function(){
+            if($(this).val() !="0")
+            {
+                if($(this).val() == 1) {$(".hiding").show( )}
+                if($(this).val() == 2) {$(".hiding").hide( )}
+            }
+        });
+    });
+
+    $(function(){
+        $("#depend-if").change(function(){
+            if($(this).val() !="0")
+            {
+                if($(this).val() == 1) {$(".depend_hiding").hide( )}
+                if($(this).val() == 2) {$(".depend_hiding").hide( )}
+                if($(this).val() == 3) {$(".depend_hiding").show( )}
+            }
+        });
+    });
+
 </script>
+
+
+
+
 <div id="login" class="login" style="position: fixed; z-index: 999; top:20%; left:40%; display:none">
     <div class="login__header">
         <h2>login</h2>

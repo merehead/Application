@@ -35,10 +35,10 @@
 </form>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-        <a href="Signup_C_step18.html" class="registrationBtns__item registrationBtns__item--back">
+{{--        <a href="Signup_C_step18.html" class="registrationBtns__item registrationBtns__item--back">
             <i class="fa fa-arrow-left "></i>back
-        </a>
-        <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
+        </a>--}}
+        <a href="/" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>

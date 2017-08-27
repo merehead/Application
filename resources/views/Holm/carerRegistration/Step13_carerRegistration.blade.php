@@ -30,8 +30,16 @@
                                 <label for="boxf{{$language->id}}">{{$language->carer_language}}</label>
 
                             </div>
-                        @endforeach
 
+                        @endforeach                   </div>
+
+
+                </div>
+                            @if ($errors->has('languages'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('languages') }}</strong>
+                                    </span>
+                            @endif
                         <div class="formField">
                             <h2 class="formLabel questionForm__label">
                                 If other, please state
@@ -40,13 +48,15 @@
                                 {!! Form::text('language_additional',null,['class'=>'formInput','placeholder'=>'Other']) !!}
 
                             </div>
+                            @if ($errors->has('language_additional'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('language_additional') }}</strong>
+                                    </span>
+                            @endif
                         </div>
 
 
-                    </div>
 
-
-                </div>
 
 
                 <input type="hidden" name="step" value = '13'>
@@ -60,10 +70,10 @@
 </div>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-        <a href="Signup_C_step12.html" class="registrationBtns__item registrationBtns__item--back">
+{{--        <a href="Signup_C_step12.html" class="registrationBtns__item registrationBtns__item--back">
             <i class="fa fa-arrow-left "></i>back
-        </a>
-        <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
+        </a>--}}
+        <a href="/" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>

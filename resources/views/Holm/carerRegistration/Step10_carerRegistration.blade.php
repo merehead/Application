@@ -34,73 +34,28 @@
 
                         </div>
                     @endforeach
-{{--                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf3">
-                        <label for="boxf3">PERSONAL CARE </label>
-                    </div>
-
-                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf4">
-                        <label for="boxf4"> DEMENTIA CARE</label>
-                    </div>
-
-                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf5">
-                        <label for="boxf5">HOUSEKEEPING </label>
-                    </div>
-
-                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf6">
-                        <label for="boxf6"> FOOD / NUTRITION</label>
-                    </div>
-
-                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf7">
-                        <label for="boxf7">DRESSINGS AND WOUND MANAGEMENT
-                        </label>
-                    </div>
-
-                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf8">
-                        <label for="boxf8"> COMPANIONSHIP</label>
-                    </div>
-
-                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf9">
-                        <label for="boxf9"> TRAVEL / VISITS / EXCURSIONS</label>
-                    </div>
-
-                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf10">
-                        <label for="boxf10">MEDICATION / TREATMENTS </label>
-                    </div>
-
-                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf11">
-                        <label for="boxf11"> MOBILITY</label>
-                    </div>--}}
-
-
-
+                    @if ($errors->has('assistanceType'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('assistanceType') }}</strong>
+                                    </span>
+                    @endif
 
 
                 </div>
             <input type="hidden" name="step" value = '10'>
             <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
             {!! Form::close()!!}
-{{--            <form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
-                {{ csrf_field() }}
-            </form>--}}
+
         </div>
 
     </div>
 </div>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-        <a href="Signup_C_step9.html" class="registrationBtns__item registrationBtns__item--back">
+{{--        <a href="Signup_C_step9.html" class="registrationBtns__item registrationBtns__item--back">
             <i class="fa fa-arrow-left "></i>back
-        </a>
-        <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
+        </a>--}}
+        <a href="/" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>

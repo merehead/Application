@@ -21,18 +21,27 @@
                 </h2>
                 <div class="inputWrap">
                     {!! Form::select('have_questions',['1'=>'Yes','2'=>'No'],
-null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                 </div>
-
+                @if ($errors->has('have_questions'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('have_questions') }}</strong>
+                                    </span>
+                @endif
 
             </div>
-            <div class="formField">
+            <div class="hiding formField" style="display: none">
                 <h2 class="formLabel questionForm__label">
                     If yes, what questions do you have? We will get back to you as soon as possible with answers.
                 </h2>
                 <div class="inputWrap">
                     {!! Form::textarea('questions',null,['class'=>'formArea','placeholder'=>'Your text']) !!}
                 </div>
+                @if ($errors->has('questions'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('questions') }}</strong>
+                                    </span>
+                @endif
             </div>
             <input type="hidden" name="step" value='20'>
             <input type="hidden" name="carersProfileID" value= {{$carersProfileID}}>
@@ -45,10 +54,10 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
 </div>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-        <a href="Signup_C_step19.html" class="registrationBtns__item registrationBtns__item--back">
+{{--        <a href="Signup_C_step19.html" class="registrationBtns__item registrationBtns__item--back">
             <i class="fa fa-arrow-left "></i>back
-        </a>
-        <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
+        </a>--}}
+        <a href="/" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>

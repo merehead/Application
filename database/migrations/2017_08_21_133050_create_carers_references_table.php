@@ -8,7 +8,7 @@ class CreateCarersReferencesTable extends Migration
 {
     public function up()
     {
-        Schema::create('carer_references', function (Blueprint $table) {
+        Schema::create('carers_references', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 64);
             $table->string('job_title', 64);

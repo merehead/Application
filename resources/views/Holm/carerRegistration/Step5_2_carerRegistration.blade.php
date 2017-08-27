@@ -28,8 +28,10 @@
 </form>
 <div class="registrationBtns registrationBtns--center">
 
-    <a href="Signup_C_step4.html" class="registrationBtns__item"
+    <a href="\" class="registrationBtns__item"
+{{--
        onclick="event.preventDefault();document.getElementById('step').submit();"
+--}}
     >
         OK
     </a>
