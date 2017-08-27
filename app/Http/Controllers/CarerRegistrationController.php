@@ -86,8 +86,6 @@ class CarerRegistrationController extends FrontController
 
     public function update(Request $request) {
 
-        //dd($request->all());
-
             $this->carersProfile->saveStep($request);
 
         return redirect('/carer-registration');

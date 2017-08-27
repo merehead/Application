@@ -514,9 +514,16 @@ class CarerRegistration
 
         $step = $this->model->find($id)->registration_progress;
 
-        if ($step>1)
-            $activeStep=2;
+        //dd($step);
 
+        if ($step>=1)
+            $activeStep=2;
+        if ($step>3)
+            $activeStep=3;
+        if ($step>17)
+            $activeStep=4;
+        if ($step>19)
+            $activeStep=5;
         return $activeStep;
     }
 

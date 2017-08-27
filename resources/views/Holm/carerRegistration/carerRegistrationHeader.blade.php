@@ -44,7 +44,7 @@
                 <i class="fa fa-check-circle"></i>
               </span>
                     </div>
-                    <div class="signStep signStep--step3 ">
+                    <div class="signStep signStep--step3 {{$activeStep > 3 ? "signStep--active"  : ""}}">
                         <div class="signStep__item">
                         </div>
                         <span class="signStep__ico">
@@ -52,7 +52,7 @@
               </span>
 
                     </div>
-                    <div class="signStep signStep--step4">
+                    <div class="signStep signStep--step4 {{$activeStep > 4 ? "signStep--active"  : ""}}">
                         <div class="signStep__item">
 
                         </div>
