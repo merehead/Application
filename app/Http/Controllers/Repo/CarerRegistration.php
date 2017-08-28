@@ -487,11 +487,8 @@ class CarerRegistration
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
-
-
         $carerProfile->CarerReferences()->attach($reference->id);
-
-
+        //dd($carerProfile->CarerReferences,$reference, $reference->CarersProfiles);
 
         return;
     }

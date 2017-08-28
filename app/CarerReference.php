@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class CarerReference extends Model
 {
 
-    protected $table = 'carer_references';
+    protected $table = 'carers_references';
 
     public function CarersProfiles()
     {
-        return $this->belongsToMany('App\CarersProfile', 'carer_profile_reference', 'carer_profile_id', 'reference_id');
+        return $this->belongsToMany('App\CarersProfile', 'carer_profile_reference', 'reference_id', 'carer_profile_id');
     }
 }
