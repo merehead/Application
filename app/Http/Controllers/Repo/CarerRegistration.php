@@ -11,9 +11,11 @@ namespace App\Http\Controllers\Repo;
 
 use App\CarerReference;
 use App\CarersProfile;
+use App\Http\Requests\CarerRegistrationRequest;
 use App\User;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CarerRegistration
 {
@@ -190,8 +192,12 @@ class CarerRegistration
             $carerPrifile -> save();
         }
 
-        if (Auth::attempt(['email' => $user->email, 'password' => $request['password']],TRUE)) {
+        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']],TRUE)) {
             Auth::login($user, true);
+
+            Mail::send('errors.404', ['userName' => $user->email, 'password' => $request['password']],
+                function ($m) use ($request) {$m->to($request['email'])->subject('Registration');});
+
         }
 
         return;

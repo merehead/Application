@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CarerReference extends Model
 {
 
-    protected $table = 'carers_references';
+    protected $table = 'carer_references';
 
     public function CarersProfiles()
     {

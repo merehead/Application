@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AssistanceType;
 use App\Http\Controllers\Repo\CarerRegistration;
+use App\Http\Requests\CarerRegistrationRequest;
 use App\Language;
 use App\Postcode;
 use App\ServiceType;

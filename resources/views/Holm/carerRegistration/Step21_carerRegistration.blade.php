@@ -38,7 +38,7 @@
     </div>
 
 </div>
-<form id="step" method="GET" action="/">
+<form id="step" method="GET" action="/im-carer">
     {{ csrf_field() }}
     <input type="hidden" name="step" value = '21'>
     <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
