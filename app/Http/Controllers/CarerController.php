@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CarersProfile;
+use App\Postcode;
 use Illuminate\Http\Request;
 
 class CarerController extends FrontController
@@ -31,7 +32,8 @@ class CarerController extends FrontController
             }
             $this->vars = array_add($this->vars,'user',$this->user);
             $this->vars = array_add($this->vars,'carerProfile',$carerProfile);
-
+            $postcodes = Postcode::all()->pluck('name', 'id')->toArray();
+            $this->vars = array_add($this->vars, 'postcodes', $postcodes);
             //dd($this->user,$carerProfile);
             $this->content = view(config('settings.frontTheme').'.CarerProfiles.PrivateProfile')->with($this->vars)->render();
         }
