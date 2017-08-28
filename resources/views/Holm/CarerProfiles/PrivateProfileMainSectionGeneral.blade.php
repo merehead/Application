@@ -16,18 +16,20 @@
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                 </a>
             </div>
+
+
             <div class="generalInfo__text">
                 <div class="generalInfo__elem">
-                    <p>first name</p><span>Rosie </span>
+                    <p>first name</p><span>{{$carerProfile->first_name}}</span>
                 </div>
                 <div class="generalInfo__elem">
-                    <p>last name</p><span>Petry</span>
+                    <p>last name</p><span>{{$carerProfile->family_name}}</span>
                 </div>
                 <div class="generalInfo__elem">
-                    <p>gender</p><span>Female </span>
+                    <p>gender</p><span>{{$carerProfile->gender}} </span>
                 </div>
                 <div class="generalInfo__elem">
-                    <p>date of birth</p><span>08/12/1962 </span>
+                    <p>date of birth</p><span>{{$carerProfile->DoB}}</span>
                 </div>
 
 
@@ -199,7 +201,7 @@
                 Address Line 1 <span class="requireIco">*</span>
               </span>
             </h2>
-            <input type="text" class="profileField__input" placeholder="Your address">
+            <input type="text" class="profileField__input" placeholder="{{$carerProfile->address_line1}}">
         </div>
 
         <div class="profileField">
@@ -208,7 +210,7 @@
                 Address Line 2
               </span>
             </h2>
-            <input type="text" class="profileField__input" placeholder="Your address">
+            <input type="text" class="profileField__input" placeholder="{{$carerProfile->address_line2}}">
         </div>
 
         <div class="profileField">
@@ -218,7 +220,7 @@
               </span>
             </h2>
             <div class="profileField__input-wrap">
-                <input type="text" class="profileField__input" placeholder="Your city">
+                <input type="text" class="profileField__input" placeholder="{{$carerProfile->town}}">
                 <span class="profileField__input-ico centeredLink">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
               </span>
@@ -237,7 +239,7 @@
                 Post code <span class="requireIco">*</span>
               </span>
             </h2>
-            <input type="text" class="profileField__input" placeholder="Your code">
+            <input type="text" class="profileField__input" placeholder="{{$carerProfile->Postcode->name}}">
         </div>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
@@ -245,7 +247,7 @@
                 Mobile Number <span class="requireIco">*</span>
               </span>
             </h2>
-            <input type="text" class="profileField__input" placeholder="Your phone">
+            <input type="text" class="profileField__input" placeholder="{{$carerProfile->mobile_number}}">
         </div>
 
         <div class="profileField">
@@ -254,7 +256,7 @@
                 Email ADDRESS <span class="requireIco">*</span>
               </span>
             </h2>
-            <input type="text" class="profileField__input" placeholder="Your email">
+            <input type="text" class="profileField__input" placeholder="{{$user->email}}">
         </div>
     </div>
 
@@ -293,7 +295,7 @@
     <div class="profileRow">
 
         <div class="profileField profileField--full-width">
-            <input type="text" class="profileField__input" placeholder="One line summary">
+            <input type="text" class="profileField__input" placeholder="{{$carerProfile->sentence_yourself}}">
         </div>
     </div>
 
@@ -310,7 +312,7 @@
                  <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                    How should the carer enter the Service User’s home?    </span>
                </h2>-->
-            <textarea class="profileField__area" placeholder="Type text about yourself"></textarea>
+            <textarea class="profileField__area" placeholder="{{$carerProfile->description_yourself}}"></textarea>
         </div>
     </div>
 

@@ -33,7 +33,7 @@ class CarerController extends FrontController
             $this->vars = array_add($this->vars,'carerProfile',$carerProfile);
 
             //dd($this->user,$carerProfile);
-            $this->content = view(config('settings.frontTheme').'.CarerProfiles.PrivateProfile')->render();
+            $this->content = view(config('settings.frontTheme').'.CarerProfiles.PrivateProfile')->with($this->vars)->render();
         }
 
 

@@ -45,4 +45,9 @@ class CarersProfile extends Model
 
     }
 
+    public function getDoBAttribute($value)
+    {
+        return date('d/m/Y',strtotime($value));
+    }
+
 }
