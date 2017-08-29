@@ -50,4 +50,29 @@ class CarersProfile extends Model
         return date('d/m/Y',strtotime($value));
     }
 
+
+    public function setDriverLicenceValidUntilAttribute($value)
+    {
+        $date = DateTime::createFromFormat('d/m/Y', $value);
+        $this->attributes['driver_licence_valid_until'] = $date->format('Y-m-d H:i:s');
+
+    }
+
+    public function getDriverLicenceValidUntilAttribute($value)
+    {
+        return date('d/m/Y',strtotime($value));
+    }
+
+    public function setCarInsuranceValidUntilAttribute($value)
+    {
+        $date = DateTime::createFromFormat('d/m/Y', $value);
+        $this->attributes['car_insurance_valid_until'] = $date->format('Y-m-d H:i:s');
+
+    }
+
+    public function getCarInsuranceValidUntilAttribute($value)
+    {
+        return date('d/m/Y',strtotime($value));
+    }
+
 }

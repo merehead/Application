@@ -79,14 +79,36 @@
 </footer>
 
 
-<script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"   >
-</script>
+
+
+
 <script>
     $('.footerSocial a, .headerSocial a').click(function(e) {
         e.preventDefault();
         var href = $(this).attr('href');
         window.open(href, '_blank').focus();
     });
+
+    var $j = jQuery.noConflict();
+    //$j("#datepicker").datepicker();
+
+    $j( function() {
+        $j( "#datepicker_driver_licence" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"dd/mm/yy",
+            showAnim:"slideDown"
+        });
+    } );
+
+    $j( function() {
+        $j( "#datepicker_insurance" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"dd/mm/yy",
+            showAnim:"slideDown"
+        });
+    } );
 </script>
 
 

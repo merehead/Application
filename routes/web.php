@@ -23,7 +23,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 //----
 Route::get('/', 'HomePageController@index')->name('mainHomePage');
+
 Route::get('/im-carer', 'CarerController@index')->name('ImCarerPage');
+Route::post('/im-carer', 'CarerController@update')->name('ImCarerPrivatePage');
 
 Route::get('carer-registration','CarerRegistrationController@index')->name('CarerRegistration');
 Route::post('carer-registration','CarerRegistrationController@update')->name('CarerRegistrationPost');

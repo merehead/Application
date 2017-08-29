@@ -1,7 +1,7 @@
 <div class="profileInfoContainer">
     <div class="generalInfo">
         <div class="profilePhoto profilePhoto--change">
-            <img src="./dist/img/profile4.png" alt="">
+            <img src="./img/profile4.png" alt="">
             <a href="#" class="profilePhoto__ico">
                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
             </a>

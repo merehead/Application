@@ -1,12 +1,17 @@
 <div class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">BANK ACCOUNT </h2>
-        <a href="#" class="profileCategory__link">
+        <a href="#" class="profileCategory__link"
+           onclick="event.preventDefault();document.getElementById('carerPrivateBank').submit();"
+        >
             <i class="fa fa-pencil"></i>
         </a>
     </div>
 </div>
 
+{!! Form::model($user, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateBank']) !!}
+{!! Form::hidden('id',null) !!}
+{!! Form::hidden('stage','bank') !!}
 <div class="borderContainer">
     <div class="profileRow">
         <div class="profileField ">
@@ -16,7 +21,7 @@
               </span>
 
             </h2>
-            <input type="text" class="profileField__input" placeholder="Sort code">
+            {!! Form::text('sort_code',null,['class'=>'profileField__input','placeholder'=>'Sort code']) !!}
         </div>
         <div class="profileField ">
             <h2 class="profileField__title ordinaryTitle">
@@ -25,10 +30,11 @@
               </span>
 
             </h2>
-            <input type="text" class="profileField__input" placeholder="Account number">
+            {!! Form::text('account_number',null,['class'=>'profileField__input','placeholder'=>'Account number']) !!}
         </div>
     </div>
 </div>
+{!! Form::close()!!}
 
 <div class="borderContainer">
     <div class="profileCategory">

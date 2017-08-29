@@ -1,118 +1,50 @@
 <div class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">Languages</h2>
-        <a href="#" class="profileCategory__link">
+        <a href="#" class="profileCategory__link"
+           onclick="event.preventDefault();document.getElementById('carerPrivateLanguages').submit();"
+        >
             <i class="fa fa-pencil"></i>
         </a>
     </div>
 </div>
 
 
-
+{!! Form::model($carerProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateLanguages']) !!}
+{!! Form::hidden('id',$carerProfile->id) !!}
+{!! Form::hidden('stage','carerPrivateLanguages') !!}
 
 <div class="borderContainer">
-    <div class="profileRow">
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check1" />
-                <label for="check1"> <span>english</span></label>
-            </div>
-        </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check2" />
-                <label for="check2"> <span>SPANISH</span></label>
-            </div>
-        </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check3" />
-                <label for="check3"> <span>Welsh</span></label>
-            </div>
-        </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check4" />
-                <label for="check4"> <span>Sign</span></label>
-            </div>
-        </div>
-    </div>
 
-    <div class="profileRow">
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check5" />
-                <label for="check5"> <span>Polish</span></label>
+        @foreach(array_chunk($languages->all(),4) as $languageCareRow)
+            <div class="profileRow">
+                @foreach($languageCareRow as $language)
+                    <div class="profileField profileField--fourth">
+                        <div class="checbox_wrap">
+                            {!! Form::checkbox('languages['.$language->id.']', null,($carerProfile->Languages->contains('id', $language->id)? 1 : null),array('class' => 'checkboxNew','id'=>'checkL'.$language->id)) !!}
+                            <label for="checkL{{$language->id}}"> <span>{{$language->carer_language}}</span></label>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-        </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check6" />
-                <label for="check6"> <span>Urdu</span></label>
-            </div>
-        </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check7" />
-                <label for="check7"> <span>Hindi</span></label>
-            </div>
-        </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check8" />
-                <label for="check8"> <span>Punjabi</span></label>
-            </div>
-        </div>
-    </div>
-
-    <div class="profileRow">
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check9" />
-                <label for="check9"> <span>Gujarati</span></label>
-            </div>
-        </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check10" />
-                <label for="check10"> <span>Bengali</span></label>
-            </div>
-        </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check11" />
-                <label for="check11"> <span>Arabic</span></label>
-            </div>
-        </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check12" />
-                <label for="check12"> <span>Cantonese</span></label>
-            </div>
-        </div>
-    </div>
-
-    <div class="profileRow">
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check13" />
-                <label for="check13"> <span>Mandarin</span></label>
-            </div>
-        </div>
-
-    </div>
+        @endforeach
 
 </div>
+{{ Form::close() }}
 
 <div class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">Transport</h2>
-        <a href="#" class="profileCategory__link">
+        <a href="#" class="profileCategory__link"
+           onclick="event.preventDefault();document.getElementById('carerPrivateTransport').submit();"
+        >
             <i class="fa fa-pencil"></i>
         </a>
     </div>
 </div>
-
+{!! Form::model($carerProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateTransport']) !!}
+{!! Form::hidden('id',$carerProfile->id) !!}
+{!! Form::hidden('stage','carerPrivateTransport') !!}
 <div class="borderContainer">
     <div class="profileRow profileRow--start">
         <div class="profileField">
@@ -122,14 +54,14 @@
                   Driving licence
                 </span>
                 </h2>
-                <select class="profileField__select profileField__select--greyBg">
-                    <option value="Flat">Have UK/EEA Driving Licence</option>
 
+                {!! Form::select('driving_licence',['Yes'=>'Have UK/EEA Driving Licence','No'=>'Do not have a driving licence'],
+null,['class'=>'profileField__select profileField__select--greyBg']) !!}
+{{--                <select class="profileField__select profileField__select--greyBg">
+                    <option value="Flat">Have UK/EEA Driving Licence</option>
                     <option value="Flat">Do not have a driving licence</option>
                     <option value="Flat">Please select</option>
-
-
-                </select>
+                </select>--}}
             </div>
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
@@ -137,16 +69,14 @@
                  Car for Work
                 </span>
                 </h2>
-                <select class="profileField__select ">
+                {!! Form::select('have_car',['Yes'=>'Car for work','No'=>'Do not have a car'],
+null,['class'=>'profileField__select']) !!}
+
+{{--                <select class="profileField__select ">
                     <option value="Flat">Car for work</option>
-
-
                     <option value="Flat">Do not have a car</option>
                     <option value="Flat">Please select</option>
-
-
-
-                </select>
+                </select>--}}
             </div>
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
@@ -154,17 +84,16 @@
                 Transport clients
                 </span>
                 </h2>
-                <select class="profileField__select ">
+                {!! Form::select('use_car',['Yes'=>'Transport clients','No'=>'Can not transport clients'],
+null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+
+
+{{--                <select class="profileField__select ">
                     <option value="Flat">Transport clients</option>
-
-
                     <option value="Flat">Can not transport clients</option>
                     <option value="Flat">Please select</option>
+                </select>--}}
 
-
-
-
-                </select>
             </div>
         </div>
 
@@ -188,7 +117,8 @@
                  Car insurance Number
                 </span>
                 </h2>
-                <input type="text" class="profileField__input profileField__input--greyBg" placeholder="Car insurance number">
+                {!! Form::text('car_insurance_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Car insurance number']) !!}
+               {{-- <input type="text" class="profileField__input profileField__input--greyBg" placeholder="Car insurance number">--}}
             </div>
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
@@ -196,7 +126,11 @@
                  Valid until
                 </span>
                 </h2>
-                <input type="text" class="profileField__input " placeholder="Valid until date">
+
+                {!! Form::text('car_insurance_valid_until',null,['id'=>'datepicker_insurance','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
+
+
+      {{--          <input id="datepicker_insurance" type="text" class="profileField__input " placeholder="Valid until date">--}}
             </div>
         </div>
 
@@ -220,7 +154,8 @@
                  UK\EEA Driving licence Number
                 </span>
                 </h2>
-                <input type="text" class="profileField__input profileField__input--greyBg" placeholder="UK\EEA Driving licence Number">
+                {!! Form::text('DBS_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Driving licence number']) !!}
+                {{--<input type="text" class="profileField__input profileField__input--greyBg" placeholder="UK\EEA Driving licence Number">--}}
             </div>
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
@@ -228,9 +163,13 @@
                  Valid until
                 </span>
                 </h2>
-                <input type="text" class="profileField__input " placeholder="Valid until date">
+                {!! Form::text('driver_licence_valid_until',null,['id'=>'datepicker_driver_licence','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
+
+                {{--<input type="text" class="profileField__input " placeholder="Valid until date">--}}
             </div>
         </div>
 
     </div>
 </div>
+
+{{ Form::close() }}
