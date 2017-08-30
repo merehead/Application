@@ -51,7 +51,7 @@
 
                 <div class="popularSlider__item popularCard">
                     <div class="profilePhoto  ">
-                        <img src="./img/Profile3.png" alt="">
+                        <img src="./img/profile2.png" alt="">
                     </div>
                     <div class="profileRating popularCard__rating">
               <span class="profileRating__item active">

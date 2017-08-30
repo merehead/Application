@@ -40,7 +40,7 @@ PLEASE REMEMBER TO PRESS 'SUBMIT' AT THE END TO MAKE SURE WE RECEIVE ALL YOUR IN
         </form>
         <div class="registrationBtns registrationBtns--center">
 
-            <a href="Signup_C_step3.html" class="registrationBtns__item"
+            <a href="next" class="registrationBtns__item"
                onclick="event.preventDefault();document.getElementById('step').submit();"
             >
                 start

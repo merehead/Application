@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,900" rel="stylesheet">
     <link rel="stylesheet" href="css/main.min.css">
     <link rel="stylesheet" href="css/cupertino/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/customize.css">
     <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
 </head>

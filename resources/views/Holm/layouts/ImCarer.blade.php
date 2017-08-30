@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/owl.carousel.css">
     <link rel="stylesheet" href="css/main.min.css">
+    <link rel="stylesheet" href="css/customize.css">
     <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" defer  >
     </script>
     <script  src="js/owl.carousel.min.js" defer ></script>
@@ -74,7 +75,7 @@
             </div>
             <div class="roundedBtn login__btn">
                 <a href="toLogin" class="roundedBtn__item  "
-                   onclick="event.preventDefault();document.getElementById('login__form').submit();">>
+                   onclick="event.preventDefault();document.getElementById('login__form').submit();">
                     login
                 </a>
             </div>

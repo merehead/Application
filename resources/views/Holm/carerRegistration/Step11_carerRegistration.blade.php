@@ -25,7 +25,7 @@
                             ?>
 
                             {{--<input type="checkbox" name="checkbox" class="customCheckbox" id="boxf3">--}}
-                                {!! Form::checkbox('workingTime['.$first->id.']', null,null,array('class' => 'customCheckbox','id'=>$id)) !!}
+                                {!! Form::checkbox('workingTime['.$first->id.']', null,null,array('class' => 'customCheckbox allTime','id'=>$id)) !!}
 
                                 <label for="boxf{{$first->id}}">{{$first->name}}</label>
 
@@ -39,7 +39,7 @@
 
 
                                 <?php $id = 'boxf'.$workingTime->id ?>
-                                {!! Form::checkbox('workingTime['.$workingTime->id.']', null,null,array('class' => 'customCheckbox','id'=>$id)) !!}
+                                {!! Form::checkbox('workingTime['.$workingTime->id.']', null,null,array('class' => 'customCheckbox checkSingle','id'=>$id)) !!}
                                 <label for="boxf{{$workingTime->id}}">{{$workingTime->name}}</label>
 
                             </div>
@@ -83,13 +83,20 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </h2>
                     <div class="profileField__input-wrap ">
                         <div class="jobTime">
-                            <ul class="timeDropdown">
+
+                            {!! Form::select('times',['HOURS'=>'HOURS','DAYS'=>'DAYS','WEEKS'=>'WEEKS'],null,['id'=>'workingTimes','class'=>'formSelect']) !!}
+
+
+
+{{--                            <ul class="timeDropdown">
                                 <li>
                                     <a href="#" class="timeDropdown__link">
                                         hours <i class="fa fa-angle-down"></i>
                                     </a>
                                 </li>
-                            </ul>
+                            </ul>--}}
+
+
                             {!! Form::number('work_hours',null,['class'=>'profileField__number']) !!}
 
 
@@ -112,9 +119,11 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
 </div>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-{{--        <a href="Signup_C_step10.html" class="registrationBtns__item registrationBtns__item--back">
+        <a href="Signup_C_step10.html" class="registrationBtns__item registrationBtns__item--back"
+onclick="event.preventDefault();document.getElementById('stepback').submit();"
+>
             <i class="fa fa-arrow-left "></i>back
-        </a>--}}
+        </a>
         <a href="/" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
@@ -128,3 +137,8 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
     </a>
 </div>
 
+{!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'stepback','class'=>'personalForm']) !!}
+<input type="hidden" name="step" value = '9'>
+<input type="hidden" name="stepback" value = '9'>
+<input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
+{!! Form::close()!!}

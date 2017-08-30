@@ -65,7 +65,7 @@
             </div>
             <div class="roundedBtn login__btn">
                 <a href="toLogin" class="roundedBtn__item  "
-                   onclick="event.preventDefault();document.getElementById('login__form').submit();">>
+                   onclick="event.preventDefault();document.getElementById('login__form').submit();">
                     login
                 </a>
             </div>

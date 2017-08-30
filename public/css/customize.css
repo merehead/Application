@@ -2,3 +2,11 @@
     font-size: 70%;
     color: red
 }
+
+#workingTimes {
+    with:120px;
+}
+
+.formArea, .formInput, .formSelect {
+    with:38% !important;
+}

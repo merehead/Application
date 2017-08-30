@@ -21,13 +21,17 @@
             </h2>
             <div class="profileField__input-wrap ">
                 <div class="jobTime">
-                    <ul class="timeDropdown">
+
+                    {!! Form::select('times',['HOURS'=>'HOURS','DAYS'=>'DAYS','WEEKS'=>'WEEKS'],null,['id'=>'workingTimes','class'=>'formSelect','style'=>'with:120px;']) !!}
+
+
+{{--                    <ul class="timeDropdown">
                         <li>
                             <a href="#" class="timeDropdown__link">
                                 hours <i class="fa fa-angle-down"></i>
                             </a>
                         </li>
-                    </ul>
+                    </ul>--}}
                     {!! Form::number('work_hours',null,['class'=>'profileField__number']) !!}
                     {{--<input type="number" class="profileField__number" >--}}
                 </div>

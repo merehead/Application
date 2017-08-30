@@ -35,9 +35,11 @@
 </form>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-{{--        <a href="Signup_C_step18.html" class="registrationBtns__item registrationBtns__item--back">
+        <a href="Signup_C_step18.html" class="registrationBtns__item registrationBtns__item--back"
+           onclick="event.preventDefault();document.getElementById('stepback').submit();"
+        >
             <i class="fa fa-arrow-left "></i>back
-        </a>--}}
+        </a>
         <a href="/" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
@@ -51,3 +53,8 @@
     </a>
 </div>
 
+{!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'stepback','class'=>'personalForm']) !!}
+<input type="hidden" name="step" value = '17'>
+<input type="hidden" name="stepback" value = '17'>
+<input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
+{!! Form::close()!!}

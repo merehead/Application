@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\CarersProfile;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +41,15 @@ class LoginController extends Controller
 
         switch ($user->user_type_id) {
             case 1 : return '/';
-            case 3 : return '/carer-registration';
+            case 3 : {
+
+                $carerProfile =  CarersProfile::findOrFail($user->id);
+
+                if($carerProfile->registration_progress != '20')
+                    return '/carer-registration';
+                else
+                    return'/im-carer';
+            }
             //case 4 : return '/admin';
         }
 

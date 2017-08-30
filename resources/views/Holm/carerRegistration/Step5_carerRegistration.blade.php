@@ -16,7 +16,7 @@
     <div class="registration__column  registration__column--bg">
         <div class="personal">
 
-                {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
+                {!! Form::model($carersProfile,['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
@@ -59,18 +59,25 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) 
 </div>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-{{--        <a href="Signup_C_step4.html" class="registrationBtns__item registrationBtns__item--back">
+        <a href="back" class="registrationBtns__item registrationBtns__item--back"
+           onclick="event.preventDefault();document.getElementById('stepback').submit();"
+        >
             <i class="fa fa-arrow-left "></i>back
-        </a>--}}
+        </a>
         <a href="\" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>
 
-    <a href="Signup_C_step5_1.html" class="registrationBtns__item"
+    <a href="next" class="registrationBtns__item"
        onclick="event.preventDefault();document.getElementById('step').submit();"
     >
         next step
         <i class="fa fa-arrow-right"></i>
     </a>
 </div>
+
+{!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'stepback','class'=>'personalForm']) !!}
+<input type="hidden" name="step" value = '3'>
+<input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
+{!! Form::close()!!}

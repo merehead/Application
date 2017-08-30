@@ -32,19 +32,19 @@
                 Average rating
             </h2>
             <div class="profileRating ">
-                <span class="profileRating__item active">
+                <span class="profileRating__item">
                   <i class="fa fa-heart"></i>
                 </span>
-                <span class="profileRating__item active">
+                <span class="profileRating__item ">
                   <i class="fa fa-heart"></i>
                 </span>
-                <span class="profileRating__item active">
+                <span class="profileRating__item ">
                 <i class="fa fa-heart"></i>
                 </span>
-                <span class="profileRating__item active">
+                <span class="profileRating__item ">
                   <i class="fa fa-heart"></i>
                 </span>
-                <span class="profileRating__item active">
+                <span class="profileRating__item ">
                   <i class="fa fa-heart"></i>
                 </span>
             </div>
@@ -57,19 +57,19 @@
                     <span>Punctuality</span>
                 </p>
                 <div class="profileRating ">
-                  <span class="profileRating__item active">
+                  <span class="profileRating__item ">
                     <i class="fa fa-heart"></i>
                   </span>
-                    <span class="profileRating__item active">
+                    <span class="profileRating__item ">
                     <i class="fa fa-heart"></i>
                   </span>
-                    <span class="profileRating__item active">
+                    <span class="profileRating__item ">
                   <i class="fa fa-heart"></i>
                   </span>
-                    <span class="profileRating__item active">
+                    <span class="profileRating__item ">
                     <i class="fa fa-heart"></i>
                   </span>
-                    <span class="profileRating__item active">
+                    <span class="profileRating__item ">
                     <i class="fa fa-heart"></i>
                   </span>
                 </div>
@@ -80,19 +80,19 @@
                     <span>Friendliness</span>s
                 </p>
                 <div class="profileRating ">
-                  <span class="profileRating__item active">
+                  <span class="profileRating__item ">
                     <i class="fa fa-heart"></i>
                   </span>
-                    <span class="profileRating__item active">
+                    <span class="profileRating__item ">
                     <i class="fa fa-heart"></i>
                   </span>
-                    <span class="profileRating__item active">
+                    <span class="profileRating__item ">
                   <i class="fa fa-heart"></i>
                   </span>
-                    <span class="profileRating__item active">
+                    <span class="profileRating__item ">
                     <i class="fa fa-heart"></i>
                   </span>
-                    <span class="profileRating__item active">
+                    <span class="profileRating__item ">
                     <i class="fa fa-heart"></i>
                   </span>
                 </div>
@@ -103,19 +103,19 @@
                     <span>Communication</span>
                 </p>
                 <div class="profileRating ">
-                  <span class="profileRating__item active">
+                  <span class="profileRating__item ">
                     <i class="fa fa-heart"></i>
                   </span>
-                    <span class="profileRating__item active">
+                    <span class="profileRating__item ">
                     <i class="fa fa-heart"></i>
                   </span>
-                    <span class="profileRating__item active">
+                    <span class="profileRating__item ">
                   <i class="fa fa-heart"></i>
                   </span>
-                    <span class="profileRating__item active">
+                    <span class="profileRating__item ">
                     <i class="fa fa-heart"></i>
                   </span>
-                    <span class="profileRating__item active">
+                    <span class="profileRating__item ">
                     <i class="fa fa-heart"></i>
                   </span>
                 </div>
@@ -126,19 +126,19 @@
                     <span>Performance</span>
                 </p>
                 <div class="profileRating ">
-                  <span class="profileRating__item active">
+                  <span class="profileRating__item ">
                     <i class="fa fa-heart"></i>
                   </span>
-                    <span class="profileRating__item active">
+                    <span class="profileRating__item ">
                     <i class="fa fa-heart"></i>
                   </span>
-                    <span class="profileRating__item active">
+                    <span class="profileRating__item ">
                   <i class="fa fa-heart"></i>
                   </span>
-                    <span class="profileRating__item active">
+                    <span class="profileRating__item ">
                     <i class="fa fa-heart"></i>
                   </span>
-                    <span class="profileRating__item active">
+                    <span class="profileRating__item ">
                     <i class="fa fa-heart"></i>
                   </span>
                 </div>

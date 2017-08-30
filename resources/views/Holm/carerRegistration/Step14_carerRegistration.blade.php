@@ -16,7 +16,7 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
+            {!! Form::model($carersProfile,['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Are you able to work legally in the UK?<span>*</span>
@@ -66,6 +66,23 @@ null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                                     </span>
                     @endif
                 </div>
+
+            <div class="formField">
+                <h2 class="formLabel questionForm__label">
+                    What is your National Insurance Number?
+                </h2>
+                <div class="inputWrap">
+                    {!! Form::text('national_insurance_number',null,['class'=>'formInput','placeholder'=>'Insurance Number']) !!}
+                </div>
+                @if ($errors->has('national_insurance_number'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('work_UK_restriction') }}</strong>
+                                    </span>
+                @endif
+
+            </div>
+
+
             <input type="hidden" name="step" value = '14'>
             <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
 
@@ -76,9 +93,11 @@ null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
 </div>
 <div class="registrationBtns">
     <div class="registrationBtns__left">
-{{--        <a href="Signup_C_step13.html" class="registrationBtns__item registrationBtns__item--back">
+        <a href="Signup_C_step13.html" class="registrationBtns__item registrationBtns__item--back"
+           onclick="event.preventDefault();document.getElementById('stepback').submit();"
+        >
             <i class="fa fa-arrow-left "></i>back
-        </a>--}}
+        </a>
         <a href="/" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
@@ -91,4 +110,9 @@ null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
         <i class="fa fa-arrow-right"></i>
     </a>
 </div>
+{!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'stepback','class'=>'personalForm']) !!}
+<input type="hidden" name="step" value = '12'>
+<input type="hidden" name="stepback" value = '12'>
+<input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
+{!! Form::close()!!}
 

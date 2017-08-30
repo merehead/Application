@@ -30,7 +30,6 @@ class CarerRegistration
     public function getID()
     {
 
-        //здесь ошибка, т.к. предполагается, что ид-юзера == ид-профиля, что точно не правильно!!!
 
         $user = Auth::user();
 
@@ -43,7 +42,8 @@ class CarerRegistration
 
         $user = Auth::user();
 
-        $currentStep = $this->model->find($user->id)->registration_progress; //смотри предыдущую ошибку!!!!
+            $currentStep = $this->model->find($user->id)->registration_progress;
+
 
         switch ($currentStep) {
             case '0' : $step = 'Step1_carerRegistration';break;
@@ -118,16 +118,17 @@ class CarerRegistration
 
         $carersProfile->registration_progress = $nextStep;
 
-        if ($request->input('step')==5 && $request->input('criminal_conviction')==3) { // no criminal backend
-
+        if ($request->input('step')==5 && $request->input('criminal_conviction')==3) { // no a criminal backend
             $carersProfile->registration_progress = '5_2';
         }
 
-        if ($request->input('step')=='5_2' && $carersProfile->criminal_conviction=='Yes') { // has criminal backend
+        if ($request->input('step')=='5' && $request->input('criminal_conviction')==2) { // has the criminal backend
+           $carersProfile->registration_progress = '5_1';
+            //return redirect()->action('HomePageController@index');
+        }
 
-            //$carersProfile->registration_progress = '5_1';
-
-            return redirect()->action('HomePageController@index');
+        if ($request->input('step')=='5_1' && $carersProfile->criminal_conviction=='Some') { // has some criminal backend
+            $carersProfile->registration_progress = '5_2';
         }
 
 
@@ -225,6 +226,7 @@ class CarerRegistration
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
+        $carerProfile->title            = $request->input('title');
         $carerProfile->first_name       = $request->input('first_name');
         $carerProfile->family_name      = $request->input('family_name');
         $carerProfile->like_name        = $request->input('like_name');
@@ -244,13 +246,24 @@ class CarerRegistration
 
     private function saveStep5($request) {
 
+        //dd($request->all());
+
+
         $this->validate($request,[
             'criminal_conviction' => 'required|numeric:1',
         ]);
 
-        $value = 'Yes';
+        switch ($request->input('criminal_conviction')){
+            case 1 : {$value = 'Some';break;}
+            case 2 : {$value = 'Yes';break;}
+            case 3 : {$value = 'No';break;}
+            default: $value = 'Yes';
+        }
+
+
+/*        $value = 'Yes';
         if($request->input('criminal_conviction')=='3')
-            $value = 'No';
+            $value = 'No';*/
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
@@ -298,12 +311,17 @@ class CarerRegistration
     }
     private function saveStep8($request) {
 
+
+
         $this->validate($request,[
             'driving_licence' => 'required|numeric:1',
             'DBS_number' => 'string|nullable|max:128',
             'have_car' => 'nullable|numeric:1',
-            'use_car' => 'nullable|numeric:1',
+            'use_car' => 'required_if:have_car,1|numeric:1',
         ]);
+
+
+        //dd($request->all());
 
         $request->input('driving_licence')=='1' ? $driving_licence='Yes' : $driving_licence='No';
         $request->input('have_car')=='1' ? $have_car='Yes' : $have_car='No';
@@ -357,10 +375,12 @@ class CarerRegistration
     }
     private function saveStep11($request) {
 
+
         $this->validate($request,[
             'workingTime' => 'required|array',
             'work_at_holiday' => 'required|numeric:1',
-            'work_hours' => 'required|numeric:1',
+            'times' => 'required|string:32',
+            'work_hours' => 'nullable|numeric:2',
         ]);
 
 
@@ -370,7 +390,9 @@ class CarerRegistration
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
         $carerProfile->work_at_holiday  = $work_at_holiday;
-        $carerProfile->work_hours  = $request->input('work_hours');
+        $carerProfile->times  = $request->input('times');
+
+        if (null !== $request->input('work_hours')) $carerProfile->work_hours  = $request->input('work_hours');
 
         $carerProfile->update();
 
@@ -431,6 +453,7 @@ class CarerRegistration
             'work_UK' => 'required|numeric:1',
             'work_UK_restriction' => 'required|numeric:1',
             'work_UK_description' => 'nullable|string:512',
+            'national_insurance_number'=>'nullable|string:128',
         ]);
 
 

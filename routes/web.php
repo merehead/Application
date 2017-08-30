@@ -12,9 +12,6 @@
 */
 
 
-
-
-
 Route::get('customer-registration/{step_token?}', 'Registration\CustomerRegistrationController@index');
 Route::post('customer-registration/ajax', 'Registration\CustomerRegistrationController@ajax');
 
@@ -27,7 +24,7 @@ Route::get('/', 'HomePageController@index')->name('mainHomePage');
 Route::get('/im-carer', 'CarerController@index')->name('ImCarerPage');
 Route::post('/im-carer', 'CarerController@update')->name('ImCarerPrivatePage');
 
-Route::get('carer-registration','CarerRegistrationController@index')->name('CarerRegistration');
+Route::get('carer-registration/{stepback?}','CarerRegistrationController@index')->name('CarerRegistration');
 Route::post('carer-registration','CarerRegistrationController@update')->name('CarerRegistrationPost');
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
@@ -41,7 +38,5 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
 
     Route::get('/dispute-payout-to-carer/{appointmentId}/{userId}/{amount}', 'AdminSitePayment\AdminSitePayment@DisputePayoutToCarer')->name('DisputePayoutToCarer');
     Route::get('/dispute-payout-to-purchaser/{appointmentId}/{userId}/{amount}', 'AdminSitePayment\AdminSitePayment@DisputePayoutToPurchaser')->name('DisputePayoutToPurchaser');
-
-
 
 });
