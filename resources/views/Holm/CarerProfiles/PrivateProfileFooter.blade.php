@@ -109,6 +109,37 @@
             showAnim:"slideDown"
         });
     } );
+
+    $j(document).ready(function() {
+
+        $j(".allTime").change(function(){
+            if(this.checked){
+                $j(".checkSingle").each(function(){
+                    this.checked=true;
+                })
+            }else{
+                $j(".checkSingle").each(function(){
+                    this.checked=false;
+                })
+            }
+        });
+
+        $j(".checkSingle").click(function () {
+            if ($j(this).is(":checked")){
+                var isAllChecked = 0;
+                $j(".checkSingle").each(function(){
+                    if(!this.checked)
+                        isAllChecked = 1;
+                })
+                if(isAllChecked == 0){ $j(".allTime").prop("checked", true); }
+            }
+            else {
+                $j(".allTime").prop("checked", false);
+            }
+        });
+    });
+
+
 </script>
 
 

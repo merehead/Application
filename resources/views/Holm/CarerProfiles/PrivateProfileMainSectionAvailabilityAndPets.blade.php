@@ -50,10 +50,17 @@
                 @foreach($workingTimes as $step=>$workingTime)
                     <div class="checkBox_item">
 
+                        @if($step==0)
+                            {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
+                            array('class' => 'customCheckbox allTime','id'=>'boxG'.$workingTime->id)) !!}
+                            <label for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
 
-                        {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),array('class' => 'customCheckbox','id'=>'boxG'.$workingTime->id)) !!}
+                        @else
+
+                        {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
+                        array('class' => 'customCheckbox checkSingle','id'=>'boxG'.$workingTime->id)) !!}
                         <label for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
-
+                            @endif
                     </div>
                 @endforeach
 
@@ -77,7 +84,8 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                 @foreach($bottomTime as $workingTime)
                     <div class="checbox_wrap checbox_wrap--date">
 
-                        {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),array('class' => 'checkboxNew','id'=>'checkD'.$workingTime->id)) !!}
+                        {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
+                        array('class' => 'checkboxNew checkSingle','id'=>'checkD'.$workingTime->id)) !!}
                         <label for="checkD{{$workingTime->id}}">{{$workingTime->name}}</label>
 
                     </div>
