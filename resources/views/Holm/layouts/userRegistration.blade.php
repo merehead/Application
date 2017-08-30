@@ -48,7 +48,7 @@
         if($("#main-if").val()==1){
             {$(".hiding").show( )}
         }
-        if($("#depend-if").val()==3){
+        if($("#depend-if").val()=='It depends'){
             {$(".depend_hiding").show( )}
         }
 
@@ -68,9 +68,9 @@
         $("#depend-if").change(function(){
             if($(this).val() !="0")
             {
-                if($(this).val() == 1) {$(".depend_hiding").hide( )}
-                if($(this).val() == 2) {$(".depend_hiding").hide( )}
-                if($(this).val() == 3) {$(".depend_hiding").show( )}
+                if($(this).val() == 'Yes') {$(".depend_hiding").hide( )}
+                if($(this).val() == 'No') {$(".depend_hiding").hide( )}
+                if($(this).val() == 'It depends') {$(".depend_hiding").show( )}
             }
         });
     });

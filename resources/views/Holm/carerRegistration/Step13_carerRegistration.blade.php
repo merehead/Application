@@ -24,7 +24,8 @@
                             <div class="checkBox_item">
 
                                 <?php $id = 'boxf'.$language->id ?>
-                                {!! Form::checkbox('languages['.$language->id.']', null,null,array('class' => 'customCheckbox','id'=>$id)) !!}
+                                {!! Form::checkbox('languages['.$language->id.']', null,($carersProfile->Languages->contains('id', $language->id)? 1 : null),
+                                array('class' => 'customCheckbox','id'=>$id)) !!}
                                 <label for="boxf{{$language->id}}">{{$language->carer_language}}</label>
 
                             </div>

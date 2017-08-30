@@ -21,8 +21,13 @@
                         Are you willing to work in homes with pets? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('work_with_pets',['1'=>'Yes','2'=>'No','3'=>'It depends'],
-null,['id'=>'depend-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+
+
+
+
+                        {!! Form::select('work_with_pets',['Yes'=>'Yes','No'=>'No','It depends'=>'It depends'],null,['id'=>'depend-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+
+
                     </div>
                     @if ($errors->has('work_with_pets'))
                         <span class="help-block">

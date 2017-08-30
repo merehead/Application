@@ -24,7 +24,7 @@
                     <div class="inputWrap">
 
                         {!! Form::select('work_UK',['1'=>'Yes','2'=>'No'],
-null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+$carersProfile->work_UK=='Yes' ? '1' : '2',['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
                     @if ($errors->has('work_UK'))
@@ -40,7 +40,7 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </h2>
                     <div class="inputWrap">
                         {!! Form::select('work_UK_restriction',['1'=>'Yes','2'=>'No'],
-null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+$carersProfile->work_UK_restriction=='Yes' ? '1' : '2',['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
                     @if ($errors->has('work_UK_restriction'))
                         <span class="help-block">

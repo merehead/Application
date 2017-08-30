@@ -11,7 +11,7 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
+            {!! Form::model($carersProfile,['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
@@ -25,7 +25,7 @@
                             ?>
 
                             {{--<input type="checkbox" name="checkbox" class="customCheckbox" id="boxf3">--}}
-                                {!! Form::checkbox('workingTime['.$first->id.']', null,null,array('class' => 'customCheckbox allTime','id'=>$id)) !!}
+                                {!! Form::checkbox('workingTime['.$first->id.']', null,($carersProfile->WorkingTimes->contains('id', $first->id)? 1 : null),array('class' => 'customCheckbox allTime','id'=>$id)) !!}
 
                                 <label for="boxf{{$first->id}}">{{$first->name}}</label>
 
@@ -39,7 +39,7 @@
 
 
                                 <?php $id = 'boxf'.$workingTime->id ?>
-                                {!! Form::checkbox('workingTime['.$workingTime->id.']', null,null,array('class' => 'customCheckbox checkSingle','id'=>$id)) !!}
+                                {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carersProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),array('class' => 'customCheckbox checkSingle','id'=>$id)) !!}
                                 <label for="boxf{{$workingTime->id}}">{{$workingTime->name}}</label>
 
                             </div>
@@ -64,8 +64,13 @@
                     <div class="inputWrap">
 
 
-                        {!! Form::select('work_at_holiday',['1'=>'Yes','2'=>'No'],
+                        {!! Form::select('work_at_holiday',['Yes'=>'Yes','No'=>'No'],
 null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+
+{{--                        {!! Form::select('criminal_conviction',['1'=>'Yes, but they are very old, and for a minor offence.','2'=>'Yes','3'=>'No'],
+null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) !!}--}}
+
+
                     </div>
 
                     @if ($errors->has('work_at_holiday'))

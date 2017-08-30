@@ -378,27 +378,29 @@ class CarerRegistration
 
         $this->validate($request,[
             'workingTime' => 'required|array',
-            'work_at_holiday' => 'required|numeric:1',
+            'work_at_holiday' => 'required|string:3',
             'times' => 'required|string:32',
             'work_hours' => 'nullable|numeric:2',
         ]);
 
 
-        $request->input('work_at_holiday')=='1' ? $work_at_holiday='Yes' : $work_at_holiday='No';
+        //$request->input('work_at_holiday')=='1' ? $work_at_holiday='Yes' : $work_at_holiday='No';
         $workingTimes = $request->input('workingTime');
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
-        $carerProfile->work_at_holiday  = $work_at_holiday;
+        $carerProfile->work_at_holiday  = $request->input('work_at_holiday');
         $carerProfile->times  = $request->input('times');
 
         if (null !== $request->input('work_hours')) $carerProfile->work_hours  = $request->input('work_hours');
 
         $carerProfile->update();
 
-        foreach ($workingTimes as $k=>$v) {
+        $carerProfile->WorkingTimes()->sync(array_keys($workingTimes));
+
+/*        foreach ($workingTimes as $k=>$v) {
             $carerProfile->WorkingTimes()->attach($k);
-        }
+        }*/
 
         return;
     }
@@ -406,13 +408,18 @@ class CarerRegistration
     private function saveStep12($request) {
 
         $this->validate($request,[
-            'work_with_pets' => 'required|numeric:1',
+            'work_with_pets' => 'required|string:16',
             'pets_description' => 'nullable|string:512',
         ]);
 
+        //$request->input('work_with_pets')=='1' ? $work_with_pets='Yes' : $work_with_pets='No';
 
+        switch ($request->input('work_with_pets')){
+            case 'Yes' : {$work_with_pets='Yes'; break; }
+            case 'No' : {$work_with_pets='No'; break; }
+            case 'It depends' : {$work_with_pets='It depends'; break; }
+        }
 
-        $request->input('work_with_pets')=='1' ? $work_with_pets='Yes' : $work_with_pets='No';
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
@@ -440,9 +447,11 @@ class CarerRegistration
 
         $carerProfile->update();
 
-        foreach ($languages as $k=>$v) {
+        $carerProfile->Languages()->sync(array_keys($languages));
+
+/*        foreach ($languages as $k=>$v) {
             $carerProfile->Languages()->attach($k);
-        }
+        }*/
 
         return;
     }
@@ -464,7 +473,8 @@ class CarerRegistration
 
         $carerProfile->work_UK  = $work_UK;
         $carerProfile->work_UK_restriction  = $work_UK_restriction;
-        $carerProfile->pets_description  = $request->input('work_UK_description');
+        $carerProfile->work_UK_description  = $request->input('work_UK_description');
+        $carerProfile->national_insurance_number  = $request->input('national_insurance_number');
 
         $carerProfile->update();
 
