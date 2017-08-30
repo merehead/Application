@@ -47,7 +47,7 @@
         <div class="profileField profileField--two-thirds profileField--content-end  ">
             <div class="checkRow checkRow--margin-bottom">
 
-                @foreach($workingTimes as $workingTime)
+                @foreach($workingTimes as $step=>$workingTime)
                     <div class="checkBox_item">
 
 

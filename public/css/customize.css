@@ -3,10 +3,20 @@
     color: red
 }
 
-#workingTimes {
-    with:120px;
+#workingTimes, #workingTimes:active, #workingTimes:focus
+{
+    width:120px !important;
+    background-color: #7ab7dc;
+    border: none;
+    color: #fff;
+    outline: none;
 }
 
-.formArea, .formInput, .formSelect {
-    with:38% !important;
+textarea:focus, input:focus{
+    outline: none;
+}
+
+select#workingTimes {
+    border:0px;
+    outline:0px;
 }

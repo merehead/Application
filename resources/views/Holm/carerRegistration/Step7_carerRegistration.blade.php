@@ -165,7 +165,7 @@
 </div>
 
 {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'stepback','class'=>'personalForm']) !!}
-<input type="hidden" name="step" value = '5'>
-<input type="hidden" name="stepback" value = '5'>
+<input type="hidden" name="step" value = '5_2'>
+<input type="hidden" name="stepback" value = '5_2'>
 <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
 {!! Form::close()!!}
