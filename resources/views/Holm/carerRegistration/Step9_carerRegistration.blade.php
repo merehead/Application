@@ -25,7 +25,8 @@
 
 
                             <?php $id = 'boxf'.$serviceType->id ?>
-                        {!! Form::checkbox('serviceType['.$serviceType->id.']', null,null,array('class' => 'customCheckbox','id'=>$id)) !!}
+                        {!! Form::checkbox('serviceType['.$serviceType->id.']', null,($carersProfile->ServicesTypes->contains('id', $serviceType->id)? 1 : null),
+                        array('class' => 'customCheckbox','id'=>$id)) !!}
                             <label for="boxf{{$serviceType->id}}">{{$serviceType->name}}</label>
 
                         </div>

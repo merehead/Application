@@ -189,7 +189,11 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
                             </h2>
                             <div class="inputWrap">
 
-                                {!! Form::text('DoB',null,['id'=>'datepicker','class'=>'profileField__input','placeholder'=>'dd/mm/yyyy']) !!}
+                                @if($carersProfile->DoB === "01/01/1970")
+                                <input name="DoB" id="datepicker" class="profileField__input" placeholder="dd/mm/yyyy" type="text">
+                                @else
+                                {!! Form::text('DoB',null,['id'=>'datepicker','class'=>'profileField__input']) !!}
+                                @endif
 {{--                                <span class="profileField__input-ico centeredLink">
                 <i class="fa fa-calendar" aria-hidden="true"></i>
               </span>--}}
