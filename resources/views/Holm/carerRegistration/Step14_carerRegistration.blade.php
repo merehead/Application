@@ -72,7 +72,7 @@ $carersProfile->work_UK_restriction=='Yes' ? '1' : '2',['id'=>'main-if','class'=
                     What is your National Insurance Number?
                 </h2>
                 <div class="inputWrap">
-                    {!! Form::text('national_insurance_number',null,['class'=>'formInput','placeholder'=>'Insurance Number']) !!}
+                    {!! Form::text('national_insurance_number',null,['class'=>'formInput','placeholder'=>'Insurance number']) !!}
                 </div>
                 @if ($errors->has('national_insurance_number'))
                     <span class="help-block">

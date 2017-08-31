@@ -28,9 +28,9 @@ class CarerController extends FrontController
 
         $this->title = 'Holm Care';
 
-        if (!$this->user){
+       /* if (!$this->user){*/
             $this->content = view(config('settings.frontTheme').'.ImCarer.ImCarer')->render();
-        } else {
+/*        } else {
             $carerProfile = CarersProfile::findOrFail($this->user->id);
             if($carerProfile->registration_progress!='20'){
                 return redirect()->action('CarerRegistrationController@index');
@@ -47,7 +47,7 @@ class CarerController extends FrontController
             $this->vars = array_add($this->vars, 'languages', $languages);
             //dd($this->user,$carerProfile);
             $this->content = view(config('settings.frontTheme').'.CarerProfiles.PrivateProfile')->with($this->vars)->render();
-        }
+        }*/
 
 
         //$step = view(config('settings.frontTheme').'.carerRegistration.'.$this->carersProfile->getNextStep())->with($this->vars)->render();

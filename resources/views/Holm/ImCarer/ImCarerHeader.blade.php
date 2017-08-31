@@ -34,7 +34,7 @@
                     @if (Route::has('login'))
                         <div class="top-right links">
                             @if (Auth::check())
-                                <a href="#" class="registeredCarer">
+                                <a href="/carer-registration" class="registeredCarer">
                                     <div class="profilePhoto registeredCarer__img">
                                         <img src="./img/profile4.png" alt="">
                                     </div>

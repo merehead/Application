@@ -24,7 +24,37 @@
                 </h2>
                 <div class="inputWrap">
 
-                    {!! Form::select('DBS',['1'=>'Yes','2'=>'No'],($carersProfile->DBS == 'Yes' ? '1' : '2'),['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    {!! Form::select('DBS',['1'=>'Yes','2'=>'No'],($carersProfile->DBS == 'Yes' ? '1' : '2'),['id'=>'main-if2','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                </div>
+                @if ($errors->has('DBS'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('DBS') }}</strong>
+                                    </span>
+                @endif
+            </div>
+            <div class="formField hiding2" style="display: none">
+                <h2 class="formLabel questionForm__label">
+                    Upload copy of DBS certificate.
+                </h2>
+                <div class="inputWrap">
+                    <a href="#" class="add add--moreHeight">
+                        <i class="fa fa-plus-circle"></i>
+                        <div class="add__comment add__comment--smaller">
+                            <p>Choose a File or Drag Here</p>
+                            <span>Size limit: 10 MB</span>
+                        </div>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="formField hiding2" style="display: none">
+                <h2 class="formLabel questionForm__label">
+                    Date of certificate.
+                </h2>
+                <div class="inputWrap">
+
+                    {!! Form::text('dbs_date',null,['id'=>'datepicker','class'=>'formInput','placeholder'=>'Date of certificate']) !!}
                 </div>
                 @if ($errors->has('DBS'))
                     <span class="help-block">
@@ -33,6 +63,8 @@
                 @endif
             </div>
 
+
+
             <div class="formField">
                 <h2 class="formLabel questionForm__label">
                     Have you used the new <a href="https://www.gov.uk/dbs-update-service" target="blank"
@@ -40,7 +72,7 @@
                 </h2>
                 <div class="inputWrap">
 
-                    {!! Form::select('DBS_use',['1'=>'Yes','2'=>'No'],($carersProfile->DBS_use == 'Yes' ? '1' : '2'),['class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    {!! Form::select('DBS_use',['1'=>'Yes','2'=>'No'],($carersProfile->DBS_use == 'Yes' ? '1' : '2'),['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                 </div>
                 @if ($errors->has('DBS_use'))
                     <span class="help-block">

@@ -24,7 +24,7 @@
                     <div class="inputWrap">
 
                         {!! Form::select('driving_licence',['1'=>'Yes','2'=>'No'],
-($carersProfile->driving_licence == 'Yes' ? '1' : '2'),['class'=>'formSelect','placeholder'=>'Please select']) !!}
+($carersProfile->driving_licence == 'Yes' ? '1' : '2'),['id'=>'main-if2','class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
                     @if ($errors->has('driving_licence'))
@@ -33,7 +33,7 @@
                                     </span>
                     @endif
                 </div>
-                <div class="formField">
+                <div class="formField hiding2" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         What is your Driving Licence Number?
                     </h2>
@@ -51,7 +51,7 @@
 
 
 
-                <div class="formField">
+                <div class="formField  hiding2" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Please upload photographic proof of your driving licence.
                     </h2>
@@ -65,7 +65,6 @@
                         </a>
                     </div>
 
-
                 </div>
 
                 <div class="formField">
@@ -75,7 +74,7 @@
                     <div class="inputWrap">
 
                         {!! Form::select('have_car',['1'=>'Yes','2'=>'No'],
-($carersProfile->have_car == 'Yes' ? '1' : '2'),['class'=>'formSelect','placeholder'=>'Please select']) !!}
+($carersProfile->have_car == 'Yes' ? '1' : '2'),['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
                     @if ($errors->has('have_car'))
                         <span class="help-block">
@@ -84,7 +83,7 @@
                     @endif
 
                 </div>
-                <div class="formField">
+                <div class="formField  hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Would you be interested in using your car to transport clients to the shops or for short trips?<span>*</span>
                     </h2>

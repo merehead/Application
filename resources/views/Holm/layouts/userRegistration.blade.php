@@ -37,7 +37,10 @@
             changeMonth: true,
             changeYear: true,
             dateFormat:"dd/mm/yy",
-            showAnim:"slideDown"
+            showAnim:"slideDown",
+            minDate: "-70Y",
+            maxDate: "-1D",
+            yearRange: "-70:+0"
         });
     } );
 
@@ -51,6 +54,9 @@
         if($("#depend-if").val()=='It depends'){
             {$(".depend_hiding").show( )}
         }
+        if($("#main-if2").val()==1){
+            {$(".hiding2").show( )}
+        }
 
     });
 
@@ -63,6 +69,17 @@
             }
         });
     });
+
+    $(function(){
+        $("#main-if2").change(function(){
+            if($(this).val() !="0")
+            {
+                if($(this).val() == 1) {$(".hiding2").show( )}
+                if($(this).val() == 2) {$(".hiding2").hide( )}
+            }
+        });
+    });
+
 
     $(function(){
         $("#depend-if").change(function(){
@@ -133,7 +150,7 @@
                     Email
                 </h2>
                 <div class="inputWrap">
-                    <input type="email" class="formInput " placeholder="Your Email"
+                    <input type="email" class="formInput " placeholder="Your email"
                            name="email">
                 </div>
             </div>

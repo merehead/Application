@@ -293,8 +293,10 @@ class CarerRegistration
         $this->validate($request,[
             'DBS' => 'required|numeric:1',
             'DBS_use' => 'required|numeric:1',
-            'DBS_identifier' => 'string|nullable|max:128',
+            'DBS_identifier' => 'required_if:DBS_use,1|string|nullable|max:128',
         ]);
+
+        //dd($request->all());
 
         $request->input('DBS')=='1' ? $DBS='Yes' : $DBS='No';
 
@@ -305,6 +307,9 @@ class CarerRegistration
         $carerProfile->DBS  = $DBS;
         $carerProfile->DBS_use  = $DBS_use;
         $carerProfile->DBS_identifier  = $request->input('DBS_identifier');
+
+        $carerProfile->dbs_date  = $request->input('dbs_date');
+
         $carerProfile->update();
 
         return;
@@ -504,8 +509,8 @@ class CarerRegistration
 
     private function saveStep17($request) {
 
-        //dd($request->all());
 
+        //dd($request->all());
         $this->validate($request,[
             'name' => 'required|string:128',
             'job_title' => 'required|string:128',
@@ -514,7 +519,12 @@ class CarerRegistration
             'email' => 'required|email',
         ]);
 
-        $reference = new CarerReference();
+        if($request->input('id')=='0')
+            $reference = new CarerReference();
+        else
+            $reference = CarerReference::findOrFail($request->input('id'));
+
+
 
         $reference->name = $request->input('name');
         $reference->job_title = $request->input('job_title');
@@ -526,11 +536,17 @@ class CarerRegistration
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
-        $carerProfile->CarerReferences()->attach($reference->id);
+        if($request->input('id')=='0')
+            $carerProfile->CarerReferences()->attach($reference->id);
+
+
+
+        //$carerProfile->CarerReferences()->attach($reference->id);
         //dd($carerProfile->CarerReferences,$reference, $reference->CarersProfiles);
 
         return;
     }
+
     private function saveStep20($request) {
         $this->validate($request,[
             'have_questions' => 'required|numeric:1',

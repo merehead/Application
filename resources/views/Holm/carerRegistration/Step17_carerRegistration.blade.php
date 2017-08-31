@@ -14,9 +14,17 @@
         </div>
 
     </div>
+
+
+{{--    {{dd($carersProfile->CarerReferences->shift())}}--}}
+
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
+
+            <?php $carerReference = $carersProfile->CarerReferences->shift(); ?>
+
+            {!! Form::model($carerReference,['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
+            <input type="hidden" name="id" value='{{isset($carerReference->id) ? $carerReference->id : '0'}}'>
             <div class="formField">
                 <h2 class="formLabel questionForm__label">
                     Name <span>*</span>
@@ -92,8 +100,7 @@
         >
             <i class="fa fa-arrow-left "></i>back
         </a>
-        <a href="/" class="registrationBtns__item registrationBtns__item--later"
-           onclick="event.preventDefault();document.getElementById('stepback').submit();">
+        <a href="/" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>

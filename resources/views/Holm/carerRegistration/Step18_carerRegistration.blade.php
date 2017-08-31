@@ -15,9 +15,29 @@
         </div>
 
     </div>
+
+    <?php
+    if (count($carersProfile->CarerReferences)){
+
+        //dd($carersProfile->CarerReferences);
+        $carerReferenceC = $carersProfile->CarerReferences->splice(1);
+    }
+    if(isset($carerReferenceC))
+        $carerReference = $carerReferenceC[0];
+    //dd($carerReference)
+    ?>
+
+
+
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
+@if(isset($carerReference))
+            {!! Form::model($carerReference,['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
+@else
+                {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'questionForm']) !!}
+@endif
+                <input type="hidden" name="id" value='{{isset($carerReference->id) ? $carerReference->id : '0'}}'>
+
             <div class="formField">
                 <h2 class="formLabel questionForm__label">
                     Name <span>*</span>

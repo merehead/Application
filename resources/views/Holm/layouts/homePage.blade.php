@@ -42,7 +42,7 @@
                     Email
                 </h2>
                 <div class="inputWrap">
-                    <input type="email" class="formInput " placeholder="Your Email"
+                    <input type="email" class="formInput " placeholder="Your email"
                            name="email">
                 </div>
             </div>

@@ -75,4 +75,15 @@ class CarersProfile extends Model
         return date('d/m/Y',strtotime($value));
     }
 
+    public function setDbsDateAttribute($value)
+    {
+        $date = DateTime::createFromFormat('d/m/Y', $value);
+        $this->attributes['dbs_date'] = $date->format('Y-m-d H:i:s');
+
+    }
+    public function getDbsDateAttribute($value)
+    {
+        return date('d/m/Y',strtotime($value));
+    }
+
 }

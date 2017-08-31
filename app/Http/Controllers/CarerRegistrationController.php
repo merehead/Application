@@ -74,10 +74,10 @@ class CarerRegistrationController extends FrontController
                 $this->vars = array_add($this->vars, 'languages', $languages);
             }
 
-            if ($this->carersProfile->getNextStep($stepback) == 'Step13_carerRegistration') {
+/*            if ($this->carersProfile->getNextStep($stepback) == 'Step13_carerRegistration') {
                 $languages = Language::all();
                 $this->vars = array_add($this->vars, 'languages', $languages);
-            }
+            }*/
 
             $this->vars = array_add($this->vars,'activeStep',$this->carersProfile->getActiveStep($user->id));
 
