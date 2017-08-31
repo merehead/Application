@@ -35,7 +35,8 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::resource('/user','User\UserController', ['except' => ['show']]);
     Route::resource('/booking','Booking\BookingController', ['only' => ['index']]);
     Route::resource('/dispute-payout','DisputePayout\DisputePayoutController', ['only' => ['index']]);
-
+    Route::resource('/carer-payout','CarerPayout\CarerPayoutController', ['only' => ['index']]);
+    Route::resource('/purchaser-payout','PurchaserPayout\PurchaserPayoutController', ['only' => ['index']]);
 
     Route::get('/dispute-payout-to-carer/{appointmentId}/{userId}/{amount}', 'AdminSitePayment\AdminSitePayment@DisputePayoutToCarer')->name('DisputePayoutToCarer');
     Route::get('/dispute-payout-to-purchaser/{appointmentId}/{userId}/{amount}', 'AdminSitePayment\AdminSitePayment@DisputePayoutToPurchaser')->name('DisputePayoutToPurchaser');
