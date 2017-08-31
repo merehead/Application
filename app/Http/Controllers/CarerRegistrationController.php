@@ -49,6 +49,13 @@ class CarerRegistrationController extends FrontController
             //dd($this->user, $this->carersProfile->getID(),$this->carersProfile->getNextStep());
             $carersProfile = CarersProfile::findOrFail($user->id);
 
+            //dd($carersProfile->registration_progress);
+
+            if($carersProfile->registration_progress=='20') {
+                return redirect('/im-carer');
+            }
+
+
             $this->vars = array_add($this->vars, 'carersProfileID', $this->carersProfile->getID());
             $this->vars = array_add($this->vars, 'carersProfile', $carersProfile);
 

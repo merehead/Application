@@ -10,7 +10,7 @@
         </span>
             </a>
             <div class="collapseBox">
-                <a href="{{route('ImCarerPage')}}" class="carerSelf">
+                <a href="{{ route('welcomeCarer') }}" class="carerSelf">
                     i am a carer
                 </a>
                 <div class="headerNav_container">

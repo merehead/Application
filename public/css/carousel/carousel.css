@@ -1,0 +1,24 @@
+.carousel-inner>.active, .carousel-inner>.next, .carousel-inner>.prev {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+}
+.carousel-inner{
+  /*overflow: visible;*/
+}
+
+@media (max-width:992px){
+  .carousel-inner{
+    overflow: auto;
+  }
+  .carousel-inner1{
+    overflow: hidden;
+  }
+}
+.sliderControl{
+  display: flex;
+  top: calc(50% - 40px)
+}
+.people_quote{
+  display: none;
+}

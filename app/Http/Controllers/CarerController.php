@@ -15,28 +15,39 @@ class CarerController extends FrontController
 {
     //private $carersProfile;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         //$this->carersProfile = $carersProfile;
 
-        $this->template = config('settings.frontTheme').'.templates.ImCarer';
+        $this->template = config('settings.frontTheme') . '.templates.ImCarer';
     }
 
+    public function welcome()
+    {
+        $this->title = 'Holm Care';
+        $this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
+        return $this->renderOutput();
+    }
 
-
-    public function index(){
+    public function index()
+    {
 
         $this->title = 'Holm Care';
 
-       /* if (!$this->user){*/
-            $this->content = view(config('settings.frontTheme').'.ImCarer.ImCarer')->render();
-/*        } else {
+//dd('srger');
+
+        if (!$this->user) {
+            $this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
+        } else {
+
             $carerProfile = CarersProfile::findOrFail($this->user->id);
-            if($carerProfile->registration_progress!='20'){
+
+            if ($carerProfile->registration_progress != '20') {
                 return redirect()->action('CarerRegistrationController@index');
             }
-            $this->vars = array_add($this->vars,'user',$this->user);
-            $this->vars = array_add($this->vars,'carerProfile',$carerProfile);
+            $this->vars = array_add($this->vars, 'user', $this->user);
+            $this->vars = array_add($this->vars, 'carerProfile', $carerProfile);
             $postcodes = Postcode::all()->pluck('name', 'id')->toArray();
             $this->vars = array_add($this->vars, 'postcodes', $postcodes);
             $typeCare = AssistanceType::all();
@@ -46,9 +57,9 @@ class CarerController extends FrontController
             $languages = Language::all();
             $this->vars = array_add($this->vars, 'languages', $languages);
             //dd($this->user,$carerProfile);
-            $this->content = view(config('settings.frontTheme').'.CarerProfiles.PrivateProfile')->with($this->vars)->render();
-        }*/
+            $this->content = view(config('settings.frontTheme') . '.CarerProfiles.PrivateProfile')->with($this->vars)->render();
 
+        }
 
         //$step = view(config('settings.frontTheme').'.carerRegistration.'.$this->carersProfile->getNextStep())->with($this->vars)->render();
         //$this->vars = array_add($this->vars,'step',$step);
@@ -60,7 +71,8 @@ class CarerController extends FrontController
         return $this->renderOutput();
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
 
 
         //dd($request->all());
@@ -69,7 +81,7 @@ class CarerController extends FrontController
 
         $carerProfiles = CarersProfile::findOrFail($input['id']);
 
-        if($input['stage']=='general') {
+        if ($input['stage'] == 'general') {
             if (isset($input['address_line1'])) $carerProfiles->address_line1 = $input['address_line1'];
             if (isset($input['address_line2'])) $carerProfiles->address_line2 = $input['address_line2'];
             if (isset($input['town'])) $carerProfiles->town = $input['town'];
@@ -98,7 +110,7 @@ class CarerController extends FrontController
             }
             unset($carerProfiles);
         }
-        if($input['stage']=='bank') {
+        if ($input['stage'] == 'bank') {
 
             $user = User::findOrFail($input['id']);
 
@@ -110,7 +122,7 @@ class CarerController extends FrontController
             unset($carerProfiles);
         }
 
-        if($input['stage']=='carerPrivateTypeCare') {
+        if ($input['stage'] == 'carerPrivateTypeCare') {
 
             if (isset($input['typeCare']))
                 $carerProfiles->AssistantsTypes()->sync(array_keys($input['typeCare']));
@@ -118,7 +130,7 @@ class CarerController extends FrontController
             unset($carerProfiles);
         }
 
-        if($input['stage']=='carerPrivateAvailability') {
+        if ($input['stage'] == 'carerPrivateAvailability') {
 
             if (isset($input['work_hours'])) $carerProfiles->work_hours = $input['work_hours'];
             if (isset($input['work_at_holiday'])) $carerProfiles->work_at_holiday = $input['work_at_holiday'];
@@ -131,7 +143,7 @@ class CarerController extends FrontController
             unset($carerProfiles);
         }
 
-        if($input['stage']=='carerPrivatePets') {
+        if ($input['stage'] == 'carerPrivatePets') {
 
             if (isset($input['work_with_pets'])) $carerProfiles->work_with_pets = $input['work_with_pets'];
             if (isset($input['pets_description'])) $carerProfiles->pets_description = $input['pets_description'];
@@ -141,7 +153,7 @@ class CarerController extends FrontController
             unset($carerProfiles);
         }
 
-        if($input['stage']=='carerPrivateLanguages') {
+        if ($input['stage'] == 'carerPrivateLanguages') {
 
             if (isset($input['languages']))
                 $carerProfiles->Languages()->sync(array_keys($input['languages']));
@@ -149,7 +161,7 @@ class CarerController extends FrontController
             unset($carerProfiles);
         }
 
-        if($input['stage']=='carerPrivateTransport') {
+        if ($input['stage'] == 'carerPrivateTransport') {
 
             //dd($input);
 
@@ -167,7 +179,7 @@ class CarerController extends FrontController
             unset($carerProfiles);
         }
 
-        if($input['stage']=='carerPrivateCriminal') {
+        if ($input['stage'] == 'carerPrivateCriminal') {
 
             //dd($input);
 
