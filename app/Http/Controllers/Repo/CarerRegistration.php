@@ -350,9 +350,12 @@ class CarerRegistration
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
-        foreach ($serviceTypes as $k=>$v) {
+        $carerProfile->ServicesTypes()->sync(array_keys($serviceTypes));
+
+
+/*        foreach ($serviceTypes as $k=>$v) {
             $carerProfile->ServicesTypes()->attach($k);
-        }
+        }*/
 
         return;
     }
@@ -367,9 +370,12 @@ class CarerRegistration
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
+        $carerProfile->AssistantsTypes()->sync(array_keys($assistanceType));
+
+/*
         foreach ($assistanceType as $k=>$v) {
             $carerProfile->AssistantsTypes()->attach($k);
-        }
+        }*/
 
         return;
     }

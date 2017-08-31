@@ -24,7 +24,7 @@
                 </h2>
                 <div class="inputWrap">
 
-                    {!! Form::select('DBS',['1'=>'Yes','2'=>'No'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    {!! Form::select('DBS',['1'=>'Yes','2'=>'No'],($carersProfile->DBS == 'Yes' ? '1' : '2'),['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                 </div>
                 @if ($errors->has('DBS'))
                     <span class="help-block">
@@ -40,7 +40,7 @@
                 </h2>
                 <div class="inputWrap">
 
-                    {!! Form::select('DBS_use',['1'=>'Yes','2'=>'No'],null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    {!! Form::select('DBS_use',['1'=>'Yes','2'=>'No'],($carersProfile->DBS_use == 'Yes' ? '1' : '2'),['class'=>'formSelect','placeholder'=>'Please select']) !!}
                 </div>
                 @if ($errors->has('DBS_use'))
                     <span class="help-block">

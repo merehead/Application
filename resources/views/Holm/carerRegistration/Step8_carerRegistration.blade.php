@@ -24,7 +24,7 @@
                     <div class="inputWrap">
 
                         {!! Form::select('driving_licence',['1'=>'Yes','2'=>'No'],
-null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+($carersProfile->driving_licence == 'Yes' ? '1' : '2'),['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
                     @if ($errors->has('driving_licence'))
@@ -75,7 +75,7 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     <div class="inputWrap">
 
                         {!! Form::select('have_car',['1'=>'Yes','2'=>'No'],
-null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+($carersProfile->have_car == 'Yes' ? '1' : '2'),['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
                     @if ($errors->has('have_car'))
                         <span class="help-block">
@@ -91,7 +91,7 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     <div class="inputWrap">
 
                         {!! Form::select('use_car',['1'=>'Yes','2'=>'No'],
-null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+($carersProfile->use_car == 'Yes' ? '1' : '2'),['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
                     @if ($errors->has('use_car'))
