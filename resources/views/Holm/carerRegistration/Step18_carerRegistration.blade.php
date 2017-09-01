@@ -17,15 +17,16 @@
     </div>
 
     <?php
-    if (count($carersProfile->CarerReferences)){
+    if (count($carersProfile->CarerReferences)==2){
 
         //dd($carersProfile->CarerReferences);
         $carerReferenceC = $carersProfile->CarerReferences->splice(1);
-    }
-    if(isset($carerReferenceC))
         $carerReference = $carerReferenceC[0];
+    }
+/*    if(isset($carerReferenceC))
     //dd($carerReference)
-    ?>
+    */
+?>
 
 
 

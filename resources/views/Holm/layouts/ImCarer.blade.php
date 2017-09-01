@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="css/owl.carousel.css">
     <link rel="stylesheet" href="css/main.min.css">
     <link rel="stylesheet" href="css/customize.css">
-    <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" defer  >
-    </script>
+    <link rel="stylesheet" href="css/carousel/carousel.css">
+    <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" defer  > </script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script  src="js/owl.carousel.min.js" defer ></script>
 
     <script  src="js/main.js" defer ></script>
@@ -31,6 +32,20 @@
         var href = $(this).attr('href');
         window.open(href, '_blank').focus();
     });
+
+    // Carousel
+    $('.multi-item-carousel').carousel({
+        interval: false
+    });
+
+    // change quote
+    $('.peopleBox').on('click', function (e) {
+        e.preventDefault()
+        var quote = $(this).find('.people_quote').text().trim()
+        $('#testimonialSlider__item p').text(quote)
+    })
+
+
 </script>
 
 <div id="login" class="login" style="position: fixed; z-index: 999; top:20%; left:40%; display:none">

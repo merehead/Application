@@ -54,7 +54,12 @@
                 </h2>
                 <div class="inputWrap">
 
-                    {!! Form::text('dbs_date',null,['id'=>'datepicker','class'=>'formInput','placeholder'=>'Date of certificate']) !!}
+                    @if($carersProfile->dbs_date === "01/01/1970")
+                        <input name="dbs_date" id="datepicker" class="profileField__input" placeholder="dd/mm/yyyy" type="text">
+                    @else
+                        {!! Form::text('dbs_date',null,['id'=>'datepicker','class'=>'formInput','placeholder'=>'Date of certificate']) !!}
+                    @endif
+
                 </div>
                 @if ($errors->has('DBS'))
                     <span class="help-block">

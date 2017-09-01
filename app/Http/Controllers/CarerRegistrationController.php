@@ -28,7 +28,7 @@ class CarerRegistrationController extends FrontController
     public function index($stepback=null){
 
 
-        //dd('index',$stepback);
+
 
 
         $this->title = 'Carer Registration';
@@ -39,6 +39,9 @@ class CarerRegistrationController extends FrontController
         $this->vars = array_add($this->vars,'footer',$footer);
 
         $user = Auth::user();
+
+        //dd('CarerRegistrationController index' , $user);
+
 
         if (!$user) {
             $step = view(config('settings.frontTheme').'.carerRegistration.Step1_carerRegistration')->with($this->vars)->render();
