@@ -17,7 +17,7 @@
     </div>
 
     <?php
-    if (count($carersProfile->CarerReferences)==2){
+    if (count($carersProfile->CarerReferences)>1){
 
         //dd($carersProfile->CarerReferences);
         $carerReferenceC = $carersProfile->CarerReferences->splice(1);

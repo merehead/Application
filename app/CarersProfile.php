@@ -78,7 +78,9 @@ class CarersProfile extends Model
     public function setDbsDateAttribute($value)
     {
         $date = DateTime::createFromFormat('d/m/Y', $value);
-        $this->attributes['dbs_date'] = $date->format('Y-m-d H:i:s');
+        if(!null===$date)
+            $this->attributes['dbs_date'] = $date->format('Y-m-d H:i:s');
+        $this->attributes['dbs_date'] = null;
 
     }
     public function getDbsDateAttribute($value)
