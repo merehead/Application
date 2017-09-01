@@ -24,7 +24,7 @@
                 </h2>
                 <div class="inputWrap">
 
-                    {!! Form::select('DBS',['1'=>'Yes','2'=>'No'],($carersProfile->DBS == 'Yes' ? '1' : '2'),['id'=>'main-if2','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    {!! Form::select('DBS',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if2','class'=>'formSelect','placeholder'=>'Please select']) !!}
                 </div>
                 @if ($errors->has('DBS'))
                     <span class="help-block">
@@ -52,6 +52,7 @@
                 <h2 class="formLabel questionForm__label">
                     Date of certificate.
                 </h2>
+
                 <div class="inputWrap">
 
                     @if($carersProfile->dbs_date === "01/01/1970")
@@ -77,12 +78,12 @@
                 </h2>
                 <div class="inputWrap">
 
-                    {!! Form::select('DBS_use',['1'=>'Yes','2'=>'No'],($carersProfile->DBS_use == 'Yes' ? '1' : '2'),['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    {!! Form::select('DBS_use',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                 </div>
                 @if ($errors->has('DBS_use'))
                     <span class="help-block">
-                                        <strong>{{ $errors->first('DBS_use') }}</strong>
-                                    </span>
+                        <strong>{{ $errors->first('DBS_use') }}</strong>
+                    </span>
                 @endif
             </div>
 

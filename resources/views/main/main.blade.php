@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}" ng-app="HolmApp">
     <head>
-        @include('includes.head')
+        @include('Holm.includes.head')
         @stack('scripts_head')
     </head>
     <body>
         <header class="header">
-            @include('includes.header')
+            @include('Holm.includes.header')
         </header>
 
 
@@ -14,7 +14,7 @@
 
 
         <footer class="footer">
-            @include('includes.footer')
+            @include('Holm.includes.footer')
         </footer>
 
         <div id="login" class="login" style="position: fixed; top:120px; right:50px; display:none">

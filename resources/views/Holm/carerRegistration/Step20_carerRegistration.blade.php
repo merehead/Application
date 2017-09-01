@@ -20,7 +20,7 @@
                     Do you have any other questions?
                 </h2>
                 <div class="inputWrap">
-                    {!! Form::select('have_questions',['1'=>'Yes','2'=>'No'],
+                    {!! Form::select('have_questions',['Yes'=>'Yes','No'=>'No'],
 null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                 </div>
                 @if ($errors->has('have_questions'))

@@ -21,14 +21,7 @@
             <a href="{{route('ImCarerPage')}}" class="carerSelf">
                 i am a carer
             </a>
-            <div class="loginBox">
-                <a href="" class=" centeredLink loginBox__link">
-                    Login
-                </a>
-                <a href="" class=" centeredLink loginBox__link loginBox__link--active">
-                    Sign up
-                </a>
-            </div>
+            @include(config('settings.frontTheme').'.includes.loginOnPages')
 
             <div class="payment">
                 <a href="" class="payment__item">

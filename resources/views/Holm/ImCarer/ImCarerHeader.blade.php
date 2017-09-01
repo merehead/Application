@@ -33,30 +33,7 @@
                     </div>
                     @if (Route::has('login'))
                         <div class="top-right links">
-                            @if (Auth::check())
-                                <a href="/carer-registration" class="registeredCarer">
-                                    <div class="profilePhoto registeredCarer__img">
-                                        <img src="./img/no_photo.png" alt="">
-                                    </div>
-                                    <h2 class="profileName">
-                                        Rosie P.
-                                    </h2>
-                                    <span class="registeredCarer__ico">
-              <i class="fa fa-sign-out" aria-hidden="true"></i>
-            </span>
-                                </a>
-                            @else
-                                <div class="loginBox">
-                                    <a href="/login" class=" centeredLink loginBox__link"
-                                       onclick="event.preventDefault();document.getElementById('login').style.display = 'block';"
-                                    >
-                                        Login
-                                    </a>
-                                    <a href="/" class=" centeredLink loginBox__link loginBox__link--active">
-                                        Sign up
-                                    </a>
-                                </div>
-                            @endif
+                            @include(config('settings.frontTheme').'.includes.loginOnPages')
                         </div>
                     @endif
                 </div>

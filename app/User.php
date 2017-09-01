@@ -28,19 +28,6 @@ class User extends Authenticatable
     ];
 
 
-    public function meta()
-    {
-        return $this->hasMany('MetaUser');
-    }
-
-    public function tempUser()
-    {
-        return $this->hasOne('TempUser');
-    }
-
-
-    //--> ivan likhvar 2017 08  11
-
     public function userPurchaser()
     {
         return $this->hasMany('App\Booking','purchaser_id','id');
@@ -55,5 +42,23 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Booking','carer_id','id');
     }
-    //<--
+
+    public function userCarerProfile()
+    {
+        return $this->hasOne('App\CarersProfile','id','id');
+    }
+
+
+    public function userName()
+    {
+
+        if ($this->user_type_id==3) {
+
+            return $this->userCarerProfile->like_name;
+
+        }
+
+        return $this->id;
+    }
+
 }

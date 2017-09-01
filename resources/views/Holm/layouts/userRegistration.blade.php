@@ -51,9 +51,9 @@
             changeYear: true,
             dateFormat:"dd/mm/yy",
             showAnim:"slideDown",
-            minDate: "-70Y",
-            maxDate: "-2Y",
-            yearRange: "-50:+0"
+            minDate: "-4Y",
+            maxDate: "+20Y",
+            yearRange: "-2:+10"
         });
     } );
 
@@ -61,13 +61,13 @@
 
         //alert($("#main-if").val());
 
-        if($("#main-if").val()==1){
+        if($("#main-if").val()=='Yes'){
             {$(".hiding").show( )}
         }
         if($("#depend-if").val()=='It depends'){
             {$(".depend_hiding").show( )}
         }
-        if($("#main-if2").val()==1){
+        if($("#main-if2").val()=='Yes'){
             {$(".hiding2").show( )}
         }
 
@@ -77,8 +77,8 @@
         $("#main-if").change(function(){
             if($(this).val() !="0")
             {
-                if($(this).val() == 1) {$(".hiding").show( )}
-                if($(this).val() == 2) {$(".hiding").hide( )}
+                if($(this).val() == 'Yes') {$(".hiding").show( )}
+                if($(this).val() == 'No') {$(".hiding").hide( )}
             }
         });
     });
@@ -87,8 +87,8 @@
         $("#main-if2").change(function(){
             if($(this).val() !="0")
             {
-                if($(this).val() == 1) {$(".hiding2").show( )}
-                if($(this).val() == 2) {$(".hiding2").hide( )}
+                if($(this).val() == 'Yes') {$(".hiding2").show( )}
+                if($(this).val() == 'No') {$(".hiding2").hide( )}
             }
         });
     });

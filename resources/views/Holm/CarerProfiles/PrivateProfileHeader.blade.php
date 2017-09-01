@@ -31,7 +31,14 @@
                             <i class="fa fa-twitter"></i>
                         </a>
                     </div>
-                    <a href="#" class="registeredCarer">
+
+                    @if (Route::has('login'))
+                        <div class="top-right links">
+                            @include(config('settings.frontTheme').'.includes.loginOnPages')
+                        </div>
+                    @endif
+
+ {{--                   <a href="#" class="registeredCarer">
                         <div class="profilePhoto registeredCarer__img">
                             <img src="./img/no_photo.png" alt="">
                         </div>
@@ -41,7 +48,8 @@
                         <span class="registeredCarer__ico">
               <i class="fa fa-sign-out" aria-hidden="true"></i>
             </span>
-                    </a>
+                    </a>--}}
+
                 </div>
             </div>
 

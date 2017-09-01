@@ -118,11 +118,12 @@ class CarerRegistration
 
         $carersProfile->registration_progress = $nextStep;
 
-        if ($request->input('step')==5 && $request->input('criminal_conviction')==3) { // no a criminal backend
+        if ($request->input('step')==5 && $request->input('criminal_conviction')=="No") { // no a criminal backend
             $carersProfile->registration_progress = '5_2';
         }
 
-        if ($request->input('step')=='5' && $request->input('criminal_conviction')==2) { // has the criminal backend
+        if (($request->input('step')=='5' && $request->input('criminal_conviction')=="Yes") // has the criminal backend
+        ||($request->input('step')=='14' && $request->input('work_UK')=="No")) {            // restricted in UK
            $carersProfile->registration_progress = '5_1';
             //return redirect()->action('HomePageController@index');
         }
@@ -250,24 +251,12 @@ class CarerRegistration
 
 
         $this->validate($request,[
-            'criminal_conviction' => 'required|numeric:1',
+            'criminal_conviction' => 'required|in:"Yes","No","Some"',
         ]);
-
-        switch ($request->input('criminal_conviction')){
-            case 1 : {$value = 'Some';break;}
-            case 2 : {$value = 'Yes';break;}
-            case 3 : {$value = 'No';break;}
-            default: $value = 'Yes';
-        }
-
-
-/*        $value = 'Yes';
-        if($request->input('criminal_conviction')=='3')
-            $value = 'No';*/
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
-        $carerProfile->criminal_conviction  = $value;
+        $carerProfile->criminal_conviction  = $request->input('criminal_conviction');
         $carerProfile->update();
 
         return;
@@ -291,21 +280,15 @@ class CarerRegistration
     private function saveStep6($request) {
 
         $this->validate($request,[
-            'DBS' => 'required|numeric:1',
-            'DBS_use' => 'required|numeric:1',
-            'DBS_identifier' => 'required_if:DBS_use,1|string|nullable|max:128',
+            'DBS' => 'required|in:"Yes","No"',
+            'DBS_use' => 'required|in:"Yes","No"',
+            'DBS_identifier' => 'required_if:DBS_use,"Yes"|string|nullable|max:128',
         ]);
-
-        //dd($request->all());
-
-        $request->input('DBS')=='1' ? $DBS='Yes' : $DBS='No';
-
-        $request->input('DBS_use')=='1' ? $DBS_use='Yes' : $DBS_use='No';
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
-        $carerProfile->DBS  = $DBS;
-        $carerProfile->DBS_use  = $DBS_use;
+        $carerProfile->DBS  = $request->input('DBS');
+        $carerProfile->DBS_use  = $request->input('DBS_use');
         $carerProfile->DBS_identifier  = $request->input('DBS_identifier');
 
         $carerProfile->dbs_date  = $request->input('dbs_date');
@@ -316,27 +299,18 @@ class CarerRegistration
     }
     private function saveStep8($request) {
 
-
-
         $this->validate($request,[
-            'driving_licence' => 'required|numeric:1',
+            'driving_licence' => 'required|in:"Yes","No"',
             'DBS_number' => 'string|nullable|max:128',
-            'have_car' => 'nullable|numeric:1',
-            'use_car' => 'required_if:have_car,1|numeric:1',
+            'have_car' => 'nullable|in:"Yes","No"',
+            'use_car' => 'required_if:have_car,"Yes"|in:"Yes","No"',
         ]);
-
-
-        //dd($request->all());
-
-        $request->input('driving_licence')=='1' ? $driving_licence='Yes' : $driving_licence='No';
-        $request->input('have_car')=='1' ? $have_car='Yes' : $have_car='No';
-        $request->input('use_car')=='1' ? $use_car='Yes' : $use_car='No';
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
-        $carerProfile->driving_licence  = $driving_licence;
-        $carerProfile->have_car  = $have_car;
-        $carerProfile->use_car  = $use_car;
+        $carerProfile->driving_licence  = $request->input('driving_licence');
+        $carerProfile->have_car  = $request->input('have_car');
+        $carerProfile->use_car  = $request->input('use_car');
         $carerProfile->DBS_number  = $request->input('DBS_number');
 
         $carerProfile->update();
@@ -419,22 +393,20 @@ class CarerRegistration
     private function saveStep12($request) {
 
         $this->validate($request,[
-            'work_with_pets' => 'required|string:16',
-            'pets_description' => 'nullable|string:512',
+            'work_with_pets' => 'required|in:"Yes","No","It depends"',
+            'pets_description' => 'required_if:work_with_pets,"It depends"|string:512',
         ]);
 
-        //$request->input('work_with_pets')=='1' ? $work_with_pets='Yes' : $work_with_pets='No';
-
-        switch ($request->input('work_with_pets')){
+/*        switch ($request->input('work_with_pets')){
             case 'Yes' : {$work_with_pets='Yes'; break; }
             case 'No' : {$work_with_pets='No'; break; }
             case 'It depends' : {$work_with_pets='It depends'; break; }
-        }
+        }*/
 
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
-        $carerProfile->work_with_pets  = $work_with_pets;
+        $carerProfile->work_with_pets  = $request->input('work_with_pets');
         $carerProfile->pets_description  = $request->input('pets_description');
 
         $carerProfile->update();
@@ -470,20 +442,20 @@ class CarerRegistration
     private function saveStep14($request) {
 
         $this->validate($request,[
-            'work_UK' => 'required|numeric:1',
-            'work_UK_restriction' => 'required|numeric:1',
+            'work_UK' => 'required|in:"Yes","No"',
+            'work_UK_restriction' => 'required|in:"Yes","No"',
             'work_UK_description' => 'nullable|string:512',
             'national_insurance_number'=>'nullable|string:128',
         ]);
 
-
+/*
         $request->input('work_UK')=='1' ? $work_UK='Yes' : $work_UK='No';
-        $request->input('work_UK_restriction')=='1' ? $work_UK_restriction='Yes' : $work_UK_restriction='No';
+        $request->input('work_UK_restriction')=='1' ? $work_UK_restriction='Yes' : $work_UK_restriction='No';*/
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
-        $carerProfile->work_UK  = $work_UK;
-        $carerProfile->work_UK_restriction  = $work_UK_restriction;
+        $carerProfile->work_UK  = $request->input('work_UK');
+        $carerProfile->work_UK_restriction  = $request->input('work_UK_restriction');
         $carerProfile->work_UK_description  = $request->input('work_UK_description');
         $carerProfile->national_insurance_number  = $request->input('national_insurance_number');
 
@@ -549,7 +521,7 @@ class CarerRegistration
 
     private function saveStep20($request) {
         $this->validate($request,[
-            'have_questions' => 'required|numeric:1',
+            'have_questions' => 'required|in:"Yes","No"',
             'questions' => 'nullable|string:1024',
         ]);
 
