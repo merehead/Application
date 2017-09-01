@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin\DisputePayout;
+namespace App\Http\Controllers\Admin\CarerPayout;
 
 use App\Appointment;
 use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Http\Request;
 
 
-class DisputePayoutController extends AdminController
+class CarerPayoutController extends AdminController
 {
 
-    private $disputePayout;
+    //private $disputePayout;
 
     public function __construct(/*AdminBookings $booking*/) {
         parent::__construct();
@@ -28,6 +28,8 @@ class DisputePayoutController extends AdminController
     public function index(Request $request)
     {
 
+
+
         $filter = FALSE;
         $input = $request->all();
         //$orderDirection = 'desc';
@@ -36,16 +38,16 @@ class DisputePayoutController extends AdminController
         $this->title = 'Admin Dispute Payout';
 
 
-        $appointments = Appointment::where('status_id', '=', 5)
-            ->orWhere('carer_status_id', '=', 5)
-            ->orWhere('purchaser_status_id', '=', 5)
+        $appointments = Appointment::where('status_id', '=', 4)
+            ->orWhere('carer_status_id', '=', 4)
+            ->orWhere('purchaser_status_id', '=', 4)
             ->get();
 
-
+        //dd($appointments);
 
         $this->vars = array_add($this->vars,'appointments',$appointments);
 
-        $this->content = view(config('settings.theme').'.disputePayouts.disputePayouts')->with($this->vars)->render();
+        $this->content = view(config('settings.theme').'.carerPayouts.carerPayouts')->with($this->vars)->render();
 
         return $this->renderOutput();
     }

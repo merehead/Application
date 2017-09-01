@@ -51,7 +51,7 @@
             </a>
         </li>
         <li class="adminNav__item">
-            <a href="#" class="adminNav__link">
+            <a href="{{route('purchaser-payout.index')}}" class="adminNav__link">
                 <span class="adminNav__ico">
                   <i class="fa fa-money" aria-hidden="true"></i>
                 </span>
@@ -61,7 +61,7 @@
             </a>
         </li>
         <li class="adminNav__item">
-            <a href="#" class="adminNav__link">
+            <a href="{{route('carer-payout.index')}}" class="adminNav__link">
                 <span class="adminNav__ico">
                   <i class="fa fa-credit-card" aria-hidden="true"></i>
                 </span>
