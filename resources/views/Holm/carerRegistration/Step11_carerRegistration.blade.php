@@ -39,7 +39,7 @@
 
 
                                 <?php $id = 'boxf'.$workingTime->id ?>
-                                {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carersProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),array('class' => 'customCheckbox checkSingle','id'=>$id)) !!}
+                                {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carersProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),array('placeholder'=>'1','class' => 'customCheckbox checkSingle','id'=>$id)) !!}
                                 <label for="boxf{{$workingTime->id}}">{{$workingTime->name}}</label>
 
                             </div>

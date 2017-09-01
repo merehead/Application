@@ -173,7 +173,7 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) 
                                 Postcode <span>*</span>
                             </h2>
                             <div class="inputWrap">
-
+                                {!! Form::text('postcode-check',null,['id'=>'postcodeChecker','class'=>'formInput personalForm__input','placeholder'=>'Your postcode']) !!}
                                 {!! Form::select('postcode_id',$postcodes,null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) !!}
 
                             </div>
