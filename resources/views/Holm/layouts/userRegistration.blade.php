@@ -39,8 +39,21 @@
             dateFormat:"dd/mm/yy",
             showAnim:"slideDown",
             minDate: "-70Y",
-            maxDate: "-1D",
+            maxDate: "-18Y",
             yearRange: "-70:+0"
+        });
+    } );
+
+
+    $( function() {
+        $( "#datepicker15" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"dd/mm/yy",
+            showAnim:"slideDown",
+            minDate: "-70Y",
+            maxDate: "-2Y",
+            yearRange: "-50:+0"
         });
     } );
 

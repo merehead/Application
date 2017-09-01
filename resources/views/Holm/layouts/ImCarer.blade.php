@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/main.min.css">
     <link rel="stylesheet" href="css/customize.css">
     <link rel="stylesheet" href="css/carousel/carousel.css">
-    <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" defer  > </script>
+    <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"> </script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script  src="js/owl.carousel.min.js" defer ></script>
 

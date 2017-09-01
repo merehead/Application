@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link rel="stylesheet" href="css/main.min.css">
     <link rel="stylesheet" href="css/carousel/carousel.css">
+
 </head>
 <body>
 @yield('content')

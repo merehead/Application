@@ -2,7 +2,7 @@
     <div class="registration__column registration__column--with-padding">
         <div class="questionsBox">
             <h2>DBS - Formally called CRB</h2>
-            <h3>We consider a DBS completed within the last 12 months to be up to date for now. We will ask you to
+            <h3>We consider a DBS completed within the last 24 months to be up to date for now. We will ask you to
                 reapply for a new one in future.</h3>
 
 
@@ -55,9 +55,9 @@
                 <div class="inputWrap">
 
                     @if($carersProfile->dbs_date === "01/01/1970")
-                        <input name="dbs_date" id="datepicker" class="profileField__input" placeholder="dd/mm/yyyy" type="text">
+                        <input name="dbs_date" id="datepicker15" class="profileField__input" placeholder="dd/mm/yyyy" type="text">
                     @else
-                        {!! Form::text('dbs_date',null,['id'=>'datepicker','class'=>'formInput','placeholder'=>'Date of certificate']) !!}
+                        {!! Form::text('dbs_date',null,['id'=>'datepicker15','class'=>'formInput','placeholder'=>'Date of certificate']) !!}
                     @endif
 
                 </div>
