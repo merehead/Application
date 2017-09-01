@@ -80,7 +80,6 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
         <div class="profileField profileField--full-width">
             <div class="checkRow">
 
-
                 @foreach($bottomTime as $workingTime)
                     <div class="checbox_wrap checbox_wrap--date">
 
@@ -90,11 +89,14 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
 
                     </div>
                 @endforeach
-
             </div>
 
         </div>
+
     </div>
+
+
+
 </div>
 {!! Form::close() !!}
 
@@ -133,7 +135,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
 null,['id'=>'depend-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
 
         </div>
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField profileField--two-thirds depend_hiding" style="display: none">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Details   </span>

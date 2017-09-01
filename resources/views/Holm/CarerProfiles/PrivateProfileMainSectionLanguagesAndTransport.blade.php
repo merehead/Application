@@ -28,7 +28,19 @@
                 @endforeach
             </div>
         @endforeach
+    @if(strlen($carerProfile->language_additional))
+            <div class="profileRow">
 
+                <div class="profileField profileField--two-thirds">
+                    <h2 class="profileField__title ordinaryTitle">
+              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
+                Other languages   </span>
+                    </h2>
+                    {!! Form::text('language_additional',null,['class'=>'profileField__input','placeholder'=>'Details']) !!}
+                    {{--      <input type="text" class="profileField__input" placeholder="Details">--}}
+                </div>
+            </div>
+        @endif
 </div>
 {{ Form::close() }}
 
@@ -127,10 +139,12 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                 </span>
                 </h2>
 
-                {!! Form::text('car_insurance_valid_until',null,['id'=>'datepicker_insurance','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
+                @if($carerProfile->car_insurance_valid_until === "01/01/1970")
+                    <input name="car_insurance_valid_until" id="datepicker_insurance" class="profileField__input" placeholder="Valid until date" type="text">
+                @else
+                    {!! Form::text('car_insurance_valid_until',null,['id'=>'datepicker_insurance','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
+                @endif
 
-
-      {{--          <input id="datepicker_insurance" type="text" class="profileField__input " placeholder="Valid until date">--}}
             </div>
         </div>
 
@@ -163,7 +177,12 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                  Valid until
                 </span>
                 </h2>
-                {!! Form::text('driver_licence_valid_until',null,['id'=>'datepicker_driver_licence','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
+
+                @if($carerProfile->driver_licence_valid_until === "01/01/1970")
+                    <input name="driver_licence_valid_until" id="datepicker_driver_licence" class="profileField__input" placeholder="Valid until date" type="text">
+                @else
+                    {!! Form::text('driver_licence_valid_until',null,['id'=>'datepicker_driver_licence','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
+                @endif
 
                 {{--<input type="text" class="profileField__input " placeholder="Valid until date">--}}
             </div>

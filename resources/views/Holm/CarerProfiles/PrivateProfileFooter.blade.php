@@ -90,7 +90,10 @@
             changeMonth: true,
             changeYear: true,
             dateFormat:"dd/mm/yy",
-            showAnim:"slideDown"
+            showAnim:"slideDown",
+            minDate: "+0D",
+            maxDate: "+20Y",
+            yearRange: "0:+10"
         });
     } );
 
@@ -99,7 +102,10 @@
             changeMonth: true,
             changeYear: true,
             dateFormat:"dd/mm/yy",
-            showAnim:"slideDown"
+            showAnim:"slideDown",
+            minDate: "+0D",
+            maxDate: "+20Y",
+            yearRange: "0:+10"
         });
     } );
 
@@ -132,7 +138,32 @@
         });
     });
 
+    $j( document ).ready(function() {
 
+        //alert($("#main-if").val());
+
+/*        if($("#main-if").val()=='Yes'){
+            {$(".hiding").show( )}
+        }*/
+        if($j("#depend-if").val()=='It depends'){
+            {$j(".depend_hiding").show( )}
+        }
+/*        if($("#main-if2").val()=='Yes'){
+            {$(".hiding2").show( )}
+        }*/
+
+    });
+
+    $j(function(){
+        $j("#depend-if").change(function(){
+            if($j(this).val() !="0")
+            {
+                if($j(this).val() == 'Yes') {$j(".depend_hiding").hide( )}
+                if($j(this).val() == 'No') {$j(".depend_hiding").hide( )}
+                if($j(this).val() == 'It depends') {$j(".depend_hiding").show( )}
+            }
+        });
+    });
 </script>
 
 
