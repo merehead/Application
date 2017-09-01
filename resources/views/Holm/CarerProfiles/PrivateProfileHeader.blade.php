@@ -33,7 +33,7 @@
                     </div>
                     <a href="#" class="registeredCarer">
                         <div class="profilePhoto registeredCarer__img">
-                            <img src="./img/profile4.png" alt="">
+                            <img src="./img/no_photo.png" alt="">
                         </div>
                         <h2 class="profileName">
                             Rosie P.
