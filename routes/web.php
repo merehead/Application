@@ -41,4 +41,11 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::get('/dispute-payout-to-carer/{appointmentId}/{userId}/{amount}', 'AdminSitePayment\AdminSitePayment@DisputePayoutToCarer')->name('DisputePayoutToCarer');
     Route::get('/dispute-payout-to-purchaser/{appointmentId}/{userId}/{amount}', 'AdminSitePayment\AdminSitePayment@DisputePayoutToPurchaser')->name('DisputePayoutToPurchaser');
 
+    Route::get('/booking-payout-to-purchaser/{action}/{bookingId}/{amount}', 'AdminSitePayment\AdminSitePayment@BookingPayoutToPurchaser')->name('BookingPayoutToPurchaser');
+    Route::get('/bonus-payout-to-purchaser/{action}/{bonusRecordId}/{amount}', 'AdminSitePayment\AdminSitePayment@BonusPayoutToPurchaser')->name('BonusPayoutToPurchaser');
+
+    Route::get('/booking-payout-to-carer/{action}/{bookingId}/{amount}', 'AdminSitePayment\AdminSitePayment@BookingPayoutToCarer')->name('BookingPayoutToCarer');
+    Route::get('/bonus-payout-to-carer/{action}/{bonusRecordId}/{amount}', 'AdminSitePayment\AdminSitePayment@BonusPayoutToCarer')->name('BonusPayoutToCarer');
+
+
 });

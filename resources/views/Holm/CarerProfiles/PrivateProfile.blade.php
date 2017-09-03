@@ -1,4 +1,4 @@
-@include(config('settings.frontTheme').'.CarerProfiles/PrivateProfileHead')
+{{--@include(config('settings.frontTheme').'.CarerProfiles/PrivateProfileHead')--}}
 {{--
 @include(config('settings.frontTheme').'.CarerProfiles/PrivateProfileHeader')
 --}}

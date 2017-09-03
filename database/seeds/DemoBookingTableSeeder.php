@@ -11,6 +11,10 @@ class DemoBookingTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('users')->insert(['email' => 'u1@loc.loc','password' => 'u1@loc.loc','user_type_id'=>2]);
+        DB::table('users')->insert(['email' => 'u2@loc.loc','password' => 'u1@loc.loc','user_type_id'=>3]);
+        DB::table('users')->insert(['email' => 'u3@loc.loc','password' => 'u1@loc.loc','user_type_id'=>4]);
+        //--------------------------
         DB::table('transactions')->insert(['name' => 'tran1']);
         DB::table('transactions')->insert(['name' => 'tran2']);
         DB::table('transactions')->insert(['name' => 'tran3']);

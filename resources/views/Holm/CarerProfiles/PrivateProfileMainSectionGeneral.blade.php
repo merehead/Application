@@ -1,4 +1,4 @@
-<div class="borderContainer">
+<div id="carerGeneral" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">General</h2>
         <a href="#" class="profileCategory__link"

@@ -10,10 +10,10 @@
         <div class="who-you-are">
             <div class="who-you-are__box">
                 <a href="/welcome-carer" class="who-you-are__item">
-                    carer
+                    Care Worker
                 </a>
                 <a href="#" class="who-you-are__item">
-                    purchaser
+                    Buying Care
                 </a>
             </div>
 

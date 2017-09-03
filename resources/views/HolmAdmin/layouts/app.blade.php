@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,900" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/admin/main4.min.css')}}">
+    <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="{{asset('js/admin/main.js')}}"></script>
 </head>
 <body>
@@ -25,8 +26,7 @@
     </div>
 </div>
 
-<script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"   >
-</script>
+
 
 
 </body>

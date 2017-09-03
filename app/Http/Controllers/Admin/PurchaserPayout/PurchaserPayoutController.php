@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin\PurchaserPayout;
 
 use App\Appointment;
+use App\Booking;
 use App\Http\Controllers\Admin\AdminController;
+use App\User;
 use Illuminate\Http\Request;
 
 
@@ -28,24 +30,16 @@ class PurchaserPayoutController extends AdminController
     public function index(Request $request)
     {
 
-
-
         $filter = FALSE;
         $input = $request->all();
-        //$orderDirection = 'desc';
+
         if (isset($input['filter'])) {$input['filter'] != 0 ? $filter = ['status_id','=',$input['filter']] : $filter = FALSE;}
 
-        $this->title = 'Admin Dispute Payout';
+        $this->title = 'Payout to purchasers';
 
+        $users = User::where('user_type_id','1')->get();
 
-        $appointments = Appointment::where('status_id', '=', 4)
-            ->orWhere('carer_status_id', '=', 4)
-            ->orWhere('purchaser_status_id', '=', 4)
-            ->get();
-
-        //dd($appointments);
-
-        $this->vars = array_add($this->vars,'appointments',$appointments);
+        $this->vars = array_add($this->vars,'users',$users);
 
         $this->content = view(config('settings.theme').'.purchaserPayouts.purchaserPayouts')->with($this->vars)->render();
 

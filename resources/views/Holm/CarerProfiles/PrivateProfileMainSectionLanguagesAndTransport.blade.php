@@ -1,4 +1,4 @@
-<div class="borderContainer">
+<div id="carerLanguages" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">Languages</h2>
         <a href="#" class="profileCategory__link"
@@ -44,7 +44,7 @@
 </div>
 {{ Form::close() }}
 
-<div class="borderContainer">
+<div id="carerTransport" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">Transport</h2>
         <a href="#" class="profileCategory__link"

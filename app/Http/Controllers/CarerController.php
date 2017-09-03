@@ -10,6 +10,8 @@ use App\Postcode;
 use App\User;
 use App\WorkingTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 
 class CarerController extends FrontController
 {
@@ -18,11 +20,12 @@ class CarerController extends FrontController
     {
         parent::__construct();
 
-        $this->template = config('settings.frontTheme') . '.templates.ImCarer';
+
     }
 
     public function welcome()
     {
+        $this->template = config('settings.frontTheme') . '.templates.ImCarer';
         $this->title = 'Holm Care';
 
         $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
@@ -40,6 +43,7 @@ class CarerController extends FrontController
     public function index()
     {
 
+        $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
         $this->title = 'Holm Care';
 
         $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
@@ -88,6 +92,7 @@ class CarerController extends FrontController
     {
 
 
+        $depart = '';
         //dd($request->all());
 
         $input = $request->all();
@@ -95,6 +100,9 @@ class CarerController extends FrontController
         $carerProfiles = CarersProfile::findOrFail($input['id']);
 
         if ($input['stage'] == 'general') {
+
+            $depart = "#carerGeneral";
+
             if (isset($input['address_line1'])) $carerProfiles->address_line1 = $input['address_line1'];
             if (isset($input['address_line2'])) $carerProfiles->address_line2 = $input['address_line2'];
             if (isset($input['town'])) $carerProfiles->town = $input['town'];
@@ -125,6 +133,8 @@ class CarerController extends FrontController
         }
         if ($input['stage'] == 'bank') {
 
+            $depart = "#carerBank";
+
             $user = User::findOrFail($input['id']);
 
             if (isset($input['sort_code'])) $user->sort_code = $input['sort_code'];
@@ -137,6 +147,8 @@ class CarerController extends FrontController
 
         if ($input['stage'] == 'carerPrivateTypeCare') {
 
+            $depart = "#carerTypeCare";
+
             if (isset($input['typeCare']))
                 $carerProfiles->AssistantsTypes()->sync(array_keys($input['typeCare']));
 
@@ -144,6 +156,8 @@ class CarerController extends FrontController
         }
 
         if ($input['stage'] == 'carerPrivateAvailability') {
+
+            $depart = "#carerAvailability";
 
             if (isset($input['work_hours'])) $carerProfiles->work_hours = $input['work_hours'];
             if (isset($input['work_at_holiday'])) $carerProfiles->work_at_holiday = $input['work_at_holiday'];
@@ -158,6 +172,8 @@ class CarerController extends FrontController
 
         if ($input['stage'] == 'carerPrivatePets') {
 
+            $depart = "#carerPets";
+
             if (isset($input['work_with_pets'])) $carerProfiles->work_with_pets = $input['work_with_pets'];
             if (isset($input['pets_description'])) $carerProfiles->pets_description = $input['pets_description'];
 
@@ -168,6 +184,8 @@ class CarerController extends FrontController
 
         if ($input['stage'] == 'carerPrivateLanguages') {
 
+            $depart = "#carerLanguages";
+
             if (isset($input['languages']))
                 $carerProfiles->Languages()->sync(array_keys($input['languages']));
 
@@ -176,7 +194,7 @@ class CarerController extends FrontController
 
         if ($input['stage'] == 'carerPrivateTransport') {
 
-            //dd($input);
+            $depart = "#carerTransport";
 
             if (isset($input['driving_licence'])) $carerProfiles->driving_licence = $input['driving_licence'];
             if (isset($input['have_car'])) $carerProfiles->have_car = $input['have_car'];
@@ -194,7 +212,7 @@ class CarerController extends FrontController
 
         if ($input['stage'] == 'carerPrivateCriminal') {
 
-            //dd($input);
+            $depart = "#carerCriminal";
 
             if (isset($input['DBS'])) $carerProfiles->DBS = $input['DBS'];
             if (isset($input['criminal_conviction'])) $carerProfiles->criminal_conviction = $input['criminal_conviction'];
@@ -205,6 +223,10 @@ class CarerController extends FrontController
             unset($carerProfiles);
         }
 
-        return redirect()->back();
+        //return redirect()->back();
+
+
+        return Redirect::to(URL::previous() . $depart);
+
     }
 }

@@ -9,200 +9,119 @@
         <table class="innerTable ">
             <tr>
                 <td class="idField">
-                    <span>{{$appointment->booking->carer_id}}</span>
+                    <span>{{$user->id}}</span>
                 </td>
                 <td class="nameField">
-                    <a href="#" class="tableLink">{{$appointment->booking->bookingCarer->id}}</a>
+                    <a href="#" class="tableLink">{{$user->email}}</a>
                 </td>
             </tr>
         </table>
     </td>
     <td class="for-inner">
+        @if(count($user->userPurchaser))
         <table class="innerTable ">
+            @foreach($user->userPurchaser as $item)
             <tr>
                 <td class="">
-                    <span>1000</span>
+                    <span>{{$item->amount_for_carer}}</span>
                 </td>
-                <td class="nameField">
-                    <div class="actionsGroup">
-                        <a href="#" class="actionsBtn actionsBtn--accept">
-                            payout bookings
-                        </a>
-                        <a href="#" class="actionsBtn actionsBtn--reject">
-                            cancel booking
-                        </a>
-                        <a href="#" class="actionsBtn actionsBtn--accept">
-                            delay booking
-                        </a>
-                    </div>
+                @if($item->status_id==4 || $item->status_id==8 || $item->status_id==9)
+                    <td class="nameField"></td>
+                    <td>
+                        <div class="profStatus profStatus--left">
+                            @if($item->status_id==8)
+                                <span class="profStatus__item profStatus__item--new">PAID</span>
+                            @endif
+                            @if($item->status_id==4)
+                                <span class="profStatus__item profStatus__item--canceled">canceled</span>
+                            @endif
+                            @if($item->status_id==9)
+                                <span class="profStatus__item profStatus__item--progress"> delayed</span>
+                            @endif
+                        </div>
+                    </td>
 
-                </td>
-                <td>
-                    <div class="profStatus profStatus--left">
-                        <span class="profStatus__item profStatus__item--new">PAID  r</span>
-                        <span class="profStatus__item profStatus__item--canceled">canceled  </span>
-                        <span class="profStatus__item profStatus__item--progress"> delayed</span>
+                @else
 
-                    </div>
-                </td>
+                    <td class="nameField">
+                        <div class="actionsGroup">
+                            <a href="{{route('BookingPayoutToCarer',['pay',$item->id,$item->amount_for_carer])}}"
+                               class="actionsBtn actionsBtn--accept">
+                                payout bookings
+                            </a>
+                            <a href="{{route('BookingPayoutToCarer',['cancel',$item->id,$item->amount_for_carer])}}"
+                               class="actionsBtn actionsBtn--reject">
+                                cancel booking
+                            </a>
+                            <a href="{{route('BookingPayoutToCarer',['delay',$item->id,$item->amount_for_carer])}}"
+                               class="actionsBtn actionsBtn--accept">
+                                delay booking
+                            </a>
+
+                        </div>
+
+                    </td>
+                    <td></td>
+
+
+
+                @endif
             </tr>
+            @endforeach
         </table>
+        @endif
     </td>
     <td class="for-inner">
-        <table class="innerTable ">
-            <tr>
-                <td class="">
-                    <span>1000</span>
-                </td>
-                <td class="">
-                    <div class="actionsGroup">
-                        <a href="#" class="actionsBtn actionsBtn--accept">
-                            payout bookings
-                        </a>
-                        <a href="#" class="actionsBtn actionsBtn--reject">
-                            cancel booking
-                        </a>
-                        <a href="#" class="actionsBtn actionsBtn--accept">
-                            delay booking
-                        </a>
-                    </div>
+        @if(count($user->bonusAcceptors))
+            <table class="innerTable ">
 
-                </td>
-                <td>
-                    <div class="profStatus profStatus--left">
-                        <span class="profStatus__item profStatus__item--new">PAID  r</span>
-                        <span class="profStatus__item profStatus__item--canceled">canceled  </span>
-                        <span class="profStatus__item profStatus__item--progress"> delayed</span>
+                @foreach($user->bonusAcceptors as $item)
 
-                    </div>
-                </td>
-            </tr>
-        </table>
+                    <tr>
+                        <td class="">
+                            <span>{{$item->amount}}</span>
+                        </td>
+
+                        @if($item->payment_status == 'NEW')
+                            <td class="">
+                                <div class="actionsGroup">
+                                    <a href="{{route('BonusPayoutToPurchaser',['pay',$item->id,$item->amount])}}"
+                                       class="actionsBtn actionsBtn--accept">
+                                        payout
+                                    </a>
+                                    <a href="{{route('BonusPayoutToPurchaser',['cancel',$item->id,$item->amount])}}"
+                                       class="actionsBtn actionsBtn--reject">
+                                        cancel
+                                    </a>
+                                    <a href="{{route('BonusPayoutToPurchaser',['delay',$item->id,$item->amount])}}"
+                                       class="actionsBtn actionsBtn--accept">
+                                        delay
+                                    </a>
+                                </div>
+                            </td>
+                            <td></td>
+                        @else
+                            <td></td>
+                            <td>
+                                <div class="profStatus profStatus--left">
+                                    @if($item->payment_status == 'PAID')
+                                        <span class="profStatus__item profStatus__item--new">PAID</span>
+                                    @endif
+                                    @if($item->payment_status == 'CANCELLED')
+                                        <span class="profStatus__item profStatus__item--canceled">canceled  </span>
+                                    @endif
+                                    @if($item->payment_status == 'DELAYED')
+                                        <span class="profStatus__item profStatus__item--progress"> delayed</span>
+                                    @endif
+                                </div>
+                            </td>
+                        @endif
+                    </tr>
+
+                @endforeach
+            </table>
+        @endif
     </td>
 
 
 </tr>
-
-
-
-{{--
-
-<tr>
-    <td>
-
-    </td>
-    <td class="for-inner">
-        <table class="innerTable ">
-            <tr>
-                <td class="idField">
-                    <span>{{$appointment->booking->purchaser_id}}</span>
-                </td>
-                <td class="nameField">
-                    <a href="#" class="tableLink">{{$appointment->booking->bookingPurchaser->fname}}</a>
-                </td>
-            </tr>
-        </table>
-    </td>
-    <td class="for-inner">
-        <table class="innerTable ">
-            <tr>
-                <td class="idField">
-                    <span>{{$appointment->booking->carer_id}}</span>
-                </td>
-                <td class="nameField">
-                    <a href="#" class="tableLink">{{$appointment->booking->bookingCarer->fname}}</a>
-                </td>
-            </tr>
-        </table>
-    </td>
-    <td class="for-inner">
-        <table class="innerTable ">
-            <tr>
-                <td class="idField">
-                    <span>{{$appointment->booking->id}}</span>
-                </td>
-                <td class="nameField">
-                    <a href="#" class="tableLink">some room</a>
-                </td>
-            </tr>
-        </table>
-    </td>
-    <td class="for-inner">
-        <table class="innerTable ">
-            <tr>
-                <td class=" ">
-                    @if(!empty($appointment->transaction))
-                        {{$appointment->transaction->id}}
-                    @else
-                        <span></span>
-                    @endif
-                </td>
-            </tr>
-
-        </table>
-    </td>
-    <td class="for-inner">
-        <table class="innerTable ">
-            <tr>
-                <td class=" ">
-                    <span>{{$appointment->id}}</span>
-                </td>
-
-                <td class=" ">
-                    <span>{{$appointment->date_start}}</span>
-                </td>
-                <td class=" ">
-                    <span>{{$appointment->date_end}}</span>
-
-                </td>
-                <td class="">
-                    <span>{{$appointment->amount}}</span>
-                </td>
-
-
-            </tr>
-
-        </table>
-    </td>
-    <td class="for-inner">
-        <table class="innerTable ">
-            <tr>
-                <td class=" ">
-                    <span>some details</span>
-                </td>
-                <td class=" ">
-                    <span>some details</span>
-                </td>
-            </tr>
-
-        </table>
-    </td>
-    <td>
-
-
-        @if(empty($appointment->disputePayment))
-        <div class="actionsGroup">
-            <a href="{{route('DisputePayoutToCarer',[$appointment->id,$appointment->booking->purchaser_id,$appointment->amount_for_carer])}}" class="actionsBtn actionsBtn--accept actionsBtn--wider">
-                pay out to carer
-            </a>
-            <a href="{{route('DisputePayoutToPurchaser',[$appointment->id,$appointment->booking->carer_id,$appointment->amount_for_purchaser])}}" class="actionsBtn actionsBtn--view actionsBtn--wider">
-                pay out to purchaser
-            </a>
-        </div>
-        @endif
-    </td>
-    <td>
-        @if(!empty($appointment->disputePayment))
-        <div class="profStatus profStatus--left">
---}}
-{{--
-            <span class="profStatus__item profStatus__item--new">PAID TO Purchaser</span>
---}}{{--
-
-            <span class="profStatus__item profStatus__item--{{$appointment->disputePayment->css_name}}">{{$appointment->disputePayment->name}}</span>
-        </div>
-        @endif
-    </td>
-
-</tr>
---}}

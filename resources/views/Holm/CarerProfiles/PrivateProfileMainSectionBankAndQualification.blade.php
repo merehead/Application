@@ -1,4 +1,4 @@
-<div class="borderContainer">
+<div id="carerBank" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">BANK ACCOUNT </h2>
         <a href="#" class="profileCategory__link"

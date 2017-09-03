@@ -25,7 +25,7 @@
                             ?>
 
                             {{--<input type="checkbox" name="checkbox" class="customCheckbox" id="boxf3">--}}
-                                {!! Form::checkbox('workingTime['.$first->id.']', null,($carersProfile->WorkingTimes->contains('id', $first->id)? 1 : null),array('class' => 'customCheckbox allTime','id'=>$id)) !!}
+                                {!! Form::checkbox('workingTime['.$first->id.']', null,($carersProfile->WorkingTimes->contains('id', $first->id)? 1 : null),array('class' => 'customCheckbox '.$first->css_name,'id'=>$id)) !!}
 
                                 <label for="boxf{{$first->id}}">{{$first->name}}</label>
 
@@ -39,7 +39,7 @@
 
 
                                 <?php $id = 'boxf'.$workingTime->id ?>
-                                {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carersProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),array('placeholder'=>'1','class' => 'customCheckbox checkSingle','id'=>$id)) !!}
+                                {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carersProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),array('placeholder'=>'1','class' => 'customCheckbox '.$workingTime->css_name,'id'=>$id)) !!}
                                 <label for="boxf{{$workingTime->id}}">{{$workingTime->name}}</label>
 
                             </div>

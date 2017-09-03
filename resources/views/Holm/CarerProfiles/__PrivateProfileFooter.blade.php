@@ -85,58 +85,9 @@
     var $j = jQuery.noConflict();
     //$j("#datepicker").datepicker();
 
-    $j( function() {
-        $j( "#datepicker_driver_licence" ).datepicker({
-            changeMonth: true,
-            changeYear: true,
-            dateFormat:"dd/mm/yy",
-            showAnim:"slideDown",
-            minDate: "+0D",
-            maxDate: "+20Y",
-            yearRange: "0:+10"
-        });
-    } );
 
-    $j( function() {
-        $j( "#datepicker_insurance" ).datepicker({
-            changeMonth: true,
-            changeYear: true,
-            dateFormat:"dd/mm/yy",
-            showAnim:"slideDown",
-            minDate: "+0D",
-            maxDate: "+20Y",
-            yearRange: "0:+10"
-        });
-    } );
 
-    $j(document).ready(function() {
 
-        $j(".allTime").change(function(){
-            if(this.checked){
-                $j(".checkSingle").each(function(){
-                    this.checked=true;
-                })
-            }else{
-                $j(".checkSingle").each(function(){
-                    this.checked=false;
-                })
-            }
-        });
-
-        $j(".checkSingle").click(function () {
-            if ($j(this).is(":checked")){
-                var isAllChecked = 0;
-                $j(".checkSingle").each(function(){
-                    if(!this.checked)
-                        isAllChecked = 1;
-                })
-                if(isAllChecked == 0){ $j(".allTime").prop("checked", true); }
-            }
-            else {
-                $j(".allTime").prop("checked", false);
-            }
-        });
-    });
 
     $j( document ).ready(function() {
 

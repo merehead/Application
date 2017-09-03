@@ -48,7 +48,14 @@ class User extends Authenticatable
         return $this->hasOne('App\CarersProfile','id','id');
     }
 
-
+    public function bonusAcceptors()
+    {
+        return $this->hasMany('App\Bonuses_record','user_acceptor_id','id');
+    }
+    public function bonusDonors()
+    {
+        return $this->hasMany('App\Bonuses_record','user_donor_id','id');
+    }
     public function userName()
     {
 

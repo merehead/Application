@@ -1,4 +1,4 @@
-<div class="borderContainer">
+<div id="carerAvailability" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">AVAILABILITY</h2>
         <a href="#" class="profileCategory__link"
@@ -52,13 +52,13 @@
 
                         @if($step==0)
                             {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
-                            array('class' => 'customCheckbox allTime','id'=>'boxG'.$workingTime->id)) !!}
+                            array('class' => 'customCheckbox '.$workingTime->css_name,'id'=>'boxG'.$workingTime->id)) !!}
                             <label for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
 
                         @else
 
                         {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
-                        array('class' => 'customCheckbox checkSingle','id'=>'boxG'.$workingTime->id)) !!}
+                        array('class' => 'customCheckbox '.$workingTime->css_name,'id'=>'boxG'.$workingTime->id)) !!}
                         <label for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
                             @endif
                     </div>
@@ -84,7 +84,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                     <div class="checbox_wrap checbox_wrap--date">
 
                         {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
-                        array('class' => 'checkboxNew checkSingle','id'=>'checkD'.$workingTime->id)) !!}
+                        array('class' =>  'customCheckbox '.$workingTime->css_name,'id'=>'checkD'.$workingTime->id)) !!}
                         <label for="checkD{{$workingTime->id}}">{{$workingTime->name}}</label>
 
                     </div>
@@ -100,7 +100,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
 </div>
 {!! Form::close() !!}
 
-<div class="borderContainer">
+<div id="carerPets" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">Work with pets</h2>
         <a href="#" class="profileCategory__link"

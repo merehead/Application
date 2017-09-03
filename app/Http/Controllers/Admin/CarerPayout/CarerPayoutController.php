@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\CarerPayout;
 
 use App\Appointment;
 use App\Http\Controllers\Admin\AdminController;
+use App\User;
 use Illuminate\Http\Request;
 
 
@@ -28,24 +29,20 @@ class CarerPayoutController extends AdminController
     public function index(Request $request)
     {
 
-
-
         $filter = FALSE;
         $input = $request->all();
-        //$orderDirection = 'desc';
+
         if (isset($input['filter'])) {$input['filter'] != 0 ? $filter = ['status_id','=',$input['filter']] : $filter = FALSE;}
 
-        $this->title = 'Admin Dispute Payout';
+        $this->title = 'Payout to carers';
 
+        $users = User::where('user_type_id','3')->get();
 
-        $appointments = Appointment::where('status_id', '=', 4)
-            ->orWhere('carer_status_id', '=', 4)
-            ->orWhere('purchaser_status_id', '=', 4)
-            ->get();
+        //$user = User::find('1');
 
-        //dd($appointments);
+        //dd($user->userPurchaser);
 
-        $this->vars = array_add($this->vars,'appointments',$appointments);
+        $this->vars = array_add($this->vars,'users',$users);
 
         $this->content = view(config('settings.theme').'.carerPayouts.carerPayouts')->with($this->vars)->render();
 

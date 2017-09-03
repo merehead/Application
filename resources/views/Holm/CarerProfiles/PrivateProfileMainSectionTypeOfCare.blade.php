@@ -1,4 +1,4 @@
-<div class="borderContainer">
+<div id="carerTypeCare" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">TYPE OF CARE offered</h2>
         <a href="#" class="profileCategory__link"

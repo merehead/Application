@@ -3,7 +3,7 @@
           <span class="categoryTitle__ico">
             <i class="fa fa-money" aria-hidden="true"></i>
           </span>
-        payouts to purshasers
+        payouts to purchasers
     </h2>
     <div class="panelHead">
         <div class="filterBox">
