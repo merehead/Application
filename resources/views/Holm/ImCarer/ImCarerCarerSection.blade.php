@@ -1,4 +1,24 @@
+<section class="mainSection ">
 
+    <div class="container">
+        <div class="breadcrumbs">
+            <a href="\" class="breadcrumbs__item">
+                Home
+            </a>
+            <span class="breadcrumbs__arrow">></span>
+            <a href="{{ route('ImCarerPage') }}" class="breadcrumbs__item">
+                i am a carer
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+
+    </div>
+
+</section>
 <section class="carerSection">
     <div class="container">
         <div class="carerContainer">

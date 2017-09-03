@@ -2,7 +2,6 @@
     <div class="container">
         <div class="headerContainer">
             <a href="\" class="themeLogo">
-
             </a>
             <a href="\" class="xsNav">
         <span class="">
@@ -38,9 +37,6 @@
                     @endif
                 </div>
             </div>
-
-
-
         </div>
     </div>
 </header>

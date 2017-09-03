@@ -172,15 +172,15 @@ class CarerRegistration
         $this->validate($request,[
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'referal_code'=>'string|nullable|max:128',
+            'referral_code'=>'string|nullable|max:128',
         ]);
 
-        (isset($request['referal_code']))? $referal_code = $request['referal_code'] : $referal_code = 0;
+        (isset($request['referral_code']))? $referal_code = $request['referral_code'] : $referral_code = 0;
 
         $user = User::create([
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
-            'referal_code' => $referal_code,
+            'referral_code' => $referral_code,
             'user_type_id' => 3,
         ]);
 
@@ -394,7 +394,7 @@ class CarerRegistration
 
         $this->validate($request,[
             'work_with_pets' => 'required|in:"Yes","No","It depends"',
-            'pets_description' => 'required_if:work_with_pets,"It depends"|string:512',
+            'pets_description' => 'required_if:work_with_pets,"It depends"|string:512|nullable',
         ]);
 
 /*        switch ($request->input('work_with_pets')){
@@ -443,7 +443,7 @@ class CarerRegistration
 
         $this->validate($request,[
             'work_UK' => 'required|in:"Yes","No"',
-            'work_UK_restriction' => 'required|in:"Yes","No"',
+            'work_UK_restriction' => 'required_if:work_UK,"Yes"|in:"Yes","No"',
             'work_UK_description' => 'nullable|string:512',
             'national_insurance_number'=>'nullable|string:128',
         ]);

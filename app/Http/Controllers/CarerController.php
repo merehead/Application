@@ -13,12 +13,10 @@ use Illuminate\Http\Request;
 
 class CarerController extends FrontController
 {
-    //private $carersProfile;
 
     public function __construct()
     {
         parent::__construct();
-        //$this->carersProfile = $carersProfile;
 
         $this->template = config('settings.frontTheme') . '.templates.ImCarer';
     }
@@ -26,6 +24,15 @@ class CarerController extends FrontController
     public function welcome()
     {
         $this->title = 'Holm Care';
+
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
         $this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
         return $this->renderOutput();
     }
@@ -35,7 +42,13 @@ class CarerController extends FrontController
 
         $this->title = 'Holm Care';
 
-//dd('srger');
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
 
         if (!$this->user) {
             $this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();

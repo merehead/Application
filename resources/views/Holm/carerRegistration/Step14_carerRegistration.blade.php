@@ -49,7 +49,7 @@
 
             <div class="hiding formField" style="display: none">
                 <h2 class="formLabel questionForm__label">
-                    If yes, what restrictions are there? <span>*</span>
+                    What restrictions are there? <span>*</span>
                 </h2>
                 <div class="inputWrap">
                     {!! Form::text('work_UK_description',null,['class'=>'formInput','placeholder'=>'Details']) !!}

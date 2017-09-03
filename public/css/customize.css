@@ -20,3 +20,7 @@ select#workingTimes {
     border:0px;
     outline:0px;
 }
+
+#sign_up_div {
+    width: 200px;
+}

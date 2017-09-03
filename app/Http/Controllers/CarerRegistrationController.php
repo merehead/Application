@@ -27,16 +27,15 @@ class CarerRegistrationController extends FrontController
 
     public function index($stepback=null){
 
-
-
-
-
         $this->title = 'Carer Registration';
-        $header = view(config('settings.frontTheme').'.headers.userRegistrationHeader')->render();
-        $this->vars = array_add($this->vars,'header',$header);
 
-        $footer = view(config('settings.frontTheme').'.footers.userRegistrationFooter')->render();
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
         $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
 
         $user = Auth::user();
 

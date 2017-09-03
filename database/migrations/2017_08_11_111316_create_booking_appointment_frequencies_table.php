@@ -15,7 +15,7 @@ class CreateBookingAppointmentFrequenciesTable extends Migration
     {
         Schema::create('booking_appointment_frequencies', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 128)->nullable();
+            $table->string('name', 64)->nullable();
             $table->timestamps();
         });
     }
