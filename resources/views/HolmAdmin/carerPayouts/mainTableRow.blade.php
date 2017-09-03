@@ -26,7 +26,7 @@
                     <span>{{$item->amount_for_carer}}</span>
                 </td>
                 @if($item->status_id==4 || $item->status_id==8 || $item->status_id==9)
-                    <td class="nameField"></td>
+                    <td class="nameField"><div class="actionsGroup"></div></td>
                     <td>
                         <div class="profStatus profStatus--left">
                             @if($item->status_id==8)
@@ -61,7 +61,7 @@
                         </div>
 
                     </td>
-                    <td></td>
+                    <td><div class="profStatus profStatus--left"></div></td>
 
 
 
