@@ -1,7 +1,7 @@
         <div class="registration">
             <div class="registration__column registration__column--with-padding">
                 <div class="questionsBox">
-                    <h2>Your details</h2>
+                    <h2>Person you are buying care for</h2>
 
 
                     <div class="questionsBox__img">
@@ -207,7 +207,7 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) 
                             @endif
                         </div>
 
-                    <input type="hidden" name="step" value = '4'>
+                    <input type="hidden" name="step" value = '4_1'>
                     <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
 
                         {!! Form::close()!!}
