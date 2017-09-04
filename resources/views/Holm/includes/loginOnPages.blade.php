@@ -25,7 +25,7 @@
             Login
         </a>
         <a href="/" id = "sign_up_button" class=" centeredLink loginBox__link loginBox__link--active"
-           data-toggle="modal" data-target="#sign_up_div"
+           data-toggle="modal" data-target="#signUpdiv"
                 {{--onclick="event.preventDefault();document.getElementById('sign_up_div').style.display = 'block';"--}}
         >
             Sign up

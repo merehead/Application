@@ -51,19 +51,24 @@
                     <div class="checkBox_item">
 
                         @if($step==0)
-                            {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
+                 {{--           {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
                             array('class' => 'customCheckbox '.$workingTime->css_name,'id'=>'boxG'.$workingTime->id)) !!}
                             <label for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
-
+--}}
                         @else
 
                         {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
                         array('class' => 'customCheckbox '.$workingTime->css_name,'id'=>'boxG'.$workingTime->id)) !!}
                         <label for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
-                            @endif
+
+                        @endif
                     </div>
                 @endforeach
 
+                    <?php $workingTime = $workingTimes->shift()?>
+                    {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
+                                                array('class' => 'customCheckbox '.$workingTime->css_name,'id'=>'boxG'.$workingTime->id)) !!}
+                    <label for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
             </div>
 
             <div class="profileField profileField--half">
@@ -80,7 +85,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
         <div class="profileField profileField--full-width">
             <div class="checkRow">
 
-                @foreach($bottomTime as $workingTime)
+                @foreach($bottomTime->sortBy('byDay') as $workingTime)
                     <div class="checbox_wrap checbox_wrap--date">
 
                         {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),

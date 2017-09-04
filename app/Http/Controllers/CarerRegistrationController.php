@@ -111,7 +111,13 @@ class CarerRegistrationController extends FrontController
 
             $carerProfiles = CarersProfile::findOrFail($request->input('carersProfileID'));
 
-            $carerProfiles->registration_progress = $request->input('stepback');
+            if($stepback == '4' && $carerProfiles->criminal_conviction == 'Some' && $carerProfiles->registration_progress !='5')
+                $stepback = '5';
+
+
+            //dd($request->all(),$carerProfiles,$stepback);
+
+            $carerProfiles->registration_progress = $stepback;
 
             $carerProfiles->save();
 

@@ -32,9 +32,9 @@ class CreatePurchasersProfilesTable extends Migration
             $table->string      ('registration_progress',16)->nullable();          //step number
             $table->timestamps();
 
-            $table->index('postcode_id');
+/*            $table->index('postcode_id');
 
-            $table->foreign('postcode_id')         ->references('id')->on('postcodes');
+            $table->foreign('postcode_id')         ->references('id')->on('postcodes');*/
         });
     }
 

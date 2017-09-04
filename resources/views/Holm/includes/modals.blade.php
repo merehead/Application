@@ -1,5 +1,5 @@
-<div id="sign_up_div" class="modal fade" role="dialog">
-    <div class="login" style="position:fixed; top:20%; left:40%; display:block" tabindex="-1">
+<div id="signUpdiv" class="modal fade" role="dialog">
+    <div class="login" style="position:fixed; top:20%; left:40%; ">
         <div class="login__header">
             <h2>Who are You</h2>
             {{--        <a href="/close" class="closeModal"
