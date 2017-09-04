@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomePageController@index')->name('mainHomePage');
 
 Route::get('/welcome-carer', 'CarerController@welcome')->name('welcomeCarer');
+Route::get('/carer-settings', 'CarerController@index')->name('carerSettings'); //synonym for ImCarerPage
 Route::get('/im-carer', 'CarerController@index')->name('ImCarerPage');
 Route::post('/im-carer', 'CarerController@update')->name('ImCarerPrivatePage');
 

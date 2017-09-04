@@ -90,7 +90,7 @@
 
             <div class="formField hiding" style="display: none">
                 <h2 class="formLabel questionForm__label">
-                    If yes, please could we have your personal identifier.<span>*</span>
+                    Please could we have your personal identifier.<span>*</span>
                 </h2>
 
                 <div class="inputWrap">

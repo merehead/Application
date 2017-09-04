@@ -56,16 +56,35 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Bonuses_record','user_donor_id','id');
     }
+
+
+
     public function userName()
     {
+        if ($this->user_type_id==3) {
+            return $this->userCarerProfile->like_name;
+        }
+        return $this->id;
+    }
+
+    public function isCarer()
+    {
+        if ($this->user_type_id==3) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isReregistrationCompleted(){
 
         if ($this->user_type_id==3) {
-
-            return $this->userCarerProfile->like_name;
+            if ($this->userCarerProfile->registration_progress == '20'){
+                return true;
+            }
 
         }
 
-        return $this->id;
+        return false;
     }
 
 }

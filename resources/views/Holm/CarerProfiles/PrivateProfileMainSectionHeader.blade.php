@@ -4,7 +4,7 @@
             Home
         </a>
         <span class="breadcrumbs__arrow">></span>
-        <a href="/" class="breadcrumbs__item">
+        <a href="/carer-settings" class="breadcrumbs__item">
             Profile Settings
         </a>
         <!--

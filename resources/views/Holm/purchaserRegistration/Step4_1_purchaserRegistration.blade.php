@@ -15,7 +15,7 @@
             <div class="registration__column  registration__column--bg">
                 <div class="personal">
 
-                    {!! Form::model($carersProfile,['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'step','class'=>'personalForm']) !!}
+                    {!! Form::model($purchasersProfile,['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'step','class'=>'personalForm']) !!}
                     {{--<form class="personalForm">--}}
 
                         <div class="formField personalActive">
@@ -191,7 +191,7 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) 
                             </h2>
                             <div class="inputWrap">
 
-                                @if($carersProfile->DoB === "01/01/1970")
+                                @if($purchasersProfile->DoB === "01/01/1970")
                                 <input name="DoB" id="datepicker" class="profileField__input" placeholder="dd/mm/yyyy" type="text">
                                 @else
                                 {!! Form::text('DoB',null,['id'=>'datepicker','class'=>'profileField__input']) !!}
@@ -208,7 +208,7 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) 
                         </div>
 
                     <input type="hidden" name="step" value = '4'>
-                    <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
+                    <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
 
                         {!! Form::close()!!}
 
@@ -223,9 +223,9 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) 
                    onclick="event.preventDefault();document.getElementById('stepback').submit();">
                     <i class="fa fa-arrow-left "></i>back
                 </a>
-                <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
+{{--                <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
                     continue later
-                </a>
+                </a>--}}
             </div>
 
             <a href="next" class="registrationBtns__item"
@@ -235,7 +235,7 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) 
                 <i class="fa fa-arrow-right"></i>
             </a>
         </div>
-        {!! Form::open(['method'=>'POST','route'=>'CarerRegistrationPost','id'=>'stepback','class'=>'personalForm']) !!}
+        {!! Form::open(['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'stepback','class'=>'personalForm']) !!}
         <input type="hidden" name="step" value = '2'>
-        <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
+        <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
         {!! Form::close()!!}

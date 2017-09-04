@@ -18,7 +18,7 @@
             <a href="\" class=" themeLogo themeLogo--dark">
 
             </a>
-            <a href="{{route('ImCarerPage')}}" class="carerSelf">
+            <a href="{{route('welcomeCarer')}}" class="carerSelf">
                 i am a carer
             </a>
             @include(config('settings.frontTheme').'.includes.loginOnPages')

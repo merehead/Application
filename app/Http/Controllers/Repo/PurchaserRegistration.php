@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Repo;
 
 use App\CarerReference;
 use App\CarersProfile;
+use App\PurchasersProfile;
 use App\User;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
@@ -22,37 +23,40 @@ class PurchaserRegistration
 
     protected $model = FALSE;
 
-    public function __construct(PurchaserProfile $purchaserProfile) {
+    public function __construct(PurchasersProfile $purchaserProfile) {
         $this->model = $purchaserProfile;
     }
 
-    public function getID()
+/*    public function getID()
     {
 
 
         $user = Auth::user();
 
         return $user->id;
-    }
+    }*/
 
     public function getNextStep()
     {
 
-
         $user = Auth::user();
 
-            $currentStep = $this->model->find($user->id)->registration_progress;
+        $currentStep = $this->model->find($user->id)->registration_progress;
 
 
         switch ($currentStep) {
-            case '0' : $step = 'Step1_carerRegistration';break;
-            case '1' : $step = 'Step2_carerRegistration';break;
-            case '2' : $step = 'Step3_carerRegistration';break;
-            case '3' : $step = 'Step4_carerRegistration';break;
-            case '4' : $step = 'Step5_carerRegistration';break;
-            case '5' : $step = 'Step5_1_carerRegistration';break;
-            case '5_1' : $step = 'Step5_2_carerRegistration';break;
-            case '5_2' : $step = 'Step6_carerRegistration';break;
+            case '0' : $step = 'Step1_purchaserRegistration';break;
+            case '1' : $step = 'Step2_purchaserRegistration';break;
+            case '2' : $step = 'Step3_purchaserRegistration';break;
+            case '3' : $step = 'Step4_purchaserRegistration';break;
+            case '4' : $step = 'Step4_2_purchaserRegistration';break;
+            case '4_2' : $step = 'Step4_1_purchaserRegistration';break;
+
+            case '5' : $step = 'Step5_1_purchaserRegistration';break;
+            case '5_1' : $step = 'Step5_2_purchaserRegistration';break;
+            case '5_2' : $step = 'Step6_purchaserRegistration';break;
+
+
             case '6' : $step = 'Step7_carerRegistration';break;
             case '7' : $step = 'Step8_carerRegistration';break;
             case '8' : $step = 'Step9_carerRegistration';break;
@@ -82,7 +86,9 @@ class PurchaserRegistration
 
         $user = Auth::user();
 
-        $carersProfile = $this->model->findOrFail($user->id);
+        $purchaserProfile = $this->model->findOrFail($user->id);
+
+
 
         $nextStep = 0;
         switch ($array['step']) {
@@ -90,6 +96,7 @@ class PurchaserRegistration
             case '2' : $nextStep = '2';break;
             case '3' : $nextStep = '3';break;
             case '4' : $nextStep = '4';break;
+            case '4_2' : $nextStep = '4_2';break;
             case '5' : $nextStep = '5';break;
             case '5_1' : $nextStep = '5_1';break;
             case '5_2' : $nextStep = '5_2';break;
@@ -115,24 +122,24 @@ class PurchaserRegistration
         //dd($request->all());
 
 
-        $carersProfile->registration_progress = $nextStep;
+        $purchaserProfile->registration_progress = $nextStep;
 
         if ($request->input('step')==5 && $request->input('criminal_conviction')=="No") { // no a criminal backend
-            $carersProfile->registration_progress = '5_2';
+            $purchaserProfile->registration_progress = '5_2';
         }
 
         if (($request->input('step')=='5' && $request->input('criminal_conviction')=="Yes") // has the criminal backend
         ||($request->input('step')=='14' && $request->input('work_UK')=="No")) {            // restricted in UK
-           $carersProfile->registration_progress = '5_1';
+            $purchaserProfile->registration_progress = '5_1';
             //return redirect()->action('HomePageController@index');
         }
 
-        if ($request->input('step')=='5_1' && $carersProfile->criminal_conviction=='Some') { // has some criminal backend
-            $carersProfile->registration_progress = '5_2';
+        if ($request->input('step')=='5_1' && $purchaserProfile->criminal_conviction=='Some') { // has some criminal backend
+            $purchaserProfile->registration_progress = '5_2';
         }
 
 
-        $carersProfile->update();
+        $purchaserProfile->update();
 
         return;
     }
@@ -143,6 +150,7 @@ class PurchaserRegistration
 
         switch ($step) {
             case '1'    : $this->saveStep1($request);break;
+            case '3'    : $this->saveStep3($request);break;
             case '4'    : $this->saveStep4($request);break;
             case '5'    : $this->saveStep5($request);break;
             case '5_1'  : $this->saveStep5_1($request);break;
@@ -180,17 +188,17 @@ class PurchaserRegistration
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
             'referral_code' => $referral_code,
-            'user_type_id' => 3,
+            'user_type_id' => 1,
         ]);
 
 
         if ($user) {
 
-            $carerPrifile = new CarersProfile();
+            $purchaserProfile = new PurchasersProfile();
 
-            $carerPrifile->id = $user->id;
-            $carerPrifile->registration_progress = 1;
-            $carerPrifile -> save();
+            $purchaserProfile->id = $user->id;
+            $purchaserProfile->registration_progress = 1;
+            $purchaserProfile -> save();
         }
 
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']],TRUE)) {
@@ -204,10 +212,24 @@ class PurchaserRegistration
         return;
     }
 
-    private function saveStep4($request) {
+    private function saveStep3($request) {
+
+        $this->validate($request,[
+            'purchasing_care_for' => 'required|in:"Someone else","Myself"',
+        ]);
+
 
         //dd($request->all());
 
+        $purchaserProfile = $this->model->findOrFail($request->input('purchasersProfileID'));
+
+        $purchaserProfile->purchasing_care_for  = $request->input('purchasing_care_for');
+        $purchaserProfile->update();
+
+        return;
+    }
+
+    private function saveStep4($request) {
 
         $this->validate($request,[
             'title' => 'required|numeric:1',
@@ -219,26 +241,28 @@ class PurchaserRegistration
             'address_line1'=>'required|string|max:256',
             'address_line2' => 'nullable|string|max:256',
             'town' => 'required|string|max:128',
-            'postcode_id' => 'required|integer',
+            'postcode' => 'required|string|max:32',
             'DoB'=>'required',
         ]);
 
+        //dd($request->all());
 
-        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+        $purchaserProfile = $this->model->findOrFail($request->input('purchasersProfileID'));
+        //dd($purchaserProfile);
 
-        $carerProfile->title            = $request->input('title');
-        $carerProfile->first_name       = $request->input('first_name');
-        $carerProfile->family_name      = $request->input('family_name');
-        $carerProfile->like_name        = $request->input('like_name');
-        $carerProfile->gender           = $request->input('gender');
-        $carerProfile->mobile_number    = $request->input('mobile_number');
-        $carerProfile->address_line1    = $request->input('address_line1');
-        $carerProfile->address_line2    = $request->input('address_line2');
-        $carerProfile->address_line1    = $request->input('address_line1');
-        $carerProfile->town             = $request->input('town');
-        $carerProfile->postcode_id      = $request->input('postcode_id');
-        $carerProfile->DoB              = $request->input('DoB');
-        $carerProfile->update();
+        $purchaserProfile->title            = $request->input('title');
+        $purchaserProfile->first_name       = $request->input('first_name');
+        $purchaserProfile->family_name      = $request->input('family_name');
+        $purchaserProfile->like_name        = $request->input('like_name');
+        $purchaserProfile->gender           = $request->input('gender');
+        $purchaserProfile->mobile_number    = $request->input('mobile_number');
+        $purchaserProfile->address_line1    = $request->input('address_line1');
+        $purchaserProfile->address_line2    = $request->input('address_line2');
+        $purchaserProfile->address_line1    = $request->input('address_line1');
+        $purchaserProfile->town             = $request->input('town');
+        $purchaserProfile->postcode         = $request->input('postcode');
+        $purchaserProfile->DoB              = $request->input('DoB');
+        $purchaserProfile->update();
         //dd($request->all());
 
         return;
@@ -542,8 +566,6 @@ class PurchaserRegistration
         $activeStep=1;
 
         $step = $this->model->find($id)->registration_progress;
-
-        //dd($step);
 
         if ($step>=1)
             $activeStep=2;

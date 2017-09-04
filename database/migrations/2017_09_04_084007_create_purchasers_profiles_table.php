@@ -15,7 +15,8 @@ class CreatePurchasersProfilesTable extends Migration
     {
         Schema::create('purchasers_profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer      ('title'                )->unsigned()->nullable();
+            $table->string      ('purchasing_care_for', 16)->nullable();
+            $table->integer     ('title'                )->unsigned()->nullable();
             $table->string      ('first_name'           , 128)->nullable();
             $table->string      ('family_name'          , 128)->nullable();
             $table->string      ('like_name'            , 128)->nullable();
@@ -24,8 +25,8 @@ class CreatePurchasersProfilesTable extends Migration
             $table->string      ('address_line1'        , 128)->nullable();
             $table->string      ('address_line2'        , 128)->nullable();
             $table->string      ('town'                 , 128)->nullable();
-            $table->integer     ('postcode_id'           )->unsigned()->nullable();
-            $table->string      ('postcode_second_part'  ,16)->nullable();
+           // $table->integer     ('postcode_id'           )->unsigned()->nullable();
+            $table->string      ('postcode'  ,32)->nullable();
             $table->dateTime    ('DoB'                   )->nullable();
 
             $table->string      ('registration_progress',16)->nullable();          //step number

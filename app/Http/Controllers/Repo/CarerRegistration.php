@@ -220,7 +220,7 @@ class CarerRegistration
             'address_line1'=>'required|string|max:256',
             'address_line2' => 'nullable|string|max:256',
             'town' => 'required|string|max:128',
-            'postcode_id' => 'required|integer',
+            'postcode' => 'required|string|max:32',
             'DoB'=>'required',
             'postcode_second_part' => 'nullable|string|max:16',
         ]);
@@ -238,8 +238,8 @@ class CarerRegistration
         $carerProfile->address_line2    = $request->input('address_line2');
         $carerProfile->address_line1    = $request->input('address_line1');
         $carerProfile->town             = $request->input('town');
-        $carerProfile->postcode_id      = $request->input('postcode_id');
-        $carerProfile->postcode_second_part= $request->input('postcode_second_part');
+        $carerProfile->postcode         = $request->input('postcode');
+        //$carerProfile->postcode_second_part= $request->input('postcode_second_part');
         $carerProfile->DoB              = $request->input('DoB');
         $carerProfile->update();
         //dd($request->all());
@@ -523,7 +523,7 @@ class CarerRegistration
 
     private function saveStep20($request) {
         $this->validate($request,[
-            'have_questions' => 'required|in:"Yes","No"',
+            'have_questions' => 'nullable|in:"Yes","No"',
             'questions' => 'nullable|string:1024',
         ]);
 
