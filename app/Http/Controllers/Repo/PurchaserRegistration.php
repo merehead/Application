@@ -17,7 +17,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
-class CarerRegistration
+class PurchaserRegistration
 {
     use  ValidatesRequests;
 
@@ -222,7 +222,6 @@ class CarerRegistration
             'town' => 'required|string|max:128',
             'postcode_id' => 'required|integer',
             'DoB'=>'required',
-            'postcode_second_part' => 'nullable|string|max:16',
         ]);
 
 
@@ -239,7 +238,6 @@ class CarerRegistration
         $carerProfile->address_line1    = $request->input('address_line1');
         $carerProfile->town             = $request->input('town');
         $carerProfile->postcode_id      = $request->input('postcode_id');
-        $carerProfile->postcode_second_part= $request->input('postcode_second_part');
         $carerProfile->DoB              = $request->input('DoB');
         $carerProfile->update();
         //dd($request->all());

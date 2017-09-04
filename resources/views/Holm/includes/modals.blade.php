@@ -12,7 +12,7 @@
                 <a href="/welcome-carer" class="who-you-are__item">
                     Care Worker
                 </a>
-                <a href="#" class="who-you-are__item">
+                <a href="{{route('PurchaserRegistration')}}" class="who-you-are__item">
                     Buying Care
                 </a>
             </div>

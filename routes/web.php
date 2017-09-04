@@ -28,6 +28,9 @@ Route::post('/im-carer', 'CarerController@update')->name('ImCarerPrivatePage');
 Route::get('carer-registration/{stepback?}','CarerRegistrationController@index')->name('CarerRegistration');
 Route::post('carer-registration','CarerRegistrationController@update')->name('CarerRegistrationPost');
 
+Route::get('purchaser-registration/','PurchaserRegistrationController@index')->name('PurchaserRegistration');
+Route::post('purchaser-registration','PurchaserRegistrationController@update')->name('PurchaserRegistrationPost');
+
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
 
     Route::get('/', 'AdminController@index')->name('index');

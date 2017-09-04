@@ -20,6 +20,7 @@ class CarersProfilesTable extends Migration
             $table->string      ('address_line2'        , 128)->nullable();
             $table->string      ('town'                 , 128)->nullable();
             $table->integer     ('postcode_id'           )->unsigned()->nullable();
+            $table->string      ('postcode_second_part'  ,16)->nullable();
             $table->dateTime    ('DoB'                   )->nullable();
             $table->string      ('criminal_conviction'  ,32)->nullable();          //yes.but../yes/no
             $table->string      ('criminal_detail'      ,512)->nullable();
