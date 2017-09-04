@@ -11,7 +11,6 @@ namespace App\Http\Controllers\Repo;
 
 use App\CarerReference;
 use App\CarersProfile;
-use App\Http\Requests\CarerRegistrationRequest;
 use App\User;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
@@ -23,8 +22,8 @@ class PurchaserRegistration
 
     protected $model = FALSE;
 
-    public function __construct(CarersProfile $carersProfile) {
-        $this->model = $carersProfile;
+    public function __construct(PurchaserProfile $purchaserProfile) {
+        $this->model = $purchaserProfile;
     }
 
     public function getID()

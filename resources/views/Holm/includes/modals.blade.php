@@ -9,7 +9,7 @@
         </div>
         <div class="who-you-are">
             <div class="who-you-are__box">
-                <a href="/welcome-carer" class="who-you-are__item">
+                <a href="{{route('CarerRegistration')}}" class="who-you-are__item">
                     Care Worker
                 </a>
                 <a href="{{route('PurchaserRegistration')}}" class="who-you-are__item">

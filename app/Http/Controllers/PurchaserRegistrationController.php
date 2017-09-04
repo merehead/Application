@@ -67,7 +67,7 @@ class PurchaserRegistrationController extends FrontController
 
         } else {*/
 
-            $this->carersProfile->saveStep($request);
+            $this->purchaserProfile->saveStep($request);
         //}
 
 
