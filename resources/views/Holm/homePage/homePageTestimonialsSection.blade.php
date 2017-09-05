@@ -71,7 +71,7 @@
                             <div class="peopleBox__info">
                                 <h2 class="profileName">Peter S.</h2>
                                 <div class="people_quote">
-                                    I got to choose who looked after my mother asdrfewqrwer
+                                    I couldn’t wait for an agency. I wanted help as soon as possible. Holm really helped us. Thank you!
                                 </div>
                                 <!--  <p class="peopleBox__text">70 year old man</p> -->
                             </div>
@@ -83,7 +83,7 @@
                             <div class="peopleBox__info">
                                 <h2 class="profileName">Elizabeth M.</h2>
                                 <div class="people_quote">
-                                    safdsfsdgre erterter eryeryer eryeryery
+                                    Holm helped me find great care and we saved so much. Now we can buy more care for our money.
                                 </div>
                                 <!--  <p class="peopleBox__text">60 year old woman</p> -->
                             </div>
@@ -98,9 +98,9 @@
                                 <img src="./img/Sarah_P.png" alt="">
                             </div>
                             <div class="peopleBox__info">
-                                <h2 class="profileName">Sarah P.11</h2>
+                                <h2 class="profileName">Sarah P.</h2>
                                 <div class="people_quote">
-                                    safdsfsdgre erterter eryeryer eryeryery
+                                    I got to choose who looked after my mother
                                 </div>
                                 <!-- <p class="peopleBox__text">50 year old woman</p>-->
                             </div>
@@ -110,9 +110,9 @@
                                 <img src="./img/Peter_S.png" alt="">
                             </div>
                             <div class="peopleBox__info">
-                                <h2 class="profileName">Peter S.222</h2>
+                                <h2 class="profileName">Peter S.</h2>
                                 <div class="people_quote">
-                                    safdsfsdgre erterter eryeryer eryeryery
+                                    I couldn’t wait for an agency. I wanted help as soon as possible. Holm really helped us. Thank you!
                                 </div>
                                 <!--  <p class="peopleBox__text">70 year old man</p> -->
                             </div>
@@ -122,9 +122,9 @@
                                 <img src="./img/Elizabeth_M.png" alt="">
                             </div>
                             <div class="peopleBox__info">
-                                <h2 class="profileName">Elizabeth M.33</h2>
+                                <h2 class="profileName">Elizabeth M.</h2>
                                 <div class="people_quote">
-                                    safdsfsdgre erterter eryeryer eryeryery
+                                    Holm helped me find great care and we saved so much. Now we can buy more care for our money.
                                 </div>
                                 <!--  <p class="peopleBox__text">60 year old woman</p> -->
                             </div>
