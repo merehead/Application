@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Repo\PurchaserRegistration;
 use App\Postcode;
 use App\PurchasersProfile;
+use App\ServiceUsersProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,14 +51,39 @@ class PurchaserRegistrationController extends FrontController
             $this->vars = array_add($this->vars, 'purchasersProfile', $purchasersProfile);
 
             if ($this->purchaserProfile->getNextStep() == 'Step4_purchaserRegistration') {
-                $postcodes = Postcode::all()->pluck('name', 'id')->toArray();
+                //$postcodes = Postcode::all()->pluck('name', 'id')->toArray();
                 $this->vars = array_add($this->vars, 'user', $this->user);
-                $this->vars = array_add($this->vars, 'postcodes', $postcodes);
+                //$this->vars = array_add($this->vars, 'postcodes', $postcodes);
             }
             if ($this->purchaserProfile->getNextStep() == 'Step4_1_purchaserRegistration') {
-                $postcodes = Postcode::all()->pluck('name', 'id')->toArray();
+
+                if (count($purchasersProfile->serviceUsers)){
+
+                    $serviceUsersProfile = $purchasersProfile->serviceUsers->first();
+                }
+                else {
+                    $serviceUsersProfile = new ServiceUsersProfile();
+                    $serviceUsersProfile->purchaser_id = $purchasersProfile->id;
+                    $serviceUsersProfile->title        = $purchasersProfile->title;
+                    $serviceUsersProfile->first_name   = $purchasersProfile->first_name;
+                    $serviceUsersProfile->family_name  = $purchasersProfile->family_name;
+                    $serviceUsersProfile->like_name    = $purchasersProfile->like_name;
+                    $serviceUsersProfile->gender       = $purchasersProfile->gender;
+                    $serviceUsersProfile->mobile_number= $purchasersProfile->mobile_number;
+                    $serviceUsersProfile->address_line1= $purchasersProfile->address_line1;
+                    $serviceUsersProfile->address_line2= $purchasersProfile->address_line2;
+                    $serviceUsersProfile->address_line1= $purchasersProfile->address_line1;
+                    $serviceUsersProfile->town         = $purchasersProfile->town;
+                    $serviceUsersProfile->postcode     = $purchasersProfile->postcode;
+                    $serviceUsersProfile->DoB          = $purchasersProfile->DoB;
+                    $serviceUsersProfile->save();
+                }
+
+                //dd($serviceUsersProfile);
+
+                //$postcodes = Postcode::all()->pluck('name', 'id')->toArray();
                 $this->vars = array_add($this->vars, 'user', $this->user);
-                $this->vars = array_add($this->vars, 'postcodes', $postcodes);
+                $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
             }
             $this->vars = array_add($this->vars,'activeStep',$this->purchaserProfile->getActiveStep($user->id));
 
@@ -75,24 +101,29 @@ class PurchaserRegistrationController extends FrontController
 
     public function update(Request $request) {
 
-       // dd($request->all());
+        //dd($request->all());
 
 
-/*        if ($request->has('stepback')) {
+/*        if ($request->input('step') == '4_2'){
+            $purchaserProfile = PurchasersProfile::findOrFail($request->input('purchasersProfileID'));
+        }*/
+
+
+        if ($request->has('stepback')) {
             //dd($request->all());
 
             $stepback = $request->stepback;
 
-            $carerProfiles = CarersProfile::findOrFail($request->input('carersProfileID'));
+            $purchaserProfiles = PurchasersProfile::findOrFail($request->input('purchasersProfileID'));
 
-            $carerProfiles->registration_progress = $request->input('stepback');
+            $purchaserProfiles->registration_progress = $request->input('stepback');
 
-            $carerProfiles->save();
+            $purchaserProfiles->save();
 
-        } else {*/
+        } else {
 
             $this->purchaserProfile->saveStep($request);
-        //}
+        }
 
 
         return redirect('/purchaser-registration');

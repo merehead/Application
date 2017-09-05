@@ -24,7 +24,7 @@
                             </h2>
                             <div class="inputWrap">
                                 {!! Form::select('title',['1'=>'Mr','2'=>'Mrs','3'=>'Miss','4'=>'Dr','5'=>'Prof'],
-null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) !!}
+null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                             </div>
                             @if ($errors->has('title'))
                                 <span class="help-block">

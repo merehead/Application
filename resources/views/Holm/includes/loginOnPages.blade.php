@@ -1,6 +1,6 @@
 @if (Auth::check())
     @if(Auth::user()->isReregistrationCompleted())
-    <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-registration' }}" class="registeredCarer">
+    <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-settings' }}" class="registeredCarer">
         <div class="profilePhoto registeredCarer__img">
             <img src="./img/no_photo.png" alt="">
         </div>

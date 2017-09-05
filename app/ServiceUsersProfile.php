@@ -5,13 +5,11 @@ namespace App;
 use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
-class PurchasersProfile extends Model
+class ServiceUsersProfile extends Model
 {
 
-    public function serviceUsers()
-    {
-        return $this->hasMany('App\ServiceUsersProfile','purchaser_id','id');
-    }
+
+
 
 
 

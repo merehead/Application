@@ -35,7 +35,7 @@ class CarersProfilesTable extends Migration
             $table->string      ('work_at_holiday'      ,8)->nullable();          //Yes/No
             $table->string      ('times'                ,32)->nullable();          //Hourly/Daily/Weekly
             $table->integer     ('work_hours'            )->nullable()->default(1);
-            $table->string      ('work_with_pets'       ,8)->nullable();          //Yes/No
+            $table->string      ('work_with_pets'       ,16)->nullable();          //Yes/No
             $table->string      ('pets_description'     ,256)->nullable();
             $table->string      ('language_additional'  ,256)->nullable();
             $table->string      ('work_UK'              ,8)->nullable();          //Yes/No

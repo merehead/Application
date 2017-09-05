@@ -33,7 +33,7 @@
                             <option value="no">No</option>
                         </select>--}}
                         {!! Form::select('criminal_conviction',['Some'=>'Yes, but they are very old, and for a minor offence.','Yes'=>'Yes','No'=>'No'],
-null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) !!}
+null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
                     @if ($errors->has('criminal_conviction'))

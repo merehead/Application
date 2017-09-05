@@ -31,10 +31,11 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
 
     </div>
 </div>
-<form id="step" method="POST" action="{{ route('PurchaserRegistrationPost') }}">
+<form id="stepback" method="POST" action="{{ route('PurchaserRegistrationPost') }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='3'>
-    <input type="hidden" name="carersProfileID" value= {{$purchasersProfileID}}>
+    <input type="hidden" name="stepback" value='1'>
+    <input type="hidden" name="purchasersProfileID" value= {{$purchasersProfileID}}>
 </form>
 <div class="registrationBtns">
     <div class="registrationBtns__left">

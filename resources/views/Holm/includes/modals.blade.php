@@ -1,7 +1,7 @@
 <div id="signUpdiv" class="modal fade" role="dialog">
     <div class="login" style="position:fixed; top:20%; left:40%; ">
         <div class="login__header">
-            <h2>Who are You</h2>
+            <h2>Are You</h2>
             {{--        <a href="/close" class="closeModal"
                        onclick="event.preventDefault();document.getElementById('sign_up_div').style.display = 'none';">
                         <i class="fa fa-times"></i>
@@ -10,10 +10,10 @@
         <div class="who-you-are">
             <div class="who-you-are__box">
                 <a href="{{route('CarerRegistration')}}" class="who-you-are__item">
-                    Care Worker
+                    A Care Worker?
                 </a>
                 <a href="{{route('PurchaserRegistration')}}" class="who-you-are__item">
-                    Buying Care
+                    Buying Care?
                 </a>
             </div>
 

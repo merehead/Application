@@ -48,6 +48,11 @@ class User extends Authenticatable
         return $this->hasOne('App\CarersProfile','id','id');
     }
 
+    public function userPurchaserProfile()
+    {
+        return $this->hasOne('App\PurchasersProfile','id','id');
+    }
+
     public function bonusAcceptors()
     {
         return $this->hasMany('App\Bonuses_record','user_acceptor_id','id');
@@ -64,6 +69,10 @@ class User extends Authenticatable
         if ($this->user_type_id==3) {
             return $this->userCarerProfile->like_name;
         }
+
+        if ($this->user_type_id==1) {
+            return $this->userPurchaserProfile->like_name;
+        }
         return $this->id;
     }
 
@@ -77,11 +86,15 @@ class User extends Authenticatable
 
     public function isReregistrationCompleted(){
 
-        if ($this->user_type_id==3) {
+        if ($this->user_type_id==3) { //carer
             if ($this->userCarerProfile->registration_progress == '20'){
                 return true;
             }
-
+        }
+        if ($this->user_type_id==1) { //purchaser
+            if ($this->userPurchaserProfile->registration_progress == '4_1_2_1'){
+                return true;
+            }
         }
 
         return false;

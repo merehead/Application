@@ -51,6 +51,9 @@ class PurchaserRegistration
             case '3' : $step = 'Step4_purchaserRegistration';break;
             case '4' : $step = 'Step4_2_purchaserRegistration';break;
             case '4_2' : $step = 'Step4_1_purchaserRegistration';break;
+            case '4_1' : $step = 'Step4_1_2_purchaserRegistration';break;
+            case '4_1_2_1' : $step = 'Step4_1_2_1_Thank__you_Sign_up';break;
+
 
             case '5' : $step = 'Step5_1_purchaserRegistration';break;
             case '5_1' : $step = 'Step5_2_purchaserRegistration';break;
@@ -97,6 +100,9 @@ class PurchaserRegistration
             case '3' : $nextStep = '3';break;
             case '4' : $nextStep = '4';break;
             case '4_2' : $nextStep = '4_2';break;
+            case '4_1' : $nextStep = '4_1';break;
+            case '4_1_2' : $nextStep = '4_1_2_1';break;
+
             case '5' : $nextStep = '5';break;
             case '5_1' : $nextStep = '5_1';break;
             case '5_2' : $nextStep = '5_2';break;
@@ -149,9 +155,12 @@ class PurchaserRegistration
         $step = $request->input('step');
 
         switch ($step) {
-            case '1'    : $this->saveStep1($request);break;
-            case '3'    : $this->saveStep3($request);break;
-            case '4'    : $this->saveStep4($request);break;
+            case '1'      : $this->saveStep1($request);break;
+            case '3'      : $this->saveStep3($request);break;
+            case '4'      : $this->saveStep4($request);break;
+            case '4_1'    : $this->saveStep4_1($request);break;
+            //case '4_1_2'  : $this->saveStep4_1_2($request);break;
+
             case '5'    : $this->saveStep5($request);break;
             case '5_1'  : $this->saveStep5_1($request);break;
             case '6'    : $this->saveStep6($request);break;
@@ -267,6 +276,51 @@ class PurchaserRegistration
 
         return;
     }
+
+    private function saveStep4_1($request) {
+
+        $this->validate($request,[
+            'title' => 'required|numeric:1',
+            'first_name' => 'required|string|max:128',
+            'family_name' => 'required|string|max:128',
+            'like_name' => 'required|string|max:128',
+            'gender' => 'required|string|max:14',
+            'mobile_number' => 'required',
+            'address_line1'=>'required|string|max:256',
+            'address_line2' => 'nullable|string|max:256',
+            'town' => 'required|string|max:128',
+            'postcode' => 'required|string|max:32',
+            'DoB'=>'required',
+        ]);
+
+        //dd($request->all());
+
+        $purchaserProfile = $this->model->findOrFail($request->input('purchasersProfileID'));
+
+        $serviceUsersProfile = $purchaserProfile->serviceUsers->first();
+
+
+        //dd($purchaserProfile);
+
+        if ($serviceUsersProfile) {
+            $serviceUsersProfile->title = $request->input('title');
+            $serviceUsersProfile->first_name = $request->input('first_name');
+            $serviceUsersProfile->family_name = $request->input('family_name');
+            $serviceUsersProfile->like_name = $request->input('like_name');
+            $serviceUsersProfile->gender = $request->input('gender');
+            $serviceUsersProfile->mobile_number = $request->input('mobile_number');
+            $serviceUsersProfile->address_line1 = $request->input('address_line1');
+            $serviceUsersProfile->address_line2 = $request->input('address_line2');
+            $serviceUsersProfile->address_line1 = $request->input('address_line1');
+            $serviceUsersProfile->town = $request->input('town');
+            $serviceUsersProfile->postcode = $request->input('postcode');
+            $serviceUsersProfile->DoB = $request->input('DoB');
+            $serviceUsersProfile->update();
+            //dd($request->all());
+        }
+        return;
+    }
+
 
     private function saveStep5($request) {
 

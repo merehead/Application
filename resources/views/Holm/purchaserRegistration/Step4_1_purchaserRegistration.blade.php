@@ -15,7 +15,7 @@
             <div class="registration__column  registration__column--bg">
                 <div class="personal">
 
-                    {!! Form::model($purchasersProfile,['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'step','class'=>'personalForm']) !!}
+                    {!! Form::model($serviceUsersProfile,['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'step','class'=>'personalForm']) !!}
                     {{--<form class="personalForm">--}}
 
                         <div class="formField personalActive">
@@ -24,7 +24,7 @@
                             </h2>
                             <div class="inputWrap">
                                 {!! Form::select('title',['1'=>'Mr','2'=>'Mrs','3'=>'Miss','4'=>'Dr','5'=>'Prof'],
-null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) !!}
+null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                             </div>
                             @if ($errors->has('title'))
                                 <span class="help-block">
@@ -236,6 +236,7 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) 
             </a>
         </div>
         {!! Form::open(['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'stepback','class'=>'personalForm']) !!}
-        <input type="hidden" name="step" value = '2'>
+        <input type="hidden" name="step" value = '4'>
+        <input type="hidden" name="stepback" value = '4'>
         <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
         {!! Form::close()!!}

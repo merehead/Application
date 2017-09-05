@@ -11,11 +11,11 @@
 
 <div class="signBox">
     <div class="signSteps ">
-        <p href="#" class="signSteps__item signSteps__item--active">
+        <p href="#" class="signSteps__item {{$activeStep == 1 ? "signSteps__item--active"  : ""}}">
             <span class="signSteps__name">Email & Password</span>
             <span class="signSteps__info">Enter your account information</span>
         </p>
-        <p href="#" class="signSteps__item ">
+        <p href="#" class="signSteps__item {{$activeStep == 2 ? "signSteps__item--active"  : ""}}">
             <span class="signSteps__name">Personal Details</span>
             <span class="signSteps__info">Enter your personal information</span>
         </p>
@@ -28,7 +28,7 @@
             <span class="signSteps__info">Complete the process</span>
         </p>
         <div class="signProgress ">
-            <div class="signStep signStep--step1 ">
+            <div class="signStep signStep--step1 {{$activeStep > 1 ? "signStep--active"  : ""}}">
                 <div class="signStep__item">
 
                 </div>
@@ -48,7 +48,7 @@
 
             <div class="signStep signStep--step2 signStep--haveSubsteps">
                 <div class="signStep__item">
-                    <div class="signSubstep signSubstep--step1  ">
+                    <div class="signSubstep signSubstep--step1  {{$activeStep > 1 ? "signSubstep--active"  : ""}}">
                         <div class="signSubstep__item">
                         </div>
                         <span class="signSubstep__ico">

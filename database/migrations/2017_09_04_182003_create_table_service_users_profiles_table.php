@@ -15,7 +15,7 @@ class CreateTableServiceUsersProfilesTable extends Migration
     {
         Schema::create('service_users_profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string      ('purchasing_care_for', 16)->nullable();
+
 
             $table->integer     ('purchaser_id'            )->unsigned();
 
