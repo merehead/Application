@@ -54,7 +54,7 @@
           <i class="fa fa-check" aria-hidden="true"></i>
         </span>
     <p class="info-p">
-        You will need to fill in a care and health questionnaire about [service user name] before booking a carer.
+        You will need to fill in a care and health questionnaire about {{$purchasersProfile->serviceUsers->first()->like_name}} before booking a carer.
     </p>
     <p >
         You can do that later, or you can press 'Next step' and do that now.
