@@ -38,6 +38,7 @@ class PurchaserRegistrationController extends FrontController
         if (!$user) {
             $step = view(config('settings.frontTheme').'.purchaserRegistration.Step1_purchaserRegistration')->with($this->vars)->render();
             $this->vars = array_add($this->vars,'activeStep',1);
+            $this->vars = array_add($this->vars,'activeSubStep',0);
         } else {
             $purchasersProfile = PurchasersProfile::findOrFail($user->id);
 
