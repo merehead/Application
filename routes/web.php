@@ -31,8 +31,9 @@ Route::post('carer-registration','CarerRegistrationController@update')->name('Ca
 
 
 Route::get('/purchaser-settings', 'PurchaserController@index')->name('purchaserSettings');
-Route::get('purchaser-registration/','PurchaserRegistrationController@index')->name('PurchaserRegistration');
-Route::post('purchaser-registration','PurchaserRegistrationController@update')->name('PurchaserRegistrationPost');
+Route::post('/purchaser-settings','PurchaserController@update')->name('purchaserSettingsPost');
+Route::get('/purchaser-registration/','PurchaserRegistrationController@index')->name('PurchaserRegistration');
+Route::post('/purchaser-registration','PurchaserRegistrationController@update')->name('PurchaserRegistrationPost');
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
 

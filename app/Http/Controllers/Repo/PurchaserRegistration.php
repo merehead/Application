@@ -623,13 +623,35 @@ class PurchaserRegistration
 
         if ($step>=1)
             $activeStep=2;
-        if ($step>3)
+        if ($step>5)
             $activeStep=3;
         if ($step>17)
             $activeStep=4;
         if ($step>19)
             $activeStep=5;
         return $activeStep;
+    }
+
+
+    public function getActiveSubStep($id){
+
+        $activeSubStep=0;
+
+        $step = $this->model->find($id)->registration_progress;
+
+        if ($step == 3)
+            $activeSubStep=1;
+        if ($step == 4)
+            $activeSubStep=2;
+        if ($step == '4_2'||$step == '4_1')
+            $activeSubStep=3;
+        if ($step == '4_1_2_1')
+            $activeSubStep=4;
+
+
+
+
+        return $activeSubStep;
     }
 
 }

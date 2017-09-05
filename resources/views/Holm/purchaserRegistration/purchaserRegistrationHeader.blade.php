@@ -19,11 +19,11 @@
             <span class="signSteps__name">Personal Details</span>
             <span class="signSteps__info">Enter your personal information</span>
         </p>
-        <p href="#" class="signSteps__item ">
+        <p href="#" class="signSteps__item {{$activeStep == 3 ? "signSteps__item--active"  : ""}}">
             <span class="signSteps__name">Health Questionnaire </span>
             <span class="signSteps__info">Information to help carers</span>
         </p>
-        <p href="#" class="signSteps__item ">
+        <p href="#" class="signSteps__item {{$activeStep == 4 ? "signSteps__item--active"  : ""}}">
             <span class="signSteps__name">Finish</span>
             <span class="signSteps__info">Complete the process</span>
         </p>
@@ -48,28 +48,28 @@
 
             <div class="signStep signStep--step2 signStep--haveSubsteps">
                 <div class="signStep__item">
-                    <div class="signSubstep signSubstep--step1  {{$activeStep > 1 ? "signSubstep--active"  : ""}}">
+                    <div class="signSubstep signSubstep--step1  {{$activeSubStep > 0 ? "signSubstep--active"  : ""}}">
                         <div class="signSubstep__item">
                         </div>
                         <span class="signSubstep__ico">
                     <i class="fa fa-check-circle"></i>
                   </span>
                     </div>
-                    <div class="signSubstep signSubstep--step2">
+                    <div class="signSubstep signSubstep--step2 {{$activeSubStep > 1 ? "signSubstep--active"  : ""}}">
                         <div class="signSubstep__item">
                         </div>
                         <span class="signSubstep__ico">
                     <i class="fa fa-check-circle"></i>
                   </span>
                     </div>
-                    <div class="signSubstep signSubstep--step3">
+                    <div class="signSubstep signSubstep--step3 {{$activeSubStep > 2 ? "signSubstep--active"  : ""}}">
                         <div class="signSubstep__item">
                         </div>
                         <span class="signSubstep__ico">
                     <i class="fa fa-check-circle"></i>
                   </span>
                     </div>
-                    <div class="signSubstep signSubstep--step4">
+                    <div class="signSubstep signSubstep--step4 {{$activeSubStep > 3 ? "signSubstep--active"  : ""}}">
                         <div class="signSubstep__item">
                         </div>
                         <span class="signSubstep__ico">

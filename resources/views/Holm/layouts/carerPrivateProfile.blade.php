@@ -18,9 +18,6 @@
 <body>
 
 
-
-
-
 @yield('header')
 @yield('content')
 @yield('footer')
@@ -40,8 +37,8 @@
             dateFormat:"dd/mm/yy",
             showAnim:"slideDown",
             minDate: "+0D",
-            maxDate: "+20Y",
-            yearRange: "0:+10"
+            maxDate: "+50Y",
+            yearRange: "0:+50"
         });
     } );
 
@@ -52,8 +49,8 @@
             dateFormat:"dd/mm/yy",
             showAnim:"slideDown",
             minDate: "+0D",
-            maxDate: "+20Y",
-            yearRange: "0:+10"
+            maxDate: "+50Y",
+            yearRange: "0:+50"
         });
     } );
 

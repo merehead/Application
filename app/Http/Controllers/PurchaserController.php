@@ -64,5 +64,11 @@ class PurchaserController extends FrontController
         return $this->renderOutput();
     }
 
+    public function update(Request $reqest) {
+
+        dd('public function update');
+
+    }
+
 
 }

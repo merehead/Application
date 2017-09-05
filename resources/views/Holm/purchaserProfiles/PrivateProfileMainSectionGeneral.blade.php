@@ -1,12 +1,13 @@
 <div class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">General</h2>
-        <a href="#" class="profileCategory__link">
+        <a href="#" class="profileCategory__link"
+           onclick="event.preventDefault();document.getElementById('PrivateGeneral').submit();">
             <i class="fa fa-pencil"></i>
         </a>
     </div>
 </div>
-{!! Form::model($purchaserProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateGeneral']) !!}
+{!! Form::model($purchaserProfile, ['method'=>'POST','route'=>'purchaserSettingsPost','id'=>'PrivateGeneral']) !!}
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('stage','general') !!}
 <div class="borderContainer">

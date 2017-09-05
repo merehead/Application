@@ -85,7 +85,9 @@ class PurchaserRegistrationController extends FrontController
                 $this->vars = array_add($this->vars, 'user', $this->user);
                 $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
             }
+
             $this->vars = array_add($this->vars,'activeStep',$this->purchaserProfile->getActiveStep($user->id));
+            $this->vars = array_add($this->vars,'activeSubStep',$this->purchaserProfile->getActiveSubStep($user->id));
 
             $step = view(config('settings.frontTheme').'.purchaserRegistration.'.$this->purchaserProfile->getNextStep())->with($this->vars)->render();
 
