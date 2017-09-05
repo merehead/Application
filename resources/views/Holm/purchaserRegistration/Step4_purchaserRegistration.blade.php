@@ -179,9 +179,9 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                                 {!! Form::text('postcode',null,['class'=>'formInput personalForm__input','placeholder'=>'Your postcode']) !!}
 
                             </div>
-                            @if ($errors->has('postcode_id'))
+                            @if ($errors->has('postcode'))
                                 <span class="help-block">
-                                        <strong>{{ $errors->first('postcode_id') }}</strong>
+                                        <strong>{{ $errors->first('postcode') }}</strong>
                                     </span>
                             @endif
                         </div>
