@@ -10,51 +10,51 @@ namespace App\Http\Controllers\Repo;
 
 
 use App\CarerReference;
-use App\CarersProfile;
 use App\PurchasersProfile;
+use App\ServiceUsersProfile;
 use App\User;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
-class PurchaserRegistration
+class ServiceUserRegistration
 {
-    use  ValidatesRequests;
+    use   ValidatesRequests;
 
     protected $model = FALSE;
+    protected $user;
 
-    public function __construct(PurchasersProfile $purchaserProfile) {
-        $this->model = $purchaserProfile;
+    public function __construct(ServiceUsersProfile $serviceUsersProfile) {
+        $this->model = $serviceUsersProfile;
+
     }
 
-    public function getNextStep()
+    public function getNextStep($serviceUserProfileId)
     {
 
-        $user = Auth::user();
+        //$user = Auth::user();
 
-        $currentStep = $this->model->find($user->id)->registration_progress;
+        $currentStep = $this->model->FindOrFail($serviceUserProfileId)->registration_progress;
 
+
+        $step = 'Step4_1_2_3_Thank__you_Sign_up1';
 
         switch ($currentStep) {
-            case '0' : $step = 'Step1_purchaserRegistration';break;
-            case '1' : $step = 'Step2_purchaserRegistration';break;
-            case '2' : $step = 'Step3_purchaserRegistration';break;
-            case '3' : $step = 'Step4_purchaserRegistration';break;
-            case '4' : $step = 'Step4_2_purchaserRegistration';break;
-            case '4_2' : $step = 'Step4_1_purchaserRegistration';break;
-            case '4_1' : $step = 'Step4_1_2_purchaserRegistration';break;
-            case '4_1_2_1' : $step = 'Step4_1_2_1_Thank__you_Sign_up';break;
+
+            case '4_1_2_1' : $step = 'Step4_1_2_3_Thank__you_Sign_up1';break;
+            case '4_1_2_3' : $step = 'Step4_1_2_4_Thank__you_Sign_up1_1';break;
+            case '4_1_2_4' : $step = 'Step5_serviceUserRegistration';break;
+            case '5' : $step = 'Step5_1_serviceUserRegistration';break;
+
+            case '5_1' : $step = 'Step6_serviceUserRegistration';break;
+            case '6' : $step = 'Step7_serviceUserRegistration';break;
+            case '7' : $step = 'Step8_serviceUserRegistration';break;
+            case '8' : $step = 'Step9_serviceUserRegistration';break;
+            case '9' : $step = 'StepVV_serviceUserRegistration';break;
 
 
-            case '5' : $step = 'Step5_1_purchaserRegistration';break;
-            case '5_1' : $step = 'Step5_2_purchaserRegistration';break;
-            case '5_2' : $step = 'Step6_purchaserRegistration';break;
 
 
-            case '6' : $step = 'Step7_carerRegistration';break;
-            case '7' : $step = 'Step8_carerRegistration';break;
-            case '8' : $step = 'Step9_carerRegistration';break;
-            case '9' : $step = 'Step10_carerRegistration';break;
             case '10' : $step = 'Step11_carerRegistration';break;
             case '11' : $step = 'Step12_carerRegistration';break;
             case '12' : $step = 'Step13_carerRegistration';break;
@@ -78,29 +78,23 @@ class PurchaserRegistration
 
         $array=$request->all();
 
-        $user = Auth::user();
-
-        $purchaserProfile = $this->model->findOrFail($user->id);
-
-
+        $serviceUserProfile = $this->model->findOrFail($array['serviceUserProfileID']);
 
         $nextStep = 0;
-        switch ($array['step']) {
-            case '1' : $nextStep = '1';break;
-            case '2' : $nextStep = '2';break;
-            case '3' : $nextStep = '3';break;
-            case '4' : $nextStep = '4';break;
-            case '4_2' : $nextStep = '4_2';break;
-            case '4_1' : $nextStep = '4_1';break;
-            case '4_1_2' : $nextStep = '4_1_2_1';break;
 
+        switch ($array['step']) {
+
+            case '4_1_2_1' : $nextStep = '4_1_2_1';break;
+            case '4_1_2_3' : $nextStep = '4_1_2_3';break;
+            case '4_1_2_4' : $nextStep = '4_1_2_4';break;
             case '5' : $nextStep = '5';break;
             case '5_1' : $nextStep = '5_1';break;
-            case '5_2' : $nextStep = '5_2';break;
             case '6' : $nextStep = '6';break;
             case '7' : $nextStep = '7';break;
             case '8' : $nextStep = '8';break;
             case '9' : $nextStep = '9';break;
+
+
             case '10' : $nextStep = '10';break;
             case '11' : $nextStep = '11';break;
             case '12' : $nextStep = '12';break;
@@ -119,9 +113,9 @@ class PurchaserRegistration
         //dd($request->all());
 
 
-        $purchaserProfile->registration_progress = $nextStep;
+        $serviceUserProfile->registration_progress = $nextStep;
 
-        if ($request->input('step')==5 && $request->input('criminal_conviction')=="No") { // no a criminal backend
+/*        if ($request->input('step')==5 && $request->input('criminal_conviction')=="No") { // no a criminal backend
             $purchaserProfile->registration_progress = '5_2';
         }
 
@@ -133,39 +127,30 @@ class PurchaserRegistration
 
         if ($request->input('step')=='5_1' && $purchaserProfile->criminal_conviction=='Some') { // has some criminal backend
             $purchaserProfile->registration_progress = '5_2';
-        }
+        }*/
 
 
-        $purchaserProfile->update();
+        $serviceUserProfile->update();
 
         return;
     }
 
     public function saveStep($request) {
 
+
+        //dd($request->all());
+
+
         $step = $request->input('step');
 
         switch ($step) {
-            case '1'      : $this->saveStep1($request);break;
-            case '3'      : $this->saveStep3($request);break;
-            case '4'      : $this->saveStep4($request);break;
-            case '4_1'    : $this->saveStep4_1($request);break;
-            //case '4_1_2'  : $this->saveStep4_1_2($request);break;
 
             case '5'    : $this->saveStep5($request);break;
-            case '5_1'  : $this->saveStep5_1($request);break;
+            case '5_1'    : $this->saveStep5_1($request);break;
             case '6'    : $this->saveStep6($request);break;
-            case '8'    : $this->saveStep8($request);break;
+            case '7'    : $this->saveStep7($request);break;
             case '9'    : $this->saveStep9($request);break;
-            case '10'    : $this->saveStep10($request);break;
-            case '11'    : $this->saveStep11($request);break;
-            case '12'    : $this->saveStep12($request);break;
-            case '13'    : $this->saveStep13($request);break;
-            case '14'    : $this->saveStep14($request);break;
-            case '15'    : $this->saveStep15($request);break;
-            case '17'    : $this->saveStep17($request);break;
-            case '18'    : $this->saveStep17($request);break; //step 17 and 18 have the one method
-            case '20'    : $this->saveStep20($request);break;
+
         }
 
         $this->setNextStep($request);
@@ -173,218 +158,11 @@ class PurchaserRegistration
         return;
     }
 
-    private function saveStep1($request) {
-
-
-        $this->validate($request,[
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'referral_code'=>'string|nullable|max:128',
-        ]);
-
-        (isset($request['referral_code']))? $referal_code = $request['referral_code'] : $referral_code = 0;
-
-        $user = User::create([
-            'email' => $request['email'],
-            'password' => bcrypt($request['password']),
-            'referral_code' => $referral_code,
-            'user_type_id' => 1,
-        ]);
-
-
-        if ($user) {
-
-            $purchaserProfile = new PurchasersProfile();
-
-            $purchaserProfile->id = $user->id;
-            $purchaserProfile->registration_progress = 1;
-            $purchaserProfile -> save();
-        }
-
-        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']],TRUE)) {
-            Auth::login($user, true);
-
-            Mail::send('errors.404', ['userName' => $user->email, 'password' => $request['password']],
-                function ($m) use ($request) {$m->to($request['email'])->subject('Registration');});
-
-        }
-
-        return;
-    }
-
-    private function saveStep3($request) {
-
-        $this->validate($request,[
-            'purchasing_care_for' => 'required|in:"Someone else","Myself"',
-        ]);
-
-
-        //dd($request->all());
-
-        $purchaserProfile = $this->model->findOrFail($request->input('purchasersProfileID'));
-
-        $purchaserProfile->purchasing_care_for  = $request->input('purchasing_care_for');
-        $purchaserProfile->update();
-
-        return;
-    }
-
-    private function saveStep4($request) {
-
-       // dd($request->all());
-
-        $this->validate($request, [
-            'title' =>
-                array(
-                    'required',
-                    'numeric:1',
-                    ),
-            'first_name' =>
-                array(
-                    'required',
-                    'string',
-                    'max:128'
-                    ),
-            'family_name' =>
-                array(
-                    'required',
-                    'string',
-                    'max:128'
-                ),
-            'like_name' =>
-                array(
-                    'required',
-                    'string',
-                    'max:128'
-                ),
-            'gender' =>
-                array(
-                    'required',
-                    'string',
-                    'max:14'
-                ),
-            'mobile_number' =>
-                array(
-                    'required',
-                ),
-            'address_line1' =>
-                array(
-                    'required',
-                    'string',
-                    'max:256'
-                ),
-            'address_line2' =>
-                array(
-                    'required',
-                    'string',
-                    'max:256'
-                ),
-            'town' =>
-                array(
-                    'required',
-                    'string',
-                    'max:128'
-                ),
-            'DoB' =>
-                array(
-                    'required',
-                ),
-            'postcode' =>
-                array(
-                    'required',
-//                    'regex:#^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))
-//[0-9][A-Za-z]{2})$#',
-                )
-        ]);
-
-
-/*        $this->validate($request,[
-            'title' => 'required|numeric:1',
-            'first_name' => 'required|string|max:128',
-            'family_name' => 'required|string|max:128',
-            'like_name' => 'required|string|max:128',
-            'gender' => 'required|string|max:14',
-            'mobile_number' => 'required',
-            'address_line1'=>'required|string|max:256',
-            'address_line2' => 'nullable|string|max:256',
-            'town' => 'required|string|max:128',
-            'postcode' => 'required|string|max:32|regex:#^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))
-[0-9][A-Za-z]{2})$#',
-            'DoB'=>'required',
-        ]);*/
-
-        //dd($request->all());
-
-        $purchaserProfile = $this->model->findOrFail($request->input('purchasersProfileID'));
-        //dd($purchaserProfile);
-
-        $purchaserProfile->title            = $request->input('title');
-        $purchaserProfile->first_name       = $request->input('first_name');
-        $purchaserProfile->family_name      = $request->input('family_name');
-        $purchaserProfile->like_name        = $request->input('like_name');
-        $purchaserProfile->gender           = $request->input('gender');
-        $purchaserProfile->mobile_number    = $request->input('mobile_number');
-        $purchaserProfile->address_line1    = $request->input('address_line1');
-        $purchaserProfile->address_line2    = $request->input('address_line2');
-        $purchaserProfile->address_line1    = $request->input('address_line1');
-        $purchaserProfile->town             = $request->input('town');
-        $purchaserProfile->postcode         = $request->input('postcode');
-        $purchaserProfile->DoB              = $request->input('DoB');
-        $purchaserProfile->update();
-        //dd($request->all());
-
-        return;
-    }
-
-    private function saveStep4_1($request) {
-
-        $this->validate($request,[
-            'title' => 'required|numeric:1',
-            'first_name' => 'required|string|max:128',
-            'family_name' => 'required|string|max:128',
-            'like_name' => 'required|string|max:128',
-            'gender' => 'required|string|max:14',
-            'mobile_number' => 'required',
-            'address_line1'=>'required|string|max:256',
-            'address_line2' => 'nullable|string|max:256',
-            'town' => 'required|string|max:128',
-            'postcode' => 'required|string|max:32',
-            'DoB'=>'required',
-        ]);
-
-        //dd($request->all());
-
-        $purchaserProfile = $this->model->findOrFail($request->input('purchasersProfileID'));
-
-        $serviceUsersProfile = $purchaserProfile->serviceUsers->first();
-
-
-        //dd($purchaserProfile);
-
-        if ($serviceUsersProfile) {
-            $serviceUsersProfile->title = $request->input('title');
-            $serviceUsersProfile->first_name = $request->input('first_name');
-            $serviceUsersProfile->family_name = $request->input('family_name');
-            $serviceUsersProfile->like_name = $request->input('like_name');
-            $serviceUsersProfile->gender = $request->input('gender');
-            $serviceUsersProfile->mobile_number = $request->input('mobile_number');
-            $serviceUsersProfile->address_line1 = $request->input('address_line1');
-            $serviceUsersProfile->address_line2 = $request->input('address_line2');
-            $serviceUsersProfile->address_line1 = $request->input('address_line1');
-            $serviceUsersProfile->town = $request->input('town');
-            $serviceUsersProfile->postcode = $request->input('postcode');
-            $serviceUsersProfile->DoB = $request->input('DoB');
-            $serviceUsersProfile->update();
-            //dd($request->all());
-        }
-        return;
-    }
-
 
     private function saveStep5($request) {
 
         //dd($request->all());
-
+/*
 
         $this->validate($request,[
             'criminal_conviction' => 'required|in:"Yes","No","Some"',
@@ -393,14 +171,14 @@ class PurchaserRegistration
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
         $carerProfile->criminal_conviction  = $request->input('criminal_conviction');
-        $carerProfile->update();
+        $carerProfile->update();*/
 
         return;
     }
 
     private function saveStep5_1($request) {
 
-        $this->validate($request,[
+/*        $this->validate($request,[
             'criminal_detail' => 'required|string:512',
         ]);
 
@@ -408,14 +186,14 @@ class PurchaserRegistration
 
         $carerProfile->criminal_detail  = $request->input('criminal_detail');
 
-        $carerProfile->update();
+        $carerProfile->update();*/
 
         return;
     }
 
     private function saveStep6($request) {
 
-        $this->validate($request,[
+/*        $this->validate($request,[
             'DBS' => 'required|in:"Yes","No"',
             'DBS_use' => 'required|in:"Yes","No"',
             'DBS_identifier' => 'required_if:DBS_use,"Yes"|string|nullable|max:128',
@@ -429,13 +207,13 @@ class PurchaserRegistration
 
         $carerProfile->dbs_date  = $request->input('dbs_date');
 
-        $carerProfile->update();
+        $carerProfile->update();*/
 
         return;
     }
-    private function saveStep8($request) {
+    private function saveStep7($request) {
 
-        $this->validate($request,[
+/*        $this->validate($request,[
             'driving_licence' => 'required|in:"Yes","No"',
             'DBS_number' => 'string|nullable|max:128',
             'have_car' => 'nullable|in:"Yes","No"',
@@ -449,7 +227,7 @@ class PurchaserRegistration
         $carerProfile->use_car  = $request->input('use_car');
         $carerProfile->DBS_number  = $request->input('DBS_number');
 
-        $carerProfile->update();
+        $carerProfile->update();*/
 
         return;
     }

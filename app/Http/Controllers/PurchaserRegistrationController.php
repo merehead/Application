@@ -42,12 +42,6 @@ class PurchaserRegistrationController extends FrontController
         } else {
             $purchasersProfile = PurchasersProfile::findOrFail($user->id);
 
-            //dd($purchasersProfile->registration_progress);
-
-/*            if ($carersProfile->registration_progress == '20') {
-                return redirect('/im-carer');
-            }*/
-
             $this->vars = array_add($this->vars, 'purchasersProfileID', $purchasersProfile->id);
             $this->vars = array_add($this->vars, 'purchasersProfile', $purchasersProfile);
 
@@ -103,14 +97,6 @@ class PurchaserRegistrationController extends FrontController
     }
 
     public function update(Request $request) {
-
-        //dd($request->all());
-
-
-/*        if ($request->input('step') == '4_2'){
-            $purchaserProfile = PurchasersProfile::findOrFail($request->input('purchasersProfileID'));
-        }*/
-
 
         if ($request->has('stepback')) {
             //dd($request->all());
