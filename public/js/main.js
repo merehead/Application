@@ -145,28 +145,67 @@ $(document).ready(function(){
 
 
 	 /*--------------слайдер I am carer page------------*/
+    if($.isFunction('owlCarousel')) {
+        $('.carerBanner').owlCarousel({
+            items: 1,
+            loop: true,
+            dots: false,
+            navigation: false,
+            autoplay: true,
+            autoplayTimeout: 8000,
+            autoplayHoverPause: false,
 
-	 $('.carerBanner').owlCarousel({
- 	    items:1,
- 	    loop:true,
- 	    dots: false,
- 	    navigation: false,
- 	    autoplay:true,
- 	    autoplayTimeout:8000,
- 	    autoplayHoverPause:false,
+            responsive: {
+                600: {
+                    items: 1
 
- 	    responsive:{
- 	        600:{
- 	            items:1
-
- 	        }
- 	    }
- 	});
-
-
-
-
+                }
+            }
+        });
+    }
 
 
 
 });
+
+function login_ajax(form){
+
+    token = $(form).find('input[name=_token]').val();
+    $(form).find('.error-block h3 strong').html('');
+    $.ajax({
+        url: $(form).attr('action'),
+        headers: {'X-CSRF-TOKEN': token},
+        data: $(form).serialize(),
+        type: 'POST',
+        dataType: "application/json",
+        success: function (response) {
+
+            if(response.status!=200) {
+                $(form).find('.error-block strong').html(response.email);
+            }else{
+            	window.refresh();
+            }
+        },
+        error: function(response) {
+            $(form).find('.formField').hide();
+
+            if(response.status!=200) {
+                var data = $.parseJSON(response.responseText);
+                $(form).find('.error-block h3 strong').html(data.email);
+                $(form).find('.error-block h3 strong').html(data.password);
+                $('.btry').show();
+            }else{
+                $(form).find('.success-block h3 strong').html('Login success');
+                window.location.reload();
+            }
+        }
+
+    });
+    return false;
+}
+
+function refreshLoginForm(form){
+    $(form).find('.error-block strong').html('');
+	$('.blogin').show();
+    $(form).find('.formField').show();
+}

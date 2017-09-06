@@ -19,12 +19,12 @@
 @yield('header')
 @yield('content')
 @yield('footer')
-@yield('modals')
 <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="{{asset('js/main.js')}}"></script>
+@yield('modals')
 
 <script src="{{asset('js/jquery-ui.min.js')}}"></script>
-
 <script>
     $('.footerSocial a, .headerSocial a').click(function(e) {
         e.preventDefault();
