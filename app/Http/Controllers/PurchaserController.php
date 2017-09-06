@@ -87,7 +87,7 @@ class PurchaserController extends FrontController
             if (isset($input['address_line1'])) $purchaserProfile->address_line1 = $input['address_line1'];
             if (isset($input['address_line2'])) $purchaserProfile->address_line2 = $input['address_line2'];
             if (isset($input['town'])) $purchaserProfile->town = $input['town'];
-            if (isset($input['postcode_id'])) $purchaserProfile->postcode_id = $input['postcode_id'];
+            if (isset($input['postcode'])) $purchaserProfile->postcode_id = $input['postcode'];
             if (isset($input['mobile_number'])) $purchaserProfile->mobile_number = $input['mobile_number'];
 /*            if (isset($input['sentence_yourself'])) $purchaserProfile->sentence_yourself = $input['sentence_yourself'];
             if (isset($input['description_yourself'])) $purchaserProfile->description_yourself = $input['description_yourself'];*/

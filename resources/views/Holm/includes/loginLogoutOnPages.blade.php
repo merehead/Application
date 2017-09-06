@@ -8,7 +8,7 @@
             <h2 class="profileName">
                 {!! Auth::user()->userName() !!}
                 <span class="registeredCarer__type">
-                  <i class="fa fa-exchange" aria-hidden="true"></i>
+                  <i class="fa {{Auth::user()->isCarer()? ' ' : 'fa-exchange' }} " aria-hidden="true"></i>
                     {{Auth::user()->isCarer()? 'carer' : 'purchaser' }}
                   </span>
             </h2>
