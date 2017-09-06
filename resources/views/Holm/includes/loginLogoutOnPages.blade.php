@@ -17,7 +17,7 @@
               </span>
         </a>
         @else
-            <a href="/{{Auth::user()->isCarer()? 'im-carer' : 'purchaser-registration' }}" class="registeredCarer">
+            <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-registration' }}" class="registeredCarer">
                 <h2 class="profileName" style="padding-left:20px; ">continue sigh up</h2>
             </a>
         @endif
