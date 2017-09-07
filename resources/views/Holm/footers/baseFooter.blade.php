@@ -43,7 +43,7 @@
             <p class="copyright">
                 COPYRIGHT © 2017 Holm. All rights reserved
             </p>
-            <a href="" class="footerExtra__terms">
+            <a href="{{route('TermsPage')}}" class="footerExtra__terms">
                 Terms and Conditions
             </a >
             <div class="footerSocial">
