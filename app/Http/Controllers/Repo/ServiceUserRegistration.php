@@ -50,24 +50,25 @@ class ServiceUserRegistration
             case '6' : $step = 'Step7_serviceUserRegistration';break;
             case '7' : $step = 'Step8_serviceUserRegistration';break;
             case '8' : $step = 'Step9_serviceUserRegistration';break;
-            case '9' : $step = 'StepVV_serviceUserRegistration';break;
+            case '9' : $step = 'Step9_1_serviceUserRegistration';break;
+            case '9_1' : $step = 'Step10_serviceUserRegistration';break;
+
+            case '10' : $step = 'Step11_serviceUserRegistration';break;
+            case '11' : $step = 'Step12_serviceUserRegistration';break;
+            case '12' : $step = 'Step13_serviceUserRegistration';break;
+            case '13' : $step = 'Step14_serviceUserRegistration';break;
+            case '14' : $step = 'Step15_serviceUserRegistration';break;
+            case '15' : $step = 'Step16_serviceUserRegistration';break;
+            case '16' : $step = 'Step17_serviceUserRegistration';break;
 
 
+            case '17' : $step = 'Step17_serviceUserRegistration';break;
 
-
-            case '10' : $step = 'Step11_carerRegistration';break;
-            case '11' : $step = 'Step12_carerRegistration';break;
-            case '12' : $step = 'Step13_carerRegistration';break;
-            case '13' : $step = 'Step14_carerRegistration';break;
-            case '14' : $step = 'Step14_1_carerRegistration';break;
-            case '14_1' : $step = 'Step15_carerRegistration';break;
-            case '15' : $step = 'Step16_carerRegistration';break;
-            case '16' : $step = 'Step17_carerRegistration';break;
-            case '17' : $step = 'Step18_carerRegistration';break;
+/*
             case '18' : $step = 'Step19_carerRegistration';break;
             case '19' : $step = 'Step20_carerRegistration';break;
             case '20' : $step = 'Step21_carerRegistration';break;
-            //case '21' : $step = 'Step2_carerRegistration';break;
+            //case '21' : $step = 'Step2_carerRegistration';break;*/
         }
 
         return $step;
@@ -93,17 +94,17 @@ class ServiceUserRegistration
             case '7' : $nextStep = '7';break;
             case '8' : $nextStep = '8';break;
             case '9' : $nextStep = '9';break;
-
-
+            case '9_1' : $nextStep = '9_1';break;
             case '10' : $nextStep = '10';break;
             case '11' : $nextStep = '11';break;
             case '12' : $nextStep = '12';break;
             case '13' : $nextStep = '13';break;
             case '14' : $nextStep = '14';break;
-            case '14_1' : $nextStep = '14_1';break;
             case '15' : $nextStep = '15';break;
             case '16' : $nextStep = '16';break;
             case '17' : $nextStep = '17';break;
+
+
             case '18' : $nextStep = '18';break;
             case '19' : $nextStep = '19';break;
             case '20' : $nextStep = '20';break;
@@ -235,7 +236,7 @@ class ServiceUserRegistration
     private function saveStep9($request) {
 
 
-        $this->validate($request,[
+/*        $this->validate($request,[
             'serviceType' => 'required|array',
         ]);
 
