@@ -1,16 +1,16 @@
 <footer class="footer">
     <div class="container">
         <div class="footerNav">
-            <a href="" class="footerNav__item">
+            <a href="{{route('AboutPage')}}" class="footerNav__item">
                 about us
             </a>
-            <a href="" class="footerNav__item">
+            <a href="{{route('ContactPage')}}" class="footerNav__item">
                 contact
             </a>
-            <a href="" class="footerNav__item">
+            <a href="{{route('FaqPage')}}" class="footerNav__item">
                 Frequently Asked Questions
             </a>
-            <a href="" class="footerNav__item">
+            <a href="{{route('BlogPage')}}" class="footerNav__item">
                 blog
             </a>
         </div>
@@ -44,7 +44,7 @@
             <p class="copyright">
                 COPYRIGHT © 2017 Holm. All rights reserved
             </p>
-            <a href="" class="footerExtra__terms">
+            <a href="{{route('TermsPage')}}" class="footerExtra__terms">
                 Terms and Conditions
             </a >
             <div class="footerSocial">

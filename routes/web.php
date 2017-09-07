@@ -20,6 +20,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 //----
 Route::get('/', 'HomePageController@index')->name('mainHomePage');
+//---- static page ----
+Route::get('/about', 'AboutController@index')->name('AboutPage');
+Route::get('/faq', 'FaqController@index')->name('FaqPage');
+Route::get('/contact', 'AboutController@index')->name('ContactPage');
+Route::get('/blog', 'AboutController@index')->name('BlogPage');
+Route::get('/terms', 'TermsController@index')->name('TermsPage');
 
 Route::get('/welcome-carer', 'CarerController@welcome')->name('welcomeCarer');
 Route::get('/carer-settings', 'CarerController@index')->name('carerSettings'); //synonym for ImCarerPage
