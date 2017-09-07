@@ -84,28 +84,28 @@
 
             <div class="signStep signStep--step3 signStep--haveSubsteps">
                 <div class="signStep__item">
-                    <div class="signSubstep signSubstep--step1  ">
+                    <div class="signSubstep signSubstep--step1 {{$activeSubStep > 4 ? "signSubstep--active"  : ""}} ">
                         <div class="signSubstep__item">
                         </div>
                         <span class="signSubstep__ico">
                     <i class="fa fa-check-circle"></i>
                   </span>
                     </div>
-                    <div class="signSubstep signSubstep--step2">
+                    <div class="signSubstep signSubstep--step2 {{$activeSubStep > 5 ? "signSubstep--active"  : ""}}">
                         <div class="signSubstep__item">
                         </div>
                         <span class="signSubstep__ico">
                     <i class="fa fa-check-circle"></i>
                   </span>
                     </div>
-                    <div class="signSubstep signSubstep--step3">
+                    <div class="signSubstep signSubstep--step3 {{$activeSubStep > 6 ? "signSubstep--active"  : ""}}">
                         <div class="signSubstep__item">
                         </div>
                         <span class="signSubstep__ico">
                     <i class="fa fa-check-circle"></i>
                   </span>
                     </div>
-                    <div class="signSubstep signSubstep--step4">
+                    <div class="signSubstep signSubstep--step4 {{$activeSubStep > 7 ? "signSubstep--active"  : ""}}">
                         <div class="signSubstep__item">
                         </div>
                         <span class="signSubstep__ico">

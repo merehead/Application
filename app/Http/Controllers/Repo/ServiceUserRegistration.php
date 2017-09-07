@@ -388,7 +388,7 @@ class ServiceUserRegistration
 
         if ($step>=1)
             $activeStep=2;
-        if ($step>5)
+        if ($step>=5||$step == '4_1_2_4')
             $activeStep=3;
         if ($step>17)
             $activeStep=4;
@@ -404,13 +404,15 @@ class ServiceUserRegistration
 
         $step = $this->model->find($id)->registration_progress;
 
+        //dd($this->model->find($id)->registration_progress);
+
         if ($step == 3)
             $activeSubStep=1;
         if ($step == 4)
             $activeSubStep=2;
         if ($step == '4_2'||$step == '4_1')
             $activeSubStep=3;
-        if ($step == '4_1_2_1')
+        if ($step == '4_1_2_1'||'5')
             $activeSubStep=4;
 
 

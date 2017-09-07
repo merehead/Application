@@ -23,7 +23,10 @@ class ServiceUsersProfile extends Model
         return $this->belongsToMany('App\WorkingTime', 'service_user_profile_working_time', 'service_user_profile_id', 'working_times_id');
     }
 
-
+    public function Floor()
+    {
+        return $this->belongsTo('App\Floor');
+    }
 
 
 
