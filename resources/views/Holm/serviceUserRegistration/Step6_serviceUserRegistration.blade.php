@@ -5,7 +5,7 @@
 
 
             <div class="questionsBox__img">
-                <img src="./img/Signup_P_step6.jpg" alt="">
+                <img src="{{asset('/img/Signup_P_step6.jpg')}}" alt="">
             </div>
 
         </div>
@@ -13,155 +13,63 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
+            {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        When would [Service_user_name] like someone to help?  <span>*</span>
+                        When would {{$serviceUserProfile->like_name}} like someone to help?  <span>*</span>
                     </h2>
                     <div class="registrationCheckboxes registrationCheckboxes--single">
                         <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf25">
-                            <label for="boxf25"> ALL THE TIME</label>
+
+                            <?php $first = $workingTimes->shift();
+                            $id = 'boxf'.$first->id
+                            ?>
+
+                            {{--<input type="checkbox" name="checkbox" class="customCheckbox" id="boxf3">--}}
+                            {!! Form::checkbox('workingTime['.$first->id.']', null,($serviceUserProfile->WorkingTimes->contains('id', $first->id)? 1 : null),array('class' => 'customCheckbox '.$first->css_name,'id'=>$id)) !!}
+
+                            <label for="boxf{{$first->id}}">{{$first->name}}</label>
+
+
                         </div>
                     </div>
                     <div class="registrationCheckboxes">
 
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf1">
-                            <label for="boxf1"> EVERY MORNING</label>
-                        </div>
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf2">
-                            <label for="boxf2"> EVERY AFTERNOON</label>
-                        </div>
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf3">
-                            <label for="boxf3"> EVERY NIGHT</label>
-                        </div>
+                        @foreach($workingTimes as $workingTime)
+                            <div class="checkBox_item">
 
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf4">
-                            <label for="boxf4"> MONDAY MORNING</label>
-                        </div>
 
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf5">
-                            <label for="boxf5">MONDAY AFTERNOON</label>
-                        </div>
+                                <?php $id = 'boxf'.$workingTime->id ?>
+                                {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($serviceUserProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),array('placeholder'=>'1','class' => 'customCheckbox '.$workingTime->css_name,'id'=>$id)) !!}
+                                <label for="boxf{{$workingTime->id}}">{{$workingTime->name}}</label>
 
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf6">
-                            <label for="boxf6">MONDAY NIGHT</label>
-                        </div>
+                            </div>
+                        @endforeach
 
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf7">
-                            <label for="boxf7">TUESDAY MORNING</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf8">
-                            <label for="boxf8">TUESDAY AFTERNOON</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf9">
-                            <label for="boxf9">TUESDAY NIGHT</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf10">
-                            <label for="boxf10">WEDNESDAY MORNING</label>
-                        </div>
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf11">
-                            <label for="boxf11">WEDNESDAY AFTERNOON</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf12">
-                            <label for="boxf12">WEDNESDAY NIGHT</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf13">
-                            <label for="boxf13">THURSDAY MORNING</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf14">
-                            <label for="boxf14">THURSDAY AFTERNOON</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf15">
-                            <label for="boxf15">THURSDAY NIGHT</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf16">
-                            <label for="boxf16">FRIDAY MORNING</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf17">
-                            <label for="boxf17">FRIDAY AFTERNOON</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf18">
-                            <label for="boxf18">FRIDAY NIGHT</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf19">
-                            <label for="boxf19">SATURDAY MORNING</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf20">
-                            <label for="boxf20">SATURDAY AFTERNOON</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf21">
-                            <label for="boxf21">SATURDAY NIGHT</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf22">
-                            <label for="boxf22">SUNDAY MORNING</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf23">
-                            <label for="boxf23">SUNDAY AFTERNOON</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf24">
-                            <label for="boxf24">SUNDAY NIGHT</label>
-                        </div>
                     </div>
 
-
-
-
+                    @if ($errors->has('workingTime'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('workingTime') }}</strong>
+                                    </span>
+                    @endif
 
                 </div>
-
-            </form>
+            <input type="hidden" name="step" value='6'>
+            <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
 
     </div>
+
 </div>
 
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
+{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='6'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
+</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

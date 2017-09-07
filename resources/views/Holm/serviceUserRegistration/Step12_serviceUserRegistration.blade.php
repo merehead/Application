@@ -2,100 +2,71 @@
     <div class="registration__column registration__column--with-padding">
         <div class="questionsBox">
             <h2>Pets</h2>
-
-
             <div class="questionsBox__img">
-                <img src="./dist/img/Signup_P_step12.jpg" alt="">
+                <img src="{{asset('/img/Signup_P_step12.jpg')}}" alt="">
             </div>
-
-
-
         </div>
-
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
+            {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does [Service_user_name] own any pets? <span>*</span>
+                        Does {{$serviceUserProfile->like_name}} own any pets? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
+                        {!! Form::select('own_pets',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
 
-
-
-                            <option value="select">Please select</option>
-
-
-
-                            <option value="yes">Yes</option>
-                            <option value="no">Sometimes</option>
-                        </select>
+                    @if ($errors->has('own_pets'))
+                        <span class="help-block">
+                                <strong>{{ $errors->first('own_pets') }}</strong>
+                                    </span>
+                    @endif
                     </div>
-
-
                 </div>
-
-
-
-
-
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Please give details <span>*</span>
                     </h2>
                     <div class="inputWrap">
-
-                        <input type="text" class="formInput " placeholder="Details">
-
+                        {!! Form::text('pet_detail',null,['class'=>'formInput ','placeholder'=>'Details']) !!}
+                        @if ($errors->has('pet_detail'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('pet_detail') }}</strong>
+                                    </span>
+                        @endif
                     </div>
 
-
                 </div>
-
-
-
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Are the pets friendly with strangers?  <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-
-
-                            <option value="select">Please select</option>
-
-
-
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-
-                            <option value="normally">Normally</option>
-                            <option value="no">Sometimes</option>
-                        </select>
+                        {!! Form::select('pet_friendly',['Yes'=>'Yes','No'=>'No','Normally'=>'Normally','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('pet_friendly'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('pet_friendly') }}</strong>
+                                    </span>
+                        @endif
                     </div>
-
-
                 </div>
-
-
-
-            </form>
+            <input type="hidden" name="step" value='12'>
+            <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
 
     </div>
 </div>
 
-
+{{--
 <form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='12'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
+</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

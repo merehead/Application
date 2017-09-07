@@ -4,7 +4,7 @@
             <h2>Care</h2>
 
             <div class="questionsBox__img">
-                <img src="./img/Signup_P_step5.jpg" alt="">
+                <img src="{{asset('/img/Signup_P_step5.jpg')}}" alt="">
             </div>
 
 
@@ -13,13 +13,33 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
+
+                {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        What kind of care is [Service_user_name] looking to purchase? <span>*</span>
+                        What kind of care is {{$serviceUserProfile->like_name}} looking to purchase? <span>*</span>
                     </h2>
-                    <div class="checkBox_item">
+
+                    @foreach($serviceTypes as $serviceType)
+                        <div class="checkBox_item">
+
+
+                            <?php $id = 'boxf'.$serviceType->id ?>
+                            {!! Form::checkbox('serviceType['.$serviceType->id.']', null,($serviceUserProfile->ServicesTypes->contains('id', $serviceType->id)? 1 : null),
+                            array('class' => 'customCheckbox','id'=>$id)) !!}
+                            <label for="boxf{{$serviceType->id}}">{{$serviceType->name}}</label>
+
+                        </div>
+                    @endforeach
+
+                    @if ($errors->has('serviceType'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('serviceType') }}</strong>
+                                    </span>
+                    @endif
+
+{{--                    <div class="checkBox_item">
                         <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf1">
                         <label for="boxf1"> Single / Regular visits</label>
                     </div>
@@ -30,21 +50,22 @@
                     <div class="checkBox_item">
                         <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf3">
                         <label for="boxf3"> Respite care</label>
-                    </div>
+                    </div>--}}
 
                 </div>
-
-            </form>
+                <input type="hidden" name="step" value='5'>
+                <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
 
     </div>
 </div>
 
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
+{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='5'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
+</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

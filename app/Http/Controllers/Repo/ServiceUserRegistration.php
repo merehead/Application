@@ -151,7 +151,13 @@ class ServiceUserRegistration
             case '6'    : $this->saveStep6($request);break;
             case '7'    : $this->saveStep7($request);break;
             case '9'    : $this->saveStep9($request);break;
-
+            case '9_1'    : $this->saveStep9_1($request);break;
+            case '10'    : $this->saveStep10($request);break;
+            case '11'    : $this->saveStep11($request);break;
+            case '12'    : $this->saveStep12($request);break;
+            case '13'    : $this->saveStep13($request);break;
+            case '14'    : $this->saveStep14($request);break;
+            case '15'    : $this->saveStep15($request);break;
         }
 
         $this->setNextStep($request);
@@ -162,99 +168,20 @@ class ServiceUserRegistration
 
     private function saveStep5($request) {
 
-        //dd($request->all());
-/*
-
         $this->validate($request,[
-            'criminal_conviction' => 'required|in:"Yes","No","Some"',
-        ]);
+            'serviceType' => 'required|array',
+            ]);
 
-        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+        $serviceTypes = $request->input('serviceType');
 
-        $carerProfile->criminal_conviction  = $request->input('criminal_conviction');
-        $carerProfile->update();*/
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->ServicesTypes()->sync(array_keys($serviceTypes));
 
         return;
     }
 
     private function saveStep5_1($request) {
-
-/*        $this->validate($request,[
-            'criminal_detail' => 'required|string:512',
-        ]);
-
-        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
-
-        $carerProfile->criminal_detail  = $request->input('criminal_detail');
-
-        $carerProfile->update();*/
-
-        return;
-    }
-
-    private function saveStep6($request) {
-
-/*        $this->validate($request,[
-            'DBS' => 'required|in:"Yes","No"',
-            'DBS_use' => 'required|in:"Yes","No"',
-            'DBS_identifier' => 'required_if:DBS_use,"Yes"|string|nullable|max:128',
-        ]);
-
-        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
-
-        $carerProfile->DBS  = $request->input('DBS');
-        $carerProfile->DBS_use  = $request->input('DBS_use');
-        $carerProfile->DBS_identifier  = $request->input('DBS_identifier');
-
-        $carerProfile->dbs_date  = $request->input('dbs_date');
-
-        $carerProfile->update();*/
-
-        return;
-    }
-    private function saveStep7($request) {
-
-/*        $this->validate($request,[
-            'driving_licence' => 'required|in:"Yes","No"',
-            'DBS_number' => 'string|nullable|max:128',
-            'have_car' => 'nullable|in:"Yes","No"',
-            'use_car' => 'required_if:have_car,"Yes"|in:"Yes","No"',
-        ]);
-
-        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
-
-        $carerProfile->driving_licence  = $request->input('driving_licence');
-        $carerProfile->have_car  = $request->input('have_car');
-        $carerProfile->use_car  = $request->input('use_car');
-        $carerProfile->DBS_number  = $request->input('DBS_number');
-
-        $carerProfile->update();*/
-
-        return;
-    }
-
-    private function saveStep9($request) {
-
-
-/*        $this->validate($request,[
-            'serviceType' => 'required|array',
-        ]);
-
-        $serviceTypes = $request->input('serviceType');
-
-        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
-
-        $carerProfile->ServicesTypes()->sync(array_keys($serviceTypes));
-
-
-/*        foreach ($serviceTypes as $k=>$v) {
-            $carerProfile->ServicesTypes()->attach($k);
-        }*/
-
-        return;
-    }
-
-    private function saveStep10($request) {
 
         $this->validate($request,[
             'assistanceType' => 'required|array',
@@ -262,45 +189,105 @@ class ServiceUserRegistration
 
         $assistanceType = $request->input('assistanceType');
 
-        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
 
-        $carerProfile->AssistantsTypes()->sync(array_keys($assistanceType));
+        $serviceUserProfile->AssistantsTypes()->sync(array_keys($assistanceType));
 
-/*
-        foreach ($assistanceType as $k=>$v) {
-            $carerProfile->AssistantsTypes()->attach($k);
-        }*/
 
         return;
     }
-    private function saveStep11($request) {
 
+    private function saveStep6($request) {
 
         $this->validate($request,[
             'workingTime' => 'required|array',
-            'work_at_holiday' => 'required|string:3',
-            'times' => 'required|string:32',
-            'work_hours' => 'nullable|numeric:2',
         ]);
 
-
-        //$request->input('work_at_holiday')=='1' ? $work_at_holiday='Yes' : $work_at_holiday='No';
         $workingTimes = $request->input('workingTime');
 
-        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
 
-        $carerProfile->work_at_holiday  = $request->input('work_at_holiday');
-        $carerProfile->times  = $request->input('times');
+        $serviceUserProfile->WorkingTimes()->sync(array_keys($workingTimes));
 
-        if (null !== $request->input('work_hours')) $carerProfile->work_hours  = $request->input('work_hours');
+        return;
+    }
+    private function saveStep7($request) {
 
-        $carerProfile->update();
+        $this->validate($request,[
+            'start_date' => 'required',
+        ]);
 
-        $carerProfile->WorkingTimes()->sync(array_keys($workingTimes));
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
 
-/*        foreach ($workingTimes as $k=>$v) {
-            $carerProfile->WorkingTimes()->attach($k);
-        }*/
+        $serviceUserProfile->start_date  = $request->input('start_date');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep9($request) {
+
+
+        //dd($request->all());
+
+        $this->validate($request,[
+            'kind_of_building' => 'required|string:16',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->kind_of_building  = $request->input('kind_of_building');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep9_1($request) {
+
+        $this->validate($request,[
+            'lift_available' => 'required|in:"Yes","No"',
+            'floor_id' => 'required|integer',
+        ]);
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->lift_available  = $request->input('lift_available');
+        $serviceUserProfile->floor_id  = $request->input('floor_id');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+    private function saveStep10($request) {
+
+        $this->validate($request,[
+            'move_available' => 'required|in:"Yes","No","Sometimes"',
+            'assistance_moving' => 'required|in:"Yes","No","Sometimes"',
+        ]);
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->move_available  = $request->input('move_available');
+        $serviceUserProfile->assistance_moving  = $request->input('assistance_moving');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep11($request) {
+
+        $this->validate($request,[
+            'home_safe' => 'required|in:"Yes","No","Sometimes"',
+            'assistance_keeping' => 'nullable|in:"Yes","No","Sometimes"',
+        ]);
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->home_safe  = $request->input('home_safe');
+        $serviceUserProfile->assistance_keeping  = $request->input('assistance_keeping');
+
+        $serviceUserProfile->update();
+
 
         return;
     }
@@ -308,23 +295,18 @@ class ServiceUserRegistration
     private function saveStep12($request) {
 
         $this->validate($request,[
-            'work_with_pets' => 'required|in:"Yes","No","It depends"',
-            'pets_description' => 'required_if:work_with_pets,"It depends"|string:512|nullable',
+            'own_pets' => 'required|in:"Yes","No","Sometimes"',
+            'pet_detail' => 'required|String:128',
+            'pet_friendly' => 'required|in:"Yes","No","Sometimes","Normally"',
         ]);
 
-/*        switch ($request->input('work_with_pets')){
-            case 'Yes' : {$work_with_pets='Yes'; break; }
-            case 'No' : {$work_with_pets='No'; break; }
-            case 'It depends' : {$work_with_pets='It depends'; break; }
-        }*/
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
 
+        $serviceUserProfile->own_pets  = $request->input('own_pets');
+        $serviceUserProfile->pet_detail  = $request->input('pet_detail');
+        $serviceUserProfile->pet_friendly  = $request->input('pet_friendly');
 
-        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
-
-        $carerProfile->work_with_pets  = $request->input('work_with_pets');
-        $carerProfile->pets_description  = $request->input('pets_description');
-
-        $carerProfile->update();
+        $serviceUserProfile->update();
 
         return;
     }
@@ -332,104 +314,49 @@ class ServiceUserRegistration
     private function saveStep13($request) {
 
         $this->validate($request,[
-            'languages' => 'required|array',
-            'language_additional' => 'nullable|string:128',
+            'anyone_else_live' => 'required|in:"Yes","No","Sometimes"',
+            'anyone_detail' => 'required|String:128',
+            'anyone_friendly' => 'required|in:"Yes","No","Sometimes","Normally"',
         ]);
 
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
 
-        $languages = $request->input('languages');
+        $serviceUserProfile->anyone_else_live  = $request->input('anyone_else_live');
+        $serviceUserProfile->anyone_detail  = $request->input('anyone_detail');
+        $serviceUserProfile->anyone_friendly  = $request->input('anyone_friendly');
 
-        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
-
-        $carerProfile->language_additional  = $request->input('language_additional');
-
-        $carerProfile->update();
-
-        $carerProfile->Languages()->sync(array_keys($languages));
-
-/*        foreach ($languages as $k=>$v) {
-            $carerProfile->Languages()->attach($k);
-        }*/
+        $serviceUserProfile->update();
 
         return;
     }
-
     private function saveStep14($request) {
 
         $this->validate($request,[
-            'work_UK' => 'required|in:"Yes","No"',
-            'work_UK_restriction' => 'required_if:work_UK,"Yes"|in:"Yes","No"',
-            'work_UK_description' => 'nullable|string:512',
-            'national_insurance_number'=>'nullable|string:128',
+            'carer_enter' => 'nullable|String:512',
         ]);
 
-/*
-        $request->input('work_UK')=='1' ? $work_UK='Yes' : $work_UK='No';
-        $request->input('work_UK_restriction')=='1' ? $work_UK_restriction='Yes' : $work_UK_restriction='No';*/
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
 
-        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+        $serviceUserProfile->carer_enter  = $request->input('carer_enter');
 
-        $carerProfile->work_UK  = $request->input('work_UK');
-        $carerProfile->work_UK_restriction  = $request->input('work_UK_restriction');
-        $carerProfile->work_UK_description  = $request->input('work_UK_description');
-        $carerProfile->national_insurance_number  = $request->input('national_insurance_number');
-
-        $carerProfile->update();
+        $serviceUserProfile->update();
 
         return;
     }
+
     private function saveStep15($request) {
 
         $this->validate($request,[
-            'description_yourself' => 'required|string:1024',
-            'sentence_yourself' => 'required|string:512',
-        ]);
-        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
-
-        $carerProfile->description_yourself  = $request->input('description_yourself');
-        $carerProfile->sentence_yourself  = $request->input('sentence_yourself');
-
-        $carerProfile->update();
-
-        return;
-    }
-
-    private function saveStep17($request) {
-
-
-        //dd($request->all());
-        $this->validate($request,[
-            'name' => 'required|string:128',
-            'job_title' => 'required|string:128',
-            'relationship' => 'required|string:128',
-            'phone' => 'required|string:64',
-            'email' => 'required|email',
+            'entering_aware' => 'required|in:"Yes","No","Sometimes"',
+            'other_detail' => 'nullable|String:512',
         ]);
 
-        if($request->input('id')=='0')
-            $reference = new CarerReference();
-        else
-            $reference = CarerReference::findOrFail($request->input('id'));
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
 
+        $serviceUserProfile->entering_aware  = $request->input('entering_aware');
+        $serviceUserProfile->other_detail  = $request->input('other_detail');
 
-
-        $reference->name = $request->input('name');
-        $reference->job_title = $request->input('job_title');
-        $reference->relationship = $request->input('relationship');
-        $reference->phone = $request->input('phone');
-        $reference->email = $request->input('email');
-
-        $reference->save();
-
-        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
-
-        if($request->input('id')=='0')
-            $carerProfile->CarerReferences()->attach($reference->id);
-
-
-
-        //$carerProfile->CarerReferences()->attach($reference->id);
-        //dd($carerProfile->CarerReferences,$reference, $reference->CarersProfiles);
+        $serviceUserProfile->update();
 
         return;
     }

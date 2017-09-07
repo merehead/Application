@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\AssistanceType;
+use App\Floor;
 use App\Http\Controllers\Repo\ServiceUserRegistration;
+use App\ServiceType;
 use App\ServiceUsersProfile;
+use App\WorkingTime;
 use Illuminate\Http\Request;
 
 //use Illuminate\Http\Request;
@@ -39,6 +43,27 @@ class ServiceUserRegistrationController extends FrontController
 
         $this->vars = array_add($this->vars, 'serviceUserProfileID', $serviceUserProfileId);
         $this->vars = array_add($this->vars, 'serviceUserProfile', $serviceUserProfile);
+
+        if ($this->serviceUserProfile->getNextStep($serviceUserProfileId) == 'Step5_serviceUserRegistration') {
+            $serviceTypes = ServiceType::all();
+            $this->vars = array_add($this->vars, 'serviceTypes', $serviceTypes);
+        }
+        if ($this->serviceUserProfile->getNextStep($serviceUserProfileId) == 'Step5_1_serviceUserRegistration') {
+            $assistanceTypes = AssistanceType::all();
+            $this->vars = array_add($this->vars, 'assistanceTypes', $assistanceTypes);
+        }
+        if ($this->serviceUserProfile->getNextStep($serviceUserProfileId) == 'Step6_serviceUserRegistration') {
+            $workingTimes = WorkingTime::all();
+            $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
+        }
+        if ($this->serviceUserProfile->getNextStep($serviceUserProfileId) == 'Step9_1_serviceUserRegistration') {
+            $floors = Floor::all()->pluck('name', 'id')->toArray();
+            $this->vars = array_add($this->vars, 'floors', $floors);
+        }
+
+
+
+        //dd($this->serviceUserProfile->getNextStep($serviceUserProfileId));
 
         $this->vars = array_add($this->vars,'activeStep',$this->serviceUserProfile->getActiveStep($serviceUserProfileId));
         $this->vars = array_add($this->vars,'activeSubStep',$this->serviceUserProfile->getActiveSubStep($serviceUserProfileId));

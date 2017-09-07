@@ -4,7 +4,7 @@
             <h2>Start when?</h2>
 
             <div class="questionsBox__img">
-                <img src="./dist/img/Signup_P_step7.jpg" alt="">
+                <img src="{{asset('/img/Signup_P_step7.jpg')}}" alt="">
             </div>
 
 
@@ -14,29 +14,42 @@
     <div class="registration__column  registration__column--bg">
 
         <div class="personal">
-            <form class="questionForm">
-
+            {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        When would [Service_user_name] like someone to start? (Must be a minimum of 3 days notice)
+                        When would {{$serviceUserProfile->like_name}} like someone to start? (Must be a minimum of 3 days notice)
                         <span>*</span>
                     </h2>
 
-
                     <div class="inputWrap">
+
+                        @if($serviceUserProfile->start_date === "01/01/1970")
+                            <input name="start_date" id="datepicker_when_start" class="formInput personalForm__input" placeholder="Start date (dd/mm/yyyy)" type="text">
+                        @else
+                            {!! Form::text('start_date',null,['id'=>'datepicker_when_start','class'=>'formInput personalForm__input']) !!}
+                        @endif
+
+                    </div>
+                    @if ($errors->has('start_date'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('start_date') }}</strong>
+                                    </span>
+                    @endif
+
+   {{--                 <div class="inputWrap">
                         <input type="text" disabled="" class="formInput personalForm__input"
                                placeholder="Start date">
                         <span class="inputIco personalForm__ico centeredLink">
                   <i class="fa fa-calendar"></i>
                 </span>
-                    </div>
+                    </div>--}}
                 </div>
-
-
-            </form>
-
-
+            <input type="hidden" name="step" value='7'>
+            <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
+
+
 
 
     </div>

@@ -56,6 +56,19 @@
         });
     } );
 
+    $( function() {
+        $( "#datepicker_when_start" ).datepicker({
+            //changeMonth: true,
+            //changeYear: true,
+            dateFormat:"dd/mm/yy",
+            showAnim:"slideDown",
+            minDate: "+3D",
+            maxDate: "+20Y",
+            yearRange: "0:+10"
+        });
+    } );
+
+
     $( document ).ready(function() {
 
         //alert($("#main-if").val());
