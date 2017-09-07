@@ -53,7 +53,14 @@
                                name="password">
                     </div>
                 </div>
+                <span class="error-block">
+                    <h3><strong></strong></h3>
+                </span>
+                <span class="success-block">
+                    <h3><strong></strong></h3>
+                </span>
             </form>
+
         </div>
         <div class="login__footer">
             <div class="login__row">
@@ -61,10 +68,16 @@
                     <input type="checkbox" class="checkboxNew" id="check1"/>
                     <label for="check1"> <span>Stay signed in</span></label>
                 </div>
-                <div class="roundedBtn login__btn">
-                    <a href="toLogin" class="roundedBtn__item  "
-                       onclick="event.preventDefault();document.getElementById('login__form').submit();">
+                <div class="roundedBtn login__btn blogin">
+                    <a href="toLogin" class="roundedBtn__item"
+                       onclick="event.preventDefault();login_ajax(document.getElementById('login__form'));$('.blogin').hide();">
                         login
+                    </a>
+                </div>
+                <div class="roundedBtn login__btn btry" style="display: none">
+                    <a href="toLogin" class="roundedBtn__item"
+                       onclick="event.preventDefault();refreshLoginForm(document.getElementById('login__form')); $('.btry').hide();">
+                        try again
                     </a>
                 </div>
             </div>

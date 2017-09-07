@@ -1,6 +1,14 @@
 .help-block{
     font-size: 70%;
-    color: red
+    color: red;
+}
+
+.error-block{
+    color: red;
+}
+
+.success-block{
+    color: green;
 }
 
 #workingTimes, #workingTimes:active, #workingTimes:focus
