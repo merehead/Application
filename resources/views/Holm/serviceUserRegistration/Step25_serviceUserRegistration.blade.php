@@ -1,11 +1,15 @@
 <div class="registration">
     <div class="registration__column registration__column--with-padding">
         <div class="questionsBox">
-            <h2>[Service_user_name]'s Health</h2>
+            <h2>Vision</h2>
+
             <div class="questionsBox__img">
-                <img src="{{asset('/img/Signup_P_step17.jpg')}}" alt="">
+                <img src="{{asset('/img/Signup_P_step17.jpg')}}./dist/img/Signup_P_step25.jpg" alt="">
             </div>
+
+
         </div>
+
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
@@ -13,43 +17,18 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does [Service_user_name] have any of the following conditions?
-                    </h2>
+                        Does [Service_user_name] have serious impediments seeing? <span>*</span>          </h2>
                     <div class="inputWrap">
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf1">
-                            <label for="boxf1"> Blindness  / Serious visual impairment</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf2">
-                            <label for="boxf2"> Deafness / Serious hearing impairment</label>
-                        </div>
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf3">
-                            <label for="boxf3">Physical disabilities which require mobility aids </label>
-                        </div>
+                        <select class="formSelect">
 
 
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf4">
-                            <label for="boxf4"> Mental / Psychological conditions</label>
-                        </div>
+                            <option value="select">Please select</option>
 
 
-
-
-                        <div class="checkBox_item">
-                            <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf5">
-                            <label for="boxf5"> Long Term Medical Conditions</label>
-                        </div>
-
-
-
-
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                            <option value="normally">Sometimes</option>
+                        </select>
                     </div>
 
 
@@ -58,30 +37,40 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Please give details of all the conditions mentioned above (if any).
+                        Please give further details of what kind of help is needed. <span>*</span>
                     </h2>
 
                     <div class="inputWrap">
                         <textarea class="formArea" placeholder="Details"></textarea>
                     </div>
 
+
                 </div>
+
+
+
+
+
+
+
+
             </form>
         </div>
 
     </div>
 </div>
 
+
 <form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
-    <input type="hidden" name="step" value='17'>
+    <input type="hidden" name="step" value='9'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
 </form>
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
-    <input type="hidden" name="step" value='17'>
-    <input type="hidden" name="stepback" value='15'>
+    <input type="hidden" name="step" value='9'>
+    <input type="hidden" name="stepback" value='7'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
 </form>
 
