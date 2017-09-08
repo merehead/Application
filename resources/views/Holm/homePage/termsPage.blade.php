@@ -382,7 +382,7 @@
                 </h2>
 
                 <p>If you have any questions about the terms and conditions or the services provided by Holm please
-                    contact us at: <a href="mailto:info@holm.care">info@holm.care</a>.</p>
+                    contact us at: <a href="mailto:info@holm.care">info@holm.care</a></p>
             </div>
         </div>
     </div>

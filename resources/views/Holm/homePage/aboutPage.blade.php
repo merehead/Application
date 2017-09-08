@@ -5,7 +5,7 @@
                 <a href="{{route('mainHomePage')}}" class="breadcrumbs__item">
                     Home
                 </a>
-                <span class="breadcrumbs__arrow"></span>
+                <span class="breadcrumbs__arrow">></span>
                 <a href="{{route('AboutPage')}}" class="breadcrumbs__item">
                     About us
                 </a>
