@@ -28,6 +28,10 @@ class ServiceUsersProfile extends Model
         return $this->belongsTo('App\Floor');
     }
 
+    public function ServiceUserConditions()
+    {
+        return $this->belongsToMany('App\ServiceUserCondition', 'servUserProfile_servUserCondition', 'service_user_profile_id', 'service_user_conditions_id');
+    }
 
 
     public function setDoBAttribute($value)

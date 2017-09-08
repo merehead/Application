@@ -9,51 +9,58 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
+            {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
 
-                <div class="formField">
-                    <h2 class="formLabel questionForm__label">
-                        Does [Service_user_name] need help moving around home?  <span>*</span>
-                    </h2>
+
+            <div class="formField">
+                <h2 class="formLabel questionForm__label">
+                    Does {{$userNameForSite}} need help moving around home? <span>*</span>
+                </h2>
+                <div class="inputWrap">
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-                            <option value="select">Please select</option>
-
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="normally">Sometimes</option>
-                        </select>
+                        {!! Form::select('mobility_home',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('mobility_home'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('mobility_home') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
+            </div>
+            <div class="formField">
+                <h2 class="formLabel questionForm__label">
+                    Please give details of what type of help is needed. <span>*</span>
+                </h2>
 
-                <div class="formField">
-                    <h2 class="formLabel questionForm__label">
-                        Please give details of what type of help is needed.  <span>*</span>
-                    </h2>
-
-                    <div class="inputWrap">
-                        <textarea class="formArea" placeholder="Details"></textarea>
-                    </div>
+                <div class="inputWrap">
+                    {!! Form::textarea('mobility_home_detail',null,['class'=>'formArea ','placeholder'=>'Details']) !!}
+                    @if ($errors->has('mobility_home_detail'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('mobility_home_detail') }}</strong>
+                                    </span>
+                    @endif
                 </div>
-            </form>
+            </div>
+            <input type="hidden" name="step" value='22'>
+            <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
 
     </div>
 </div>
 
 
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
+{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='22'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
+</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='22'>
     <input type="hidden" name="stepback" value='20'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
+    <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
 </form>
 
 

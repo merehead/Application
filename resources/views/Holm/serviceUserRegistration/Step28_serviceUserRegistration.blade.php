@@ -9,19 +9,18 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
-                <div class="formField">
+            {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
+
+            <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does [Service_user_name] sometimes have problems understanding other people? <span>*</span>       </h2>
+                        Does {{$userNameForSite}} sometimes have problems understanding other people? <span>*</span>       </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-                            <option value="select">Please select</option>
-
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="normally">Sometimes</option>
-                        </select>
+                        {!! Form::select('comprehension',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('comprehension'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('comprehension') }}</strong>
+                                    </span>
+                        @endif
                     </div>
 
                 </div>
@@ -32,22 +31,28 @@
                     </h2>
 
                     <div class="inputWrap">
-                        <textarea class="formArea" placeholder="Details"></textarea>
+                        {!! Form::textarea('comprehension_detail',null,['class'=>'formArea ','placeholder'=>'Details']) !!}
+                        @if ($errors->has('comprehension_detail'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('comprehension_detail') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
-
-            </form>
+                <input type="hidden" name="step" value='28'>
+                <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
 
     </div>
 </div>
 
 
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
+{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='28'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
+</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

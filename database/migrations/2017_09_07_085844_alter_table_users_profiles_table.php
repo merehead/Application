@@ -50,11 +50,11 @@ class AlterTableUsersProfilesTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('service_users_profiles', function (Blueprint $table) {
                 $table->dropColumn      ('start_date');
              $table->dropColumn      ('kind_of_building');
              $table->dropColumn      ('lift_available');
-             $table->dropColumn      ('floor');
+             $table->dropColumn      ('floor_id');
              $table->dropColumn      ('move_available');
              $table->dropColumn      ('assistance_moving');
              $table->dropColumn      ('home_safe');

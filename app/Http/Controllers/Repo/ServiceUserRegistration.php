@@ -81,9 +81,9 @@ class ServiceUserRegistration
             case '37' : $step = 'Step38_serviceUserRegistration';break;
             case '38' : $step = 'Step39_serviceUserRegistration';break;
             case '39' : $step = 'Step40_serviceUserRegistration';break;
-            case '40' : $step = 'Step41_serviceUserRegistration';break;
-            case '41' : $step = 'Step41_1_serviceUserRegistration';break;
-            case '41_1' : $step = 'Step42_serviceUserRegistration';break;
+            case '40' : $step = 'Step40_1_serviceUserRegistration';break;
+            case '40_1' : $step = 'Step41_serviceUserRegistration';break;
+            case '41' : $step = 'Step42_serviceUserRegistration';break;
             case '42' : $step = 'Step43_serviceUserRegistration';break;
             case '43' : $step = 'Step44_serviceUserRegistration';break;
             case '44' : $step = 'Step45_serviceUserRegistration';break;
@@ -91,7 +91,7 @@ class ServiceUserRegistration
             case '46' : $step = 'Step47_serviceUserRegistration';break;
             case '47' : $step = 'Step48_serviceUserRegistration';break;
             case '48' : $step = 'Step49_serviceUserRegistration';break;
-            case '49' : $step = 'Step40_serviceUserRegistration';break;
+            case '49' : $step = 'Step50_serviceUserRegistration';break;
             case '50' : $step = 'Step51_serviceUserRegistration';break;
             case '51' : $step = 'Step52_serviceUserRegistration';break;
             case '52' : $step = 'Step53_serviceUserRegistration';break;
@@ -164,6 +164,7 @@ class ServiceUserRegistration
             case '38' : $nextStep = '38';break;
             case '39' : $nextStep = '39';break;
             case '40' : $nextStep = '40';break;
+            case '40_1' : $nextStep = '40_1';break;
             case '41' : $nextStep = '41';break;
             case '42' : $nextStep = '42';break;
             case '43' : $nextStep = '43';break;
@@ -174,6 +175,18 @@ class ServiceUserRegistration
             case '48' : $nextStep = '48';break;
             case '49' : $nextStep = '49';break;
             case '50' : $nextStep = '50';break;
+            case '51' : $nextStep = '51';break;
+            case '52' : $nextStep = '52';break;
+            case '53' : $nextStep = '53';break;
+            case '54' : $nextStep = '54';break;
+            case '55' : $nextStep = '55';break;
+            case '56' : $nextStep = '56';break;
+            case '57' : $nextStep = '57';break;
+            case '58' : $nextStep = '58';break;
+            case '59' : $nextStep = '59';break;
+            case '60' : $nextStep = '60';break;
+            case '61' : $nextStep = '61';break;
+            case '62' : $nextStep = '62';break;
 
         }
 
@@ -224,6 +237,19 @@ class ServiceUserRegistration
             case '13'    : $this->saveStep13($request);break;
             case '14'    : $this->saveStep14($request);break;
             case '15'    : $this->saveStep15($request);break;
+            case '17'    : $this->saveStep17($request);break;
+            case '18'    : $this->saveStep18($request);break;
+            case '19'    : $this->saveStep19($request);break;
+            case '20'    : $this->saveStep20($request);break;
+            case '21'    : $this->saveStep21($request);break;
+            case '22'    : $this->saveStep22($request);break;
+            case '23'    : $this->saveStep23($request);break;
+            case '24'    : $this->saveStep24($request);break;
+            case '25'    : $this->saveStep25($request);break;
+            case '26'    : $this->saveStep26($request);break;
+            case '27'    : $this->saveStep27($request);break;
+
+            case '28'    : $this->saveStep28($request);break;
         }
 
         $this->setNextStep($request);
@@ -427,21 +453,203 @@ class ServiceUserRegistration
         return;
     }
 
-    private function saveStep20($request) {
+    private function saveStep17($request) {
+
         $this->validate($request,[
-            'have_questions' => 'required|in:"Yes","No"',
-            'questions' => 'nullable|string:1024',
+            'conditions_detail' => 'nullable|string:256',
+            'workingTime' => 'nullable|array',
         ]);
 
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
 
-        $request->input('have_questions')=='1' ? $have_questions='Yes' : $have_questions='No';
+        $serviceUserProfile->ServiceUserConditions()->sync(array_keys($request->input('workingTime')));
 
-        $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
+        $serviceUserProfile->conditions_detail  = $request->input('conditions_detail');
 
-        $carerProfile->have_questions  = $request->input('have_questions');
-        $carerProfile->questions  = $request->input('questions');
+        $serviceUserProfile->update();
 
-        $carerProfile->update();
+        return;
+    }
+
+    private function saveStep18($request) {
+
+        $this->validate($request,[
+            'have_dementia' => 'required|in:"Yes","No","Sometimes"',
+            'dementia_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->have_dementia  = $request->input('have_dementia');
+        $serviceUserProfile->dementia_detail  = $request->input('dementia_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep19($request) {
+
+        $this->validate($request,[
+            'help_with_mobility' => 'required|in:"Yes","No","Sometimes"',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->help_with_mobility  = $request->input('help_with_mobility');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep20($request) {
+
+        $this->validate($request,[
+            'history_of_falls' => 'required|in:"Yes","No","Sometimes"',
+            'falls_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->history_of_falls  = $request->input('history_of_falls');
+        $serviceUserProfile->falls_detail  = $request->input('falls_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep21($request) {
+
+        $this->validate($request,[
+            'mobility_bed' => 'required|in:"Yes","No","Sometimes"',
+            'mobility_bed_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->mobility_bed  = $request->input('mobility_bed');
+        $serviceUserProfile->mobility_bed_detail  = $request->input('mobility_bed_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+    private function saveStep22($request) {
+
+        $this->validate($request,[
+            'mobility_home' => 'required|in:"Yes","No","Sometimes"',
+            'mobility_home_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->mobility_home  = $request->input('mobility_home');
+        $serviceUserProfile->mobility_home_detail  = $request->input('mobility_home_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep23($request) {
+
+        $this->validate($request,[
+            'mobility_shopping' => 'required|in:"Yes","No","Sometimes"',
+            'mobility_shopping_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->mobility_shopping  = $request->input('mobility_shopping');
+        $serviceUserProfile->mobility_shopping_detail  = $request->input('mobility_shopping_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep24($request) {
+
+        $this->validate($request,[
+            'communication' => 'required|in:"Yes","No","Sometimes"',
+
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->communication  = $request->input('communication');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep25($request) {
+
+        $this->validate($request,[
+            'vision' => 'required|in:"Yes","No","Sometimes"',
+            'vision_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->vision  = $request->input('vision');
+        $serviceUserProfile->vision_detail  = $request->input('vision_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep26($request) {
+
+        $this->validate($request,[
+            'hearing' => 'required|in:"Yes","No","Sometimes"',
+            'hearing_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->hearing  = $request->input('hearing');
+        $serviceUserProfile->hearing_detail  = $request->input('hearing_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep27($request) {
+
+        $this->validate($request,[
+            'speech' => 'required|in:"Yes","No","Sometimes"',
+            'speech_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->speech  = $request->input('speech');
+        $serviceUserProfile->speech_detail  = $request->input('speech_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep28($request) {
+
+        $this->validate($request,[
+            'comprehension' => 'required|in:"Yes","No","Sometimes"',
+            'comprehension_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->comprehension  = $request->input('comprehension');
+        $serviceUserProfile->comprehension_detail  = $request->input('comprehension_detail');
+
+        $serviceUserProfile->update();
 
         return;
     }

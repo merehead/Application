@@ -4,7 +4,7 @@
         <div class="questionsBox">
             <h2>Toilet</h2>
             <div class="questionsBox__img">
-                <img src="{{asset('/img/Signup_P_step47.jpg')}}./dist/img/Signup_P_step47.jpg" alt="">
+                <img src="{{asset('/img/Signup_P_step47.jpg')}}" alt="">
             </div>
         </div>
     </div>

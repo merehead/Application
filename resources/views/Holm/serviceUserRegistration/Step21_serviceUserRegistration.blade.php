@@ -9,20 +9,19 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
-                <div class="formField">
+            {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
+
+            <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does [Service_user_name] need help getting in / out of bed?  <span>*</span>
+                        Does {{$userNameForSite}} need help getting in / out of bed?  <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-                            <option value="select">Please select</option>
-
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="normally">Sometimes</option>
-                        </select>
+                        {!! Form::select('mobility_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('mobility_bed'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('mobility_bed') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
 
@@ -32,10 +31,17 @@
                     </h2>
 
                     <div class="inputWrap">
-                        <textarea class="formArea" placeholder="Details"></textarea>
+                        {!! Form::textarea('mobility_bed_detail',null,['class'=>'formArea ','placeholder'=>'Details']) !!}
+                        @if ($errors->has('mobility_bed_detail'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('mobility_bed_detail') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
-            </form>
+                <input type="hidden" name="step" value='21'>
+                <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
     </div>
 </div>

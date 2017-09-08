@@ -6,7 +6,7 @@
                 Home
             </a>
             <span class="breadcrumbs__arrow">></span>
-            <a href="{{ route('ImCarerPage') }}" class="breadcrumbs__item">
+            <a href="/welcome-carer" class="breadcrumbs__item">
                 i am a carer
             </a>
 

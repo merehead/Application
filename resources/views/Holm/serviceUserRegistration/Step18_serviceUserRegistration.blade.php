@@ -9,21 +9,20 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
+            {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
+
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does [Service_user_name] have Dementia?  <span>*</span>
+                        Does {{$userNameForSite}} have Dementia?  <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
+                        {!! Form::select('have_dementia',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('have_dementia'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('have_dementia') }}</strong>
+                                    </span>
+                        @endif
 
-                            <option value="select">Please select</option>
-
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="normally">Sometimes</option>
-
-                        </select>
                     </div>
                 </div>
 
@@ -33,22 +32,30 @@
                     </h2>
 
                     <div class="inputWrap">
-                        <textarea class="formArea" placeholder="Details"></textarea>
+                        {!! Form::textarea('dementia_detail',null,['class'=>'formArea ','placeholder'=>'Details']) !!}
+                        @if ($errors->has('dementia_detail'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('dementia_detail') }}</strong>
+                                    </span>
+                        @endif
                     </div>
+
                 </div>
 
-            </form>
+            <input type="hidden" name="step" value='18'>
+            <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
 
     </div>
 </div>
 
 
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
+{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='18'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
+</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

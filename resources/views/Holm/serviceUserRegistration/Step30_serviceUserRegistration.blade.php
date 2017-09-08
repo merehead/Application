@@ -1,43 +1,66 @@
 <div class="registration">
-    <div class="personal">
-        <form class="questionForm">
-            <div class="formField">
-                <h2 class="formLabel questionForm__label">
-                    Does [Service_user_name] have regular social interaction with friends / family?
-                </h2>
-                <div class="inputWrap">
-                    <select class="formSelect">
+    <div class="registration__column registration__column--with-padding">
+        <div class="questionsBox">
+            <h2>Social</h2>
 
 
-                        <option value="select">Please select</option>
-
-
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                        <option value="normally">Sometimes</option>
-                    </select>
-                </div>
+            <div class="questionsBox__img">
+                <img src="{{asset('/img/Signup_P_step30.jpg')}}" alt="">
             </div>
 
-            <div class="formField">
-                <h2 class="formLabel questionForm__label">
-                    Would [Service_user_name] like someone to visit regularly for companionship?
-                </h2>
-                <div class="inputWrap">
-                    <select class="formSelect">
 
-                        <option value="select">Please select</option>
+        </div>
 
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                        <option value="normally">Sometimes</option>
-                    </select>
+    </div>
+    <div class="registration__column  registration__column--bg">
+        <div class="personal">
+            <form class="questionForm">
+
+
+                <div class="formField">
+                    <h2 class="formLabel questionForm__label">
+                        Does [Service_user_name] have regular social interaction with friends / family?
+                    </h2>
+                    <div class="inputWrap">
+                        <select class="formSelect">
+
+
+                            <option value="select">Please select</option>
+
+
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                            <option value="normally">Sometimes</option>
+                        </select>
+                    </div>
+
+
                 </div>
 
 
-            </div>
+                <div class="formField">
+                    <h2 class="formLabel questionForm__label">
+                        Would [Service_user_name] like someone to visit regularly for companionship?
+                    </h2>
+                    <div class="inputWrap">
+                        <select class="formSelect">
 
-        </form>
+
+
+                            <option value="select">Please select</option>
+
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                            <option value="normally">Sometimes</option>
+                        </select>
+                    </div>
+
+
+                </div>
+
+            </form>
+        </div>
+
     </div>
 
 </div>

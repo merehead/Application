@@ -11,21 +11,7 @@
         </div>
     </div>
 </div>
-<div class="registrationBtns">
-    <div class="registrationBtns__left">
-        <a href="Signup_P_step30.html" class="registrationBtns__item registrationBtns__item--back">
-            <i class="fa fa-arrow-left "></i>back
-        </a>
-        <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
-            continue later
-        </a>
-    </div>
 
-    <a href="Signup_P_step32.html" class="registrationBtns__item">
-        next step
-        <i class="fa fa-arrow-right"></i>
-    </a>
-</div>
 
 
 <form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">

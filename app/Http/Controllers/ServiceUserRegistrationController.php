@@ -6,6 +6,7 @@ use App\AssistanceType;
 use App\Floor;
 use App\Http\Controllers\Repo\ServiceUserRegistration;
 use App\ServiceType;
+use App\ServiceUserCondition;
 use App\ServiceUsersProfile;
 use App\WorkingTime;
 use Illuminate\Http\Request;
@@ -40,6 +41,8 @@ class ServiceUserRegistrationController extends FrontController
         $this->vars = array_add($this->vars, 'footer', $footer);
         $this->vars = array_add($this->vars, 'modals', $modals);
 
+        $this->vars = array_add($this->vars, 'userNameForSite', $serviceUserProfile->like_name);
+
 
         $this->vars = array_add($this->vars, 'serviceUserProfileID', $serviceUserProfileId);
         $this->vars = array_add($this->vars, 'serviceUserProfile', $serviceUserProfile);
@@ -61,6 +64,10 @@ class ServiceUserRegistrationController extends FrontController
             $this->vars = array_add($this->vars, 'floors', $floors);
         }
 
+        if ($this->serviceUserProfile->getNextStep($serviceUserProfileId) == 'Step17_serviceUserRegistration') {
+            $serviceUserConditions = ServiceUserCondition::all();
+            $this->vars = array_add($this->vars, 'serviceUserConditions', $serviceUserConditions);
+        }
 
 
         //dd($this->serviceUserProfile->getNextStep($serviceUserProfileId));

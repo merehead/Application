@@ -9,20 +9,19 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
-                <div class="formField">
+            {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
+
+            <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does [Service_user_name] need help going shopping, or to other local facilities / events? <span>*</span>
+                        Does {{$userNameForSite}} need help going shopping, or to other local facilities / events? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-                            <option value="select">Please select</option>
-
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="normally">Sometimes</option>
-                        </select>
+                        {!! Form::select('mobility_shopping',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('mobility_shopping'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('mobility_shopping') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
                 <div class="formField">
@@ -31,21 +30,28 @@
                     </h2>
 
                     <div class="inputWrap">
-                        <textarea class="formArea" placeholder="Details"></textarea>
+                        {!! Form::textarea('mobility_shopping_detail',null,['class'=>'formArea ','placeholder'=>'Details']) !!}
+                        @if ($errors->has('mobility_shopping_detail'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('mobility_shopping_detail') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
-            </form>
+                <input type="hidden" name="step" value='23'>
+                <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
 
     </div>
 </div>
 
 
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
+{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='23'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
+</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
