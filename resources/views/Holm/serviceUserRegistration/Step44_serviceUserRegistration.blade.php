@@ -2,27 +2,15 @@
     <div class="registration__column registration__column--with-padding">
         <div class="questionsBox">
             <h2>Clothes</h2>
-
-
             <div class="questionsBox__img">
-                <img src="{{asset('/img/Signup_P_step17.jpg')}}./dist/img/Signup_P_step44.jpg" alt="">
+                <img src="{{asset('/img/Signup_P_step44.jpg')}}" alt="">
             </div>
-
-
-
         </div>
 
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
             <form class="questionForm">
-
-
-
-
-
-
-
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Does [Service_user_name] need assistance in choosing appropriate clothes? - eg choosing warm clothes in the winter. <span>*</span>
@@ -39,8 +27,6 @@
                             <option value="normally">Sometimes</option>
                         </select>
                     </div>
-
-
                 </div>
 
             </form>
@@ -52,14 +38,14 @@
 
 <form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
-    <input type="hidden" name="step" value='9'>
+    <input type="hidden" name="step" value='44'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
 </form>
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
-    <input type="hidden" name="step" value='9'>
-    <input type="hidden" name="stepback" value='7'>
+    <input type="hidden" name="step" value='44'>
+    <input type="hidden" name="stepback" value='42'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
 </form>
 

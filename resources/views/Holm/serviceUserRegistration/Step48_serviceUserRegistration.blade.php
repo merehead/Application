@@ -2,26 +2,14 @@
     <div class="registration__column registration__column--with-padding">
         <div class="questionsBox">
             <h2>Continence</h2>
-
-
             <div class="questionsBox__img">
-                <img src="{{asset('/img/Signup_P_step17.jpg')}}./dist/img/Signup_P_step48.jpg" alt="">
+                <img src="{{asset('/img/Signup_P_step48.jpg')}}" alt="">
             </div>
-
-
         </div>
-
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
             <form class="questionForm">
-
-
-
-
-
-
-
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Does [Service_user_name] have incontinence? <span>*</span>
@@ -38,14 +26,7 @@
                             <option value="normally">Sometimes</option>
                         </select>
                     </div>
-
-
                 </div>
-
-
-
-
-
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Please briefly describe what kind of incontinence. <span>*</span>
@@ -54,12 +35,7 @@
                     <div class="inputWrap">
                         <textarea class="formArea" placeholder="Details"></textarea>
                     </div>
-
-
                 </div>
-
-
-
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Does [Service_user_name] have their own supply of incontinence wear? <span>*</span>
@@ -76,10 +52,7 @@
                             <option value="normally">Sometimes</option>
                         </select>
                     </div>
-
-
                 </div>
-
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Where are the incontinence products stored? <span>*</span>
@@ -88,8 +61,6 @@
                     <div class="inputWrap">
                         <textarea class="formArea" placeholder="Details"></textarea>
                     </div>
-
-
                 </div>
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
@@ -121,14 +92,14 @@
 
 <form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
-    <input type="hidden" name="step" value='9'>
+    <input type="hidden" name="step" value='48'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
 </form>
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
-    <input type="hidden" name="step" value='9'>
-    <input type="hidden" name="stepback" value='7'>
+    <input type="hidden" name="step" value='48'>
+    <input type="hidden" name="stepback" value='46'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
 </form>
 

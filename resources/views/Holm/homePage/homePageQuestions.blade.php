@@ -6,7 +6,7 @@
                 Need more information?
             </h2>
             <div class="roundedBtn">
-                <a href="/" class="roundedBtn__item roundedBtn__item--readFAQ">
+                <a href="{{route('FaqPage')}}" class="roundedBtn__item roundedBtn__item--readFAQ">
                     Read our Frequently Asked Questions
                 </a>
             </div>

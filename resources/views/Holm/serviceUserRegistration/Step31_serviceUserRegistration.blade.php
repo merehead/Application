@@ -3,22 +3,12 @@
         <div class="questionsBox questionsBox--text-left">
             <h2>How are you feeling? </h2>
             <h2>Don't worry. It'll be worth it.</h2>
-
-
-            <!-- <div class="questionsBox__img">
-              <img src="./dist/img/Signup_P_step31.jpg" alt="">
-             </div>  --->
-
-
         </div>
-
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="mood">
-            <img src="{{asset('/img/Signup_P_step17.jpg')}}./dist/img/Signup_P_step31.jpg" alt="">
-
+            <img src="{{asset('/img/Signup_P_step31.jpg')}}" alt="">
         </div>
-
     </div>
 </div>
 <div class="registrationBtns">
@@ -35,7 +25,6 @@
         next step
         <i class="fa fa-arrow-right"></i>
     </a>
-</div>
 </div>
 
 

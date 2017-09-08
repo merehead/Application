@@ -145,24 +145,24 @@ $(document).ready(function(){
 
 
 	 /*--------------слайдер I am carer page------------*/
+	 if($('div').is('.carerBanner')) {
+         $('.carerBanner').owlCarousel({
+             items: 1,
+             loop: true,
+             dots: false,
+             navigation: false,
+             autoplay: true,
+             autoplayTimeout: 8000,
+             autoplayHoverPause: false,
 
-        $('.carerBanner').owlCarousel({
-            items: 1,
-            loop: true,
-            dots: false,
-            navigation: false,
-            autoplay: true,
-            autoplayTimeout: 8000,
-            autoplayHoverPause: false,
+             responsive: {
+                 600: {
+                     items: 1
 
-            responsive: {
-                600: {
-                    items: 1
-
-                }
-            }
-        });
-
+                 }
+             }
+         });
+     }
     $(".toggler").click(function(e){
     	e.preventDefault();
 		var that = $(this);

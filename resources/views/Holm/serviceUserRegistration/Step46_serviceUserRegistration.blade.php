@@ -2,26 +2,14 @@
     <div class="registration__column registration__column--with-padding">
         <div class="questionsBox">
             <h2>Bathing</h2>
-
-
             <div class="questionsBox__img">
-                <img src="{{asset('/img/Signup_P_step17.jpg')}}./dist/img/Signup_P_step46.jpg" alt="">
+                <img src="{{asset('/img/Signup_P_step46.jpg')}}" alt="">
             </div>
-
-
         </div>
-
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
             <form class="questionForm">
-
-
-
-
-
-
-
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Does [Service_user_name] need assistance with bathing / showering? <span>*</span>
@@ -34,35 +22,10 @@
                             <option value="no">No</option>
                             <option value="normally">Sometimes</option>
 
-
-
-
-
                         </select>
                     </div>
 
-
                 </div>
-
-                <!--
-
-                             <div class="formField">
-                              <h2 class="formLabel questionForm__label">
-                               Would the Service User like assistance with preparing meals?
-                              </h2>
-                              <div class="inputWrap">
-                                <select class="formSelect">
-                                  <option value="yes">Yes</option>
-                                  <option value="no">No</option>
-
-                                </select>
-                              </div>
-
-
-                            </div>
-                -->
-
-
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
@@ -100,10 +63,6 @@
                     </div>
 
                 </div>
-
-
-
-
             </form>
         </div>
 
@@ -113,14 +72,14 @@
 
 <form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
-    <input type="hidden" name="step" value='9'>
+    <input type="hidden" name="step" value='46'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
 </form>
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
-    <input type="hidden" name="step" value='9'>
-    <input type="hidden" name="stepback" value='7'>
+    <input type="hidden" name="step" value='46'>
+    <input type="hidden" name="stepback" value='44'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
 </form>
 
