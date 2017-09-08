@@ -2,20 +2,14 @@
     <div class="registration__column registration__column--with-padding">
         <div class="questionsBox">
             <h2>Dementia</h2>
-
-
             <div class="questionsBox__img">
-                <img src="{{asset('/img/Signup_P_step17.jpg')}}Signup_P_step17./dist/img/Signup_P_step18.jpg" alt="">
+                <img src="{{asset('/img/Signup_P_step18.jpg')}}" alt="">
             </div>
-
-
         </div>
-
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
             <form class="questionForm">
-
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Does [Service_user_name] have Dementia?  <span>*</span>
@@ -23,10 +17,7 @@
                     <div class="inputWrap">
                         <select class="formSelect">
 
-
-
                             <option value="select">Please select</option>
-
 
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
@@ -34,8 +25,6 @@
 
                         </select>
                     </div>
-
-
                 </div>
 
                 <div class="formField">
@@ -46,17 +35,7 @@
                     <div class="inputWrap">
                         <textarea class="formArea" placeholder="Details"></textarea>
                     </div>
-
-
                 </div>
-
-
-
-
-
-
-
-
 
             </form>
         </div>
@@ -67,14 +46,14 @@
 
 <form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
-    <input type="hidden" name="step" value='9'>
+    <input type="hidden" name="step" value='18'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
 </form>
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
-    <input type="hidden" name="step" value='9'>
-    <input type="hidden" name="stepback" value='7'>
+    <input type="hidden" name="step" value='18'>
+    <input type="hidden" name="stepback" value='16'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
 </form>
 

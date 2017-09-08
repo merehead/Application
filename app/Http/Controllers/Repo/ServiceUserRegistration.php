@@ -31,12 +31,8 @@ class ServiceUserRegistration
 
     public function getNextStep($serviceUserProfileId)
     {
-
         //$user = Auth::user();
-
         $currentStep = $this->model->FindOrFail($serviceUserProfileId)->registration_progress;
-
-
         $step = 'Step4_1_2_3_Thank__you_Sign_up1';
 
         switch ($currentStep) {
@@ -62,13 +58,53 @@ class ServiceUserRegistration
             case '16' : $step = 'Step17_serviceUserRegistration';break;
 
 
-            case '17' : $step = 'Step17_serviceUserRegistration';break;
+            case '17' : $step = 'Step18_serviceUserRegistration';break;
+            case '18' : $step = 'Step19_serviceUserRegistration';break;
+            case '19' : $step = 'Step20_serviceUserRegistration';break;
+            case '20' : $step = 'Step21_serviceUserRegistration';break;
+            case '21' : $step = 'Step22_serviceUserRegistration';break;
+            case '22' : $step = 'Step23_serviceUserRegistration';break;
+            case '23' : $step = 'Step24_serviceUserRegistration';break;
+            case '24' : $step = 'Step25_serviceUserRegistration';break;
+            case '25' : $step = 'Step26_serviceUserRegistration';break;
+            case '26' : $step = 'Step27_serviceUserRegistration';break;
+            case '27' : $step = 'Step28_serviceUserRegistration';break;
+            case '28' : $step = 'Step29_serviceUserRegistration';break;
+            case '29' : $step = 'Step30_serviceUserRegistration';break;
+            case '30' : $step = 'Step31_serviceUserRegistration';break;
+            case '31' : $step = 'Step32_serviceUserRegistration';break;
+            case '32' : $step = 'Step33_serviceUserRegistration';break;
+            case '33' : $step = 'Step34_serviceUserRegistration';break;
+            case '34' : $step = 'Step35_serviceUserRegistration';break;
+            case '35' : $step = 'Step36_serviceUserRegistration';break;
+            case '36' : $step = 'Step37_serviceUserRegistration';break;
+            case '37' : $step = 'Step38_serviceUserRegistration';break;
+            case '38' : $step = 'Step39_serviceUserRegistration';break;
+            case '39' : $step = 'Step40_serviceUserRegistration';break;
+            case '40' : $step = 'Step41_serviceUserRegistration';break;
+            case '41' : $step = 'Step41_1_serviceUserRegistration';break;
+            case '41_1' : $step = 'Step42_serviceUserRegistration';break;
+            case '42' : $step = 'Step43_serviceUserRegistration';break;
+            case '43' : $step = 'Step44_serviceUserRegistration';break;
+            case '44' : $step = 'Step45_serviceUserRegistration';break;
+            case '45' : $step = 'Step46_serviceUserRegistration';break;
+            case '46' : $step = 'Step47_serviceUserRegistration';break;
+            case '47' : $step = 'Step48_serviceUserRegistration';break;
+            case '48' : $step = 'Step49_serviceUserRegistration';break;
+            case '49' : $step = 'Step40_serviceUserRegistration';break;
+            case '50' : $step = 'Step51_serviceUserRegistration';break;
+            case '51' : $step = 'Step52_serviceUserRegistration';break;
+            case '52' : $step = 'Step53_serviceUserRegistration';break;
+            case '53' : $step = 'Step54_serviceUserRegistration';break;
+            case '54' : $step = 'Step55_serviceUserRegistration';break;
+            case '55' : $step = 'Step56_serviceUserRegistration';break;
+            case '56' : $step = 'Step57_serviceUserRegistration';break;
+            case '57' : $step = 'Step58_serviceUserRegistration';break;
+            case '58' : $step = 'Step59_serviceUserRegistration';break;
+            case '59' : $step = 'Step60_serviceUserRegistration';break;
+            case '60' : $step = 'Step61_serviceUserRegistration';break;
+            case '61' : $step = 'Step62_serviceUserRegistration';break;
 
-/*
-            case '18' : $step = 'Step19_carerRegistration';break;
-            case '19' : $step = 'Step20_carerRegistration';break;
-            case '20' : $step = 'Step21_carerRegistration';break;
-            //case '21' : $step = 'Step2_carerRegistration';break;*/
         }
 
         return $step;
@@ -109,6 +145,36 @@ class ServiceUserRegistration
             case '19' : $nextStep = '19';break;
             case '20' : $nextStep = '20';break;
             case '21' : $nextStep = '21';break;
+            case '22' : $nextStep = '22';break;
+            case '23' : $nextStep = '23';break;
+            case '24' : $nextStep = '24';break;
+            case '25' : $nextStep = '25';break;
+            case '26' : $nextStep = '26';break;
+            case '27' : $nextStep = '27';break;
+            case '28' : $nextStep = '28';break;
+            case '29' : $nextStep = '29';break;
+            case '30' : $nextStep = '30';break;
+            case '31' : $nextStep = '31';break;
+            case '32' : $nextStep = '32';break;
+            case '33' : $nextStep = '33';break;
+            case '34' : $nextStep = '34';break;
+            case '35' : $nextStep = '35';break;
+            case '36' : $nextStep = '36';break;
+            case '37' : $nextStep = '37';break;
+            case '38' : $nextStep = '38';break;
+            case '39' : $nextStep = '39';break;
+            case '40' : $nextStep = '40';break;
+            case '41' : $nextStep = '41';break;
+            case '42' : $nextStep = '42';break;
+            case '43' : $nextStep = '43';break;
+            case '44' : $nextStep = '44';break;
+            case '45' : $nextStep = '45';break;
+            case '46' : $nextStep = '46';break;
+            case '47' : $nextStep = '47';break;
+            case '48' : $nextStep = '48';break;
+            case '49' : $nextStep = '49';break;
+            case '50' : $nextStep = '50';break;
+
         }
 
         //dd($request->all());

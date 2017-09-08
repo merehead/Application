@@ -30,14 +30,14 @@
 
 <form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
-    <input type="hidden" name="step" value='9'>
+    <input type="hidden" name="step" value='31'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
 </form>
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
-    <input type="hidden" name="step" value='9'>
-    <input type="hidden" name="stepback" value='7'>
+    <input type="hidden" name="step" value='31'>
+    <input type="hidden" name="stepback" value='29'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
 </form>
 

@@ -1,7 +1,6 @@
 <div class="registration">
     <div class="personal">
         <form class="questionForm">
-
             <div class="formField">
                 <h2 class="formLabel questionForm__label">
                     What languages does [Service_user_name] speak? <span>*</span>
@@ -69,10 +68,6 @@
                         </div>
                     </div>
 
-
-
-
-
                     <div class="formField">
                         <h2 class="formLabel questionForm__label">
                             If other, please state
@@ -81,31 +76,24 @@
                             <input type="text" class="formInput " placeholder="Other">
                         </div>
                     </div>
-
-
                 </div>
-
-
             </div>
-
-
         </form>
     </div>
 
-</div>
 </div>
 
 
 <form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
-    <input type="hidden" name="step" value='9'>
+    <input type="hidden" name="step" value='29'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
 </form>
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
-    <input type="hidden" name="step" value='9'>
-    <input type="hidden" name="stepback" value='7'>
+    <input type="hidden" name="step" value='29'>
+    <input type="hidden" name="stepback" value='27'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
 </form>
 
