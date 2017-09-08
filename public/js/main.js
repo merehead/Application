@@ -145,7 +145,7 @@ $(document).ready(function(){
 
 
 	 /*--------------слайдер I am carer page------------*/
-    if($.isFunction('owlCarousel')) {
+
         $('.carerBanner').owlCarousel({
             items: 1,
             loop: true,
@@ -162,7 +162,6 @@ $(document).ready(function(){
                 }
             }
         });
-    }
 
     $(".toggler").click(function(e){
     	e.preventDefault();
