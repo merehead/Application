@@ -68,7 +68,7 @@
                 </h2>
 
                 {!! Form::select('driving_licence',['Yes'=>'Have UK/EEA Driving Licence','No'=>'Do not have a driving licence'],
-null,['class'=>'profileField__select profileField__select--greyBg']) !!}
+null,['class'=>'profileField__select profileField__select--greyBg','disabled']) !!}
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Have UK/EEA Driving Licence</option>
                     <option value="Flat">Do not have a driving licence</option>
@@ -129,7 +129,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                  Car insurance Number
                 </span>
                 </h2>
-                {!! Form::text('car_insurance_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Car insurance number']) !!}
+                {!! Form::text('car_insurance_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Car insurance number','readonly']) !!}
                {{-- <input type="text" class="profileField__input profileField__input--greyBg" placeholder="Car insurance number">--}}
             </div>
             <div class="profileField profileField--full-width">
@@ -168,7 +168,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                  UK\EEA Driving licence Number
                 </span>
                 </h2>
-                {!! Form::text('DBS_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Driving licence number']) !!}
+                {!! Form::text('DBS_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Driving licence number','readonly']) !!}
                 {{--<input type="text" class="profileField__input profileField__input--greyBg" placeholder="UK\EEA Driving licence Number">--}}
             </div>
             <div class="profileField profileField--full-width">

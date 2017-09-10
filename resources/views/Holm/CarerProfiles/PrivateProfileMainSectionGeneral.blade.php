@@ -108,7 +108,7 @@
                 <option value="Yes">Able work legally in the UK</option>
             </select>--}}
             {!! Form::select('work_UK',['Yes'=>'Yes','No'=>'No'],
-null,['class'=>'profileField__select  profileField__select--greyBg']) !!}
+null,['class'=>'profileField__select  profileField__select--greyBg','disabled']) !!}
         </div>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
@@ -119,7 +119,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg']) !!}
                 <option value="Yes">Do not have restrictions to work in the uk</option>
             </select>--}}
             {!! Form::select('work_UK_restriction',['Yes'=>'Yes','No'=>'No'],
-null,['class'=>'profileField__select  profileField__select--greyBg']) !!}
+null,['class'=>'profileField__select  profileField__select--greyBg','disabled']) !!}
         </div>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">

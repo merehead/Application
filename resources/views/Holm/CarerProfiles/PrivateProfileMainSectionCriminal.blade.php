@@ -30,7 +30,7 @@
                   DBS/CRB
                 </span>
                 </h2>
-                {!! Form::select('DBS',['Yes'=>'Have an up to date DBS','No'=>'Have not a DBS'],null,['id'=>'main-if','class'=>'profileField__select profileField__select--greyBg','placeholder'=>'Please select']) !!}
+                {!! Form::select('DBS',['Yes'=>'Have an up to date DBS','No'=>'Have not a DBS'],null,['id'=>'main-if','class'=>'profileField__select profileField__select--greyBg','placeholder'=>'Please select','readonly']) !!}
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Have an up to date DBS</option>
                 </select>--}}
@@ -43,7 +43,7 @@
                 </h2>
 
                 {!! Form::select('criminal_conviction',['Old'=>'Yes, but they are very old, and for a minor offence.','Yes'=>'Yes','No'=>'Do not have criminal convictions'],
-null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) !!}
+null,['class'=>'formInput personalForm__input','placeholder'=>'Please select','readonly']) !!}
 
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Do not have criminal convictions</option>

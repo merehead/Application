@@ -113,7 +113,7 @@ class CarerController extends FrontController
 
             $carerProfiles->save();
 
-            if (count($input['Persons'])) {
+            if (isset($input['Persons']) && count($input['Persons'])) {
                 foreach ($input['Persons'] as $personData) {
 
                     $person = CarerReference::findOrFail($personData['id']);
