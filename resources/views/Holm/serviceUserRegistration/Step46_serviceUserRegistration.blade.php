@@ -9,20 +9,19 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
-                <div class="formField">
+            {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
+
+            <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does [Service_user_name] need assistance with bathing / showering? <span>*</span>
+                        Does {{$userNameForSite}} need assistance with bathing / showering? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-                            <option value="select">Please select</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="normally">Sometimes</option>
-
-                        </select>
+                        {!! Form::select('assistance_with_bathing',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('assistance_with_bathing'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('assistance_with_bathing') }}</strong>
+                                    </span>
+                        @endif
                     </div>
 
                 </div>
@@ -33,48 +32,32 @@
                     </h2>
 
                     <div class="inputWrap">
-                        <select class="formSelect">
-                            <option value="select">Please select</option>
-                            <option value="yes">1</option>
-                            <option value="yes">2</option>
-                            <option value="yes">3</option>
-                            <option value="yes">4</option>
-                            <option value="yes">5</option>
-                            <option value="yes">6</option>
-                            <option value="yes">7</option>
-                            <option value="yes">8</option>
-                            <option value="yes">9</option>
-                            <option value="yes">10</option>
-
-                            <option value="yes">11</option>
-                            <option value="yes">12</option>
-                            <option value="yes">13</option>
-                            <option value="yes">14</option>
-                            <option value="yes">15</option>
-                            <option value="yes">16</option>
-                            <option value="yes">17</option>
-                            <option value="yes">18</option>
-                            <option value="yes">19</option>
-                            <option value="yes">20</option>
-
-
-
-                        </select>
+                        {!! Form::select('bathing_times_per_week',
+                        ['1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10','11'=>'11',
+                        '12'=>'12','13'=>'13','14'=>'14','15'=>'15','16'=>'16','17'=>'17','18'=>'18','19'=>'19','20'=>'20'],
+                        null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('bathing_times_per_week'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('bathing_times_per_week') }}</strong>
+                                    </span>
+                        @endif
                     </div>
 
                 </div>
-            </form>
+            <input type="hidden" name="step" value='46'>
+            <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
 
     </div>
 </div>
 
-
+{{--
 <form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='46'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
+</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

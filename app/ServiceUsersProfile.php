@@ -32,7 +32,15 @@ class ServiceUsersProfile extends Model
     {
         return $this->belongsToMany('App\ServiceUserCondition', 'servUserProfile_servUserCondition', 'service_user_profile_id', 'service_user_conditions_id');
     }
+    public function Languages()
+    {
+        return $this->belongsToMany('App\Language', 'service_user_profile_language', 'services_user_profile_id', 'language_id');
+    }
 
+    public function Behaviours()
+    {
+        return $this->belongsToMany('App\Behaviour', 'service_user_profile_behaviour', 'services_user_profile_id', 'behaviour_id');
+    }
 
     public function setDoBAttribute($value)
     {

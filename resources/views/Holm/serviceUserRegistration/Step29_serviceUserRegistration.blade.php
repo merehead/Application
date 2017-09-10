@@ -13,85 +13,44 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
+            {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        What languages does [Service_user_name] speak? <span>*</span>
+                        What languages does {{$userNameForSite}} speak? <span>*</span>
                     </h2>
                     <div class="inputWrap">
 
                         <div class="registrationCheckboxes">
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf1">
-                                <label for="boxf1"> English</label>
-                            </div>
 
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf2">
-                                <label for="boxf2"> Welsh</label>
-                            </div>
+                            @foreach($languages as $language)
+                                <div class="checkBox_item">
 
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf3">
-                                <label for="boxf3">Sign </label>
-                            </div>
+                                    {!! Form::checkbox('languages['.$language->id.']', null,($serviceUserProfile->Languages->contains('id', $language->id)? 1 : null),
+                                    array('class' => 'customCheckbox','id'=>'boxf'.$language->id)) !!}
+                                    <label for="boxf{{$language->id}}">{{$language->carer_language}}</label>
 
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf4">
-                                <label for="boxf4"> Polish</label>
-                            </div>
+                                </div>
 
-
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf5">
-                                <label for="boxf5"> Urdu</label>
-                            </div>
-
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf6">
-                                <label for="boxf6"> Hindi</label>
-                            </div>
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf7">
-                                <label for="boxf7"> Punjabi</label>
-                            </div>
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf8">
-                                <label for="boxf8"> Bengali</label>
-                            </div>
-
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf9">
-                                <label for="boxf9"> Arabic</label>
-                            </div>
-
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf10">
-                                <label for="boxf10"> Mandarin</label>
-                            </div>
-
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf11">
-                                <label for="boxf11"> Cantonese</label>
-                            </div>
-
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf12">
-                                <label for="boxf12"> Other</label>
-                            </div>
+                            @endforeach
+                                @if ($errors->has('languages'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('languages') }}</strong>
+                                    </span>
+                                @endif
                         </div>
-
-
-
-
-
                         <div class="formField">
                             <h2 class="formLabel questionForm__label">
                                 If other, please state
                             </h2>
                             <div class="inputWrap">
-                                <input type="text" class="formInput " placeholder="Other">
+                                {!! Form::text('other_languages',null,['class'=>'formArea ','placeholder'=>'Other']) !!}
+                                @if ($errors->has('other_languages'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('other_languages') }}</strong>
+                                    </span>
+                                @endif
+
                             </div>
                         </div>
 
@@ -101,30 +60,23 @@
 
                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-            </form>
+            <input type="hidden" name="step" value='29'>
+            <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
 
     </div>
 
 </div>
 
+{{--
 
 <form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='29'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
 </form>
+--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

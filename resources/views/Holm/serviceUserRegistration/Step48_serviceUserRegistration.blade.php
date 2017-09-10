@@ -9,22 +9,19 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
-                <div class="formField">
+            {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
+
+            <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does [Service_user_name] have incontinence? <span>*</span>
+                        Does {{$userNameForSite}} have incontinence? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-
-                            <option value="select">Please select</option>
-
-
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="normally">Sometimes</option>
-                        </select>
+                        {!! Form::select('have_incontinence',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('have_incontinence'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('have_incontinence') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
                 <div class="formField">
@@ -33,24 +30,25 @@
                     </h2>
 
                     <div class="inputWrap">
-                        <textarea class="formArea" placeholder="Details"></textarea>
+                        {!! Form::textarea('kind_of_incontinence',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        @if ($errors->has('kind_of_incontinence'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('kind_of_incontinence') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does [Service_user_name] have their own supply of incontinence wear? <span>*</span>
+                        Does {{$userNameForSite}} have their own supply of incontinence wear? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-
-                            <option value="select">Please select</option>
-
-
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="normally">Sometimes</option>
-                        </select>
+                        {!! Form::select('incontinence_wear',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('incontinence_wear'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('incontinence_wear') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
                 <div class="formField">
@@ -59,42 +57,41 @@
                     </h2>
 
                     <div class="inputWrap">
-                        <textarea class="formArea" placeholder="Details"></textarea>
+                        {!! Form::textarea('incontinence_products_stored',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        @if ($errors->has('incontinence_products_stored'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('incontinence_products_stored') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Would [Service_user_name] like help in choosing incontinence products?
+                        Would {{$userNameForSite}} like help in choosing incontinence products?
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-
-                            <option value="select">Please select</option>
-
-
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="normally">Sometimes</option>
-                        </select>
+                        {!! Form::select('choosing_incontinence_products',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('choosing_incontinence_products'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('choosing_incontinence_products') }}</strong>
+                                    </span>
+                        @endif
                     </div>
-
-
                 </div>
-
-
-            </form>
+            <input type="hidden" name="step" value='48'>
+            <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
 
     </div>
 </div>
 
 
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
+{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='48'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
+</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

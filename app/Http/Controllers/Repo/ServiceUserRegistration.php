@@ -250,6 +250,28 @@ class ServiceUserRegistration
             case '27'    : $this->saveStep27($request);break;
 
             case '28'    : $this->saveStep28($request);break;
+            case '29'    : $this->saveStep29($request);break;
+            case '30'    : $this->saveStep30($request);break;
+            case '32'    : $this->saveStep32($request);break;
+            case '33'    : $this->saveStep33($request);break;
+            case '34'    : $this->saveStep34($request);break;
+
+            case '35'    : $this->saveStep35($request);break;
+            case '36'    : $this->saveStep36($request);break;
+            case '37'    : $this->saveStep37($request);break;
+            case '38'    : $this->saveStep38($request);break;
+            case '39'    : $this->saveStep39($request);break;
+            case '40'    : $this->saveStep40($request);break;
+            case '40_1'    : $this->saveStep40_1($request);break;
+            case '41'    : $this->saveStep41($request);break;
+            case '43'    : $this->saveStep43($request);break;
+            case '44'    : $this->saveStep44($request);break;
+            case '45'    : $this->saveStep45($request);break;
+            case '46'    : $this->saveStep46($request);break;
+            case '47'    : $this->saveStep47($request);break;
+            case '48'    : $this->saveStep48($request);break;
+            case '50'    : $this->saveStep50($request);break;
+            case '51'    : $this->saveStep51($request);break;
         }
 
         $this->setNextStep($request);
@@ -654,6 +676,366 @@ class ServiceUserRegistration
         return;
     }
 
+    private function saveStep29($request) {
+
+        $this->validate($request,[
+            'languages' => 'required|array',
+            'other_languages' => 'nullable|String:256',
+        ]);
+
+
+        $languages = $request->input('languages');
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->Languages()->sync(array_keys($languages));
+
+        $serviceUserProfile->other_languages  = $request->input('other_languages');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep30($request) {
+
+        $this->validate($request,[
+            'social_interaction' => 'required|in:"Yes","No","Sometimes"',
+            'visit_for_companionship' => 'required|in:"Yes","No","Sometimes"',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->social_interaction  = $request->input('social_interaction');
+        $serviceUserProfile->visit_for_companionship  = $request->input('visit_for_companionship');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep32($request) {
+
+        $this->validate($request,[
+            'long_term_conditions' => 'nullable|String:256',
+            'have_any_allergies' => 'required|in:"Yes","No","Sometimes"',
+            'allergies_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->long_term_conditions  = $request->input('long_term_conditions');
+        $serviceUserProfile->have_any_allergies  = $request->input('have_any_allergies');
+        $serviceUserProfile->allergies_detail  = $request->input('allergies_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep33($request) {
+
+        $this->validate($request,[
+            'assistance_in_medication' => 'required|in:"Yes","No","Sometimes"',
+            'in_medication_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->assistance_in_medication  = $request->input('assistance_in_medication');
+        $serviceUserProfile->in_medication_detail  = $request->input('in_medication_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep34($request) {
+
+        $this->validate($request,[
+            'skin_scores' => 'required|in:"Yes","No","Sometimes"',
+            'skin_scores_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->skin_scores  = $request->input('skin_scores');
+        $serviceUserProfile->skin_scores_detail  = $request->input('skin_scores_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep35($request) {
+
+        $this->validate($request,[
+            'assistance_with_dressings' => 'required|in:"Yes","No","Sometimes"',
+            'dressings_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->assistance_with_dressings  = $request->input('assistance_with_dressings');
+        $serviceUserProfile->dressings_detail  = $request->input('dressings_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep36($request) {
+
+        $this->validate($request,[
+            'other_medical_conditions' => 'required|in:"Yes","No","Sometimes"',
+            'other_medical_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->other_medical_conditions  = $request->input('other_medical_conditions');
+        $serviceUserProfile->other_medical_detail  = $request->input('other_medical_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+    private function saveStep37($request) {
+
+        $this->validate($request,[
+            'food_allergies' => 'required|in:"Yes","No","Sometimes"',
+            'food_allergies_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->food_allergies  = $request->input('food_allergies');
+        $serviceUserProfile->food_allergies_detail  = $request->input('food_allergies_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+    private function saveStep38($request) {
+
+        $this->validate($request,[
+            'dietary_requirements' => 'required|in:"Yes","No","Sometimes"',
+            'dietary_requirements_interaction' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->dietary_requirements  = $request->input('dietary_requirements');
+        $serviceUserProfile->dietary_requirements_interaction  = $request->input('dietary_requirements_interaction');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+    private function saveStep39($request) {
+
+        $this->validate($request,[
+            'special_dietary_requirements' => 'required|in:"Yes","No","Sometimes"',
+            'special_dietary_requirements_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->special_dietary_requirements  = $request->input('special_dietary_requirements');
+        $serviceUserProfile->special_dietary_requirements_detail  = $request->input('special_dietary_requirements_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep40($request) {
+
+        $this->validate($request,[
+            'prepare_food' => 'required|in:"Yes","No","Sometimes"',
+            'assistance_with_preparing_food' => 'required|in:"Yes","No","Sometimes"',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->prepare_food  = $request->input('prepare_food');
+        $serviceUserProfile->assistance_with_preparing_food  = $request->input('assistance_with_preparing_food');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+    private function saveStep40_1($request) {
+
+        $this->validate($request,[
+            'preferences_of_food' => 'required|in:"Yes","No","Sometimes"',
+            'preferences_of_food_requirements' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->preferences_of_food  = $request->input('preferences_of_food');
+        $serviceUserProfile->preferences_of_food_requirements  = $request->input('preferences_of_food_requirements');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep41($request) {
+
+        $this->validate($request,[
+            'assistance_with_eating' => 'required|in:"Yes","No","Sometimes"',
+            'assistance_with_eating_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->assistance_with_eating  = $request->input('assistance_with_eating');
+        $serviceUserProfile->assistance_with_eating_detail  = $request->input('assistance_with_eating_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+    private function saveStep43($request) {
+
+        $this->validate($request,[
+            'assistance_with_personal_hygiene' => 'required|in:"Yes","No","Sometimes"',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->assistance_with_personal_hygiene  = $request->input('assistance_with_personal_hygiene');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+    private function saveStep44($request) {
+
+        $this->validate($request,[
+            'appropriate_clothes' => 'required|in:"Yes","No","Sometimes"',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->appropriate_clothes  = $request->input('appropriate_clothes');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep45($request) {
+
+        $this->validate($request,[
+            'assistance_getting_dressed' => 'required|in:"Yes","No","Sometimes"',
+            'assistance_getting_dressed_detail' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->assistance_getting_dressed  = $request->input('assistance_getting_dressed');
+        $serviceUserProfile->assistance_getting_dressed_detail  = $request->input('assistance_getting_dressed_detail');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep46($request) {
+
+        $this->validate($request,[
+            'assistance_with_bathing' => 'required|in:"Yes","No","Sometimes"',
+            'bathing_times_per_week' => 'required|in:"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->assistance_with_bathing  = $request->input('assistance_with_bathing');
+        $serviceUserProfile->bathing_times_per_week  = $request->input('bathing_times_per_week');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep47($request) {
+
+        $this->validate($request,[
+            'managing_toilet_needs' => 'required|in:"Yes","No","Sometimes"',
+            'mobilising_to_toilet' => 'required|in:"Yes","No","Sometimes"',
+            'cleaning_themselves' => 'required|in:"Yes","No","Sometimes"',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->managing_toilet_needs  = $request->input('managing_toilet_needs');
+        $serviceUserProfile->mobilising_to_toilet  = $request->input('mobilising_to_toilet');
+        $serviceUserProfile->cleaning_themselves  = $request->input('cleaning_themselves');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+    private function saveStep48($request) {
+
+        $this->validate($request,[
+            'have_incontinence' => 'required|in:"Yes","No","Sometimes"',
+            'kind_of_incontinence' => 'required|String:256',
+            'incontinence_wear' => 'required|in:"Yes","No","Sometimes"',
+            'incontinence_products_stored' => 'required|String:256',
+            'choosing_incontinence_products' => 'required|in:"Yes","No","Sometimes"',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->have_incontinence  = $request->input('have_incontinence');
+        $serviceUserProfile->kind_of_incontinence  = $request->input('kind_of_incontinence');
+        $serviceUserProfile->incontinence_wear  = $request->input('incontinence_wear');
+        $serviceUserProfile->incontinence_products_stored  = $request->input('incontinence_products_stored');
+        $serviceUserProfile->choosing_incontinence_products  = $request->input('choosing_incontinence_products');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep50($request) {
+
+        $this->validate($request,[
+            'behaviour' => 'required|array',
+            'other_behaviour' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->Behaviours()->sync(array_keys($request->input('behaviour')));
+
+        $serviceUserProfile->other_behaviour  = $request->input('other_behaviour');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+    private function saveStep51($request) {
+
+        $this->validate($request,[
+            'consent' => 'required|in:"Yes","No","Sometimes"',
+            'consent_details' => 'required|required|String:256',
+
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->consent  = $request->input('consent');
+        $serviceUserProfile->consent_details  = $request->input('consent_details');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
     public function getActiveStep($id){
 
         $activeStep=1;

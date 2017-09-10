@@ -9,21 +9,19 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
-                <div class="formField">
+            {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
+
+            <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does [Service_user_name] have any preferences of food? eg. Are there any do's and don'ts? <span>*</span>
+                        Does {{$userNameForSite}} have any preferences of food? eg. Are there any do's and don'ts? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-                            <option value="select">Please select</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-
-                            <option value="normally">Sometimes</option>
-
-
-                        </select>
+                        {!! Form::select('preferences_of_food',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('preferences_of_food'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('preferences_of_food') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
 
@@ -31,23 +29,29 @@
                     <h2 class="formLabel questionForm__label">
                         Please mention what requirements (we will contact you for greater detail at a later date). <span>*</span>
                     </h2>
-
                     <div class="inputWrap">
-                        <textarea class="formArea" placeholder="Details"></textarea>
+                        {!! Form::textarea('preferences_of_food_requirements',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        @if ($errors->has('preferences_of_food_requirements'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('preferences_of_food_requirements') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
-            </form>
+                <input type="hidden" name="step" value='40_1'>
+                <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
 
     </div>
 </div>
 
 
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
+{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='40_1'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
+</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

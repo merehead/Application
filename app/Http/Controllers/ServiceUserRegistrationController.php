@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\AssistanceType;
+use App\Behaviour;
 use App\Floor;
 use App\Http\Controllers\Repo\ServiceUserRegistration;
+use App\Language;
 use App\ServiceType;
 use App\ServiceUserCondition;
 use App\ServiceUsersProfile;
@@ -69,6 +71,15 @@ class ServiceUserRegistrationController extends FrontController
             $this->vars = array_add($this->vars, 'serviceUserConditions', $serviceUserConditions);
         }
 
+        if ($this->serviceUserProfile->getNextStep($serviceUserProfileId) == 'Step29_serviceUserRegistration') {
+            $languages = Language::all();
+            $this->vars = array_add($this->vars, 'languages', $languages);
+        }
+
+        if ($this->serviceUserProfile->getNextStep($serviceUserProfileId) == 'Step50_serviceUserRegistration') {
+            $behaviours = Behaviour::all();
+            $this->vars = array_add($this->vars, 'behaviours', $behaviours);
+        }
 
         //dd($this->serviceUserProfile->getNextStep($serviceUserProfileId));
 

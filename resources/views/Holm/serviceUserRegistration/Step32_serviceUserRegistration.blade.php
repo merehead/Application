@@ -2,7 +2,7 @@
     <div class="registration__column registration__column--with-padding">
         <div class="questionsBox">
             <h2>Health and Wellbeing</h2>
-            <h3>We need to understand some matters about [Service_user_name]’s health and wellbeing.</h3>
+            <h3>We need to understand some matters about {{$userNameForSite}}’s health and wellbeing.</h3>
             <div class="questionsBox__img">
                 <img src="{{asset('/img/Signup_P_step32.jpg')}}" alt="">
             </div>
@@ -11,32 +11,33 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
-                <div class="formField">
+            {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
+
+            <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        What long term health conditions does [Service_user_name] have? - (There is no need to give long descriptions. We will ask for more information at a later date.)
+                        What long term health conditions does {{$userNameForSite}} have? - (There is no need to give long descriptions. We will ask for more information at a later date.)
                     </h2>
 
                     <div class="inputWrap">
-                        <textarea class="formArea" placeholder="Details"></textarea>
+                        {!! Form::textarea('long_term_conditions',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        @if ($errors->has('long_term_conditions'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('long_term_conditions') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does [Service_user_name] have any allergies to food / medication / anything else? <span>*</span>
+                        Does {{$userNameForSite}} have any allergies to food / medication / anything else? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-
-                            <option value="select">Please select</option>
-
-
-
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="normally">Sometimes</option>
-                        </select>
+                        {!! Form::select('have_any_allergies',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('have_any_allergies'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('have_any_allergies') }}</strong>
+                                    </span>
+                        @endif
                     </div>
 
 
@@ -48,21 +49,28 @@
                     </h2>
 
                     <div class="inputWrap">
-                        <textarea class="formArea" placeholder="Details"></textarea>
+                        {!! Form::textarea('allergies_detail',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        @if ($errors->has('allergies_detail'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('allergies_detail') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
-            </form>
+            <input type="hidden" name="step" value='32'>
+            <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
 
     </div>
 </div>
 
 
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
+{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='32'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
+</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
