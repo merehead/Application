@@ -1,11 +1,8 @@
 <div id="carerTypeCare" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">TYPE OF CARE offered</h2>
-        <a href="#" class="profileCategory__link"
-           onclick="event.preventDefault();document.getElementById('carerPrivateTypeCare').submit();"
-        >
-            <i class="fa fa-pencil"></i>
-        </a>
+        <a href="#" class="btn btn-info"><span class="fa fa-pencil" data-id="carerPrivateTypeCare"></span> EDIT</a>
+        <a href="#" onclick="event.preventDefault();document.getElementById('carerPrivateTypeCare').submit();" class="btn btn-success hidden"><span class="glyphicon glyphicon-floppy-disk"></span> SAVE</a>
     </div>
 </div>
 {!! Form::model($typeCare, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateTypeCare']) !!}

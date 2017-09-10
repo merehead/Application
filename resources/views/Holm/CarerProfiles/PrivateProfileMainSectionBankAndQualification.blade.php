@@ -1,11 +1,8 @@
 <div id="carerBank" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">BANK ACCOUNT </h2>
-        <a href="#" class="profileCategory__link"
-           onclick="event.preventDefault();document.getElementById('carerPrivateBank').submit();"
-        >
-            <i class="fa fa-pencil"></i>
-        </a>
+        <a href="#" class="btn btn-info"><span class="fa fa-pencil" data-id="carerPrivateBank"></span> EDIT</a>
+        <a href="#" onclick="event.preventDefault();document.getElementById('carerPrivateBank').submit();" class="btn btn-success hidden"><span class="glyphicon glyphicon-floppy-disk"></span> SAVE</a>
     </div>
 </div>
 
@@ -39,9 +36,8 @@
 <div class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">QUALIFICATIONS </h2>
-        <a href="#" class="profileCategory__link">
-            <i class="fa fa-pencil"></i>
-        </a>
+        <a href="#" class="btn btn-info"><span class="fa fa-pencil" data-id="carerPrivateAvailability"></span> EDIT</a>
+        <a href="#" onclick="event.preventDefault();document.getElementById('carerPrivateAvailability').submit();" class="btn btn-success hidden"><span class="glyphicon glyphicon-floppy-disk"></span> SAVE</a>
     </div>
 </div>
 

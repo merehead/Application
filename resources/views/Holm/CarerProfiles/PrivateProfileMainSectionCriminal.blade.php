@@ -2,11 +2,8 @@
 <div id="carerCriminal" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">CRIMINAL RECORDS </h2>
-        <a href="#" class="profileCategory__link"
-           onclick="event.preventDefault();document.getElementById('carerPrivateCriminal').submit();"
-        >
-            <i class="fa fa-pencil"></i>
-        </a>
+        <a href="#" class="btn btn-info"><span class="fa fa-pencil" data-id="carerPrivateCriminal"></span> EDIT</a>
+        <a href="#" onclick="event.preventDefault();document.getElementById('carerPrivateCriminal').submit();" class="btn btn-success hidden"><span class="glyphicon glyphicon-floppy-disk"></span> SAVE</a>
     </div>
 </div>
 {!! Form::model($carerProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateCriminal']) !!}
