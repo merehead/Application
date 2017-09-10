@@ -167,13 +167,15 @@ $(document).ready(function(){
     	e.preventDefault();
 		var that = $(this);
         $(this).parent().parent().next().slideToggle("slow",function () {
-            if($(that).hasClass('fa-minus')){
-                $(that).removeClass('fa-minus');
-                $(that).addClass('fa-plus');
-			}else{
-                $(that).addClass('fa-minus');
-                $(that).removeClass('fa-plus');
-			}
+            if($(that).hasClass('fa')){
+                if ($(that).hasClass('fa-minus')) {
+                    $(that).removeClass('fa-minus');
+                    $(that).addClass('fa-plus');
+                } else {
+                    $(that).addClass('fa-minus');
+                    $(that).removeClass('fa-plus');
+                }
+            }
         });
     });
     //--- for page Faq -----
