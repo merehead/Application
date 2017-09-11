@@ -48,12 +48,12 @@
 
 
                     <div class="inputWrap">
-                        @if($serviceUserProfile->DoB === "01/01/1970")
-                            <input name="DoB" id="datepicker" class="profileField__input" placeholder="Time" type="text">
+                        @if($serviceUserProfile->time_to_bed === "01/01/1970")
+                            <input name="time_to_bed" id="datepicker" class="profileField__input" placeholder="Time" type="text">
                         @else
-                            {!! Form::text('DoB',null,['id'=>'datepicker','class'=>'profileField__input']) !!}
+                            {!! Form::text('time_to_bed',null,['id'=>'datepicker','class'=>'profileField__input']) !!}
                         @endif
-                        <input type="text" disabled="" class="formInput personalForm__input" placeholder="Time">
+                        {{--<input type="text" disabled="" class="formInput personalForm__input" placeholder="Time">--}}
                         <span class="inputIco personalForm__ico centeredLink">
                   <i class="fa fa-calendar"></i>
                 </span>

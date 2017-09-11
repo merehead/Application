@@ -9,53 +9,48 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
-                <div class="formField">
+            {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
+
+            <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does [Service_user_name] need help going to the toilet at night? <span>*</span>
+                        Does {{$userNameForSite}} need help going to the toilet at night? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-
-                            <option value="select">Please select</option>
-
-
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="normally">Sometimes</option>
-                        </select>
+                        {!! Form::select('toilet_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('toilet_at_night'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('toilet_at_night') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Would [Service_user_name] like someone to help at night?
+                        Would {{$userNameForSite}}  like someone to help at night?
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-
-                            <option value="select">Please select</option>
-
-
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="normally">Sometimes</option>
-                        </select>
+                        {!! Form::select('helping_toilet_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('helping_toilet_at_night'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('helping_toilet_at_night') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
-            </form>
+            <input type="hidden" name="step" value='54'>
+            <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
     </div>
 </div>
 
 
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
+{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='54'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
+</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

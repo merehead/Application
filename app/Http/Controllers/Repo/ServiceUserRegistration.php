@@ -272,6 +272,13 @@ class ServiceUserRegistration
             case '48'    : $this->saveStep48($request);break;
             case '50'    : $this->saveStep50($request);break;
             case '51'    : $this->saveStep51($request);break;
+            case '52'    : $this->saveStep52($request);break;
+            case '53'    : $this->saveStep53($request);break;
+            case '54'    : $this->saveStep54($request);break;
+            case '56'    : $this->saveStep56($request);break;
+            case '57'    : $this->saveStep57($request);break;
+            case '58'    : $this->saveStep58($request);break;
+            case '59'    : $this->saveStep59($request);break;
         }
 
         $this->setNextStep($request);
@@ -1023,7 +1030,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'consent' => 'required|in:"Yes","No","Sometimes"',
-            'consent_details' => 'required|required|String:256',
+            'consent_details' => 'required|String:256',
 
         ]);
 
@@ -1036,6 +1043,129 @@ class ServiceUserRegistration
 
         return;
     }
+
+    private function saveStep52($request) {
+
+        $this->validate($request,[
+            'getting_dressed_for_bed' => 'required|in:"Yes","No","Sometimes"',
+            'getting_ready_for_bed' => 'required|in:"Yes","No","Sometimes"',
+            'time_to_bed' => 'required|String:256',
+
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->getting_dressed_for_bed  = $request->input('getting_dressed_for_bed');
+        $serviceUserProfile->getting_ready_for_bed  = $request->input('getting_ready_for_bed');
+        $serviceUserProfile->time_to_bed  = $request->input('time_to_bed');
+
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+    private function saveStep53($request) {
+
+        $this->validate($request,[
+            'keeping_safe_at_night' => 'required|in:"Yes","No","Sometimes"',
+            'keeping_safe_at_night_details' => 'required|String:256',
+            'time_to_night_helping' => 'required|String:256',
+
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->keeping_safe_at_night  = $request->input('keeping_safe_at_night');
+        $serviceUserProfile->keeping_safe_at_night_details  = $request->input('keeping_safe_at_night_details');
+        $serviceUserProfile->time_to_night_helping  = $request->input('time_to_night_helping');
+
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep54($request) {
+
+        $this->validate($request,[
+            'toilet_at_night' => 'required|in:"Yes","No","Sometimes"',
+            'helping_toilet_at_night' => 'required|in:"Yes","No","Sometimes"',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->toilet_at_night  = $request->input('toilet_at_night');
+        $serviceUserProfile->helping_toilet_at_night  = $request->input('helping_toilet_at_night');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep56($request) {
+
+        $this->validate($request,[
+            'religious_beliefs' => 'required|in:"Yes","No","Sometimes"',
+            'religious_beliefs_details' => 'required|String:256',
+         ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->religious_beliefs  = $request->input('religious_beliefs');
+        $serviceUserProfile->religious_beliefs_details  = $request->input('religious_beliefs_details');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+    private function saveStep57($request) {
+
+        $this->validate($request,[
+            'particular_likes' => 'required|in:"Yes","No","Sometimes"',
+            'particular_likes_details' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->particular_likes  = $request->input('particular_likes');
+        $serviceUserProfile->particular_likes_details  = $request->input('particular_likes_details');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep58($request) {
+
+        $this->validate($request,[
+            'socialising_with_other' => 'required|in:"Yes","No","Sometimes"',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->socialising_with_other  = $request->input('socialising_with_other');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+    private function saveStep59($request) {
+
+        $this->validate($request,[
+            'interests_hobbies' => 'required|in:"Yes","No","Sometimes"',
+            'interests_hobbies_details' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->interests_hobbies  = $request->input('interests_hobbies');
+        $serviceUserProfile->interests_hobbies_details  = $request->input('interests_hobbies_details');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
     public function getActiveStep($id){
 
         $activeStep=1;

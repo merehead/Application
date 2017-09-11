@@ -16,10 +16,10 @@
                         Does {{$userNameForSite}} need assistance keeping safe at night? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('getting_ready_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
-                        @if ($errors->has('getting_ready_for_bed'))
+                        {!! Form::select('keeping_safe_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('keeping_safe_at_night'))
                             <span class="help-block">
-                                        <strong>{{ $errors->first('getting_ready_for_bed') }}</strong>
+                                        <strong>{{ $errors->first('keeping_safe_at_night') }}</strong>
                                     </span>
                         @endif
                     </div>
@@ -29,18 +29,27 @@
                         Please give details of what kind of assistance. <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <textarea class="formArea" placeholder="Details"></textarea>
+                        {!! Form::textarea('keeping_safe_at_night_details',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        @if ($errors->has('keeping_safe_at_night_details'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('keeping_safe_at_night_details') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        What time would [Service_user_name] like someone to help?
+                        What time would {{$userNameForSite}} like someone to help?
                     </h2>
 
 
                     <div class="inputWrap">
-                        <input type="text" disabled="" class="formInput personalForm__input" placeholder="Time">
+                        @if($serviceUserProfile->time_to_bed === "01/01/1970")
+                            <input name="time_to_bed" id="datepicker" class="profileField__input" placeholder="Time" type="text">
+                        @else
+                            {!! Form::text('time_to_night_helping',null,['id'=>'datepicker','class'=>'profileField__input']) !!}
+                        @endif
                         <span class="inputIco personalForm__ico centeredLink">
                   <i class="fa fa-calendar"></i>
                 </span>

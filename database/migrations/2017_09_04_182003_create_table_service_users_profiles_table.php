@@ -105,7 +105,7 @@ class CreateTableServiceUsersProfilesTable extends Migration
             $table->string      ('keeping_safe_at_night'            , 12)->nullable();
             $table->string      ('keeping_safe_at_night_details'            , 256)->nullable();
             $table->datetime    ('time_to_night_helping'            )->nullable();
-            $table->string      ('toilet_at_night?'            , 12)->nullable();
+            $table->string      ('toilet_at_night'            , 12)->nullable();
             $table->string      ('helping_toilet_at_night'            , 12)->nullable();
             //$table->string      ('keeping_safe_at_night'            , 12)->nullable();
             //$table->string      ('keeping_safe_at_night_details'            , 256)->nullable();
