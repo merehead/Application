@@ -83,11 +83,6 @@ class PurchaserController extends FrontController
         $depart = '';
 
 
-/*        $input = $request->all();
-
-
-        $purchaserProfile = PurchasersProfile::findOrFail($input['id']);*/
-
 
         if ($input['stage'] == 'general') {
 
