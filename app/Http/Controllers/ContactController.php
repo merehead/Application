@@ -32,6 +32,23 @@ class ContactController extends FrontController
         return $this->renderOutput();
     }
 
+    public function thank(){
+
+        $this->title = 'Holm Care - About Us';
+
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
+        $this->content = view(config('settings.frontTheme').'.homePage.ThankYouContact')->render();
+
+        return $this->renderOutput();
+    }
+
     public function send(Request $request){
 
         $input = $request->all();
@@ -44,11 +61,11 @@ class ContactController extends FrontController
             'body'=> $message.'<br/><br/> Message:'.$input['message']
         ];
 
-        $receiverAddress = 'anton.shelehvost@gmail.com';
+        $receiverAddress = 'info@holm.care';
 
         Mail::to($receiverAddress)->send(new OrderShipped($content));
 
-        dd('mail send successfully');
+        return redirect()->route('ThankPage');
 
     }
 }
