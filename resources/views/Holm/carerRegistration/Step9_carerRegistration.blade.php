@@ -4,7 +4,7 @@
             <h2>Care</h2>
 
             <div class="questionsBox__img">
-                <img src="./img/Signup_C_step9.jpg" alt="">
+                <img src="/img/Signup_C_step9.jpg" alt="">
             </div>
 
 

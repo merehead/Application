@@ -4,7 +4,7 @@
             Home
         </a>
         <span class="breadcrumbs__arrow">></span>
-        <a href="/" class="breadcrumbs__item">
+        <a href="/carer-settings" class="breadcrumbs__item">
             Profile Settings
         </a>
         <!--
@@ -25,7 +25,7 @@
 
 <div class="invite">
     <div class="profilePhoto invite__photo">
-        <img src="./img/profile4.png" alt="">
+        <img src="/img/no_photo.png" alt="">
     </div>
     <h2 class="invite__title">
         Invite other users and both get £100 after 20 hours of usage

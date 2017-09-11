@@ -11,6 +11,15 @@ class DemoBookingTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('users')->insert(['email' => 'u1@loc.loc','password' => 'u1@loc.loc','user_type_id'=>1]);
+        DB::table('users')->insert(['email' => 'u2@loc.loc','password' => 'u1@loc.loc','user_type_id'=>2]);
+        DB::table('users')->insert(['email' => 'u3@loc.loc','password' => 'u1@loc.loc','user_type_id'=>2]);
+        DB::table('users')->insert(['email' => 'u4@loc.loc','password' => 'u1@loc.loc','user_type_id'=>4]);
+        DB::table('users')->insert(['email' => 'u5@loc.loc','password' => 'u1@loc.loc','user_type_id'=>1]);
+        DB::table('users')->insert(['email' => 'u6@loc.loc','password' => 'u1@loc.loc','user_type_id'=>2]);
+        DB::table('users')->insert(['email' => 'u7@loc.loc','password' => 'u1@loc.loc','user_type_id'=>3]);
+        DB::table('users')->insert(['email' => 'u8@loc.loc','password' => 'u1@loc.loc','user_type_id'=>4]);
+        //--------------------------
         DB::table('transactions')->insert(['name' => 'tran1']);
         DB::table('transactions')->insert(['name' => 'tran2']);
         DB::table('transactions')->insert(['name' => 'tran3']);
@@ -92,9 +101,12 @@ class DemoBookingTableSeeder extends Seeder
         DB::table('appointment_payments')->insert(['appointment_id' => '4','carer_id' => '2','transaction_id' => 'tr_4Ar41R2eZvKYlo2CnJudEU2Q','amount' => '4900','created' => '2017-08-10 00:00:00','description' => 'fourth app']);
         DB::table('appointment_payments')->insert(['appointment_id' => '5','carer_id' => '2','transaction_id' => 'tr_4Ar41R2eZvKYlo2CnJudEU2Q','amount' => '4900','created' => '2017-08-10 00:00:00','description' => 'fifth app']);
         //-----------------------------------------------------------------------------
-        DB::table('bonuses_records')->insert(['user_id' => '1','amount' => '120']);
-        DB::table('bonuses_records')->insert(['user_id' => '2','amount' => '100']);
-        DB::table('bonuses_records')->insert(['user_id' => '1','amount' => '120']);
+        DB::table('bonuses_records')->insert(['user_acceptor_id' => '2','user_donor_id'=>'1','amount' => '120']);
+        DB::table('bonuses_records')->insert(['user_acceptor_id' => '2','user_donor_id'=>'1','amount' => '120']);
+        DB::table('bonuses_records')->insert(['user_acceptor_id' => '2','user_donor_id'=>'1','amount' => '120']);
+        DB::table('bonuses_records')->insert(['user_acceptor_id' => '3','user_donor_id'=>'2','amount' => '120']);
+        DB::table('bonuses_records')->insert(['user_acceptor_id' => '3','user_donor_id'=>'2','amount' => '120']);
+        DB::table('bonuses_records')->insert(['user_acceptor_id' => '3','user_donor_id'=>'2','amount' => '120']);
         //-----------------------------------------------------------------------------
         DB::table('bonuses_balances')->insert(['purchaser_id' => '1','amount' => '40']);
         //-----------------------------------------------------------------------------

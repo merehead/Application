@@ -11,3 +11,7 @@
 @section('footer')
     {!! $footer !!}
 @endsection
+
+@section('modals')
+    {!! $modals !!}
+@endsection

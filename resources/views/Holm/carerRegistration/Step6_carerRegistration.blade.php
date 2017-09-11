@@ -2,12 +2,12 @@
     <div class="registration__column registration__column--with-padding">
         <div class="questionsBox">
             <h2>DBS - Formally called CRB</h2>
-            <h3>We consider a DBS completed within the last 12 months to be up to date for now. We will ask you to
+            <h3>We consider a DBS completed within the last 24 months to be up to date for now. We will ask you to
                 reapply for a new one in future.</h3>
 
 
             <div class="questionsBox__img">
-                <img src="./img/Signup_C_step6.jpg" alt="">
+                <img src="/img/Signup_C_step6.jpg" alt="">
             </div>
 
 
@@ -24,7 +24,7 @@
                 </h2>
                 <div class="inputWrap">
 
-                    {!! Form::select('DBS',['1'=>'Yes','2'=>'No'],($carersProfile->DBS == 'Yes' ? '1' : '2'),['id'=>'main-if2','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    {!! Form::select('DBS',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if2','class'=>'formSelect','placeholder'=>'Please select']) !!}
                 </div>
                 @if ($errors->has('DBS'))
                     <span class="help-block">
@@ -52,9 +52,15 @@
                 <h2 class="formLabel questionForm__label">
                     Date of certificate.
                 </h2>
+
                 <div class="inputWrap">
 
-                    {!! Form::text('dbs_date',null,['id'=>'datepicker','class'=>'formInput','placeholder'=>'Date of certificate']) !!}
+                    @if($carersProfile->dbs_date === "01/01/1970")
+                        <input name="dbs_date" id="datepicker15" class="profileField__input" placeholder="dd/mm/yyyy" type="text">
+                    @else
+                        {!! Form::text('dbs_date',null,['id'=>'datepicker15','class'=>'formInput','placeholder'=>'Date of certificate']) !!}
+                    @endif
+
                 </div>
                 @if ($errors->has('DBS'))
                     <span class="help-block">
@@ -72,19 +78,19 @@
                 </h2>
                 <div class="inputWrap">
 
-                    {!! Form::select('DBS_use',['1'=>'Yes','2'=>'No'],($carersProfile->DBS_use == 'Yes' ? '1' : '2'),['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    {!! Form::select('DBS_use',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                 </div>
                 @if ($errors->has('DBS_use'))
                     <span class="help-block">
-                                        <strong>{{ $errors->first('DBS_use') }}</strong>
-                                    </span>
+                        <strong>{{ $errors->first('DBS_use') }}</strong>
+                    </span>
                 @endif
             </div>
 
 
             <div class="formField hiding" style="display: none">
                 <h2 class="formLabel questionForm__label">
-                    If yes, please could we have your personal identifier.<span>*</span>
+                    Please could we have your personal identifier.<span>*</span>
                 </h2>
 
                 <div class="inputWrap">

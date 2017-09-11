@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\DisputePayout;
 use App\Appointment;
 use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+
 
 class DisputePayoutController extends AdminController
 {

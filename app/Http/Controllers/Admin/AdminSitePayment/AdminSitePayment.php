@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\AdminSitePayment;
 
 use App\Appointment;
+use App\Bonuses_record;
+use App\Booking;
 use App\DisputePayment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -62,4 +64,73 @@ class AdminSitePayment extends Controller
 
         return redirect()->back();
     }
+
+    public function BookingPayoutToPurchaser(Request $request, $action,$bookingId,$amount) {
+
+
+        $booking = Booking::findOrFail($bookingId);
+
+        switch ($action) {
+            case 'pay' : {$actionId = 8;break;}
+            case 'cancel' : {$actionId = 4;break;}
+            case 'delay' : {$actionId = 9;break;}
+            default : return;
+        }
+
+        $booking->status_id = $actionId;
+        $booking->save();
+
+        return redirect()->back();
+    }
+    public function BonusPayoutToPurchaser(Request $request, $action,$bonusRecordId,$amount) {
+
+        $bonusRecord = Bonuses_record::findOrFail($bonusRecordId);
+
+        switch ($action) {
+            case 'pay' : {$action = 'PAID';break;}
+            case 'cancel' : {$action = 'CANCELLED';break;}
+            case 'delay' : {$action = 'DELAYED';break;}
+            default : return;
+        }
+
+        $bonusRecord->payment_status = $action;
+        $bonusRecord->save();
+
+        return redirect()->back();
+    }
+
+    public function BookingPayoutToCarer(Request $request, $action,$bookingId,$amount) {
+
+
+        $booking = Booking::findOrFail($bookingId);
+
+        switch ($action) {
+            case 'pay' : {$actionId = 8;break;}
+            case 'cancel' : {$actionId = 4;break;}
+            case 'delay' : {$actionId = 9;break;}
+            default : return;
+        }
+
+        $booking->status_id = $actionId;
+        $booking->save();
+
+        return redirect()->back();
+    }
+    public function BonusPayoutToCarer(Request $request, $action,$bonusRecordId,$amount) {
+
+        $bonusRecord = Bonuses_record::findOrFail($bonusRecordId);
+
+        switch ($action) {
+            case 'pay' : {$action = 'PAID';break;}
+            case 'cancel' : {$action = 'CANCELLED';break;}
+            case 'delay' : {$action = 'DELAYED';break;}
+            default : return;
+        }
+
+        $bonusRecord->payment_status = $action;
+        $bonusRecord->save();
+
+        return redirect()->back();
+    }
+
 }

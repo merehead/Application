@@ -41,13 +41,13 @@ class servicesTableSeeder extends Seeder
         DB::table('booking_statuses')->insert(['name' => 'dispute','css_name' => 'dispute']);
         DB::table('booking_statuses')->insert(['name' => 'completed','css_name' => 'complete']);
         DB::table('booking_statuses')->insert(['name' => 'paid','css_name' => 'canceled']);
+        DB::table('booking_statuses')->insert(['name' => 'delayed','css_name' => 'canceled']);
         //-----------------------------------------------------------------------------
         DB::table('booking_appointment_frequencies')->insert(['name' => 'undefined']);
         DB::table('booking_appointment_frequencies')->insert(['name' => 'daily']);
         DB::table('booking_appointment_frequencies')->insert(['name' => 'weekly']);
         DB::table('booking_appointment_frequencies')->insert(['name' => 'monthly']);
         DB::table('booking_appointment_frequencies')->insert(['name' => 'irregular']);
-
         //-----------------------------------------------------------------------------
         DB::table('postcodes')->insert(['name' => 'BLO']);
         DB::table('postcodes')->insert(['name' => 'BL1']);
@@ -147,39 +147,39 @@ class servicesTableSeeder extends Seeder
         DB::table('assistance_types')->insert(['name' => 'MEDICATION / TREATMENTS']);
         DB::table('assistance_types')->insert(['name' => 'MOBILITY']);
         //-----------------------------------------------------------------------------
-        DB::table('working_times')->insert(['name' => 'ALL THE TIME']);
+        DB::table('working_times')->insert(['name' => 'ALL THE TIME','css_name' => 'checkboxTimer allTime']);
 
-        DB::table('working_times')->insert(['name' => 'EVERY MORNING']);
-        DB::table('working_times')->insert(['name' => 'EVERY AFTERNOON']);
-        DB::table('working_times')->insert(['name' => 'EVERY NIGHT']);
+        DB::table('working_times')->insert(['name' => 'EVERY MORNING','css_name' => 'checkboxTimerGroup everyMorning']);
+        DB::table('working_times')->insert(['name' => 'EVERY AFTERNOON','css_name' => 'checkboxTimerGroup everyAfternoon']);
+        DB::table('working_times')->insert(['name' => 'EVERY NIGHT','css_name' => 'checkboxTimerGroup everyNight']);
 
-        DB::table('working_times')->insert(['name' => 'MONDAY MORNING']);
-        DB::table('working_times')->insert(['name' => 'MONDAY AFTERNOON']);
-        DB::table('working_times')->insert(['name' => 'MONDAY NIGHT']);
+        DB::table('working_times')->insert(['name' => 'MONDAY MORNING','css_name' => 'checkboxTimer regular morning']);
+        DB::table('working_times')->insert(['name' => 'MONDAY AFTERNOON','css_name' => 'checkboxTimer regular afternoon']);
+        DB::table('working_times')->insert(['name' => 'MONDAY NIGHT','css_name' => 'checkboxTimer regular night']);
 
-        DB::table('working_times')->insert(['name' => 'TUESDAY MORNING']);
-        DB::table('working_times')->insert(['name' => 'TUESDAY AFTERNOON']);
-        DB::table('working_times')->insert(['name' => 'TUESDAY NIGHT']);
+        DB::table('working_times')->insert(['name' => 'TUESDAY MORNING','css_name' => 'checkboxTimer regular morning']);
+        DB::table('working_times')->insert(['name' => 'TUESDAY AFTERNOON','css_name' => 'checkboxTimer regular afternoon']);
+        DB::table('working_times')->insert(['name' => 'TUESDAY NIGHT','css_name' => 'checkboxTimer regular  night']);
 
-        DB::table('working_times')->insert(['name' => 'WEDNESDAY MORNING']);
-        DB::table('working_times')->insert(['name' => 'WEDNESDAY AFTERNOON']);
-        DB::table('working_times')->insert(['name' => 'WEDNESDAY NIGHT']);
+        DB::table('working_times')->insert(['name' => 'WEDNESDAY MORNING','css_name' => 'checkboxTimer regular morning']);
+        DB::table('working_times')->insert(['name' => 'WEDNESDAY AFTERNOON','css_name' => 'checkboxTimer regular  afternoon']);
+        DB::table('working_times')->insert(['name' => 'WEDNESDAY NIGHT','css_name' => 'checkboxTimer regular night']);
 
-        DB::table('working_times')->insert(['name' => 'THURSDAY MORNING']);
-        DB::table('working_times')->insert(['name' => 'THURSDAY AFTERNOON']);
-        DB::table('working_times')->insert(['name' => 'THURSDAY NIGHT']);
+        DB::table('working_times')->insert(['name' => 'THURSDAY MORNING','css_name' => 'checkboxTimer regular morning']);
+        DB::table('working_times')->insert(['name' => 'THURSDAY AFTERNOON','css_name' => 'checkboxTimer regular  afternoon']);
+        DB::table('working_times')->insert(['name' => 'THURSDAY NIGHT','css_name' => 'checkboxTimer regular  night']);
 
-        DB::table('working_times')->insert(['name' => 'FRIDAY MORNING']);
-        DB::table('working_times')->insert(['name' => 'FRIDAY AFTERNOON']);
-        DB::table('working_times')->insert(['name' => 'FRIDAY NIGHT']);
+        DB::table('working_times')->insert(['name' => 'FRIDAY MORNING','css_name' => 'checkboxTimer regular morning']);
+        DB::table('working_times')->insert(['name' => 'FRIDAY AFTERNOON','css_name' => 'checkboxTimer regular  afternoon']);
+        DB::table('working_times')->insert(['name' => 'FRIDAY NIGHT','css_name' => 'checkboxTimer regular night']);
 
-        DB::table('working_times')->insert(['name' => 'SATURDAY MORNING']);
-        DB::table('working_times')->insert(['name' => 'SATURDAY AFTERNOON']);
-        DB::table('working_times')->insert(['name' => 'SATURDAY NIGHT']);
+        DB::table('working_times')->insert(['name' => 'SATURDAY MORNING','css_name' => 'checkboxTimer regular morning']);
+        DB::table('working_times')->insert(['name' => 'SATURDAY AFTERNOON','css_name' => 'checkboxTimer regular afternoon']);
+        DB::table('working_times')->insert(['name' => 'SATURDAY NIGHT','css_name' => 'checkboxTimer regular night']);
 
-        DB::table('working_times')->insert(['name' => 'SUNDAY MORNING']);
-        DB::table('working_times')->insert(['name' => 'SUNDAY AFTERNOON']);
-        DB::table('working_times')->insert(['name' => 'SUNDAY NIGHT']);
+        DB::table('working_times')->insert(['name' => 'SUNDAY MORNING','css_name' => 'checkboxTimer regular morning']);
+        DB::table('working_times')->insert(['name' => 'SUNDAY AFTERNOON','css_name' => 'checkboxTimer regular afternoon']);
+        DB::table('working_times')->insert(['name' => 'SUNDAY NIGHT','css_name' => 'checkboxTimer regular night']);
         //-----------------------------------------------------------------------------
         DB::table('languages')->insert(['carer_language' => 'ENGLISH']);
         DB::table('languages')->insert(['carer_language' => 'WELSH']);

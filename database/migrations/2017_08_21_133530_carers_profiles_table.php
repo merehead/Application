@@ -10,7 +10,7 @@ class CarersProfilesTable extends Migration
     {
         Schema::create('carers_profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string      ('title'                , 12)->nullable();
+            $table->integer      ('title'                )->unsigned()->nullable();
             $table->string      ('first_name'           , 128)->nullable();
             $table->string      ('family_name'          , 128)->nullable();
             $table->string      ('like_name'            , 128)->nullable();
@@ -19,25 +19,29 @@ class CarersProfilesTable extends Migration
             $table->string      ('address_line1'        , 128)->nullable();
             $table->string      ('address_line2'        , 128)->nullable();
             $table->string      ('town'                 , 128)->nullable();
-            $table->integer     ('postcode_id'                         )->unsigned()->nullable();
-            $table->dateTime    ('DoB'                              )->nullable();
+            //$table->integer     ('postcode_id'           )->unsigned()->nullable();
+            $table->string      ('postcode'             ,32)->nullable();
+            $table->dateTime    ('DoB'                   )->nullable();
             $table->string      ('criminal_conviction'  ,32)->nullable();          //yes.but../yes/no
             $table->string      ('criminal_detail'      ,512)->nullable();
             $table->string      ('DBS'                  ,8)->nullable();          //Yes/No
             $table->string      ('DBS_use'              ,8)->nullable();          //Yes/No
+            $table->dateTime    ('dbs_date'              )->nullable();
             $table->string      ('DBS_identifier'       ,128)->nullable();
             $table->string      ('driving_licence'      ,8)->nullable();          //Yes/No
             $table->string      ('DBS_number'           ,128)->nullable();
             $table->string      ('have_car'             ,8)->nullable();          //Yes/No
             $table->string      ('use_car'              ,8)->nullable();          //Yes/No
             $table->string      ('work_at_holiday'      ,8)->nullable();          //Yes/No
-            $table->integer     ('work_hours'                       )->nullable();          //Yes/No
-            $table->string      ('work_with_pets'       ,8)->nullable();          //Yes/No
+            $table->string      ('times'                ,32)->nullable();          //Hourly/Daily/Weekly
+            $table->integer     ('work_hours'            )->nullable()->default(1);
+            $table->string      ('work_with_pets'       ,16)->nullable();          //Yes/No
             $table->string      ('pets_description'     ,256)->nullable();
             $table->string      ('language_additional'  ,256)->nullable();
             $table->string      ('work_UK'              ,8)->nullable();          //Yes/No
             $table->string      ('work_UK_restriction'  ,8)->nullable();          //Yes/No
             $table->string      ('work_UK_description'  ,256)->nullable();
+            $table->string      ('national_insurance_number',256)->nullable();
             $table->string      ('description_yourself' ,1024)->nullable();
             $table->string      ('sentence_yourself'    ,512)->nullable();
             $table->string      ('have_questions'       ,8)->nullable();          //Yes/No
@@ -45,9 +49,9 @@ class CarersProfilesTable extends Migration
             $table->string      ('registration_progress',16)->nullable();          //step number
             $table->timestamps();
 
-            $table->index('postcode_id');
+/*            $table->index('postcode_id');
 
-            $table->foreign('postcode_id')         ->references('id')->on('postcodes');
+            $table->foreign('postcode_id')         ->references('id')->on('postcodes');*/
         });
     }
 

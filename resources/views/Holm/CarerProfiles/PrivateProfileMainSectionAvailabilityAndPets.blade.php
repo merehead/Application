@@ -1,11 +1,12 @@
-<div class="borderContainer">
+<div id="carerAvailability" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">AVAILABILITY</h2>
-        <a href="#" class="profileCategory__link"
-           onclick="event.preventDefault();document.getElementById('carerPrivateAvailability').submit();"
-        >
-            <i class="fa fa-pencil"></i>
-        </a>
+        <a href="#" class="btn btn-info btn-edit"><span class="fa fa-pencil" data-id="carerPrivateAvailability"></span>
+            EDIT</a>
+
+        <button type="button" class="btn btn-success hidden" id="load" data-loading-text="<i class='fa fa-spinner
+        fa-spin '></i> Processing"><i class="fa fa-floppy-o"></i>  Save</button>
+
     </div>
 </div>
 {!! Form::model($carerProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateAvailability']) !!}
@@ -51,19 +52,24 @@
                     <div class="checkBox_item">
 
                         @if($step==0)
-                            {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
-                            array('class' => 'customCheckbox allTime','id'=>'boxG'.$workingTime->id)) !!}
+                 {{--           {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
+                            array('class' => 'customCheckbox '.$workingTime->css_name,'id'=>'boxG'.$workingTime->id)) !!}
                             <label for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
-
+--}}
                         @else
 
                         {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
-                        array('class' => 'customCheckbox checkSingle','id'=>'boxG'.$workingTime->id)) !!}
+                        array('class' => 'customCheckbox '.$workingTime->css_name,'id'=>'boxG'.$workingTime->id)) !!}
                         <label for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
-                            @endif
+
+                        @endif
                     </div>
                 @endforeach
 
+                    <?php $workingTime = $workingTimes->shift()?>
+                    {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
+                                                array('class' => 'customCheckbox '.$workingTime->css_name,'id'=>'boxG'.$workingTime->id)) !!}
+                    <label for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
             </div>
 
             <div class="profileField profileField--half">
@@ -80,32 +86,32 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
         <div class="profileField profileField--full-width">
             <div class="checkRow">
 
-
-                @foreach($bottomTime as $workingTime)
+                @foreach($bottomTime->sortBy('byDay') as $workingTime)
                     <div class="checbox_wrap checbox_wrap--date">
 
                         {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
-                        array('class' => 'checkboxNew checkSingle','id'=>'checkD'.$workingTime->id)) !!}
+                        array('class' =>  'customCheckbox '.$workingTime->css_name,'id'=>'checkD'.$workingTime->id)) !!}
                         <label for="checkD{{$workingTime->id}}">{{$workingTime->name}}</label>
 
                     </div>
                 @endforeach
-
             </div>
 
         </div>
+
     </div>
+
+
+
 </div>
 {!! Form::close() !!}
 
-<div class="borderContainer">
+<div id="carerPets" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">Work with pets</h2>
-        <a href="#" class="profileCategory__link"
-           onclick="event.preventDefault();document.getElementById('carerPrivatePets').submit();"
-        >
-            <i class="fa fa-pencil"></i>
-        </a>
+        <a href="#" class="btn btn-info btn-edit btn-edit"><span class="fa fa-pencil" data-id="carerPrivatePets"></span> EDIT</a>
+        <button type="button" class="btn btn-success hidden" id="load" data-loading-text="<i class='fa fa-spinner
+        fa-spin '></i> Processing"><i class="fa fa-floppy-o"></i>  Save</button>
     </div>
 </div>
 {!! Form::model($carerProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivatePets']) !!}
@@ -133,7 +139,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
 null,['id'=>'depend-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
 
         </div>
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField profileField--two-thirds depend_hiding" style="display: none">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Details   </span>

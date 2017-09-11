@@ -5,7 +5,7 @@
 
 
             <div class="questionsBox__img">
-                <img src="./img/Signup_C_step5.jpg" alt="">
+                <img src="/img/Signup_C_step5.jpg" alt="">
             </div>
 
 
@@ -32,8 +32,8 @@
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
                         </select>--}}
-                        {!! Form::select('criminal_conviction',['1'=>'Yes, but they are very old, and for a minor offence.','2'=>'Yes','3'=>'No'],
-null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) !!}
+                        {!! Form::select('criminal_conviction',['Some'=>'Yes, but they are very old, and for a minor offence.','Yes'=>'Yes','No'=>'No'],
+null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
                     @if ($errors->has('criminal_conviction'))

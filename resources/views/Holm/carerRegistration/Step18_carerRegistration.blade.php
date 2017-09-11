@@ -7,7 +7,7 @@
 
 
             <div class="questionsBox__img">
-                <img src="./img/Signup_C_step18.jpg" alt="">
+                <img src="/img/Signup_C_step18.jpg" alt="">
             </div>
 
 
@@ -17,15 +17,16 @@
     </div>
 
     <?php
-    if (count($carersProfile->CarerReferences)){
+    if (count($carersProfile->CarerReferences)>1){
 
         //dd($carersProfile->CarerReferences);
         $carerReferenceC = $carersProfile->CarerReferences->splice(1);
-    }
-    if(isset($carerReferenceC))
         $carerReference = $carerReferenceC[0];
+    }
+/*    if(isset($carerReferenceC))
     //dd($carerReference)
-    ?>
+    */
+?>
 
 
 

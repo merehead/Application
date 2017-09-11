@@ -15,7 +15,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'user_type_id', 'referal_code',
+        'email',
+        'password',
+        'user_type_id',
+        'referal_code',
     ];
 
     /**
@@ -24,36 +27,88 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'activation_key',
+        'password',
+        'remember_token',
+        'activation_key',
     ];
 
 
-    public function meta()
-    {
-        return $this->hasMany('MetaUser');
-    }
-
-    public function tempUser()
-    {
-        return $this->hasOne('TempUser');
-    }
-
-
-    //--> ivan likhvar 2017 08  11
-
     public function userPurchaser()
     {
-        return $this->hasMany('App\Booking','purchaser_id','id');
+        return $this->hasMany('App\Booking', 'purchaser_id', 'id');
     }
 
     public function userService()
     {
-        return $this->hasMany('App\Booking','service_user_id','id');
+        return $this->hasMany('App\Booking', 'service_user_id', 'id');
     }
 
     public function userCarer()
     {
-        return $this->hasMany('App\Booking','carer_id','id');
+        return $this->hasMany('App\Booking', 'carer_id', 'id');
     }
-    //<--
+
+    public function userCarerProfile()
+    {
+        return $this->hasOne('App\CarersProfile', 'id', 'id');
+    }
+
+    public function userPurchaserProfile()
+    {
+        return $this->hasOne('App\PurchasersProfile', 'id', 'id');
+    }
+
+    public function bonusAcceptors()
+    {
+        return $this->hasMany('App\Bonuses_record', 'user_acceptor_id', 'id');
+    }
+
+    public function bonusDonors()
+    {
+        return $this->hasMany('App\Bonuses_record', 'user_donor_id', 'id');
+    }
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
+
+
+    public function userName()
+    {
+        if ($this->user_type_id == 3) {
+            return $this->userCarerProfile->like_name;
+        }
+
+        if ($this->user_type_id == 1) {
+            return $this->userPurchaserProfile->like_name;
+        }
+        return $this->id;
+    }
+
+    public function isCarer()
+    {
+        if ($this->user_type_id == 3) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isReregistrationCompleted()
+    {
+
+        if ($this->user_type_id == 3) { //carer
+            if ($this->userCarerProfile->registration_progress == '20') {
+                return true;
+            }
+        }
+        if ($this->user_type_id == 1) { //purchaser
+            if ($this->userPurchaserProfile->registration_progress == '4_1_2_1') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

@@ -5,7 +5,7 @@
 
 
             <div class="questionsBox__img">
-                <img src="./img/Signup_C_step8.jpg" alt="">
+                <img src="/img/Signup_C_step8.jpg" alt="">
             </div>
 
 
@@ -23,8 +23,7 @@
                     </h2>
                     <div class="inputWrap">
 
-                        {!! Form::select('driving_licence',['1'=>'Yes','2'=>'No'],
-($carersProfile->driving_licence == 'Yes' ? '1' : '2'),['id'=>'main-if2','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('driving_licence',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if2','class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
                     @if ($errors->has('driving_licence'))
@@ -73,8 +72,7 @@
                     </h2>
                     <div class="inputWrap">
 
-                        {!! Form::select('have_car',['1'=>'Yes','2'=>'No'],
-($carersProfile->have_car == 'Yes' ? '1' : '2'),['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('have_car',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
                     @if ($errors->has('have_car'))
                         <span class="help-block">
@@ -89,8 +87,7 @@
                     </h2>
                     <div class="inputWrap">
 
-                        {!! Form::select('use_car',['1'=>'Yes','2'=>'No'],
-($carersProfile->use_car == 'Yes' ? '1' : '2'),['class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('use_car',['Yes'=>'Yes','No'=>'No'],null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     </div>
 
                     @if ($errors->has('use_car'))

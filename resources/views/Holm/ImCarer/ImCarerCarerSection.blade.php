@@ -1,4 +1,24 @@
+<section class="mainSection ">
 
+    <div class="container">
+        <div class="breadcrumbs">
+            <a href="\" class="breadcrumbs__item">
+                Home
+            </a>
+            <span class="breadcrumbs__arrow">></span>
+            <a href="{{ route('ImCarerPage') }}" class="breadcrumbs__item">
+                i am a carer
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+
+    </div>
+
+</section>
 <section class="carerSection">
     <div class="container">
         <div class="carerContainer">
@@ -61,7 +81,7 @@
         <div class="advantages">
             <div class="advantages__item singleAdvantage">
                 <div class="singleAdvantage__img">
-                    <img src="./img/clock.png" alt="">
+                    <img src="/img/clock.png" alt="">
                 </div>
                 <div class="singleAdvantage__info">
                     <h2>
@@ -75,7 +95,7 @@
 
             <div class="advantages__item singleAdvantage">
                 <div class="singleAdvantage__img">
-                    <img src="./img/arrows.png" alt="">
+                    <img src="/img/arrows.png" alt="">
                 </div>
                 <div class="singleAdvantage__info">
                     <h2>
@@ -89,7 +109,7 @@
 
             <div class="advantages__item singleAdvantage">
                 <div class="singleAdvantage__img">
-                    <img src="./img/money.png" alt="">
+                    <img src="/img/money.png" alt="">
                 </div>
                 <div class="singleAdvantage__info">
                     <h2>
@@ -103,7 +123,7 @@
 
             <div class="advantages__item singleAdvantage">
                 <div class="singleAdvantage__img">
-                    <img src="./img/carer_user.png" alt="">
+                    <img src="/img/carer_user.png" alt="">
                 </div>
                 <div class="singleAdvantage__info">
                     <h2>

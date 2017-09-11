@@ -17,8 +17,14 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('email', 100)->unique();
             $table->string('password');
+            $table->string('referral_code')->nullable();
+            $table->integer     ('user_type_id')            ->unsigned();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->index('user_type_id');
+
+            $table->foreign('user_type_id')         ->references('id')->on('user_types');
         });
 
     }

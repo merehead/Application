@@ -6,29 +6,26 @@ use Illuminate\Http\Request;
 
 class HomePageController extends FrontController
 {
-    //private $carersProfile;
 
     public function __construct() {
         parent::__construct();
-        //$this->carersProfile = $carersProfile;
 
         $this->template = config('settings.frontTheme').'.templates.homePage';
     }
 
-
-
     public function index(){
-
 
         $this->title = 'Holm Care';
 
-        //$step = view(config('settings.frontTheme').'.carerRegistration.'.$this->carersProfile->getNextStep())->with($this->vars)->render();
-        //$this->vars = array_add($this->vars,'step',$step);
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
 
-//        $this->content = view(config('settings.frontTheme').'.homePage.homePage')->with($this->vars)->render();
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
         $this->content = view(config('settings.frontTheme').'.homePage.homePage')->render();
-
-        //dd($this->content);
 
         return $this->renderOutput();
     }

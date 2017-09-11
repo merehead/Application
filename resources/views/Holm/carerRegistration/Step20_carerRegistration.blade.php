@@ -5,7 +5,7 @@
 
 
             <div class="questionsBox__img">
-                <img src="./img/Signup_C_step20.jpg" alt="">
+                <img src="/img/Signup_C_step20.jpg" alt="">
             </div>
 
 
@@ -20,7 +20,7 @@
                     Do you have any other questions?
                 </h2>
                 <div class="inputWrap">
-                    {!! Form::select('have_questions',['1'=>'Yes','2'=>'No'],
+                    {!! Form::select('have_questions',['Yes'=>'Yes','No'=>'No'],
 null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                 </div>
                 @if ($errors->has('have_questions'))

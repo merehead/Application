@@ -27,18 +27,20 @@ class CarerRegistrationController extends FrontController
 
     public function index($stepback=null){
 
-
-        //dd('index',$stepback);
-
-
         $this->title = 'Carer Registration';
-        $header = view(config('settings.frontTheme').'.headers.userRegistrationHeader')->render();
-        $this->vars = array_add($this->vars,'header',$header);
 
-        $footer = view(config('settings.frontTheme').'.footers.userRegistrationFooter')->render();
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
         $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
 
         $user = Auth::user();
+
+        //dd('CarerRegistrationController index' , $user);
+
 
         if (!$user) {
             $step = view(config('settings.frontTheme').'.carerRegistration.Step1_carerRegistration')->with($this->vars)->render();
@@ -52,7 +54,7 @@ class CarerRegistrationController extends FrontController
             //dd($carersProfile->registration_progress);
 
             if($carersProfile->registration_progress=='20') {
-                return redirect('/im-carer');
+                return redirect('/carer-settings');
             }
 
 
@@ -109,7 +111,13 @@ class CarerRegistrationController extends FrontController
 
             $carerProfiles = CarersProfile::findOrFail($request->input('carersProfileID'));
 
-            $carerProfiles->registration_progress = $request->input('stepback');
+            if($stepback == '4' && $carerProfiles->criminal_conviction == 'Some' && $carerProfiles->registration_progress !='5')
+                $stepback = '5';
+
+
+            //dd($request->all(),$carerProfiles,$stepback);
+
+            $carerProfiles->registration_progress = $stepback;
 
             $carerProfiles->save();
 

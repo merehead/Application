@@ -5,7 +5,7 @@
 
 
                     <div class="questionsBox__img">
-                        <img src="./img/Signup_C_step4.jpg" alt="">
+                        <img src="/img/Signup_C_step4.jpg" alt="">
                     </div>
 
 
@@ -24,7 +24,7 @@
                             </h2>
                             <div class="inputWrap">
                                 {!! Form::select('title',['1'=>'Mr','2'=>'Mrs','3'=>'Miss','4'=>'Dr','5'=>'Prof'],
-null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss / Dr / Prof.']) !!}
+null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                             </div>
                             @if ($errors->has('title'))
                                 <span class="help-block">
@@ -173,8 +173,10 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Mr / Mrs / Miss /
                                 Postcode <span>*</span>
                             </h2>
                             <div class="inputWrap">
-
-                                {!! Form::select('postcode_id',$postcodes,null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) !!}
+{{--
+                                {!! Form::select('postcode_id',$postcodes,null,['class'=>'formInput personalForm__input','placeholder'=>'Please select','style'=>'width:30%']) !!}
+--}}
+                                {!! Form::text('postcode',null,['class'=>'formInput personalForm__input','placeholder'=>'Your postcode']) !!}
 
                             </div>
                             @if ($errors->has('postcode_id'))

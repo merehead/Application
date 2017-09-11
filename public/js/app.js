@@ -7,7 +7,7 @@ if("undefined"==typeof jQuery)throw new Error("Bootstrap's JavaScript requires j
  * jQuery JavaScript Library v3.2.1
  * https://jquery.com/
  *
- * Includes Sizzle.js
+ * includes Sizzle.js
  * https://sizzlejs.com/
  *
  * Copyright JS Foundation and other contributors
