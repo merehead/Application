@@ -46,7 +46,19 @@ class ServiceUserRegistration
             case '6' : $step = 'Step7_serviceUserRegistration';break;
             case '7' : $step = 'Step8_serviceUserRegistration';break;
             case '8' : $step = 'Step9_serviceUserRegistration';break;
-            case '9' : $step = 'Step9_1_serviceUserRegistration';break;
+            //case '9' : $step = 'Step9_1_serviceUserRegistration';break;
+
+
+            case '9'    :
+            {
+                if($this->model->FindOrFail($serviceUserProfileId)->kind_of_building == 'FLAT')
+                    $step = 'Step9_1_serviceUserRegistration';
+                else
+                    $step = 'Step10_serviceUserRegistration';
+                break;
+            }
+
+
             case '9_1' : $step = 'Step10_serviceUserRegistration';break;
 
             case '10' : $step = 'Step11_serviceUserRegistration';break;
@@ -56,16 +68,34 @@ class ServiceUserRegistration
             case '14' : $step = 'Step15_serviceUserRegistration';break;
             case '15' : $step = 'Step16_serviceUserRegistration';break;
             case '16' : $step = 'Step17_serviceUserRegistration';break;
-
-
             case '17' : $step = 'Step18_serviceUserRegistration';break;
             case '18' : $step = 'Step19_serviceUserRegistration';break;
-            case '19' : $step = 'Step20_serviceUserRegistration';break;
+            //case '19' : $step = 'Step20_serviceUserRegistration';break;
+            case '19' :
+            {
+                if($this->model->FindOrFail($serviceUserProfileId)->help_with_mobility == 'Yes'||
+                    $this->model->FindOrFail($serviceUserProfileId)->help_with_mobility == 'Sometimes')
+                    $step = 'Step20_serviceUserRegistration';
+                else
+                    $step = 'Step24_serviceUserRegistration';
+                break;
+            }
+
             case '20' : $step = 'Step21_serviceUserRegistration';break;
             case '21' : $step = 'Step22_serviceUserRegistration';break;
             case '22' : $step = 'Step23_serviceUserRegistration';break;
             case '23' : $step = 'Step24_serviceUserRegistration';break;
-            case '24' : $step = 'Step25_serviceUserRegistration';break;
+            //case '24' : $step = 'Step25_serviceUserRegistration';break;
+            case '24' :
+            {
+                if($this->model->FindOrFail($serviceUserProfileId)->communication == 'Yes'||
+                    $this->model->FindOrFail($serviceUserProfileId)->communication == 'Sometimes')
+                    $step = 'Step25_serviceUserRegistration';
+                else
+                    $step = 'Step29_serviceUserRegistration';
+                break;
+            }
+
             case '25' : $step = 'Step26_serviceUserRegistration';break;
             case '26' : $step = 'Step27_serviceUserRegistration';break;
             case '27' : $step = 'Step28_serviceUserRegistration';break;
@@ -86,7 +116,16 @@ class ServiceUserRegistration
             case '41' : $step = 'Step42_serviceUserRegistration';break;
             case '42' : $step = 'Step43_serviceUserRegistration';break;
             case '43' : $step = 'Step44_serviceUserRegistration';break;
-            case '44' : $step = 'Step45_serviceUserRegistration';break;
+            case '44' :
+            {
+                if($this->model->FindOrFail($serviceUserProfileId)->appropriate_clothes == 'Yes'||
+                    $this->model->FindOrFail($serviceUserProfileId)->appropriate_clothes == 'Sometimes')
+                    $step = 'Step45_serviceUserRegistration';
+                else
+                    $step = 'Step49_serviceUserRegistration';
+                break;
+            }
+            //case '44' : $step = 'Step45_serviceUserRegistration';break;
             case '45' : $step = 'Step46_serviceUserRegistration';break;
             case '46' : $step = 'Step47_serviceUserRegistration';break;
             case '47' : $step = 'Step48_serviceUserRegistration';break;
@@ -108,6 +147,43 @@ class ServiceUserRegistration
         }
 
         return $step;
+    }
+
+    public function getBackStep($serviceUserProfileId,$stepback){
+
+        //$currentStep = $this->model->FindOrFail($serviceUserProfileId)->registration_progress;
+
+//dd($stepback);
+        switch ($stepback) {
+
+            case '9'    :
+            {
+                if($this->model->FindOrFail($serviceUserProfileId)->kind_of_building != 'FLAT')
+                    $stepback = '8';
+                break;
+            }
+
+            case '22'    :
+            {
+                if($this->model->FindOrFail($serviceUserProfileId)->help_with_mobility == 'No')
+                    $stepback = '18';
+                break;
+            }
+            case '27'    :
+            {
+                if($this->model->FindOrFail($serviceUserProfileId)->communication == 'No')
+                    $stepback = '23';
+                break;
+            }
+            case '47'    :
+            {
+                if($this->model->FindOrFail($serviceUserProfileId)->appropriate_clothes == 'No')
+                    $stepback = '43';
+                break;
+            }
+        }
+        //dd($serviceUserProfileId,$stepback);
+        return $stepback;
     }
 
     public function setNextStep($request)
@@ -230,6 +306,8 @@ class ServiceUserRegistration
             case '6'    : $this->saveStep6($request);break;
             case '7'    : $this->saveStep7($request);break;
             case '9'    : $this->saveStep9($request);break;
+
+
             case '9_1'    : $this->saveStep9_1($request);break;
             case '10'    : $this->saveStep10($request);break;
             case '11'    : $this->saveStep11($request);break;

@@ -47,10 +47,10 @@ class PurchaserRegistrationController extends FrontController
 
             if ($this->purchaserProfile->getNextStep() == 'Step4_purchaserRegistration') {
                 //$postcodes = Postcode::all()->pluck('name', 'id')->toArray();
-                $this->vars = array_add($this->vars, 'user', $this->user);
                 //$this->vars = array_add($this->vars, 'postcodes', $postcodes);
+                $this->vars = array_add($this->vars, 'user', $this->user);
             }
-            if ($this->purchaserProfile->getNextStep() == 'Step4_1_purchaserRegistration') {
+            if ($this->purchaserProfile->getNextStep() == 'Step4_2_purchaserRegistration') {
 
                 if (count($purchasersProfile->serviceUsers)){
 
@@ -59,18 +59,20 @@ class PurchaserRegistrationController extends FrontController
                 else {
                     $serviceUsersProfile = new ServiceUsersProfile();
                     $serviceUsersProfile->purchaser_id = $purchasersProfile->id;
-                    $serviceUsersProfile->title        = $purchasersProfile->title;
-                    $serviceUsersProfile->first_name   = $purchasersProfile->first_name;
-                    $serviceUsersProfile->family_name  = $purchasersProfile->family_name;
-                    $serviceUsersProfile->like_name    = $purchasersProfile->like_name;
-                    $serviceUsersProfile->gender       = $purchasersProfile->gender;
-                    $serviceUsersProfile->mobile_number= $purchasersProfile->mobile_number;
-                    $serviceUsersProfile->address_line1= $purchasersProfile->address_line1;
-                    $serviceUsersProfile->address_line2= $purchasersProfile->address_line2;
-                    $serviceUsersProfile->address_line1= $purchasersProfile->address_line1;
-                    $serviceUsersProfile->town         = $purchasersProfile->town;
-                    $serviceUsersProfile->postcode     = $purchasersProfile->postcode;
-                    $serviceUsersProfile->DoB          = $purchasersProfile->DoB;
+                    if ($purchasersProfile->purchasing_care_for == 'Myself') {
+                        $serviceUsersProfile->title = $purchasersProfile->title;
+                        $serviceUsersProfile->first_name = $purchasersProfile->first_name;
+                        $serviceUsersProfile->family_name = $purchasersProfile->family_name;
+                        $serviceUsersProfile->like_name = $purchasersProfile->like_name;
+                        $serviceUsersProfile->gender = $purchasersProfile->gender;
+                        $serviceUsersProfile->mobile_number = $purchasersProfile->mobile_number;
+                        $serviceUsersProfile->address_line1 = $purchasersProfile->address_line1;
+                        $serviceUsersProfile->address_line2 = $purchasersProfile->address_line2;
+                        $serviceUsersProfile->address_line1 = $purchasersProfile->address_line1;
+                        $serviceUsersProfile->town = $purchasersProfile->town;
+                        $serviceUsersProfile->postcode = $purchasersProfile->postcode;
+                        $serviceUsersProfile->DoB = $purchasersProfile->DoB;
+                    }
                     $serviceUsersProfile->save();
                 }
 

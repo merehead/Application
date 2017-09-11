@@ -107,13 +107,8 @@ class ServiceUserRegistrationController extends FrontController
             abort('404');
 
         if ($request->has('stepback')) {
-            //dd($request->all());
 
-            $stepback = $request->stepback;
-
-            $serviceUserProfile = ServiceUsersProfile::findOrFail($serviceUserProfileId);
-
-            $serviceUserProfile->registration_progress = $request->input('stepback');
+            $serviceUserProfile->registration_progress = $this->serviceUserProfile->getBackStep($serviceUserProfileId,$request->input('stepback'));
 
             $serviceUserProfile->save();
 
