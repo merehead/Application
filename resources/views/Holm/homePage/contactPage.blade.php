@@ -2,11 +2,11 @@
     <div class="container">
         <div class="justifyContainer justifyContainer--smColumn">
             <div class="breadcrumbs">
-                <a href="index.html" class="breadcrumbs__item">
+                <a href="{{route('mainHomePage')}}" class="breadcrumbs__item">
                     Home
                 </a>
                 <span class="breadcrumbs__arrow">&gt;</span>
-                <a href="Contact_Us.html" class="breadcrumbs__item">
+                <a href="{{route('ContactPage')}}" class="breadcrumbs__item">
                     Contact Us
                 </a>
             </div>
@@ -28,8 +28,7 @@
                     <div class="contactForm__column">
                         <h2 class="fieldTitle">email adress <span> * </span></h2>
                         <div class="contactForm__field">
-                            <input type="email" name="email" class="contactForm__item" required placeholder="Your
-                            email">
+                            <input type="email" name="email" class="contactForm__item" required placeholder="Your email">
                             <span class="contactForm__ico"><i class="fa fa-envelope"></i></span>
                         </div>
                     </div>
@@ -63,9 +62,7 @@
                     <div class="contactForm__column">
                         <h2 class="fieldTitle">Message</h2>
                         <div class="contactForm__field contactForm__field--area ">
-                            <textarea type="text" name="message" class="contactForm__item contactForm__item--area">
-
-                            </textarea>
+                            <textarea type="text" name="message" class="contactForm__item contactForm__item--area"></textarea>
                             <span class="contactForm__ico"><i class="fa fa-pencil"></i></span>
                         </div>
                     </div>

@@ -24,6 +24,7 @@ Route::get('/', 'HomePageController@index')->name('mainHomePage');
 Route::get('/about', 'AboutController@index')->name('AboutPage');
 Route::get('/faq', 'FaqController@index')->name('FaqPage');
 Route::get('/contact', 'ContactController@index')->name('ContactPage');
+Route::get('/contact/thank', 'ContactController@thank')->name('ThankPage');
 Route::post('/contact', 'ContactController@send')->name('ContactSendMail');
 Route::get('/blog', 'BlogController@index')->name('BlogPage');
 Route::get('/blog/{blogId}', 'BlogController@view')->name('BlogViewPage');
