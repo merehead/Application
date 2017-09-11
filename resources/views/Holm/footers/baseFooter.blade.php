@@ -4,7 +4,7 @@
             <a href="{{route('AboutPage')}}" class="footerNav__item">
                 about us
             </a>
-            <a href="#" class="footerNav__item">
+            <a href="{{route('ContactPage')}}" class="footerNav__item">
                 contact
             </a>
             <a href="{{route('FaqPage')}}" class="footerNav__item">
