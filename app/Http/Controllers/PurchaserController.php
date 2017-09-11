@@ -64,9 +64,16 @@ class PurchaserController extends FrontController
         return $this->renderOutput();
     }
 
-    public function update(Request $reqest) {
+    public function update(Request $request) {
 
-        dd('public function update');
+        $input = $request->all();
+        $purchaserProfile = PurchasersProfile::findOrFail($input['id']);
+
+        if($input['stage'] == 'payment'){
+
+        }
+        return response(json_encode(['status'=>'does not save | function don`t result']),400);
+        //dd($input,$purchaserProfile);
 
     }
 

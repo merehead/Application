@@ -1,8 +1,9 @@
 <div id="carerTypeCare" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">TYPE OF CARE offered</h2>
-        <a href="#" class="btn btn-info"><span class="fa fa-pencil" data-id="carerPrivateTypeCare"></span> EDIT</a>
-        <a href="#" onclick="event.preventDefault();document.getElementById('carerPrivateTypeCare').submit();" class="btn btn-success hidden"><span class="glyphicon glyphicon-floppy-disk"></span> SAVE</a>
+        <a href="#" class="btn btn-info btn-edit"><span class="fa fa-pencil" data-id="carerPrivateTypeCare"></span> EDIT</a>
+        <button type="button" class="btn btn-success hidden" id="load" data-loading-text="<i class='fa fa-spinner
+        fa-spin '></i> Processing"><i class="fa fa-floppy-o"></i>  Save</button>
     </div>
 </div>
 {!! Form::model($typeCare, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateTypeCare']) !!}
@@ -14,7 +15,11 @@
         @foreach($typeCareRow as $typeCare)
                 <div class="profileField profileField--fourth">
                     <div class="checbox_wrap">
-                        {!! Form::checkbox('typeCare['.$typeCare->id.']', null,($carerProfile->AssistantsTypes->contains('id', $typeCare->id)? 1 : null),array('class' => 'checkboxNew','id'=>'check'.$typeCare->id,(in_array($typeCare->name,['MEDICATION / TREATMENTS','DRESSINGS AND WOUND MANAGEMENT','DEMENTIA CARE']))?'onclick="return false;"':'')) !!}
+                        {!! Form::checkbox('typeCare['.$typeCare->id.']', null,
+                        ($carerProfile->AssistantsTypes->contains('id', $typeCare->id)? 1 : null),array('class' =>
+                        'checkboxNew','id'=>'check'.$typeCare->id,(in_array($typeCare->name,['MEDICATION /
+                        TREATMENTS','DRESSINGS AND WOUND MANAGEMENT','DEMENTIA CARE']))?'onclick="return false;" data-edit="false"':''
+                        )) !!}
                         <label for="check{{$typeCare->id}}"> <span>{{$typeCare->name}}</span></label>
                     </div>
                 </div>

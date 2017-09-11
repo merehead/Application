@@ -23,7 +23,7 @@ Route::get('/', 'HomePageController@index')->name('mainHomePage');
 //---- static page ----
 Route::get('/about', 'AboutController@index')->name('AboutPage');
 Route::get('/faq', 'FaqController@index')->name('FaqPage');
-Route::get('/contact', 'AboutController@index')->name('ContactPage');
+Route::get('/contact', 'ContactController@index')->name('ContactPage');
 Route::get('/blog', 'AboutController@index')->name('BlogPage');
 Route::get('/terms', 'TermsController@index')->name('TermsPage');
 

@@ -1,8 +1,9 @@
 <div id="carerLanguages" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">Languages</h2>
-        <a href="#" class="btn btn-info"><span class="fa fa-pencil" data-id="carerPrivateLanguages"></span> EDIT</a>
-        <a href="#" onclick="event.preventDefault();document.getElementById('carerPrivateLanguages').submit();" class="btn btn-success hidden"><span class="glyphicon glyphicon-floppy-disk"></span> SAVE</a>
+        <a href="#" class="btn btn-info btn-edit"><span class="fa fa-pencil" data-id="carerPrivateLanguages"></span> EDIT</a>
+        <button type="button" class="btn btn-success hidden" id="load" data-loading-text="<i class='fa fa-spinner
+        fa-spin '></i> Processing"><i class="fa fa-floppy-o"></i>  Save</button>
     </div>
 </div>
 
@@ -44,8 +45,9 @@
 <div id="carerTransport" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">Transport</h2>
-        <a href="#" class="btn btn-info"><span class="fa fa-pencil" data-id="carerPrivateTransport"></span> EDIT</a>
-        <a href="#" onclick="event.preventDefault();document.getElementById('carerPrivateTransport').submit();" class="btn btn-success hidden"><span class="glyphicon glyphicon-floppy-disk"></span> SAVE</a>
+        <a href="#" class="btn btn-info btn-edit"><span class="fa fa-pencil" data-id="carerPrivateTransport"></span> EDIT</a>
+        <button type="button" class="btn btn-success hidden" id="load" data-loading-text="<i class='fa fa-spinner
+        fa-spin '></i> Processing"><i class="fa fa-floppy-o"></i>  Save</button>
     </div>
 </div>
 {!! Form::model($carerProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateTransport']) !!}
@@ -62,7 +64,7 @@
                 </h2>
 
                 {!! Form::select('driving_licence',['Yes'=>'Have UK/EEA Driving Licence','No'=>'Do not have a driving licence'],
-null,['class'=>'profileField__select profileField__select--greyBg','disabled']) !!}
+null,['class'=>'profileField__select profileField__select--greyBg','disabled','data-edit'=>'false']) !!}
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Have UK/EEA Driving Licence</option>
                     <option value="Flat">Do not have a driving licence</option>
@@ -123,7 +125,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                  Car insurance Number
                 </span>
                 </h2>
-                {!! Form::text('car_insurance_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Car insurance number','readonly']) !!}
+                {!! Form::text('car_insurance_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Car insurance number','readonly','data-edit'=>'false']) !!}
                {{-- <input type="text" class="profileField__input profileField__input--greyBg" placeholder="Car insurance number">--}}
             </div>
             <div class="profileField profileField--full-width">
@@ -162,7 +164,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                  UK\EEA Driving licence Number
                 </span>
                 </h2>
-                {!! Form::text('DBS_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Driving licence number','readonly']) !!}
+                {!! Form::text('DBS_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Driving licence number','readonly','data-edit'=>'false']) !!}
                 {{--<input type="text" class="profileField__input profileField__input--greyBg" placeholder="UK\EEA Driving licence Number">--}}
             </div>
             <div class="profileField profileField--full-width">

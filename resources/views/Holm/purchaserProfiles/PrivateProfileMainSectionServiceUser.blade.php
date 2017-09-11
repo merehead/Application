@@ -1,9 +1,6 @@
 <div class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">People i am BUYING care for</h2>
-        <a href="#" class="profileCategory__link">
-            <i class="fa fa-pencil"></i>
-        </a>
     </div>
 </div>
 <div class="peopleCareWrap">

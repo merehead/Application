@@ -1,8 +1,9 @@
 <div id="carerGeneral" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">General</h2>
-        <a href="#" class="btn btn-info"><span class="fa fa-pencil" data-id="carerPrivateGeneral"></span> EDIT</a>
-        <a href="#" onclick="event.preventDefault();document.getElementById('carerPrivateGeneral').submit();" class="btn btn-success hidden"><span class="glyphicon glyphicon-floppy-disk"></span> SAVE</a>
+        <a href="#" class="btn btn-info btn-edit"><span class="fa fa-pencil" data-id="carerPrivateGeneral"></span> EDIT</a>
+        <button type="button" class="btn btn-success hidden" id="load" data-loading-text="<i class='fa fa-spinner
+        fa-spin '></i> Processing"><i class="fa fa-floppy-o"></i>  Save</button>
     </div>
 </div>
 
@@ -106,7 +107,7 @@
                 <option value="Yes">Able work legally in the UK</option>
             </select>--}}
             {!! Form::select('work_UK',['Yes'=>'Yes','No'=>'No'],
-null,['class'=>'profileField__select  profileField__select--greyBg','disabled']) !!}
+null,['class'=>'profileField__select  profileField__select--greyBg','disabled','data-edit'=>'false']) !!}
         </div>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
@@ -117,7 +118,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','disabled'])
                 <option value="Yes">Do not have restrictions to work in the uk</option>
             </select>--}}
             {!! Form::select('work_UK_restriction',['Yes'=>'Yes','No'=>'No'],
-null,['class'=>'profileField__select  profileField__select--greyBg','disabled']) !!}
+null,['class'=>'profileField__select  profileField__select--greyBg','disabled','data-edit'=>'false']) !!}
         </div>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">

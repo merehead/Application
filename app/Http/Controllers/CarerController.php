@@ -107,6 +107,7 @@ class CarerController extends FrontController
             if (isset($input['address_line2'])) $carerProfiles->address_line2 = $input['address_line2'];
             if (isset($input['town'])) $carerProfiles->town = $input['town'];
             if (isset($input['postcode_id'])) $carerProfiles->postcode_id = $input['postcode_id'];
+            if (isset($input['postcode'])) $carerProfiles->postcode = $input['postcode'];
             if (isset($input['mobile_number'])) $carerProfiles->mobile_number = $input['mobile_number'];
             if (isset($input['sentence_yourself'])) $carerProfiles->sentence_yourself = $input['sentence_yourself'];
             if (isset($input['description_yourself'])) $carerProfiles->description_yourself = $input['description_yourself'];
@@ -226,7 +227,7 @@ class CarerController extends FrontController
         //return redirect()->back();
 
 
-        return Redirect::to(URL::previous() . $depart);
+        return response(json_encode(['status'=>'save']),200);
 
     }
 }
