@@ -25,6 +25,6 @@ class CreateXtableServiceUserProfilrToBehaviours extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('service_user_profile_behavior');
+        Schema::dropIfExists('service_user_profile_behaviour');
     }
 }

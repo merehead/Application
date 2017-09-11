@@ -48,6 +48,11 @@
 
 
                     <div class="inputWrap">
+                        @if($serviceUserProfile->DoB === "01/01/1970")
+                            <input name="DoB" id="datepicker" class="profileField__input" placeholder="Time" type="text">
+                        @else
+                            {!! Form::text('DoB',null,['id'=>'datepicker','class'=>'profileField__input']) !!}
+                        @endif
                         <input type="text" disabled="" class="formInput personalForm__input" placeholder="Time">
                         <span class="inputIco personalForm__ico centeredLink">
                   <i class="fa fa-calendar"></i>

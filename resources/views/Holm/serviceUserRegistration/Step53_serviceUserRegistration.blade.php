@@ -9,20 +9,19 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
-                <div class="formField">
+            {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
+
+            <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does [Service_user_name] need assistance keeping safe at night? <span>*</span>
+                        Does {{$userNameForSite}} need assistance keeping safe at night? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-                            <option value="select">Please select</option>
-
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="normally">Sometimes</option>
-                        </select>
+                        {!! Form::select('getting_ready_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('getting_ready_for_bed'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('getting_ready_for_bed') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
                 <div class="formField">
@@ -47,20 +46,20 @@
                 </span>
                     </div>
                 </div>
-
-
-            </form>
+            <input type="hidden" name="step" value='53'>
+            <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
 
     </div>
 </div>
 
 
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
+{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='53'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
+</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
