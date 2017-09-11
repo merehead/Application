@@ -92,7 +92,7 @@
                                             read more
                                         </a>
                                     </div>
-                                    <span class="postDate">{{$single->create_at}}</span>
+                                    <span class="postDate">{{$single->created_at}}</span>
                                 </div>
                             </div>
                             @endforeach
