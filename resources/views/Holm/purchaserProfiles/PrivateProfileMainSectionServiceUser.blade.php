@@ -14,7 +14,7 @@
 
                 <div class="peopleCare__item">
                     <div class="profilePhoto peopleCare__photo">
-                        <a href="" target="balnk">  <img src="./img/no_photo.png" alt=""> </a>
+                        <a href="" target="balnk">  <img src="/img/no_photo.png" alt=""> </a>
                     </div>
 
                     <h2 class="peopleCare__name">

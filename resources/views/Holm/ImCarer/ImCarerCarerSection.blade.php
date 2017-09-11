@@ -81,7 +81,7 @@
         <div class="advantages">
             <div class="advantages__item singleAdvantage">
                 <div class="singleAdvantage__img">
-                    <img src="./img/clock.png" alt="">
+                    <img src="/img/clock.png" alt="">
                 </div>
                 <div class="singleAdvantage__info">
                     <h2>
@@ -95,7 +95,7 @@
 
             <div class="advantages__item singleAdvantage">
                 <div class="singleAdvantage__img">
-                    <img src="./img/arrows.png" alt="">
+                    <img src="/img/arrows.png" alt="">
                 </div>
                 <div class="singleAdvantage__info">
                     <h2>
@@ -109,7 +109,7 @@
 
             <div class="advantages__item singleAdvantage">
                 <div class="singleAdvantage__img">
-                    <img src="./img/money.png" alt="">
+                    <img src="/img/money.png" alt="">
                 </div>
                 <div class="singleAdvantage__info">
                     <h2>
@@ -123,7 +123,7 @@
 
             <div class="advantages__item singleAdvantage">
                 <div class="singleAdvantage__img">
-                    <img src="./img/carer_user.png" alt="">
+                    <img src="/img/carer_user.png" alt="">
                 </div>
                 <div class="singleAdvantage__info">
                     <h2>

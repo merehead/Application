@@ -27,7 +27,7 @@
                     <div class="testimonialsPeople">
                         <a href="#" class="peopleBox">
                             <div class="profilePhoto peopleBox__photo">
-                                <img src="./img/Annie_B.png" alt="">
+                                <img src="/img/Annie_B.png" alt="">
                             </div>
                             <div class="peopleBox__info">
                                 <h2 class="profileName">ANNIE B.</h2>
@@ -39,7 +39,7 @@
                         </a>
                         <a href="#" class="peopleBox ">
                             <div class="profilePhoto peopleBox__photo">
-                                <img src="./img/John_R.png" alt="">
+                                <img src="/img/John_R.png" alt="">
                             </div>
                             <div class="peopleBox__info">
                                 <h2 class="profileName">JOHN R.</h2>
@@ -51,7 +51,7 @@
                         </a>
                         <a href="#" class="peopleBox ">
                             <div class="profilePhoto peopleBox__photo">
-                                <img src="./img/Ginger_P.png" alt="">
+                                <img src="/img/Ginger_P.png" alt="">
                             </div>
                             <div class="peopleBox__info">
                                 <h2 class="profileName">Ginger P.</h2>
@@ -66,7 +66,7 @@
                     <div class="testimonialsPeople">
                         <a href="#" class="peopleBox">
                             <div class="profilePhoto peopleBox__photo">
-                                <img src="./img/Annie_B.png" alt="">
+                                <img src="/img/Annie_B.png" alt="">
                             </div>
                             <div class="peopleBox__info">
                                 <h2 class="profileName">ANNIE B.</h2>
@@ -78,7 +78,7 @@
                         </a>
                         <a href="#" class="peopleBox ">
                             <div class="profilePhoto peopleBox__photo">
-                                <img src="./img/John_R.png" alt="">
+                                <img src="/img/John_R.png" alt="">
                             </div>
                             <div class="peopleBox__info">
                                 <h2 class="profileName">JOHN R.</h2>
@@ -90,7 +90,7 @@
                         </a>
                         <a href="#" class="peopleBox ">
                             <div class="profilePhoto peopleBox__photo">
-                                <img src="./img/Ginger_P.png" alt="">
+                                <img src="/img/Ginger_P.png" alt="">
                             </div>
                             <div class="peopleBox__info">
                                 <h2 class="profileName">Ginger P.</h2>

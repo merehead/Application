@@ -3,7 +3,7 @@
         <div class="questionsBox">
             <h2>Who is it for?</h2>
             <div class="questionsBox__img">
-                <img src="./img/Signup_P_step3.jpg" alt="">
+                <img src="/img/Signup_P_step3.jpg" alt="">
             </div>
         </div>
     </div>
