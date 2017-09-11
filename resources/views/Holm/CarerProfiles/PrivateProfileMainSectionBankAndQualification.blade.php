@@ -29,7 +29,7 @@
               </span>
 
             </h2>
-            {!! Form::text('account_number',null,['class'=>'profileField__input','placeholder'=>'Account number']) !!}
+            {!! Form::text('account_number',$user->account_number,['class'=>'profileField__input','placeholder'=>'Account number']) !!}
         </div>
     </div>
 </div>

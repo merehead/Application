@@ -85,6 +85,11 @@ function ajaxForm(form,that){
                 $(form).find('.error-block strong').html(response.toString());
             }
             that.button('reset');
+            var idForm =$(form).attr('id');
+            if(idForm=='carerPrivateGeneral'){
+                var geocoder = new google.maps.Geocoder();
+                geocodeAddress(geocoder, map);
+            }
             // -- processing effects ----------
             setTimeout(function() {
                 $(that).addClass('hidden');
@@ -94,6 +99,11 @@ function ajaxForm(form,that){
         },
         error: function (response) {
             that.button('reset');
+            var idForm =$(form).attr('id');
+            if(idForm=='carerPrivateGeneral'){
+                var geocoder = new google.maps.Geocoder();
+                geocodeAddress(geocoder, map);
+            }
             // -- processing effects -----------
             setTimeout(function() {
                 $(that).addClass('hidden');
