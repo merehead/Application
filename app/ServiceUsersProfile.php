@@ -68,7 +68,7 @@ class ServiceUsersProfile extends Model
         return date('d/m/Y',strtotime($value));
     }
 
-    public function setTimeToBedAttribute($value)
+/*    public function setTimeToBedAttribute($value)
     {
         $date = DateTime::createFromFormat('d/m/Y', $value);
 
@@ -79,9 +79,9 @@ class ServiceUsersProfile extends Model
     public function getTimeToBedAttribute($value)
     {
         return date('d/m/Y',strtotime($value));
-    }
+    }*/
 
-    public function setTimeToNightHelpingAttribute($value)
+/*    public function setTimeToNightHelpingAttribute($value)
     {
         $date = DateTime::createFromFormat('d/m/Y', $value);
 
@@ -92,5 +92,5 @@ class ServiceUsersProfile extends Model
     public function getTimeToNightHelpingAttribute($value)
     {
         return date('d/m/Y',strtotime($value));
-    }
+    }*/
 }

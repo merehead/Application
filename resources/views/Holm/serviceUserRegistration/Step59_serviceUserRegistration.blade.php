@@ -30,12 +30,14 @@
                 <h2 class="formLabel questionForm__label">
                     Please give further details. <span>*</span>
                 </h2>
+                <div class="inputWrap">
                 {!! Form::textarea('interests_hobbies_details',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
                 @if ($errors->has('interests_hobbies_details'))
                     <span class="help-block">
                                         <strong>{{ $errors->first('interests_hobbies_details') }}</strong>
                                     </span>
                 @endif
+                </div>
             </div>
         </div>
         <input type="hidden" name="step" value='59'>

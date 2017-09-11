@@ -45,10 +45,11 @@
 
 
                     <div class="inputWrap">
-                        @if($serviceUserProfile->time_to_bed === "01/01/1970")
-                            <input name="time_to_bed" id="datepicker" class="profileField__input" placeholder="Time" type="text">
+                        @if(empty($serviceUserProfile->time_to_night_helping))
+
+                            <input name="time_to_night_helping" id="timepicker" class="profileField__input" placeholder="Time" type="text">
                         @else
-                            {!! Form::text('time_to_night_helping',null,['id'=>'datepicker','class'=>'profileField__input']) !!}
+                            {!! Form::text('time_to_night_helping',null,['id'=>'timepicker','class'=>'profileField__input']) !!}
                         @endif
                         <span class="inputIco personalForm__ico centeredLink">
                   <i class="fa fa-calendar"></i>

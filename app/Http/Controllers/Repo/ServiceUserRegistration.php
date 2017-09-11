@@ -279,6 +279,8 @@ class ServiceUserRegistration
             case '57'    : $this->saveStep57($request);break;
             case '58'    : $this->saveStep58($request);break;
             case '59'    : $this->saveStep59($request);break;
+            case '60'    : $this->saveStep60($request);break;
+            case '61'    : $this->saveStep61($request);break;
         }
 
         $this->setNextStep($request);
@@ -1135,6 +1137,7 @@ class ServiceUserRegistration
         return;
     }
 
+
     private function saveStep58($request) {
 
         $this->validate($request,[
@@ -1160,6 +1163,40 @@ class ServiceUserRegistration
 
         $serviceUserProfile->interests_hobbies  = $request->input('interests_hobbies');
         $serviceUserProfile->interests_hobbies_details  = $request->input('interests_hobbies_details');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep60($request) {
+
+        $this->validate($request,[
+            'we_missed' => 'required|in:"Yes","No","Sometimes"',
+            'we_missed_details' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->we_missed  = $request->input('we_missed');
+        $serviceUserProfile->we_missed_details  = $request->input('we_missed_details');
+
+        $serviceUserProfile->update();
+
+        return;
+    }
+
+    private function saveStep61($request) {
+
+        $this->validate($request,[
+            'multiple_carers' => 'required|in:"Yes","No","Sometimes"',
+            'multiple_carers_details' => 'required|String:256',
+        ]);
+
+        $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        $serviceUserProfile->multiple_carers  = $request->input('multiple_carers');
+        $serviceUserProfile->multiple_carers_details  = $request->input('multiple_carers_details');
 
         $serviceUserProfile->update();
 

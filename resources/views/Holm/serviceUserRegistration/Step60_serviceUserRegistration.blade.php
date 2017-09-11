@@ -10,22 +10,19 @@
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
-            <form class="questionForm">
-                <div class="formField">
+            {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
+
+            <div class="formField">
                     <h2 class="formLabel questionForm__label">
                         Are there any other medical conditions, disabilities, or other pieces of information not already covered which you feel may be of use? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <select class="formSelect">
-
-
-                            <option value="select">Please select</option>
-
-
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="normally">Sometimes</option>
-                        </select>
+                        {!! Form::select('we_missed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        @if ($errors->has('we_missed'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('we_missed') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
 
@@ -34,21 +31,28 @@
                         Please give further details. <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <textarea class="formArea" placeholder="Details"></textarea>
+                        {!! Form::textarea('we_missed_details',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        @if ($errors->has('we_missed_details'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('we_missed_details') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
-            </form>
+            <input type="hidden" name="step" value='60'>
+            <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            {!! Form::close()!!}
         </div>
 
     </div>
 </div>
 
 
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
+{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='60'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
+</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

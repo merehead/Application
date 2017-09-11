@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800"
           rel="stylesheet">
-
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <link rel="stylesheet" href="{{asset('css/main.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/customize.css')}}">
     <link rel="stylesheet" href="{{asset('css/cupertino/jquery-ui.min.css')}}">
@@ -27,12 +27,26 @@
 @yield('modals')
 
 <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <script>
     $('.footerSocial a, .headerSocial a').click(function(e) {
         e.preventDefault();
         var href = $(this).attr('href');
         window.open(href, '_blank').focus();
     });
+
+    $('#timepicker').timepicker({
+        timeFormat: 'h:mm p',
+        interval: 30,
+        //minTime: '10',
+        //maxTime: '6:00pm',
+        //defaultTime: '18',
+        startTime: '18:00',
+        dynamic: true,
+        dropdown: true,
+        scrollbar: true
+    });
+
     $( function() {
         $( "#datepicker" ).datepicker({
             changeMonth: true,
