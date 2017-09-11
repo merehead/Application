@@ -1,10 +1,9 @@
 <div class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">Payments Details</h2>
-        <a href="#" class="profileCategory__link"
-           onclick="event.preventDefault();document.getElementById('Payment').submit();">
-            <i class="fa fa-pencil"></i>
-        </a>
+        <a href="#" class="btn btn-info btn-edit btn-edit"><span class="fa fa-pencil" data-id="Payment"></span> EDIT</a>
+        <button type="button" class="btn btn-success hidden" id="load" data-loading-text="<i class='fa fa-spinner
+        fa-spin '></i> Processing"><i class="fa fa-floppy-o"></i>  Save</button>
     </div>
 </div>
 <div class="borderContainer">

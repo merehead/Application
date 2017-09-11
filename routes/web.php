@@ -23,8 +23,10 @@ Route::get('/', 'HomePageController@index')->name('mainHomePage');
 //---- static page ----
 Route::get('/about', 'AboutController@index')->name('AboutPage');
 Route::get('/faq', 'FaqController@index')->name('FaqPage');
-Route::get('/contact', 'AboutController@index')->name('ContactPage');
-Route::get('/blog', 'AboutController@index')->name('BlogPage');
+Route::get('/contact', 'ContactController@index')->name('ContactPage');
+Route::post('/contact', 'ContactController@send')->name('ContactSendMail');
+Route::get('/blog', 'BlogController@index')->name('BlogPage');
+Route::get('/blog/{blogId}', 'BlogController@view')->name('BlogViewPage');
 Route::get('/terms', 'TermsController@index')->name('TermsPage');
 
 Route::get('/welcome-carer', 'CarerController@welcome')->name('welcomeCarer');

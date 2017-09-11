@@ -1,9 +1,6 @@
 <div class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">People i am BUYING care for</h2>
-        <a href="#" class="profileCategory__link">
-            <i class="fa fa-pencil"></i>
-        </a>
     </div>
 </div>
 <div class="peopleCareWrap">
@@ -17,7 +14,7 @@
 
                 <div class="peopleCare__item">
                     <div class="profilePhoto peopleCare__photo">
-                        <a href="" target="balnk">  <img src="./img/no_photo.png" alt=""> </a>
+                        <a href="" target="balnk">  <img src="/img/no_photo.png" alt=""> </a>
                     </div>
 
                     <h2 class="peopleCare__name">

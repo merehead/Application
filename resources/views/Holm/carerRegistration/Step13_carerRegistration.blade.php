@@ -4,7 +4,7 @@
             <h2>Languages</h2>
 
             <div class="questionsBox__img">
-                <img src="./img/Signup_C_step13.jpg" alt="">
+                <img src="/img/Signup_C_step13.jpg" alt="">
             </div>
 
         </div>

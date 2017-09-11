@@ -3,7 +3,7 @@
 </div>
 <div class="adminProfile">
     <div class="adminProfile__photo">
-        <img src={{asset("./img/admin/nik.png")}} alt="Nik_Seth" >
+        <img src={{asset("/img/admin/nik.png")}} alt="Nik_Seth" >
     </div>
     <h2 class="adminProfile__name">Nik Seth</h2>
     <p class="adminProfile__role">admin</p>

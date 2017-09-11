@@ -11,9 +11,11 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800"
           rel="stylesheet">
+
     <link rel="stylesheet" href="{{asset('css/main.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/customize.css')}}">
     <link rel="stylesheet" href="{{asset('css/cupertino/jquery-ui.min.css')}}">
+
 </head>
 <body>
 @yield('header')

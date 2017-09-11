@@ -4,13 +4,13 @@
             <a href="{{route('AboutPage')}}" class="footerNav__item">
                 about us
             </a>
-            <a href="#" class="footerNav__item">
+            <a href="{{route('ContactPage')}}" class="footerNav__item">
                 contact
             </a>
             <a href="{{route('FaqPage')}}" class="footerNav__item">
                 Frequently Asked Questions
             </a>
-            <a href="#" class="footerNav__item">
+            <a href="{{route('BlogPage')}}" class="footerNav__item">
                 blog
             </a>
         </div>
@@ -26,16 +26,16 @@
             @endif
             <div class="payment">
                 <a href="" class="payment__item">
-                    <img src="./img/pay1.png" alt="">
+                    <img src="/img/pay1.png" alt="">
                 </a>
                 <a href="" class="payment__item">
-                    <img src="./img/pay2.png" alt="">
+                    <img src="/img/pay2.png" alt="">
                 </a>
                 <a href="" class="payment__item">
-                    <img src="./img/pay3.png" alt="">
+                    <img src="/img/pay3.png" alt="">
                 </a>
                 <a href="" class="payment__item">
-                    <img src="./img/pay4.png" alt="">
+                    <img src="/img/pay4.png" alt="">
                 </a>
             </div>
         </div>

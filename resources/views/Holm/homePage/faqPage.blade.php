@@ -17,7 +17,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                            <span class="ordinaryTitle__text ordinaryTitle--medium">
+                            <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                              How are we different from a care agency?
                             </span>
                         </h2>
@@ -44,7 +44,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                            <span class="ordinaryTitle__text ordinaryTitle--medium">
+                            <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                              What is the carer paid?
                             </span>
                         </h2>
@@ -54,18 +54,17 @@
                     </a>
                     <div class="faq__content">
                         <p>
-                            A 20% commission is deducted from your payment, before being paid to the carer. This is an
-                            administrative and introductory fee necessary to ensure we continue to provide this service
-                            for all users. Carers are paid an minimum of £10 per hour. This is much better than
-                            conventional agencies which often take 100% commission and pay carers less. Carers deserve a
-                            real living wage.
+                            A 20% commission is added to the fee the carer earns. This is an administrative and introductory
+                            fee necessary to ensure we continue to provide this service for all users. Carers earn a minimum
+                            of £10 per hour. This is much better than through conventional agencies which often take a minimum
+                            of 80% commission and pay carers less. Carers deserve a real living wage.
                         </p>
                     </div>
                 </div>
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                            <span class="ordinaryTitle__text ordinaryTitle--medium">
+                            <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                              How does Holm work?
                             </span>
                         </h2>
@@ -89,7 +88,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                            <span class="ordinaryTitle__text ordinaryTitle--medium">
+                            <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                              Do I pick my own carer or do you assign one to me?
                             </span>
                         </h2>
@@ -99,7 +98,7 @@
                     </a>
                     <div class="faq__content">
                         <p>
-                            Unlike most care agencies, you can choose the best carers for your needs. If you need any
+                            Unlike with care agencies, you can choose the best carers for your needs. If you need any
                             assistance, please do let us know and we’ll be happy to help. The choice is always your’s.
                         </p>
                     </div>
@@ -108,7 +107,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                            <span class="ordinaryTitle__text ordinaryTitle--medium">
+                            <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                                 How do I find the right carer?
                             </span>
                         </h2>
@@ -127,7 +126,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                <span class="ordinaryTitle__text ordinaryTitle--medium">
+                <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                   Can I employ more than one carer?
                 </span>
                         </h2>
@@ -150,7 +149,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                <span class="ordinaryTitle__text ordinaryTitle--medium">
+                <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                   Why can’t I find a carer where I live?
                 </span>
                         </h2>
@@ -173,14 +172,13 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                <span class="ordinaryTitle__text ordinaryTitle--medium">
-                  How long is a visit?
-                </span>
+                            <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
+                              How long is a visit?
+                            </span>
                         </h2>
                         <span class="faq__ico">
-                <i class="fa fa-plus toggler"></i>
-              </span>
-
+                            <i class="fa fa-plus toggler"></i>
+                        </span>
                     </a>
                     <div class="faq__content">
                         <p>
@@ -197,7 +195,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                <span class="ordinaryTitle__text ordinaryTitle--medium">
+                <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                   What is the minimum contract length?
                 </span>
                         </h2>
@@ -220,7 +218,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                <span class="ordinaryTitle__text ordinaryTitle--medium">
+                <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                  Can I cancel a booking?
                 </span>
                         </h2>
@@ -246,7 +244,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                <span class="ordinaryTitle__text ordinaryTitle--medium">
+                <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                   How do I pay?
                 </span>
                         </h2>
@@ -257,7 +255,7 @@
                     </a>
                     <div class="faq__content">
                         <p>
-                            Home uses the same secure online payment system as many well known companies. You can use a
+                            Holm uses the same secure online payment system as many well known companies. You can use a
                             variety of debit and credit cards, as well as PayPal. Your payment details are taken at the
                             time of booking, but payment is only taken once the Carer has confirmed the booking. Your
                             money is held by a safe third party until both you and the carer have confirmed the visit
@@ -273,7 +271,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                <span class="ordinaryTitle__text ordinaryTitle--medium">
+                <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                  Can I pay carers with cash?
                 </span>
                         </h2>
@@ -297,7 +295,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                <span class="ordinaryTitle__text ordinaryTitle--medium">
+                <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                  Can I make alternative arrangements with carers without Holm?
                 </span>
                         </h2>
@@ -321,7 +319,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                <span class="ordinaryTitle__text ordinaryTitle--medium">
+                <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                  What happens if I am not happy with a carer?
                 </span>
                         </h2>
@@ -350,7 +348,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                <span class="ordinaryTitle__text ordinaryTitle--medium">
+                <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                  How are carers checked?
                 </span>
                         </h2>
@@ -378,7 +376,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                <span class="ordinaryTitle__text ordinaryTitle--medium">
+                <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                  Is Holm registered with the Care Quality Commission?
                 </span>
                         </h2>
@@ -404,7 +402,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                <span class="ordinaryTitle__text ordinaryTitle--medium">
+                <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                 What if there is a dispute?
                 </span>
                         </h2>
@@ -425,7 +423,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                <span class="ordinaryTitle__text ordinaryTitle--medium">
+                <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
                 I can’t find the answer to my question
                 </span>
                         </h2>

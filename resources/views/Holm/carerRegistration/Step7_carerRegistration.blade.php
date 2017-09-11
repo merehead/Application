@@ -7,7 +7,7 @@
             <h3>Don't worry if you don't have the certificates to hand, you can complete this later.</h3>
 
             <div class="questionsBox__img">
-                <img src="./img/Signup_C_step7.jpg" alt="">
+                <img src="/img/Signup_C_step7.jpg" alt="">
             </div>
 
 
