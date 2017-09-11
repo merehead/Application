@@ -571,7 +571,8 @@ class ServiceUserRegistration
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
 
-        $serviceUserProfile->ServiceUserConditions()->sync(array_keys($request->input('workingTime')));
+        if (count($request->input('workingTime')))
+            $serviceUserProfile->ServiceUserConditions()->sync(array_keys($request->input('workingTime')));
 
         $serviceUserProfile->conditions_detail  = $request->input('conditions_detail');
 
