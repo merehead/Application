@@ -257,6 +257,23 @@ $(document).ready(function () {
                 }
             }
         });
+        return false;
+    });
+    $(".faq__link").click(function (e) {
+        e.preventDefault();
+        var that = $(this).find('.toggler');
+        $(this).parent().find('.faq__content').slideToggle("slow", function () {
+            if ($(that).hasClass('fa')) {
+                if ($(that).hasClass('fa-minus')) {
+                    $(that).removeClass('fa-minus');
+                    $(that).addClass('fa-plus');
+                } else {
+                    $(that).addClass('fa-minus');
+                    $(that).removeClass('fa-plus');
+                }
+            }
+        });
+        return false;
     });
 
     //--- for page Faq -----

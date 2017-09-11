@@ -244,14 +244,11 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
-                  How do I pay?
-                </span>
+                            <span class="ordinaryTitle__text ordinaryTitle--medium">
+                              How do I pay?
+                            </span>
                         </h2>
-                        <span class="faq__ico">
-                <i class="fa fa-plus toggler"></i>
-              </span>
-
+                        <span class="faq__ico"><i class="fa fa-plus toggler"></i></span>
                     </a>
                     <div class="faq__content">
                         <p>
