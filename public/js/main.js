@@ -48,7 +48,7 @@ function refreshLoginForm(form) {
 function setNoEditableFields() {
 
     $carer_profile.find('select').attr("disabled", true).addClass('profileField__select--greyBg');
-    $carer_profile.find('checkbox').attr("readonly", true).addClass('profileField__select--greyBg');
+    $carer_profile.find('input[type="checkbox"]').attr("disabled", true).addClass('profileField__select--greyBg');
     $carer_profile.find('input').attr("readonly", true).addClass('profileField__input--greyBg');
     $carer_profile.find('textarea').attr("readonly", true).addClass('profileField__input--greyBg');
     return true;
@@ -56,7 +56,6 @@ function setNoEditableFields() {
 // -- Default cancel edit fields in Carer Profile ---------
 function cancelEditFieldsCarer() {
     $('[data-edit]').each(function () {
-        console.log($(this).get(0).tagName);
         switch ($(this).get(0).tagName){
             case "SELECT":
                 $(this).attr("disabled", true).addClass('profileField__select--greyBg');
@@ -119,7 +118,6 @@ function ajaxForm(form,that){
 
 // -- Document events ---------------
 $(document).ready(function () {
-   // console.log('check');
 
     $('.sortLinkXs').click(function (e) {
 
@@ -303,7 +301,7 @@ $(document).ready(function () {
         var that = $(this);
         var idForm ='form#'+$(that).find('span').attr('data-id');
         $(idForm).find('select').attr("disabled", false).removeClass('profileField__select--greyBg');
-        $(idForm).find('checkbox').attr("readonly", false).removeClass('profileField__select--greyBg');
+        $(idForm).find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
         $(idForm).find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
         $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
         $(that).hide();

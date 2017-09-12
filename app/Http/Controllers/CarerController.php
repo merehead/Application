@@ -189,6 +189,8 @@ class CarerController extends FrontController
 
             if (isset($input['languages']))
                 $carerProfiles->Languages()->sync(array_keys($input['languages']));
+                if (isset($input['language_additional'])) $carerProfiles->language_additional = $input['language_additional'];
+                $carerProfiles->save();
 
             unset($carerProfiles);
         }

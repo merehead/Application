@@ -15,6 +15,7 @@ input[type="checkbox"][readonly] {
     pointer-events: none;
 }
 
+.about_section{margin-top: 0px;}
 #workingTimes, #workingTimes:active, #workingTimes:focus
 {
     width:120px !important;
