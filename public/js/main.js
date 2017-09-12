@@ -56,10 +56,11 @@ function setNoEditableFields() {
     $carer_profile.find('textarea').attr("readonly", true).addClass('profileField__input--greyBg');
     return true;
 }
+
 // -- Default cancel edit fields in Carer Profile ---------
 function cancelEditFieldsCarer() {
     $('[data-edit]').each(function () {
-        switch ($(this).get(0).tagName){
+        switch ($(this).get(0).tagName) {
             case "SELECT":
                 $(this).attr("disabled", true).addClass('profileField__select--greyBg');
                 break;
@@ -67,7 +68,7 @@ function cancelEditFieldsCarer() {
                 $(this).attr("readonly", true).addClass('profileField__input--greyBg');
                 break;
             case "RADIO":
-                $(this).on('click',function () {
+                $(this).on('click', function () {
                     return false;
                 });
                 break;
@@ -76,7 +77,7 @@ function cancelEditFieldsCarer() {
 }
 
 // -- Send request to server with AJAX data ----------
-function ajaxForm(form,that){
+function ajaxForm(form, that) {
     var token = $(form).find('input[name=_token]').val();
     $.ajax({
         url: $(form).attr('action'),
@@ -89,13 +90,13 @@ function ajaxForm(form,that){
                 $(form).find('.error-block strong').html(response.toString());
             }
             that.button('reset');
-            var idForm =$(form).attr('id');
-            if(idForm =='carerPrivateGeneral'||idForm == "PrivateGeneral"){
+            var idForm = $(form).attr('id');
+            if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
                 var geocoder = new google.maps.Geocoder();
                 geocodeAddress(geocoder, map);
             }
             // -- processing effects ----------
-            setTimeout(function() {
+            setTimeout(function () {
                 $(that).addClass('hidden');
                 setNoEditableFields();
                 $(that).parent().find('a.btn-edit').show();
@@ -103,13 +104,13 @@ function ajaxForm(form,that){
         },
         error: function (response) {
             that.button('reset');
-            var idForm =$(form).attr('id');
-            if(idForm=='carerPrivateGeneral'||idForm == "PrivateGeneral"){
+            var idForm = $(form).attr('id');
+            if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
                 var geocoder = new google.maps.Geocoder();
                 geocodeAddress(geocoder, map);
             }
             // -- processing effects -----------
-            setTimeout(function() {
+            setTimeout(function () {
                 $(that).addClass('hidden');
                 setNoEditableFields();
                 $(that).parent().find('a.btn-edit').show();
@@ -259,7 +260,7 @@ $(document).ready(function () {
     $(".toggler").click(function (e) {
         e.preventDefault();
         var that = $(this).parent().find('i.toggler');
-        if(that.length==0)
+        if (that.length == 0)
             that = $(this).parent().parent().find('i.toggler');
         $(this).parent().parent().next().slideToggle("slow", function () {
             if ($(that).hasClass('fa')) {
@@ -298,11 +299,11 @@ $(document).ready(function () {
     $carer_profile = $('.carer-profile');
     setNoEditableFields();
     // -- Edit Carer Profile -------
-    $carer_profile.find('a.btn-edit').on('click',function(e){
+    $carer_profile.find('a.btn-edit').on('click', function (e) {
         e.preventDefault();
 
         var that = $(this);
-        var idForm ='form#'+$(that).find('span').attr('data-id');
+        var idForm = 'form#' + $(that).find('span').attr('data-id');
         $(idForm).find('select').attr("disabled", false).removeClass('profileField__select--greyBg');
         $(idForm).find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
         $(idForm).find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
@@ -314,14 +315,25 @@ $(document).ready(function () {
     });
 
     // -- Save Carer Profile -------
-    $carer_profile.find('button.btn-success').on('click',function (e) {
+    $carer_profile.find('button.btn-success').on('click', function (e) {
         e.preventDefault();
         var that = $(this);
-        var idForm ='form#'+$(that).parent().find('a>span').attr('data-id');
+        var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
         that.button('loading');
-        ajaxForm($(idForm),that);
+        ajaxForm($(idForm), that);
 
         return false;
     })
-
+    // -- Registration Carer Step 8
+    $('select[name="have_car"]').parent().parent().hide();
+    $('select[name="driving_licence"]').on('change', function (e) {
+        if ($(this).val() == 'Yes') {
+            {
+                $('select[name="have_car"]').parent().parent().show()
+            }
+        } else {
+            $('select[name="have_car"]').val('');
+            $('select[name="have_car"]').parent().parent().hide()
+        }
+    });
 });
