@@ -137,10 +137,11 @@ class CarerController extends FrontController
             $depart = "#carerBank";
 
             //$user = User::findOrFail($input['id']);
-
+            $carerProfiles = CarersProfile::findOrFail($input['id']);
             if (isset($input['sort_code'])) $carerProfiles->sort_code = $input['sort_code'];
             if (isset($input['account_number'])) $carerProfiles->account_number = $input['account_number'];
 
+            $carerProfiles->save();
        /*     $user->save();
             unset($user);*/
             unset($carerProfiles);
