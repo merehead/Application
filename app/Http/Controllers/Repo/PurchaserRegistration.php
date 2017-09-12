@@ -41,15 +41,15 @@ class PurchaserRegistration
             case '2' : $step = 'Step3_purchaserRegistration';break;
             case '3' : $step = 'Step4_purchaserRegistration';break;
             case '4' : $step = 'Step4_2_purchaserRegistration';break;
-            //case '4_2' : $step = 'Step4_1_purchaserRegistration';break;
-            case '4_2' :
+            case '4_2' : $step = 'Step4_1_purchaserRegistration';break;
+/*            case '4_2' :
             {
                 if($this->model->find($user->id)->purchasing_care_for == 'Myself')
                     $step = 'Step4_1_2_1_Thank__you_Sign_up';
                 else
                     $step = 'Step4_1_purchaserRegistration';
                 break;
-            }
+            }*/
             case '4_1' : $step = 'Step4_1_2_purchaserRegistration';break;
             case '4_1_2_1' : $step = 'Step4_1_2_1_Thank__you_Sign_up';break;
 
@@ -225,7 +225,7 @@ class PurchaserRegistration
                 ),
             'address_line2' =>
                 array(
-                    'required',
+                    'nullable',
                     'string',
                     'max:256'
                 ),

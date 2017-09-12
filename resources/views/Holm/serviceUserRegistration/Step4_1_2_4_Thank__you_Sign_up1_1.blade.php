@@ -43,7 +43,7 @@
     <a href="next" class="registrationBtns__item"
        onclick="event.preventDefault();document.getElementById('step').submit();"
     >
-        next step
+        Start
         <i class="fa fa-arrow-right"></i>
     </a>
 </div>

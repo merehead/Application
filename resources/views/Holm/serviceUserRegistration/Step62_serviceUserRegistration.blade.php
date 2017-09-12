@@ -52,6 +52,7 @@
 </form>
 
 
+{{--
 
 <div class="registrationBtns">
 
@@ -74,3 +75,4 @@
         <i class="fa fa-arrow-right"></i>
     </a>
 </div>
+--}}

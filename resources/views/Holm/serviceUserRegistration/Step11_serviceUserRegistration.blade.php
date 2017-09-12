@@ -17,7 +17,7 @@
 
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('home_safe',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('home_safe',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-noif','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('home_safe'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('home_safe') }}</strong>
@@ -27,7 +27,7 @@
 
                 </div>
 
-                <div class="formField">
+            <div class="formField sometimesNo_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Does {{$serviceUserProfile->like_name}} require assistance keeping the home safe and clean?
                     </h2>

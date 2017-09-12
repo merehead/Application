@@ -106,6 +106,14 @@
             {$(".sometimes_hiding").show( )}
         }
 
+        if($("#sometimes-noif").val()=='Sometimes'){
+            {$(".sometimesNo_hiding").show( )}
+        }
+        if($("#sometimes-noif").val()=='No'){
+            {$(".sometimesNo_hiding").show( )}
+        }
+
+
     });
 
     $(function(){
@@ -147,6 +155,17 @@
                 if($(this).val() == 'Yes') {$(".sometimes_hiding").show( )}
                 if($(this).val() == 'No') {$(".sometimes_hiding").hide( )}
                 if($(this).val() == 'Sometimes') {$(".sometimes_hiding").show( )}
+            }
+        });
+    });
+
+    $(function(){
+        $("#sometimes-noif").change(function(){
+            if($(this).val() !="0")
+            {
+                if($(this).val() == 'Yes') {$(".sometimesNo_hiding").hide( )}
+                if($(this).val() == 'No') {$(".sometimesNo_hiding").show( )}
+                if($(this).val() == 'Sometimes') {$(".sometimesNo_hiding").show( )}
             }
         });
     });

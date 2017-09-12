@@ -8,8 +8,8 @@
         <div class="sorryBox">
 
             <p class="info-p info-p--roboto">
-                Your answers will help the Carer better understand [Service User' Name]'s needs, in order to provide better care.<br> </br>
-                You will only need to answer these questions once about [service user name]. You can edit their details in their private profile page if you need to later.
+                Your answers will help the Carer better understand {{$userNameForSite}}'s needs, in order to provide better care.<br> </br>
+                You will only need to answer these questions once about {{$userNameForSite}}. You can edit their details in their private profile page if you need to later.
             </p>
         </div>
 

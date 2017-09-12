@@ -22,7 +22,7 @@
                         Does anyone else live with {{$serviceUserProfile->like_name}}?  <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('anyone_else_live',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('anyone_else_live',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
 
                         @if ($errors->has('anyone_else_live'))
                             <span class="help-block">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
 
-                <div class="formField">
+            <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Please give their name and relationship to {{$serviceUserProfile->like_name}}. <span>*</span>
                     </h2>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <div class="formField">
+            <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Is the other person likely to be home during care visits? <span>*</span>
                     </h2>

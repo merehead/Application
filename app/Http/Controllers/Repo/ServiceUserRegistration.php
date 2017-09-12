@@ -137,8 +137,18 @@ class ServiceUserRegistration
             case '40_1' : $step = 'Step41_serviceUserRegistration';break;
             case '41' : $step = 'Step42_serviceUserRegistration';break;
             case '42' : $step = 'Step43_serviceUserRegistration';break;
-            case '43' : $step = 'Step44_serviceUserRegistration';break;
-            case '44' :
+            //case '43' : $step = 'Step44_serviceUserRegistration';break;
+            case '43' : {
+                if ($this->model->FindOrFail($serviceUserProfileId)->appropriate_clothes == 'Yes' ||
+                    $this->model->FindOrFail($serviceUserProfileId)->appropriate_clothes == 'Sometimes')
+                    $step = 'Step44_serviceUserRegistration';
+                else {
+                    $this->model->where('id', $serviceUserProfileId)->update(['appropriate_clothes' => null, 'assistance_getting_dressed' => null, 'assistance_getting_dressed_detail' => null, 'assistance_with_bathing' => null, 'bathing_times_per_week' => null, 'managing_toilet_needs' => null, 'mobilising_to_toilet' => null, 'cleaning_themselves' => null]);
+                    $step = 'Step49_serviceUserRegistration';
+                }
+                break;
+            }
+/*            case '44' :
             {
                 if($this->model->FindOrFail($serviceUserProfileId)->appropriate_clothes == 'Yes'||
                     $this->model->FindOrFail($serviceUserProfileId)->appropriate_clothes == 'Sometimes')
@@ -148,8 +158,8 @@ class ServiceUserRegistration
                     $step = 'Step49_serviceUserRegistration';
                 }
                 break;
-            }
-            //case '44' : $step = 'Step45_serviceUserRegistration';break;
+            }*/
+            case '44' : $step = 'Step45_serviceUserRegistration';break;
             case '45' : $step = 'Step46_serviceUserRegistration';break;
             case '46' : $step = 'Step47_serviceUserRegistration';break;
             case '47' : $step = 'Step48_serviceUserRegistration';break;
@@ -201,8 +211,8 @@ class ServiceUserRegistration
             }
             case '47'    :
             {
-                if($this->model->FindOrFail($serviceUserProfileId)->appropriate_clothes == 'No')
-                    $stepback = '43';
+                if($this->model->FindOrFail($serviceUserProfileId)->assistance_with_personal_hygiene == 'No')
+                    $stepback = '42';
                 break;
             }
         }
@@ -540,8 +550,8 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'anyone_else_live' => 'required|in:"Yes","No","Sometimes"',
-            'anyone_detail' => 'required|String:128',
-            'anyone_friendly' => 'required|in:"Yes","No","Sometimes","Normally"',
+            'anyone_detail' => 'required_if:anyone_else_live,"Yes","Sometimes"|nullable|String:128',
+            'anyone_friendly' => 'required_if:anyone_else_live,"Yes","Sometimes"|nullable|in:"Yes","No","Sometimes","Normally"',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1194,7 +1204,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'toilet_at_night' => 'required|in:"Yes","No","Sometimes"',
-            'helping_toilet_at_night' => 'required|in:"Yes","No","Sometimes"',
+            'helping_toilet_at_night' => 'equired_if:toilet_at_night,"Yes","Sometimes"|nullable|in:"Yes","No","Sometimes"',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1312,14 +1322,18 @@ class ServiceUserRegistration
 
         $step = $this->model->find($id)->registration_progress;
 
+        //dd($this->model->find($id)->registration_progress);
+
         if ($step>=1)
             $activeStep=2;
         if ($step>=5||$step == '4_1_2_4')
             $activeStep=3;
-        if ($step>17)
+        if ($step>58)
             $activeStep=4;
-        if ($step>19)
-            $activeStep=5;
+/*        if ($step>19)
+            $activeStep=5;*/
+   /*     if ($step>59)
+            $activeStep=6;*/
         return $activeStep;
     }
 
@@ -1338,12 +1352,18 @@ class ServiceUserRegistration
             $activeSubStep=2;
         if ($step == '4_2'||$step == '4_1')
             $activeSubStep=3;
-        if ($step == '4_1_2_1'||'5')
+        if ($step == '4_1_2_1'||$step == '5')
             $activeSubStep=4;
-
-
-
-
+        if ($step >=6||$step == '5_1')
+            $activeSubStep=5;
+        if ($step >=7)
+            $activeSubStep=6;
+        if ($step >=15)
+            $activeSubStep=7;
+        if ($step >=59)
+            $activeSubStep=8;
+        if ($step >=61)
+            $activeSubStep=9;
         return $activeSubStep;
     }
 /*

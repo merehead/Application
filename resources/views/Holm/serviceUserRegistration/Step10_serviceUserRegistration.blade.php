@@ -19,7 +19,7 @@
                         Can {{$serviceUserProfile->like_name}} move around home safely by themselves? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('move_available',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('move_available',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-noif','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('move_available'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('assistance_keeping') }}</strong>
@@ -29,7 +29,7 @@
 
                 </div>
 
-                <div class="formField">
+            <div class="formField sometimesNo_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Does {{$serviceUserProfile->like_name}}  require assistance moving around home?
                     </h2>

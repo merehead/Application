@@ -14,7 +14,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does [Service_user_name] demonstrate any of the following? - (we will contact you later for
+                        Does {{$userNameForSite}} demonstrate any of the following? - (we will contact you later for
                         further details). <span>*</span>
                     </h2>
 
