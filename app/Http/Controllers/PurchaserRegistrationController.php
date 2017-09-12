@@ -38,24 +38,37 @@ class PurchaserRegistrationController extends FrontController
         if (!$user) {
             $step = view(config('settings.frontTheme').'.purchaserRegistration.Step1_purchaserRegistration')->with($this->vars)->render();
             $this->vars = array_add($this->vars,'activeStep',1);
+            $this->vars = array_add($this->vars,'activeSubStep',0);
         } else {
             $purchasersProfile = PurchasersProfile::findOrFail($user->id);
 
-            //dd($purchasersProfile->registration_progress);
+            //dd($this->purchaserProfile->getNextStep());
 
-/*            if ($carersProfile->registration_progress == '20') {
-                return redirect('/im-carer');
-            }*/
 
             $this->vars = array_add($this->vars, 'purchasersProfileID', $purchasersProfile->id);
             $this->vars = array_add($this->vars, 'purchasersProfile', $purchasersProfile);
 
             if ($this->purchaserProfile->getNextStep() == 'Step4_purchaserRegistration') {
                 //$postcodes = Postcode::all()->pluck('name', 'id')->toArray();
-                $this->vars = array_add($this->vars, 'user', $this->user);
                 //$this->vars = array_add($this->vars, 'postcodes', $postcodes);
+                $this->vars = array_add($this->vars, 'user', $this->user);
             }
             if ($this->purchaserProfile->getNextStep() == 'Step4_1_purchaserRegistration') {
+
+                //dd('gtehth');
+
+                if (!count($purchasersProfile->serviceUsers)) {
+                    $serviceUsersProfile = new ServiceUsersProfile();
+                    $serviceUsersProfile->purchaser_id = $purchasersProfile->id;
+                    $serviceUsersProfile->save();
+                } else {
+                    $serviceUsersProfile = $purchasersProfile->serviceUsers->first();
+                }
+                    $this->vars = array_add($this->vars, 'user', $this->user);
+                    $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
+
+            }
+            if ($this->purchaserProfile->getNextStep() == 'Step4_2_purchaserRegistration') {
 
                 if (count($purchasersProfile->serviceUsers)){
 
@@ -64,18 +77,20 @@ class PurchaserRegistrationController extends FrontController
                 else {
                     $serviceUsersProfile = new ServiceUsersProfile();
                     $serviceUsersProfile->purchaser_id = $purchasersProfile->id;
-                    $serviceUsersProfile->title        = $purchasersProfile->title;
-                    $serviceUsersProfile->first_name   = $purchasersProfile->first_name;
-                    $serviceUsersProfile->family_name  = $purchasersProfile->family_name;
-                    $serviceUsersProfile->like_name    = $purchasersProfile->like_name;
-                    $serviceUsersProfile->gender       = $purchasersProfile->gender;
-                    $serviceUsersProfile->mobile_number= $purchasersProfile->mobile_number;
-                    $serviceUsersProfile->address_line1= $purchasersProfile->address_line1;
-                    $serviceUsersProfile->address_line2= $purchasersProfile->address_line2;
-                    $serviceUsersProfile->address_line1= $purchasersProfile->address_line1;
-                    $serviceUsersProfile->town         = $purchasersProfile->town;
-                    $serviceUsersProfile->postcode     = $purchasersProfile->postcode;
-                    $serviceUsersProfile->DoB          = $purchasersProfile->DoB;
+                    if ($purchasersProfile->purchasing_care_for == 'Myself') {
+                        $serviceUsersProfile->title = $purchasersProfile->title;
+                        $serviceUsersProfile->first_name = $purchasersProfile->first_name;
+                        $serviceUsersProfile->family_name = $purchasersProfile->family_name;
+                        $serviceUsersProfile->like_name = $purchasersProfile->like_name;
+                        $serviceUsersProfile->gender = $purchasersProfile->gender;
+                        $serviceUsersProfile->mobile_number = $purchasersProfile->mobile_number;
+                        $serviceUsersProfile->address_line1 = $purchasersProfile->address_line1;
+                        $serviceUsersProfile->address_line2 = $purchasersProfile->address_line2;
+                        $serviceUsersProfile->address_line1 = $purchasersProfile->address_line1;
+                        $serviceUsersProfile->town = $purchasersProfile->town;
+                        $serviceUsersProfile->postcode = $purchasersProfile->postcode;
+                        $serviceUsersProfile->DoB = $purchasersProfile->DoB;
+                    }
                     $serviceUsersProfile->save();
                 }
 
@@ -102,14 +117,6 @@ class PurchaserRegistrationController extends FrontController
     }
 
     public function update(Request $request) {
-
-        //dd($request->all());
-
-
-/*        if ($request->input('step') == '4_2'){
-            $purchaserProfile = PurchasersProfile::findOrFail($request->input('purchasersProfileID'));
-        }*/
-
 
         if ($request->has('stepback')) {
             //dd($request->all());

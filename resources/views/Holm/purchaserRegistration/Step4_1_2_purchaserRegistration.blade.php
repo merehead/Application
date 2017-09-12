@@ -20,7 +20,7 @@
                 <div class="addRow addRow__for-single">
                     <div class="formField">
                         <h2 class=" formLabel questionForm__label">
-                            Please add a photo of {{$purchasersProfile->serviceUsers->first()->like_name}}. This will only be shared with carers you choose to book and will be visible on [service user name]'s profile. You can upload a photo later if you don't have one handy.                        </h2>
+                            Please add a photo of {{$purchasersProfile->serviceUsers->first()->like_name}}. This will only be shared with carers you choose to book and will be visible on {{$purchasersProfile->serviceUsers->first()->like_name}}'s profile. You can upload a photo later if you don't have one handy.                        </h2>
                         <div class="addContainer ">
                             <a href="#" class="add add--moreHeight">
                                 <i class="fa fa-plus-circle"></i>

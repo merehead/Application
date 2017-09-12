@@ -73,6 +73,11 @@ class User extends Authenticatable
         return $this->hasMany(Blog::class);
     }
 
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+
 
     public function userName()
     {

@@ -21,8 +21,9 @@
             <a href="{{route('welcomeCarer')}}" class="carerSelf">
                 i am a carer
             </a>
-            @include(config('settings.frontTheme').'.includes.loginOnPages')
-
+            @if (!Auth::check())
+            @include(config('settings.frontTheme').'.includes.loginLogoutOnPages')
+            @endif
             <div class="payment">
                 <a href="" class="payment__item">
                     <img src="/img/pay1.png" alt="">

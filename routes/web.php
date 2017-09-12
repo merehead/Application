@@ -35,7 +35,8 @@ Route::get('/carer-settings', 'CarerController@index')->name('carerSettings'); /
 Route::get('/im-carer', 'CarerController@index')->name('ImCarerPage');
 Route::post('/im-carer', 'CarerController@update')->name('ImCarerPrivatePage');
 
-Route::get('carer-registration/{stepback?}','CarerRegistrationController@index')->name('CarerRegistration');
+//Route::get('carer-registration/{stepback?}','CarerRegistrationController@index')->name('CarerRegistration');
+Route::get('carer-registration/','CarerRegistrationController@index')->name('CarerRegistration');
 Route::post('carer-registration','CarerRegistrationController@update')->name('CarerRegistrationPost');
 
 
@@ -43,6 +44,11 @@ Route::get('/purchaser-settings', 'PurchaserController@index')->name('purchaserS
 Route::post('/purchaser-settings','PurchaserController@update')->name('purchaserSettingsPost');
 Route::get('/purchaser-registration/','PurchaserRegistrationController@index')->name('PurchaserRegistration');
 Route::post('/purchaser-registration','PurchaserRegistrationController@update')->name('PurchaserRegistrationPost');
+
+Route::get('/service-registration/{serviceUserProfile}','ServiceUserRegistrationController@index')->name('ServiceUserRegistration');
+Route::post('/service-registration/{serviceUserProfile}','ServiceUserRegistrationController@update')->name('ServiceUserRegistration');
+
+Route::post('/document/upload','DocumentsController@upload')->name('UploadDocument');
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
 
@@ -64,4 +70,8 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::get('/bonus-payout-to-carer/{action}/{bonusRecordId}/{amount}', 'AdminSitePayment\AdminSitePayment@BonusPayoutToCarer')->name('BonusPayoutToCarer');
 
 
+});
+
+Route::get('/test_document_upload', function (){
+    return view('test_document_upload');
 });

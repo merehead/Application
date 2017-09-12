@@ -31,7 +31,8 @@
                     </div>
                     @if (Route::has('login'))
                         <div class="top-right links">
-                        @include(config('settings.frontTheme').'.includes.loginOnPages')
+                        {{--@include(config('settings.frontTheme').'.includes.loginOnPages')--}}
+                            @include(config('settings.frontTheme').'.includes.loginLogoutOnPages')
                         </div>
                     @endif
                 </div>

@@ -46,6 +46,8 @@ class CarersProfilesTable extends Migration
             $table->string      ('sentence_yourself'    ,512)->nullable();
             $table->string      ('have_questions'       ,8)->nullable();          //Yes/No
             $table->string      ('questions'            ,1024)->nullable();
+            $table->string      ('sort_code'            ,16)->nullable();
+            $table->string      ('account_number'       ,32)->nullable();
             $table->string      ('registration_progress',16)->nullable();          //step number
             $table->timestamps();
 
