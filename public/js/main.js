@@ -86,7 +86,7 @@ function ajaxForm(form,that){
             }
             that.button('reset');
             var idForm =$(form).attr('id');
-            if(idForm=='carerPrivateGeneral'){
+            if(idForm =='carerPrivateGeneral'||idForm == "PrivateGeneral"){
                 var geocoder = new google.maps.Geocoder();
                 geocodeAddress(geocoder, map);
             }
@@ -100,7 +100,7 @@ function ajaxForm(form,that){
         error: function (response) {
             that.button('reset');
             var idForm =$(form).attr('id');
-            if(idForm=='carerPrivateGeneral'){
+            if(idForm=='carerPrivateGeneral'||idForm == "PrivateGeneral"){
                 var geocoder = new google.maps.Geocoder();
                 geocodeAddress(geocoder, map);
             }
@@ -271,7 +271,7 @@ $(document).ready(function () {
     });
     $(".faq__link").click(function (e) {
         e.preventDefault();
-        var that = $(this).find('.toggler');
+        var that = $(this).parent().find('.toggler');
         $(this).parent().find('.faq__content').slideToggle("slow", function () {
             if ($(that).hasClass('fa')) {
                 if ($(that).hasClass('fa-minus')) {
