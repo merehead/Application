@@ -2,14 +2,10 @@
     <div class="registration__column registration__column--with-padding">
         <div class="questionsBox">
             <h2>Care</h2>
-
             <div class="questionsBox__img">
                 <img src="{{asset('/img/Signup_P_step5.jpg')}}" alt="">
             </div>
-
-
         </div>
-
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
@@ -38,20 +34,6 @@
                                         <strong>{{ $errors->first('serviceType') }}</strong>
                                     </span>
                     @endif
-
-{{--                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf1">
-                        <label for="boxf1"> Single / Regular visits</label>
-                    </div>
-                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf2">
-                        <label for="boxf2"> Live in care</label>
-                    </div>
-                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf3">
-                        <label for="boxf3"> Respite care</label>
-                    </div>--}}
-
                 </div>
                 <input type="hidden" name="step" value='5'>
                 <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
@@ -60,12 +42,6 @@
 
     </div>
 </div>
-
-{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='5'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

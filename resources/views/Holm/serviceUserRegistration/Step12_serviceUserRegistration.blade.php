@@ -16,7 +16,7 @@
                         Does {{$serviceUserProfile->like_name}} own any pets? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('own_pets',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('own_pets',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
 
                     @if ($errors->has('own_pets'))
                         <span class="help-block">
@@ -60,13 +60,6 @@
 
     </div>
 </div>
-
-{{--
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='12'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

@@ -16,18 +16,6 @@
                         What kind of building does {{$serviceUserProfile->like_name}}  live in? <span>*</span>
                     </h2>
 
-{{--                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf1">
-                        <label for="boxf1">Flat</label>
-                    </div>
-                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf2">
-                        <label for="boxf2"> House</label>
-                    </div>
-                    <div class="checkBox_item">
-                        <input type="checkbox" name="checkbox" class="customCheckbox" id="boxf3">
-                        <label for="boxf3"> Bungalow</label>
-                    </div>--}}
                     <div class="checkBox_item">
                     {{ Form::radio('kind_of_building', 'FLAT',false,['class'=>'radio','id'=>'radio1']) }}
                         <label for="radio1"><span> FLAT</span></label>
@@ -53,11 +41,6 @@
 
     </div>
 </div>
-{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='9'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

@@ -45,16 +45,6 @@
     </div>
 </div>
 
-
-
-{{--
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='5_1'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
---}}
-
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='5_1'>

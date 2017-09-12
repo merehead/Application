@@ -26,7 +26,6 @@
                             $id = 'boxf'.$first->id
                             ?>
 
-                            {{--<input type="checkbox" name="checkbox" class="customCheckbox" id="boxf3">--}}
                             {!! Form::checkbox('workingTime['.$first->id.']', null,($serviceUserProfile->WorkingTimes->contains('id', $first->id)? 1 : null),array('class' => 'customCheckbox '.$first->css_name,'id'=>$id)) !!}
 
                             <label for="boxf{{$first->id}}">{{$first->name}}</label>
@@ -64,12 +63,6 @@
     </div>
 
 </div>
-
-{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='6'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

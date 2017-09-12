@@ -2,14 +2,10 @@
     <div class="registration__column registration__column--with-padding">
         <div class="questionsBox">
             <h2>Start when?</h2>
-
             <div class="questionsBox__img">
                 <img src="{{asset('/img/Signup_P_step7.jpg')}}" alt="">
             </div>
-
-
         </div>
-
     </div>
     <div class="registration__column  registration__column--bg">
 
@@ -36,20 +32,11 @@
                                     </span>
                     @endif
 
-   {{--                 <div class="inputWrap">
-                        <input type="text" disabled="" class="formInput personalForm__input"
-                               placeholder="Start date">
-                        <span class="inputIco personalForm__ico centeredLink">
-                  <i class="fa fa-calendar"></i>
-                </span>
-                    </div>--}}
                 </div>
             <input type="hidden" name="step" value='7'>
             <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
             {!! Form::close()!!}
         </div>
-
-
 
 
     </div>

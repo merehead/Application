@@ -29,6 +29,21 @@ class ServiceUserRegistration
 
     }
 
+/*    private function DoEmpty($serviceUserProfileId,$fields){
+
+        $builder = $this->model->where('id',$serviceUserProfileId)->get();
+
+
+        dd($builder);
+
+        if (count($fields)){
+            foreach ($fields as $field) {
+
+            }
+        }
+
+    }*/
+
     public function getNextStep($serviceUserProfileId)
     {
         //$user = Auth::user();
@@ -53,9 +68,12 @@ class ServiceUserRegistration
             {
                 if($this->model->FindOrFail($serviceUserProfileId)->kind_of_building == 'FLAT')
                     $step = 'Step9_1_serviceUserRegistration';
-                else
+                else {
+                    $this->model->where('id',$serviceUserProfileId)->update(['lift_available' => null,'floor_id' => null]);
                     $step = 'Step10_serviceUserRegistration';
+                }
                 break;
+
             }
 
 
@@ -76,8 +94,10 @@ class ServiceUserRegistration
                 if($this->model->FindOrFail($serviceUserProfileId)->help_with_mobility == 'Yes'||
                     $this->model->FindOrFail($serviceUserProfileId)->help_with_mobility == 'Sometimes')
                     $step = 'Step20_serviceUserRegistration';
-                else
+                else {
+                    //$this->doEmpty(['lift_available','floor_id']);
                     $step = 'Step24_serviceUserRegistration';
+                }
                 break;
             }
 
@@ -464,7 +484,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'move_available' => 'required|in:"Yes","No","Sometimes"',
-            'assistance_moving' => 'required|in:"Yes","No","Sometimes"',
+            'assistance_moving' => 'nullable|in:"Yes","No","Sometimes"',
         ]);
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
 
@@ -1322,5 +1342,15 @@ class ServiceUserRegistration
 
         return $activeSubStep;
     }
+/*
+    private function DoEmpty($serviceUserProfileId,$fields){
+
+        if (count($fields)){
+            foreach ($fields as $field) {
+
+            }
+        }
+
+    }*/
 
 }

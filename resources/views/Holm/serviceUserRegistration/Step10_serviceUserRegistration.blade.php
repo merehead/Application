@@ -37,7 +37,7 @@
                         {!! Form::select('assistance_moving',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('assistance_moving'))
                             <span class="help-block">
-                                        <strong>{{ $errors->first('assistance_keeping') }}</strong>
+                                        <strong>{{ $errors->first('assistance_moving') }}</strong>
                                     </span>
                         @endif
                     </div>
@@ -49,13 +49,6 @@
 
     </div>
 </div>
-
-
-{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='10'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

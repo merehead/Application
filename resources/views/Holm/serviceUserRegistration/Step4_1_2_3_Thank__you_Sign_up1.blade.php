@@ -2,10 +2,6 @@
     <h2 class="thank__title">
         PLEASE ANSWER THESE QUESTIONS BEFORE BOOKING A CARER
     </h2>
-    <!-- <span class="successIco">
-       <i class="fa fa-check" aria-hidden="true"></i>
-     </span>
-     -->
     <p class="info-p">
         THIS QUESTIONNAIRE NORMALLY TAKES ABOUT 15 MINUTES TO COMPLETE, PROBABLY LESS.
     </p>

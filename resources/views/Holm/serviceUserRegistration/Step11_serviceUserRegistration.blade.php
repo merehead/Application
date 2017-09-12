@@ -2,17 +2,10 @@
     <div class="registration__column registration__column--with-padding">
         <div class="questionsBox">
             <h2>Home safety</h2>
-
-
-
             <div class="questionsBox__img">
                 <img src="{{asset('/img/Signup_P_step11.jpg')}}" alt="">
             </div>
-
-
-
         </div>
-
     </div>
     <div class="registration__column  registration__column--bg">
         <div class="personal">
@@ -32,8 +25,6 @@
                         @endif
                     </div>
 
-
-
                 </div>
 
                 <div class="formField">
@@ -49,7 +40,6 @@
                         @endif
                     </div>
 
-
                 </div>
             <input type="hidden" name="step" value='11'>
             <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
@@ -59,14 +49,6 @@
     </div>
 </div>
 
-
-{{--
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='11'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
---}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
