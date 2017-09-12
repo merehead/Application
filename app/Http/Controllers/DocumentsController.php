@@ -14,7 +14,7 @@ class DocumentsController extends Controller
 
         return Plupload::receive('file', function ($file) use ($user, $request)
         {
-            $fileName = md5(uniqid());
+            $fileName = md5(uniqid()).'.'.$file->extension();
             $user->documents()->create([
                 'title' => $request->title,
                 'type' => $request->type,
