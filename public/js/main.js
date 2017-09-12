@@ -3,7 +3,8 @@ var $carer_profile = null;
 
 // ------ Global Functions ----------
 function login_ajax(form) {
-
+    $('.login__body').hide();
+    $('.loader').show();
     var token = $(form).find('input[name=_token]').val();
     $(form).find('.error-block h3 strong').html('');
     $.ajax({
@@ -13,7 +14,8 @@ function login_ajax(form) {
         type: 'POST',
         dataType: "application/json",
         success: function (response) {
-
+            $('.login__body').show();
+            $('.loader').hide();
             if (response.status != 200) {
                 $(form).find('.error-block strong').html(response.email);
             } else {
@@ -22,7 +24,8 @@ function login_ajax(form) {
         },
         error: function (response) {
             $(form).find('.formField').hide();
-
+            $('.login__body').show();
+            $('.loader').hide();
             if (response.status != 200) {
                 var data = $.parseJSON(response.responseText);
                 $(form).find('.error-block h3 strong').html(data.email);
