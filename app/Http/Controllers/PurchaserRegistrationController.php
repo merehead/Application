@@ -42,6 +42,9 @@ class PurchaserRegistrationController extends FrontController
         } else {
             $purchasersProfile = PurchasersProfile::findOrFail($user->id);
 
+            //dd($this->purchaserProfile->getNextStep());
+
+
             $this->vars = array_add($this->vars, 'purchasersProfileID', $purchasersProfile->id);
             $this->vars = array_add($this->vars, 'purchasersProfile', $purchasersProfile);
 
@@ -49,6 +52,21 @@ class PurchaserRegistrationController extends FrontController
                 //$postcodes = Postcode::all()->pluck('name', 'id')->toArray();
                 //$this->vars = array_add($this->vars, 'postcodes', $postcodes);
                 $this->vars = array_add($this->vars, 'user', $this->user);
+            }
+            if ($this->purchaserProfile->getNextStep() == 'Step4_1_purchaserRegistration') {
+
+                //dd('gtehth');
+
+                if (!count($purchasersProfile->serviceUsers)) {
+                    $serviceUsersProfile = new ServiceUsersProfile();
+                    $serviceUsersProfile->purchaser_id = $purchasersProfile->id;
+                    $serviceUsersProfile->save();
+                } else {
+                    $serviceUsersProfile = $purchasersProfile->serviceUsers->first();
+                }
+                    $this->vars = array_add($this->vars, 'user', $this->user);
+                    $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
+
             }
             if ($this->purchaserProfile->getNextStep() == 'Step4_2_purchaserRegistration') {
 
