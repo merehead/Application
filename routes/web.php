@@ -48,6 +48,8 @@ Route::post('/purchaser-registration','PurchaserRegistrationController@update')-
 Route::get('/service-registration/{serviceUserProfile}','ServiceUserRegistrationController@index')->name('ServiceUserRegistration');
 Route::post('/service-registration/{serviceUserProfile}','ServiceUserRegistrationController@update')->name('ServiceUserRegistration');
 
+Route::post('/document/upload','DocumentsController@upload')->name('UploadDocument');
+
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
 
     Route::get('/', 'AdminController@index')->name('index');
@@ -68,4 +70,8 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::get('/bonus-payout-to-carer/{action}/{bonusRecordId}/{amount}', 'AdminSitePayment\AdminSitePayment@BonusPayoutToCarer')->name('BonusPayoutToCarer');
 
 
+});
+
+Route::get('/test_document_upload', function (){
+    return view('test_document_upload');
 });
