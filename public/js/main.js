@@ -255,7 +255,9 @@ $(document).ready(function () {
 
     $(".toggler").click(function (e) {
         e.preventDefault();
-        var that = $(this);
+        var that = $(this).parent().find('i.toggler');
+        if(that.length==0)
+            that = $(this).parent().parent().find('i.toggler');
         $(this).parent().parent().next().slideToggle("slow", function () {
             if ($(that).hasClass('fa')) {
                 if ($(that).hasClass('fa-minus')) {
@@ -271,7 +273,7 @@ $(document).ready(function () {
     });
     $(".faq__link").click(function (e) {
         e.preventDefault();
-        var that = $(this).parent().find('.toggler');
+        var that = $(this).find('i.toggler');
         $(this).parent().find('.faq__content').slideToggle("slow", function () {
             if ($(that).hasClass('fa')) {
                 if ($(that).hasClass('fa-minus')) {
