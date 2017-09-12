@@ -11,6 +11,10 @@
     color: green;
 }
 
+input[type="checkbox"][readonly] {
+    pointer-events: none;
+}
+
 #workingTimes, #workingTimes:active, #workingTimes:focus
 {
     width:120px !important;

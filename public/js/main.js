@@ -48,7 +48,9 @@ function refreshLoginForm(form) {
 function setNoEditableFields() {
 
     $carer_profile.find('select').attr("disabled", true).addClass('profileField__select--greyBg');
+    $carer_profile.find('checkbox').attr("readonly", true).addClass('profileField__select--greyBg');
     $carer_profile.find('input').attr("readonly", true).addClass('profileField__input--greyBg');
+    $carer_profile.find('textarea').attr("readonly", true).addClass('profileField__input--greyBg');
     return true;
 }
 // -- Default cancel edit fields in Carer Profile ---------
@@ -301,7 +303,9 @@ $(document).ready(function () {
         var that = $(this);
         var idForm ='form#'+$(that).find('span').attr('data-id');
         $(idForm).find('select').attr("disabled", false).removeClass('profileField__select--greyBg');
+        $(idForm).find('checkbox').attr("readonly", false).removeClass('profileField__select--greyBg');
         $(idForm).find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
+        $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
         $(that).hide();
         $(that).parent().find('button.hidden').removeClass('hidden');
         cancelEditFieldsCarer();
