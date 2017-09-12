@@ -16,7 +16,7 @@
                         Does {{$userNameForSite}} have problems getting dressed for bed? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('getting_dressed_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('getting_dressed_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('getting_dressed_for_bed'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('getting_dressed_for_bed') }}</strong>
@@ -27,12 +27,12 @@
 
                 </div>
 
-                <div class="formField">
+            <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Would {{$userNameForSite}} like help getting ready for bed?
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('getting_ready_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('getting_ready_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('getting_ready_for_bed'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('getting_ready_for_bed') }}</strong>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
 
-                <div class="formField">
+            <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         What time would {{$userNameForSite}} like someone to come and help?
                     </h2>
@@ -67,13 +67,6 @@
 
     </div>
 </div>
-
-{{--
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='52'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

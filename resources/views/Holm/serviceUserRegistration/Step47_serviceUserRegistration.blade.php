@@ -17,7 +17,7 @@
                         Does {{$userNameForSite}} need any assistance managing their toilet needs? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('managing_toilet_needs',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('managing_toilet_needs',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('managing_toilet_needs'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('managing_toilet_needs') }}</strong>
@@ -25,12 +25,12 @@
                         @endif
                     </div>
                 </div>
-                <div class="formField">
+            <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Does {{$userNameForSite}} need help mobilising themselves to the toilet? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('mobilising_to_toilet',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('mobilising_to_toilet',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('mobilising_to_toilet'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('mobilising_to_toilet') }}</strong>
@@ -38,12 +38,12 @@
                         @endif
                     </div>
                 </div>
-                <div class="formField">
+            <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Does {{$userNameForSite}} need help cleaning themselves when using the toilet? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('cleaning_themselves',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('cleaning_themselves',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('cleaning_themselves'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('cleaning_themselves') }}</strong>
@@ -58,13 +58,6 @@
 
     </div>
 </div>
-
-
-{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='47'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

@@ -16,7 +16,7 @@
                         Does {{$userNameForSite}} need the assistance of more than one person at a time to achieve any particular task? - eg bathing, dressing etc. <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('multiple_carers',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('multiple_carers',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('multiple_carers'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('multiple_carers') }}</strong>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
 
-                <div class="formField">
+            <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Please give further details. <span>*</span>
                     </h2>
@@ -46,12 +46,6 @@
     </div>
 </div>
 
-{{--
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='61'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

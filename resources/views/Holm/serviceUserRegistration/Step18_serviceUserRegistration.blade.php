@@ -16,7 +16,7 @@
                         Does {{$userNameForSite}} have Dementia?  <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('have_dementia',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('have_dementia',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('have_dementia'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('have_dementia') }}</strong>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-                <div class="formField">
+                <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Please give more information.  <span>*</span>
                     </h2>
@@ -50,12 +50,6 @@
     </div>
 </div>
 
-
-{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='18'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

@@ -16,7 +16,7 @@
                         Does {{$userNameForSite}} need help getting in / out of bed?  <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('mobility_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('mobility_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('mobility_bed'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('mobility_bed') }}</strong>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
 
-                <div class="formField">
+                <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Please give details of what kind of help is needed.  <span>*</span>
                     </h2>

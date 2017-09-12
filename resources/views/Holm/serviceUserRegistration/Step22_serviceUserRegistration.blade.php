@@ -18,7 +18,7 @@
                 </h2>
                 <div class="inputWrap">
                     <div class="inputWrap">
-                        {!! Form::select('mobility_home',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('mobility_home',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('mobility_home'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('mobility_home') }}</strong>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class="formField">
+            <div class="formField sometimes_hiding" style="display: none">
                 <h2 class="formLabel questionForm__label">
                     Please give details of what type of help is needed. <span>*</span>
                 </h2>
@@ -49,12 +49,6 @@
     </div>
 </div>
 
-
-{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='22'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

@@ -16,7 +16,7 @@
                         Does {{$userNameForSite}} have a doctor's note or court order saying that they are not able to give consent? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('consent',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('consent',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('consent'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('consent') }}</strong>
@@ -24,7 +24,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="formField">
+            <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Please give further details. <span>*</span>
                     </h2>
@@ -47,12 +47,6 @@
     </div>
 </div>
 
-
-{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='51'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

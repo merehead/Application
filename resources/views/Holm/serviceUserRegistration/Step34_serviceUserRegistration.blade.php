@@ -16,7 +16,7 @@
                         Does {{$userNameForSite}} have a risk of developing sores on the skin? - Please answer yes if there is a history of sores or if there is a high risk of developing them, if not looked after correctly. <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('skin_scores',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('skin_scores',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('skin_scores'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('skin_scores') }}</strong>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
 
-                <div class="formField">
+            <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Please give details of what equipment / treatments are being used. <span>*</span>
                     </h2>
@@ -46,15 +46,6 @@
 
     </div>
 </div>
-
-{{--
-
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='34'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
---}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

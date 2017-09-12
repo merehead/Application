@@ -17,7 +17,7 @@
                         Are there any other medical conditions, disabilities, or other pieces of information not already covered which you feel may be of use? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('we_missed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('we_missed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('we_missed'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('we_missed') }}</strong>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-                <div class="formField">
+            <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Please give further details. <span>*</span>
                     </h2>
@@ -46,13 +46,6 @@
 
     </div>
 </div>
-
-
-{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='60'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>--}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

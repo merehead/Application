@@ -16,7 +16,7 @@
                         Does {{$userNameForSite}} need assistance with bathing / showering? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('assistance_with_bathing',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('assistance_with_bathing',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('assistance_with_bathing'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('assistance_with_bathing') }}</strong>
@@ -26,7 +26,7 @@
 
                 </div>
 
-                <div class="formField">
+            <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         How many times a week? <span>*</span>
                     </h2>
@@ -52,12 +52,7 @@
     </div>
 </div>
 
-{{--
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='46'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>--}}
+
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

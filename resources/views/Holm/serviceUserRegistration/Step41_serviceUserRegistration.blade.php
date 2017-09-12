@@ -16,7 +16,7 @@
                         Does {{$userNameForSite}} require assistance with eating / drinking? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('assistance_with_eating',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('assistance_with_eating',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('assistance_with_eating'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('assistance_with_eating') }}</strong>
@@ -27,7 +27,7 @@
 
                 </div>
 
-                <div class="formField">
+            <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Please briefly explain what assistance is needed - (we will contact you for greater detail at a later date). <span>*</span>
                     </h2>
@@ -48,14 +48,6 @@
     </div>
 </div>
 
-{{--
-
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="step" value='41'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
---}}
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}

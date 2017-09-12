@@ -25,7 +25,7 @@
                     @endif
                     </div>
                 </div>
-                <div class="formField">
+                <div class="formField hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Please give details <span>*</span>
                     </h2>
@@ -40,12 +40,12 @@
 
                 </div>
 
-                <div class="formField">
+                <div class="formField hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Are the pets friendly with strangers?  <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('pet_friendly',['Yes'=>'Yes','No'=>'No','Normally'=>'Normally','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('pet_friendly',['Yes'=>'Yes','No'=>'No','Normally'=>'Normally','Sometimes'=>'Sometimes'],null,['class'=>'formSelect ','placeholder'=>'Please select']) !!}
                         @if ($errors->has('pet_friendly'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('pet_friendly') }}</strong>

@@ -99,6 +99,13 @@
             {$(".hiding2").show( )}
         }
 
+        if($("#sometimes-if").val()=='Sometimes'){
+            {$(".sometimes_hiding").show( )}
+        }
+        if($("#sometimes-if").val()=='Yes'){
+            {$(".sometimes_hiding").show( )}
+        }
+
     });
 
     $(function(){
@@ -132,6 +139,19 @@
             }
         });
     });
+
+    $(function(){
+        $("#sometimes-if").change(function(){
+            if($(this).val() !="0")
+            {
+                if($(this).val() == 'Yes') {$(".sometimes_hiding").show( )}
+                if($(this).val() == 'No') {$(".sometimes_hiding").hide( )}
+                if($(this).val() == 'Sometimes') {$(".sometimes_hiding").show( )}
+            }
+        });
+    });
+
+
 
     $(".allTime").click(function(){
         $('input.checkboxTimerGroup:checkbox').not(this).prop('checked', this.checked);
