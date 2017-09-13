@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
@@ -15,6 +16,6 @@ class Blog extends Model
     }
 
     public function getCreated_atAttribute($value){
-        return date('m Y',strtotime($value));
+        return date('d/m/Y',strtotime($value));
     }
 }
