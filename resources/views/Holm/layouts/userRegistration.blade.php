@@ -109,10 +109,45 @@
         if($("#sometimes-noif").val()=='Sometimes'){
             {$(".sometimesNo_hiding").show( )}
         }
+
+
         if($("#sometimes-noif").val()=='No'){
             {$(".sometimesNo_hiding").show( )}
         }
 
+        if($("#boxf12").attr("checked") == 'checked'){
+            {
+
+                $(".hiding").show();
+            }
+        }
+
+
+        $('#boxf12').change(function() {
+            if(this.checked) {
+                $(".hiding").show();
+            } else {
+                $(".hiding").hide();
+            }
+
+        });
+
+        if($("#boxf9").attr("checked") == 'checked'){
+            {
+
+                $(".hiding").show();
+            }
+        }
+
+
+        $('#boxf9').change(function() {
+            if(this.checked) {
+                $(".hiding").show();
+            } else {
+                $(".hiding").hide();
+            }
+
+        });
 
     });
 
