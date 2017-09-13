@@ -28,6 +28,7 @@ class CreateDocumentsTable extends Migration
                 'car_insurance_photo',
                 'driving_licence_photo',
                 'dbs_certificate_photo',
+                'personal_photo',
             ]);
             $table->timestamps();
 
