@@ -80,7 +80,7 @@ class ServiceUserRegistration
                     $this->model->FindOrFail($serviceUserProfileId)->help_with_mobility == 'Sometimes')
                     $step = 'Step20_serviceUserRegistration';
                 else {
-                    $this->model->where('id',$serviceUserProfileId)->update(['lift_available' => null,'falls_detail' => null,'mobility_bed' => null,'mobility_bed_detail' => null,'mobility_home' => null,'mobility_home_detail' => null,'mobility_shopping' => null,'mobility_shopping_detail' => null]);
+                    $this->model->where('id',$serviceUserProfileId)->update(['history_of_falls' => null,'falls_detail' => null,'mobility_bed' => null,'mobility_bed_detail' => null,'mobility_home' => null,'mobility_home_detail' => null,'mobility_shopping' => null,'mobility_shopping_detail' => null]);
                     $step = 'Step24_serviceUserRegistration';
                 }
                 break;
@@ -124,11 +124,15 @@ class ServiceUserRegistration
             case '42' : $step = 'Step43_serviceUserRegistration';break;
             //case '43' : $step = 'Step44_serviceUserRegistration';break;
             case '43' : {
-                if ($this->model->FindOrFail($serviceUserProfileId)->appropriate_clothes == 'Yes' ||
-                    $this->model->FindOrFail($serviceUserProfileId)->appropriate_clothes == 'Sometimes')
+                if ($this->model->FindOrFail($serviceUserProfileId)->assistance_with_personal_hygiene == 'Yes' ||
+                    $this->model->FindOrFail($serviceUserProfileId)->assistance_with_personal_hygiene == 'Sometimes')
                     $step = 'Step44_serviceUserRegistration';
                 else {
-                    $this->model->where('id', $serviceUserProfileId)->update(['appropriate_clothes' => null, 'assistance_getting_dressed' => null, 'assistance_getting_dressed_detail' => null, 'assistance_with_bathing' => null, 'bathing_times_per_week' => null, 'managing_toilet_needs' => null, 'mobilising_to_toilet' => null, 'cleaning_themselves' => null]);
+                    $this->model->where('id', $serviceUserProfileId)->update(['appropriate_clothes' => null, 'assistance_getting_dressed' => null,
+                        'assistance_getting_dressed_detail' => null, 'assistance_with_bathing' => null, 'bathing_times_per_week' => null,
+                        'managing_toilet_needs' => null, 'mobilising_to_toilet' => null, 'cleaning_themselves' => null,
+                        'have_incontinence' => null, 'kind_of_incontinence' => null, 'incontinence_wear' => null,
+                        'incontinence_products_stored' => null, 'choosing_incontinence_products' => null]);
                     $step = 'Step49_serviceUserRegistration';
                 }
                 break;
@@ -1169,7 +1173,7 @@ class ServiceUserRegistration
         $this->validate($request,[
             'keeping_safe_at_night' => 'required|in:"Yes","No","Sometimes"',
             'keeping_safe_at_night_details' => 'required_if:keeping_safe_at_night,"Yes","Sometimes"|nullable|String:256',
-            'time_to_night_helping' => 'required_if:keeping_safe_at_night,"Yes","Sometimes"|nullable|String:256',
+            'time_to_night_helping' => 'nullable|String:256',
 
         ]);
 

@@ -395,8 +395,8 @@ class CarerRegistration
     private function saveStep12($request) {
 
         $this->validate($request,[
-            'work_with_pets' => 'required|in:"Yes","No","It depends"',
-            'pets_description' => 'required_if:work_with_pets,"It depends"|string:512|nullable',
+            'work_with_pets' => 'required|in:"Yes","No","Sometimes"',
+            'pets_description' => 'required_if:work_with_pets,"Sometimes","Yes"|string:512|nullable',
         ]);
 
 /*        switch ($request->input('work_with_pets')){

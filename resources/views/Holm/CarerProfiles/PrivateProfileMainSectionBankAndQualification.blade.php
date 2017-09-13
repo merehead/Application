@@ -32,6 +32,11 @@
             </h2>
             {!! Form::text('account_number',$carerProfile->account_number,['class'=>'profileField__input',
             'placeholder'=>'Account number','maxlength'=>32]) !!}
+            @if ($errors->has('account_number'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('account_number') }}</strong>
+                                    </span>
+            @endif
         </div>
     </div>
 </div>

@@ -16,7 +16,10 @@
         </a>
         @else
             <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-registration' }}" class="registeredCarer">
-                <h2 class="profileName" style="padding-left:20px; ">continue sigh up</h2>
+{{--            <div class="profilePhoto registeredCarer__img">
+                <img src="./img/no_photo.png" alt="">
+            </div>--}}
+                <h2 class="profileName" style="padding-left:45px; ">continue sigh up</h2>
             </a>
         @endif
 

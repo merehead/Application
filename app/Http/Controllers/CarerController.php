@@ -134,6 +134,10 @@ class CarerController extends FrontController
         }
         if ($input['stage'] == 'bank') {
 
+            $this->validate($request,[
+                'account_number' => 'nullable|integer',
+            ]);
+
             $depart = "#carerBank";
 
             //$user = User::findOrFail($input['id']);
