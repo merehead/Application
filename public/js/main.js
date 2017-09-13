@@ -120,9 +120,24 @@ function ajaxForm(form, that) {
     return false;
 }
 
+function scale(block) {
+    var step = 0.1,
+        minfs = 10,
+        scw = block.scrollWidth,
+        w = block.offsetWidth+20;
+    if (scw < w) {
+        var fontsize = parseInt($(block).css('font-size'), 10) - step;
+        if (fontsize >= minfs){
+            $(block).css('font-size',fontsize)
+            scale(block);
+        }
+    }
+}
 // -- Document events ---------------
 $(document).ready(function () {
-
+    // Иван функция уменшает автоматом шрифт у имени пользователя в шапке
+    if($('.profileName'))
+        scale($('.profileName').parent()[0]);
     $('.sortLinkXs').click(function (e) {
 
         e.preventDefault();
@@ -301,7 +316,7 @@ $(document).ready(function () {
     // -- Edit Carer Profile -------
     $carer_profile.find('a.btn-edit').on('click', function (e) {
         e.preventDefault();
-
+        is_data_changed=true;
         var that = $(this);
         var idForm = 'form#' + $(that).find('span').attr('data-id');
         $(idForm).find('select').attr("disabled", false).removeClass('profileField__select--greyBg');
@@ -317,6 +332,7 @@ $(document).ready(function () {
     // -- Save Carer Profile -------
     $carer_profile.find('button.btn-success').on('click', function (e) {
         e.preventDefault();
+        is_data_changed=false;
         var that = $(this);
         var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
         that.button('loading');
@@ -336,4 +352,5 @@ $(document).ready(function () {
             $('select[name="have_car"]').parent().parent().hide()
         }
     });
+
 });
