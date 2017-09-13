@@ -3,10 +3,20 @@
         Home
     </a>
     <span class="breadcrumbs__arrow">></span>
-    <a href="Signup_P_step1.html" class="breadcrumbs__item">
+
+    @if(!empty($serviceUserProfile))
+    <a href="{{route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUserProfile->id])}}" class="breadcrumbs__item">
         Customer Registration
     </a>
-
+    @elseif (!empty($purchasersProfileID))
+        <a href="{{route('PurchaserRegistration')}}" class="breadcrumbs__item">
+            Customer Registration
+        </a>
+    @else
+        <a href="" class="breadcrumbs__item">
+            Customer Registration
+        </a>
+    @endif
 </div>
 
 <div class="signBox">
@@ -36,16 +46,6 @@
                 <i class="fa fa-check-circle"></i>
               </span>
             </div>
-            <!--<div class="signStep signStep--step2 ">
-              <div class="signStep__item">
-
-              </div>
-              <span class="signStep__ico">
-                <i class="fa fa-check-circle"></i>
-              </span>
-            </div>
-			-->
-
             <div class="signStep signStep--step2 signStep--haveSubsteps">
                 <div class="signStep__item">
                     <div class="signSubstep signSubstep--step1  {{$activeSubStep > 0 ? "signSubstep--active"  : ""}}">

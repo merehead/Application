@@ -18,7 +18,7 @@
                     </div>
 
                     <h2 class="peopleCare__name">
-                        <a href="" target="balnk">{{$serviceUser->like_name}}</a>
+                        <a href="{{route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUser->id])}}" target="balnk">{{$serviceUser->like_name}}</a>
                     </h2>
                     <a href="" class="peopleCare__delete">
                         <i class="fa fa-trash" aria-hidden="true"></i>
