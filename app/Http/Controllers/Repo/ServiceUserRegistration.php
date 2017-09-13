@@ -29,21 +29,6 @@ class ServiceUserRegistration
 
     }
 
-/*    private function DoEmpty($serviceUserProfileId,$fields){
-
-        $builder = $this->model->where('id',$serviceUserProfileId)->get();
-
-
-        dd($builder);
-
-        if (count($fields)){
-            foreach ($fields as $field) {
-
-            }
-        }
-
-    }*/
-
     public function getNextStep($serviceUserProfileId)
     {
         //$user = Auth::user();
@@ -69,7 +54,7 @@ class ServiceUserRegistration
                 if($this->model->FindOrFail($serviceUserProfileId)->kind_of_building == 'FLAT')
                     $step = 'Step9_1_serviceUserRegistration';
                 else {
-                    $this->model->where('id',$serviceUserProfileId)->update(['history_of_falls' => null,'floor_id' => null]);
+                    $this->model->where('id',$serviceUserProfileId)->update(['lift_available' => null,'floor_id' => null]);
                     $step = 'Step10_serviceUserRegistration';
                 }
                 break;

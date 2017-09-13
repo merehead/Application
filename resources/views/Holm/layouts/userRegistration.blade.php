@@ -39,8 +39,9 @@
   var file
 
   $('.addInfo__input').change(function () {
-    var input_name = $(this).attr('name')
-    var input_field = $("input[name="+input_name+"]").val()
+    // var input_name = $(this).attr('name')
+    // var input_field = $("input[name="+input_name+"]").val()
+    console.log(arrFiles)
   })
 
   $('.pickfiles').on('change', function() {
@@ -90,7 +91,7 @@
       formdata.append('chunk', chunk)
       formdata.append('chunks', chunks)
       formdata.append('title', 'test')
-      // formdata.append('type', file.type_value)
+      // formdata.append('title', file.title)
       formdata.append('type', 'nvq')
       formdata.append('file', fileSend)
       chunk += 1

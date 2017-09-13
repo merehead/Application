@@ -3,7 +3,8 @@ var $carer_profile = null;
 
 // ------ Global Functions ----------
 function login_ajax(form) {
-
+    $('.login__body').hide();
+    $('.loader').show();
     var token = $(form).find('input[name=_token]').val();
     $(form).find('.error-block h3 strong').html('');
     $.ajax({
@@ -13,7 +14,8 @@ function login_ajax(form) {
         type: 'POST',
         dataType: "application/json",
         success: function (response) {
-
+            $('.login__body').show();
+            $('.loader').hide();
             if (response.status != 200) {
                 $(form).find('.error-block strong').html(response.email);
             } else {
@@ -22,7 +24,8 @@ function login_ajax(form) {
         },
         error: function (response) {
             $(form).find('.formField').hide();
-
+            $('.login__body').show();
+            $('.loader').hide();
             if (response.status != 200) {
                 var data = $.parseJSON(response.responseText);
                 $(form).find('.error-block h3 strong').html(data.email);
@@ -48,14 +51,16 @@ function refreshLoginForm(form) {
 function setNoEditableFields() {
 
     $carer_profile.find('select').attr("disabled", true).addClass('profileField__select--greyBg');
+    $carer_profile.find('input[type="checkbox"]').attr("disabled", true).addClass('profileField__select--greyBg');
     $carer_profile.find('input').attr("readonly", true).addClass('profileField__input--greyBg');
+    $carer_profile.find('textarea').attr("readonly", true).addClass('profileField__input--greyBg');
     return true;
 }
+
 // -- Default cancel edit fields in Carer Profile ---------
 function cancelEditFieldsCarer() {
     $('[data-edit]').each(function () {
-        console.log($(this).get(0).tagName);
-        switch ($(this).get(0).tagName){
+        switch ($(this).get(0).tagName) {
             case "SELECT":
                 $(this).attr("disabled", true).addClass('profileField__select--greyBg');
                 break;
@@ -63,7 +68,7 @@ function cancelEditFieldsCarer() {
                 $(this).attr("readonly", true).addClass('profileField__input--greyBg');
                 break;
             case "RADIO":
-                $(this).on('click',function () {
+                $(this).on('click', function () {
                     return false;
                 });
                 break;
@@ -72,7 +77,7 @@ function cancelEditFieldsCarer() {
 }
 
 // -- Send request to server with AJAX data ----------
-function ajaxForm(form,that){
+function ajaxForm(form, that) {
     var token = $(form).find('input[name=_token]').val();
     $.ajax({
         url: $(form).attr('action'),
@@ -85,8 +90,13 @@ function ajaxForm(form,that){
                 $(form).find('.error-block strong').html(response.toString());
             }
             that.button('reset');
+            var idForm = $(form).attr('id');
+            if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
+                var geocoder = new google.maps.Geocoder();
+                geocodeAddress(geocoder, map);
+            }
             // -- processing effects ----------
-            setTimeout(function() {
+            setTimeout(function () {
                 $(that).addClass('hidden');
                 setNoEditableFields();
                 $(that).parent().find('a.btn-edit').show();
@@ -94,8 +104,13 @@ function ajaxForm(form,that){
         },
         error: function (response) {
             that.button('reset');
+            var idForm = $(form).attr('id');
+            if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
+                var geocoder = new google.maps.Geocoder();
+                geocodeAddress(geocoder, map);
+            }
             // -- processing effects -----------
-            setTimeout(function() {
+            setTimeout(function () {
                 $(that).addClass('hidden');
                 setNoEditableFields();
                 $(that).parent().find('a.btn-edit').show();
@@ -105,10 +120,24 @@ function ajaxForm(form,that){
     return false;
 }
 
+function scale(block) {
+    var step = 0.1,
+        minfs = 10,
+        scw = block.scrollWidth,
+        w = block.offsetWidth+20;
+    if (scw < w) {
+        var fontsize = parseInt($(block).css('font-size'), 10) - step;
+        if (fontsize >= minfs){
+            $(block).css('font-size',fontsize)
+            scale(block);
+        }
+    }
+}
 // -- Document events ---------------
 $(document).ready(function () {
-   // console.log('check');
-
+    // Иван функция уменшает автоматом шрифт у имени пользователя в шапке
+    if($('.profileName'))
+        scale($('.profileName').parent()[0]);
     $('.sortLinkXs').click(function (e) {
 
         e.preventDefault();
@@ -245,7 +274,9 @@ $(document).ready(function () {
 
     $(".toggler").click(function (e) {
         e.preventDefault();
-        var that = $(this);
+        var that = $(this).parent().find('i.toggler');
+        if (that.length == 0)
+            that = $(this).parent().parent().find('i.toggler');
         $(this).parent().parent().next().slideToggle("slow", function () {
             if ($(that).hasClass('fa')) {
                 if ($(that).hasClass('fa-minus')) {
@@ -261,7 +292,7 @@ $(document).ready(function () {
     });
     $(".faq__link").click(function (e) {
         e.preventDefault();
-        var that = $(this).find('.toggler');
+        var that = $(this).find('i.toggler');
         $(this).parent().find('.faq__content').slideToggle("slow", function () {
             if ($(that).hasClass('fa')) {
                 if ($(that).hasClass('fa-minus')) {
@@ -283,13 +314,15 @@ $(document).ready(function () {
     $carer_profile = $('.carer-profile');
     setNoEditableFields();
     // -- Edit Carer Profile -------
-    $carer_profile.find('a.btn-edit').on('click',function(e){
+    $carer_profile.find('a.btn-edit').on('click', function (e) {
         e.preventDefault();
-
+        is_data_changed=true;
         var that = $(this);
-        var idForm ='form#'+$(that).find('span').attr('data-id');
+        var idForm = 'form#' + $(that).find('span').attr('data-id');
         $(idForm).find('select').attr("disabled", false).removeClass('profileField__select--greyBg');
+        $(idForm).find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
         $(idForm).find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
+        $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
         $(that).hide();
         $(that).parent().find('button.hidden').removeClass('hidden');
         cancelEditFieldsCarer();
@@ -297,14 +330,27 @@ $(document).ready(function () {
     });
 
     // -- Save Carer Profile -------
-    $carer_profile.find('button.btn-success').on('click',function (e) {
+    $carer_profile.find('button.btn-success').on('click', function (e) {
         e.preventDefault();
+        is_data_changed=false;
         var that = $(this);
-        var idForm ='form#'+$(that).parent().find('a>span').attr('data-id');
+        var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
         that.button('loading');
-        ajaxForm($(idForm),that);
+        ajaxForm($(idForm), that);
 
         return false;
     })
+    // -- Registration Carer Step 8
+    $('select[name="have_car"]').parent().parent().hide();
+    $('select[name="driving_licence"]').on('change', function (e) {
+        if ($(this).val() == 'Yes') {
+            {
+                $('select[name="have_car"]').parent().parent().show()
+            }
+        } else {
+            $('select[name="have_car"]').val('');
+            $('select[name="have_car"]').parent().parent().hide()
+        }
+    });
 
 });
