@@ -5,9 +5,7 @@
             <div class="profilePhoto registeredCarer__img">
                 <img src="./img/no_photo.png" alt="">
             </div>
-            <h2 class="profileName">
-                {!! Auth::user()->userName() !!}
-                <span class="registeredCarer__type">
+            <h2 class="profileName">{!! Auth::user()->userName() !!}<span class="registeredCarer__type">
                   <i class="fa {{Auth::user()->isCarer()? ' ' : 'fa-exchange' }} " aria-hidden="true"></i>
                     {{Auth::user()->isCarer()? 'carer' : 'purchaser' }}
                   </span>

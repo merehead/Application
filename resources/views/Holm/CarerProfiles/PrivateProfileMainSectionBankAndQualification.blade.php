@@ -20,7 +20,8 @@
               </span>
 
             </h2>
-            {!! Form::text('sort_code',null,['class'=>'profileField__input','placeholder'=>'Sort code']) !!}
+            {!! Form::text('sort_code',$carerProfile->sort_code,['class'=>'profileField__input','placeholder'=>'Sort code',
+            'maxlength'=>16]) !!}
         </div>
         <div class="profileField ">
             <h2 class="profileField__title ordinaryTitle">
@@ -29,7 +30,8 @@
               </span>
 
             </h2>
-            {!! Form::text('account_number',null,['class'=>'profileField__input','placeholder'=>'Account number']) !!}
+            {!! Form::text('account_number',$carerProfile->account_number,['class'=>'profileField__input',
+            'placeholder'=>'Account number','maxlength'=>32]) !!}
         </div>
     </div>
 </div>

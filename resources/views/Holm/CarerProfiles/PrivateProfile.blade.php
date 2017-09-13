@@ -7,8 +7,12 @@
         var geocoder;
         var map;
         var marker;
+        var is_data_changed=false;
+        window.onbeforeunload = function () {
+            return (is_data_changed ? "Измененные данные не сохранены. Закрыть страницу?" : null);
+        }
         function initMap() {
-            var map = new google.maps.Map(document.getElementById('map_canvas'), {
+            map = new google.maps.Map(document.getElementById('map_canvas'), {
                 zoom: 17,
                 center: {lat: -34.397, lng: 150.644}
             });
@@ -17,11 +21,12 @@
         }
 
         function geocodeAddress(geocoder, resultsMap) {
-            var address = $('input[name="town"]').val()+' '+$('input[name="address_line1"]').val();
+            var addr = ($('input[name="address_line1"]').val()!='не указан')?$('input[name="address_line1"]').val():'';
+            var address = $('input[name="town"]').val()+' '+ addr;
             geocoder.geocode({'address': address}, function(results, status) {
                 if (status === 'OK') {
                     resultsMap.setCenter(results[0].geometry.location);
-
+                    if(marker)marker.setMap(null);
                     marker = new google.maps.Marker({
                         map: resultsMap,
                         position: results[0].geometry.location

@@ -29,7 +29,7 @@
                         <i class="fa fa-times"></i>
                     </a>--}}
         </div>
-
+        <div class="loader"></div>
         <div class="login__body">
 
             {{--<form  class="login__form">--}}
@@ -70,7 +70,9 @@
                 </div>
                 <div class="roundedBtn login__btn blogin">
                     <a href="toLogin" class="roundedBtn__item"
-                       onclick="event.preventDefault();login_ajax(document.getElementById('login__form'));$('.blogin').hide();">
+                       onclick="event.preventDefault();login_ajax(document.getElementById
+                       ('login__form'));$('' +
+                        '.blogin').hide();">
                         login
                     </a>
                 </div>

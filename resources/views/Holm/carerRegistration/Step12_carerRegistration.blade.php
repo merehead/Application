@@ -41,7 +41,7 @@
 
                 <div class="formField depend_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
-                        If it depends, what does it depend upon? <span>*</span>
+                        What does it depend upon? <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         {!! Form::text('pets_description',null,['class'=>'formInput','placeholder'=>'Details']) !!}

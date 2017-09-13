@@ -38,21 +38,11 @@
                                 filter
                             </h2>
                             <div class="blogFilter__list">
+                                @foreach($blogDate as $date)
                                 <a href="#" class="blogFilter__item">
-                                    December 2017
+                                    {{$date->cdate}}
                                 </a>
-                                <a href="#" class="blogFilter__item">
-                                    November 2017
-                                </a>
-                                <a href="#" class="blogFilter__item">
-                                    October 2017
-                                </a>
-                                <a href="#" class="blogFilter__item">
-                                    September 2017
-                                </a>
-                                <a href="#" class="blogFilter__item">
-                                    August 2017
-                                </a>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -92,7 +82,8 @@
                                             read more
                                         </a>
                                     </div>
-                                    <span class="postDate">{{$single->created_at}}</span>
+                                    <span class="postDate">{{$single->getCreated_atAttribute($single->created_at)
+                                    }}</span>
                                 </div>
                             </div>
                             @endforeach
