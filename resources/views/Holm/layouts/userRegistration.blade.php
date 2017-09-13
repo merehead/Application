@@ -23,12 +23,107 @@
 @yield('footer')
 <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- <script src="{{asset('js/plupload.full.min.js')}}"></script> -->
 <script src="{{asset('js/main.js')}}"></script>
 @yield('modals')
 
 <script src="{{asset('js/jquery-ui.min.js')}}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <script>
+
+  // upload files
+
+
+  var arrFiles = []
+  var file
+
+  $('.addInfo__input').change(function () {
+    var input_name = $(this).attr('name')
+    var input_field = $("input[name="+input_name+"]").val()
+  })
+
+  $('.pickfiles').on('change', function() {
+    // var value = $(this).parent().find('.addContainer_load-header-inner').text().toLowerCase()
+    var input_value = $(this).parent().parent().find('.addInfo__input').prop( "disabled", false )
+    // var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
+
+    // var input_name = $('.formField').find('.addInfo__input').attr('name')
+    // var input_field = $("input[name="+input_name+"]").val()
+
+    file = $(this)[0].files[0]
+    // file.type_value = value
+    arrFiles.push(file)
+    $(this).parent().find('.add__comment--smaller').html(file.name)
+  })
+
+  $('.upload_files').on('click', function () {
+    $(this).html('uploading..')
+    var fileChunk = 0
+    file = arrFiles[fileChunk]
+    var sliceSize = 524288 // 512 kib
+    var chunks = Math.ceil(file.size / sliceSize)
+    var chunk = 0
+    var start = 0
+    var end = sliceSize
+
+    function loop() {
+      var blob = file.slice(start, end)
+      if(blob.size !== 0){
+        if(blob.size === sliceSize){
+          send(blob)
+          start += sliceSize
+          end += blob.size
+        }else{
+          send(blob)
+          start += sliceSize
+          end += blob.size
+        }
+      }
+    }
+    loop()
+
+    function send(fileSend) {
+
+      var formdata = new FormData()
+      formdata.append('name', file.name)
+      formdata.append('chunk', chunk)
+      formdata.append('chunks', chunks)
+      formdata.append('title', 'test')
+      // formdata.append('type', file.type_value)
+      formdata.append('type', 'nvq')
+      formdata.append('file', fileSend)
+      chunk += 1
+
+      axios.post('/document/upload', formdata)
+      .then(function (response) {
+        if(chunk === chunks){
+          if(arrFiles[fileChunk + 1]){
+            fileChunk += 1
+            file = arrFiles[fileChunk]
+            chunks = Math.ceil(file.size / sliceSize)
+            chunk = 0
+            start = 0
+            end = sliceSize
+            loop()
+          }else{
+            $('.add__comment--smaller').html('<p>Choose a File or Drag Here</p><span>Size limit: 10 MB</span>')
+            $('.addInfo__input').prop( "disabled", true )
+            $('.upload_files').html('upload files')
+            $('.addInfo__input').val('')
+            $('.pickfiles').val('')
+            arrFiles = []
+          }
+        }else{
+          loop()
+        }
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+    }
+  })
+
     $('.footerSocial a, .headerSocial a').click(function(e) {
         e.preventDefault();
         var href = $(this).attr('href');

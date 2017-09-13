@@ -1,6 +1,6 @@
 <div class="registration">
     <div class="registration__column registration__column--with-padding">
-        <div class="questionsBox ">
+        <div class="questionsBox">
             <h2>QUALIFICATIONS</h2>
             <h3>These include NVQs, Care Certificates, additional training courses and any other relevant qualifications.</h3>
             <h3>Please upload photographic proof of the certificates along with the titles.</h3>
@@ -20,11 +20,35 @@
                 <h2 class=" formLabel questionForm__label">
                 Please list what qualifications you have. Please give full title of qualification and type eg NVQ etc.
                 </h2>
-                <div class="addRow ">
+                <div class="addRow">
                     <div class="addColumn">
                         <div class="formField">
+                            <div class="addContainer">
+                              <div class="addContainer_load-header">
+                                <span class="addContainer_load-header-inner">NVQ</span>
+                              </div>
+                              <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                                <a class="add add--moreHeight">
+                                    <i class="fa fa-plus-circle"></i>
+                                    <div class="add__comment add__comment--smaller">
+                                        <p>Choose a File or Drag Here</p>
+                                        <span>Size limit: 10 MB</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="addInfo">
+                                <input disabled type="text" name="nvq" class="addInfo__input" placeholder="Name">
+                            </div>
+                        </div>
+                    </div>
 
-                            <div class="addContainer ">
+                    <div class="addColumn">
+                        <div class="formField">
+                            <div class="addContainer">
+                              <div class="addContainer_load-header">
+                                <span class="addContainer_load-header-inner">CARE CERTIFICATE</span>
+                              </div>
+                              <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -34,7 +58,31 @@
                                 </a>
                             </div>
                             <div class="addInfo">
-                                <input type="text" class="addInfo__input" placeholder="Name" >
+                                <input disabled type="text" name="care_certificate" class="addInfo__input" placeholder="Name" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="addRow ">
+                    <div class="addColumn">
+                        <div class="formField">
+
+                            <div class="addContainer ">
+                              <div class="addContainer_load-header">
+                                <span class="addContainer_load-header-inner">HEALTH AND SOCIAL</span>
+                              </div>
+                                <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                                <a href="#" class="add add--moreHeight">
+                                    <i class="fa fa-plus-circle"></i>
+                                    <div class="add__comment add__comment--smaller">
+                                        <p>Choose a File or Drag Here</p>
+                                        <span>Size limit: 10 MB</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="addInfo">
+                                <input disabled type="text" name="health_and_social" class="addInfo__input" placeholder="Name" >
                             </div>
                         </div>
                     </div>
@@ -42,16 +90,20 @@
                     <div class="addColumn">
                         <div class="formField">
                             <div class="addContainer ">
-                                <a href="#" class="add add--moreHeight">
-                                    <i class="fa fa-plus-circle"></i>
-                                    <div class="add__comment add__comment--smaller">
-                                        <p>Choose a File or Drag Here</p>
-                                        <span>Size limit: 10 MB</span>
-                                    </div>
-                                </a>
+                              <div class="addContainer_load-header">
+                                <span class="addContainer_load-header-inner">TRAINING CERTIFICATE</span>
+                              </div>
+                              <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              <a href="#" class="add add--moreHeight">
+                                  <i class="fa fa-plus-circle"></i>
+                                  <div class="add__comment add__comment--smaller">
+                                      <p>Choose a File or Drag Here</p>
+                                      <span>Size limit: 10 MB</span>
+                                  </div>
+                              </a>
                             </div>
                             <div class="addInfo">
-                                <input type="text" class="addInfo__input" placeholder="Name" >
+                                <input disabled type="text" name="training_certificate" class="addInfo__input" placeholder="Name" >
                             </div>
                         </div>
                     </div>
@@ -63,6 +115,10 @@
                         <div class="formField">
 
                             <div class="addContainer ">
+                              <div class="addContainer_load-header">
+                                <span class="addContainer_load-header-inner">ADDITIONAL TRAINING COURSE</span>
+                              </div>
+                              <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -72,7 +128,7 @@
                                 </a>
                             </div>
                             <div class="addInfo">
-                                <input type="text" class="addInfo__input" placeholder="Name" >
+                                <input disabled type="text" name="additional_training_course" class="addInfo__input" placeholder="Name" >
                             </div>
                         </div>
                     </div>
@@ -80,6 +136,10 @@
                     <div class="addColumn">
                         <div class="formField">
                             <div class="addContainer ">
+                              <div class="addContainer_load-header">
+                                <span class="addContainer_load-header-inner">OTHER RELEVANT QUALIFICATIONS</span>
+                              </div>
+                              <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -89,53 +149,17 @@
                                 </a>
                             </div>
                             <div class="addInfo">
-                                <input type="text" class="addInfo__input" placeholder="Name" >
+                                <input disabled type="text" name="other_relevant_qualifications" class="addInfo__input" placeholder="Name" >
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-                <div class="addRow ">
-                    <div class="addColumn">
-                        <div class="formField">
-
-                            <div class="addContainer ">
-                                <a href="#" class="add add--moreHeight">
-                                    <i class="fa fa-plus-circle"></i>
-                                    <div class="add__comment add__comment--smaller">
-                                        <p>Choose a File or Drag Here</p>
-                                        <span>Size limit: 10 MB</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="addInfo">
-                                <input type="text" class="addInfo__input" placeholder="Name" >
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="addColumn">
-                        <div class="formField">
-                            <div class="addContainer ">
-                                <a href="#" class="add add--moreHeight">
-                                    <i class="fa fa-plus-circle"></i>
-                                    <div class="add__comment add__comment--smaller">
-                                        <p>Choose a File or Drag Here</p>
-                                        <span>Size limit: 10 MB</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="addInfo">
-                                <input type="text" class="addInfo__input" placeholder="Name" >
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
             </form>
+            <div style='text-align: center'>
+              <a class="registrationBtns__item upload_files">
+                  upload files
+              </a>
+            </div>
         </div>
 
     </div>
