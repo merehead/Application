@@ -1,4 +1,8 @@
 @if (Auth::check())
+
+
+
+
     <div class="dropdownUser">
         @if(Auth::user()->isReregistrationCompleted())
         <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-settings' }}" class="registeredCarer">
