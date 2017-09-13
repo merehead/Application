@@ -242,7 +242,7 @@ class PurchaserRegistration
             'postcode' =>
                 array(
                     'required',
-                    'regex:#^[A-Za-z]{1,2}[0-9]{1,2} [0-9][A-Za-z]{1,2}$#'
+                    'regex:#^[BMOSWbmosw][LKANlkan0-9][0-9]{1,2} [0-9][A-Za-z]{1,2}$#'
 //                    'regex:#^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))
 //[0-9][A-Za-z]{2})$#',
                 )
@@ -279,7 +279,7 @@ class PurchaserRegistration
         $purchaserProfile->address_line2    = $request->input('address_line2');
         $purchaserProfile->address_line1    = $request->input('address_line1');
         $purchaserProfile->town             = $request->input('town');
-        $purchaserProfile->postcode         = $request->input('postcode');
+        $purchaserProfile->postcode         = strtoupper($request->input('postcode'));
         $purchaserProfile->DoB              = $request->input('DoB');
         $purchaserProfile->update();
         //dd($request->all());
@@ -348,7 +348,7 @@ class PurchaserRegistration
             'postcode' =>
                 array(
                     'required',
-                    'regex:#^[A-Za-z]{1,2}[0-9]{1,2} [0-9][A-Za-z]{1,2}$#'
+                    'regex:#^[BMOSWbmosw][LKANlkan0-9][0-9]{1,2} [0-9][A-Za-z]{1,2}$#'
 //                    'regex:#^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))
 //[0-9][A-Za-z]{2})$#',
                 )
@@ -390,7 +390,7 @@ class PurchaserRegistration
             $serviceUsersProfile->address_line2 = $request->input('address_line2');
             $serviceUsersProfile->address_line1 = $request->input('address_line1');
             $serviceUsersProfile->town = $request->input('town');
-            $serviceUsersProfile->postcode = $request->input('postcode');
+            $serviceUsersProfile->postcode = strtoupper($request->input('postcode'));
             $serviceUsersProfile->DoB = $request->input('DoB');
             $serviceUsersProfile->update();
             //dd($request->all());

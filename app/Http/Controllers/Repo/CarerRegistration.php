@@ -266,7 +266,7 @@ class CarerRegistration
             'postcode' =>
                 array(
                     'required',
-                    'regex:#^[A-Za-z]{1,2}[0-9]{1,2} [0-9][A-Za-z]{1,2}$#'
+                    'regex:#^[BMOSWbmosw][LKANlkan0-9][0-9]{1,2} [0-9][A-Za-z]{1,2}$#'
 //                    'regex:#^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))
 //[0-9][A-Za-z]{2})$#',
                 )
@@ -304,7 +304,7 @@ class CarerRegistration
         $carerProfile->address_line2    = $request->input('address_line2');
         $carerProfile->address_line1    = $request->input('address_line1');
         $carerProfile->town             = $request->input('town');
-        $carerProfile->postcode         = $request->input('postcode');
+        $carerProfile->postcode         = strtoupper($request->input('postcode'));
         //$carerProfile->postcode_second_part= $request->input('postcode_second_part');
         $carerProfile->DoB              = $request->input('DoB');
         $carerProfile->update();
