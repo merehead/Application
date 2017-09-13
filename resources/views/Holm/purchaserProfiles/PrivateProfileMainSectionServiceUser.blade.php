@@ -33,7 +33,7 @@
         </div>
         <div class="col-md-3">
             <div class="roundedBtn roundedBtn--peopleCare">
-                <a href="" class="roundedBtn__item roundedBtn__item--accept">
+                <a href="{{route('ServiceUserCreate')}}" class="roundedBtn__item roundedBtn__item--accept">
                     ADD SERVICE USER
                 </a>
             </div>

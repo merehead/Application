@@ -15,7 +15,7 @@
             <div class="registration__column  registration__column--bg">
                 <div class="personal">
 
-                    {!! Form::model($serviceUsersProfile,['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'step','class'=>'personalForm']) !!}
+                    {!! Form::model($serviceUserProfile,['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'step','class'=>'personalForm']) !!}
                     {{--<form class="personalForm">--}}
 
                         <div class="formField personalActive">
@@ -191,11 +191,15 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                             </h2>
                             <div class="inputWrap">
 
-                                @if($purchasersProfile->DoB === "01/01/1970")
+
+
+                                @if($serviceUserProfile->DoB === "01/01/1970")
                                 <input name="DoB" id="datepicker" class="profileField__input" placeholder="dd/mm/yyyy" type="text">
                                 @else
                                 {!! Form::text('DoB',null,['id'=>'datepicker','class'=>'profileField__input']) !!}
                                 @endif
+
+
 {{--                                <span class="profileField__input-ico centeredLink">
                 <i class="fa fa-calendar" aria-hidden="true"></i>
               </span>--}}
@@ -208,8 +212,11 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                         </div>
 
                     <input type="hidden" name="step" value = '4_1'>
-                    <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
-
+                    @if(empty($purchasersProfileID))
+                        <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
+                    @else
+                        <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
+                    @endif
                         {!! Form::close()!!}
 
 
@@ -238,5 +245,9 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
         {!! Form::open(['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'stepback','class'=>'personalForm']) !!}
         <input type="hidden" name="step" value = '4'>
         <input type="hidden" name="stepback" value = '4'>
-        <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
+        @if(empty($purchasersProfileID))
+            <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
+        @else
+            <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
+        @endif
         {!! Form::close()!!}

@@ -28,6 +28,9 @@ class ServiceUserRegistrationController extends FrontController
 
     public function index($serviceUserProfileId){
 
+        //dd($serviceUserProfileId);
+
+
         $serviceUserProfile = ServiceUsersProfile::findOrFail($serviceUserProfileId);
 
         if ($serviceUserProfile->purchaser_id != $this->user->id)
@@ -86,7 +89,14 @@ class ServiceUserRegistrationController extends FrontController
         $this->vars = array_add($this->vars,'activeStep',$this->serviceUserProfile->getActiveStep($serviceUserProfileId));
         $this->vars = array_add($this->vars,'activeSubStep',$this->serviceUserProfile->getActiveSubStep($serviceUserProfileId));
 
-        $step = view(config('settings.frontTheme').'.serviceUserRegistration.'.$this->serviceUserProfile->getNextStep($serviceUserProfileId))->with($this->vars)->render();
+
+        if($this->serviceUserProfile->getNextStep($serviceUserProfileId)=='Step4_1_purchaserRegistration'
+        || $this->serviceUserProfile->getNextStep($serviceUserProfileId)=='Step4_1_2_purchaserRegistration') {
+            $this->vars = array_add($this->vars, 'user', $this->user);
+            $step = view(config('settings.frontTheme') . '.purchaserRegistration.' . $this->serviceUserProfile->getNextStep($serviceUserProfileId))->with($this->vars)->render();
+        }
+        else
+            $step = view(config('settings.frontTheme').'.serviceUserRegistration.'.$this->serviceUserProfile->getNextStep($serviceUserProfileId))->with($this->vars)->render();
 
 
         $this->vars = array_add($this->vars,'step',$step);
@@ -101,7 +111,7 @@ class ServiceUserRegistrationController extends FrontController
 
         $serviceUserProfile = ServiceUsersProfile::findorfail($serviceUserProfileId);
 
-        //dd($request->all());
+        dd($request->all());
 
         if ($serviceUserProfile->purchaser_id != $this->user->id)
             abort('404');

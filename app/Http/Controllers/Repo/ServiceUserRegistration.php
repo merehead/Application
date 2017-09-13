@@ -37,6 +37,15 @@ class ServiceUserRegistration
 
         switch ($currentStep) {
 
+            case '4_2' : $step = 'Step4_1_purchaserRegistration';break;
+            case '4_1' : $step = 'Step4_1_2_purchaserRegistration';break;
+
+
+            //case '4_1_2_1' : $step = 'Step4_1_2_1_Thank__you_Sign_up';break;
+
+
+
+
             case '4_1_2_1' : $step = 'Step4_1_2_3_Thank__you_Sign_up1';break;
             case '4_1_2_3' : $step = 'Step4_1_2_4_Thank__you_Sign_up1_1';break;
             case '4_1_2_4' : $step = 'Step5_serviceUserRegistration';break;
@@ -219,6 +228,10 @@ class ServiceUserRegistration
         $nextStep = 0;
 
         switch ($array['step']) {
+
+            case '4_2' : $nextStep = '4_2';break;
+            case '4_1' : $nextStep = '4_1';break;
+            case '4_1_2' : $nextStep = '4_1_2_1';break;
 
             case '4_1_2_1' : $nextStep = '4_1_2_1';break;
             case '4_1_2_3' : $nextStep = '4_1_2_3';break;

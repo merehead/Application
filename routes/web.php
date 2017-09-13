@@ -48,6 +48,11 @@ Route::post('/purchaser-registration','PurchaserRegistrationController@update')-
 Route::get('/service-registration/{serviceUserProfile}','ServiceUserRegistrationController@index')->name('ServiceUserRegistration');
 Route::post('/service-registration/{serviceUserProfile}','ServiceUserRegistrationController@update')->name('ServiceUserRegistration');
 
+Route::get('/addServiceUser/','AddServiceUserController@create')->name('ServiceUserCreate');
+
+
+
+
 Route::post('/document/upload','DocumentsController@upload')->name('UploadDocument');
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {

@@ -65,7 +65,7 @@ class PurchaserRegistrationController extends FrontController
                     $serviceUsersProfile = $purchasersProfile->serviceUsers->first();
                 }
                     $this->vars = array_add($this->vars, 'user', $this->user);
-                    $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
+                    $this->vars = array_add($this->vars, 'serviceUserProfile', $serviceUsersProfile);
 
             }
             if ($this->purchaserProfile->getNextStep() == 'Step4_2_purchaserRegistration') {
