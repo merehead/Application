@@ -21,7 +21,9 @@
                     <div class="formField">
                         <h2 class=" formLabel questionForm__label">
                             Please add a photo of {{$purchasersProfile->serviceUsers->first()->like_name}}. This will only be shared with carers you choose to book and will be visible on [service user name]'s profile. You can upload a photo later if you don't have one handy.                        </h2>
-                        <div class="addContainer ">
+                        <div class="addContainer">
+                          <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                          <div class="pickfiles_img"></div>
                             <a href="#" class="add add--moreHeight">
                                 <i class="fa fa-plus-circle"></i>
                                 <div class="add__comment">
@@ -30,11 +32,16 @@
                                 </div>
                             </a>
                         </div>
-
+                        <div style="display: none" class="addInfo">
+                            <input disabled type="text" name="personal_photo_2" class="addInfo__input" placeholder="Name" >
+                        </div>
                     </div>
                 </div>
-
-
+                <div style='text-align: center; margin-top: 20px'>
+                  <a class="registrationBtns__item upload_files">
+                    upload files
+                  </a>
+                </div>
             </form>
 
             <form id="step" method="POST" action="{{ route('PurchaserRegistrationPost') }}">

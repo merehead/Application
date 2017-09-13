@@ -307,4 +307,121 @@ $(document).ready(function () {
         return false;
     })
 
-});
+
+  // -- upload files -------
+  var arrFiles = []
+  var file
+
+  $('.addInfo__input').change(function () {
+    var input_name = $(this).attr('name')
+    var input_val = $("input[name="+input_name+"]").val()
+    arrFiles.map((index) => {
+      if(index.type_value === input_name){
+        index.title = input_val
+      }
+    })
+  })
+
+  $('.pickfiles').on('change', function() {
+    // var value = $(this).parent().find('.addContainer_load-header-inner').text().toLowerCase()
+    // var input_field = $("input[name="+input_name+"]").val()
+    // var input_name = $('.formField').find('.addInfo__input').attr('name')
+
+    var input_value = $(this).parent().parent().find('.addInfo__input').prop( "disabled", false)
+    var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
+
+    file = $(this)[0].files[0]
+
+    fileTypes = [
+      'image/jpeg',
+      'image/gif',
+      'image/png',
+    ]
+
+    var reader  = new FileReader()
+    reader.addEventListener("load", () => {
+      $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
+      $(this).parent().find('.add--moreHeight').attr('style', 'opacity: 0')
+    }, false)
+
+    if (fileTypes.indexOf(file.type) !== -1) {
+      reader.readAsDataURL(file)
+    }
+
+    console.log(file)
+
+    file.type_value = input_name
+    arrFiles.push(file)
+
+    $(this).parent().find('.add__comment--smaller').html(file.name)
+  })
+
+  $('.upload_files').on('click', function () {
+    $(this).html('uploading..')
+    var fileChunk = 0
+    file = arrFiles[fileChunk]
+    var sliceSize = 524288 // 512 kib
+    var chunks = Math.ceil(file.size / sliceSize)
+    var chunk = 0
+    var start = 0
+    var end = sliceSize
+
+    function loop() {
+      var blob = file.slice(start, end)
+      if(blob.size !== 0){
+        if(blob.size === sliceSize){
+          send(blob)
+          start += sliceSize
+          end += blob.size
+        }else{
+          send(blob)
+          start += sliceSize
+          end += blob.size
+        }
+      }
+    }
+    loop()
+
+    function send(fileSend) {
+
+      var formdata = new FormData()
+      formdata.append('name', file.name)
+      formdata.append('chunk', chunk)
+      formdata.append('chunks', chunks)
+      formdata.append('title', file.title)
+      formdata.append('type', file.type_value)
+      formdata.append('file', fileSend)
+      chunk += 1
+
+      axios.post('/document/upload', formdata)
+      .then(function (response) {
+        if(chunk === chunks){
+          if(arrFiles[fileChunk + 1]){
+            fileChunk += 1
+            file = arrFiles[fileChunk]
+            chunks = Math.ceil(file.size / sliceSize)
+            chunk = 0
+            start = 0
+            end = sliceSize
+            loop()
+          }else{
+            $('.add__comment--smaller').html('<p>Choose a File or Drag Here</p><span>Size limit: 10 MB</span>')
+            $('.add--moreHeight').attr('style', '')
+            $('.pickfiles_img').attr('style', '')
+            $('.addInfo__input').prop( "disabled", true )
+            $('.upload_files').html('upload files')
+            $('.addInfo__input').val('')
+            $('.pickfiles').val('')
+            arrFiles = []
+          }
+        }else{
+          loop()
+        }
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+    }
+  })
+
+})

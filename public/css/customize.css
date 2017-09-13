@@ -42,3 +42,37 @@ select#workingTimes {
     height: 1px;
     background: #dee1e3;
 }
+.pickfiles{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 9;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.addContainer{
+  position: relative;
+}
+.addContainer_load-header{
+  text-align: center;
+}
+.addContainer_load-header-inner{
+  font-size: 12px;
+  font-weight: 700;
+}
+.upload_files{
+  cursor: pointer;
+}
+.pickfiles_img{
+  position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    /*z-index: 9;*/
+}
