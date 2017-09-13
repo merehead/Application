@@ -330,12 +330,13 @@ class ServiceUserRegistration
     public function saveStep($request) {
 
 
-        //dd($request->all());
+
 
 
         $step = $request->input('step');
 
         switch ($step) {
+            case '4_1'    : $this->saveStep4_1($request);break;
 
             case '5'    : $this->saveStep5($request);break;
             case '5_1'    : $this->saveStep5_1($request);break;
@@ -402,6 +403,116 @@ class ServiceUserRegistration
         return;
     }
 
+    private function saveStep4_1($request) {
+
+        $this->validate($request, [
+            'title' =>
+                array(
+                    'required',
+                    'numeric:1',
+                ),
+            'first_name' =>
+                array(
+                    'required',
+                    'string',
+                    'max:128'
+                ),
+            'family_name' =>
+                array(
+                    'required',
+                    'string',
+                    'max:128'
+                ),
+            'like_name' =>
+                array(
+                    'required',
+                    'string',
+                    'max:128'
+                ),
+            'gender' =>
+                array(
+                    'required',
+                    'string',
+                    'max:14'
+                ),
+            'mobile_number' =>
+                array(
+                    'required',
+                ),
+            'address_line1' =>
+                array(
+                    'required',
+                    'string',
+                    'max:256'
+                ),
+            'address_line2' =>
+                array(
+                    'nullable',
+                    'string',
+                    'max:256'
+                ),
+            'town' =>
+                array(
+                    'required',
+                    'string',
+                    'max:128'
+                ),
+            'DoB' =>
+                array(
+                    'required',
+                ),
+            'postcode' =>
+                array(
+                    'required',
+                    'regex:#^([BMOSWbmosw][LKANlkan0-9][0-9]{1,2})|([BMOSWbmosw][LKANlkan0-9]) [0-9][A-Za-z]{1,2}$#'
+//                    'regex:#^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))
+//[0-9][A-Za-z]{2})$#',
+                )
+        ]);
+
+
+
+        /*        $this->validate($request,[
+                    'title' => 'required|numeric:1',
+                    'first_name' => 'required|string|max:128',
+                    'family_name' => 'required|string|max:128',
+                    'like_name' => 'required|string|max:128',
+                    'gender' => 'required|string|max:14',
+                    'mobile_number' => 'required',
+                    'address_line1'=>'required|string|max:256',
+                    'address_line2' => 'nullable|string|max:256',
+                    'town' => 'required|string|max:128',
+                    'postcode' => 'required|string|max:32',
+                    'DoB'=>'required',
+                ]);*/
+
+        //dd($request->all());
+
+        $serviceUsersProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
+
+        //$serviceUsersProfile = $purchaserProfile->serviceUsers->first();
+
+
+        //dd($purchaserProfile);
+
+        if ($serviceUsersProfile) {
+            $serviceUsersProfile->title = $request->input('title');
+            $serviceUsersProfile->first_name = $request->input('first_name');
+            $serviceUsersProfile->family_name = $request->input('family_name');
+            $serviceUsersProfile->like_name = $request->input('like_name');
+            $serviceUsersProfile->gender = $request->input('gender');
+            $serviceUsersProfile->mobile_number = $request->input('mobile_number');
+            $serviceUsersProfile->address_line1 = $request->input('address_line1');
+            $serviceUsersProfile->address_line2 = $request->input('address_line2');
+            $serviceUsersProfile->address_line1 = $request->input('address_line1');
+            $serviceUsersProfile->town = $request->input('town');
+            $serviceUsersProfile->postcode = strtoupper($request->input('postcode'));
+            $serviceUsersProfile->DoB = $request->input('DoB');
+            $serviceUsersProfile->update();
+            //dd($request->all());
+        }
+        return;
+    }
 
     private function saveStep5($request) {
 

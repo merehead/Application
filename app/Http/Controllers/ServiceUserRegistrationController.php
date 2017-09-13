@@ -111,7 +111,7 @@ class ServiceUserRegistrationController extends FrontController
 
         $serviceUserProfile = ServiceUsersProfile::findorfail($serviceUserProfileId);
 
-        dd($request->all());
+        //dd($request->all());
 
         if ($serviceUserProfile->purchaser_id != $this->user->id)
             abort('404');

@@ -14,10 +14,12 @@
             </div>
             <div class="registration__column  registration__column--bg">
                 <div class="personal">
+                    @if(empty($purchasersProfileID))
+                        {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
 
+                    @else
                     {!! Form::model($serviceUserProfile,['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'step','class'=>'personalForm']) !!}
-                    {{--<form class="personalForm">--}}
-
+                    @endif
                         <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
                                 Title <span>*</span>
