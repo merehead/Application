@@ -357,7 +357,30 @@ $(document).ready(function () {
 
     // -- upload files -------
     var arrFiles = []
+    var arrLocalStorage = []
     var file
+    var getlocalStorageData = JSON.parse(localStorage.getItem('files_id'))
+
+    if(getlocalStorageData){
+      getlocalStorageData.map((index) => {
+        axios.get(
+          '/api/document/'+index.id.id+'/',
+        ).then(function (response) {
+          console.log(response)
+          $('#'+index.type_value+'').attr('style', 'background-image: url(/api/document/'+index.id.id+'/preview)')
+          $('#'+index.type_value+'').parent().children('.add').find('.add__comment--smaller').html('<div class="file-name">asdasd</div>')
+          $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
+          $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('style', 'display: block')
+          $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id.id)
+          $('#'+index.type_value+'').parent().parent().find('.addInfo__input').prop( "disabled", false )
+          if(response.data.data.document.title !== 'undefined'){
+            $('#'+index.type_value+'').parent().parent().find('.addInfo__input').val(response.data.data.document.title)
+          }
+        })
+      })
+    }else{
+      console.log([])
+    }
 
     $('.addInfo__input').change(function () {
       var input_name = $(this).attr('name')
@@ -383,15 +406,28 @@ $(document).ready(function () {
           return index
         }
       })
-      console.log(arrFiles)
+
+      var deleteID = $(this).attr('id')
+
+        if($(this).attr('id')){
+          axios.delete(
+            '/api/document/'+deleteID+'/',
+          ).then(function (response) {
+            console.log(response)
+            var getls = JSON.parse(localStorage.getItem('files_id'))
+            var newGetls = getls.filter((index) => {
+              if(index.id.id !== parseInt(deleteID)){
+                return index
+              }
+            })
+            console.log(newGetls)
+            localStorage.setItem('files_id', JSON.stringify(newGetls))
+          })
+        }
     })
 
     $('.pickfiles').on('change', function() {
-      // var value = $(this).parent().find('.addContainer_load-header-inner').text().toLowerCase()
-      // var input_name = $(this).attr('name')
-      // var input_val = $("input[name="+input_name+"]").val()
       var input_val = $(this).parent().parent().find('.addInfo__input').val('')
-      // var input_name = $('.formField').find('.addInfo__input').attr('name')
 
       $(this).parent().parent().find('.addInfo__input').prop( "disabled", false)
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
@@ -435,7 +471,7 @@ $(document).ready(function () {
       })
 
       arrFiles.push(file)
-      console.log(arrFiles)
+      // console.log(arrFiles)
 
       $(this).parent().find('.add__comment--smaller').html('<div class="file-name">'+file.name+'</div>')
       $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
@@ -478,12 +514,30 @@ $(document).ready(function () {
           formdata.append('type', file.type_value)
           formdata.append('file', fileSend)
           chunk += 1
+          axios.post(
+            '/document/upload',
+            formdata,
+          ).then(function (response) {
 
-          axios.post('/document/upload', formdata)
-          .then(function (response) {
-            console.log(response.data.result)
+            if(response.data.result){
+              // console.log(response.data.result)
+              // console.log(arrFiles[fileChunk])
+              var data = {
+                id: response.data.result,
+                type_value: arrFiles[fileChunk].type_value
+              }
+
+              var getls = JSON.parse(localStorage.getItem('files_id'))
+              if(getls){
+                getls.push(data)
+                localStorage.setItem('files_id', JSON.stringify(getls))
+              }else{
+                arrLocalStorage.push(data)
+                localStorage.setItem('files_id', JSON.stringify(arrLocalStorage))
+              }
+            }
+
             if(chunk === chunks){
-              console.log(arrFiles[fileChunk])
               if(arrFiles[fileChunk + 1]){
                 fileChunk += 1
                 file = arrFiles[fileChunk]
