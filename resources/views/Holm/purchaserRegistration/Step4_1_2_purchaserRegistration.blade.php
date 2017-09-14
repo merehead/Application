@@ -14,17 +14,33 @@
     </div>
 
 
+
     <div class="registration__column  registration__column--bg">
         <div class="personal">
             <form class="questionForm">
                 <div class="addRow addRow__for-single">
                     <div class="formField">
-                        <h2 class=" formLabel questionForm__label">
-                            Please add a photo of {{$purchasersProfile->serviceUsers->first()->like_name}}. This will only be shared with carers you choose to book and will be visible on [service user name]'s profile. You can upload a photo later if you don't have one handy.                        </h2>
+
+                        @if(!empty($purchasersProfileID))
+                            <h2 class=" formLabel questionForm__label">
+                                Please add a photo of {{$purchasersProfile->serviceUsers->first()->like_name}}. This will only be shared with
+                                carers you choose to book and will be visible on {{$purchasersProfile->serviceUsers->first()->like_name}}'s
+                                profile. You can upload a photo later if you don't have one handy. </h2>
+                        @else
+                            <h2 class=" formLabel questionForm__label">
+                                Please add a photo of {{$purchasersProfile->serviceUsers->first()->like_name}}. This will only be shared with
+                                carers you choose to book and will be visible on {{$serviceUserProfile->like_name}}'s
+                                profile. You can upload a photo later if you don't have one handy. </h2>
+                        @endif
+
+
+
                         <div class="addContainer">
+
                           <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                           <span class="pickfiles-delete">X</span>
                           <div class="pickfiles_img"></div>
+
                             <a href="#" class="add add--moreHeight">
                                 <i class="fa fa-plus-circle"></i>
                                 <div class="add__comment add__comment--smaller">
@@ -34,34 +50,37 @@
                             </a>
                         </div>
                         <div style="display: none" class="addInfo">
+
                             <input disabled type="text" name="purchaser_personal_photo" class="addInfo__input" placeholder="Name" >
+
                         </div>
                     </div>
                 </div>
-                <div style='text-align: center; margin-top: 20px'>
-                  <a class="registrationBtns__item upload_files">
-                    upload files
-                  </a>
-                </div>
-            </form>
 
+                <div style='text-align: center; margin-top: 20px'>
+                    <a class="registrationBtns__item upload_files">
+                        upload files
+                    </a>
+                </div>
+
+            </form>
 
             @if(empty($purchasersProfileID))
                 <form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id'=>$serviceUserProfileID]) }}">
-            @else
-                <form id="step" method="POST" action="{{ route('PurchaserRegistrationPost') }}">
-            @endif
+                    @else
+                        <form id="step" method="POST" action="{{ route('PurchaserRegistrationPost') }}">
+                            @endif
 
 
 
-                {{ csrf_field() }}
-                <input type="hidden" name="step" value = '4_1_2'>
-                @if(empty($purchasersProfileID))
-                    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-                @else
-                    <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
-                @endif
-            </form>
+                            {{ csrf_field() }}
+                            <input type="hidden" name="step" value = '4_1_2'>
+                            @if(empty($purchasersProfileID))
+                                <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
+                            @else
+                                <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
+                            @endif
+                        </form>
 
         </div>
 
@@ -73,9 +92,9 @@
            onclick="event.preventDefault();document.getElementById('stepback').submit();">
             <i class="fa fa-arrow-left "></i>back
         </a>
-{{--        <a href="/" class="registrationBtns__item registrationBtns__item--later">
-            continue later
-        </a>--}}
+        {{--        <a href="/" class="registrationBtns__item registrationBtns__item--later">
+                    continue later
+                </a>--}}
     </div>
 
     <a href="next" class="registrationBtns__item"

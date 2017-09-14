@@ -149,6 +149,7 @@
                               <div class="addContainer_load-header">
                                 <span class="addContainer_load-header-inner">OTHER RELEVANT QUALIFICATIONS</span>
                               </div>
+                              <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                               <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                               <span class="pickfiles-delete">X</span>
                               <div class="pickfiles_img"></div>
