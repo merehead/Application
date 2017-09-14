@@ -36,6 +36,7 @@
 
                     @foreach(Auth::user()->userPurchaserProfile->serviceUsers as $serviceUser)
 
+                        @if(strlen($serviceUser->first_name)>0)
 
                 <a href="{{route('ServiceUserRegistration',['id'=>$serviceUser->id])}}" class="dropdownUser__item">
                     <div class="profilePhoto dropdownUser__img">
@@ -48,6 +49,8 @@
                   <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </span>
                 </a>
+
+                        @endif
 
                     @endforeach
 
