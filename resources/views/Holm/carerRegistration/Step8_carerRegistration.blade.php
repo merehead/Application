@@ -56,6 +56,7 @@
                     </h2>
                     <div class="inputWrap addContainer">
                       <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                      <span class="pickfiles-delete">X</span>
                       <div class="pickfiles_img"></div>
                         <a href="#" class="add add--moreHeight">
                             <i class="fa fa-plus-circle"></i>
@@ -68,11 +69,11 @@
                     <div style="display: none" class="addInfo">
                         <input disabled type="text" name="personal_photo_2" class="addInfo__input" placeholder="Name">
                     </div>
-                </div>
-                <div style='text-align: center; margin-top: 20px'>
-                  <a class="registrationBtns__item upload_files">
-                    upload files
-                  </a>
+                  <div style='text-align: center; margin-top: 20px'>
+                    <a class="registrationBtns__item upload_files">
+                      upload files
+                    </a>
+                  </div>
                 </div>
 
                 <div class="formField">

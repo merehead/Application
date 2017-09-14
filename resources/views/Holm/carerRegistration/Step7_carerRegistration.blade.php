@@ -27,7 +27,8 @@
                               <div class="addContainer_load-header">
                                 <span class="addContainer_load-header-inner">NVQ</span>
                               </div>
-                              <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              <span class="pickfiles-delete">X</span>
                               <div class="pickfiles_img"></div>
                                 <a class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
@@ -49,7 +50,8 @@
                               <div class="addContainer_load-header">
                                 <span class="addContainer_load-header-inner">CARE CERTIFICATE</span>
                               </div>
-                              <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              <span class="pickfiles-delete">X</span>
                               <div class="pickfiles_img"></div>
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
@@ -74,7 +76,8 @@
                               <div class="addContainer_load-header">
                                 <span class="addContainer_load-header-inner">HEALTH AND SOCIAL</span>
                               </div>
-                                <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                                <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                                <span class="pickfiles-delete">X</span>
                                 <div class="pickfiles_img"></div>
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
@@ -96,7 +99,8 @@
                               <div class="addContainer_load-header">
                                 <span class="addContainer_load-header-inner">TRAINING CERTIFICATE</span>
                               </div>
-                              <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              <span class="pickfiles-delete">X</span>
                               <div class="pickfiles_img"></div>
                               <a href="#" class="add add--moreHeight">
                                   <i class="fa fa-plus-circle"></i>
@@ -122,7 +126,8 @@
                               <div class="addContainer_load-header">
                                 <span class="addContainer_load-header-inner">ADDITIONAL TRAINING COURSE</span>
                               </div>
-                              <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              <span class="pickfiles-delete">X</span>
                               <div class="pickfiles_img"></div>
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
@@ -144,7 +149,8 @@
                               <div class="addContainer_load-header">
                                 <span class="addContainer_load-header-inner">OTHER RELEVANT QUALIFICATIONS</span>
                               </div>
-                              <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              <span class="pickfiles-delete">X</span>
                               <div class="pickfiles_img"></div>
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>

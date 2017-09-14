@@ -18,22 +18,22 @@
                 <div class="addRow addRow__for-single">
                     <div class="formField">
                         <h2 class=" formLabel questionForm__label">
-                        Please upload a photo of yourself to use as part of your profile.
-
+                          Please upload a photo of yourself to use as part of your profile.
                         </h2>
                         <div class="addContainer">
-                          <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                          <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                          <span class="pickfiles-delete">X</span>
                           <div class="pickfiles_img"></div>
-                            <a href="#" class="add add--moreHeight">
-                                <i class="fa fa-plus-circle"></i>
-                                <div class="add__comment">
-                                    <p>Choose a File or Drag Here</p>
-                                    <span>Size limit: 10 MB</span>
-                                </div>
-                            </a>
+                          <a href="#" class="add add--moreHeight">
+                              <i class="fa fa-plus-circle"></i>
+                              <div class="add__comment add__comment--smaller">
+                                  <p>Choose a File or Drag Here</p>
+                                  <span>Size limit: 10 MB</span>
+                              </div>
+                          </a>
                         </div>
                         <div style="display: none" class="addInfo">
-                            <input disabled type="text" name="personal_photo_2" class="addInfo__input" placeholder="Name" >
+                            <input disabled type="text" name="carer_profile_photo" class="addInfo__input" placeholder="Name" >
                         </div>
                     </div>
                 </div>
@@ -42,7 +42,6 @@
                     upload files
                   </a>
                 </div>
-
             </form>
 
             <form id="step" method="POST" action="{{ route('CarerRegistrationPost') }}">
