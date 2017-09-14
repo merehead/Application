@@ -2,13 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Plupload;
 use App\Document;
 use Auth;
+use DB;
 
 class DocumentsController extends Controller
 {
+    public function GetDocuments(){
+//        $user = Auth::user();
+        $user = User::find(92);
+        $sql = "SELECT DISTINCT type FROM documents WHERE user_id = $user->id";
+        $res = DB::select($sql);
+        $types = array_pluck($res, 'type');
+
+        $documents = array();
+        foreach ($types as $type){
+            $documents[$type] = $user->documents()->where('type', $type)->get()->toArray();
+        }
+
+
+        return response(
+            [
+                'status' => 'success',
+                'data' => [
+                    'documents' => $documents
+                ]
+        ]);
+    }
+
     public function getDocument(Document $document){
         return response(
             [
