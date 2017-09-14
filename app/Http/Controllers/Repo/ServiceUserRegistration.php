@@ -644,8 +644,8 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'own_pets' => 'required|in:"Yes","No","Sometimes"',
-            'pet_detail' => 'required_if:own_pets,"Yes"|String:128|nullable',
-            'pet_friendly' => 'required_if:own_pets,"Yes"|in:"Yes","No","Sometimes","Normally"|nullable',
+            'pet_detail' => 'required_if:own_pets,"Yes","Sometimes"|String:128|nullable',
+            'pet_friendly' => 'required_if:own_pets,"Yes","Sometimes"|in:"Yes","No","Sometimes","Normally"|nullable',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));

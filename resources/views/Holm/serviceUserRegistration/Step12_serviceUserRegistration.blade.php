@@ -16,7 +16,7 @@
                         Does {{$serviceUserProfile->like_name}} own any pets? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('own_pets',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('own_pets',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
 
                     @if ($errors->has('own_pets'))
                         <span class="help-block">
@@ -25,7 +25,7 @@
                     @endif
                     </div>
                 </div>
-                <div class="formField hiding" style="display: none">
+                <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Please give details <span>*</span>
                     </h2>
@@ -40,7 +40,7 @@
 
                 </div>
 
-                <div class="formField hiding" style="display: none">
+                <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Are the pets friendly with strangers?  <span>*</span>
                     </h2>

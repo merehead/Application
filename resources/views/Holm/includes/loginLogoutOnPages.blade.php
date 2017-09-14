@@ -23,7 +23,7 @@
 {{--            <div class="profilePhoto registeredCarer__img">
                 <img src="./img/no_photo.png" alt="">
             </div>--}}
-                <h2 class="profileName" style="padding-left:45px; ">continue sigh up</h2>
+                <h2 class="profileName" style="padding-left:45px; font-size: 70%">continue sigh up</h2>
             </a>
         @endif
 
@@ -33,17 +33,24 @@
 
 
                 @if(count(Auth::user()->userPurchaserProfile->serviceUsers))
-                <a href="/" class="dropdownUser__item">
+
+                    @foreach(Auth::user()->userPurchaserProfile->serviceUsers as $serviceUser)
+
+
+                <a href="{{route('ServiceUserRegistration',['id'=>$serviceUser->id])}}" class="dropdownUser__item">
                     <div class="profilePhoto dropdownUser__img">
                         <img src="./img/no_photo.png" alt="">
                     </div>
                     <h2 class="profileName">
-                        {{Auth::user()->userPurchaserProfile->serviceUsers->first()->like_name}}
+                        {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1)!!}
                     </h2>
                     <span class="dropdownUser__ico">
                   <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </span>
                 </a>
+
+                    @endforeach
+
                 @endif
 
             @endif
