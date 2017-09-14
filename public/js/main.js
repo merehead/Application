@@ -403,7 +403,10 @@ $(document).ready(function () {
         'image/gif',
         'image/png',
       ]
-      var wordFileType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      var wordFileType = [
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || 'application/msword',
+        'application/msword'
+      ]
       var pdfFileType = 'application/pdf'
 
       var reader  = new FileReader()
@@ -415,7 +418,7 @@ $(document).ready(function () {
       if (fileTypes.indexOf(file.type) !== -1) {
         reader.readAsDataURL(file)
       }else{
-        if(wordFileType === file.type){
+        if(wordFileType.indexOf(file.type) !== -1){
           $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
         }
         if(pdfFileType === file.type){
@@ -476,7 +479,7 @@ $(document).ready(function () {
           formdata.append('file', fileSend)
           chunk += 1
 
-          axios.post('https://cors-anywhere.herokuapp.com/http://37.0.25.139/document/upload', formdata)
+          axios.post('/document/upload', formdata)
           .then(function (response) {
             console.log(response.data.result)
             if(chunk === chunks){
