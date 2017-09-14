@@ -28,6 +28,9 @@
                                 <span class="addContainer_load-header-inner">NVQ</span>
                               </div>
                               <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+
+                              <div class="pickfiles_img"></div>
+
                                 <a class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -49,6 +52,9 @@
                                 <span class="addContainer_load-header-inner">CARE CERTIFICATE</span>
                               </div>
                               <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+
+                              <div class="pickfiles_img"></div>
+
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -58,7 +64,9 @@
                                 </a>
                             </div>
                             <div class="addInfo">
+
                                 <input disabled type="text" name="care_certificate" class="addInfo__input" placeholder="Name" >
+
                             </div>
                         </div>
                     </div>
@@ -73,6 +81,9 @@
                                 <span class="addContainer_load-header-inner">HEALTH AND SOCIAL</span>
                               </div>
                                 <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+
+                                <div class="pickfiles_img"></div>
+
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -94,6 +105,9 @@
                                 <span class="addContainer_load-header-inner">TRAINING CERTIFICATE</span>
                               </div>
                               <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+
+                              <div class="pickfiles_img"></div>
+
                               <a href="#" class="add add--moreHeight">
                                   <i class="fa fa-plus-circle"></i>
                                   <div class="add__comment add__comment--smaller">
@@ -119,6 +133,9 @@
                                 <span class="addContainer_load-header-inner">ADDITIONAL TRAINING COURSE</span>
                               </div>
                               <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+
+                              <div class="pickfiles_img"></div>
+
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -135,11 +152,16 @@
 
                     <div class="addColumn">
                         <div class="formField">
+
                             <div class="addContainer ">
+
                               <div class="addContainer_load-header">
                                 <span class="addContainer_load-header-inner">OTHER RELEVANT QUALIFICATIONS</span>
                               </div>
                               <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+
+                              <div class="pickfiles_img"></div>
+
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
