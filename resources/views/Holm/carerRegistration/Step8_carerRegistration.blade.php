@@ -76,7 +76,7 @@
                   </div>
                 </div>
 
-                <div class="formField">
+                <div class="formField hiding2">
                     <h2 class="formLabel questionForm__label">
                         Do you own a car which you intend to use for work?
                     </h2>
