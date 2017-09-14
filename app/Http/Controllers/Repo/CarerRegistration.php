@@ -371,7 +371,7 @@ class CarerRegistration
             'driving_licence' => 'required|in:"Yes","No"',
             'DBS_number' => 'string|nullable|max:128',
             'have_car' => 'nullable|in:"Yes","No"',
-            'use_car' => 'required_if:have_car,"Yes"|in:"Yes","No"',
+            'use_car' => 'required_if:have_car,"Yes"|nullable|in:"Yes","No"',
         ]);
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
