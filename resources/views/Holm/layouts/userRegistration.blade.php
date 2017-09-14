@@ -34,7 +34,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <script>
 
-<<<<<<< HEAD
+
     // upload files
 
 
@@ -130,9 +130,7 @@
     })
 
     $('.footerSocial a, .headerSocial a').click(function (e) {
-=======
-    $('.footerSocial a, .headerSocial a').click(function(e) {
->>>>>>> 1092e30ccf45d0c88007fe40ef97383a1267ac94
+
         e.preventDefault();
         var href = $(this).attr('href');
         window.open(href, '_blank').focus();
