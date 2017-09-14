@@ -36,19 +36,23 @@
 
 
                         <div class="addContainer">
-                            <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file"/>
-                            <div class="pickfiles_img"></div>
+
+                          <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                          <span class="pickfiles-delete">X</span>
+                          <div class="pickfiles_img"></div>
+
                             <a href="#" class="add add--moreHeight">
                                 <i class="fa fa-plus-circle"></i>
-                                <div class="add__comment">
+                                <div class="add__comment add__comment--smaller">
                                     <p>Choose a File or Drag Here</p>
                                     <span>Size limit: 10 MB</span>
                                 </div>
                             </a>
                         </div>
                         <div style="display: none" class="addInfo">
-                            <input disabled type="text" name="personal_photo_2" class="addInfo__input"
-                                   placeholder="Name">
+
+                            <input disabled type="text" name="purchaser_personal_photo" class="addInfo__input" placeholder="Name" >
+
                         </div>
                     </div>
                 </div>
