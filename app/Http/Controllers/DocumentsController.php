@@ -15,13 +15,36 @@ class DocumentsController extends Controller
         return Plupload::receive('file', function ($file) use ($user, $request)
         {
             $fileName = md5(uniqid()).'.'.$file->extension();
-            $user->documents()->create([
-                'title' => $request->title,
-                'type' => $request->type,
-                'file_name' => $fileName,
-            ]);
+            if($request->has('id')){
+                $document = Document::find($request->id);
+                if(!$document)
+                    return ['document not found'];
+                $oldFileName = $document->file_name;
+                if(file_exists(storage_path().'/documents/'.$oldFileName))
+                    unlink(storage_path().'/documents/'.$oldFileName);
+                $document->file_name = $fileName;
+                $document->title = $request->title;
+                $document->save();
+            } else {
+                $document = $user->documents()->create([
+                    'title' => $request->title,
+                    'type' => strtoupper($request->type),
+                    'file_name' => $fileName,
+                ]);
+            }
+
             $file->move(storage_path() . '/documents/', $fileName);
-            return 'ready';
+
+            return ['id' => $document->id];
         });
+    }
+
+    public function destroy(Document $document){
+        //todo policy
+        
+        if(file_exists(storage_path().'/documents/'.$document->file_name))
+            unlink(storage_path().'/documents/'.$document->file_name);
+        $document->delete();
+        return response(['status' => 'success']);
     }
 }
