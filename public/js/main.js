@@ -327,6 +327,7 @@ $(document).ready(function () {
         $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
         $(that).hide();
         $(that).parent().find('button.hidden').removeClass('hidden');
+        $('.alert').remove();
         cancelEditFieldsCarer();
         return false;
     });
