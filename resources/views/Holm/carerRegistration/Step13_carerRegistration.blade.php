@@ -40,7 +40,7 @@
                                         <strong>{{ $errors->first('languages') }}</strong>
                                     </span>
                             @endif
-                        <div class="formField">
+                        <div class="formField hiding" style="display: none">
                             <h2 class="formLabel questionForm__label">
                                 If other, please state
                             </h2>
