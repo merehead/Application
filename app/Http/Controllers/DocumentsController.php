@@ -9,8 +9,22 @@ use Auth;
 
 class DocumentsController extends Controller
 {
-    public function show(Document $document){
-       
+    public function getDocument(Document $document){
+        return response(
+            [
+                'status' => 'success',
+                'data' => [
+                    'document' => $document
+                ]
+        ]);
+    }
+
+    public function getPreview(Document $document){
+        if (file_exists(storage_path().'/documents/'.$document->file_name)) {
+            header("Content-type: image/jpg");
+            readfile(storage_path().'/documents/'.$document->file_name);
+            exit;
+        }
     }
 
     public function upload(Request $request){
