@@ -12,8 +12,8 @@ use DB;
 class DocumentsController extends Controller
 {
     public function GetDocuments(){
-//        $user = Auth::user();
-        $user = User::find(92);
+        $user = Auth::user();
+//        $user = User::find(92);
         $sql = "SELECT DISTINCT type FROM documents WHERE user_id = $user->id";
         $res = DB::select($sql);
         $types = array_pluck($res, 'type');
