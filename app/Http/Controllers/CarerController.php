@@ -134,15 +134,20 @@ class CarerController extends FrontController
         }
         if ($input['stage'] == 'bank') {
 
+            $this->validate($request,[
+                'account_number' => 'nullable|integer',
+            ]);
+
             $depart = "#carerBank";
 
-            $user = User::findOrFail($input['id']);
+            //$user = User::findOrFail($input['id']);
+            $carerProfiles = CarersProfile::findOrFail($input['id']);
+            if (isset($input['sort_code'])) $carerProfiles->sort_code = $input['sort_code'];
+            if (isset($input['account_number'])) $carerProfiles->account_number = $input['account_number'];
 
-            if (isset($input['sort_code'])) $user->sort_code = $input['sort_code'];
-            if (isset($input['account_number'])) $user->account_number = $input['account_number'];
-
-            $user->save();
-            unset($user);
+            $carerProfiles->save();
+       /*     $user->save();
+            unset($user);*/
             unset($carerProfiles);
         }
 
@@ -189,6 +194,8 @@ class CarerController extends FrontController
 
             if (isset($input['languages']))
                 $carerProfiles->Languages()->sync(array_keys($input['languages']));
+                if (isset($input['language_additional'])) $carerProfiles->language_additional = $input['language_additional'];
+                $carerProfiles->save();
 
             unset($carerProfiles);
         }

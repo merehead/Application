@@ -18,7 +18,7 @@
                     </div>
 
                     <h2 class="peopleCare__name">
-                        <a href="" target="balnk">{{$serviceUser->like_name}}</a>
+                        <a href="{{route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUser->id])}}" target="balnk">{{$serviceUser->like_name}}</a>
                     </h2>
                     <a href="" class="peopleCare__delete">
                         <i class="fa fa-trash" aria-hidden="true"></i>
@@ -33,7 +33,7 @@
         </div>
         <div class="col-md-3">
             <div class="roundedBtn roundedBtn--peopleCare">
-                <a href="" class="roundedBtn__item roundedBtn__item--accept">
+                <a href="{{route('ServiceUserCreate')}}" class="roundedBtn__item roundedBtn__item--accept">
                     ADD SERVICE USER
                 </a>
             </div>

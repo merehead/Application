@@ -102,7 +102,7 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) 
                             </ul>--}}
 
 
-                            {!! Form::number('work_hours',null,['class'=>'profileField__number']) !!}
+                            {!! Form::number('work_hours',null,['class'=>'profileField__number','min'=>'1']) !!}
 
 
                         </div>

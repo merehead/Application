@@ -48,7 +48,7 @@ class LoginController extends Controller
                 if($carerProfile->registration_progress != '20')
                     return '/carer-registration';
                 else
-                    return'/im-carer';
+                    return'/carer-settings';
             }
             //case 4 : return '/admin';
         }

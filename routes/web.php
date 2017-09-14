@@ -35,7 +35,8 @@ Route::get('/carer-settings', 'CarerController@index')->name('carerSettings'); /
 Route::get('/im-carer', 'CarerController@index')->name('ImCarerPage');
 Route::post('/im-carer', 'CarerController@update')->name('ImCarerPrivatePage');
 
-Route::get('carer-registration/{stepback?}','CarerRegistrationController@index')->name('CarerRegistration');
+//Route::get('carer-registration/{stepback?}','CarerRegistrationController@index')->name('CarerRegistration');
+Route::get('carer-registration/','CarerRegistrationController@index')->name('CarerRegistration');
 Route::post('carer-registration','CarerRegistrationController@update')->name('CarerRegistrationPost');
 
 
@@ -44,6 +45,16 @@ Route::post('/purchaser-settings','PurchaserController@update')->name('purchaser
 Route::get('/purchaser-registration/','PurchaserRegistrationController@index')->name('PurchaserRegistration');
 Route::post('/purchaser-registration','PurchaserRegistrationController@update')->name('PurchaserRegistrationPost');
 
+Route::get('/service-registration/{serviceUserProfile}','ServiceUserRegistrationController@index')->name('ServiceUserRegistration');
+Route::post('/service-registration/{serviceUserProfile}','ServiceUserRegistrationController@update')->name('ServiceUserRegistration');
+
+Route::get('/addServiceUser/','AddServiceUserController@create')->name('ServiceUserCreate');
+
+
+
+
+Route::post('/document/upload','DocumentsController@upload')->name('UploadDocument');
+
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
 
     Route::get('/', 'AdminController@index')->name('index');
@@ -51,8 +62,12 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::resource('/user','User\UserController', ['except' => ['show']]);
     Route::resource('/booking','Booking\BookingController', ['only' => ['index']]);
     Route::resource('/dispute-payout','DisputePayout\DisputePayoutController', ['only' => ['index']]);
+    Route::resource('/blog','Blog\BlogController');
+    #Route::resource('/blog/edit/{idBlog}','Blog\BlogController@edit', ['only' => ['edit']]);
     Route::resource('/carer-payout','CarerPayout\CarerPayoutController', ['only' => ['index']]);
     Route::resource('/purchaser-payout','PurchaserPayout\PurchaserPayoutController', ['only' => ['index']]);
+
+   // Route::get('/blog/edit/{blogId}', 'Booking\BookingController@edit', ['except' => ['show']]);
 
     Route::get('/dispute-payout-to-carer/{appointmentId}/{userId}/{amount}', 'AdminSitePayment\AdminSitePayment@DisputePayoutToCarer')->name('DisputePayoutToCarer');
     Route::get('/dispute-payout-to-purchaser/{appointmentId}/{userId}/{amount}', 'AdminSitePayment\AdminSitePayment@DisputePayoutToPurchaser')->name('DisputePayoutToPurchaser');
@@ -64,4 +79,8 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::get('/bonus-payout-to-carer/{action}/{bonusRecordId}/{amount}', 'AdminSitePayment\AdminSitePayment@BonusPayoutToCarer')->name('BonusPayoutToCarer');
 
 
+});
+
+Route::get('/test_document_upload', function (){
+    return view('test_document_upload');
 });

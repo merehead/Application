@@ -207,10 +207,76 @@ class CarerRegistration
 
     private function saveStep4($request) {
 
+        $this->validate($request, [
+            'title' =>
+                array(
+                    'required',
+                    'numeric:1',
+                ),
+            'first_name' =>
+                array(
+                    'required',
+                    'string',
+                    'max:128'
+                ),
+            'family_name' =>
+                array(
+                    'required',
+                    'string',
+                    'max:128'
+                ),
+            'like_name' =>
+                array(
+                    'required',
+                    'string',
+                    'max:128'
+                ),
+            'gender' =>
+                array(
+                    'required',
+                    'string',
+                    'max:14'
+                ),
+            'mobile_number' =>
+                array(
+                    'required',
+                ),
+            'address_line1' =>
+                array(
+                    'required',
+                    'string',
+                    'max:256'
+                ),
+            'address_line2' =>
+                array(
+                    'nullable',
+                    'string',
+                    'max:256'
+                ),
+            'town' =>
+                array(
+                    'required',
+                    'string',
+                    'max:128'
+                ),
+            'DoB' =>
+                array(
+                    'required',
+                ),
+            'postcode' =>
+                array(
+                    'required',
+                    'regex:#^([BMOSWbmosw][LKANlkan0-9][0-9]{1,2})|([BMOSWbmosw][LKANlkan0-9]) [0-9][A-Za-z]{1,2}$#'
+//                    'regex:#^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))
+//[0-9][A-Za-z]{2})$#',
+                )
+        ]);
+
+
         //dd($request->all());
 
 
-        $this->validate($request,[
+/*        $this->validate($request,[
             'title' => 'required|numeric:1',
             'first_name' => 'required|string|max:128',
             'family_name' => 'required|string|max:128',
@@ -223,7 +289,7 @@ class CarerRegistration
             'postcode' => 'required|string|max:32',
             'DoB'=>'required',
             'postcode_second_part' => 'nullable|string|max:16',
-        ]);
+        ]);*/
 
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
@@ -238,7 +304,7 @@ class CarerRegistration
         $carerProfile->address_line2    = $request->input('address_line2');
         $carerProfile->address_line1    = $request->input('address_line1');
         $carerProfile->town             = $request->input('town');
-        $carerProfile->postcode         = $request->input('postcode');
+        $carerProfile->postcode         = strtoupper($request->input('postcode'));
         //$carerProfile->postcode_second_part= $request->input('postcode_second_part');
         $carerProfile->DoB              = $request->input('DoB');
         $carerProfile->update();
@@ -395,8 +461,8 @@ class CarerRegistration
     private function saveStep12($request) {
 
         $this->validate($request,[
-            'work_with_pets' => 'required|in:"Yes","No","It depends"',
-            'pets_description' => 'required_if:work_with_pets,"It depends"|string:512|nullable',
+            'work_with_pets' => 'required|in:"Yes","No","Sometimes"',
+            'pets_description' => 'required_if:work_with_pets,"Sometimes","Yes"|string:512|nullable',
         ]);
 
 /*        switch ($request->input('work_with_pets')){

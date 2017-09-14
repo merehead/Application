@@ -45,10 +45,22 @@
                 </div>
             </form>
 
-            <form id="step" method="POST" action="{{ route('PurchaserRegistrationPost') }}">
+
+            @if(empty($purchasersProfileID))
+                <form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id'=>$serviceUserProfileID]) }}">
+            @else
+                <form id="step" method="POST" action="{{ route('PurchaserRegistrationPost') }}">
+            @endif
+
+
+
                 {{ csrf_field() }}
                 <input type="hidden" name="step" value = '4_1_2'>
-                <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
+                @if(empty($purchasersProfileID))
+                    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
+                @else
+                    <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
+                @endif
             </form>
 
         </div>
@@ -77,5 +89,9 @@
 {!! Form::open(['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'stepback','class'=>'personalForm']) !!}
 <input type="hidden" name="step" value = '4_2'>
 <input type="hidden" name="stepback" value = '4_2'>
-<input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
+@if(empty($purchasersProfileID))
+    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
+@else
+    <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
+@endif
 {!! Form::close()!!}

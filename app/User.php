@@ -73,15 +73,20 @@ class User extends Authenticatable
         return $this->hasMany(Blog::class);
     }
 
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+
 
     public function userName()
     {
         if ($this->user_type_id == 3) {
-            return $this->userCarerProfile->like_name;
+            return $this->userCarerProfile->first_name.'&nbsp'.mb_substr($this->userCarerProfile->family_name,0,1).'.';
         }
 
         if ($this->user_type_id == 1) {
-            return $this->userPurchaserProfile->like_name;
+            return $this->userPurchaserProfile->first_name.'&nbsp'.mb_substr($this->userPurchaserProfile->family_name,0,1).'.';
         }
         return $this->id;
     }

@@ -11,9 +11,11 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800"
           rel="stylesheet">
-    <link rel="stylesheet" href="/css/main.min.css">
-    <link rel="stylesheet" href="/css/customize.css">
-    <link rel="stylesheet" href="/css/cupertino/jquery-ui.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="{{asset('css/main.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/customize.css')}}">
+    <link rel="stylesheet" href="{{asset('css/cupertino/jquery-ui.min.css')}}">
+
 </head>
 <body>
 @yield('header')
@@ -21,16 +23,126 @@
 @yield('footer')
 <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- <script src="{{asset('js/plupload.full.min.js')}}"></script> -->
 <script src="{{asset('js/main.js')}}"></script>
 @yield('modals')
 
 <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <script>
+
+  // upload files
+
+
+  var arrFiles = []
+  var file
+
+  $('.addInfo__input').change(function () {
+    // var input_name = $(this).attr('name')
+    // var input_field = $("input[name="+input_name+"]").val()
+    console.log(arrFiles)
+  })
+
+  $('.pickfiles').on('change', function() {
+    // var value = $(this).parent().find('.addContainer_load-header-inner').text().toLowerCase()
+    var input_value = $(this).parent().parent().find('.addInfo__input').prop( "disabled", false )
+    // var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
+
+    // var input_name = $('.formField').find('.addInfo__input').attr('name')
+    // var input_field = $("input[name="+input_name+"]").val()
+
+    file = $(this)[0].files[0]
+    // file.type_value = value
+    arrFiles.push(file)
+    $(this).parent().find('.add__comment--smaller').html(file.name)
+  })
+
+  $('.upload_files').on('click', function () {
+    $(this).html('uploading..')
+    var fileChunk = 0
+    file = arrFiles[fileChunk]
+    var sliceSize = 524288 // 512 kib
+    var chunks = Math.ceil(file.size / sliceSize)
+    var chunk = 0
+    var start = 0
+    var end = sliceSize
+
+    function loop() {
+      var blob = file.slice(start, end)
+      if(blob.size !== 0){
+        if(blob.size === sliceSize){
+          send(blob)
+          start += sliceSize
+          end += blob.size
+        }else{
+          send(blob)
+          start += sliceSize
+          end += blob.size
+        }
+      }
+    }
+    loop()
+
+    function send(fileSend) {
+
+      var formdata = new FormData()
+      formdata.append('name', file.name)
+      formdata.append('chunk', chunk)
+      formdata.append('chunks', chunks)
+      formdata.append('title', 'test')
+      // formdata.append('title', file.title)
+      formdata.append('type', 'nvq')
+      formdata.append('file', fileSend)
+      chunk += 1
+
+      axios.post('/document/upload', formdata)
+      .then(function (response) {
+        if(chunk === chunks){
+          if(arrFiles[fileChunk + 1]){
+            fileChunk += 1
+            file = arrFiles[fileChunk]
+            chunks = Math.ceil(file.size / sliceSize)
+            chunk = 0
+            start = 0
+            end = sliceSize
+            loop()
+          }else{
+            $('.add__comment--smaller').html('<p>Choose a File or Drag Here</p><span>Size limit: 10 MB</span>')
+            $('.addInfo__input').prop( "disabled", true )
+            $('.upload_files').html('upload files')
+            $('.addInfo__input').val('')
+            $('.pickfiles').val('')
+            arrFiles = []
+          }
+        }else{
+          loop()
+        }
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+    }
+  })
+
     $('.footerSocial a, .headerSocial a').click(function(e) {
         e.preventDefault();
         var href = $(this).attr('href');
         window.open(href, '_blank').focus();
     });
+
+    $('#timepicker').timepicker({
+        timeFormat: 'h:mm p',
+        interval: 30,
+        //minTime: '10',
+        //maxTime: '6:00pm',
+        //defaultTime: '18',
+        startTime: '18:00',
+        dynamic: true,
+        dropdown: true,
+        scrollbar: true
+    });
+
     $( function() {
         $( "#datepicker" ).datepicker({
             changeMonth: true,
@@ -56,6 +168,19 @@
         });
     } );
 
+    $( function() {
+        $( "#datepicker_when_start" ).datepicker({
+            //changeMonth: true,
+            //changeYear: true,
+            dateFormat:"dd/mm/yy",
+            showAnim:"slideDown",
+            minDate: "+3D",
+            maxDate: "+20Y",
+            yearRange: "0:+10"
+        });
+    } );
+
+
     $( document ).ready(function() {
 
         //alert($("#main-if").val());
@@ -69,6 +194,21 @@
         if($("#main-if2").val()=='Yes'){
             {$(".hiding2").show( )}
         }
+
+        if($("#sometimes-if").val()=='Sometimes'){
+            {$(".sometimes_hiding").show( )}
+        }
+        if($("#sometimes-if").val()=='Yes'){
+            {$(".sometimes_hiding").show( )}
+        }
+
+        if($("#sometimes-noif").val()=='Sometimes'){
+            {$(".sometimesNo_hiding").show( )}
+        }
+        if($("#sometimes-noif").val()=='No'){
+            {$(".sometimesNo_hiding").show( )}
+        }
+
 
     });
 
@@ -103,6 +243,30 @@
             }
         });
     });
+
+    $(function(){
+        $("#sometimes-if").change(function(){
+            if($(this).val() !="0")
+            {
+                if($(this).val() == 'Yes') {$(".sometimes_hiding").show( )}
+                if($(this).val() == 'No') {$(".sometimes_hiding").hide( )}
+                if($(this).val() == 'Sometimes') {$(".sometimes_hiding").show( )}
+            }
+        });
+    });
+
+    $(function(){
+        $("#sometimes-noif").change(function(){
+            if($(this).val() !="0")
+            {
+                if($(this).val() == 'Yes') {$(".sometimesNo_hiding").hide( )}
+                if($(this).val() == 'No') {$(".sometimesNo_hiding").show( )}
+                if($(this).val() == 'Sometimes') {$(".sometimesNo_hiding").show( )}
+            }
+        });
+    });
+
+
 
     $(".allTime").click(function(){
         $('input.checkboxTimerGroup:checkbox').not(this).prop('checked', this.checked);

@@ -23,15 +23,16 @@ class BlogController extends FrontController
         $modals = view(config('settings.frontTheme').'.includes.modals')->render();
 
         $blog = Blog::with('user')->get();
-        $blogDate = Blog::all('created_at')->groupBy('create_at');
-        //dd($blogDate);
+        $blogDate = Blog::selectRaw("date_format(`created_at`,'%M %Y') as cdate")->groupBy('created_at')->get();
+
 
         $this->vars = array_add($this->vars,'header',$header);
         $this->vars = array_add($this->vars,'footer',$footer);
         $this->vars = array_add($this->vars,'modals',$modals);
 
 
-        $this->content = view(config('settings.frontTheme').'.homePage.blogPage',['blog'=>$blog])->render();
+        $this->content = view(config('settings.frontTheme').'.homePage.blogPage',['blog'=>$blog,'blogDate'=>$blogDate])
+            ->render();
 
         return $this->renderOutput();
     }

@@ -14,10 +14,12 @@
             </div>
             <div class="registration__column  registration__column--bg">
                 <div class="personal">
+                    @if(empty($purchasersProfileID))
+                        {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
 
-                    {!! Form::model($serviceUsersProfile,['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'step','class'=>'personalForm']) !!}
-                    {{--<form class="personalForm">--}}
-
+                    @else
+                    {!! Form::model($serviceUserProfile,['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'step','class'=>'personalForm']) !!}
+                    @endif
                         <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
                                 Title <span>*</span>
@@ -179,9 +181,9 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                                 {!! Form::text('postcode',null,['class'=>'formInput personalForm__input','placeholder'=>'Your postcode']) !!}
 
                             </div>
-                            @if ($errors->has('postcode_id'))
+                            @if ($errors->has('postcode'))
                                 <span class="help-block">
-                                        <strong>{{ $errors->first('postcode_id') }}</strong>
+                                        <strong>{{ $errors->first('postcode') }}</strong>
                                     </span>
                             @endif
                         </div>
@@ -191,11 +193,15 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                             </h2>
                             <div class="inputWrap">
 
-                                @if($purchasersProfile->DoB === "01/01/1970")
+
+
+                                @if($serviceUserProfile->DoB === "01/01/1970")
                                 <input name="DoB" id="datepicker" class="profileField__input" placeholder="dd/mm/yyyy" type="text">
                                 @else
                                 {!! Form::text('DoB',null,['id'=>'datepicker','class'=>'profileField__input']) !!}
                                 @endif
+
+
 {{--                                <span class="profileField__input-ico centeredLink">
                 <i class="fa fa-calendar" aria-hidden="true"></i>
               </span>--}}
@@ -208,8 +214,11 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                         </div>
 
                     <input type="hidden" name="step" value = '4_1'>
-                    <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
-
+                    @if(empty($purchasersProfileID))
+                        <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
+                    @else
+                        <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
+                    @endif
                         {!! Form::close()!!}
 
 
@@ -238,5 +247,9 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
         {!! Form::open(['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'stepback','class'=>'personalForm']) !!}
         <input type="hidden" name="step" value = '4'>
         <input type="hidden" name="stepback" value = '4'>
-        <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
+        @if(empty($purchasersProfileID))
+            <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
+        @else
+            <input type="hidden" name="purchasersProfileID" value = {{$purchasersProfileID}}>
+        @endif
         {!! Form::close()!!}
