@@ -476,10 +476,11 @@ $(document).ready(function () {
           formdata.append('file', fileSend)
           chunk += 1
 
-          axios.post('/document/upload', formdata)
+          axios.post('https://cors-anywhere.herokuapp.com/http://37.0.25.139/document/upload', formdata)
           .then(function (response) {
             console.log(response.data.result)
             if(chunk === chunks){
+              console.log(arrFiles[fileChunk])
               if(arrFiles[fileChunk + 1]){
                 fileChunk += 1
                 file = arrFiles[fileChunk]
@@ -504,9 +505,10 @@ $(document).ready(function () {
             }
           })
           .catch(function (error) {
+            $('.upload_files').html('upload files')
             console.log(error)
           })
         }
       }
     })
-});
+})

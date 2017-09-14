@@ -67,7 +67,7 @@
                         </a>
                     </div>
                     <div style="display: none" class="addInfo">
-                        <input disabled type="text" name="personal_photo_2" class="addInfo__input" placeholder="Name">
+                        <input disabled type="text" name="transport_photo" class="addInfo__input" placeholder="Name">
                     </div>
                   <div style='text-align: center; margin-top: 20px'>
                     <a class="registrationBtns__item upload_files">
