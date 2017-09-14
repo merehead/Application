@@ -9,6 +9,10 @@ use Auth;
 
 class DocumentsController extends Controller
 {
+    public function show(Document $document){
+       
+    }
+
     public function upload(Request $request){
         $user = Auth::user();
 

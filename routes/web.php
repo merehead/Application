@@ -54,7 +54,6 @@ Route::get('/addServiceUser/','AddServiceUserController@create')->name('ServiceU
 
 
 Route::post('/document/upload','DocumentsController@upload')->name('UploadDocument');
-Route::delete('/document/{document}','DocumentsController@destroy')->name('DeleteDocument');
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
 
