@@ -42,7 +42,7 @@
                         <img src="./img/no_photo.png" alt="">
                     </div>
                     <h2 class="profileName">
-                        {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1)!!}
+                        {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
                     </h2>
                     <span class="dropdownUser__ico">
                   <i class="fa fa-arrow-right" aria-hidden="true"></i>

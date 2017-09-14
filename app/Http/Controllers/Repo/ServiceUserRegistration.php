@@ -1277,7 +1277,7 @@ class ServiceUserRegistration
         $this->validate($request,[
             'getting_dressed_for_bed' => 'required|in:"Yes","No","Sometimes"',
             'getting_ready_for_bed' => 'required_if:getting_dressed_for_bed,"Yes","Sometimes"|nullable|in:"Yes","No","Sometimes"',
-            'time_to_bed' => 'required_if:getting_dressed_for_bed,"Yes","Sometimes"|nullable|String:256',
+            'time_to_bed' => 'nullable|String:256',
 
         ]);
 
