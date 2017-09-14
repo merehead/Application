@@ -18,7 +18,7 @@ class AddFieldsToCarersProfiles extends Migration
             $table->dateTime('driver_licence_valid_until')->nullable();
             $table->dateTime('car_insurance_valid_until')->nullable();
             //$table->string('sort_code',16)->nullable();
-            $table->string('account_number',32)->nullable();
+            //$table->string('account_number',32)->nullable();
         });
     }
 
