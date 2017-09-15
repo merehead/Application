@@ -38,11 +38,6 @@
                         </div>
                     </div>
                 </div>
-                <div style='text-align: center; margin-top: 20px'>
-                  <a class="registrationBtns__item upload_files">
-                    upload files
-                  </a>
-                </div>
             </form>
 
             <form id="step" method="POST" action="{{ route('PurchaserRegistrationPost') }}">

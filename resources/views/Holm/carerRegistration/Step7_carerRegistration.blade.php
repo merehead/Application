@@ -180,11 +180,6 @@
                     </div>
                 </div>
             </form>
-            <!-- <div style='text-align: center'>
-              <a class="registrationBtns__item upload_files">
-                  upload files
-              </a>
-            </div> -->
         </div>
 
     </div>
