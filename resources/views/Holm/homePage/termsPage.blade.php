@@ -255,6 +255,20 @@
                     to void payment in cases where cancellation has taken place within 24 hours of the contracted
                     period. Refunds for care work already contracted and subsequently cancelled will only be issued
                     where both parties agree that it is appropriate to do so.</p>
+
+                <p>5.8 Bonus Payments</p>
+                <p>Referral Bonus payments are paid to both the referrer, and the person receiving the referral code.
+                    The referral code must be applied when the new user is registering an account for the first time.
+                    A minimum of 20 hours of care must either be purchased, or provided by person receiving the referral
+                    in order for both parties to receive the bonus. If the recipient of the payment is registered as a
+                    care worker on the Holm platform, they shall receive credit added to their account, and that shall
+                    be paid out on the following pay run. If the recipient of the payment is registered as a care
+                    purchaser on the Holm Platform, they shall receive credit to their account, which can then solely
+                    be used to purchase additional care via the Holm platform.Special bonus payments to newly registered
+                    care workers when an eligible code is applied when registering an account for the first time. The
+                    bonus payment is payable after the care worker has completed a minimum of 1 hour of care. The care
+                    worker will receive credit added to their account, and that shall be paid out on the following pay
+                    run.</p>
             </div>
 
 

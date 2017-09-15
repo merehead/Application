@@ -27,7 +27,9 @@ Route::get('/contact', 'ContactController@index')->name('ContactPage');
 Route::get('/contact/thank', 'ContactController@thank')->name('ThankPage');
 Route::post('/contact', 'ContactController@send')->name('ContactSendMail');
 Route::get('/blog', 'BlogController@index')->name('BlogPage');
+Route::get('/blog/filter/{month}-{year}', 'BlogController@viewFilter')->name('BlogFilter');
 Route::get('/blog/{blogId}', 'BlogController@view')->name('BlogViewPage');
+
 Route::get('/terms', 'TermsController@index')->name('TermsPage');
 
 Route::get('/welcome-carer', 'CarerController@welcome')->name('welcomeCarer');

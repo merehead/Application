@@ -32,7 +32,11 @@
                         position: results[0].geometry.location
                     });
                 } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
+                    $('.fieldCategory').after('<div class="alert alert-warning alert-dismissable fade in">\n' +
+                        '    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
+                        '    <strong>Warning!</strong> You entered an incorrect address. Please enter your real address.\n' +
+                        '  </div>')
+                    //alert('Geocode was not successful for the following reason: ' + status);
                 }
             });
         }

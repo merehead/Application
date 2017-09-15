@@ -1,5 +1,4 @@
 <section class="mainSection ">
-
     <div class="container">
         <div class="breadcrumbs">
             <a href="{{route('mainHomePage')}}" class="breadcrumbs__item">
@@ -45,13 +44,22 @@
                             </div>
                             <div class="singlePost__content">
                                 <p>
-                                  {{$blog->body}}
+                                    {{$blog->body}}
                                 </p>
                             </div>
                             <div class="singlePost__footer">
                                 <div class="roundedBtn">
-                                    <a href="" class="roundedBtn__item roundedBtn__item--read-more">
-                                        <i class="fa fa-share-alt"></i>
+                                    <a href="https://plus.google.com/share?url={{route('BlogPage')}}/{{$blog->id}}" class="roundedBtn__item roundedBtn__item--read-more"
+                                       onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
+                                    >
+                                        <i class="fa fa-google-plus"></i>
+                                        share this post
+                                    </a>
+                                </div>
+                                <div class="roundedBtn">
+                                    <a onClick="window.open('http://www.facebook.com/sharer.php?s=100&amp;p[title]=<?php echo $title;?>&amp;p[url]=<?php echo $url; ?>&amp;&p[images][0]=<?php echo $image;?>', 'sharer', 'toolbar=0,status=0,width=548,height=325');" target="_parent" href="javascript: void(0)" class="roundedBtn__item roundedBtn__item--read-more">
+                                        <i class="fa fa-facebook"></i>
                                         share this post
                                     </a>
                                 </div>
@@ -65,38 +73,25 @@
                 <div class="col-sm-4">
                     <div class="relatedWrap">
                         <h2 class="relatedTitle">Related posts</h2>
-
-                        <div class="relatedPost">
-                            <h2 class="ordinaryTitle relatedPost__title">
+                        @if(isset($relationPost))
+                            @foreach($relationPost as $item)
+                                <div class="relatedPost">
+                                    <h2 class="ordinaryTitle relatedPost__title">
                   <span class="ordinaryTitle__text ordinaryTitle--medium">
-                    Post title
+                    {{$item->title}}
                   </span>
-                            </h2>
-                            <div class="relatedPost__text">
-                                <p>
-                                    Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran ende salutandi no per. Est eu pertinaciaen delacrue instructiol vel eu natum vedi... idqran ende salutandi no per.
-                                </p>
-                            </div>
-                            <a href="Post_page.html" class="relatedPost__link">
-                                read more
-                            </a>
-                        </div>
-
-                        <div class="relatedPost">
-                            <h2 class="ordinaryTitle relatedPost__title">
-                  <span class="ordinaryTitle__text ordinaryTitle--medium">
-                    Post title
-                  </span>
-                            </h2>
-                            <div class="relatedPost__text">
-                                <p>
-                                    Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran ende salutandi no per. Est eu pertinaciaen delacrue instructiol vel eu natum vedi... idqran ende salutandi no per.
-                                </p>
-                            </div>
-                            <a href="Post_page.html" class="relatedPost__link">
-                                read more
-                            </a>
-                        </div>
+                                    </h2>
+                                    <div class="relatedPost__text">
+                                        <p>
+                                            {{words(strip_tags($item->body))}}
+                                        </p>
+                                    </div>
+                                    <a href="{{route('BlogPage')}}/{{$item->id}}" class="relatedPost__link">
+                                        read more
+                                    </a>
+                                </div>
+                            @endforeach
+                        @endif
 
 
                     </div>
@@ -104,4 +99,5 @@
             </div>
 
         </div>
-    </div></section>
+    </div>
+</section>
