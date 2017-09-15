@@ -31,7 +31,7 @@
                               <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                               <span class="pickfiles-delete">X</span>
 
-                              <div class="pickfiles_img"></div>
+                              <div id="nvq" class="pickfiles_img"></div>
                                 <a class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -56,7 +56,7 @@
                               <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                               <span class="pickfiles-delete">X</span>
 
-                              <div class="pickfiles_img"></div>
+                              <div id="care_certificate" class="pickfiles_img"></div>
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -84,7 +84,7 @@
                                 <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                                 <span class="pickfiles-delete">X</span>
 
-                                <div class="pickfiles_img"></div>
+                                <div id="health_and_social" class="pickfiles_img"></div>
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -109,7 +109,7 @@
                               <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                               <span class="pickfiles-delete">X</span>
 
-                              <div class="pickfiles_img"></div>
+                              <div id="training_certificate" class="pickfiles_img"></div>
                               <a href="#" class="add add--moreHeight">
                                   <i class="fa fa-plus-circle"></i>
                                   <div class="add__comment add__comment--smaller">
@@ -138,7 +138,7 @@
                               <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                               <span class="pickfiles-delete">X</span>
 
-                              <div class="pickfiles_img"></div>
+                              <div id="additional_training_course" class="pickfiles_img"></div>
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -164,7 +164,7 @@
                               <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                               <span class="pickfiles-delete">X</span>
 
-                              <div class="pickfiles_img"></div>
+                              <div id="other_relevant_qualifications" class="pickfiles_img"></div>
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -180,11 +180,11 @@
                     </div>
                 </div>
             </form>
-            <div style='text-align: center'>
+            <!-- <div style='text-align: center'>
               <a class="registrationBtns__item upload_files">
                   upload files
               </a>
-            </div>
+            </div> -->
         </div>
 
     </div>
@@ -206,8 +206,7 @@
         </a>
     </div>
 
-    <a href="next" class="registrationBtns__item"
-       onclick="event.preventDefault();document.getElementById('step').submit();">
+    <a href="#" id="upload_files" class="registrationBtns__item upload_files">
         next step
         <i class="fa fa-arrow-right"></i>
     </a>
