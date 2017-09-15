@@ -228,10 +228,15 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
         </div>
         <div class="registrationBtns">
             <div class="registrationBtns__left">
+
+                @if(!empty($purchasersProfileID))
+
                 <a href="Signup_C_3.html" class="registrationBtns__item registrationBtns__item--back"
                    onclick="event.preventDefault();document.getElementById('stepback').submit();">
                     <i class="fa fa-arrow-left "></i>back
                 </a>
+
+                @endif
 {{--                <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
                     continue later
                 </a>--}}

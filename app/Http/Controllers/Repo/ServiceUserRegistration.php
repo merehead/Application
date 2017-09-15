@@ -1221,7 +1221,7 @@ class ServiceUserRegistration
             'kind_of_incontinence' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|String:256',
             'incontinence_wear' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|in:"Yes","No","Sometimes"',
             'incontinence_products_stored' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|String:256',
-            'choosing_incontinence_products' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|in:"Yes","No","Sometimes"',
+            'choosing_incontinence_products' => 'nullable|in:"Yes","No","Sometimes"',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1276,8 +1276,8 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'getting_dressed_for_bed' => 'required|in:"Yes","No","Sometimes"',
-            'getting_ready_for_bed' => 'required_if:getting_dressed_for_bed,"Yes","Sometimes"|nullable|in:"Yes","No","Sometimes"',
-            'time_to_bed' => 'required_if:getting_dressed_for_bed,"Yes","Sometimes"|nullable|String:256',
+            'getting_ready_for_bed' => 'nullable|in:"Yes","No","Sometimes"',
+            'time_to_bed' => 'nullable|String:256',
 
         ]);
 
@@ -1317,7 +1317,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'toilet_at_night' => 'required|in:"Yes","No","Sometimes"',
-            'helping_toilet_at_night' => 'equired_if:toilet_at_night,"Yes","Sometimes"|nullable|in:"Yes","No","Sometimes"',
+            'helping_toilet_at_night' => 'nullable|in:"Yes","No","Sometimes"',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));

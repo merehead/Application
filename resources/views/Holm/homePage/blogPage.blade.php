@@ -39,7 +39,8 @@
                             </h2>
                             <div class="blogFilter__list">
                                 @foreach($blogDate as $date)
-                                <a href="#" class="blogFilter__item">
+                                <a href="{{route('BlogPage')}}/filter/{{$date->month}}-{{$date->year}}"
+                                   class="blogFilter__item">
                                     {{$date->cdate}}
                                 </a>
                                 @endforeach
@@ -67,12 +68,7 @@
                                     </div>
                                 </div>
                                 <div class="singlePost__content">
-
-                                    {{$single->body}}
-
-                                        Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran ende salutandi no
-                                        per. Est eu pertinaciaen delacrue instructiol vel eu natum vedi idqran ende
-                                        salutandi no per....
+                                    {{words(strip_tags($single->body))}}
                                     </p>
                                 </div>
                                 <div class="singlePost__footer">
@@ -90,6 +86,9 @@
 
 
                         </div>
+                        @if(count($blog->items())>0)
+                        {{$blog->render()}}
+                            @endif
                     </div>
                 </div>
             </div>

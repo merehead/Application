@@ -133,14 +133,16 @@
             }
         }
 
-        if ($("#boxf12").attr("checked") == 'checked') {
+
+
+        if ($("input[name='behaviour[9]']").attr("checked") == 'checked') {
             {
                 $(".hiding").show();
             }
         }
 
 
-        $('#boxf12').change(function () {
+        $( "input[name='behaviour[9]']" ).change(function () {
             if (this.checked) {
                 $(".hiding").show();
             } else {
@@ -149,7 +151,7 @@
 
         });
 
-        if ($("#boxf12").attr("checked") == 'checked') {
+        if ($("input[name='languages[12]']").attr("checked") == 'checked') {
             {
 
                 $(".hiding").show();
@@ -157,7 +159,7 @@
         }
 
 
-        $('#boxf12').change(function () {
+        $("input[name='languages[12]']").change(function () {
             if (this.checked) {
                 $(".hiding").show();
             } else {

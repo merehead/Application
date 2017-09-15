@@ -36,18 +36,21 @@
 
                     @foreach(Auth::user()->userPurchaserProfile->serviceUsers as $serviceUser)
 
+                        @if(strlen($serviceUser->first_name)>0)
 
                 <a href="{{route('ServiceUserRegistration',['id'=>$serviceUser->id])}}" class="dropdownUser__item">
                     <div class="profilePhoto dropdownUser__img">
                         <img src="./img/no_photo.png" alt="">
                     </div>
                     <h2 class="profileName">
-                        {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1)!!}
+                        {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
                     </h2>
                     <span class="dropdownUser__ico">
                   <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </span>
                 </a>
+
+                        @endif
 
                     @endforeach
 

@@ -31,9 +31,11 @@
                     <p class="carerBanner__text">
                         Carers use Holm to earn at least 30% more and take control of their work. That’s why only the best personal carers work at Holm
                     </p>
+                    @if(!Auth::check())
                     <a href="{{ route('CarerRegistration') }}" class="carerBanner__btn">
                         Register as a Carer
                     </a>
+                        @endif
                 </div>
 
                 <div class="carerBanner__box">
@@ -48,9 +50,11 @@
                         Use Bonus Code  <b>'REGISTER'</b> when registering.
                     </p>
 
-                    <a href="{{ route('CarerRegistration') }}" class="carerBanner__btn">
-                        Register as a Carer
-                    </a>
+                    @if(!Auth::check())
+                        <a href="{{ route('CarerRegistration') }}" class="carerBanner__btn">
+                            Register as a Carer
+                        </a>
+                    @endif
                 </div>
 
             </div>

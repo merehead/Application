@@ -1,3 +1,23 @@
+<script>
+    function AddressVerification() {
+        var geocoder = new google.maps.Geocoder();
+        var addr = ($('input[name="address_line1"]').val()!='не указан')?$('input[name="address_line1"]').val():'';
+        var address = $('input[name="town"]').val()+' '+ addr;
+        geocoder.geocode({'address': address}, function(results, status) {
+            if (status === 'OK') {
+                document.getElementById('step').submit();
+            } else {
+                $('input[name="postcode"]').parent().parent().after('<div class="alert alert-warning alert-dismissable fade in">\n' +
+                    '    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
+                    '    <strong>Warning!</strong> You entered an incorrect address. Please enter your real address.\n' +
+                    '  </div>')
+                return false;
+                //alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJaLv-6bVXViUGJ_e_-nR5RZlt9GUuC4M"></script>
         <div class="registration">
             <div class="registration__column registration__column--with-padding">
                 <div class="questionsBox">
@@ -179,9 +199,9 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                                 {!! Form::text('postcode',null,['class'=>'formInput personalForm__input','placeholder'=>'Your postcode']) !!}
 
                             </div>
-                            @if ($errors->has('postcode_id'))
+                            @if ($errors->has('postcode'))
                                 <span class="help-block">
-                                        <strong>{{ $errors->first('postcode_id') }}</strong>
+                                        <strong>{{ $errors->first('postcode') }}</strong>
                                     </span>
                             @endif
                         </div>
@@ -229,7 +249,7 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
             </div>
 
             <a href="next" class="registrationBtns__item"
-               onclick="event.preventDefault();document.getElementById('step').submit();"
+               onclick="event.preventDefault();AddressVerification();"
             >
                 next step
                 <i class="fa fa-arrow-right"></i>
