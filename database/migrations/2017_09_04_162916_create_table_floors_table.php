@@ -9,7 +9,7 @@ class CreateTableFloorsTable extends Migration
     public function up()
     {
 
-        if (!Schema::hasTable('users'))
+
 
         Schema::create('floors', function (Blueprint $table) {
             $table->increments('id');
