@@ -18,18 +18,19 @@ class CreateDocumentsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->string('file_name',255);
             $table->string('title',255);
-            $table->enum('type',[
-                'nvq',
-                'care_certificate',
-                'health_and_social',
-                'training_certificate',
-                'additional_training_course',
-                'other_relevant_qualification',
-                'car_insurance_photo',
-                'driving_licence_photo',
-                'dbs_certificate_photo',
-                'personal_photo',
-            ]);
+//            $table->enum('type',[
+//                'nvq',
+//                'care_certificate',
+//                'health_and_social',
+//                'training_certificate',
+//                'additional_training_course',
+//                'other_relevant_qualification',
+//                'car_insurance_photo',
+//                'driving_licence_photo',
+//                'dbs_certificate_photo',
+//                'personal_photo',
+//            ]);
+            $table->string('type',255);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

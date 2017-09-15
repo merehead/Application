@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c7308639d73c5a3f7010017cd0141068",
+    "hash": "7a8ea455ac4ebcb66ca042316f8df3bd",
     "content-hash": "b703bf4e9216469785aa44f6ecbe07e9",
     "packages": [
         {
@@ -1089,16 +1089,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v5.2.0",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "7b4a4c18a36c460291399c6a34920b7dabc11c57"
+                "reference": "8de523434a271db522b06187625c01e5e813b08b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/7b4a4c18a36c460291399c6a34920b7dabc11c57",
-                "reference": "7b4a4c18a36c460291399c6a34920b7dabc11c57",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/8de523434a271db522b06187625c01e5e813b08b",
+                "reference": "8de523434a271db522b06187625c01e5e813b08b",
                 "shasum": ""
             },
             "require": {
@@ -1140,7 +1140,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2017-08-29 12:47:40"
+            "time": "2017-09-14 19:39:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2044,32 +2044,32 @@
     "packages-dev": [
         {
             "name": "doctrine/instantiator",
-            "version": "1.0.5",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d"
+                "reference": "185b8868aa9bf7159f5f953ed5afb2d7fcdc3bda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/185b8868aa9bf7159f5f953ed5afb2d7fcdc3bda",
+                "reference": "185b8868aa9bf7159f5f953ed5afb2d7fcdc3bda",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3,<8.0-DEV"
+                "php": "^7.1"
             },
             "require-dev": {
                 "athletic/athletic": "~0.1.8",
                 "ext-pdo": "*",
                 "ext-phar": "*",
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "~2.0"
+                "phpunit/phpunit": "^6.2.3",
+                "squizlabs/php_codesniffer": "^3.0.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -2094,7 +2094,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2015-06-14 21:17:01"
+            "time": "2017-07-22 11:58:36"
         },
         {
             "name": "fzaninotto/faker",
@@ -2230,7 +2230,7 @@
             ],
             "authors": [
                 {
-                    "name": "Pádraic Brady",
+                    "name": "Padraic Brady",
                     "email": "padraic.brady@gmail.com",
                     "homepage": "http://blog.astrumfutura.com"
                 },
