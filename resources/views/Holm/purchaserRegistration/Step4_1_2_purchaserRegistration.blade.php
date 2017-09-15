@@ -28,8 +28,8 @@
                                 profile. You can upload a photo later if you don't have one handy. </h2>
                         @else
                             <h2 class=" formLabel questionForm__label">
-                                Please add a photo of {{ $serviceUserProfile->like_name }}. This will only be shared with
-                                carers you choose to book and will be visible on {{ $serviceUserProfile->like_name }}'s
+                                Please add a photo of {{$purchasersProfile->serviceUsers->first()->like_name}}. This will only be shared with
+                                carers you choose to book and will be visible on {{$serviceUserProfile->like_name}}'s
                                 profile. You can upload a photo later if you don't have one handy. </h2>
                         @endif
 
@@ -39,7 +39,7 @@
 
                           <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                           <span class="pickfiles-delete">X</span>
-                          <div id="purchaser_personal_photo" class="pickfiles_img"></div>
+                          <div id="personal_photo_service_user" class="pickfiles_img"></div>
 
                             <a href="#" class="add add--moreHeight">
                                 <i class="fa fa-plus-circle"></i>
@@ -51,7 +51,7 @@
                         </div>
                         <div style="display: none" class="addInfo">
 
-                            <input disabled type="text" name="purchaser_personal_photo" class="addInfo__input" placeholder="Name" >
+                            <input disabled type="text" name="personal_photo_service_user" class="addInfo__input" placeholder="Name" >
 
                         </div>
                     </div>
@@ -93,9 +93,7 @@
                 </a>--}}
     </div>
 
-    <a href="next" class="registrationBtns__item"
-       onclick="event.preventDefault();document.getElementById('step').submit();"
-    >
+    <a href="#" id="upload_files" class="registrationBtns__item upload_files">
         next step
         <i class="fa fa-arrow-right"></i>
     </a>

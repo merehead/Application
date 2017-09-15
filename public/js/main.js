@@ -427,8 +427,6 @@ $(document).ready(function () {
           })
         }
       })
-    }else{
-      console.log([])
     }
 
     $('.addInfo__input').change(function () {
@@ -507,11 +505,16 @@ $(document).ready(function () {
       }
 
       var getls = JSON.parse(localStorage.getItem('files_id'))
-      getls.map((index) => {
-        if(index.id.id === deleteID){
-          arrForDeleteID.push(deleteID)
-        }
-      })
+      if(getls){
+        getls.map((index) => {
+          if(index.id.id === parseInt(deleteID)){
+            console.log(index.id.id, parseInt(deleteID))
+            arrForDeleteID.push(parseInt(deleteID))
+          }
+        })
+      }
+
+      console.log(arrForDeleteID)
 
       file.type_value = input_name
 
@@ -530,19 +533,6 @@ $(document).ready(function () {
     $('.upload_files').on('click', function (e) {
       e.preventDefault()
 
-      // if(arrForDeleteID.length > 0){
-      //   var getls = JSON.parse(localStorage.getItem('files_id'))
-      //   arrFiles = arrFiles.filter((index) => {
-      //     if(index.type_value !== input_name){
-      //       return index
-      //     }
-      //   })
-        // getls.map((index) => {
-        //   if(index.id.id === deleteID){
-        //     arrForDeleteID.push(deleteID)
-        //   }
-        // })
-      // }
       if(arrFiles.length > 0){
         $(this).html('uploading..')
         var fileChunk = 0
@@ -619,7 +609,24 @@ $(document).ready(function () {
                 $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
                 $('.pickfiles').val('')
                 arrFiles = []
-                document.getElementById('step').submit()
+
+                console.log(arrForDeleteID)
+                if(arrForDeleteID.length > 0){
+                  var getls = JSON.parse(localStorage.getItem('files_id'))
+                  axios.delete(
+                    '/api/document/'+arrForDeleteID+'/',
+                  ).then( (response) => {
+                    arrFiles = getls.filter((index) => {
+                      if(arrForDeleteID.indexOf(index.id.id) === -1){
+                        return index
+                      }
+                    })
+                    localStorage.setItem('files_id', JSON.stringify(arrFiles))
+                    document.getElementById('step').submit()
+                  })
+                }else{
+                  document.getElementById('step').submit()
+                }
               }
             }else{
               loop()
@@ -634,7 +641,7 @@ $(document).ready(function () {
         document.getElementById('step').submit()
       }
     });
-    
+
     $('.searchContainer__input').on('change',function (e) {
         insertParam('search',$(this).val());
     })
