@@ -35,28 +35,23 @@
                         password <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        <input type="password" name="password" class="formInput registrationForm__input"
-                               placeholder="*********">
+                        <input type="password" id="password" name="password" class="formInput registrationForm__input"
+                               placeholder="*********"autocomplete="off">
                         <span class="inputIco registrationForm__ico">
                      <i class="fa fa-lock" aria-hidden="true"></i>
                     </span>
-                        <span class="inputIco registrationForm__ico registrationForm__ico--right">
+                        <span class="inputIco  registrationForm__ico registrationForm__ico--right">
                      <i class="fa fa-check" aria-hidden="true"></i>
                     </span>
                     </div>
-
-
-
-
-
                 </div>
             </div>
             <div class="formColumn formColumn--half">
                 <div class="formField">
 
                     <div class="inputWrap">
-                        <input type="password" name="password_confirmation" class="formInput registrationForm__input"
-                               placeholder="*********">
+                        <input type="password" id="password_confirmation" name="password_confirmation" class="formInput registrationForm__input"
+                               placeholder="*********"autocomplete="off">
                         <span class="inputIco registrationForm__ico">
                      <i class="fa fa-lock" aria-hidden="true"></i>
                     </span>
@@ -75,7 +70,7 @@
         <div class="passStrength">
             <div class="passStrength__head">
                 <p class="">Password strength</p>
-                <span class="passStrength__indicate">good</span>
+                <span id="result" class="passStrength__indicate">good</span>
             </div>
             <div class="passStrength__item">
                 <div class="passStrength__bar"></div>
