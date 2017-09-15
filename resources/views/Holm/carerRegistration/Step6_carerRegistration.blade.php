@@ -40,7 +40,7 @@
                   <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                   <span class="pickfiles-delete">X</span>
                   <div class="pickfiles_img"></div>
-                  
+
                   <div id="dbs_certificate_photo" class="pickfiles_img"></div>
                     <a href="#" class="add add--moreHeight">
                         <i class="fa fa-plus-circle"></i>
@@ -136,9 +136,7 @@
         </a>
     </div>
 
-    <a href="next" class="registrationBtns__item"
-       onclick="event.preventDefault();document.getElementById('step').submit();"
-    >
+    <a href="#" class="registrationBtns__item upload_files">
         next step
         <i class="fa fa-arrow-right"></i>
     </a>

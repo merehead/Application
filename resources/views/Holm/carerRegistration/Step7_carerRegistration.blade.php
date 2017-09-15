@@ -180,11 +180,11 @@
                     </div>
                 </div>
             </form>
-            <div style='text-align: center'>
+            <!-- <div style='text-align: center'>
               <a class="registrationBtns__item upload_files">
                   upload files
               </a>
-            </div>
+            </div> -->
         </div>
 
     </div>
@@ -206,8 +206,7 @@
         </a>
     </div>
 
-    <a href="next" class="registrationBtns__item"
-       onclick="event.preventDefault();document.getElementById('step').submit();">
+    <a href="#" class="registrationBtns__item upload_files">
         next step
         <i class="fa fa-arrow-right"></i>
     </a>

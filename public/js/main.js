@@ -361,20 +361,38 @@ $(document).ready(function () {
     var file
     var getlocalStorageData = JSON.parse(localStorage.getItem('files_id'))
 
+    var fileTypes = [
+        'image/jpeg','image/gif','image/png',
+      ]
+    var wordFileType = [
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || 'application/msword',
+      'application/msword', 'doc', 'docx'
+    ]
+    var pdfFileType = ['application/pdf', 'pdf']
+
     if(getlocalStorageData){
       getlocalStorageData.map((index) => {
         axios.get(
           '/api/document/'+index.id.id+'/',
         ).then(function (response) {
-          console.log(response)
-          $('#'+index.type_value+'').attr('style', 'background-image: url(/api/document/'+index.id.id+'/preview)')
-          $('#'+index.type_value+'').parent().children('.add').find('.add__comment--smaller').html('<div class="file-name">asdasd</div>')
+
+          var res = response.data.data.document
+
+          if(wordFileType.indexOf(res.file_name.split('.')[1]) !== -1){
+            $('#'+index.type_value+'').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
+          }else if(pdfFileType.indexOf(res.file_name.split('.')[1]) !== -1){
+            $('#'+index.type_value+'').attr('style', 'background-image: url(/img/PDF_logo.png)')
+          }else{
+            $('#'+index.type_value+'').attr('style', 'background-image: url(/api/document/'+index.id.id+'/preview)')
+          }
+
+          $('#'+index.type_value+'').parent().children('.add').find('.add__comment--smaller').html('<div class="file-name">'+res.file_name+'</div>')
           $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
           $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('style', 'display: block')
           $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id.id)
           $('#'+index.type_value+'').parent().parent().find('.addInfo__input').prop( "disabled", false )
           if(response.data.data.document.title !== 'undefined'){
-            $('#'+index.type_value+'').parent().parent().find('.addInfo__input').val(response.data.data.document.title)
+            $('#'+index.type_value+'').parent().parent().find('.addInfo__input').val(res.title)
           }
         })
       })
@@ -392,38 +410,43 @@ $(document).ready(function () {
       })
     })
 
+    function pickfilesDelete(_this){
+      _this.attr('style', 'display: none')
+      _this.parent().find('.add__comment--smaller').html('<p>Choose a File or Drag Here</p><span>Size limit: 10 MB</span>')
+      _this.parent().find('.fa-plus-circle').attr('style', '')
+      _this.parent().find('.pickfiles_img').attr('style', '')
+      _this.parent().parent().find('.addInfo__input').prop( "disabled", true )
+      _this.parent().parent().find('.addInfo__input').val('')
+      _this.parent().find('.pickfiles').val('')
+      _this.attr('id', '')
+      var input_name = _this.parent().parent().find('.addInfo__input').attr('name')
+    }
+
     $('.pickfiles-delete').on('click', function () {
-      $(this).attr('style', 'display: none')
-      $(this).parent().find('.add__comment--smaller').html('<p>Choose a File or Drag Here</p><span>Size limit: 10 MB</span>')
-      $(this).parent().find('.fa-plus-circle').attr('style', '')
-      $(this).parent().find('.pickfiles_img').attr('style', '')
-      $(this).parent().parent().find('.addInfo__input').prop( "disabled", true )
-      $(this).parent().parent().find('.addInfo__input').val('')
-      $(this).parent().find('.pickfiles').val('')
-      var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
-      arrFiles = arrFiles.filter((index) => {
-        if(index.type_value !== input_name){
-          return index
-        }
-      })
-
       var deleteID = $(this).attr('id')
+      var _this = $(this)
 
-        if($(this).attr('id')){
-          axios.delete(
-            '/api/document/'+deleteID+'/',
-          ).then(function (response) {
-            console.log(response)
-            var getls = JSON.parse(localStorage.getItem('files_id'))
-            var newGetls = getls.filter((index) => {
-              if(index.id.id !== parseInt(deleteID)){
-                return index
-              }
-            })
-            console.log(newGetls)
-            localStorage.setItem('files_id', JSON.stringify(newGetls))
+      if($(this).attr('id')){
+        axios.delete(
+          '/api/document/'+deleteID+'/',
+        ).then( (response) => {
+          pickfilesDelete(_this)
+          arrFiles = arrFiles.filter((index) => {
+            if(index.type_value !== input_name){
+              return index
+            }
           })
-        }
+          var getls = JSON.parse(localStorage.getItem('files_id'))
+          var newGetls = getls.filter((index) => {
+            if(index.id.id !== parseInt(deleteID)){
+              return index
+            }
+          })
+          localStorage.setItem('files_id', JSON.stringify(newGetls))
+        })
+      }else{
+        pickfilesDelete(_this)
+      }
     })
 
     $('.pickfiles').on('change', function() {
@@ -433,17 +456,6 @@ $(document).ready(function () {
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
 
       file = $(this)[0].files[0]
-
-      var fileTypes = [
-        'image/jpeg',
-        'image/gif',
-        'image/png',
-      ]
-      var wordFileType = [
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || 'application/msword',
-        'application/msword'
-      ]
-      var pdfFileType = 'application/pdf'
 
       var reader  = new FileReader()
       reader.addEventListener("load", () => {
@@ -457,7 +469,7 @@ $(document).ready(function () {
         if(wordFileType.indexOf(file.type) !== -1){
           $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
         }
-        if(pdfFileType === file.type){
+        if(pdfFileType.indexOf(file.type) !== -1){
           $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/PDF_logo.png)')
         }
       }
@@ -471,13 +483,14 @@ $(document).ready(function () {
       })
 
       arrFiles.push(file)
-      // console.log(arrFiles)
 
       $(this).parent().find('.add__comment--smaller').html('<div class="file-name">'+file.name+'</div>')
       $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
     })
 
-    $('.upload_files').on('click', function () {
+    $('.upload_files').on('click', function (e) {
+      e.preventDefault()
+
       if(arrFiles.length > 0){
         $(this).html('uploading..')
         var fileChunk = 0
@@ -520,17 +533,15 @@ $(document).ready(function () {
           ).then(function (response) {
 
             if(response.data.result){
-              // console.log(response.data.result)
-              // console.log(arrFiles[fileChunk])
               var data = {
                 id: response.data.result,
                 type_value: arrFiles[fileChunk].type_value
               }
 
-              var getls = JSON.parse(localStorage.getItem('files_id'))
-              if(getls){
-                getls.push(data)
-                localStorage.setItem('files_id', JSON.stringify(getls))
+              var get_files_id = JSON.parse(localStorage.getItem('files_id'))
+              if(get_files_id){
+                get_files_id.push(data)
+                localStorage.setItem('files_id', JSON.stringify(get_files_id))
               }else{
                 arrLocalStorage.push(data)
                 localStorage.setItem('files_id', JSON.stringify(arrLocalStorage))
@@ -547,15 +558,16 @@ $(document).ready(function () {
                 end = sliceSize
                 loop()
               }else{
-                $('.add__comment--smaller').html('<p>Choose a File or Drag Here</p><span>Size limit: 10 MB</span>')
-                $('.pickfiles-delete').attr('style', 'display: none')
-                $('.fa-plus-circle').attr('style', '')
-                $('.pickfiles_img').attr('style', '')
-                $('.addInfo__input').prop( "disabled", true )
+                // $('.add__comment--smaller').html('<p>Choose a File or Drag Here</p><span>Size limit: 10 MB</span>')
+                // $('.pickfiles-delete').attr('style', 'display: none')
+                // $('.fa-plus-circle').attr('style', '')
+                // $('.pickfiles_img').attr('style', '')
+                // $('.addInfo__input').prop( "disabled", true )
+                // $('.addInfo__input').val('')
                 $('.upload_files').html('upload files')
-                $('.addInfo__input').val('')
                 $('.pickfiles').val('')
                 arrFiles = []
+                $('step').submit()
               }
             }else{
               loop()
@@ -566,6 +578,8 @@ $(document).ready(function () {
             console.log(error)
           })
         }
+      }else{
+        $('step').submit()
       }
     })
 })

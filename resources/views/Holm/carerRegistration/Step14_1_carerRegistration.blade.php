@@ -132,9 +132,7 @@
         </a>
     </div>
 
-    <a href="Signup_C_step15.html" class="registrationBtns__item"
-       onclick="event.preventDefault();document.getElementById('step').submit();"
-    >
+    <a href="#" class="registrationBtns__item upload_files">
         next step
         <i class="fa fa-arrow-right"></i>
     </a>
