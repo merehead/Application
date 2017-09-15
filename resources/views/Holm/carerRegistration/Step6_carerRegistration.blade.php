@@ -53,11 +53,7 @@
                 <div style="display: none" class="addInfo">
                     <input disabled type="text" name="dbs_certificate_photo" class="addInfo__input" placeholder="Name" >
                 </div>
-                <div style='text-align: center; margin-top: 20px'>
-                  <a class="registrationBtns__item upload_files">
-                    upload files
-                  </a>
-                </div>
+                
 
             </div>
             <div class="formField hiding2" style="display: none">
