@@ -462,6 +462,7 @@ $(document).ready(function () {
     // -- upload files -------
     var arrFiles = []
     var arrLocalStorage = []
+    var arrForDeleteID = []
     var file
     var getlocalStorageData = JSON.parse(localStorage.getItem('files_id'))
 
@@ -502,8 +503,6 @@ $(document).ready(function () {
           })
         }
       })
-    }else{
-      console.log([])
     }
 
     $('.addInfo__input').change(function () {
@@ -560,6 +559,7 @@ $(document).ready(function () {
 
       $(this).parent().parent().find('.addInfo__input').prop( "disabled", false)
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
+      var deleteID = $(this).parent().find('.pickfiles-delete').attr('id')
 
       file = $(this)[0].files[0]
 
@@ -579,6 +579,18 @@ $(document).ready(function () {
           $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/PDF_logo.png)')
         }
       }
+
+      var getls = JSON.parse(localStorage.getItem('files_id'))
+      if(getls){
+        getls.map((index) => {
+          if(index.id.id === parseInt(deleteID)){
+            console.log(index.id.id, parseInt(deleteID))
+            arrForDeleteID.push(parseInt(deleteID))
+          }
+        })
+      }
+
+      console.log(arrForDeleteID)
 
       file.type_value = input_name
 
@@ -644,10 +656,10 @@ $(document).ready(function () {
                 type_value: arrFiles[fileChunk].type_value
               }
 
-              var get_files_id = JSON.parse(localStorage.getItem('files_id'))
-              if(get_files_id){
-                get_files_id.push(data)
-                localStorage.setItem('files_id', JSON.stringify(get_files_id))
+              var getls = JSON.parse(localStorage.getItem('files_id'))
+              if(getls){
+                getls.push(data)
+                localStorage.setItem('files_id', JSON.stringify(getls))
               }else{
                 arrLocalStorage.push(data)
                 localStorage.setItem('files_id', JSON.stringify(arrLocalStorage))
@@ -670,17 +682,34 @@ $(document).ready(function () {
                 // $('.pickfiles_img').attr('style', '')
                 // $('.addInfo__input').prop( "disabled", true )
                 // $('.addInfo__input').val('')
-                $('.upload_files').html('upload files')
+                $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
                 $('.pickfiles').val('')
                 arrFiles = []
-                document.getElementById('step').submit()
+
+                console.log(arrForDeleteID)
+                if(arrForDeleteID.length > 0){
+                  var getls = JSON.parse(localStorage.getItem('files_id'))
+                  axios.delete(
+                    '/api/document/'+arrForDeleteID+'/',
+                  ).then( (response) => {
+                    arrFiles = getls.filter((index) => {
+                      if(arrForDeleteID.indexOf(index.id.id) === -1){
+                        return index
+                      }
+                    })
+                    localStorage.setItem('files_id', JSON.stringify(arrFiles))
+                    document.getElementById('step').submit()
+                  })
+                }else{
+                  document.getElementById('step').submit()
+                }
               }
             }else{
               loop()
             }
           })
           .catch(function (error) {
-            $('.upload_files').html('upload files')
+            $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
             console.log(error)
           })
         }
@@ -688,7 +717,7 @@ $(document).ready(function () {
         document.getElementById('step').submit()
       }
     });
-    
+
     $('.searchContainer__input').on('change',function (e) {
         insertParam('search',$(this).val());
     })
