@@ -52,6 +52,8 @@ Route::post('/service-registration/{serviceUserProfile}','ServiceUserRegistratio
 
 Route::get('/addServiceUser/','AddServiceUserController@create')->name('ServiceUserCreate');
 
+Route::get('/serviceUser-settings/{serviceUserProfile}','ServiceUserPrivateProfileController@index')->name('ServiceUserSetting');
+
 
 
 
