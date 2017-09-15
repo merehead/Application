@@ -9,8 +9,6 @@ class CreateTableFloorsTable extends Migration
     public function up()
     {
 
-
-
         Schema::create('floors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 8)->nullable();
