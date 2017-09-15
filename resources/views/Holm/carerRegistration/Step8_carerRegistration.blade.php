@@ -57,7 +57,7 @@
                     <div class="inputWrap addContainer">
                       <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                       <span class="pickfiles-delete">X</span>
-                      <div class="pickfiles_img"></div>
+                      <div id="transport_photo" class="pickfiles_img"></div>
                         <a href="#" class="add add--moreHeight">
                             <i class="fa fa-plus-circle"></i>
                             <div class="add__comment add__comment--smaller">

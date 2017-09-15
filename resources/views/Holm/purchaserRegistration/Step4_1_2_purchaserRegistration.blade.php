@@ -39,7 +39,7 @@
 
                           <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                           <span class="pickfiles-delete">X</span>
-                          <div class="pickfiles_img"></div>
+                          <div id="purchaser_personal_photo" class="pickfiles_img"></div>
 
                             <a href="#" class="add add--moreHeight">
                                 <i class="fa fa-plus-circle"></i>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
 
-                
+
 
             </form>
 
