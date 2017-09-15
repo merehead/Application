@@ -80,6 +80,15 @@ class DocumentsController extends Controller
             return ['id' => $document->id];
         });
     }
+    
+    public function update(Document $document, Request $request){
+        if($request->has('title'))
+            $document->title = $request->title;
+        if($request->has('date'))
+            $document->date = $request->date;
+        $document->save();
+        return response(['status' => 'success']);
+    }
 
     public function destroy(Document $document){
         //todo policy
