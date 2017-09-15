@@ -8,6 +8,7 @@ class CreateTableFloorsTable extends Migration
 {
     public function up()
     {
+        if(!Schema::hasTable('floors'))
         Schema::create('floors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 8)->nullable();

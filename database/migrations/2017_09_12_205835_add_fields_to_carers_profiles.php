@@ -14,7 +14,7 @@ class AddFieldsToCarersProfiles extends Migration
     public function up()
     {
         Schema::table('carers_profiles', function($table){
-            $table->integer('paid');
+            $table->integer('paid')->nullable();
             $table->dateTime('driver_licence_valid_until')->nullable();
             $table->dateTime('car_insurance_valid_until')->nullable();
             //$table->string('sort_code',16)->nullable();
