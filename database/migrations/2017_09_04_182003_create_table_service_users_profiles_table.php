@@ -145,12 +145,12 @@ class CreateTableServiceUsersProfilesTable extends Migration
 
 
             $table->index('floor_id');
+            $table->index('purchaser_id');
 
             $table->foreign('floor_id')         ->references('id')->on('floors');
+            $table->foreign('purchaser_id')         ->references('id')->on('purchasers_profiles');
 
-                        $table->index('purchaser_id');
 
-                        $table->foreign('purchaser_id')         ->references('id')->on('purchasers_profiles');
         });
     }
 
