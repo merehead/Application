@@ -98,7 +98,13 @@ class User extends Authenticatable
         }
         return false;
     }
-
+    public function isAdmin()
+    {
+        if ($this->user_type_id == 4) {
+            return true;
+        }
+        return false;
+    }
     public function isReregistrationCompleted()
     {
 

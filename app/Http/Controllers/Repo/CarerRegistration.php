@@ -266,7 +266,11 @@ class CarerRegistration
             'postcode' =>
                 array(
                     'required',
-                    'regex:#^([BMOSWbmosw][LKANlkan0-9][0-9]{1,2})|([BMOSWbmosw][LKANlkan0-9]) [0-9][A-Za-z]{1,2}$#'
+                    'regex:/^([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})|([Ss][Kk][0-9]{1,2}) [0-9][A-Za-z]{1,2}$/'
+
+
+                    //'regex:#^([BMOSWbmosw][LKANlkan0-9][0-9]{1,2})|([BMOSWbmosw][LKANlkan0-9]) [0-9][A-Za-z]{1,2}$#'
+
 //                    'regex:#^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))
 //[0-9][A-Za-z]{2})$#',
                 )
@@ -461,7 +465,7 @@ class CarerRegistration
     private function saveStep12($request) {
 
         $this->validate($request,[
-            'work_with_pets' => 'required|in:"Yes","No","Sometimes"',
+            'work_with_pets' => 'required|in:"Yes","No","It Depends"',
             'pets_description' => 'required_if:work_with_pets,"Sometimes","Yes"|string:512|nullable',
         ]);
 
@@ -511,8 +515,8 @@ class CarerRegistration
 
         $this->validate($request,[
             'work_UK' => 'required|in:"Yes","No"',
-            'work_UK_restriction' => 'required_if:work_UK,"Yes"|in:"Yes","No"',
-            'work_UK_description' => 'nullable|string:512',
+            'work_UK_restriction' => 'required_if:work_UK,"Yes"|nullable|in:"Yes","No"',
+            'work_UK_description' => 'required_if:work_UK_restriction,"Yes"nullable|string:512',
             'national_insurance_number'=>'nullable|string:128',
         ]);
 

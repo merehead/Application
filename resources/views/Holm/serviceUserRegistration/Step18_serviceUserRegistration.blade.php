@@ -16,7 +16,7 @@
                         Does {{$userNameForSite}} have Dementia?  <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('have_dementia',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('have_dementia',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('have_dementia'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('have_dementia') }}</strong>

@@ -12,6 +12,7 @@ use App\ServiceUserCondition;
 use App\ServiceUsersProfile;
 use App\WorkingTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 //use Illuminate\Http\Request;
 
@@ -30,6 +31,7 @@ class ServiceUserRegistrationController extends FrontController
 
         //dd($serviceUserProfileId);
 
+        if(!Auth::check()) return redirect('/purchaser-registration');
 
         $serviceUserProfile = ServiceUsersProfile::findOrFail($serviceUserProfileId);
 

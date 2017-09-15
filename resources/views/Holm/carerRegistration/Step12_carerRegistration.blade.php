@@ -25,7 +25,7 @@
 
 
 
-                        {!! Form::select('work_with_pets',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('work_with_pets',['Yes'=>'Yes','No'=>'No','It Depends'=>'It Depends'],null,['id'=>'depend-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
 
 
                     </div>
@@ -39,7 +39,7 @@
 
 
 
-                <div class="formField sometimes_hiding" style="display: none">
+                <div class="formField depend_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         What does it depend upon? <span>*</span>
                     </h2>

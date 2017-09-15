@@ -100,7 +100,7 @@
                 $(".hiding").show()
             }
         }
-        if ($("#depend-if").val() == 'It depends') {
+        if ($("#depend-if").val() == 'It Depends') {
             {
                 $(".depend_hiding").show()
             }
@@ -206,7 +206,7 @@
                 if ($(this).val() == 'No') {
                     $(".depend_hiding").hide()
                 }
-                if ($(this).val() == 'It depends') {
+                if ($(this).val() == 'It Depends') {
                     $(".depend_hiding").show()
                 }
             }

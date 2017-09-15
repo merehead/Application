@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\CarersProfile;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -20,7 +21,11 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    //use AuthenticatesUsers;
+
+    use AuthenticatesUsers {
+        logout as performLogout;
+    }
 
     /**
      * Where to redirect users after login.
@@ -28,6 +33,12 @@ class LoginController extends Controller
      * @var string
      */
     //protected $redirectTo = '/home';
+
+    public function logout(Request $request)
+    {
+        $this->performLogout($request);
+        return redirect()->back();
+    }
 
     protected function redirectTo()
     {
@@ -53,7 +64,7 @@ class LoginController extends Controller
             //case 4 : return '/admin';
         }
 
-        return '/home';
+        return '/';
     }
 
     /**

@@ -101,7 +101,12 @@
     </a>
 </div>
 
-{!! Form::open(['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'stepback','class'=>'personalForm']) !!}
+@if(empty($purchasersProfileID))
+    {!! Form::open(['method'=>'POST','route'=>['ServiceUserRegistration', $serviceUserProfileID],'id'=>'stepback','class'=>'personalForm']) !!}
+@else
+    {!! Form::open(['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'stepback','class'=>'personalForm']) !!}
+@endif
+
 <input type="hidden" name="step" value = '4_2'>
 <input type="hidden" name="stepback" value = '4_2'>
 @if(empty($purchasersProfileID))

@@ -17,7 +17,7 @@
 
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('history_of_falls',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('history_of_falls',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('history_of_falls'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('history_of_falls') }}</strong>

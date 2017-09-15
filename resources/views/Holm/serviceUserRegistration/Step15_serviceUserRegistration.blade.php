@@ -16,7 +16,7 @@
                         Is there anything else the Carer should be aware of when entering the home? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('entering_aware',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('entering_aware',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('entering_aware'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('entering_aware') }}</strong>

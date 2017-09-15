@@ -32,7 +32,7 @@
                         Does {{$userNameForSite}} have any allergies to food / medication / anything else? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('have_any_allergies',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('have_any_allergies',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('have_any_allergies'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('have_any_allergies') }}</strong>

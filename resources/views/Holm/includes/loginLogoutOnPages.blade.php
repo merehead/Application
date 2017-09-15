@@ -1,35 +1,50 @@
 @if (Auth::check())
-
-
-
-
     <div class="dropdownUser">
-        @if(Auth::user()->isReregistrationCompleted())
-        <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-settings' }}" class="registeredCarer">
-            <div class="profilePhoto registeredCarer__img">
-                <img src="./img/no_photo.png" alt="">
-            </div>
-            <h2 class="profileName">{!! Auth::user()->userName() !!}<span class="registeredCarer__type">
-                  <i class="fa {{Auth::user()->isCarer()? ' ' : 'fa-exchange' }} " aria-hidden="true"></i>
-                    {{Auth::user()->isCarer()? 'carer' : 'purchaser' }}
+
+        @if(Auth::user()->isAdmin())
+
+            <a href=""
+               class="registeredCarer">
+                <div class="profilePhoto registeredCarer__img">
+                    <img src="./img/no_photo.png" alt="">
+                </div>
+                <h2 class="profileName">admin</h2>
+                <span class="registeredCarer__ico">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
                   </span>
-            </h2>
-            <span class="registeredCarer__ico">
-                <i class="fa fa-sign-out" aria-hidden="true"></i>
-              </span>
-        </a>
-        @else
-            <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-registration' }}" class="registeredCarer">
-{{--            <div class="profilePhoto registeredCarer__img">
-                <img src="./img/no_photo.png" alt="">
-            </div>--}}
-                <h2 class="profileName" style="padding-left:45px; font-size: 70%">continue sigh up</h2>
             </a>
+
+        @else
+
+            @if(Auth::user()->isReregistrationCompleted())
+                <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-settings' }}" class="registeredCarer">
+                    <div class="profilePhoto registeredCarer__img">
+                        <img src="./img/no_photo.png" alt="">
+                    </div>
+                    <h2 class="profileName">{!! Auth::user()->userName() !!}<span class="registeredCarer__type">
+                      <i class="fa {{Auth::user()->isCarer()? ' ' : 'fa-exchange' }} " aria-hidden="true"></i>
+                            {{Auth::user()->isCarer()? 'carer' : 'purchaser' }}
+                      </span>
+                    </h2>
+                    <span class="registeredCarer__ico">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                  </span>
+                </a>
+            @else
+                <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-registration' }}"
+                   class="registeredCarer">
+                    {{--            <div class="profilePhoto registeredCarer__img">
+                                    <img src="./img/no_photo.png" alt="">
+                                </div>--}}
+                    <h2 class="profileName" style="padding-left:45px; font-size: 70%">continue sign up</h2>
+                </a>
+            @endif
+
         @endif
 
         <div class="dropdownUser__list">
 
-            @if(!Auth::user()->isCarer())
+            @if(!Auth::user()->isCarer() && !Auth::user()->isAdmin())
 
 
                 @if(count(Auth::user()->userPurchaserProfile->serviceUsers))
@@ -38,17 +53,16 @@
 
                         @if(strlen($serviceUser->first_name)>0)
 
-                <a href="{{route('ServiceUserRegistration',['id'=>$serviceUser->id])}}" class="dropdownUser__item">
-                    <div class="profilePhoto dropdownUser__img">
-                        <img src="./img/no_photo.png" alt="">
-                    </div>
-                    <h2 class="profileName">
-                        {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
-                    </h2>
-                    <span class="dropdownUser__ico">
-                  <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </span>
-                </a>
+                            <a href="{{route('ServiceUserRegistration',['id'=>$serviceUser->id])}}"
+                               class="dropdownUser__item">
+                                <div class="profilePhoto dropdownUser__img">
+                                    <img src="./img/no_photo.png" alt="">
+                                </div>
+                                <h2 class="profileName">
+                                    {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
+                                </h2>
+                                <span class="dropdownUser__ico"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+                            </a>
 
                         @endif
 
