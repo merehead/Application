@@ -1,18 +1,19 @@
 <script>
     function AddressVerification() {
+        $('.alert').remove();
         var geocoder = new google.maps.Geocoder();
-        var addr = ($('input[name="address_line1"]').val()!='не указан')?$('input[name="address_line1"]').val():'';
+        var addr = ($('input[name="address_line1"]').val()!='')?$('input[name="address_line1"]').val():'';
         var address = $('input[name="town"]').val()+' '+ addr;
         geocoder.geocode({'address': address}, function(results, status) {
             if (status === 'OK') {
                 document.getElementById('step').submit();
             } else {
-                $('input[name="postcode"]').parent().parent().after('<div class="alert alert-warning alert-dismissable fade in">\n' +
+                $('input[name="address_line1"]').parent().parent().after('<div class="alert alert-warning alert-dismissable fade in">\n' +
                     '    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
                     '    <strong>Warning!</strong> You entered an incorrect address. Please enter your real address.\n' +
-                    '  </div>')
+                    '  </div>');
                 return false;
-                //alert('Geocode was not successful for the following reason: ' + status);
+
             }
         });
     }
