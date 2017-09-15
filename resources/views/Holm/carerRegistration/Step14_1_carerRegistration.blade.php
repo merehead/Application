@@ -132,7 +132,7 @@
         </a>
     </div>
 
-    <a href="#" class="registrationBtns__item upload_files">
+    <a href="#" id="upload_files" class="registrationBtns__item upload_files">
         next step
         <i class="fa fa-arrow-right"></i>
     </a>
