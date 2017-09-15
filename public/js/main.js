@@ -358,6 +358,7 @@ $(document).ready(function () {
     // -- upload files -------
     var arrFiles = []
     var arrLocalStorage = []
+    var arrForDeleteID = []
     var file
     var getlocalStorageData = JSON.parse(localStorage.getItem('files_id'))
 
@@ -456,6 +457,7 @@ $(document).ready(function () {
 
       $(this).parent().parent().find('.addInfo__input').prop( "disabled", false)
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
+      var deleteID = $(this).parent().find('.pickfiles-delete').attr('id')
 
       file = $(this)[0].files[0]
 
@@ -476,6 +478,13 @@ $(document).ready(function () {
         }
       }
 
+      var getls = JSON.parse(localStorage.getItem('files_id'))
+      getls.map((index) => {
+        if(index.id.id === deleteID){
+          arrForDeleteID.push(deleteID)
+        }
+      })
+
       file.type_value = input_name
 
       arrFiles = arrFiles.filter((index) => {
@@ -493,6 +502,19 @@ $(document).ready(function () {
     $('.upload_files').on('click', function (e) {
       e.preventDefault()
 
+      // if(arrForDeleteID.length > 0){
+      //   var getls = JSON.parse(localStorage.getItem('files_id'))
+      //   arrFiles = arrFiles.filter((index) => {
+      //     if(index.type_value !== input_name){
+      //       return index
+      //     }
+      //   })
+        // getls.map((index) => {
+        //   if(index.id.id === deleteID){
+        //     arrForDeleteID.push(deleteID)
+        //   }
+        // })
+      // }
       if(arrFiles.length > 0){
         $(this).html('uploading..')
         var fileChunk = 0
@@ -540,10 +562,10 @@ $(document).ready(function () {
                 type_value: arrFiles[fileChunk].type_value
               }
 
-              var get_files_id = JSON.parse(localStorage.getItem('files_id'))
-              if(get_files_id){
-                get_files_id.push(data)
-                localStorage.setItem('files_id', JSON.stringify(get_files_id))
+              var getls = JSON.parse(localStorage.getItem('files_id'))
+              if(getls){
+                getls.push(data)
+                localStorage.setItem('files_id', JSON.stringify(getls))
               }else{
                 arrLocalStorage.push(data)
                 localStorage.setItem('files_id', JSON.stringify(arrLocalStorage))
@@ -566,7 +588,7 @@ $(document).ready(function () {
                 // $('.pickfiles_img').attr('style', '')
                 // $('.addInfo__input').prop( "disabled", true )
                 // $('.addInfo__input').val('')
-                $('.upload_files').html('upload files')
+                $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
                 $('.pickfiles').val('')
                 arrFiles = []
                 document.getElementById('step').submit()
@@ -576,7 +598,7 @@ $(document).ready(function () {
             }
           })
           .catch(function (error) {
-            $('.upload_files').html('upload files')
+            $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
             console.log(error)
           })
         }
