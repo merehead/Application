@@ -59,6 +59,9 @@
 
             </div>
         </div>
+        <div class="terms-cerer">
+            Please refer to <a href="{{route('TermsPage')}}">Terms &amp; Conditons</a>
+        </div>
     </div>
 
 </section>

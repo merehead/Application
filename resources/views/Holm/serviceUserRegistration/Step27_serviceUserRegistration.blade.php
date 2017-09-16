@@ -27,7 +27,7 @@
                         Please give details of what kind of help. <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::textarea('speech_detail',null,['class'=>'formArea ','placeholder'=>'Details']) !!}
+                        {!! Form::textarea('speech_detail',null,['class'=>'formArea ','placeholder'=>'Details','maxlength'=>"500"]) !!}
                         @if ($errors->has('speech_detail'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('speech_detail') }}</strong>

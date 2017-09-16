@@ -30,7 +30,7 @@
 </div>
 <div class="registrationBtns registrationBtns--center">
 
-    <a href="Service_User_Private_profile_page.html" class="registrationBtns__item">
+    <a href="\" class="registrationBtns__item">
         submit
     </a>
 </div>

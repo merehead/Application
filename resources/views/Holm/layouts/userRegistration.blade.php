@@ -100,7 +100,7 @@
                 $(".hiding").show()
             }
         }
-        if ($("#depend-if").val() == 'It depends') {
+        if ($("#depend-if").val() == 'It Depends') {
             {
                 $(".depend_hiding").show()
             }
@@ -206,7 +206,7 @@
                 if ($(this).val() == 'No') {
                     $(".depend_hiding").hide()
                 }
-                if ($(this).val() == 'It depends') {
+                if ($(this).val() == 'It Depends') {
                     $(".depend_hiding").show()
                 }
             }
@@ -267,6 +267,28 @@
 
 
     $(document).ready(function () {
+
+        if ($("#step input:checkbox:checked").length > 0)
+        {
+            $(".any_checked").show();
+        }
+        else
+        {
+            $(".any_checked").hide();
+        }
+
+        $("#step input:checkbox").click(function () {
+            if ($("#step input:checkbox:checked").length > 0)
+            {
+                $(".any_checked").slideDown();
+            }
+            else
+            {
+                $(".any_checked").slideUp();   // hide("slow"); //.slideUp()
+            }
+        });
+
+
         $(".allTime").change(function () {
             if (this.checked) {
                 $(".checkboxTimerGroup").each(function () {

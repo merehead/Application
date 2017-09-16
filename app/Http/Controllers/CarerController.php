@@ -20,7 +20,6 @@ class CarerController extends FrontController
     {
         parent::__construct();
 
-
     }
 
     public function welcome()

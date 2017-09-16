@@ -4,6 +4,66 @@ var arrFiles = []
 var arrForDeleteIDProfile = []
 
 // ------ Global Functions ----------
+function confirmPass($this){
+    var conf =  $($this).val();
+    var pass =  $('input[name="password"]').val();
+    if(conf!=pass){
+        $('#password_confirmation').parent().find('span.registrationForm__ico--right').addClass('registrationForm__ico--wrong');
+        $('#password_confirmation').parent().find('span.registrationForm__ico--right>i').removeClass('fa-check').addClass("fa-times");
+    }else{
+        $('#password_confirmation').parent().find('span.registrationForm__ico--right>i').addClass('fa-check').removeClass("fa-times");
+        $('#password_confirmation').parent().find('span.registrationForm__ico--right').removeClass('registrationForm__ico--wrong');
+    }
+}
+function checkStrength(password) {
+    var strength = 0;
+    $('.passStrength').show();
+    console.log(password.length);
+    if (password=='**********') {
+        $('.passStrength__bar').css('width','5%');
+        $('.passStrength__bar').css('background','red');
+        $('.passStrength__bar').css('color','red');
+        $('#result').css('color','red');
+        return 'enter the password'
+    }
+    if (password.length < 6) {
+        $('.passStrength__bar').css('width','5%');
+        $('.passStrength__bar').css('background','red');
+        $('.passStrength__bar').css('color','red');
+        $('#result').css('color','red');
+        return 'too short'
+    }
+    if (password.length > 7) strength += 1
+// If password contains both lower and uppercase characters, increase strength value.
+    if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1
+// If it has numbers and characters, increase strength value.
+    if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) strength += 1
+// If it has one special character, increase strength value.
+    if (password.match(/([!,%,&,@,#,$,^,?,_,~])/)) strength += 1
+// If it has two special characters, increase strength value.
+    if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,?,_,~])/)) strength += 1
+// Calculated strength value, we can return messages
+// If value is less than 2
+    if (strength < 2) {
+        $('.passStrength__bar').css('width','20%');
+        $('.passStrength__bar').css('background','red');
+        $('#result').css('color','red');
+
+        return 'weak'
+    } else if (strength == 2) {
+        $('.passStrength__bar').css('width','60%');
+        $('.passStrength__bar').css('background','#7ab7dc');
+        $('#result').css('color','#7ab7dc');
+
+        return 'good'
+    } else if (strength > 2) {
+        $('.passStrength__bar').css('width','100%');
+        $('.passStrength__bar').css('background','#80cb2d');
+        $('#result').css('color','#80cb2d');
+        return 'Strong'
+    }
+}
+
 function insertParam(key, value) {
     key = encodeURI(key);
     value = encodeURI(value);
@@ -454,7 +514,23 @@ $(document).ready(function () {
         }
 
         return false;
-    })
+    });
+    $('.passStrength__bar').css('width','5%');
+    $('.passStrength__bar').css('background','red');
+    $('.passStrength__bar').css('color','red');
+    $('#result').css('color','red');
+    $('#result').html('enter the password');
+    $('.passStrength').hide();
+    $('input[name="password"]').on('keyup',function (e) {
+        $('#result').html(checkStrength($(this).val()));
+        confirmPass($('input[name="password_confirmation"]'));
+
+    });
+    // -- Registration Carer Step 1
+
+    $('input[name="password_confirmation"]').on('keyup',function (e) {
+        confirmPass(this);
+    });
     // -- Registration Carer Step 8
     $('select[name="have_car"]').parent().parent().hide();
     $('select[name="driving_licence"]').on('change', function (e) {

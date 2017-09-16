@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<div class="borderContainer" id='carerPrivateGeneral'>
+<div class="borderContainer">
     @include(config('settings.frontTheme').'.CarerProfiles/PrivateProfileMainSectionGeneral_profileInfoContainer')
     @include(config('settings.frontTheme').'.CarerProfiles/PrivateProfileMainSectionGeneral_CVandPassport')
 </div>
@@ -139,7 +139,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','disabled','
     <div class="profileRow">
 
         <div class="profileField profileField--full-width">
-            {!! Form::text('sentence_yourself',null,['class'=>'profileField__input','maxlength'=>"200"]) !!}
+            {!! Form::text('sentence_yourself',null,['class'=>'profileField__input']) !!}
             {{--
                         <input type="text" class="profileField__input" placeholder="{{$carerProfile->sentence_yourself}}">
             --}}

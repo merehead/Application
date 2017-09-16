@@ -43,7 +43,7 @@
                     </h2>
                     <div class="inputWrap">
 
-                        {!! Form::text('other_behaviour',null,['class'=>'formInput','placeholder'=>'Details']) !!}
+                        {!! Form::text('other_behaviour',null,['class'=>'formInput','placeholder'=>'Details','maxlength'=>"200"]) !!}
                         @if ($errors->has('other_behaviour'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('other_behaviour') }}</strong>
