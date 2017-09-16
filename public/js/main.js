@@ -546,6 +546,7 @@ $(document).ready(function () {
 
     // -- upload files. Registration sections -------
     var arrLocalStorage = []
+    var arrForDeleteID = []
     var file
     var getlocalStorageData = JSON.parse(localStorage.getItem('files_id'))
 
@@ -698,7 +699,7 @@ $(document).ready(function () {
       console.log(arrFiles)
       console.log(arrForDeleteIDProfile)
 
-      // $(this).parent().find('.add__comment--smaller').html('<div class="file-name">'+file.name+'</div>')
+      $(this).parent().find('.add__comment--smaller').html('')
       $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
     })
 
