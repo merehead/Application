@@ -70,10 +70,19 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Please select','r
                 </span>
 
                 </h2>
-                <div class="addContainer ">
-                    <a href="#" class="add add--moreHeight">
+
+                <div class="addContainer">
+                  <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                  <span class="pickfiles-delete">X</span>
+
+                  <div id="dbs_certificate_photo" class="pickfiles_img"></div>
+                    <a class="add add--moreHeight">
                         <i class="fa fa-plus-circle"></i>
+                        <div class="add__comment add__comment--smaller"></div>
                     </a>
+                </div>
+                <div style="display: none" class="addInfo">
+                    <input disabled type="text" name="dbs_certificate_photo" class="addInfo__input" placeholder="Name" >
                 </div>
 
             </div>
@@ -94,7 +103,3 @@ null,['class'=>'formInput personalForm__input','placeholder'=>'Please select','r
 </div>
 
 {!! Form::close() !!}
-
-
-
-
