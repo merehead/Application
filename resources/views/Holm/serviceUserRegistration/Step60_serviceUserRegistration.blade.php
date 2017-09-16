@@ -17,7 +17,7 @@
                         Are there any other medical conditions, disabilities, or other pieces of information not already covered which you feel may be of use? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('we_missed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('we_missed',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('we_missed'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('we_missed') }}</strong>

@@ -57,7 +57,14 @@
                         <span class="inputIco personalForm__ico centeredLink">
                   <i class="fa fa-calendar"></i>
                 </span>
+
                     </div>
+
+                @if ($errors->has('time_to_bed'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('time_to_bed') }}</strong>
+                                    </span>
+                @endif
                 </div>
 
             <input type="hidden" name="step" value='52'>

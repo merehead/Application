@@ -16,7 +16,7 @@
                         Does {{$userNameForSite}} have any other medical conditions we should be aware of? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('other_medical_conditions',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('other_medical_conditions',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('other_medical_conditions'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('other_medical_conditions') }}</strong>

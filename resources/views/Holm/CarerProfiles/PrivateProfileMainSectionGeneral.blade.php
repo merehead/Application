@@ -139,7 +139,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','disabled','
     <div class="profileRow">
 
         <div class="profileField profileField--full-width">
-            {!! Form::text('sentence_yourself',null,['class'=>'profileField__input']) !!}
+            {!! Form::text('sentence_yourself',null,['class'=>'profileField__input','maxlength'=>"200"]) !!}
             {{--
                         <input type="text" class="profileField__input" placeholder="{{$carerProfile->sentence_yourself}}">
             --}}

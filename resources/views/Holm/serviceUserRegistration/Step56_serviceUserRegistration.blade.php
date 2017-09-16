@@ -16,7 +16,7 @@
                         Does {{$userNameForSite}} have any political, religious or other beliefs we should be aware of? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                       {!! Form::select('religious_beliefs',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                       {!! Form::select('religious_beliefs',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                             @if ($errors->has('religious_beliefs'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('religious_beliefs') }}</strong>

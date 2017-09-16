@@ -19,7 +19,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('long_term_conditions',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('long_term_conditions',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"500"]) !!}
                         @if ($errors->has('long_term_conditions'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('long_term_conditions') }}</strong>
@@ -32,7 +32,7 @@
                         Does {{$userNameForSite}} have any allergies to food / medication / anything else? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('have_any_allergies',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('have_any_allergies',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('have_any_allergies'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('have_any_allergies') }}</strong>
@@ -49,7 +49,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('allergies_detail',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('allergies_detail',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"500"]) !!}
                         @if ($errors->has('allergies_detail'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('allergies_detail') }}</strong>

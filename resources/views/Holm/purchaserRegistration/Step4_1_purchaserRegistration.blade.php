@@ -196,7 +196,7 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
 
 
                                 @if($serviceUserProfile->DoB === "01/01/1970")
-                                <input name="DoB" id="datepicker" class="profileField__input" placeholder="dd/mm/yyyy" type="text">
+                                <input name="DoB" id="datepicker" value="{{old('DoB')}}"  class="profileField__input" placeholder="dd/mm/yyyy" type="text">
                                 @else
                                 {!! Form::text('DoB',null,['id'=>'datepicker','class'=>'profileField__input']) !!}
                                 @endif
@@ -228,10 +228,15 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
         </div>
         <div class="registrationBtns">
             <div class="registrationBtns__left">
+
+                @if(!empty($purchasersProfileID))
+
                 <a href="Signup_C_3.html" class="registrationBtns__item registrationBtns__item--back"
                    onclick="event.preventDefault();document.getElementById('stepback').submit();">
                     <i class="fa fa-arrow-left "></i>back
                 </a>
+
+                @endif
 {{--                <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
                     continue later
                 </a>--}}

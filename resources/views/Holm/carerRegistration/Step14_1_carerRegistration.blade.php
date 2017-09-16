@@ -28,6 +28,8 @@
                       <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                       <span class="pickfiles-delete">X</span>
                       <div class="pickfiles_img"></div>
+
+                      <div id="photographic_proof_id" class="pickfiles_img"></div>
                         <a href="#" class="add add--moreHeight">
                             <i class="fa fa-plus-circle"></i>
                             <div class="add__comment add__comment--smaller">
@@ -51,6 +53,8 @@
                       <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                       <span class="pickfiles-delete">X</span>
                       <div class="pickfiles_img"></div>
+
+                      <div id="additional_documents_cv" class="pickfiles_img"></div>
                         <a href="#" class="add add--moreHeight">
                             <i class="fa fa-plus-circle"></i>
                             <div class="add__comment add__comment--smaller">
@@ -61,11 +65,6 @@
                     </div>
                     <div style="display: none" class="addInfo">
                         <input disabled type="text" name="additional_documents_cv" class="addInfo__input" placeholder="Name">
-                    </div>
-                    <div style='text-align: center; margin-top: 20px'>
-                      <a class="registrationBtns__item upload_files">
-                        upload files
-                      </a>
                     </div>
                 </div>
 
@@ -128,9 +127,7 @@
         </a>
     </div>
 
-    <a href="Signup_C_step15.html" class="registrationBtns__item"
-       onclick="event.preventDefault();document.getElementById('step').submit();"
-    >
+    <a href="#" id="upload_files" class="registrationBtns__item upload_files">
         next step
         <i class="fa fa-arrow-right"></i>
     </a>
