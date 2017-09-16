@@ -32,7 +32,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('dementia_detail',null,['class'=>'formArea ','placeholder'=>'Details']) !!}
+                        {!! Form::textarea('dementia_detail',null,['class'=>'formArea ','placeholder'=>'Details','maxlength'=>"500"]) !!}
                         @if ($errors->has('dementia_detail'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('dementia_detail') }}</strong>

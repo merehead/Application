@@ -19,7 +19,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('long_term_conditions',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('long_term_conditions',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"500"]) !!}
                         @if ($errors->has('long_term_conditions'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('long_term_conditions') }}</strong>
@@ -49,7 +49,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('allergies_detail',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('allergies_detail',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"500"]) !!}
                         @if ($errors->has('allergies_detail'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('allergies_detail') }}</strong>

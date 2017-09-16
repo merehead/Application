@@ -539,7 +539,7 @@ class CarerRegistration
 
         $this->validate($request,[
             'description_yourself' => 'required|string:1024',
-            'sentence_yourself' => 'required|string:512',
+            'sentence_yourself' => 'required|string:250',
         ]);
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
