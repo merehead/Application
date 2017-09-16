@@ -16,7 +16,7 @@ function confirmPass($this){
 function checkStrength(password) {
     var strength = 0;
     $('.passStrength').show();
-    console.log(password.length);
+    //console.log(password.length);
     if (password=='**********') {
         $('.passStrength__bar').css('width','5%');
         $('.passStrength__bar').css('background','red');
@@ -616,5 +616,8 @@ $(document).ready(function () {
     
     $('.searchContainer__input').on('change',function (e) {
         insertParam('search',$(this).val());
-    })
+    });
+
+
+
 });
