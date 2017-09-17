@@ -210,10 +210,11 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                             <h2 class="formLabel personalForm__label">
                                 Date of birth <span>*</span>
                             </h2>
+
                             <div class="inputWrap">
 
                                 @if($carersProfile->DoB === "01/01/1970")
-                                <input name="DoB" id="datepicker" class="profileField__input" placeholder="dd/mm/yyyy" type="text">
+                                <input name="DoB"  id="datepicker"  value="{{old('DoB')}}" class="profileField__input" placeholder="dd/mm/yyyy" type="text">
                                 @else
                                 {!! Form::text('DoB',null,['id'=>'datepicker','class'=>'profileField__input']) !!}
                                 @endif

@@ -44,7 +44,7 @@
                                 If other, please state
                             </h2>
                             <div class="inputWrap">
-                                {!! Form::text('other_languages',null,['class'=>'formArea ','placeholder'=>'Other']) !!}
+                                {!! Form::text('other_languages',null,['class'=>'formArea ','placeholder'=>'Other','maxlength'=>"500"]) !!}
                                 @if ($errors->has('other_languages'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('other_languages') }}</strong>

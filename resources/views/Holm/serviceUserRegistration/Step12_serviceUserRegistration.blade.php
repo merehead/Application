@@ -30,7 +30,7 @@
                         Please give details <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::text('pet_detail',null,['class'=>'formInput ','placeholder'=>'Details']) !!}
+                        {!! Form::text('pet_detail',null,['class'=>'formInput ','placeholder'=>'Details','maxlength'=>"200"]) !!}
                         @if ($errors->has('pet_detail'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('pet_detail') }}</strong>

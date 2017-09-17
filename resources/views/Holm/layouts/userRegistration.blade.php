@@ -267,6 +267,28 @@
 
 
     $(document).ready(function () {
+
+        if ($("#step input:checkbox:checked").length > 0)
+        {
+            $(".any_checked").show();
+        }
+        else
+        {
+            $(".any_checked").hide();
+        }
+
+        $("#step input:checkbox").click(function () {
+            if ($("#step input:checkbox:checked").length > 0)
+            {
+                $(".any_checked").slideDown();
+            }
+            else
+            {
+                $(".any_checked").slideUp();   // hide("slow"); //.slideUp()
+            }
+        });
+
+
         $(".allTime").change(function () {
             if (this.checked) {
                 $(".checkboxTimerGroup").each(function () {
