@@ -43,7 +43,7 @@ Route::get('carer-registration/','CarerRegistrationController@index')->name('Car
 Route::post('carer-registration','CarerRegistrationController@update')->name('CarerRegistrationPost');
 
 
-Route::get('purchaser-settings', 'PurchaserController@index')->name('purchaserSettings');
+Route::get('git ', 'PurchaserController@index')->name('purchaserSettings');
 Route::post('/purchaser-settings','PurchaserController@update')->name('purchaserSettingsPost');
 Route::get('/purchaser-registration/','PurchaserRegistrationController@index')->name('PurchaserRegistration');
 Route::post('/purchaser-registration','PurchaserRegistrationController@update')->name('PurchaserRegistrationPost');
