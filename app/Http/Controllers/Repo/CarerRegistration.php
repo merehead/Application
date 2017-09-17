@@ -516,7 +516,7 @@ class CarerRegistration
         $this->validate($request,[
             'work_UK' => 'required|in:"Yes","No"',
             'work_UK_restriction' => 'required_if:work_UK,"Yes"|nullable|in:"Yes","No"',
-            'work_UK_description' => 'required_if:work_UK_restriction,"Yes"nullable|string:512',
+            'work_UK_description' => 'required_if:work_UK_restriction,"Yes"|nullable|string:512',
             'national_insurance_number'=>'nullable|string:128',
         ]);
 

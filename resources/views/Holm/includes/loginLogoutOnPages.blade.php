@@ -53,7 +53,9 @@
 
                         @if(strlen($serviceUser->first_name)>0)
 
-                            <a href="{{route('ServiceUserRegistration',['id'=>$serviceUser->id])}}"
+                            <a href="{{ $serviceUser->registration_progress!='61'
+                                ? route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUser->id])
+                                : route('ServiceUserSetting',['id'=>$serviceUser->id])}}"
                                class="dropdownUser__item">
                                 <div class="profilePhoto dropdownUser__img">
                                     <img src="./img/no_photo.png" alt="">

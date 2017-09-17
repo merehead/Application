@@ -30,7 +30,7 @@
 </div>
 <div class="registrationBtns registrationBtns--center">
 
-    <a href="\" class="registrationBtns__item">
+    <a href="{{route('ServiceUserSetting',['id'=>$serviceUserProfileID])}}" class="registrationBtns__item">
         submit
     </a>
 </div>

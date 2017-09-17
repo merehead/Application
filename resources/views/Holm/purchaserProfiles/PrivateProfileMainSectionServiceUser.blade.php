@@ -8,33 +8,35 @@
         <div class="col-md-9">
 
             @if(count($serviceUsers))
-            @foreach($serviceUsers as $serviceUser)
+                @foreach($serviceUsers as $serviceUser)
 
-            <div class="peopleCare">
+                    <div class="peopleCare">
 
-                <div class="peopleCare__item">
-                    <div class="profilePhoto peopleCare__photo">
-                        <a href="" target="blank">  <img src="/img/no_photo.png" alt=""> </a>
+                        <div class="peopleCare__item">
+                            <div class="profilePhoto peopleCare__photo">
+                                <a href="" target="blank"> <img src="/img/no_photo.png" alt=""> </a>
+                            </div>
+
+                            <h2 class="peopleCare__name">
+                                <a href="{{ $serviceUser->registration_progress!='61'
+                                ? route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUser->id])
+                                : route('ServiceUserSetting',['id'=>$serviceUser->id])}}"
+                                   target="blank">
+                                    @if(strlen($serviceUser->first_name))
+                                        {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
+                                    @else
+                                        New
+                                    @endif
+                                </a>
+                            </h2>
+                            <a href="" class="peopleCare__delete">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </div>
+
                     </div>
 
-                    <h2 class="peopleCare__name">
-                        <a href="{{route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUser->id])}}"
-                           target="blank">
-                            @if(strlen($serviceUser->first_name))
-                            {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
-                            @else
-                                New
-                            @endif
-                        </a>
-                    </h2>
-                    <a href="" class="peopleCare__delete">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </a>
-                </div>
-
-            </div>
-
-            @endforeach
+                @endforeach
             @endif
 
         </div>
