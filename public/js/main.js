@@ -866,9 +866,5 @@ $(document).ready(function () {
         })
       })
     }
-})
-    });
-
-
 
 });
