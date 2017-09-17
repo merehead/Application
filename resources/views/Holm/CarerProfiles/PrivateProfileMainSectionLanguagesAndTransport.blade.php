@@ -64,13 +64,15 @@
                 </h2>
 
                 {!! Form::select('driving_licence',['Yes'=>'Have UK/EEA Driving Licence','No'=>'Do not have a driving licence'],
-null,['class'=>'profileField__select profileField__select--greyBg','disabled','data-edit'=>'false']) !!}
+                null,['class'=>'profileField__select profileField__select--greyBg','disabled','data-edit'=>'false']) !!}
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Have UK/EEA Driving Licence</option>
                     <option value="Flat">Do not have a driving licence</option>
                     <option value="Flat">Please select</option>
                 </select>--}}
             </div>
+        </div>
+        <div class="profileField">
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
@@ -112,10 +114,18 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                   Car insurance Photo
                 </span>
                 </h2>
-                <div class="addContainer ">
-                    <a href="#" class="add add--moreHeight">
+                <div class="addContainer">
+                  <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                  <span class="pickfiles-delete">X</span>
+
+                  <div id="car_insurance_photo" class="pickfiles_img"></div>
+                    <a class="add add--moreHeight">
                         <i class="fa fa-plus-circle"></i>
+                        <div class="add__comment add__comment--smaller"></div>
                     </a>
+                </div>
+                <div style="display: none" class="addInfo">
+                    <input disabled type="text" name="car_insurance_photo" class="addInfo__input" placeholder="Name">
                 </div>
 
             </div>
@@ -151,10 +161,19 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                   UK\EEA Driving licence photo
                 </span>
                 </h2>
-                <div class="addContainer ">
-                    <a href="#" class="add add--moreHeight">
+
+                <div class="addContainer">
+                  <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                  <span class="pickfiles-delete">X</span>
+
+                  <div id="driving_licence_photo" class="pickfiles_img"></div>
+                    <a class="add add--moreHeight">
                         <i class="fa fa-plus-circle"></i>
+                        <div class="add__comment add__comment--smaller"></div>
                     </a>
+                </div>
+                <div style="display: none" class="addInfo">
+                    <input disabled type="text" name="driving_licence_photo" class="addInfo__input" placeholder="Name">
                 </div>
 
             </div>

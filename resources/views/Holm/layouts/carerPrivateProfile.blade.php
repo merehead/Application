@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/css/customize.css">
     <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/axios@0.16.2/dist/axios.min.js"></script>
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
 </head>
@@ -54,6 +55,18 @@
             yearRange: "0:+50"
         });
     } );
+    $( function() {
+        $( "#datepicker_date_sertificate" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"dd/mm/yy",
+            showAnim:"slideDown",
+            minDate: "+0D",
+            maxDate: "+50Y",
+            yearRange: "0:+50",
+            ignoreReadonly:false
+        });
+    });
 
     $( document ).ready(function() {
 
