@@ -128,6 +128,16 @@ null,['class'=>'profileField__select  profileField__select--greyBg','disabled','
         {!! Form::text('work_UK_description',null,['class'=>'profileField__input']) !!}
 
         </div>
+        </div>
+        <div class="profileRow">
+        <div class="profileField">
+            <h2 class="profileField__title ordinaryTitle">
+              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
+                National Insurance Number </span>
+            </h2>
+        {!! Form::text('national_insurance_number',null,['class'=>'profileField__input']) !!}
+
+        </div>
 
     </div>
 </div>
@@ -139,7 +149,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','disabled','
     <div class="profileRow">
 
         <div class="profileField profileField--full-width">
-            {!! Form::text('sentence_yourself',null,['class'=>'profileField__input','maxlength'=>"200"]) !!}
+            {!! Form::text('sentence_yourself',null,['class'=>'profileField__input','maxlength'=>"50"]) !!}
             {{--
                         <input type="text" class="profileField__input" placeholder="{{$carerProfile->sentence_yourself}}">
             --}}

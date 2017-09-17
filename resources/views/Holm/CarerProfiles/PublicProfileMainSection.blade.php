@@ -1,0 +1,368 @@
+<div class="carer">
+    <div class="profileInfo">
+        <a href="#" class="profilePhoto  ">
+            <img src="/img/no_photo.png" alt="">
+        </a>
+        <div class="profileInfo__item">
+            <h2 class="profileName profileName--big">
+                <a href="#">
+                    {{$carerProfile->first_name}} {{$carerProfile->family_name}}</a>
+            </h2>
+            <div class="userRating">
+                <div class="avarageRate">
+                    <div class="profileRating ">
+                        <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
+                        <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
+                        <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
+                        <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
+                        <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
+                    </div>
+                </div>
+            </div>
+            <p>
+                {{$carerProfile->sentence_yourself}}
+            </p>
+        </div>
+    </div>
+
+    <div class="carerExtraInfo">
+        <p class="carerCheck">
+            <i class="fa fa-check-square-o" aria-hidden="true"></i>
+            Verified Carer
+        </p>
+        <p class="carerCheck">
+            <i class="fa fa-check-square-o" aria-hidden="true"></i>
+            Criminal Record Checked
+        </p>
+        <div class="locationBox">
+            <p class="location">
+                <span class="location__title">town/city</span>
+                <span class="location__value">{{$carerProfile->town}}</span>
+            </p>
+            <p class="location">
+                <span class="location__title">post code</span>
+                <span class="location__value">{{$carerProfile->postcode}}</span>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<div class="userRating">
+
+    <div class="otherRate">
+        <div class="userRating__item">
+
+            <p class="userRating__name">
+                <span>Punctuality</span>
+            </p>
+            <div class="profileRating ">
+<span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+                <span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+                <span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+                <span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+                <span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+            </div>
+        </div>
+        <div class="userRating__item">
+
+            <p class="userRating__name">
+                <span>Friendliness</span>s
+            </p>
+            <div class="profileRating ">
+<span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+                <span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+                <span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+                <span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+                <span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+            </div>
+        </div>
+        <div class="userRating__item">
+
+            <p class="userRating__name">
+                <span>Communication</span>
+            </p>
+            <div class="profileRating ">
+<span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+                <span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+                <span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+                <span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+                <span class="profileRating__item">
+<i class="fa fa-heart"></i>
+</span>
+            </div>
+        </div>
+        <div class="userRating__item">
+
+            <p class="userRating__name">
+                <span>Performance</span>
+            </p>
+            <div class="profileRating ">
+<span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+                <span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+                <span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+                <span class="profileRating__item active">
+<i class="fa fa-heart"></i>
+</span>
+                <span class="profileRating__item">
+<i class="fa fa-heart"></i>
+</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="profileExtraInfo">
+    <h2 class="profileTitle">
+        About
+    </h2>
+    <p class="info-p">
+        {{$carerProfile->description_yourself}}
+    </p>
+</div>
+<div class="profileExtraInfo">
+    <h2 class="profileTitle">
+        QUALIFICATIONS
+    </h2>
+    <div class="profileAdvantages">
+        <div class="profileAdvantages__row">
+            <div class="advantageColumn">
+                <h2>
+                    NVQs
+                </h2>
+            </div>
+            <div class="advantageColumn">
+                <p>
+                    NVQ level 4
+                </p>
+                <!--
+                <p>
+                Title of Qualifications
+                </p>
+                <p>
+                Title of Qualifications
+                </p>
+                </div>
+                <div class="advantageColumn">
+                <p>
+                Title of Qualifications
+                </p>
+                <p>
+                Title of Qualifications
+                </p>
+                <p>
+                Title of Qualifications
+                </p>
+                </div>
+                </div>
+                <div class="profileAdvantages__row">
+                <div class="advantageColumn">
+                <h2>
+                Care Certificates
+                </h2>
+                </div>
+                <div class="advantageColumn">
+                <p>
+                Title of Qualifications
+                </p>
+                <p>
+                Title of Qualifications
+                </p>
+                <p>
+                Title of Qualifications
+                </p>
+                </div>
+                <div class="advantageColumn">
+                <p>
+                Title of Qualifications
+                </p>
+                <p>
+                Title of Qualifications
+                </p>
+                <p>
+                Title of Qualifications
+                </p>
+                -->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="profileExtraInfo">
+    <h2 class="profileTitle">
+        TYPE OF CARE
+    </h2>
+    <div class="profileAdvantages">
+        <div class="profileAdvantages__row">
+            <div class="advantageColumn">
+                @foreach($typeCare as $item)
+                <p>
+                    {{$item->name}}
+                </p>
+                @endforeach
+                <p>
+                    Dementia
+                </p>
+                <!--
+                <p>
+                Respite care
+                </p>
+                </div>
+                <div class="advantageColumn">
+                <p>
+                Personal Care
+                </p>
+                <p>
+                Housekeeping
+                </p>
+                <p>
+                Food preparation
+                </p>
+                </div>
+                <div class="advantageColumn">
+                <p>
+                Medication and Wound
+                </p>
+                <p>
+                Companionship
+                </p>
+                <p>
+                Travel / Visits
+                </p>
+                -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="profileExtraInfo">
+    <h2 class="profileTitle">
+        ADDITIONAL
+    </h2>
+    <div class="profileAdvantages">
+        <div class="profileAdvantages__row">
+            <div class="advantageColumn">
+
+                <p class="advantage_label">
+                    <i class="fa fa-check"></i>
+                    Works with pets
+                </p>
+            </div>
+            <div class="advantageColumn">
+
+            </div>
+            <div class="advantageColumn">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="profileExtraInfo">
+    <h2 class="profileTitle">
+        Languages
+    </h2>
+    <div class="profileAdvantages">
+        <div class="profileAdvantages__row">
+            <div class="advantageColumn">
+                <h2>
+                    English
+                </h2>
+                <!-- <h2>
+                Spanish
+                </h2>
+                <h2>
+                German
+                </h2>
+                </div>
+                <div class="advantageColumn centerText">
+                <h2>
+                English
+                </h2>
+                <h2>
+                Spanish
+                </h2>
+                <h2>
+                German
+                </h2>
+                </div>
+                <div class="advantageColumn rightText">
+                <h2>
+                English
+                </h2>
+                <h2>
+                Spanish
+                </h2>
+                <h2>
+                German
+                </h2>-->
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="profileExtraInfo">
+    <h2 class="profileTitle">
+        Transport
+    </h2>
+    <div class="profileAdvantages">
+        <div class="profileAdvantages__row">
+            <div class="advantageColumn advantageColumn--transport">
+
+                <p class="advantage_label">
+                    <i class="fa fa-check"></i>
+                    Transport clients to the shop or for short trips
+                </p>
+            </div>
+            <div class="advantageColumn wider">
+                <p class="advantage_label">
+                    <i class="fa fa-check"></i>
+                    have a car for work
+                </p>
+                <p class="advantage_label">
+                    <i class="fa fa-check"></i>
+                    have UK/EEA Driving Licence
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
