@@ -64,13 +64,15 @@
                 </h2>
 
                 {!! Form::select('driving_licence',['Yes'=>'Have UK/EEA Driving Licence','No'=>'Do not have a driving licence'],
-null,['class'=>'profileField__select profileField__select--greyBg','disabled','data-edit'=>'false']) !!}
+                null,['class'=>'profileField__select profileField__select--greyBg','disabled','data-edit'=>'false']) !!}
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Have UK/EEA Driving Licence</option>
                     <option value="Flat">Do not have a driving licence</option>
                     <option value="Flat">Please select</option>
                 </select>--}}
             </div>
+        </div>
+        <div class="profileField">
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">

@@ -284,3 +284,8 @@ select#workingTimes {
 body > section > div > div.invite{
     margin-bottom: 0px;
 }
+
+.activeImg{
+    filter:none;
+    -webkit-filter: none;
+}

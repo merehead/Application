@@ -55,6 +55,18 @@
             yearRange: "0:+50"
         });
     } );
+    $( function() {
+        $( "#datepicker_date_sertificate" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"dd/mm/yy",
+            showAnim:"slideDown",
+            minDate: "+0D",
+            maxDate: "+50Y",
+            yearRange: "0:+50",
+            ignoreReadonly:false
+        });
+    });
 
     $( document ).ready(function() {
 

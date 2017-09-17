@@ -18,7 +18,7 @@ function confirmPass($this){
 function checkStrength(password) {
     var strength = 0;
     $('.passStrength').show();
-    console.log(password.length);
+    //console.log(password.length);
     if (password=='**********') {
         $('.passStrength__bar').css('width','5%');
         $('.passStrength__bar').css('background','red');
@@ -533,6 +533,14 @@ $(document).ready(function () {
     });
     // -- Registration Carer Step 8
     $('select[name="have_car"]').parent().parent().hide();
+    if ($('select[name="have_car"]').val() == 'Yes') {
+        {
+            $('select[name="have_car"]').parent().parent().show()
+        }
+    } else {
+        $('select[name="have_car"]').val('');
+        $('select[name="have_car"]').parent().parent().hide()
+    }
     $('select[name="driving_licence"]').on('change', function (e) {
         if ($(this).val() == 'Yes') {
             {
@@ -858,4 +866,5 @@ $(document).ready(function () {
         })
       })
     }
-})
+
+});
