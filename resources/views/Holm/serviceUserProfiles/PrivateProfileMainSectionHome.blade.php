@@ -291,9 +291,13 @@
                 Has regular social interaction with friends / family
               </span>
             </h2>
-            <select class="profileField__select">
-                <option value="yes">Yes</option>
-            </select>
+
+            {!! Form::select('social_interaction',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            @if ($errors->has('social_interaction'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('social_interaction') }}</strong>
+                                    </span>
+            @endif
         </div>
 
         <div class="profileField profileField--two-thirds">
@@ -301,25 +305,41 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            <input type="text" class="profileField__input" placeholder="Type details">
+
+            {!! Form::text('companionship_interaction_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"200"]) !!}
+            @if ($errors->has('companionship_interaction_details'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('companionship_interaction_details') }}</strong>
+                                    </span>
+            @endif
         </div>
 
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                Would [Service User name] like someone to visit regularly for companionship?
+                Would {{$userNameForSite}} like someone to visit regularly for companionship?
               </span>
             </h2>
-            <select class="profileField__select">
-                <option value="yes">Yes</option>
-            </select>
+
+            {!! Form::select('visit_for_companionship',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            @if ($errors->has('visit_for_companionship'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('visit_for_companionship') }}</strong>
+                                    </span>
+            @endif
         </div>
         <div class="profileField profileField--two-thirds">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            <input type="text" class="profileField__input" placeholder="Type details">
+
+            {!! Form::text('companionship_visit_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"200"]) !!}
+            @if ($errors->has('companionship_visit_details'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('companionship_visit_details') }}</strong>
+                                    </span>
+            @endif
         </div>
     </div>
 
