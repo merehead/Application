@@ -62,6 +62,8 @@ class BlogController extends FrontController
         $blogDate = Blog::selectRaw("date_format(`created_at`,'%M %Y') as cdate,date_format(`created_at`,'%m')as month,date_format(`created_at`,'%Y')as year")->groupBy('created_at')->get();
 
         $data = array_add($data,'blog',$blog);
+        $data = array_add($data,'month',$month);
+        $data = array_add($data,'year',$year);
         $data = array_add($data,'blogDate',$blogDate);
 
         $this->vars = array_add($this->vars,'header',$header);
