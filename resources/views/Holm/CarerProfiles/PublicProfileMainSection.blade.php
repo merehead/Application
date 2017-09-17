@@ -236,9 +236,7 @@
                     {{$item->name}}
                 </p>
                 @endforeach
-                <p>
-                    Dementia
-                </p>
+
                 <!--
                 <p>
                 Respite care

@@ -125,7 +125,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','disabled','
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Restrictions working </span>
             </h2>
-        {!! Form::text('work_UK_description',null,['class'=>'profileField__input']) !!}
+        {!! Form::text('work_UK_description',null,['class'=>'profileField__input','disabled','data-edit'=>'false']) !!}
 
         </div>
         </div>
