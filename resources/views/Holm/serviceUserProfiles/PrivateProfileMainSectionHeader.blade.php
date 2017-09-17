@@ -9,8 +9,7 @@
         </a>
         <span class="breadcrumbs__arrow">></span>
         <a href="" class="breadcrumbs__item">
-
-            BOB M.
+            {{$userNameForSite}}
         </a>
 
     </div>

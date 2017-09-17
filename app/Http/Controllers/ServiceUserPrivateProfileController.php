@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AssistanceType;
+use App\Floor;
 use App\Language;
 use App\ServiceUsersProfile;
 use App\WorkingTime;
@@ -39,10 +40,10 @@ class ServiceUserPrivateProfileController extends FrontController
 
             $serviceUsersProfile = ServiceUsersProfile::findOrFail($serviceUserProfile);
 
-
             $this->vars = array_add($this->vars, 'user', $this->user);
 
             $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
+            $this->vars = array_add($this->vars, 'userNameForSite', $serviceUsersProfile->like_name);
 
             $typeCare = AssistanceType::all();
             $this->vars = array_add($this->vars, 'typeCare', $typeCare);
@@ -50,7 +51,8 @@ class ServiceUserPrivateProfileController extends FrontController
             $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
             $languages = Language::all();
             $this->vars = array_add($this->vars, 'languages', $languages);
-            //dd($this->user,$carerProfile);
+            $floors = Floor::all()->pluck('name', 'id')->toArray();
+            $this->vars = array_add($this->vars, 'floors', $floors);
             $this->content = view(config('settings.frontTheme') . '.serviceUserProfiles.PrivateProfile')->with($this->vars)->render();
 
         }

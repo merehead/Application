@@ -7,96 +7,40 @@
         </a>
     </div>
 </div>
+
+{!! Form::model($serviceUsersProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateLanguages']) !!}
+{!! Form::hidden('id',$serviceUsersProfile->id) !!}
+{!! Form::hidden('stage','languages') !!}
+
 <div class="borderContainer">
-    <div class="profileRow">
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check1" />
-                <label for="check1"> <span>english</span></label>
-            </div>
-        </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check2" />
-                <label for="check2"> <span>SPANISH</span></label>
-            </div>
-        </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check3" />
-                <label for="check3"> <span>Welsh</span></label>
-            </div>
-        </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check4" />
-                <label for="check4"> <span>Sign</span></label>
-            </div>
-        </div>
-    </div>
 
-    <div class="profileRow">
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check5" />
-                <label for="check5"> <span>Polish</span></label>
-            </div>
+    @foreach(array_chunk($languages->all(),4) as $languageCareRow)
+        <div class="profileRow">
+            @foreach($languageCareRow as $language)
+                <div class="profileField profileField--fourth">
+                    <div class="checbox_wrap">
+                        {!! Form::checkbox('languages['.$language->id.']', null,($serviceUsersProfile->Languages->contains('id', $language->id)? 1 : null),array('class' => 'checkboxNew','id'=>'checkL'.$language->id)) !!}
+                        <label for="checkL{{$language->id}}"> <span>{{$language->carer_language}}</span></label>
+                    </div>
+                </div>
+            @endforeach
         </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check6" />
-                <label for="check6"> <span>Urdu</span></label>
-            </div>
-        </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check7" />
-                <label for="check7"> <span>Hindi</span></label>
-            </div>
-        </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check8" />
-                <label for="check8"> <span>Punjabi</span></label>
-            </div>
-        </div>
-    </div>
+    @endforeach
+    @if(strlen($serviceUsersProfile->other_languages))
+        <div class="profileRow">
 
-    <div class="profileRow">
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check9" />
-                <label for="check9"> <span>Gujarati</span></label>
+            <div class="profileField profileField--two-thirds">
+                <h2 class="profileField__title ordinaryTitle">
+              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
+                Other languages   </span>
+                </h2>
+                {!! Form::text('other_languages',null,['class'=>'profileField__input','placeholder'=>'Details','maxlength'=>"120"]) !!}
+                @if ($errors->has('other_languages'))
+                    <span class="help-block"><strong>{{ $errors->first('other_languages') }}</strong></span>
+                @endif
             </div>
         </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check10" />
-                <label for="check10"> <span>Bengali</span></label>
-            </div>
-        </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check11" />
-                <label for="check11"> <span>Arabic</span></label>
-            </div>
-        </div>
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check12" />
-                <label for="check12"> <span>Cantonese</span></label>
-            </div>
-        </div>
-    </div>
-
-    <div class="profileRow">
-        <div class="profileField profileField--fourth">
-            <div class="checbox_wrap">
-                <input type="checkbox" class="checkboxNew" id="check13" />
-                <label for="check13"> <span>Mandarin</span></label>
-            </div>
-        </div>
-
-    </div>
-
+    @endif
 </div>
+{{ Form::close() }}
+
