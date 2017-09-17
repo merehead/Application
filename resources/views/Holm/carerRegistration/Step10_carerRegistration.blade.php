@@ -3,14 +3,9 @@
         <div class="questionsBox">
             <h2>ASSISTANCE</h2>
 
-
-
             <div class="questionsBox__img">
                 <img src="/img/Signup_C_step10.jpg" alt="">
             </div>
-
-
-
 
         </div>
 

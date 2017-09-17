@@ -63,6 +63,18 @@ class CarersProfile extends Model
         return date('d/m/Y',strtotime($value));
     }
 
+    public function setDateCertificateAttribute($value)
+    {
+        $date = DateTime::createFromFormat('d/m/Y', $value);
+        $this->attributes['date_certificate'] = $date->format('Y-m-d H:i:s');
+
+    }
+
+    public function getDateCertificateAttribute($value)
+    {
+        return date('d/m/Y',strtotime($value));
+    }
+
     public function setCarInsuranceValidUntilAttribute($value)
     {
         $date = DateTime::createFromFormat('d/m/Y', $value);

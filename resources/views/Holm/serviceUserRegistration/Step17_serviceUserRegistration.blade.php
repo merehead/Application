@@ -24,7 +24,7 @@
 
                             {!! Form::checkbox('workingTime['.$serviceUserCondition->id.']', null,
                             ($serviceUserProfile->ServiceUserConditions->contains('id', $serviceUserCondition->id)? 1 : null),
-                            array('placeholder'=>'1','class' => 'customCheckbox','id'=>'boxf'.$serviceUserCondition->id)) !!}
+                            array('placeholder'=>'1','class' => 'customCheckbox checkHealthCondition','id'=>'boxf'.$serviceUserCondition->id)) !!}
                             <label for="boxf{{$serviceUserCondition->id}}">{{$serviceUserCondition->name}}</label>
 
                         </div>
@@ -36,13 +36,13 @@
             </div>
 
 
-            <div class="formField">
+            <div class="formField any_checked" style="display: none">
                 <h2 class="formLabel questionForm__label">
-                    Please give details of all the conditions mentioned above (if any).
+                    Please give details of all the conditions mentioned above.
                 </h2>
 
                 <div class="inputWrap">
-                    {!! Form::textarea('conditions_detail',null,['class'=>'formArea ','placeholder'=>'Details']) !!}
+                    {!! Form::textarea('conditions_detail',null,['class'=>'formArea ','placeholder'=>'Details','maxlength'=>"500"]) !!}
                     @if ($errors->has('conditions_detail'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('conditions_detail') }}</strong>

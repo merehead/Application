@@ -37,7 +37,7 @@
                         Please give their name and relationship to {{$serviceUserProfile->like_name}}. <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::text('anyone_detail',null,['class'=>'formInput ','placeholder'=>'Details']) !!}
+                        {!! Form::text('anyone_detail',null,['class'=>'formInput ','placeholder'=>'Details','maxlength'=>"200"]) !!}
                         @if ($errors->has('anyone_detail'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('anyone_detail') }}</strong>

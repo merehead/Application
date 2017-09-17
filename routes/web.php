@@ -34,6 +34,7 @@ Route::get('/terms', 'TermsController@index')->name('TermsPage');
 
 Route::get('/welcome-carer', 'CarerController@welcome')->name('welcomeCarer');
 Route::get('/carer-settings', 'CarerController@index')->name('carerSettings'); //synonym for ImCarerPage
+Route::get('/carer-settings/profile', 'CarerController@profile')->name('carerPublicProfile'); //synonym for ImCarerPage
 Route::get('/im-carer', 'CarerController@index')->name('ImCarerPage');
 Route::post('/im-carer', 'CarerController@update')->name('ImCarerPrivatePage');
 
@@ -52,10 +53,15 @@ Route::post('/service-registration/{serviceUserProfile}','ServiceUserRegistratio
 
 Route::get('/addServiceUser/','AddServiceUserController@create')->name('ServiceUserCreate');
 
+Route::get('/serviceUser-settings/{serviceUserProfile}','ServiceUserPrivateProfileController@index')->name('ServiceUserSetting');
+
 
 
 
 Route::post('/document/upload','DocumentsController@upload')->name('UploadDocument');
+Route::get('/documents','DocumentsController@GetDocuments')->name('GetDocuments');
+Route::post('/profile-photo','ProfilePhotosController@uploadUserProfilePhoto');
+Route::post('/service-user-profile-photo','ProfilePhotosController@uploadServiceUserProfilePhoto');
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
 

@@ -39,7 +39,7 @@
 
                           <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                           <span class="pickfiles-delete">X</span>
-                          <div class="pickfiles_img"></div>
+                          <div id="personal_photo_service_user" class="pickfiles_img"></div>
 
                             <a href="#" class="add add--moreHeight">
                                 <i class="fa fa-plus-circle"></i>
@@ -51,17 +51,13 @@
                         </div>
                         <div style="display: none" class="addInfo">
 
-                            <input disabled type="text" name="purchaser_personal_photo" class="addInfo__input" placeholder="Name" >
+                            <input disabled type="text" name="personal_photo_service_user" class="addInfo__input" placeholder="Name" >
 
                         </div>
                     </div>
                 </div>
 
-                <div style='text-align: center; margin-top: 20px'>
-                    <a class="registrationBtns__item upload_files">
-                        upload files
-                    </a>
-                </div>
+
 
             </form>
 
@@ -97,15 +93,18 @@
                 </a>--}}
     </div>
 
-    <a href="next" class="registrationBtns__item"
-       onclick="event.preventDefault();document.getElementById('step').submit();"
-    >
+    <a href="#" id="upload_files" class="registrationBtns__item upload_files">
         next step
         <i class="fa fa-arrow-right"></i>
     </a>
 </div>
 
-{!! Form::open(['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'stepback','class'=>'personalForm']) !!}
+@if(empty($purchasersProfileID))
+    {!! Form::open(['method'=>'POST','route'=>['ServiceUserRegistration', $serviceUserProfileID],'id'=>'stepback','class'=>'personalForm']) !!}
+@else
+    {!! Form::open(['method'=>'POST','route'=>'PurchaserRegistrationPost','id'=>'stepback','class'=>'personalForm']) !!}
+@endif
+
 <input type="hidden" name="step" value = '4_2'>
 <input type="hidden" name="stepback" value = '4_2'>
 @if(empty($purchasersProfileID))

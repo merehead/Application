@@ -31,7 +31,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('vision_detail',null,['class'=>'formArea ','placeholder'=>'Details']) !!}
+                        {!! Form::textarea('vision_detail',null,['class'=>'formArea ','placeholder'=>'Details','maxlength'=>"500"]) !!}
                         @if ($errors->has('vision_detail'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('vision_detail') }}</strong>

@@ -20,7 +20,6 @@ class CarerController extends FrontController
     {
         parent::__construct();
 
-
     }
 
     public function welcome()
@@ -88,6 +87,54 @@ class CarerController extends FrontController
         return $this->renderOutput();
     }
 
+    public function profile()
+    {
+
+        $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
+        $this->title = 'Holm Care';
+
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
+        if (!$this->user) {
+            $this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
+        } else {
+
+            $carerProfile = CarersProfile::findOrFail($this->user->id);
+
+            if ($carerProfile->registration_progress != '20') {
+                return redirect()->action('CarerRegistrationController@index');
+            }
+            $this->vars = array_add($this->vars, 'user', $this->user);
+            $this->vars = array_add($this->vars, 'carerProfile', $carerProfile);
+            $postcodes = Postcode::all()->pluck('name', 'id')->toArray();
+            $this->vars = array_add($this->vars, 'postcodes', $postcodes);
+            $typeCare = AssistanceType::all();
+            $this->vars = array_add($this->vars, 'typeCare', $typeCare);
+            $workingTimes = WorkingTime::all();
+            $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
+            $languages = Language::all();
+            $this->vars = array_add($this->vars, 'languages', $languages);
+            //dd($this->user,$carerProfile);
+            $this->content = view(config('settings.frontTheme') . '.CarerProfiles.PublicProfile')->with($this->vars)
+                ->render();
+
+        }
+
+        //$step = view(config('settings.frontTheme').'.carerRegistration.'.$this->carersProfile->getNextStep())->with($this->vars)->render();
+        //$this->vars = array_add($this->vars,'step',$step);
+
+//        $this->content = view(config('settings.frontTheme').'.homePage.homePage')->with($this->vars)->render();
+
+        //dd($this->content);
+
+        return $this->renderOutput();
+    }
     public function update(Request $request)
     {
 
@@ -111,6 +158,7 @@ class CarerController extends FrontController
             if (isset($input['mobile_number'])) $carerProfiles->mobile_number = $input['mobile_number'];
             if (isset($input['sentence_yourself'])) $carerProfiles->sentence_yourself = $input['sentence_yourself'];
             if (isset($input['description_yourself'])) $carerProfiles->description_yourself = $input['description_yourself'];
+            if (isset($input['national_insurance_number'])) $carerProfiles->national_insurance_number = $input['national_insurance_number'];
 
             $carerProfiles->save();
 
@@ -226,6 +274,7 @@ class CarerController extends FrontController
             if (isset($input['criminal_conviction'])) $carerProfiles->criminal_conviction = $input['criminal_conviction'];
             if (isset($input['DBS_use'])) $carerProfiles->DBS_use = $input['DBS_use'];
             if (isset($input['DBS_identifier'])) $carerProfiles->DBS_identifier = $input['DBS_identifier'];
+            if (isset($input['date_certificate'])) $carerProfiles->date_certificate = $input['date_certificate'];
 
             $carerProfiles->save();
             unset($carerProfiles);

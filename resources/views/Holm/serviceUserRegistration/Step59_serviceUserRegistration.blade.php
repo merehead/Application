@@ -17,7 +17,7 @@
                     Does {{$userNameForSite}} have any interests or hobbies which they enjoy? <span>*</span>
                 </h2>
                 <div class="inputWrap">
-                    {!! Form::select('interests_hobbies',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    {!! Form::select('interests_hobbies',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                     @if ($errors->has('interests_hobbies'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('interests_hobbies') }}</strong>

@@ -25,6 +25,6 @@ class CreateXtableServiceUserProfileToLanguagesTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('services_user_profile_language');
+        Schema::dropIfExists('service_user_profile_language');
     }
 }

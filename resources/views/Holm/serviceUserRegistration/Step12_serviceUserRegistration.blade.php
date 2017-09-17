@@ -16,7 +16,7 @@
                         Does {{$serviceUserProfile->like_name}} own any pets? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('own_pets',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('own_pets',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
 
                     @if ($errors->has('own_pets'))
                         <span class="help-block">
@@ -25,12 +25,12 @@
                     @endif
                     </div>
                 </div>
-                <div class="formField hiding" style="display: none">
+                <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Please give details <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::text('pet_detail',null,['class'=>'formInput ','placeholder'=>'Details']) !!}
+                        {!! Form::text('pet_detail',null,['class'=>'formInput ','placeholder'=>'Details','maxlength'=>"200"]) !!}
                         @if ($errors->has('pet_detail'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('pet_detail') }}</strong>
@@ -40,12 +40,12 @@
 
                 </div>
 
-                <div class="formField hiding" style="display: none">
+                <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Are the pets friendly with strangers?  <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('pet_friendly',['Yes'=>'Yes','No'=>'No','Normally'=>'Normally','Sometimes'=>'Sometimes'],null,['class'=>'formSelect ','placeholder'=>'Please select']) !!}
+                        {!! Form::select('pet_friendly',['Yes'=>'Yes','No'=>'No','Normally'=>'Normally'],null,['class'=>'formSelect ','placeholder'=>'Please select']) !!}
                         @if ($errors->has('pet_friendly'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('pet_friendly') }}</strong>

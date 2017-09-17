@@ -16,7 +16,7 @@
                         Does {{$userNameForSite}} have regular social interaction with friends / family?
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('social_interaction',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('social_interaction',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('social_interaction'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('social_interaction') }}</strong>
