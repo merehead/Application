@@ -1,5 +1,7 @@
 // ------ Global Variable -----------
 var $carer_profile = null;
+var arrFiles = []
+var arrForDeleteIDProfile = []
 
 // ------ Global Functions ----------
 function confirmPass($this){
@@ -408,10 +410,17 @@ $(document).ready(function () {
         is_data_changed=true;
         var that = $(this);
         var idForm = 'form#' + $(that).find('span').attr('data-id');
+        var idLoadFiles = '#' + $(that).find('span').attr('data-id');
         $(idForm).find('select').attr("disabled", false).removeClass('profileField__select--greyBg');
         $(idForm).find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
         $(idForm).find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
         $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
+
+        console.log(idLoadFiles)
+        $(idLoadFiles).find('.pickfiles').attr("disabled", false);
+        $(idLoadFiles).find('.pickfiles-delete').attr('style', 'display: block');
+
+
         $(that).hide();
         $(that).parent().find('button.hidden').removeClass('hidden');
         $('.alert').remove();
@@ -425,8 +434,84 @@ $(document).ready(function () {
         is_data_changed=false;
         var that = $(this);
         var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
+        var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');
+        $(idLoadFiles).find('.pickfiles').attr("disabled", true);
+
+        $(idLoadFiles).find('.pickfiles-delete').attr('style', 'display: none')
         that.button('loading');
-        ajaxForm($(idForm), that);
+
+        if(arrFiles.length > 0){
+          var fileChunk = 0
+          file = arrFiles[fileChunk]
+          var sliceSize = 524288 // 512 kib
+          var chunks = Math.ceil(file.size / sliceSize)
+          var chunk = 0
+          var start = 0
+          var end = sliceSize
+
+          function loop() {
+            var blob = file.slice(start, end)
+            if(blob.size !== 0){
+              if(blob.size === sliceSize){
+                send(blob)
+                start += sliceSize
+                end += blob.size
+              }else{
+                send(blob)
+                start += sliceSize
+                end += blob.size
+              }
+            }
+          }
+          loop()
+
+          function send(fileSend) {
+            var formdata = new FormData()
+            formdata.append('name', file.name)
+            formdata.append('chunk', chunk)
+            formdata.append('chunks', chunks)
+            formdata.append('title', file.title)
+            formdata.append('type', file.type_value)
+            formdata.append('file', fileSend)
+            chunk += 1
+            axios.post(
+              '/document/upload',
+              formdata,
+            ).then(function (response) {
+              if(chunk === chunks){
+                if(arrFiles[fileChunk + 1]){
+                  fileChunk += 1
+                  file = arrFiles[fileChunk]
+                  chunks = Math.ceil(file.size / sliceSize)
+                  chunk = 0
+                  start = 0
+                  end = sliceSize
+                  loop()
+                }else{
+                  $('.pickfiles').val('')
+                  arrFiles = []
+                  if(arrForDeleteIDProfile.length > 0){
+                    axios.delete(
+                      '/api/document/'+arrForDeleteIDProfile+'/',
+                    ).then( (response) => {
+                      console.log(response)
+                    })
+                    ajaxForm($(idForm), that);
+                  }else{
+                    ajaxForm($(idForm), that);
+                  }
+                }
+              }else{
+                loop()
+              }
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
+          }
+        }else{
+          ajaxForm($(idForm), that);
+        }
 
         return false;
     });
@@ -467,8 +552,7 @@ $(document).ready(function () {
         }
     });
 
-    // -- upload files -------
-    var arrFiles = []
+    // -- upload files. Registration sections -------
     var arrLocalStorage = []
     var arrForDeleteID = []
     var file
@@ -524,41 +608,48 @@ $(document).ready(function () {
     })
 
     function pickfilesDelete(_this){
+      if(!$carer_profile.length){
+        _this.parent().find('.add__comment--smaller').html('<p>Choose a File or Drag Here</p><span>Size limit: 10 MB</span>')
+      }
       _this.attr('style', 'display: none')
-      _this.parent().find('.add__comment--smaller').html('<p>Choose a File or Drag Here</p><span>Size limit: 10 MB</span>')
       _this.parent().find('.fa-plus-circle').attr('style', '')
       _this.parent().find('.pickfiles_img').attr('style', '')
       _this.parent().parent().find('.addInfo__input').prop( "disabled", true )
       _this.parent().parent().find('.addInfo__input').val('')
       _this.parent().find('.pickfiles').val('')
       _this.attr('id', '')
-      var input_name = _this.parent().parent().find('.addInfo__input').attr('name')
     }
 
     $('.pickfiles-delete').on('click', function () {
+      var input_name = $(this).parent().find('.pickfiles_img').attr('id')
       var deleteID = $(this).attr('id')
       var _this = $(this)
 
       if($(this).attr('id')){
+        arrForDeleteIDProfile.push(parseInt(deleteID))
         axios.delete(
           '/api/document/'+deleteID+'/',
         ).then( (response) => {
           pickfilesDelete(_this)
-          arrFiles = arrFiles.filter((index) => {
-            if(index.type_value !== input_name){
-              return index
-            }
-          })
           var getls = JSON.parse(localStorage.getItem('files_id'))
-          var newGetls = getls.filter((index) => {
-            if(index.id.id !== parseInt(deleteID)){
-              return index
-            }
-          })
-          localStorage.setItem('files_id', JSON.stringify(newGetls))
+          if(getls){
+            var newGetls = getls.filter((index) => {
+              if(index.id.id !== parseInt(deleteID)){
+                return index
+              }
+            })
+            localStorage.setItem('files_id', JSON.stringify(newGetls))
+          }
         })
       }else{
         pickfilesDelete(_this)
+        console.log(arrFiles, input_name)
+        arrFiles = arrFiles.filter((index) => {
+          if(index.inique_type !== input_name){
+            return index
+          }
+        })
+        console.log(arrFiles)
       }
     })
 
@@ -567,6 +658,7 @@ $(document).ready(function () {
 
       $(this).parent().parent().find('.addInfo__input').prop( "disabled", false)
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
+      var pickfiles_img_id = $(this).parent().find('.pickfiles_img').attr('id')
       var deleteID = $(this).parent().find('.pickfiles-delete').attr('id')
 
       file = $(this)[0].files[0]
@@ -592,25 +684,30 @@ $(document).ready(function () {
       if(getls){
         getls.map((index) => {
           if(index.id.id === parseInt(deleteID)){
-            console.log(index.id.id, parseInt(deleteID))
             arrForDeleteID.push(parseInt(deleteID))
           }
         })
       }
 
-      console.log(arrForDeleteID)
+      if(deleteID){
+        arrForDeleteIDProfile.push(parseInt(deleteID))
+      }
 
       file.type_value = input_name
+      file.inique_type = pickfiles_img_id
 
       arrFiles = arrFiles.filter((index) => {
-        if(index.type_value !== input_name){
+        if(index.inique_type !== pickfiles_img_id){
           return index
         }
       })
 
       arrFiles.push(file)
 
-      $(this).parent().find('.add__comment--smaller').html('<div class="file-name">'+file.name+'</div>')
+      console.log(arrFiles)
+      console.log(arrForDeleteIDProfile)
+
+      $(this).parent().find('.add__comment--smaller').html('')
       $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
     })
 
@@ -728,8 +825,46 @@ $(document).ready(function () {
 
     $('.searchContainer__input').on('change',function (e) {
         insertParam('search',$(this).val());
-    });
+    })
 
+    $("input[type='file']").change(function(){
+        $('#val').text(this.value.replace(/C:\\fakepath\\/i, ''))
+    })
 
+    // -- upload files. Profile sections -------
+    var arrTypeAndID = []
+
+    if($carer_profile.length){
+      axios.get(
+        'documents',
+      ).then( (response) => {
+        var newDoc = Object.entries(response.data.data.documents)
+
+        newDoc.map((index) => {
+          var c = 0
+          index[1].map((index) => {
+            var data = {
+              type_value: c > 0 ? (index.type + c) : index.type,
+              id: index.id,
+              type_file_name: index.file_name.split('.')[1]
+            }
+            c += 1
+            arrTypeAndID.push(data)
+          })
+        })
+
+        arrTypeAndID.map((index) => {
+          if(wordFileType.indexOf(index.type_file_name) !== -1){
+            $('#'+index.type_value+'').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
+          }else if(pdfFileType.indexOf(index.type_file_name) !== -1){
+            $('#'+index.type_value+'').attr('style', 'background-image: url(/img/PDF_logo.png)')
+          }else{
+          $('#'+index.type_value+'').attr('style', 'background-image: url(/api/document/'+index.id+'/preview)')
+          }
+          $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
+          $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id)
+        })
+      })
+    }
 
 });
