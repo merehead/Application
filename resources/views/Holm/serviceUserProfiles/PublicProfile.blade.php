@@ -1,16 +1,16 @@
 <section class="mainSection">
     <div class="container">
         <div class="breadcrumbs">
-            <a href="index.html" class="breadcrumbs__item">
+            <a href="{{route('mainHomePage')}}" class="breadcrumbs__item">
                 Home
             </a>
             <span class="breadcrumbs__arrow">&gt;</span>
-            <a href="Purchaser_Private_profile_page.html" class="breadcrumbs__item">
+            <a href="{{route('ServiceUserSetting')}}" class="breadcrumbs__item">
                 My profile
             </a>
             <span class="breadcrumbs__arrow">&gt;</span>
-            <a href="Service_User_Private_profile_page.html" class="breadcrumbs__item">
-                Bob m.
+            <a href="{{route('ServiceUserProfilePublic')}}" class="breadcrumbs__item">
+                {{$carerProfile->family_name}} {{$carerProfile->first_name}}
             </a>
         </div>
 
