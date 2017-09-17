@@ -359,7 +359,7 @@
               <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
               <span class="pickfiles-delete">X</span>
 
-              <div id="other_relevant_qualifications" class="pickfiles_img"></div>
+              <div id="other_relevant_qualification" class="pickfiles_img"></div>
                 <a class="add add--moreHeight">
                     <i class="fa fa-plus-circle"></i>
                     <div class="add__comment add__comment--smaller"></div>
@@ -376,7 +376,7 @@
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
             <span class="pickfiles-delete">X</span>
 
-            <div id="other_relevant_qualifications1" class="pickfiles_img"></div>
+            <div id="other_relevant_qualification1" class="pickfiles_img"></div>
               <a class="add add--moreHeight">
                   <i class="fa fa-plus-circle"></i>
                   <div class="add__comment add__comment--smaller"></div>
@@ -393,7 +393,7 @@
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
             <span class="pickfiles-delete">X</span>
 
-            <div id="other_relevant_qualifications2" class="pickfiles_img"></div>
+            <div id="other_relevant_qualification2" class="pickfiles_img"></div>
               <a class="add add--moreHeight">
                   <i class="fa fa-plus-circle"></i>
                   <div class="add__comment add__comment--smaller"></div>

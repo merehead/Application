@@ -159,11 +159,11 @@
                               <div class="addContainer_load-header">
                                 <span class="addContainer_load-header-inner">OTHER RELEVANT QUALIFICATIONS</span>
                               </div>
-                              
+
                               <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                               <span class="pickfiles-delete">X</span>
 
-                              <div id="other_relevant_qualifications" class="pickfiles_img"></div>
+                              <div id="other_relevant_qualification" class="pickfiles_img"></div>
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -173,7 +173,7 @@
                                 </a>
                             </div>
                             <div class="addInfo">
-                                <input disabled type="text" name="other_relevant_qualifications" class="addInfo__input" placeholder="Name" >
+                                <input disabled type="text" name="other_relevant_qualification" class="addInfo__input" placeholder="Name" >
                             </div>
                         </div>
                     </div>
