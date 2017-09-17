@@ -108,9 +108,7 @@ class User extends Authenticatable
     public function isReregistrationCompleted()
     {
 
-        return false;
 
-        dd($this);
 
         if ($this->user_type_id == 3) { //carer
             if ($this->userCarerProfile->registration_progress == '20') {
