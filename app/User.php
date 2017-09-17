@@ -108,14 +108,17 @@ class User extends Authenticatable
     public function isReregistrationCompleted()
     {
 
+        dd($this);
+
         if ($this->user_type_id == 3) { //carer
             if ($this->userCarerProfile->registration_progress == '20') {
-                return true;
+                return false;
             }
         }
         if ($this->user_type_id == 1) { //purchaser
             if ($this->userPurchaserProfile->registration_progress == '4_1_2_1') {
-                return true;
+                //return true;
+                return false;
             }
         }
 
