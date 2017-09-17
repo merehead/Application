@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<div class="borderContainer">
+<div class="borderContainer" id='carerPrivateGeneral'>
     @include(config('settings.frontTheme').'.CarerProfiles/PrivateProfileMainSectionGeneral_profileInfoContainer')
     @include(config('settings.frontTheme').'.CarerProfiles/PrivateProfileMainSectionGeneral_CVandPassport')
 </div>

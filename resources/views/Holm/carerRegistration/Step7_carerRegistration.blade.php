@@ -130,7 +130,7 @@
                     <div class="addColumn">
                         <div class="formField">
 
-                            <div class="addContainer ">
+                            <div class="addContainer">
                               <div class="addContainer_load-header">
                                 <span class="addContainer_load-header-inner">ADDITIONAL TRAINING COURSE</span>
                               </div>
@@ -159,8 +159,7 @@
                               <div class="addContainer_load-header">
                                 <span class="addContainer_load-header-inner">OTHER RELEVANT QUALIFICATIONS</span>
                               </div>
-
-                              <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              
                               <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                               <span class="pickfiles-delete">X</span>
 
