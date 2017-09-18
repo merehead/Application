@@ -35,6 +35,9 @@ Route::get('/terms', 'TermsController@index')->name('TermsPage');
 Route::get('/welcome-carer', 'CarerController@welcome')->name('welcomeCarer');
 Route::get('/carer-settings', 'CarerController@index')->name('carerSettings'); //synonym for ImCarerPage
 Route::get('/carer-settings/profile', 'CarerController@profile')->name('carerPublicProfile'); //synonym for ImCarerPage
+Route::get('/carer-settings/booking', 'CarerController@booking')->name('carerBooking'); //synonym for ImCarerPage
+Route::get('/carer-settings/booking/{status}', 'CarerController@bookingFilter')->name('carerBookingStatus'); //synonym for ImCarerPage
+
 Route::get('/im-carer', 'CarerController@index')->name('ImCarerPage');
 Route::post('/im-carer', 'CarerController@update')->name('ImCarerPrivatePage');
 

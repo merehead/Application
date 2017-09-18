@@ -135,6 +135,48 @@ class CarerController extends FrontController
 
         return $this->renderOutput();
     }
+
+    public function booking()
+    {
+
+        $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
+        $this->title = 'Holm Care';
+
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
+        $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarerall')->with($this->vars)
+            ->render();
+
+        return $this->renderOutput();
+    }
+
+    public function bookingFilter($status)
+    {
+
+        $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
+        $this->title = 'Holm Care';
+
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
+        $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarer'.$status)->with($this->vars)
+            ->render();
+
+
+        return $this->renderOutput();
+    }
+
     public function update(Request $request)
     {
 
