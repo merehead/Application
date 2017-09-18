@@ -24,7 +24,7 @@
                         <div class="addContainer">
                           <input class="pickfiles_profile_photo" accept="jpg,.jpeg,.png,.doc" type="file" />
                           <div class="pickfiles_img"></div>
-                          <div id="profile_photo" class="pickfiles_img" style="background-image: url({{asset('img/profile_photos/purchasersProfileID.png')}})"></div>
+                          <div id="profile_photo" class="pickfiles_img" style="background-image: url('img/profile_photos/{{$purchasersProfile->id}}.png')"></div>
 
                           <a href="#" class="add add--moreHeight">
                               <i class="fa fa-plus-circle"></i>

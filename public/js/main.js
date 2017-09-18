@@ -441,6 +441,7 @@ $(document).ready(function () {
         $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
 
         $(idLoadFiles).find('.pickfiles').attr("disabled", false);
+        $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", false);
 
         $(that).hide();
         $(that).parent().find('button.hidden').removeClass('hidden');
@@ -762,106 +763,106 @@ $(document).ready(function () {
 
       console.log(arrFiles)
 
-      // if(arrFiles.length > 0){
-      //   $(this).html('uploading..')
-      //   var fileChunk = 0
-      //   file = arrFiles[fileChunk]
-      //   var sliceSize = 524288 // 512 kib
-      //   var chunks = Math.ceil(file.size / sliceSize)
-      //   var chunk = 0
-      //   var start = 0
-      //   var end = sliceSize
-      //
-      //   function loop() {
-      //     var blob = file.slice(start, end)
-      //     if(blob.size !== 0){
-      //       if(blob.size === sliceSize){
-      //         send(blob)
-      //         start += sliceSize
-      //         end += blob.size
-      //       }else{
-      //         send(blob)
-      //         start += sliceSize
-      //         end += blob.size
-      //       }
-      //     }
-      //   }
-      //   loop()
-      //
-      //   function send(fileSend) {
-      //
-      //     var formdata = new FormData()
-      //     formdata.append('name', file.name)
-      //     formdata.append('chunk', chunk)
-      //     formdata.append('chunks', chunks)
-      //     formdata.append('title', file.title)
-      //     formdata.append('type', file.type_value)
-      //     formdata.append('file', fileSend)
-      //     chunk += 1
-      //     axios.post(
-      //       '/document/upload',
-      //       formdata,
-      //     ).then(function (response) {
-      //
-      //       if(response.data.result){
-      //         var data = {
-      //           id: response.data.result,
-      //           type_value: arrFiles[fileChunk].type_value
-      //         }
-      //
-      //         var getls = JSON.parse(localStorage.getItem('files_id'))
-      //         if(getls){
-      //           getls.push(data)
-      //           localStorage.setItem('files_id', JSON.stringify(getls))
-      //         }else{
-      //           arrLocalStorage.push(data)
-      //           localStorage.setItem('files_id', JSON.stringify(arrLocalStorage))
-      //         }
-      //       }
-      //
-      //       if(chunk === chunks){
-      //         if(arrFiles[fileChunk + 1]){
-      //           fileChunk += 1
-      //           file = arrFiles[fileChunk]
-      //           chunks = Math.ceil(file.size / sliceSize)
-      //           chunk = 0
-      //           start = 0
-      //           end = sliceSize
-      //           loop()
-      //         }else{
-      //           $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
-      //           $('.pickfiles').val('')
-      //           arrFiles = []
-      //
-      //           if(arrForDeleteID.length > 0){
-      //             var getls = JSON.parse(localStorage.getItem('files_id'))
-      //             axios.delete(
-      //               '/api/document/'+arrForDeleteID+'/',
-      //             ).then( (response) => {
-      //               arrFiles = getls.filter((index) => {
-      //                 if(arrForDeleteID.indexOf(index.id.id) === -1){
-      //                   return index
-      //                 }
-      //               })
-      //               localStorage.setItem('files_id', JSON.stringify(arrFiles))
-      //               document.getElementById('step').submit()
-      //             })
-      //           }else{
-      //             document.getElementById('step').submit()
-      //           }
-      //         }
-      //       }else{
-      //         loop()
-      //       }
-      //     })
-      //     .catch(function (error) {
-      //       $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
-      //       console.log(error)
-      //     })
-      //   }
-      // }else{
-      //   document.getElementById('step').submit()
-      // }
+      if(arrFiles.length > 0){
+        $(this).html('uploading..')
+        var fileChunk = 0
+        file = arrFiles[fileChunk]
+        var sliceSize = 524288 // 512 kib
+        var chunks = Math.ceil(file.size / sliceSize)
+        var chunk = 0
+        var start = 0
+        var end = sliceSize
+
+        function loop() {
+          var blob = file.slice(start, end)
+          if(blob.size !== 0){
+            if(blob.size === sliceSize){
+              send(blob)
+              start += sliceSize
+              end += blob.size
+            }else{
+              send(blob)
+              start += sliceSize
+              end += blob.size
+            }
+          }
+        }
+        loop()
+
+        function send(fileSend) {
+
+          var formdata = new FormData()
+          formdata.append('name', file.name)
+          formdata.append('chunk', chunk)
+          formdata.append('chunks', chunks)
+          formdata.append('title', file.title)
+          formdata.append('type', file.type_value)
+          formdata.append('file', fileSend)
+          chunk += 1
+          axios.post(
+            '/document/upload',
+            formdata,
+          ).then(function (response) {
+
+            if(response.data.result){
+              var data = {
+                id: response.data.result,
+                type_value: arrFiles[fileChunk].type_value
+              }
+
+              var getls = JSON.parse(localStorage.getItem('files_id'))
+              if(getls){
+                getls.push(data)
+                localStorage.setItem('files_id', JSON.stringify(getls))
+              }else{
+                arrLocalStorage.push(data)
+                localStorage.setItem('files_id', JSON.stringify(arrLocalStorage))
+              }
+            }
+
+            if(chunk === chunks){
+              if(arrFiles[fileChunk + 1]){
+                fileChunk += 1
+                file = arrFiles[fileChunk]
+                chunks = Math.ceil(file.size / sliceSize)
+                chunk = 0
+                start = 0
+                end = sliceSize
+                loop()
+              }else{
+                $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
+                $('.pickfiles').val('')
+                arrFiles = []
+
+                if(arrForDeleteID.length > 0){
+                  var getls = JSON.parse(localStorage.getItem('files_id'))
+                  axios.delete(
+                    '/api/document/'+arrForDeleteID+'/',
+                  ).then( (response) => {
+                    arrFiles = getls.filter((index) => {
+                      if(arrForDeleteID.indexOf(index.id.id) === -1){
+                        return index
+                      }
+                    })
+                    localStorage.setItem('files_id', JSON.stringify(arrFiles))
+                    document.getElementById('step').submit()
+                  })
+                }else{
+                  document.getElementById('step').submit()
+                }
+              }
+            }else{
+              loop()
+            }
+          })
+          .catch(function (error) {
+            $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
+            console.log(error)
+          })
+        }
+      }else{
+        document.getElementById('step').submit()
+      }
     })
 
     $('.pickfiles_profile_photo').on('change', function () {
@@ -932,6 +933,7 @@ $(document).ready(function () {
       var reader  = new FileReader()
       reader.addEventListener("load", () => {
         $('#profile_photo').attr('src', reader.result)
+        $('.set_preview_profile_photo').attr('src', reader.result)
         file_profile_photo.image = reader.result
         arrFilesProfilePhoto.push(file_profile_photo)
         console.log(arrFilesProfilePhoto)

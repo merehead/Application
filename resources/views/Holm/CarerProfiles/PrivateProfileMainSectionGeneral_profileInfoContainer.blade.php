@@ -4,8 +4,8 @@
           <div class="formField">
             </div>
 
-            <input class="pickfiles_profile_photo--change" accept=".jpg,.jpeg,.png,.doc" type="file" />
-            <img id="profile_photo" src="img/profile_photos/{{$carerProfile->id}}.png" alt="avatar">
+            <input disabled class="pickfiles_profile_photo--change" accept=".jpg,.jpeg,.png,.doc" type="file" />
+            <img id="profile_photo" src="img/profile_photos/{{$carerProfile->id}}.png" onerror="this.src='/img/no_photo.png'" alt="avatar">
 
             <a href="#" class="profilePhoto__ico">
                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
