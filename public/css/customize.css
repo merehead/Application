@@ -1,3 +1,4 @@
+
 .help-block{
     font-size: 70%;
     color: red;
@@ -52,8 +53,16 @@ select#workingTimes {
     height: 1px;
     background: #dee1e3;
 }
+.profileRow_qualifications{
+  justify-content: space-between;
+}
+.profileRow_qualifications .profileField{
+  margin-right: 0;
+}
 
-.pickfiles{
+.pickfiles,
+.pickfiles_profile_photo,
+.pickfiles_profile_photo--change{
   position: absolute;
   left: 0;
   top: 0;
@@ -163,7 +172,8 @@ select#workingTimes {
   border: 1px dotted #dee1e3;
   font-size: 1.5em;
 }
-.pickfiles-delete{
+.pickfiles-delete,
+.pickfiles-delete_profile_photo{
   position: absolute;
   background-size: contain;
   background-position: center;
@@ -179,7 +189,8 @@ select#workingTimes {
   text-align: center;
   display: none;
 }
-.pickfiles-delete:hover{
+.pickfiles-delete:hover,
+.pickfiles-delete_profile_photo{
   background: #ddd;
 }
 /*.pickfiles_img{

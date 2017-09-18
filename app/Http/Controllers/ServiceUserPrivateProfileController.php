@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\AssistanceType;
+use App\Behaviour;
 use App\Floor;
 use App\Language;
+use App\ServiceType;
 use App\ServiceUsersProfile;
 use App\WorkingTime;
 use Illuminate\Http\Request;
@@ -45,8 +47,15 @@ class ServiceUserPrivateProfileController extends FrontController
             $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
             $this->vars = array_add($this->vars, 'userNameForSite', $serviceUsersProfile->like_name);
 
-            $typeCare = AssistanceType::all();
+            $typeCare = AssistanceType::all()->sortBy('id');
             $this->vars = array_add($this->vars, 'typeCare', $typeCare);
+
+            $typeService = ServiceType::all()->sortBy('id');
+            $this->vars = array_add($this->vars, 'typeService', $typeService);
+
+            $behaviour = Behaviour::all();
+            $this->vars = array_add($this->vars, 'behaviour', $behaviour);
+
             $workingTimes = WorkingTime::all();
             $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
             $languages = Language::all();

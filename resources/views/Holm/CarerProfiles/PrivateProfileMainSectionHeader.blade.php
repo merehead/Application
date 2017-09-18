@@ -25,7 +25,7 @@
 
 <div class="invite">
     <div class="profilePhoto invite__photo">
-        <img src="/img/no_photo.png" alt="">
+        <img src="img/profile_photos/{{$carerProfile->id}}.png" alt="">
     </div>
     <h2 class="invite__title">
         Invite other users and both get £100 after 20 hours of usage

@@ -2,22 +2,14 @@
     <div class="generalInfo">
         <div class="profilePhoto profilePhoto--change">
           <div class="formField">
-                <div class="addContainer">
-                  <input class="pickfiles" accept=".jpg,.jpeg,.png" type="file" />
-                  <span class="pickfiles-delete">X</span>
-                  <div id="carer_profile_photo" class="pickfiles_img"></div>
-                    <a href="#" class="add add--moreHeight profilePhoto__ico">
-                        <i class="fa fa-plus-circle"></i>
-                    </a>
-                </div>
-                <div class="addInfo">
-                    <input disabled type="text" name="carer_profile_photo" class="addInfo__input" placeholder="Name" >
-                </div>
             </div>
-            <!-- <img src="/img/no_photo.png" alt="">
+
+            <input class="pickfiles_profile_photo--change" accept=".jpg,.jpeg,.png,.doc" type="file" />
+            <img id="profile_photo" src="img/profile_photos/{{$carerProfile->id}}.png" alt="avatar">
+
             <a href="#" class="profilePhoto__ico">
                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
-            </a> -->
+            </a>
         </div>
 
 

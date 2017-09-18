@@ -37,6 +37,7 @@ Route::get('/carer-settings', 'CarerController@index')->name('carerSettings'); /
 Route::get('/carer-settings/profile', 'CarerController@profile')->name('carerPublicProfile'); //synonym for ImCarerPage
 Route::get('/im-carer', 'CarerController@index')->name('ImCarerPage');
 Route::post('/im-carer', 'CarerController@update')->name('ImCarerPrivatePage');
+Route::get('/carer/{carer_id}', 'CarerController@carerProfile');
 
 //Route::get('carer-registration/{stepback?}','CarerRegistrationController@index')->name('CarerRegistration');
 Route::get('carer-registration/','CarerRegistrationController@index')->name('CarerRegistration');
@@ -44,14 +45,16 @@ Route::post('carer-registration','CarerRegistrationController@update')->name('Ca
 
 
 
+
 //Route::get('git ', 'PurchaserController@index')->name('purchaserSettings');
-
-Route::get('/purchaser-settings ', 'PurchaserController@index')->name('purchaserSettings');
-
 
 Route::get('/purchaser-settings', 'PurchaserController@index')->name('purchaserSettings');
 
+
 Route::post('/purchaser-settings','PurchaserController@update')->name('purchaserSettingsPost');
+
+
+
 Route::get('/purchaser-registration/','PurchaserRegistrationController@index')->name('PurchaserRegistration');
 Route::post('/purchaser-registration','PurchaserRegistrationController@update')->name('PurchaserRegistrationPost');
 

@@ -21,7 +21,7 @@
 
                 <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-settings' }}" class="registeredCarer">
                     <div class="profilePhoto registeredCarer__img">
-                        <img src="./img/no_photo.png" alt="">
+                        <img src="/img/profile_photos/{{Auth::user()->id}}.png" alt="">
                     </div>
                     <h2 class="profileName">{!! Auth::user()->userName() !!}<span class="registeredCarer__type">
                       <i class="fa {{Auth::user()->isCarer()? ' ' : 'fa-exchange' }} " aria-hidden="true"></i>
@@ -67,7 +67,7 @@
                                 : route('ServiceUserSetting',['id'=>$serviceUser->id])}}"
                                class="dropdownUser__item">
                                 <div class="profilePhoto dropdownUser__img">
-                                    <img src="./img/no_photo.png" alt="">
+                                    <img src="/img/service_user_profile_photos/{{$serviceUser->id}}.png" alt="">
                                 </div>
                                 <h2 class="profileName">
                                     {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
