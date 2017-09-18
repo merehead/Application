@@ -1,6 +1,7 @@
 // ------ Global Variable -----------
 var $carer_profile = null;
 var arrFiles = []
+var arrFilesProfilePhoto = []
 var arrForDeleteIDProfile = []
 
 // ------ Global Functions ----------
@@ -437,6 +438,19 @@ $(document).ready(function () {
 
         that.button('loading');
 
+        if(arrFilesProfilePhoto.length > 0){
+          var url = '/profile-photo'
+          if(arrFilesProfilePhoto[0].service_user_id){
+            url = '/service-user-profile-photo'
+          }
+          axios.post(
+            url,
+            arrFilesProfilePhoto[0],
+          ).then(function (response) {
+            console.log(response)
+          })
+        }
+
         if(arrFiles.length > 0){
           var fileChunk = 0
           file = arrFiles[fileChunk]
@@ -596,6 +610,11 @@ $(document).ready(function () {
       })
     }
 
+    if($('#profile_photo').attr('style')){
+      $('#profile_photo').parent().find('.pickfiles-delete_profile_photo').attr('style', 'display: block')
+      $('#profile_photo').parent().find('.add--moreHeight').html('')
+    }
+
     $('.addInfo__input').change(function () {
       var id = $(this).parent().parent().find('.pickfiles_img').attr('id')
       var input_name = $(this).attr('name')
@@ -651,6 +670,10 @@ $(document).ready(function () {
           }
         })
       }
+    })
+
+    $('.pickfiles-delete_profile_photo').on('click', function() {
+      arrFiles = []
     })
 
     $('.pickfiles').on('change', function() {
@@ -709,38 +732,6 @@ $(document).ready(function () {
       console.log(arrFiles)
       $(this).parent().find('.add__comment--smaller').html('')
       $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
-    })
-
-    $('.pickfiles_profile_photo').on('change', function () {
-
-      var input_val = $(this).parent().parent().find('.addInfo__input').val('')
-      var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
-
-      var val = $(this)[0].files[0]
-
-      var reader  = new FileReader()
-      reader.addEventListener("load", () => {
-        $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
-        $(this).parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
-
-        file_profile_photo.image = reader.result
-
-        arrFiles.push(file_profile_photo)
-        console.log(arrFiles)
-      }, false)
-
-      reader.readAsDataURL(val)
-      $(this).parent().find('.add__comment--smaller').html('')
-      $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
-    })
-
-    $('.upload_files_profile_photo').on('click', function (e) {
-      axios.post(
-        '/profile-photo',
-        arrFiles[0],
-      ).then(function (response) {
-        console.log(response)
-      })
     })
 
     $('.upload_files').on('click', function (e) {
@@ -848,7 +839,82 @@ $(document).ready(function () {
       // }else{
       //   document.getElementById('step').submit()
       // }
-    });
+    })
+
+    $('.pickfiles_profile_photo').on('change', function () {
+
+      arrFilesProfilePhoto = []
+
+      var input_val = $(this).parent().parent().find('.addInfo__input').val('')
+      var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
+      var this_name = $(this).attr('name')
+
+      var val = $(this)[0].files[0]
+
+      var reader  = new FileReader()
+      reader.addEventListener("load", () => {
+        $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
+        $(this).parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
+
+        file_profile_photo.image = reader.result
+        if(this_name){
+          file_profile_photo.service_user_id = parseInt(this_name)
+        }
+
+        arrFilesProfilePhoto.push(file_profile_photo)
+        console.log(arrFilesProfilePhoto)
+      }, false)
+
+      reader.readAsDataURL(val)
+      $(this).parent().find('.add__comment--smaller').html('')
+      $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
+    })
+
+    $('.upload_files_profile_photo').on('click', function (e) {
+      e.preventDefault()
+      if(arrFilesProfilePhoto.length > 0){
+        axios.post(
+          '/profile-photo',
+          arrFilesProfilePhoto[0],
+        ).then(function (response) {
+          console.log(response)
+          document.getElementById('step').submit()
+        })
+      }else{
+        document.getElementById('step').submit()
+      }
+    })
+
+    $('.upload_files_profile_photo_su').on('click', function (e) {
+      e.preventDefault()
+      if(arrFilesProfilePhoto.length > 0){
+        console.log(arrFilesProfilePhoto);
+        axios.post(
+          '/service-user-profile-photo',
+          arrFilesProfilePhoto[0],
+        ).then(function (response) {
+          console.log(response)
+          document.getElementById('step').submit()
+        })
+      }else{
+        document.getElementById('step').submit()
+      }
+    })
+
+    $('.pickfiles_profile_photo--change').on('change', function () {
+
+      arrFilesProfilePhoto = []
+      var val = $(this)[0].files[0]
+
+      var reader  = new FileReader()
+      reader.addEventListener("load", () => {
+        $('#profile_photo').attr('src', reader.result)
+        file_profile_photo.image = reader.result
+        arrFilesProfilePhoto.push(file_profile_photo)
+        console.log(arrFilesProfilePhoto)
+      }, false)
+      reader.readAsDataURL(val)
+    })
 
     $('.searchContainer__input').on('change',function (e) {
         insertParam('search',$(this).val());
@@ -866,8 +932,6 @@ $(document).ready(function () {
         'documents',
       ).then( (response) => {
         var newDoc = Object.entries(response.data.data.documents)
-
-        console.log(newDoc)
 
         newDoc.map((index) => {
           var c = 0

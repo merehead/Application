@@ -1,3 +1,4 @@
+
 .help-block{
     font-size: 70%;
     color: red;
@@ -60,7 +61,8 @@ select#workingTimes {
 }
 
 .pickfiles,
-.pickfiles_profile_photo{
+.pickfiles_profile_photo,
+.pickfiles_profile_photo--change{
   position: absolute;
   left: 0;
   top: 0;
@@ -170,7 +172,8 @@ select#workingTimes {
   border: 1px dotted #dee1e3;
   font-size: 1.5em;
 }
-.pickfiles-delete{
+.pickfiles-delete,
+.pickfiles-delete_profile_photo{
   position: absolute;
   background-size: contain;
   background-position: center;
@@ -186,7 +189,8 @@ select#workingTimes {
   text-align: center;
   display: none;
 }
-.pickfiles-delete:hover{
+.pickfiles-delete:hover,
+.pickfiles-delete_profile_photo{
   background: #ddd;
 }
 /*.pickfiles_img{
@@ -295,9 +299,4 @@ body > section > div > div.invite{
 .activeImg{
     filter:none;
     -webkit-filter: none;
-}
-
-a.blogFilter__item.active {
-    background-color: #80cb2d;
-    color: white;
 }

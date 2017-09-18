@@ -22,10 +22,10 @@
                         </h2>
                         <div class="addContainer">
                           <input class="pickfiles_profile_photo" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-                          <span class="pickfiles-delete">X</span>
                           <div class="pickfiles_img"></div>
 
-                          <div id="profile_photo" class="pickfiles_img"></div>
+                          <div id="profile_photo" class="pickfiles_img" style="background-image: url(img/profile_photos/{{$purchasersProfile->id}}.png)"></div>
+
                           <a href="#" class="add add--moreHeight">
                               <i class="fa fa-plus-circle"></i>
                               <div class="add__comment add__comment--smaller">
