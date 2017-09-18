@@ -19,7 +19,7 @@
 
                         <div class="peopleCare__item">
                             <div class="profilePhoto peopleCare__photo">
-                                <a href="" target="blank"> <img src="/img/no_photo.png" alt=""> </a>
+                                <a href="" target="blank"> <img src="img/service_user_profile_photos/{{$serviceUser->id}}.png" onerror="this.src='/img/no_photo.png'" alt=""> </a>
                             </div>
 
                             <h2 class="peopleCare__name">
