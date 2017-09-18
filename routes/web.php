@@ -44,10 +44,7 @@ Route::get('carer-registration/','CarerRegistrationController@index')->name('Car
 Route::post('carer-registration','CarerRegistrationController@update')->name('CarerRegistrationPost');
 
 
-//Route::get('git ', 'PurchaserController@index')->name('purchaserSettings');
-
-Route::get('/purchaser-settings ', 'PurchaserController@index')->name('purchaserSettings');
-
+Route::get('/purchaser-settings', 'PurchaserController@index')->name('purchaserSettings');
 Route::post('/purchaser-settings','PurchaserController@update')->name('purchaserSettingsPost');
 Route::get('/purchaser-registration/','PurchaserRegistrationController@index')->name('PurchaserRegistration');
 Route::post('/purchaser-registration','PurchaserRegistrationController@update')->name('PurchaserRegistrationPost');
@@ -58,6 +55,8 @@ Route::post('/service-registration/{serviceUserProfile}','ServiceUserRegistratio
 Route::get('/addServiceUser/','AddServiceUserController@create')->name('ServiceUserCreate');
 
 Route::get('/serviceUser-settings/{serviceUserProfile}','ServiceUserPrivateProfileController@index')->name('ServiceUserSetting');
+Route::get('/serviceUser/profile/{serviceUserProfile}','ServiceUserPrivateProfileController@profile')->name('ServiceUserProfilePublic');
+
 Route::post('/serviceUser-settings/{serviceUserProfile}','ServiceUserPrivateProfileController@update')->name('ServiceUserSettingPost');
 
 
