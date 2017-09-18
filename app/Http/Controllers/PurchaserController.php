@@ -33,7 +33,7 @@ class PurchaserController extends FrontController
         //dd();
 
         if (!$this->user) {
-            return;
+            return redirect('/');
             //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
         } else {
 

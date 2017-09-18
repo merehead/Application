@@ -56,13 +56,7 @@
 
             @if(!Auth::user()->isCarer() )
 
-
-
-
-
                 @if(count(Auth::user()->userPurchaserProfile) && count(Auth::user()->userPurchaserProfile->serviceUsers))
-
-
 
                     @foreach(Auth::user()->userPurchaserProfile->serviceUsers as $serviceUser)
 

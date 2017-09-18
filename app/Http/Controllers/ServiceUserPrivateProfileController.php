@@ -37,7 +37,7 @@ class ServiceUserPrivateProfileController extends FrontController
         $this->vars = array_add($this->vars,'modals',$modals);
 
         if (!$this->user) {
-            abort(404);
+            return redirect('/');
         } else {
 
             $serviceUsersProfile = ServiceUsersProfile::findOrFail($serviceUserProfile);
