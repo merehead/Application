@@ -459,6 +459,7 @@ $(document).ready(function () {
         var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');
 
         $(idLoadFiles).find('.pickfiles').attr("disabled", true);
+        $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", true);
 
         that.button('loading');
 
