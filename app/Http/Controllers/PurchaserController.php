@@ -33,8 +33,8 @@ class PurchaserController extends FrontController
         //dd();
 
         if (!$this->user) {
-            return;
-            //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
+            //return;
+            $this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
         } else {
 
             $purchaserProfile = PurchasersProfile::findOrFail($this->user->id);
