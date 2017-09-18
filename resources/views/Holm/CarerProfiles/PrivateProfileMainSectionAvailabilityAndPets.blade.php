@@ -69,7 +69,7 @@
                     <?php $workingTime = $workingTimes->shift()?>
                     {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
                                                 array('class' => 'customCheckbox '.$workingTime->css_name,'id'=>'boxG'.$workingTime->id)) !!}
-                    <label for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
+                    <label id="boxG1" for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
             </div>
 
             <div class="profileField profileField--half">
