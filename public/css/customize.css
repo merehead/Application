@@ -296,3 +296,8 @@ body > section > div > div.invite{
     filter:none;
     -webkit-filter: none;
 }
+
+a.blogFilter__item.active {
+    background-color: #80cb2d;
+    color: white;
+}

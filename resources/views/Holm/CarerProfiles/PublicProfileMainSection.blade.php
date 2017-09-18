@@ -236,9 +236,7 @@
                     {{$item->name}}
                 </p>
                 @endforeach
-                <p>
-                    Dementia
-                </p>
+
                 <!--
                 <p>
                 Respite care
@@ -280,7 +278,7 @@
             <div class="advantageColumn">
 
                 <p class="advantage_label">
-                    <i class="fa fa-check"></i>
+                    <i class="fa @if($carerProfile->work_with_pets=='Yes')fa-check @else  fa-ban @endif"></i>
                     Works with pets
                 </p>
             </div>
@@ -302,9 +300,16 @@
     <div class="profileAdvantages">
         <div class="profileAdvantages__row">
             <div class="advantageColumn">
-                <h2>
-                    English
-                </h2>
+                @foreach($languages as $item)
+                    <h2>
+                        @if($item->carer_language!='OTHER')
+                        {{$item->carer_language}}
+                            @else
+                            {{$carerProfile->language_additional}}
+                        @endif
+                    </h2>
+                @endforeach
+
                 <!-- <h2>
                 Spanish
                 </h2>
@@ -348,17 +353,17 @@
             <div class="advantageColumn advantageColumn--transport">
 
                 <p class="advantage_label">
-                    <i class="fa fa-check"></i>
+                    <i class="fa @if($carerProfile->use_car=='Yes')fa-check @else  fa-ban @endif"></i>
                     Transport clients to the shop or for short trips
                 </p>
             </div>
             <div class="advantageColumn wider">
                 <p class="advantage_label">
-                    <i class="fa fa-check"></i>
+                    <i class="fa @if($carerProfile->have_car=='Yes')fa-check @else  fa-ban @endif"></i>
                     have a car for work
                 </p>
                 <p class="advantage_label">
-                    <i class="fa fa-check"></i>
+                    <i class="fa @if($carerProfile->driving_licence=='Yes')fa-check @else  fa-ban @endif"></i>
                     have UK/EEA Driving Licence
                 </p>
             </div>

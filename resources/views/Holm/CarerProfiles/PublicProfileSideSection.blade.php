@@ -29,14 +29,13 @@
     </h2>
 </div>
 <div class="availability">
-    <p class="availability__item">
-        <i class="fa fa-check"></i>
-        All the time
-    </p>
-    <p class="availability__item">
-        <i class="fa fa-check"></i>
-        Every day
-    </p>
+    @foreach ($workingTimes as $item)
+        <p class="availability__item @if (strlen($item->name)>14) availability__item--full @endif ">
+            <i class="fa fa-check"></i>
+            {{$item->name}}
+        </p>
+    @endforeach
+
     <!--
     <p class="availability__item">
     <i class="fa fa-check"></i>
@@ -78,12 +77,11 @@
     <i class="fa fa-check"></i>
     Wednesday afternoon
     </p>
-    -->
     <p class="availability__item availability__item--full">
         <i class="fa fa-check"></i>
         Availability on bank holidays
     </p>
-
+    -->
 
 </div>
 <div class="profileSide__title">
@@ -93,15 +91,17 @@
 </div>
 <div class="noticeRequired">
     <h2 class="noticeRequired__item">
-        4 days
+        {{$carerProfile->work_hours}} {{$carerProfile->times}}
     </h2>
 </div>
-<div class="profileSide__title">
+
+<div class="profileSide__title hidden">
     <h2 class="profileTitle">
         reviews
     </h2>
 </div>
-<div class="review">
+
+<div class="review hidden">
     <div class="review__item singleReview">
         <div class="reviewHead">
             <div class="reviewer">
@@ -121,21 +121,11 @@
             </div>
             <div class="singleReview__rate">
                 <div class="profileRating ">
-<span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                    <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                    <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                    <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                    <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
+                    <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
+                    <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
+                    <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
+                    <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
+                    <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
                 </div>
                 <!--  <p class="hourPrice">
                 <span class="hourPrice__price hourPrice__price--review">
@@ -148,9 +138,7 @@
                 She is so nice and kind!
             </p>
         </div>
-        <span class="singleReview__date">
-10/07/2017
-</span>
+        <span class="singleReview__date">10/07/2017</span>
     </div>
 
     <!--      <div class="review__item singleReview">

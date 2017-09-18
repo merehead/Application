@@ -32,7 +32,7 @@ null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
             </div>
             <div class="hiding formField" style="display: none">
                 <h2 class="formLabel questionForm__label">
-                    If yes, what questions do you have? We will get back to you as soon as possible with answers.
+                    What questions do you have? We will get back to you as soon as possible with answers.
                 </h2>
                 <div class="inputWrap">
                     {!! Form::textarea('questions',null,['class'=>'formArea','placeholder'=>'Your text']) !!}
