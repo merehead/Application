@@ -10,6 +10,8 @@ use App\ServiceType;
 use App\ServiceUsersProfile;
 use App\WorkingTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 
 class ServiceUserPrivateProfileController extends FrontController
 {
@@ -67,5 +69,68 @@ class ServiceUserPrivateProfileController extends FrontController
         }
 
         return $this->renderOutput();
+    }
+
+    public function update(Request $request, $serviceUserProfileID)
+    {
+        $input = $request->all();
+        $serviceUsersProfile = ServiceUsersProfile::findOrFail($serviceUserProfileID);
+
+
+        $depart = '#';
+
+        if ($input['stage'] == 'general') {
+
+            $this->validate($request, [
+
+                'like_name' =>
+                    array(
+                        'required',
+                        'string',
+                        'max:128'
+                    ),
+                'mobile_number' =>
+                    array(
+                        'required',
+                    ),
+                'address_line1' =>
+                    array(
+                        'required',
+                        'string',
+                        'max:256'
+                    ),
+                'address_line2' =>
+                    array(
+                        'nullable',
+                        'string',
+                        'max:256'
+                    ),
+                'town' =>
+                    array(
+                        'required',
+                        'string',
+                        'max:128'
+                    ),
+                'postcode' =>
+                    array(
+                        'required',
+                        'regex:/^([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})|([Ss][Kk][0-9]{1,2}) [0-9][A-Za-z]{1,2}$/'
+                    )
+            ]);
+
+            $depart = "#servicePrivateGeneral";
+
+            if (isset($input['like_name'])) $serviceUsersProfile->like_name = $input['like_name'];
+            if (isset($input['address_line1'])) $serviceUsersProfile->address_line1 = $input['address_line1'];
+            if (isset($input['address_line2'])) $serviceUsersProfile->address_line2 = $input['address_line2'];
+            if (isset($input['town'])) $serviceUsersProfile->town = $input['town'];
+            if (isset($input['postcode'])) $serviceUsersProfile->postcode = $input['postcode'];
+            if (isset($input['mobile_number'])) $serviceUsersProfile->mobile_number = $input['mobile_number'];
+
+            $serviceUsersProfile->save();
+            unset($serviceUsersProfile);
+        }
+
+        return Redirect::to(URL::previous() . $depart);
     }
 }

@@ -6,9 +6,12 @@
         fa-spin '></i> Processing"><i class="fa fa-floppy-o"></i>  Save</button>
     </div>
 </div>
-{!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUsersProfile->id],'id'=>'servicePrivateGeneral']) !!}
+{!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'servicePrivateGeneral']) !!}
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('stage','general') !!}
+
+{{Form::submit('Click Me!')}}
+
 <div class="borderContainer">
     <div class="profileInfoContainer">
         <div class="generalInfo">

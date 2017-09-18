@@ -101,6 +101,9 @@ class PurchaserController extends FrontController
 
             unset($carerProfiles);
         }
+
+
+
         if ($input['stage'] == 'payment') {
 
             $depart = "#Payment";
