@@ -323,8 +323,47 @@ class ServiceUserPrivateProfileController extends FrontController
             unset($serviceUsersProfile);
 
         }
+        if ($input['stage'] == 'behaviour') {
+            $this->validate($request,[
+                'behaviour' => 'required|array',
+                'other_behaviour' => 'nullable|string|max:200',
+                'consent_details' => 'nullable|string|max:500',
+            ]);
 
-        //dd($input);
+            $depart = "#behaviour";
+
+            $behaviour = $request->input('behaviour');
+            $serviceUsersProfile->Behaviours()->sync(array_keys($behaviour));
+            $serviceUsersProfile->other_behaviour  = $request->input('other_behaviour');
+            $serviceUsersProfile->consent_details  = $request->input('consent_details');
+
+            $serviceUsersProfile->save();
+            unset($serviceUsersProfile);
+        }
+
+        if ($input['stage'] == 'typeOfCare') {
+
+
+            //dd($input);
+
+            $this->validate($request,[
+                'typeService' => 'required|array',
+                'checkSrvCare' => 'required|array',
+            ]);
+
+            $depart = "#typeOfCare";
+
+            $typeService = $request->input('typeService');
+            $checkSrvCare = $request->input('checkSrvCare');
+            //dd(array_keys($typeService),array_keys($checkSrvCare));
+
+            $serviceUsersProfile->ServicesTypes()->sync(array_keys($typeService));
+            $serviceUsersProfile->AssistantsTypes()->sync(array_keys($checkSrvCare));
+
+
+            unset($serviceUsersProfile);
+        }
+
 
         return Redirect::to(URL::previous() . $depart);
 
