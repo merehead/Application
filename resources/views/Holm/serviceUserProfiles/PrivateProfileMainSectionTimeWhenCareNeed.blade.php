@@ -7,6 +7,10 @@
     </div>
 </div>
 
+{!! Form::model($serviceUsersProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateLanguages']) !!}
+{!! Form::hidden('id',$serviceUsersProfile->id) !!}
+{!! Form::hidden('stage','timeWhenCareNeeded') !!}
+
 <div class="borderContainer">
     <div class="profileRow">
         <div class="profileField">
@@ -16,127 +20,62 @@
               </span>
             </h2>
             <div class="profileField__input-wrap">
-                <input type="text" class="profileField__input" placeholder="06/06/2017">
-                <span class="profileField__input-ico centeredLink">
-                <i class="fa fa-calendar" aria-hidden="true"></i>
-              </span>
+                {{--<input type="text" class="profileField__input" placeholder="06/06/2017">--}}
+                @if($serviceUsersProfile->start_date === "01/01/1970")
+                    <input name="start_date" id="datepicker_when_start" class="personalForm__input" placeholder="Start date (dd/mm/yyyy)" type="text">
+                @else
+                    {!! Form::text('start_date',null,['id'=>'datepicker_when_start','class'=>'formInput personalForm__input']) !!}
+                @endif
+                <span class="profileField__input-ico centeredLink"><i class="fa fa-calendar" aria-hidden="true"></i></span>
             </div>
         </div>
 
         <div class="profileField profileField--two-thirds">
             <div class="checkRow">
                 <div class="checkBox_item">
-                    <input type="checkbox" name="checkbox" class="customCheckbox" id="boxG1">
-                    <label for="boxG1">every morning</label>
+                    {!! Form::checkbox('workingTime['.$workingTimes[1]->id.']', null,($serviceUsersProfile->WorkingTimes->contains('id', $workingTimes[1]->id)? 1 : null),
+array('class' =>  'customCheckbox '.$workingTimes[1]->css_name,'id'=>'checkD'.$workingTimes[1]->id)) !!}
+                    <label for="checkD{{$workingTimes[1]->id}}">{{$workingTimes[1]->name}}</label>
                 </div>
                 <div class="checkBox_item">
-                    <input type="checkbox" name="checkbox" class="customCheckbox" id="boxG2">
-                    <label for="boxG2">Every Afternoon</label>
+                    {!! Form::checkbox('workingTime['.$workingTimes[2]->id.']', null,($serviceUsersProfile->WorkingTimes->contains('id', $workingTimes[2]->id)? 1 : null),
+array('class' =>  'customCheckbox '.$workingTimes[2]->css_name,'id'=>'checkD'.$workingTimes[2]->id)) !!}
+                    <label for="checkD{{$workingTimes[2]->id}}">{{$workingTimes[2]->name}}</label>
                 </div>
                 <div class="checkBox_item">
-                    <input type="checkbox" name="checkbox" class="customCheckbox" id="boxG3">
-                    <label for="boxG3">Every night</label>
+                    {!! Form::checkbox('workingTime['.$workingTimes[3]->id.']', null,($serviceUsersProfile->WorkingTimes->contains('id', $workingTimes[3]->id)? 1 : null),
+array('class' =>  'customCheckbox '.$workingTimes[3]->css_name,'id'=>'checkD'.$workingTimes[3]->id)) !!}
+                    <label for="checkD{{$workingTimes[3]->id}}">{{$workingTimes[3]->name}}</label>
                 </div>
                 <div class="checkBox_item">
-                    <input type="checkbox" name="checkbox" class="customCheckbox" id="boxG4">
-                    <label for="boxG4">All the time</label>
+                    {!! Form::checkbox('workingTime['.$workingTimes[0]->id.']', null,($serviceUsersProfile->WorkingTimes->contains('id', $workingTimes[0]->id)? 1 : null),
+array('class' =>  'customCheckbox '.$workingTimes[0]->css_name,'id'=>'checkD'.$workingTimes[0]->id)) !!}
+                    <label for="checkD{{$workingTimes[0]->id}}">{{$workingTimes[0]->name}}</label>
                 </div>
             </div>
 
         </div>
     </div>
 
+    <?php $bottomTime = $workingTimes->splice(4)?>
     <div class="profileRow">
         <div class="profileField profileField--full-width">
             <div class="checkRow">
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD1" />
-                    <label for="checkD1"> <span> Monday morning</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD2" />
-                    <label for="checkD2"> <span> Tuesday morning</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD3" />
-                    <label for="checkD3"> <span> Wednesday morning</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD4" />
-                    <label for="checkD4"> <span> Thursday morning</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD5" />
-                    <label for="checkD5"> <span> Friday morning</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD6" />
-                    <label for="checkD6"> <span> Saturday morning</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD7" />
-                    <label for="checkD7"> <span> Sunday morning</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD8" />
-                    <label for="checkD8"> <span> Monday afternoon</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD9" />
-                    <label for="checkD9"> <span> Tuesday afternoon</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD10" />
-                    <label for="checkD10"> <span> Wednesday afternoon</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD11" />
-                    <label for="checkD11"> <span> Thursday afternoon</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD12" />
-                    <label for="checkD12"> <span> Friday afternoon</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD13" />
-                    <label for="checkD13"> <span> Saturday afternoon</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD14" />
-                    <label for="checkD14"> <span> Sunday afternoon</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD15" />
-                    <label for="checkD15"> <span> Monday night</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD16" />
-                    <label for="checkD16"> <span> Tuesday night</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD17" />
-                    <label for="checkD17"> <span> Wednesday night</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD18" />
-                    <label for="checkD18"> <span> Thursday night</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD19" />
-                    <label for="checkD19"> <span> Friday night</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD20" />
-                    <label for="checkD20"> <span> Saturday night</span></label>
-                </div>
-                <div class="checbox_wrap checbox_wrap--date">
-                    <input type="checkbox" class="checkboxNew" id="checkD21" />
-                    <label for="checkD21"> <span> Sunday night</span></label>
-                </div>
 
+                @foreach($bottomTime->sortBy('byDay') as $workingTime)
+                    <div class="checbox_wrap checbox_wrap--date">
 
+                        {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($serviceUsersProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
+                        array('class' =>  'checkboxNew '.$workingTime->css_name,'id'=>'checkD'.$workingTime->id)) !!}
+                        <label for="checkD{{$workingTime->id}}"><span> {{$workingTime->name}}</span></label>
+
+                    </div>
+                @endforeach
             </div>
 
         </div>
+
     </div>
+
 </div>
+{!! Form::close()!!}
