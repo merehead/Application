@@ -37,6 +37,7 @@ Route::get('/carer-settings', 'CarerController@index')->name('carerSettings'); /
 Route::get('/carer-settings/profile', 'CarerController@profile')->name('carerPublicProfile'); //synonym for ImCarerPage
 Route::get('/im-carer', 'CarerController@index')->name('ImCarerPage');
 Route::post('/im-carer', 'CarerController@update')->name('ImCarerPrivatePage');
+Route::get('/carer/{carer_id}', 'CarerController@carerProfile');
 
 //Route::get('carer-registration/{stepback?}','CarerRegistrationController@index')->name('CarerRegistration');
 Route::get('carer-registration/','CarerRegistrationController@index')->name('CarerRegistration');

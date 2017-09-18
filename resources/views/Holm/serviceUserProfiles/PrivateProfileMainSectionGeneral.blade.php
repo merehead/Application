@@ -13,7 +13,10 @@
     <div class="profileInfoContainer">
         <div class="generalInfo">
             <div class="profilePhoto profilePhoto--change">
-                <img src="/img/no_photo.png" alt="">
+
+              <input name="{{$serviceUsersProfile->id}}" class="pickfiles_profile_photo" accept=".jpg,.jpeg,.png,.doc" type="file" />
+              <img id="profile_photo" src="/img/service_user_profile_photos/{{$serviceUsersProfile->id}}.png" alt="avatar">
+
                 <a href="#" class="profilePhoto__ico">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                 </a>

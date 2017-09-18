@@ -52,8 +52,8 @@
 </div>
 
 <div class="borderContainer" id="carerPrivateAvailability">
-    <div class="profileRow">
-        <div class="profileField ">
+    <div class="profileRow profileRow_qualifications">
+        <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                NVQs
@@ -63,8 +63,6 @@
             <div class="addContainer">
               <input disabled class="pickfiles" value=""
                 accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-              <span class="pickfiles-delete">X</span>
-
               <div id="nvq" class="pickfiles_img"></div>
                 <a class="add add--moreHeight">
                     <i class="fa fa-plus-circle"></i>
@@ -76,13 +74,11 @@
             </div>
 
         </div>
-        <div class="profileField ">
+        <div class="profileField">
 
           <div class="addContainer">
             <input disabled class="pickfiles" value=""
               accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-            <span class="pickfiles-delete">X</span>
-
             <div id="nvq1" class="pickfiles_img"></div>
               <a class="add add--moreHeight">
                   <i class="fa fa-plus-circle"></i>
@@ -90,17 +86,15 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="nvq" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="nvq-1" class="addInfo__input" placeholder="Name">
           </div>
         </div>
 
-        <div class="profileField ">
+        <div class="profileField">
 
           <div class="addContainer">
             <input disabled class="pickfiles" value=""
               accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-            <span class="pickfiles-delete">X</span>
-
             <div id="nvq2" class="pickfiles_img"></div>
               <a class="add add--moreHeight">
                   <i class="fa fa-plus-circle"></i>
@@ -108,13 +102,13 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="nvq" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="nvq-2" class="addInfo__input" placeholder="Name">
           </div>
         </div>
     </div>
 
     <div class="profileRow">
-        <div class="profileField ">
+        <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                Care Certificates
@@ -123,8 +117,6 @@
 
             <div class="addContainer">
               <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-              <span class="pickfiles-delete">X</span>
-
               <div id="care_certificate" class="pickfiles_img"></div>
                 <a class="add add--moreHeight">
                     <i class="fa fa-plus-circle"></i>
@@ -136,12 +128,10 @@
             </div>
 
         </div>
-        <div class="profileField ">
+        <div class="profileField">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-            <span class="pickfiles-delete">X</span>
-
             <div id="care_certificate1" class="pickfiles_img"></div>
               <a class="add add--moreHeight">
                   <i class="fa fa-plus-circle"></i>
@@ -149,16 +139,14 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="care_certificate" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="care_certificate-1" class="addInfo__input" placeholder="Name">
           </div>
         </div>
 
-        <div class="profileField ">
+        <div class="profileField">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-            <span class="pickfiles-delete">X</span>
-
             <div id="care_certificate2" class="pickfiles_img"></div>
               <a class="add add--moreHeight">
                   <i class="fa fa-plus-circle"></i>
@@ -166,7 +154,7 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="care_certificate" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="care_certificate-2" class="addInfo__input" placeholder="Name">
           </div>
         </div>
     </div>
@@ -181,8 +169,6 @@
 
             <div class="addContainer">
               <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-              <span class="pickfiles-delete">X</span>
-
               <div id="health_and_social" class="pickfiles_img"></div>
                 <a class="add add--moreHeight">
                     <i class="fa fa-plus-circle"></i>
@@ -194,12 +180,10 @@
             </div>
 
         </div>
-        <div class="profileField ">
+        <div class="profileField">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-            <span class="pickfiles-delete">X</span>
-
             <div id="health_and_social1" class="pickfiles_img"></div>
               <a class="add add--moreHeight">
                   <i class="fa fa-plus-circle"></i>
@@ -207,16 +191,14 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="health_and_social" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="health_and_social-1" class="addInfo__input" placeholder="Name">
           </div>
         </div>
 
-        <div class="profileField ">
+        <div class="profileField">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-            <span class="pickfiles-delete">X</span>
-
             <div id="health_and_social2" class="pickfiles_img"></div>
               <a class="add add--moreHeight">
                   <i class="fa fa-plus-circle"></i>
@@ -224,14 +206,14 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="health_and_social" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="health_and_social-2" class="addInfo__input" placeholder="Name">
           </div>
         </div>
     </div>
 
 
     <div class="profileRow">
-        <div class="profileField ">
+        <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                Training certificates
@@ -240,8 +222,6 @@
 
             <div class="addContainer">
               <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-              <span class="pickfiles-delete">X</span>
-
               <div id="training_certificate" class="pickfiles_img"></div>
                 <a class="add add--moreHeight">
                     <i class="fa fa-plus-circle"></i>
@@ -253,12 +233,10 @@
             </div>
 
         </div>
-        <div class="profileField ">
+        <div class="profileField">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-            <span class="pickfiles-delete">X</span>
-
             <div id="training_certificate1" class="pickfiles_img"></div>
               <a class="add add--moreHeight">
                   <i class="fa fa-plus-circle"></i>
@@ -266,16 +244,14 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="training_certificate" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="training_certificate-1" class="addInfo__input" placeholder="Name">
           </div>
         </div>
 
-        <div class="profileField ">
+        <div class="profileField">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-            <span class="pickfiles-delete">X</span>
-
             <div id="training_certificate2" class="pickfiles_img"></div>
               <a class="add add--moreHeight">
                   <i class="fa fa-plus-circle"></i>
@@ -283,13 +259,13 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="training_certificate" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="training_certificate-2" class="addInfo__input" placeholder="Name">
           </div>
         </div>
     </div>
 
     <div class="profileRow">
-        <div class="profileField ">
+        <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                Additional training courses
@@ -298,8 +274,6 @@
 
             <div class="addContainer">
               <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-              <span class="pickfiles-delete">X</span>
-
               <div id="additional_training_course" class="pickfiles_img"></div>
                 <a class="add add--moreHeight">
                     <i class="fa fa-plus-circle"></i>
@@ -311,12 +285,10 @@
             </div>
 
         </div>
-        <div class="profileField ">
+        <div class="profileField">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-            <span class="pickfiles-delete">X</span>
-
             <div id="additional_training_course1" class="pickfiles_img"></div>
               <a class="add add--moreHeight">
                   <i class="fa fa-plus-circle"></i>
@@ -324,16 +296,14 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="additional_training_course" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="additional_training_course-1" class="addInfo__input" placeholder="Name">
           </div>
         </div>
 
-        <div class="profileField ">
+        <div class="profileField">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-            <span class="pickfiles-delete">X</span>
-
             <div id="additional_training_course2" class="pickfiles_img"></div>
               <a class="add add--moreHeight">
                   <i class="fa fa-plus-circle"></i>
@@ -341,14 +311,14 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="additional_training_course" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="additional_training_course-2" class="addInfo__input" placeholder="Name">
           </div>
         </div>
     </div>
 
 
     <div class="profileRow">
-        <div class="profileField ">
+        <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                Other relevant qualifications
@@ -357,8 +327,6 @@
 
             <div class="addContainer">
               <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-              <span class="pickfiles-delete">X</span>
-
               <div id="other_relevant_qualification" class="pickfiles_img"></div>
                 <a class="add add--moreHeight">
                     <i class="fa fa-plus-circle"></i>
@@ -370,12 +338,10 @@
             </div>
 
         </div>
-        <div class="profileField ">
+        <div class="profileField">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-            <span class="pickfiles-delete">X</span>
-
             <div id="other_relevant_qualification1" class="pickfiles_img"></div>
               <a class="add add--moreHeight">
                   <i class="fa fa-plus-circle"></i>
@@ -383,16 +349,14 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="other_relevant_qualification" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="other_relevant_qualification-1" class="addInfo__input" placeholder="Name">
           </div>
         </div>
 
-        <div class="profileField ">
+        <div class="profileField">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-            <span class="pickfiles-delete">X</span>
-
             <div id="other_relevant_qualification2" class="pickfiles_img"></div>
               <a class="add add--moreHeight">
                   <i class="fa fa-plus-circle"></i>
@@ -400,7 +364,7 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="other_relevant_qualification" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="other_relevant_qualification-2" class="addInfo__input" placeholder="Name">
           </div>
         </div>
     </div>
