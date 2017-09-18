@@ -80,7 +80,7 @@
                 </span>
                 </h2>
                 {!! Form::select('have_car',['Yes'=>'Car for work','No'=>'Do not have a car'],
-null,['class'=>'profileField__select']) !!}
+null,['class'=>'profileField__select','id'=>'type_car_work']) !!}
 
 {{--                <select class="profileField__select ">
                     <option value="Flat">Car for work</option>
@@ -107,7 +107,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
             </div>
         </div>
 
-        <div class="profileField">
+        <div class="profileField car-block">
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">

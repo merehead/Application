@@ -353,6 +353,19 @@ $(document).ready(function () {
         }
     });
 
+    if($("#type_car_work").val() == 'Yes') {
+        $(".car-block").show();
+    }else{
+        $(".car-block").hide();
+    }
+    $("#type_car_work").on('change',function(){
+        if($("#type_car_work").val() == 'Yes') {
+            $(".car-block").show();
+        }else{
+            $(".car-block").hide();
+        }
+    });
+
     /*--------------слайдер I am carer page------------*/
     if ($('div').is('.carerBanner')) {
         $('.carerBanner').owlCarousel({
