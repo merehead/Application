@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AssistanceType;
+use App\Behaviour;
 use App\Floor;
 use App\Language;
 use App\ServiceType;
@@ -51,6 +52,9 @@ class ServiceUserPrivateProfileController extends FrontController
 
             $typeService = ServiceType::all()->sortBy('id');
             $this->vars = array_add($this->vars, 'typeService', $typeService);
+
+            $behaviour = Behaviour::all();
+            $this->vars = array_add($this->vars, 'behaviour', $behaviour);
 
             $workingTimes = WorkingTime::all();
             $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
