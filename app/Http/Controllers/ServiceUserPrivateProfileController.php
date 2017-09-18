@@ -131,6 +131,9 @@ class ServiceUserPrivateProfileController extends FrontController
             unset($serviceUsersProfile);
         }
 
+
+        dd($input);
+
         return Redirect::to(URL::previous() . $depart);
     }
 }
