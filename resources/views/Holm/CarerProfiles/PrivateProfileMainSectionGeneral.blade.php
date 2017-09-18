@@ -6,14 +6,14 @@
         fa-spin '></i> Processing"><i class="fa fa-floppy-o"></i>  Save</button>
     </div>
 </div>
-
+{!! Form::model($carerProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateGeneral']) !!}
+{!! Form::hidden('id',null) !!}
+{!! Form::hidden('stage','general') !!}
 <div class="borderContainer" id='carerPrivateGeneral'>
     @include(config('settings.frontTheme').'.CarerProfiles/PrivateProfileMainSectionGeneral_profileInfoContainer')
     @include(config('settings.frontTheme').'.CarerProfiles/PrivateProfileMainSectionGeneral_CVandPassport')
 </div>
-{!! Form::model($carerProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateGeneral']) !!}
-{!! Form::hidden('id',null) !!}
-{!! Form::hidden('stage','general') !!}
+
 <div class="borderContainer">
     <h2 class="fieldCategory">
         Contacts

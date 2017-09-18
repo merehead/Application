@@ -80,7 +80,7 @@
                 </span>
                 </h2>
                 {!! Form::select('have_car',['Yes'=>'Car for work','No'=>'Do not have a car'],
-null,['class'=>'profileField__select']) !!}
+null,['class'=>'profileField__select','id'=>'type_car_work']) !!}
 
 {{--                <select class="profileField__select ">
                     <option value="Flat">Car for work</option>
@@ -108,6 +108,55 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
         </div>
 
         <div class="profileField">
+            <div class="profileField profileField--full-width">
+                <h2 class="profileField__title ordinaryTitle">
+                <span class="ordinaryTitle__text ">
+                  UK\EEA Driving licence photo
+                </span>
+                </h2>
+
+                <div class="addContainer">
+                    <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                    <span class="pickfiles-delete">X</span>
+
+                    <div id="driving_licence_photo" class="pickfiles_img"></div>
+                    <a class="add add--moreHeight">
+                        <i class="fa fa-plus-circle"></i>
+                        <div class="add__comment add__comment--smaller"></div>
+                    </a>
+                </div>
+                <div style="display: none" class="addInfo">
+                    <input disabled type="text" name="driving_licence_photo" class="addInfo__input" placeholder="Name">
+                </div>
+
+            </div>
+            <div class="profileField profileField--full-width">
+                <h2 class="profileField__title ordinaryTitle">
+                <span class="ordinaryTitle__text ">
+                 UK\EEA Driving licence Number
+                </span>
+                </h2>
+                {!! Form::text('DBS_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Driving licence number','readonly','data-edit'=>'false']) !!}
+                {{--<input type="text" class="profileField__input profileField__input--greyBg" placeholder="UK\EEA Driving licence Number">--}}
+            </div>
+            <div class="profileField profileField--full-width">
+                <h2 class="profileField__title ordinaryTitle">
+                <span class="ordinaryTitle__text ">
+                 Valid until
+                </span>
+                </h2>
+
+                @if($carerProfile->driver_licence_valid_until === "01/01/1970")
+                    <input name="driver_licence_valid_until" id="datepicker_driver_licence" class="profileField__input" placeholder="Valid until date" type="text">
+                @else
+                    {!! Form::text('driver_licence_valid_until',null,['id'=>'datepicker_driver_licence','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
+                @endif
+
+                {{--<input type="text" class="profileField__input " placeholder="Valid until date">--}}
+            </div>
+        </div>
+
+        <div class="profileField car-block">
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
@@ -151,55 +200,6 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                     {!! Form::text('car_insurance_valid_until',null,['id'=>'datepicker_insurance','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
                 @endif
 
-            </div>
-        </div>
-
-        <div class="profileField">
-            <div class="profileField profileField--full-width">
-                <h2 class="profileField__title ordinaryTitle">
-                <span class="ordinaryTitle__text ">
-                  UK\EEA Driving licence photo
-                </span>
-                </h2>
-
-                <div class="addContainer">
-                  <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-                  <span class="pickfiles-delete">X</span>
-
-                  <div id="driving_licence_photo" class="pickfiles_img"></div>
-                    <a class="add add--moreHeight">
-                        <i class="fa fa-plus-circle"></i>
-                        <div class="add__comment add__comment--smaller"></div>
-                    </a>
-                </div>
-                <div style="display: none" class="addInfo">
-                    <input disabled type="text" name="driving_licence_photo" class="addInfo__input" placeholder="Name">
-                </div>
-
-            </div>
-            <div class="profileField profileField--full-width">
-                <h2 class="profileField__title ordinaryTitle">
-                <span class="ordinaryTitle__text ">
-                 UK\EEA Driving licence Number
-                </span>
-                </h2>
-                {!! Form::text('DBS_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Driving licence number','readonly','data-edit'=>'false']) !!}
-                {{--<input type="text" class="profileField__input profileField__input--greyBg" placeholder="UK\EEA Driving licence Number">--}}
-            </div>
-            <div class="profileField profileField--full-width">
-                <h2 class="profileField__title ordinaryTitle">
-                <span class="ordinaryTitle__text ">
-                 Valid until
-                </span>
-                </h2>
-
-                @if($carerProfile->driver_licence_valid_until === "01/01/1970")
-                    <input name="driver_licence_valid_until" id="datepicker_driver_licence" class="profileField__input" placeholder="Valid until date" type="text">
-                @else
-                    {!! Form::text('driver_licence_valid_until',null,['id'=>'datepicker_driver_licence','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
-                @endif
-
-                {{--<input type="text" class="profileField__input " placeholder="Valid until date">--}}
             </div>
         </div>
 

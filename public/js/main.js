@@ -342,6 +342,29 @@ $(document).ready(function () {
             $('.hiddenSort').addClass('hiddenSort--visible');
         }
     });
+    if($("#depend-if").val() == 'It Depends') {$(".depend_hiding").show( )}
+
+    $("#depend-if").on('change',function(){
+        if($(this).val() !="0")
+        {
+            if($(this).val() == 'Yes') {$(".depend_hiding").hide( )}
+            if($(this).val() == 'No') {$(".depend_hiding").hide( )}
+            if($(this).val() == 'It Depends') {$(".depend_hiding").show( )}
+        }
+    });
+
+    if($("#type_car_work").val() == 'Yes') {
+        $(".car-block").show();
+    }else{
+        $(".car-block").hide();
+    }
+    $("#type_car_work").on('change',function(){
+        if($("#type_car_work").val() == 'Yes') {
+            $(".car-block").show();
+        }else{
+            $(".car-block").hide();
+        }
+    });
 
     /*--------------слайдер I am carer page------------*/
     if ($('div').is('.carerBanner')) {

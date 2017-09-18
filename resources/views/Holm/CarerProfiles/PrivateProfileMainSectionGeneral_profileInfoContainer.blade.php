@@ -161,3 +161,13 @@
     </div>
 
 </div>
+<div class="profileRow">
+    <div class="profileField">
+        <h2 class="profileField__title ordinaryTitle">
+              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
+                I like to be called <span class="requireIco">*</span>
+              </span>
+        </h2>
+        <?php echo Form::text('like_name',null,['class'=>'profileField__input','placeholder'=>'I like to be called']); ?>
+    </div>
+</div>
