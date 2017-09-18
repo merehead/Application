@@ -15,7 +15,7 @@
             </a>
 
         @else
-{{dd(Auth::check())}}
+
             @if(Auth::user()->isReregistrationCompleted())
 
 
