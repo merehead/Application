@@ -90,8 +90,8 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                     <div class="checbox_wrap checbox_wrap--date">
 
                         {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
-                        array('class' =>  'customCheckbox '.$workingTime->css_name,'id'=>'checkD'.$workingTime->id)) !!}
-                        <label for="checkD{{$workingTime->id}}"><span>{{$workingTime->name}}</span></label>
+                        array('class' =>  'checkboxNew '.$workingTime->css_name,'id'=>'checkD'.$workingTime->id)) !!}
+                        <label for="checkD{{$workingTime->id}}"><span> {{$workingTime->name}}</span></label>
 
                     </div>
                 @endforeach
