@@ -23,7 +23,7 @@
     <div class="profileField profileField--half">
         <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                passport
+                Photographic proof of your ID (passport or driving licence is acceptable)
               </span>
         </h2>
         <div class="addContainer">

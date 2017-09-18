@@ -435,8 +435,8 @@ class CarerRegistration
 
         $this->validate($request,[
             'workingTime' => 'required|array',
-            'work_at_holiday' => 'required|string:3',
-            'times' => 'required|string:32',
+            'work_at_holiday' => 'required|string|max:3',
+            'times' => 'required|string|max:32',
             'work_hours' => 'nullable|numeric:2',
         ]);
 
@@ -466,7 +466,7 @@ class CarerRegistration
 
         $this->validate($request,[
             'work_with_pets' => 'required|in:"Yes","No","It Depends"',
-            'pets_description' => 'required_if:work_with_pets,"Sometimes","Yes"|string:512|nullable',
+            'pets_description' => 'required_if:work_with_pets,"Sometimes","Yes"|string|max:500|nullable',
         ]);
 
 /*        switch ($request->input('work_with_pets')){
@@ -490,7 +490,7 @@ class CarerRegistration
 
         $this->validate($request,[
             'languages' => 'required|array',
-            'language_additional' => 'nullable|string:128',
+            'language_additional' => 'nullable|string|max:120',
         ]);
 
 
@@ -516,8 +516,8 @@ class CarerRegistration
         $this->validate($request,[
             'work_UK' => 'required|in:"Yes","No"',
             'work_UK_restriction' => 'required_if:work_UK,"Yes"|nullable|in:"Yes","No"',
-            'work_UK_description' => 'required_if:work_UK_restriction,"Yes"|nullable|string:512',
-            'national_insurance_number'=>'nullable|string:128',
+            'work_UK_description' => 'required_if:work_UK_restriction,"Yes"|nullable|string|max:500',
+            'national_insurance_number'=>'nullable|string|max:120',
         ]);
 
 /*
@@ -538,8 +538,8 @@ class CarerRegistration
     private function saveStep15($request) {
 
         $this->validate($request,[
-            'description_yourself' => 'required|string:1024',
-            'sentence_yourself' => 'required|string:250',
+            'description_yourself' => 'required|string|max:1000',
+            'sentence_yourself' => 'required|string|max:250',
         ]);
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
@@ -556,10 +556,10 @@ class CarerRegistration
 
         //dd($request->all());
         $this->validate($request,[
-            'name' => 'required|string:128',
-            'job_title' => 'required|string:128',
-            'relationship' => 'required|string:128',
-            'phone' => 'required|string:64',
+            'name' => 'required|string|max:120',
+            'job_title' => 'required|string|max:120',
+            'relationship' => 'required|string|max:120',
+            'phone' => 'required|string|max:60',
             'email' => 'required|email',
         ]);
 
@@ -594,7 +594,7 @@ class CarerRegistration
     private function saveStep20($request) {
         $this->validate($request,[
             'have_questions' => 'nullable|in:"Yes","No"',
-            'questions' => 'nullable|string:1024',
+            'questions' => 'nullable|string|max:1024',
         ]);
 
 
