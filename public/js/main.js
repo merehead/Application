@@ -416,10 +416,10 @@ $(document).ready(function () {
         $(idForm).find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
         $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
 
-        console.log(idLoadFiles)
         $(idLoadFiles).find('.pickfiles').attr("disabled", false);
-        $(idLoadFiles).find('.pickfiles-delete').attr('style', 'display: block');
+        // $(idLoadFiles).find('.pickfiles-delete').attr('style', 'display: block');
 
+        console.log( $(idLoadFiles).find('.pickfiles-delete') )
 
         $(that).hide();
         $(that).parent().find('button.hidden').removeClass('hidden');
@@ -844,7 +844,7 @@ $(document).ready(function () {
           var c = 0
           index[1].map((index) => {
             var data = {
-              type_value: c > 0 ? (index.type + c) : index.type,
+              type_value: c > 0 ? (index.type.toLowerCase() + c) : index.type.toLowerCase(),
               id: index.id,
               type_file_name: index.file_name.split('.')[1]
             }
@@ -852,6 +852,8 @@ $(document).ready(function () {
             arrTypeAndID.push(data)
           })
         })
+
+        console.log(arrTypeAndID)
 
         arrTypeAndID.map((index) => {
           if(wordFileType.indexOf(index.type_file_name) !== -1){
@@ -863,6 +865,7 @@ $(document).ready(function () {
           }
           $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
           $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id)
+          $('#'+index.type_value+'').parent().parent().find('.addInfo__input').prop( "disabled", false )
         })
       })
     }

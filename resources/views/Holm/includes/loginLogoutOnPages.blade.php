@@ -17,6 +17,8 @@
         @else
 
             @if(Auth::user()->isReregistrationCompleted())
+
+
                 <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-settings' }}" class="registeredCarer">
                     <div class="profilePhoto registeredCarer__img">
                         <img src="./img/no_photo.png" alt="">
@@ -31,29 +33,44 @@
                   </span>
                 </a>
             @else
+
+
+
                 <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-registration' }}"
                    class="registeredCarer">
-                    {{--            <div class="profilePhoto registeredCarer__img">
-                                    <img src="./img/no_photo.png" alt="">
-                                </div>--}}
                     <h2 class="profileName" style="padding-left:45px; font-size: 70%">continue sign up</h2>
                 </a>
+
+
+
+
+
             @endif
 
         @endif
 
         <div class="dropdownUser__list">
 
-            @if(!Auth::user()->isCarer() && !Auth::user()->isAdmin())
 
 
-                @if(count(Auth::user()->userPurchaserProfile->serviceUsers))
+
+            @if(!Auth::user()->isCarer() )
+
+
+
+
+
+                @if(count(Auth::user()->userPurchaserProfile) && count(Auth::user()->userPurchaserProfile->serviceUsers))
+
+
 
                     @foreach(Auth::user()->userPurchaserProfile->serviceUsers as $serviceUser)
 
                         @if(strlen($serviceUser->first_name)>0)
 
-                            <a href="{{route('ServiceUserRegistration',['id'=>$serviceUser->id])}}"
+                            <a href="{{ $serviceUser->registration_progress!='61'
+                                ? route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUser->id])
+                                : route('ServiceUserSetting',['id'=>$serviceUser->id])}}"
                                class="dropdownUser__item">
                                 <div class="profilePhoto dropdownUser__img">
                                     <img src="./img/no_photo.png" alt="">
@@ -87,7 +104,13 @@
 
 
     </div>
+
+
+
 @else
+
+
+
     <div class="loginBox">
         <a href="/login" class=" centeredLink loginBox__link"
            data-toggle="modal" data-target="#login"
