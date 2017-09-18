@@ -135,7 +135,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
 
             </select>--}}
 
-            {!! Form::select('work_with_pets',['Yes'=>'Yes','No'=>'No','It depends'=>'It depends'],
+            {!! Form::select('work_with_pets',['Yes'=>'Yes','No'=>'No','It Depends'=>'It Depends'],
 null,['id'=>'depend-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
 
         </div>
