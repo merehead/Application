@@ -18,8 +18,8 @@ class AddCompanionshipDetailsToServUserProfile extends Migration
     public function down()
     {
         Schema::table('service_users_profiles', function($table) {
-            $table->string      ('companionship_interaction_details'           , 256)->nullable();
-            $table->string      ('companionship_visit_details'                 , 256)->nullable();
+            $table->dropColumn('companionship_interaction_details');
+            $table->dropColumn('companionship_visit_details');
         });
     }
 }
