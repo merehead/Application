@@ -417,9 +417,6 @@ $(document).ready(function () {
         $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
 
         $(idLoadFiles).find('.pickfiles').attr("disabled", false);
-        // $(idLoadFiles).find('.pickfiles-delete').attr('style', 'display: block');
-
-        console.log( $(idLoadFiles).find('.pickfiles-delete') )
 
         $(that).hide();
         $(that).parent().find('button.hidden').removeClass('hidden');
@@ -435,9 +432,9 @@ $(document).ready(function () {
         var that = $(this);
         var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
         var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');
+
         $(idLoadFiles).find('.pickfiles').attr("disabled", true);
 
-        $(idLoadFiles).find('.pickfiles-delete').attr('style', 'display: none')
         that.button('loading');
 
         if(arrFiles.length > 0){
@@ -471,7 +468,7 @@ $(document).ready(function () {
             formdata.append('chunk', chunk)
             formdata.append('chunks', chunks)
             formdata.append('title', file.title)
-            formdata.append('type', file.type_value)
+            formdata.append('type', file.type_value.split('-')[0])
             formdata.append('file', fileSend)
             chunk += 1
             axios.post(
@@ -514,7 +511,8 @@ $(document).ready(function () {
         }
 
         return false;
-    });
+    })
+
     $('.passStrength__bar').css('width','5%');
     $('.passStrength__bar').css('background','red');
     $('.passStrength__bar').css('color','red');
@@ -556,6 +554,7 @@ $(document).ready(function () {
     var arrLocalStorage = []
     var arrForDeleteID = []
     var file
+    var file_profile_photo = {}
     var getlocalStorageData = JSON.parse(localStorage.getItem('files_id'))
 
     var fileTypes = [
@@ -598,10 +597,13 @@ $(document).ready(function () {
     }
 
     $('.addInfo__input').change(function () {
+      var id = $(this).parent().parent().find('.pickfiles_img').attr('id')
       var input_name = $(this).attr('name')
       var input_val = $("input[name="+input_name+"]").val()
+
       arrFiles.map((index) => {
-        if(index.type_value === input_name){
+        if(index.unique_type === id){
+          console.log(index)
           index.title = input_val
         }
       })
@@ -643,21 +645,21 @@ $(document).ready(function () {
         })
       }else{
         pickfilesDelete(_this)
-        console.log(arrFiles, input_name)
         arrFiles = arrFiles.filter((index) => {
-          if(index.inique_type !== input_name){
+          if(index.unique_type !== input_name){
             return index
           }
         })
-        console.log(arrFiles)
       }
     })
 
     $('.pickfiles').on('change', function() {
-      var input_val = $(this).parent().parent().find('.addInfo__input').val('')
 
+      var input_val = $(this).parent().parent().find('.addInfo__input').val('')
       $(this).parent().parent().find('.addInfo__input').prop( "disabled", false)
+      $(this).parent().parent().find('.addInfo__input').attr( "readonly", false )
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
+      var input_id = $(this).parent().parent().find('.addInfo__input').attr('name')
       var pickfiles_img_id = $(this).parent().find('.pickfiles_img').attr('id')
       var deleteID = $(this).parent().find('.pickfiles-delete').attr('id')
 
@@ -667,6 +669,7 @@ $(document).ready(function () {
       reader.addEventListener("load", () => {
         $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
         $(this).parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
+        file = reader.result
       }, false)
 
       if (fileTypes.indexOf(file.type) !== -1) {
@@ -694,133 +697,157 @@ $(document).ready(function () {
       }
 
       file.type_value = input_name
-      file.inique_type = pickfiles_img_id
+      file.unique_type = pickfiles_img_id
 
       arrFiles = arrFiles.filter((index) => {
-        if(index.inique_type !== pickfiles_img_id){
+        if(index.unique_type !== pickfiles_img_id){
           return index
         }
       })
 
       arrFiles.push(file)
-
       console.log(arrFiles)
-      console.log(arrForDeleteIDProfile)
-
       $(this).parent().find('.add__comment--smaller').html('')
       $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
+    })
+
+    $('.pickfiles_profile_photo').on('change', function () {
+
+      var input_val = $(this).parent().parent().find('.addInfo__input').val('')
+      var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
+
+      var val = $(this)[0].files[0]
+
+      var reader  = new FileReader()
+      reader.addEventListener("load", () => {
+        $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
+        $(this).parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
+
+        file_profile_photo.image = reader.result
+
+        arrFiles.push(file_profile_photo)
+        console.log(arrFiles)
+      }, false)
+
+      reader.readAsDataURL(val)
+      $(this).parent().find('.add__comment--smaller').html('')
+      $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
+    })
+
+    $('.upload_files_profile_photo').on('click', function (e) {
+      axios.post(
+        '/profile-photo',
+        arrFiles[0],
+      ).then(function (response) {
+        console.log(response)
+      })
     })
 
     $('.upload_files').on('click', function (e) {
       e.preventDefault()
 
-      if(arrFiles.length > 0){
-        $(this).html('uploading..')
-        var fileChunk = 0
-        file = arrFiles[fileChunk]
-        var sliceSize = 524288 // 512 kib
-        var chunks = Math.ceil(file.size / sliceSize)
-        var chunk = 0
-        var start = 0
-        var end = sliceSize
+      console.log(arrFiles)
 
-        function loop() {
-          var blob = file.slice(start, end)
-          if(blob.size !== 0){
-            if(blob.size === sliceSize){
-              send(blob)
-              start += sliceSize
-              end += blob.size
-            }else{
-              send(blob)
-              start += sliceSize
-              end += blob.size
-            }
-          }
-        }
-        loop()
-
-        function send(fileSend) {
-
-          var formdata = new FormData()
-          formdata.append('name', file.name)
-          formdata.append('chunk', chunk)
-          formdata.append('chunks', chunks)
-          formdata.append('title', file.title)
-          formdata.append('type', file.type_value)
-          formdata.append('file', fileSend)
-          chunk += 1
-          axios.post(
-            '/document/upload',
-            formdata,
-          ).then(function (response) {
-
-            if(response.data.result){
-              var data = {
-                id: response.data.result,
-                type_value: arrFiles[fileChunk].type_value
-              }
-
-              var getls = JSON.parse(localStorage.getItem('files_id'))
-              if(getls){
-                getls.push(data)
-                localStorage.setItem('files_id', JSON.stringify(getls))
-              }else{
-                arrLocalStorage.push(data)
-                localStorage.setItem('files_id', JSON.stringify(arrLocalStorage))
-              }
-            }
-
-            if(chunk === chunks){
-              if(arrFiles[fileChunk + 1]){
-                fileChunk += 1
-                file = arrFiles[fileChunk]
-                chunks = Math.ceil(file.size / sliceSize)
-                chunk = 0
-                start = 0
-                end = sliceSize
-                loop()
-              }else{
-                // $('.add__comment--smaller').html('<p>Choose a File or Drag Here</p><span>Size limit: 10 MB</span>')
-                // $('.pickfiles-delete').attr('style', 'display: none')
-                // $('.fa-plus-circle').attr('style', '')
-                // $('.pickfiles_img').attr('style', '')
-                // $('.addInfo__input').prop( "disabled", true )
-                // $('.addInfo__input').val('')
-                $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
-                $('.pickfiles').val('')
-                arrFiles = []
-
-                console.log(arrForDeleteID)
-                if(arrForDeleteID.length > 0){
-                  var getls = JSON.parse(localStorage.getItem('files_id'))
-                  axios.delete(
-                    '/api/document/'+arrForDeleteID+'/',
-                  ).then( (response) => {
-                    arrFiles = getls.filter((index) => {
-                      if(arrForDeleteID.indexOf(index.id.id) === -1){
-                        return index
-                      }
-                    })
-                    localStorage.setItem('files_id', JSON.stringify(arrFiles))
-                    document.getElementById('step').submit()
-                  })
-                }else{
-                  document.getElementById('step').submit()
-                }
-              }
-            }else{
-              loop()
-            }
-          })
-          .catch(function (error) {
-            $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
-            console.log(error)
-          })
-        }
-      }else{
-        document.getElementById('step').submit()
-      }
+      // if(arrFiles.length > 0){
+      //   $(this).html('uploading..')
+      //   var fileChunk = 0
+      //   file = arrFiles[fileChunk]
+      //   var sliceSize = 524288 // 512 kib
+      //   var chunks = Math.ceil(file.size / sliceSize)
+      //   var chunk = 0
+      //   var start = 0
+      //   var end = sliceSize
+      //
+      //   function loop() {
+      //     var blob = file.slice(start, end)
+      //     if(blob.size !== 0){
+      //       if(blob.size === sliceSize){
+      //         send(blob)
+      //         start += sliceSize
+      //         end += blob.size
+      //       }else{
+      //         send(blob)
+      //         start += sliceSize
+      //         end += blob.size
+      //       }
+      //     }
+      //   }
+      //   loop()
+      //
+      //   function send(fileSend) {
+      //
+      //     var formdata = new FormData()
+      //     formdata.append('name', file.name)
+      //     formdata.append('chunk', chunk)
+      //     formdata.append('chunks', chunks)
+      //     formdata.append('title', file.title)
+      //     formdata.append('type', file.type_value)
+      //     formdata.append('file', fileSend)
+      //     chunk += 1
+      //     axios.post(
+      //       '/document/upload',
+      //       formdata,
+      //     ).then(function (response) {
+      //
+      //       if(response.data.result){
+      //         var data = {
+      //           id: response.data.result,
+      //           type_value: arrFiles[fileChunk].type_value
+      //         }
+      //
+      //         var getls = JSON.parse(localStorage.getItem('files_id'))
+      //         if(getls){
+      //           getls.push(data)
+      //           localStorage.setItem('files_id', JSON.stringify(getls))
+      //         }else{
+      //           arrLocalStorage.push(data)
+      //           localStorage.setItem('files_id', JSON.stringify(arrLocalStorage))
+      //         }
+      //       }
+      //
+      //       if(chunk === chunks){
+      //         if(arrFiles[fileChunk + 1]){
+      //           fileChunk += 1
+      //           file = arrFiles[fileChunk]
+      //           chunks = Math.ceil(file.size / sliceSize)
+      //           chunk = 0
+      //           start = 0
+      //           end = sliceSize
+      //           loop()
+      //         }else{
+      //           $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
+      //           $('.pickfiles').val('')
+      //           arrFiles = []
+      //
+      //           if(arrForDeleteID.length > 0){
+      //             var getls = JSON.parse(localStorage.getItem('files_id'))
+      //             axios.delete(
+      //               '/api/document/'+arrForDeleteID+'/',
+      //             ).then( (response) => {
+      //               arrFiles = getls.filter((index) => {
+      //                 if(arrForDeleteID.indexOf(index.id.id) === -1){
+      //                   return index
+      //                 }
+      //               })
+      //               localStorage.setItem('files_id', JSON.stringify(arrFiles))
+      //               document.getElementById('step').submit()
+      //             })
+      //           }else{
+      //             document.getElementById('step').submit()
+      //           }
+      //         }
+      //       }else{
+      //         loop()
+      //       }
+      //     })
+      //     .catch(function (error) {
+      //       $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
+      //       console.log(error)
+      //     })
+      //   }
+      // }else{
+      //   document.getElementById('step').submit()
+      // }
     });
 
     $('.searchContainer__input').on('change',function (e) {
@@ -840,11 +867,14 @@ $(document).ready(function () {
       ).then( (response) => {
         var newDoc = Object.entries(response.data.data.documents)
 
+        console.log(newDoc)
+
         newDoc.map((index) => {
           var c = 0
           index[1].map((index) => {
             var data = {
               type_value: c > 0 ? (index.type.toLowerCase() + c) : index.type.toLowerCase(),
+              title: index.title !== 'undefined' ? index.title : '',
               id: index.id,
               type_file_name: index.file_name.split('.')[1]
             }
@@ -852,8 +882,6 @@ $(document).ready(function () {
             arrTypeAndID.push(data)
           })
         })
-
-        console.log(arrTypeAndID)
 
         arrTypeAndID.map((index) => {
           if(wordFileType.indexOf(index.type_file_name) !== -1){
@@ -865,7 +893,9 @@ $(document).ready(function () {
           }
           $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
           $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id)
-          $('#'+index.type_value+'').parent().parent().find('.addInfo__input').prop( "disabled", false )
+          $('#'+index.type_value+'').parent().parent().find('.addInfo__input').attr( "disabled", false )
+          $('#'+index.type_value+'').parent().parent().find('.addInfo__input').attr( "readonly", false )
+          $('#'+index.type_value+'').parent().parent().find('.addInfo__input').val(index.title)
         })
       })
     }

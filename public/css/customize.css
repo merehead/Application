@@ -52,8 +52,15 @@ select#workingTimes {
     height: 1px;
     background: #dee1e3;
 }
+.profileRow_qualifications{
+  justify-content: space-between;
+}
+.profileRow_qualifications .profileField{
+  margin-right: 0;
+}
 
-.pickfiles{
+.pickfiles,
+.pickfiles_profile_photo{
   position: absolute;
   left: 0;
   top: 0;

@@ -21,11 +21,11 @@
                           Please upload a photo of yourself to use as part of your profile.
                         </h2>
                         <div class="addContainer">
-                          <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                          <input class="pickfiles_profile_photo" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                           <span class="pickfiles-delete">X</span>
                           <div class="pickfiles_img"></div>
 
-                          <div id="carer_profile_photo" class="pickfiles_img"></div>
+                          <div id="profile_photo" class="pickfiles_img"></div>
                           <a href="#" class="add add--moreHeight">
                               <i class="fa fa-plus-circle"></i>
                               <div class="add__comment add__comment--smaller">
@@ -35,7 +35,7 @@
                           </a>
                         </div>
                         <div style="display: none" class="addInfo">
-                            <input disabled type="text" name="carer_profile_photo" class="addInfo__input" placeholder="Name" >
+                            <input disabled type="text" name="profile_photo" class="addInfo__input" placeholder="Name">
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
         </a>
     </div>
 
-    <a href="#" id="upload_files" class="registrationBtns__item upload_files">
+    <a href="#" id="upload_files" class="registrationBtns__item upload_files_profile_photo">
         next step
         <i class="fa fa-arrow-right"></i>
     </a>
