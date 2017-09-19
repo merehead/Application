@@ -53,11 +53,14 @@ select#workingTimes {
     height: 1px;
     background: #dee1e3;
 }
+.profileRow{
+  /*justify-content: space-between;*/
+}
 .profileRow_qualifications{
   justify-content: space-between;
 }
-.profileRow_qualifications .profileField{
-  margin-right: 0;
+#carerPrivateAvailability .profileField{
+  margin-right: 2.3%;
 }
 
 .pickfiles,
