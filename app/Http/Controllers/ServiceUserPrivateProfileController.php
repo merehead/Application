@@ -74,7 +74,6 @@ class ServiceUserPrivateProfileController extends FrontController
     public function profile($serviceUserProfile)
     {
 
-
         //dd($serviceUserProfile);
 
         $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
@@ -98,6 +97,7 @@ class ServiceUserPrivateProfileController extends FrontController
             $this->vars = array_add($this->vars, 'user', $this->user);
 
             $this->vars = array_add($this->vars, 'carerProfile', $serviceUsersProfile);
+            $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
 
             $typeCare = AssistanceType::all();
             $this->vars = array_add($this->vars, 'typeCare', $typeCare);
@@ -112,6 +112,7 @@ class ServiceUserPrivateProfileController extends FrontController
 
         return $this->renderOutput();
     }
+
 
     public function update(Request $request, $serviceUserProfileID)
     {
@@ -174,7 +175,7 @@ class ServiceUserPrivateProfileController extends FrontController
         }
 
         if ($input['stage'] == 'oneLineAbove') {
-            $this->validate($request,[
+            $this->validate($request, [
                 'one_line_about' => 'nullable|string|max:250',
             ]);
 
@@ -187,7 +188,7 @@ class ServiceUserPrivateProfileController extends FrontController
         }
 
         if ($input['stage'] == 'languages') {
-            $this->validate($request,[
+            $this->validate($request, [
                 'languages' => 'required|array',
                 'other_languages' => 'nullable|string|max:200',
             ]);
@@ -196,7 +197,7 @@ class ServiceUserPrivateProfileController extends FrontController
 
             $languages = $request->input('languages');
             $serviceUsersProfile->Languages()->sync(array_keys($languages));
-            $serviceUsersProfile->other_languages  = $request->input('other_languages');
+            $serviceUsersProfile->other_languages = $request->input('other_languages');
 
             $serviceUsersProfile->save();
             unset($serviceUsersProfile);
@@ -204,7 +205,7 @@ class ServiceUserPrivateProfileController extends FrontController
 
 
         if ($input['stage'] == 'home') {
-            $this->validate($request,[
+            $this->validate($request, [
                 'kind_of_building' => 'required|string|max:25',
                 'lift_available' => 'nullable|in:"Yes","No"',
                 'floor_id' => 'nullable|integer',
@@ -257,9 +258,8 @@ class ServiceUserPrivateProfileController extends FrontController
         }
 
 
-
         if ($input['stage'] == 'nightTime') {
-            $this->validate($request,[
+            $this->validate($request, [
                 'religious_beliefs' => 'nullable|in:"Yes","No","Sometimes"',
                 'religious_beliefs_details' => 'nullable|string|max:250',
                 'particular_likes' => 'nullable|string|max:16',
@@ -287,9 +287,8 @@ class ServiceUserPrivateProfileController extends FrontController
         }
 
 
-
         if ($input['stage'] == 'other') {
-            $this->validate($request,[
+            $this->validate($request, [
                 'religious_beliefs' => 'nullable|in:"Yes","No","Sometimes"',
                 'religious_beliefs_details' => 'nullable|string|max:500',
                 'particular_likes' => 'nullable|in:"Yes","No","Sometimes"',
@@ -306,25 +305,25 @@ class ServiceUserPrivateProfileController extends FrontController
 
             $depart = "#nightTime";
 
-            if (isset($input['religious_beliefs'])) $serviceUsersProfile->          religious_beliefs = $input['religious_beliefs'];
-            if (isset($input['religious_beliefs_details'])) $serviceUsersProfile->  religious_beliefs_details = $input['religious_beliefs_details'];
-            if (isset($input['particular_likes'])) $serviceUsersProfile->           particular_likes = $input['particular_likes'];
-            if (isset($input['particular_likes_details'])) $serviceUsersProfile->   particular_likes_details = $input['particular_likes_details'];
-            if (isset($input['multiple_carers'])) $serviceUsersProfile->            multiple_carers = $input['multiple_carers'];
-            if (isset($input['multiple_carers_details'])) $serviceUsersProfile->    multiple_carers_details = $input['multiple_carers_details'];
-            if (isset($input['socialising_with_other'])) $serviceUsersProfile->     socialising_with_other = $input['socialising_with_other'];
+            if (isset($input['religious_beliefs'])) $serviceUsersProfile->religious_beliefs = $input['religious_beliefs'];
+            if (isset($input['religious_beliefs_details'])) $serviceUsersProfile->religious_beliefs_details = $input['religious_beliefs_details'];
+            if (isset($input['particular_likes'])) $serviceUsersProfile->particular_likes = $input['particular_likes'];
+            if (isset($input['particular_likes_details'])) $serviceUsersProfile->particular_likes_details = $input['particular_likes_details'];
+            if (isset($input['multiple_carers'])) $serviceUsersProfile->multiple_carers = $input['multiple_carers'];
+            if (isset($input['multiple_carers_details'])) $serviceUsersProfile->multiple_carers_details = $input['multiple_carers_details'];
+            if (isset($input['socialising_with_other'])) $serviceUsersProfile->socialising_with_other = $input['socialising_with_other'];
             if (isset($input['socialising_with_other_details'])) $serviceUsersProfile->socialising_with_other_details = $input['socialising_with_other_details'];
-            if (isset($input['interests_hobbies'])) $serviceUsersProfile->          interests_hobbies = $input['interests_hobbies'];
-            if (isset($input['interests_hobbies_details'])) $serviceUsersProfile->  interests_hobbies_details = $input['interests_hobbies_details'];
-            if (isset($input['we_missed'])) $serviceUsersProfile->                  we_missed = $input['we_missed'];
-            if (isset($input['we_missed_details'])) $serviceUsersProfile->          we_missed_details = $input['we_missed_details'];
+            if (isset($input['interests_hobbies'])) $serviceUsersProfile->interests_hobbies = $input['interests_hobbies'];
+            if (isset($input['interests_hobbies_details'])) $serviceUsersProfile->interests_hobbies_details = $input['interests_hobbies_details'];
+            if (isset($input['we_missed'])) $serviceUsersProfile->we_missed = $input['we_missed'];
+            if (isset($input['we_missed_details'])) $serviceUsersProfile->we_missed_details = $input['we_missed_details'];
 
             $serviceUsersProfile->save();
             unset($serviceUsersProfile);
 
         }
         if ($input['stage'] == 'behaviour') {
-            $this->validate($request,[
+            $this->validate($request, [
                 'behaviour' => 'required|array',
                 'other_behaviour' => 'nullable|string|max:200',
                 'consent_details' => 'nullable|string|max:500',
@@ -334,8 +333,8 @@ class ServiceUserPrivateProfileController extends FrontController
 
             $behaviour = $request->input('behaviour');
             $serviceUsersProfile->Behaviours()->sync(array_keys($behaviour));
-            $serviceUsersProfile->other_behaviour  = $request->input('other_behaviour');
-            $serviceUsersProfile->consent_details  = $request->input('consent_details');
+            $serviceUsersProfile->other_behaviour = $request->input('other_behaviour');
+            $serviceUsersProfile->consent_details = $request->input('consent_details');
 
             $serviceUsersProfile->save();
             unset($serviceUsersProfile);
@@ -346,7 +345,7 @@ class ServiceUserPrivateProfileController extends FrontController
 
             //dd($input);
 
-            $this->validate($request,[
+            $this->validate($request, [
                 'typeService' => 'required|array',
                 'checkSrvCare' => 'required|array',
             ]);
@@ -366,6 +365,77 @@ class ServiceUserPrivateProfileController extends FrontController
 
 
         return Redirect::to(URL::previous() . $depart);
+
+    }
+    public function booking($serviceUserProfile)
+    {
+
+        $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
+        $this->title = 'Holm Care';
+
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
+        $serviceUsersProfile = ServiceUsersProfile::findOrFail($serviceUserProfile);
+
+
+        $this->vars = array_add($this->vars, 'user', $this->user);
+
+        $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
+
+        $typeCare = AssistanceType::all();
+        $this->vars = array_add($this->vars, 'typeCare', $typeCare);
+        $workingTimes = WorkingTime::all();
+        $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
+        $languages = Language::all();
+        $this->vars = array_add($this->vars, 'languages', $languages);
+
+
+        $this->content = view(config('settings.frontTheme') . '.serviceUserProfiles.Booking.BookingTaball')->with($this->vars)
+            ->render();
+
+        return $this->renderOutput();
+    }
+
+    public function bookingFilter($serviceUserProfile, $status)
+    {
+
+        $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
+        $this->title = 'Holm Care';
+
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
+        $serviceUsersProfile = ServiceUsersProfile::findOrFail($serviceUserProfile);
+
+
+        $this->vars = array_add($this->vars, 'user', $this->user);
+
+        $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
+
+        $typeCare = AssistanceType::all();
+        $this->vars = array_add($this->vars, 'typeCare', $typeCare);
+        $workingTimes = WorkingTime::all();
+        $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
+        $languages = Language::all();
+        $this->vars = array_add($this->vars, 'languages', $languages);
+
+
+        $this->content = view(config('settings.frontTheme') . '.serviceUserProfiles.Booking.BookingTab'.$status)->with($this->vars)
+            ->render();
+
+
+        return $this->renderOutput();
 
     }
 }

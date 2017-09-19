@@ -49,6 +49,7 @@ Route::post('carer-registration','CarerRegistrationController@update')->name('Ca
 
 
 
+/*
 //Route::get('git ', 'PurchaserController@index')->name('purchaserSettings');
 
 Route::get('/purchaser-settings', 'PurchaserController@index')->name('purchaserSettings');
@@ -56,6 +57,12 @@ Route::get('/purchaser-settings', 'PurchaserController@index')->name('purchaserS
 
 Route::post('/purchaser-settings','PurchaserController@update')->name('purchaserSettingsPost');
 
+*/
+
+Route::get('/purchaser-settings', 'PurchaserController@index')->name('purchaserSettings');
+Route::post('/purchaser-settings','PurchaserController@update')->name('purchaserSettingsPost');
+Route::get('/purchaser-settings/booking', 'PurchaserController@booking')->name('purchaserBooking'); //synonym for ImCarerPage
+Route::get('/purchaser-settings/booking/{status}', 'PurchaserController@bookingFilter')->name('purchaserBookingStatus'); //synonym for ImCarerPage
 
 
 Route::get('/purchaser-registration/','PurchaserRegistrationController@index')->name('PurchaserRegistration');
@@ -70,6 +77,8 @@ Route::get('/serviceUser-settings/{serviceUserProfile}','ServiceUserPrivateProfi
 Route::get('/serviceUser/profile/{serviceUserProfile}','ServiceUserPrivateProfileController@profile')->name('ServiceUserProfilePublic');
 
 Route::post('/serviceUser-settings/{serviceUserProfile}','ServiceUserPrivateProfileController@update')->name('ServiceUserSettingPost');
+Route::get('/serviceUser-settings/booking/{serviceUserProfile}', 'ServiceUserPrivateProfileController@booking')->name('ServiceUserBooking'); //synonym for ImCarerPage
+Route::get('/serviceUser-settings/booking/{serviceUserProfile}/{status}', 'ServiceUserPrivateProfileController@bookingFilter')->name('ServiceUserBookingStatus'); //synonym for ImCarerPage
 
 
 

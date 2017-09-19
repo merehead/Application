@@ -41,11 +41,23 @@
                 </h2>
 
                 {!! Form::select('criminal_conviction',['Old'=>'Yes, but they are very old, and for a minor offence.','Yes'=>'Yes','No'=>'Do not have criminal convictions'],
-null,['class'=>'profileField__select','placeholder'=>'Please select','readonly','data-edit'=>'false']) !!}
+null,['class'=>'profileField__select','placeholder'=>'Please select','readonly','id'=>'criminal_detail','data-edit'=>'false']) !!}
 
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Do not have criminal convictions</option>
                 </select>--}}
+
+            </div>
+            <div class="profileField profileField--full-width criminal_detail nhide">
+                <h2 class="profileField__title ordinaryTitle">
+                <span class="ordinaryTitle__text ">
+                Details
+                     </span></h2>
+                <div class="inputWrap criminal_detail">
+
+                    {!! Form::textarea('criminal_detail',null,['class'=>'formArea','placeholder'=>' Detailed response']) !!}
+
+                </div>
             </div>
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
@@ -104,7 +116,8 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','readonly',
                 </span>
 
                 </h2>
-                @if($carerProfile->date_sertificate === "01/01/1970")
+
+                @if($carerProfile->date_sertificate == "01/01/1970")
                     <input name="date_certificate" id="datepicker_date_sertificate" class="profileField__input"
                            placeholder="Valid until date" type="text">
                 @else

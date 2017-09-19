@@ -366,6 +366,38 @@ $(document).ready(function () {
             $(".car-block").hide();
         }
     });
+    if($("#criminal_detail").val() == 'Old') {
+        $(".criminal_detail").show();
+    }else{
+        $(".criminal_detail").hide();
+    }
+    $("#criminal_detail").on('change',function(){
+        if($("#criminal_detail").val() == 'Old') {
+            $(".criminal_detail").show();
+        }else{
+            $(".criminal_detail").hide();
+        }
+    });
+
+    $('a.additionalTime').on('click',function(e){
+        e.preventDefault();
+        $('.datetime').last().after($('.datetime').last().clone());
+        $('.checktime').last().after($('.checktime').last().clone());
+        return false;;
+    });
+
+    if($("#checkL12").is(':checked')) {
+        $(".language_additional").show();
+    }else{
+        $(".language_additional").hide();
+    }
+    $("#checkL12").on('click',function(){
+        if($("#checkL12").is(':checked')) {
+            $(".language_additional").show();
+        }else{
+            $(".language_additional").hide();
+        }
+    });
 
     /*--------------слайдер I am carer page------------*/
     if ($('div').is('.carerBanner')) {
