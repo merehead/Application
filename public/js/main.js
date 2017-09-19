@@ -343,14 +343,20 @@ $(document).ready(function () {
             $('.hiddenSort').addClass('hiddenSort--visible');
         }
     });
-    if($("#depend-if").val() == 'It Depends') {$(".depend_hiding").show( )}
+    if($("#depend-if").val() == 'It Depends') {$(".depend_hiding").show()}
 
     $("#depend-if").on('change',function(){
         if($(this).val() !="0")
         {
-            if($(this).val() == 'Yes') {$(".depend_hiding").hide( )}
-            if($(this).val() == 'No') {$(".depend_hiding").hide( )}
-            if($(this).val() == 'It Depends') {$(".depend_hiding").show( )}
+            if($(this).val() == 'Yes') {
+                //$(".depend_hiding").hide();
+            }
+            if($(this).val() == 'No') {
+                $(".depend_hiding").hide();
+            }
+            if($(this).val() == 'It Depends') {
+                $(".depend_hiding").show();
+            }
         }
     });
 
@@ -620,14 +626,17 @@ $(document).ready(function () {
         $('select[name="have_car"]').val('');
         $('select[name="have_car"]').parent().parent().hide()
     }
-    $('select[name="driving_licence"]').on('change', function (e) {
+
+    $('select[name="driving_licence"]').on('change', function () {
         if ($(this).val() == 'Yes') {
             {
                 $('select[name="have_car"]').parent().parent().show()
             }
         } else {
-            $('select[name="have_car"]').val('');
-            $('select[name="have_car"]').parent().parent().hide()
+            $('select[name="have_car"]').val('No');
+            $('select[name="have_car"]').parent().parent().hide();
+            $('select[name="use_car"]').parent().parent().hide();
+            $('select[name="use_car"]').val('No');
         }
     });
 

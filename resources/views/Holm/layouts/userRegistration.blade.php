@@ -73,8 +73,8 @@
             dateFormat: "dd/mm/yy",
             showAnim: "slideDown",
             minDate: "-4Y",
-            maxDate: "+20Y",
-            yearRange: "-2:+10"
+            maxDate: "+0D",
+            yearRange: "-2:0"
         });
     });
 
