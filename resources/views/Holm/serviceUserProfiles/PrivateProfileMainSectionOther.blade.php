@@ -1,14 +1,16 @@
 <div class="borderContainer">
-    <div class="profileCategory">
-        <h2 class="profileCategory__title">OTHER</h2>
-        <a href="#" class="profileCategory__link">
-            <i class="fa fa-pencil"></i>
-        </a>
+    <div id="other-div" class="borderContainer">
+        <div class="profileCategory">
+            <h2 class="profileCategory__title">OTHER</h2>
+            <a href="#" class="btn btn-info btn-edit"><span class="fa fa-pencil" data-id="other"></span> EDIT</a>
+            <button type="button" class="btn btn-success hidden" id="load" data-loading-text="<i class='fa fa-spinner
+        fa-spin '></i> Processing"><i class="fa fa-floppy-o"></i>  Save</button>
+        </div>
     </div>
-
-    {!! Form::model($serviceUsersProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateLanguages']) !!}
-    {!! Form::hidden('id',$serviceUsersProfile->id) !!}
+    {!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'other']) !!}
+    {!! Form::hidden('id',null) !!}
     {!! Form::hidden('stage','other') !!}
+    {{Form::submit('Click Me!')}}
 
     <div class="profileRow">
         <div class="profileField">
