@@ -22,10 +22,10 @@
                     <div class="checbox_wrap">
 
 
-                        {!! Form::checkbox('workingTime['.$serviceUserCondition->id.']', null,
+                        {!! Form::checkbox('serviceUserCondition['.$serviceUserCondition->id.']', null,
                         ($serviceUsersProfile->ServiceUserConditions->contains('id', $serviceUserCondition->id)? 1 : null),
-                        array('placeholder'=>'1','class' => 'checkboxNew checkHealthCondition','id'=>'boxf'.$serviceUserCondition->id)) !!}
-                        <label for="boxf{{$serviceUserCondition->id}}"><span>{{$serviceUserCondition->name}}</span></label>
+                        array('placeholder'=>'1','class' => 'checkboxNew checkHealthCondition','id'=>'serviceUserCondition'.$serviceUserCondition->id)) !!}
+                        <label for="serviceUserCondition{{$serviceUserCondition->id}}"><span>{{$serviceUserCondition->name}}</span></label>
 
                     </div>
                 </div>
@@ -303,7 +303,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('in_medication_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::text('in_medication_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('in_medication_detail'))
                 <span class="help-block"><strong>{{ $errors->first('in_medication_detail') }}</strong></span>
             @endif
@@ -366,7 +366,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('skin_scores_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::text('skin_scores_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('skin_scores_detail'))
                 <span class="help-block"><strong>{{ $errors->first('skin_scores_detail') }}</strong></span>
             @endif
@@ -389,7 +389,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('dressings_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::text('dressings_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('dressings_detail'))
                 <span class="help-block"><strong>{{ $errors->first('dressings_detail') }}</strong></span>
             @endif
@@ -557,7 +557,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('assistance_with_eating_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::text('assistance_with_eating_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('assistance_with_eating_detail'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_eating_detail') }}</strong></span>
             @endif
@@ -633,7 +633,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('dietary_requirements_interaction',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::text('dietary_requirements_interaction',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('dietary_requirements_interaction'))
                 <span class="help-block"><strong>{{ $errors->first('dietary_requirements_interaction') }}</strong></span>
             @endif
@@ -658,7 +658,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('special_dietary_requirements_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::text('special_dietary_requirements_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('special_dietary_requirements_detail'))
                 <span class="help-block"><strong>{{ $errors->first('special_dietary_requirements_detail') }}</strong></span>
             @endif
@@ -741,7 +741,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('assistance_getting_dressed_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::text('assistance_getting_dressed_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('assistance_getting_dressed_detail'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_getting_dressed_detail') }}</strong></span>
             @endif
@@ -767,7 +767,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('assistance_with_bathing_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::text('assistance_with_bathing_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('assistance_with_bathing_detail'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_bathing_detail') }}</strong></span>
             @endif
@@ -864,7 +864,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('kind_of_incontinence',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::text('kind_of_incontinence',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('kind_of_incontinence'))
                 <span class="help-block"><strong>{{ $errors->first('kind_of_incontinence') }}</strong></span>
             @endif
@@ -904,7 +904,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 The incontinence products are stored...    </span>
             </h2>
-            {!! Form::textarea('incontinence_products_stored',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::textarea('incontinence_products_stored',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('incontinence_products_stored'))
                 <span class="help-block"><strong>{{ $errors->first('incontinence_products_stored') }}</strong></span>
             @endif
