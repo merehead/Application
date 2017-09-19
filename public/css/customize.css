@@ -1,4 +1,6 @@
-
+*{
+  outline: none!important;
+}
 .help-block{
     font-size: 70%;
     color: red;
@@ -43,7 +45,9 @@ select#workingTimes {
 #sign_up_div {
     width: 200px;
 }
-
+.profilePhoto__ico{
+  display: none;
+}
 .faq__title:after {
     content: '';
     display: none;
@@ -53,11 +57,14 @@ select#workingTimes {
     height: 1px;
     background: #dee1e3;
 }
+.profileRow{
+  /*justify-content: space-between;*/
+}
 .profileRow_qualifications{
   justify-content: space-between;
 }
-.profileRow_qualifications .profileField{
-  margin-right: 0;
+#carerPrivateAvailability .profileField_q{
+  margin-right: 2.3%;
 }
 
 .pickfiles,
@@ -307,6 +314,6 @@ a.blogFilter__item.active {
 }
 
 .section_title p {
-    padding-bottom: 20px;
+    padding-bottom: 80px;
 }
 #boxG1{    margin-top: 4px;}

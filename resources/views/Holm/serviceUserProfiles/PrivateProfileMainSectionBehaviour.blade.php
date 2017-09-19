@@ -19,28 +19,28 @@
             <div class="checbox_wrap">
                 {!! Form::checkbox('behaviour['.$behaviour[4]->id.']', null,($serviceUsersProfile->Behaviours->contains('id', $behaviour[4]->id)? 1 : null),
 array('class' => 'checkboxNew','id'=>'behaviour'.$behaviour[4]->id)) !!}
-                <label for="checkL{{$behaviour[4]->id}}"> <span>{{$behaviour[4]->name}}</span></label>
+                <label for="behaviour{{$behaviour[4]->id}}"> <span>{{$behaviour[4]->name}}</span></label>
             </div>
         </div>
         <div class="profileField profileField--fourth">
             <div class="checbox_wrap">
                 {!! Form::checkbox('behaviour['.$behaviour[7]->id.']', null,($serviceUsersProfile->Behaviours->contains('id', $behaviour[7]->id)? 1 : null),
 array('class' => 'checkboxNew','id'=>'behaviour'.$behaviour[7]->id)) !!}
-                <label for="checkL{{$behaviour[7]->id}}"> <span>{{$behaviour[7]->name}}</span></label>
+                <label for="behaviour{{$behaviour[7]->id}}"> <span>{{$behaviour[7]->name}}</span></label>
             </div>
         </div>
         <div class="profileField profileField--fourth">
             <div class="checbox_wrap">
                 {!! Form::checkbox('behaviour['.$behaviour[5]->id.']', null,($serviceUsersProfile->Behaviours->contains('id', $behaviour[5]->id)? 1 : null),
 array('class' => 'checkboxNew','id'=>'behaviour'.$behaviour[5]->id)) !!}
-                <label for="checkL{{$behaviour[5]->id}}"> <span>{{$behaviour[5]->name}}</span></label>
+                <label for="behaviour{{$behaviour[5]->id}}"> <span>{{$behaviour[5]->name}}</span></label>
             </div>
         </div>
         <div class="profileField profileField--fourth">
             <div class="checbox_wrap">
                 {!! Form::checkbox('behaviour['.$behaviour[1]->id.']', null,($serviceUsersProfile->Behaviours->contains('id', $behaviour[1]->id)? 1 : null),
 array('class' => 'checkboxNew','id'=>'behaviour'.$behaviour[1]->id)) !!}
-                <label for="checkL{{$behaviour[1]->id}}"> <span>{{$behaviour[1]->name}}</span></label>
+                <label for="behaviour{{$behaviour[1]->id}}"> <span>{{$behaviour[1]->name}}</span></label>
             </div>
         </div>
     </div>
@@ -50,21 +50,21 @@ array('class' => 'checkboxNew','id'=>'behaviour'.$behaviour[1]->id)) !!}
             <div class="checbox_wrap">
                 {!! Form::checkbox('behaviour['.$behaviour[6]->id.']', null,($serviceUsersProfile->Behaviours->contains('id', $behaviour[6]->id)? 1 : null),
 array('class' => 'checkboxNew','id'=>'behaviour'.$behaviour[6]->id)) !!}
-                <label for="checkL{{$behaviour[6]->id}}"> <span>{{$behaviour[6]->name}}</span></label>
+                <label for="behaviour{{$behaviour[6]->id}}"> <span>{{$behaviour[6]->name}}</span></label>
             </div>
         </div>
         <div class="profileField profileField--fourth">
             <div class="checbox_wrap">
                 {!! Form::checkbox('behaviour['.$behaviour[2]->id.']', null,($serviceUsersProfile->Behaviours->contains('id', $behaviour[2]->id)? 1 : null),
 array('class' => 'checkboxNew','id'=>'behaviour'.$behaviour[2]->id)) !!}
-                <label for="checkL{{$behaviour[2]->id}}"> <span>{{$behaviour[2]->name}}</span></label>
+                <label for="behaviour{{$behaviour[2]->id}}"> <span>{{$behaviour[2]->name}}</span></label>
             </div>
         </div>
         <div class="profileField profileField--fourth">
             <div class="checbox_wrap">
                 {!! Form::checkbox('behaviour['.$behaviour[3]->id.']', null,($serviceUsersProfile->Behaviours->contains('id', $behaviour[3]->id)? 1 : null),
 array('class' => 'checkboxNew','id'=>'behaviour'.$behaviour[3]->id)) !!}
-                <label for="checkL{{$behaviour[3]->id}}"> <span>{{$behaviour[3]->name}}</span></label>
+                <label for="behaviour{{$behaviour[3]->id}}"> <span>{{$behaviour[3]->name}}</span></label>
             </div>
         </div>
 
