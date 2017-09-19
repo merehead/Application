@@ -30,7 +30,7 @@
     @if(strlen($serviceUsersProfile->other_languages))
         <div class="profileRow">
 
-            <div class="profileField profileField--two-thirds">
+            <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Other languages   </span>
