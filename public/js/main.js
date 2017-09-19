@@ -720,7 +720,6 @@ $(document).ready(function () {
       $(this).parent().parent().find('.addInfo__input').prop( "disabled", false)
       $(this).parent().parent().find('.addInfo__input').attr( "readonly", false )
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
-      var input_id = $(this).parent().parent().find('.addInfo__input').attr('name')
       var pickfiles_img_id = $(this).parent().find('.pickfiles_img').attr('id')
       var deleteID = $(this).parent().find('.pickfiles-delete').attr('id')
 
@@ -758,7 +757,11 @@ $(document).ready(function () {
       }
 
       file.type_value = input_name
-      file.unique_type = pickfiles_img_id
+      if($carer_profile.length){
+        file.unique_type = pickfiles_img_id
+      }else{
+        file.unique_type = input_name
+      }
 
       var q = '.profileRow-'+input_name.split('-')[0]
       c += 1
@@ -779,11 +782,19 @@ $(document).ready(function () {
         </div>
       `)
 
-      arrFiles = arrFiles.filter((index) => {
-        if(index.unique_type !== pickfiles_img_id){
-          return index
-        }
-      })
+      if($carer_profile.length){
+        arrFiles = arrFiles.filter((index) => {
+          if(index.unique_type !== pickfiles_img_id){
+            return index
+          }
+        })
+      }else{
+        arrFiles = arrFiles.filter((index) => {
+          if(index.unique_type !== input_name){
+            return index
+          }
+        })
+      }
 
       arrFiles.push(file)
       console.log(arrFiles)
