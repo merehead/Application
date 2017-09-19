@@ -441,10 +441,11 @@ $(document).ready(function () {
         $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
 
         $(idLoadFiles).find('.pickfiles').attr("disabled", false);
+        $(idLoadFiles).find('.pickfiles-change').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", false);
         $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", false);
-        $(idLoadFiles).find('.addInfo__input').attr("disabled", false);
-        $(idLoadFiles).find('.addInfo__input').attr("readonly", false);
+        // $(idLoadFiles).find('.addInfo__input').attr("disabled", false);
+        // $(idLoadFiles).find('.addInfo__input').attr("readonly", false);
         $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: block');
 
         $(that).hide();
@@ -463,6 +464,8 @@ $(document).ready(function () {
         var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');
 
         $(idLoadFiles).find('.pickfiles').attr("disabled", true);
+        $(idLoadFiles).find('.pickfiles-change').attr("disabled", true);
+        $(idLoadFiles).find('.pickfiles-delete').attr("style", 'display: none');
         $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", true);
         $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", true);
         $(idLoadFiles).find('.addInfo__input').attr("disabled", true);
@@ -719,6 +722,10 @@ $(document).ready(function () {
 
     $(document).on('change', '.pickfiles', function(e) {
       var input_val = $(this).parent().parent().find('.addInfo__input').val('')
+
+      var p = $(this).parent().parent().parent().find('.profileField_h')
+      var div2 = $(this).parent().parent().addClass('profileField_h')
+
       $(this).parent().parent().find('.addInfo__input').prop( "disabled", false)
       $(this).parent().parent().find('.addInfo__input').attr( "readonly", false )
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
@@ -768,21 +775,23 @@ $(document).ready(function () {
       var q = '.profileRow-'+input_name.split('-')[0]
       c += 1
 
-      $(q).append(`
-        <div class="profileField profileField_q">
-          <div class="addContainer">
-            <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-            <div id="${input_name.split('-')[0]}-${c}u" class="pickfiles_img"></div>
-              <a class="add add--moreHeight">
-                  <i class="fa fa-plus-circle"></i>
-                  <div class="add__comment add__comment--smaller"></div>
-              </a>
+      if(p.length >= 2){
+        $(q).append(`
+          <div class="profileField profileField_q profileField_h">
+            <div class="addContainer">
+              <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+              <div id="${input_name.split('-')[0]}-${c}u" class="pickfiles_img"></div>
+                <a class="add add--moreHeight">
+                    <i class="fa fa-plus-circle"></i>
+                    <div class="add__comment add__comment--smaller"></div>
+                </a>
+            </div>
+            <div class="addInfo">
+                <input type="text" name="${input_name.split('-')[0]}-${c}u" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">
+            </div>
           </div>
-          <div class="addInfo">
-              <input type="text" name="${input_name.split('-')[0]}-${c}u" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">
-          </div>
-        </div>
-      `)
+        `)
+      }
 
       if($carer_profile.length){
         arrFiles = arrFiles.filter((index) => {
@@ -1023,9 +1032,8 @@ $(document).ready(function () {
           // if(index[1].length >= 3){
             $(p).html('')
             index[1].map((index2, i2) => {
-
               $(p).append(`
-                <div class="profileField profileField_q">
+                <div class="profileField profileField_q profileField_h">
                   ${
                     i2 === 0 ?
                     `<h2 class="profileField__title ordinaryTitle">
@@ -1081,8 +1089,8 @@ $(document).ready(function () {
                 </div>
               `)
             }
-          // }
-          // else{
+
+
             newDoc.map((index) => {
               var c = 0
               index[1].map((index) => {
@@ -1107,6 +1115,7 @@ $(document).ready(function () {
               }
               $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
               $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id)
+              $('#'+index.type_value+'').parent().find('.pickfiles-change').remove()
               $('#'+index.type_value+'').parent().parent().find('.addInfo__input').attr( "disabled", false )
               $('#'+index.type_value+'').parent().parent().find('.addInfo__input').attr( "readonly", false )
               $('#'+index.type_value+'').parent().parent().find('.addInfo__input').val(index.title)

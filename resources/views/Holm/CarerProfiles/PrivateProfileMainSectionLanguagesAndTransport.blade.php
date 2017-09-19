@@ -116,9 +116,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                 </h2>
 
                 <div class="addContainer">
-                    <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-                    <span class="pickfiles-delete">X</span>
-
+                    <input disabled class="pickfiles-change" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                     <div id="driving_licence_photo" class="pickfiles_img"></div>
                     <a class="add add--moreHeight">
                         <i class="fa fa-plus-circle"></i>
@@ -164,9 +162,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                 </span>
                 </h2>
                 <div class="addContainer">
-                  <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-                  <span class="pickfiles-delete">X</span>
-
+                  <input disabled class="pickfiles-change" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                   <div id="car_insurance_photo" class="pickfiles_img"></div>
                     <a class="add add--moreHeight">
                         <i class="fa fa-plus-circle"></i>

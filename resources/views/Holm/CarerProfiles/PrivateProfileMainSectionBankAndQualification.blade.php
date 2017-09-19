@@ -54,7 +54,7 @@
 <div class="borderContainer" id="carerPrivateAvailability">
     <div class="profileRow profileRow-nvq">
 
-        <div class="profileField">
+        <div class="profileField profileField_q">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                NVQs
@@ -74,7 +74,7 @@
             </div>
         </div>
 
-        <div class="profileField">
+        <div class="profileField profileField_q">
 
           <div class="addContainer">
             <input disabled class="pickfiles" value=""
@@ -90,7 +90,7 @@
           </div>
         </div>
 
-        <div class="profileField">
+        <div class="profileField profileField_q">
 
           <div class="addContainer">
             <input disabled class="pickfiles" value=""
@@ -108,7 +108,7 @@
     </div>
 
     <div class="profileRow profileRow-care_certificate">
-        <div class="profileField">
+        <div class="profileField profileField_q">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                Care Certificates
@@ -128,7 +128,7 @@
             </div>
 
         </div>
-        <div class="profileField">
+        <div class="profileField profileField_q">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
@@ -143,7 +143,7 @@
           </div>
         </div>
 
-        <div class="profileField">
+        <div class="profileField profileField_q">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
@@ -160,7 +160,7 @@
     </div>
 
     <div class="profileRow profileRow-health_and_social">
-        <div class="profileField">
+        <div class="profileField profileField_q">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                Health and Social
@@ -180,7 +180,7 @@
             </div>
 
         </div>
-        <div class="profileField">
+        <div class="profileField profileField_q">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
@@ -195,7 +195,7 @@
           </div>
         </div>
 
-        <div class="profileField">
+        <div class="profileField profileField_q">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
@@ -213,7 +213,7 @@
 
 
     <div class="profileRow profileRow-training_certificate">
-        <div class="profileField">
+        <div class="profileField profileField_q">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                Training certificates
@@ -233,7 +233,7 @@
             </div>
 
         </div>
-        <div class="profileField">
+        <div class="profileField profileField_q">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
@@ -248,7 +248,7 @@
           </div>
         </div>
 
-        <div class="profileField">
+        <div class="profileField profileField_q">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
@@ -265,7 +265,7 @@
     </div>
 
     <div class="profileRow profileRow-additional_training_course">
-        <div class="profileField">
+        <div class="profileField profileField_q">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                Additional training courses
@@ -285,7 +285,7 @@
             </div>
 
         </div>
-        <div class="profileField">
+        <div class="profileField profileField_q">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
@@ -300,7 +300,7 @@
           </div>
         </div>
 
-        <div class="profileField">
+        <div class="profileField profileField_q">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
@@ -318,7 +318,7 @@
 
 
     <div class="profileRow profileRow-other_relevant_qualification">
-        <div class="profileField">
+        <div class="profileField profileField_q">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                Other relevant qualifications
@@ -338,7 +338,7 @@
             </div>
 
         </div>
-        <div class="profileField">
+        <div class="profileField profileField_q">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
@@ -353,7 +353,7 @@
           </div>
         </div>
 
-        <div class="profileField">
+        <div class="profileField profileField_q">
 
           <div class="addContainer">
             <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />

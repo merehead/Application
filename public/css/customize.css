@@ -68,6 +68,7 @@ select#workingTimes {
 }
 
 .pickfiles,
+.pickfiles-change,
 .pickfiles_profile_photo,
 .pickfiles_profile_photo--change{
   position: absolute;
