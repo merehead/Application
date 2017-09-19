@@ -131,9 +131,9 @@
                Has difficulties understanding or  communicating with other
               </span>
             </h2>
-            {!! Form::select('comprehension',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
-            @if ($errors->has('comprehension'))
-                <span class="help-block"><strong>{{ $errors->first('comprehension') }}</strong></span>
+            {!! Form::select('communication',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            @if ($errors->has('communication'))
+                <span class="help-block"><strong>{{ $errors->first('communication') }}</strong></span>
             @endif
         </div>
         <div class="profileField profileField--two-thirds">
@@ -148,7 +148,7 @@
         </div>
     </div>
 
-    <div class="profileRow">
+{{--    <div class="profileRow">
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
@@ -166,7 +166,7 @@
             </h2>
             <input type="text" class="profileField__input" placeholder="Type details">
         </div>
-    </div>
+    </div>--}}
 
     <div class="profileRow">
         <div class="profileField">
