@@ -1006,6 +1006,16 @@ $(document).ready(function () {
 
         console.log(newDoc)
 
+        function func(index, index2, i) {
+          if(wordFileType.indexOf(index2.file_name.split('.')[1]) !== -1){
+            return `<div id="${index[0].toLowerCase()}${i}" class="pickfiles_img" style='background-image: url(/img/Word-icon_thumb.png)'></div>`
+          }else if(pdfFileType.indexOf(index2.file_name.split('.')[1]) !== -1){
+            return `<div id="${index[0].toLowerCase()}${i}" class="pickfiles_img" style='background-image: url(/img/PDF_logo.png)''></div>`
+          }else{
+            return `<div id="${index[0].toLowerCase()}${i}" class="pickfiles_img" style='background-image: url(/api/document/${index2.id}/preview)'></div>`
+          }
+        }
+
         newDoc.map((index, i) => {
           var p = '.' + profileRow+index[0].toLowerCase()
           var count = 3 - index[1].length
@@ -1013,19 +1023,19 @@ $(document).ready(function () {
           // if(index[1].length >= 3){
             $(p).html('')
             index[1].map((index2, i2) => {
-              
+
               $(p).append(`
                 <div class="profileField">
                   ${
                     i2 === 0 ?
                     `<h2 class="profileField__title ordinaryTitle">
                       <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                       ${index[0].toLowerCase()}
+                       ${index[0].toLowerCase().split('_').join(' ')}
                       </span>
                     </h2>` : ''
                   }
                   <div class="addContainer">
-                    <div id="${index[0].toLowerCase()}${i}" class="pickfiles_img" style='background-image: url(/api/document/${index2.id}/preview)'></div>
+                    ${func(index[0], index2, i)}
                     <a class="add add--moreHeight"></a>
                   </div>
                   <div class="addInfo">

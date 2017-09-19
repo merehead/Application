@@ -1,4 +1,6 @@
-
+*{
+  outline: none!important;
+}
 .help-block{
     font-size: 70%;
     color: red;
