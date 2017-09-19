@@ -769,7 +769,7 @@ $(document).ready(function () {
       c += 1
 
       $(q).append(`
-        <div class="profileField">
+        <div class="profileField profileField_q">
           <div class="addContainer">
             <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
             <div id="${input_name.split('-')[0]}-${c}u" class="pickfiles_img"></div>
