@@ -63,7 +63,7 @@ select#workingTimes {
 .profileRow_qualifications{
   justify-content: space-between;
 }
-#carerPrivateAvailability .profileField{
+#carerPrivateAvailability .profileField_q{
   margin-right: 2.3%;
 }
 

@@ -1025,12 +1025,12 @@ $(document).ready(function () {
             index[1].map((index2, i2) => {
 
               $(p).append(`
-                <div class="profileField">
+                <div class="profileField profileField_q">
                   ${
                     i2 === 0 ?
                     `<h2 class="profileField__title ordinaryTitle">
                       <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                       ${index[0].toLowerCase().split('_').join(' ')}
+                       ${index[0].toLowerCase().split('_').join(' ')}s
                       </span>
                     </h2>` : ''
                   }
@@ -1049,7 +1049,7 @@ $(document).ready(function () {
               count === 0 ? count += 1 : ''
               for (var i = 0; i < count; i++) {
                 $(p).append(`
-                  <div class="profileField">
+                  <div class="profileField profileField_q">
                     <div class="addContainer">
                       <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                       <div id="${index[0].toLowerCase()}${i+1}u" class="pickfiles_img"></div>
@@ -1066,7 +1066,7 @@ $(document).ready(function () {
               }
             }else{
               $(p).append(`
-                <div class="profileField">
+                <div class="profileField profileField_q">
                   <div class="addContainer">
                     <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                     <div id="${index[0].toLowerCase()}${i+1}u" class="pickfiles_img"></div>
