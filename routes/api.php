@@ -22,3 +22,4 @@ Route::delete('/document/{document}','DocumentsController@destroy')->name('Delet
 Route::get('/document/{document}','DocumentsController@getDocument')->name('GetDocument');
 Route::get('/document/{document}/preview','DocumentsController@getPreview')->name('GetDocument');
 Route::post('/booking','Bookings\BookingsController@create');
+Route::post('/booking/{booking}/setPaymentMethod','Bookings\BookingsController@setPaymentMethod');

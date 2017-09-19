@@ -6,6 +6,7 @@ use App\Booking;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use SebastianBergmann\Comparator\Book;
 
 class BookingsController extends Controller
 {
@@ -31,5 +32,14 @@ class BookingsController extends Controller
 
             $booking->assistance_types()->attach($booking_item['assistance_types']);
         }
+    }
+
+    public function setPaymentMethod(Booking $booking, Request $request){
+        $booking->payment_method = $request->payment_method;
+        $booking->save();
+    }
+
+    public function changeAppointments(Booking $booking, Request $request){
+        // From create
     }
 }
