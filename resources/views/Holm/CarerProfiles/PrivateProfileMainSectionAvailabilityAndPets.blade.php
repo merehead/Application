@@ -42,7 +42,7 @@
         </div>
 
 
-<?php $bottomTime = $workingTimes->splice(4)?>
+<?php $bottomTime = $workingTimes->splice(4);?>
 
 
         <div class="profileField profileField--two-thirds profileField--content-end  ">
@@ -69,7 +69,7 @@
                     <?php $workingTime = $workingTimes->shift()?>
                     {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
                                                 array('class' => 'customCheckbox '.$workingTime->css_name,'id'=>'boxG'.$workingTime->id)) !!}
-                    <label for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
+                    <label id="boxG1" for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
             </div>
 
             <div class="profileField profileField--half">
@@ -86,12 +86,12 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
         <div class="profileField profileField--full-width">
             <div class="checkRow">
 
-                @foreach($bottomTime->sortBy('byDay') as $workingTime)
+                @foreach($bottomTime->sortBy('sort') as $workingTime)
                     <div class="checbox_wrap checbox_wrap--date">
 
                         {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
                         array('class' =>  'customCheckbox '.$workingTime->css_name,'id'=>'checkD'.$workingTime->id)) !!}
-                        <label for="checkD{{$workingTime->id}}">{{$workingTime->name}}</label>
+                        <label for="checkD{{$workingTime->id}}"><span>{{$workingTime->name}}</span></label>
 
                     </div>
                 @endforeach
@@ -135,7 +135,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
 
             </select>--}}
 
-            {!! Form::select('work_with_pets',['Yes'=>'Yes','No'=>'No','It depends'=>'It depends'],
+            {!! Form::select('work_with_pets',['Yes'=>'Yes','No'=>'No','It Depends'=>'It Depends'],
 null,['id'=>'depend-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
 
         </div>

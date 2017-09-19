@@ -136,10 +136,7 @@ class CarerController extends FrontController
         return $this->renderOutput();
     }
 
-    /*
-     * Show carer`s profile to purchasers
-     */
-    public function carerProfile(Request $request)
+    public function booking()
     {
 
         $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
@@ -153,34 +150,29 @@ class CarerController extends FrontController
         $this->vars = array_add($this->vars,'footer',$footer);
         $this->vars = array_add($this->vars,'modals',$modals);
 
-
-
-        $carerProfile = CarersProfile::findOrFail($request->carer_id);
-
-        if ($carerProfile->registration_progress != '20') {
-            return redirect()->action('CarerRegistrationController@index');
-        }
-        $this->vars = array_add($this->vars, 'user', $this->user);
-        $this->vars = array_add($this->vars, 'carerProfile', $carerProfile);
-        $postcodes = Postcode::all()->pluck('name', 'id')->toArray();
-        $this->vars = array_add($this->vars, 'postcodes', $postcodes);
-        $typeCare = AssistanceType::all();
-        $this->vars = array_add($this->vars, 'typeCare', $typeCare);
-        $workingTimes = WorkingTime::all();
-        $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
-        $languages = Language::all();
-        $this->vars = array_add($this->vars, 'languages', $languages);
-        //dd($this->user,$carerProfile);
-        $this->content = view(config('settings.frontTheme') . '.CarerProfiles.PublicProfile')->with($this->vars)
+        $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarerall')->with($this->vars)
             ->render();
 
+        return $this->renderOutput();
+    }
 
-        //$step = view(config('settings.frontTheme').'.carerRegistration.'.$this->carersProfile->getNextStep())->with($this->vars)->render();
-        //$this->vars = array_add($this->vars,'step',$step);
+    public function bookingFilter($status)
+    {
 
-//        $this->content = view(config('settings.frontTheme').'.homePage.homePage')->with($this->vars)->render();
+        $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
+        $this->title = 'Holm Care';
 
-        //dd($this->content);
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
+        $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarer'.$status)->with($this->vars)
+            ->render();
+
 
         return $this->renderOutput();
     }
@@ -244,8 +236,8 @@ class CarerController extends FrontController
             if (isset($input['account_number'])) $carerProfiles->account_number = $input['account_number'];
 
             $carerProfiles->save();
-       /*     $user->save();
-            unset($user);*/
+            /*     $user->save();
+                 unset($user);*/
             unset($carerProfiles);
         }
 
@@ -292,8 +284,8 @@ class CarerController extends FrontController
 
             if (isset($input['languages']))
                 $carerProfiles->Languages()->sync(array_keys($input['languages']));
-                if (isset($input['language_additional'])) $carerProfiles->language_additional = $input['language_additional'];
-                $carerProfiles->save();
+            if (isset($input['language_additional'])) $carerProfiles->language_additional = $input['language_additional'];
+            $carerProfiles->save();
 
             unset($carerProfiles);
         }

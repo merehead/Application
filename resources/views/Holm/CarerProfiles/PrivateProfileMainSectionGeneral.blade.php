@@ -6,14 +6,14 @@
         fa-spin '></i> Processing"><i class="fa fa-floppy-o"></i>  Save</button>
     </div>
 </div>
-
-<div class="borderContainer">
-    @include(config('settings.frontTheme').'.CarerProfiles/PrivateProfileMainSectionGeneral_profileInfoContainer')
-    @include(config('settings.frontTheme').'.CarerProfiles/PrivateProfileMainSectionGeneral_CVandPassport')
-</div>
 {!! Form::model($carerProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateGeneral']) !!}
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('stage','general') !!}
+<div class="borderContainer" id='carerPrivateGeneral'>
+    @include(config('settings.frontTheme').'.CarerProfiles/PrivateProfileMainSectionGeneral_profileInfoContainer')
+    @include(config('settings.frontTheme').'.CarerProfiles/PrivateProfileMainSectionGeneral_CVandPassport')
+</div>
+
 <div class="borderContainer">
     <h2 class="fieldCategory">
         Contacts
@@ -125,7 +125,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','disabled','
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Restrictions working </span>
             </h2>
-        {!! Form::text('work_UK_description',null,['class'=>'profileField__input']) !!}
+        {!! Form::text('work_UK_description',null,['class'=>'profileField__input','disabled','data-edit'=>'false']) !!}
 
         </div>
         </div>

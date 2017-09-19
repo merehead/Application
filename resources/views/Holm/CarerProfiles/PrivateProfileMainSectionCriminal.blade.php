@@ -41,11 +41,23 @@
                 </h2>
 
                 {!! Form::select('criminal_conviction',['Old'=>'Yes, but they are very old, and for a minor offence.','Yes'=>'Yes','No'=>'Do not have criminal convictions'],
-null,['class'=>'profileField__select','placeholder'=>'Please select','readonly','data-edit'=>'false']) !!}
+null,['class'=>'profileField__select','placeholder'=>'Please select','readonly','id'=>'criminal_detail','data-edit'=>'false']) !!}
 
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Do not have criminal convictions</option>
                 </select>--}}
+
+            </div>
+            <div class="profileField profileField--full-width criminal_detail nhide">
+                <h2 class="profileField__title ordinaryTitle">
+                <span class="ordinaryTitle__text ">
+                Details
+                     </span></h2>
+                <div class="inputWrap criminal_detail">
+
+                    {!! Form::textarea('criminal_detail',null,['class'=>'formArea','placeholder'=>' Detailed response']) !!}
+
+                </div>
             </div>
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
@@ -70,10 +82,19 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','readonly',
                 </span>
 
                 </h2>
-                <div class="addContainer ">
-                    <a href="#" class="add add--moreHeight">
+
+                <div class="addContainer">
+                  <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                  <span class="pickfiles-delete">X</span>
+
+                  <div id="dbs_certificate_photo" class="pickfiles_img"></div>
+                    <a class="add add--moreHeight">
                         <i class="fa fa-plus-circle"></i>
+                        <div class="add__comment add__comment--smaller"></div>
                     </a>
+                </div>
+                <div style="display: none" class="addInfo">
+                    <input disabled type="text" name="dbs_certificate_photo" class="addInfo__input" placeholder="Name" >
                 </div>
 
             </div>
@@ -95,7 +116,8 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','readonly',
                 </span>
 
                 </h2>
-                @if($carerProfile->date_sertificate === "01/01/1970")
+
+                @if($carerProfile->date_sertificate == "01/01/1970")
                     <input name="date_certificate" id="datepicker_date_sertificate" class="profileField__input"
                            placeholder="Valid until date" type="text">
                 @else
@@ -109,7 +131,3 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','readonly',
 </div>
 
 {!! Form::close() !!}
-
-
-
-

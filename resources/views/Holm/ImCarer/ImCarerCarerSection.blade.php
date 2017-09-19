@@ -76,7 +76,7 @@
                 Holm understands the frustrations often felt by carers working for agencies.<br>
                 We are a new kind of home care service, helping connect you directly to elderly people who need help in the Manchester area. </p>
             <p>  We are not a care agency, and don’t charge people like an agency. <br>
-                Holm gives carers more time at people’s homes and helps them build lasting relationships with their clients
+                Holm gives you more time at people’s homes and helps you build lasting relationships with your clients
             </p>
 
 

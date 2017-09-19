@@ -40,7 +40,10 @@
                             <div class="blogFilter__list">
                                 @foreach($blogDate as $date)
                                 <a href="{{route('BlogPage')}}/filter/{{$date->month}}-{{$date->year}}"
-                                   class="blogFilter__item">
+                                   class="blogFilter__item
+@if(isset($month) && isset($year)&& $date->month==$month && $date->year==$year) active
+                                           @endif
+">
                                     {{$date->cdate}}
                                 </a>
                                 @endforeach

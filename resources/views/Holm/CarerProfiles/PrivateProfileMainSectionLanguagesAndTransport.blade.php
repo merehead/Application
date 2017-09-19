@@ -26,8 +26,8 @@
                 @endforeach
             </div>
         @endforeach
-    @if(strlen($carerProfile->language_additional))
-            <div class="profileRow">
+
+            <div class="profileRow language_additional nhide"  >
 
                 <div class="profileField profileField--two-thirds">
                     <h2 class="profileField__title ordinaryTitle">
@@ -38,7 +38,7 @@
                     {{--      <input type="text" class="profileField__input" placeholder="Details">--}}
                 </div>
             </div>
-        @endif
+
 </div>
 {{ Form::close() }}
 
@@ -55,7 +55,7 @@
 {!! Form::hidden('stage','carerPrivateTransport') !!}
 <div class="borderContainer">
     <div class="profileRow profileRow--start">
-        <div class="profileField">
+        <div class="profileField profileField-mr">
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
@@ -72,7 +72,7 @@
                 </select>--}}
             </div>
         </div>
-        <div class="profileField">
+        <div class="profileField profileField-mr">
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
@@ -80,7 +80,7 @@
                 </span>
                 </h2>
                 {!! Form::select('have_car',['Yes'=>'Car for work','No'=>'Do not have a car'],
-null,['class'=>'profileField__select']) !!}
+null,['class'=>'profileField__select','id'=>'type_car_work']) !!}
 
 {{--                <select class="profileField__select ">
                     <option value="Flat">Car for work</option>
@@ -88,6 +88,9 @@ null,['class'=>'profileField__select']) !!}
                     <option value="Flat">Please select</option>
                 </select>--}}
             </div>
+
+        </div>
+        <div class="profileField profileField-mr">
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
@@ -98,65 +101,35 @@ null,['class'=>'profileField__select']) !!}
 null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
 
 
-{{--                <select class="profileField__select ">
-                    <option value="Flat">Transport clients</option>
-                    <option value="Flat">Can not transport clients</option>
-                    <option value="Flat">Please select</option>
-                </select>--}}
+                {{--                <select class="profileField__select ">
+                                    <option value="Flat">Transport clients</option>
+                                    <option value="Flat">Can not transport clients</option>
+                                    <option value="Flat">Please select</option>
+                                </select>--}}
 
             </div>
         </div>
 
-        <div class="profileField">
-            <div class="profileField profileField--full-width">
-                <h2 class="profileField__title ordinaryTitle">
-                <span class="ordinaryTitle__text ">
-                  Car insurance Photo
-                </span>
-                </h2>
-                <div class="addContainer ">
-                    <a href="#" class="add add--moreHeight">
-                        <i class="fa fa-plus-circle"></i>
-                    </a>
-                </div>
-
-            </div>
-            <div class="profileField profileField--full-width">
-                <h2 class="profileField__title ordinaryTitle">
-                <span class="ordinaryTitle__text ">
-                 Car insurance Number
-                </span>
-                </h2>
-                {!! Form::text('car_insurance_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Car insurance number','readonly','data-edit'=>'false']) !!}
-               {{-- <input type="text" class="profileField__input profileField__input--greyBg" placeholder="Car insurance number">--}}
-            </div>
-            <div class="profileField profileField--full-width">
-                <h2 class="profileField__title ordinaryTitle">
-                <span class="ordinaryTitle__text ">
-                 Valid until
-                </span>
-                </h2>
-
-                @if($carerProfile->car_insurance_valid_until === "01/01/1970")
-                    <input name="car_insurance_valid_until" id="datepicker_insurance" class="profileField__input" placeholder="Valid until date" type="text">
-                @else
-                    {!! Form::text('car_insurance_valid_until',null,['id'=>'datepicker_insurance','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
-                @endif
-
-            </div>
-        </div>
-
-        <div class="profileField">
+        <div class="profileField profileField-mr">
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
                   UK\EEA Driving licence photo
                 </span>
                 </h2>
-                <div class="addContainer ">
-                    <a href="#" class="add add--moreHeight">
+
+                <div class="addContainer">
+                    <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                    <span class="pickfiles-delete">X</span>
+
+                    <div id="driving_licence_photo" class="pickfiles_img"></div>
+                    <a class="add add--moreHeight">
                         <i class="fa fa-plus-circle"></i>
+                        <div class="add__comment add__comment--smaller"></div>
                     </a>
+                </div>
+                <div style="display: none" class="addInfo">
+                    <input disabled type="text" name="driving_licence_photo" class="addInfo__input" placeholder="Name">
                 </div>
 
             </div>
@@ -183,6 +156,53 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                 @endif
 
                 {{--<input type="text" class="profileField__input " placeholder="Valid until date">--}}
+            </div>
+        </div>
+
+        <div class="profileField profileField-mr car-block">
+            <div class="profileField profileField--full-width">
+                <h2 class="profileField__title ordinaryTitle">
+                <span class="ordinaryTitle__text ">
+                  Car insurance Photo
+                </span>
+                </h2>
+                <div class="addContainer">
+                  <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                  <span class="pickfiles-delete">X</span>
+
+                  <div id="car_insurance_photo" class="pickfiles_img"></div>
+                    <a class="add add--moreHeight">
+                        <i class="fa fa-plus-circle"></i>
+                        <div class="add__comment add__comment--smaller"></div>
+                    </a>
+                </div>
+                <div style="display: none" class="addInfo">
+                    <input disabled type="text" name="car_insurance_photo" class="addInfo__input" placeholder="Name">
+                </div>
+
+            </div>
+            <div class="profileField profileField--full-width">
+                <h2 class="profileField__title ordinaryTitle">
+                <span class="ordinaryTitle__text ">
+                 Car insurance Number
+                </span>
+                </h2>
+                {!! Form::text('car_insurance_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Car insurance number','readonly','data-edit'=>'false']) !!}
+               {{-- <input type="text" class="profileField__input profileField__input--greyBg" placeholder="Car insurance number">--}}
+            </div>
+            <div class="profileField profileField--full-width">
+                <h2 class="profileField__title ordinaryTitle">
+                <span class="ordinaryTitle__text ">
+                 Valid until
+                </span>
+                </h2>
+
+                @if($carerProfile->car_insurance_valid_until === "01/01/1970")
+                    <input name="car_insurance_valid_until" id="datepicker_insurance" class="profileField__input" placeholder="Valid until date" type="text">
+                @else
+                    {!! Form::text('car_insurance_valid_until',null,['id'=>'datepicker_insurance','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
+                @endif
+
             </div>
         </div>
 
