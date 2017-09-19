@@ -378,6 +378,13 @@ $(document).ready(function () {
         }
     });
 
+    $('a.additionalTime').on('click',function(e){
+        e.preventDefault();
+        $('.datetime').last().after($('.datetime').last().clone());
+        $('.checktime').last().after($('.checktime').last().clone());
+        return false;;
+    });
+
     if($("#checkL12").is(':checked')) {
         $(".language_additional").show();
     }else{

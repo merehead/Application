@@ -63,7 +63,6 @@ class ServiceUserPrivateProfileController extends FrontController
     public function profile($serviceUserProfile)
     {
 
-
         //dd($serviceUserProfile);
 
         $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
@@ -87,6 +86,7 @@ class ServiceUserPrivateProfileController extends FrontController
             $this->vars = array_add($this->vars, 'user', $this->user);
 
             $this->vars = array_add($this->vars, 'carerProfile', $serviceUsersProfile);
+            $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
 
             $typeCare = AssistanceType::all();
             $this->vars = array_add($this->vars, 'typeCare', $typeCare);

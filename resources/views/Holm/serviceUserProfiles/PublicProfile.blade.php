@@ -5,11 +5,11 @@
                 Home
             </a>
             <span class="breadcrumbs__arrow">&gt;</span>
-            <a href="{{route('ServiceUserSetting')}}" class="breadcrumbs__item">
+            <a href="{{route('ServiceUserSetting',['serviceUserProfile'=>$serviceUsersProfile])}}" class="breadcrumbs__item">
                 My profile
             </a>
             <span class="breadcrumbs__arrow">&gt;</span>
-            <a href="{{route('ServiceUserProfilePublic')}}" class="breadcrumbs__item">
+            <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUsersProfile])}}" class="breadcrumbs__item">
                 {{$carerProfile->family_name}} {{$carerProfile->first_name}}
             </a>
         </div>
@@ -67,7 +67,7 @@
                         <div class="profilePricing profilePricing--user">
 
                             <div class="roundedBtn">
-                                <a href="NewAnAppointment.html" class="roundedBtn__item roundedBtn__item--message">
+                                <a href="NewAnAppointment.html" class="roundedBtn__item roundedBtn__item--message"  data-toggle="modal" data-target="#message-carer">
                                     send a message
                                 </a>
                             </div>
