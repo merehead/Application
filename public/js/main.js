@@ -442,6 +442,9 @@ $(document).ready(function () {
 
         $(idLoadFiles).find('.pickfiles').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", false);
+        $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", false);
+        $(idLoadFiles).find('.addInfo__input').attr("disabled", false);
+        $(idLoadFiles).find('.addInfo__input').attr("readonly", false);
 
         $(that).hide();
         $(that).parent().find('button.hidden').removeClass('hidden');
@@ -460,6 +463,8 @@ $(document).ready(function () {
 
         $(idLoadFiles).find('.pickfiles').attr("disabled", true);
         $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", true);
+        $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", true);
+        $(idLoadFiles).find('.addInfo__input').attr("disabled", true);
 
         that.button('loading');
 
@@ -594,7 +599,7 @@ $(document).ready(function () {
     var arrForDeleteID = []
     var file
     var file_profile_photo = {}
-    var getlocalStorageData = JSON.parse(localStorage.getItem('files_id'))
+    var getlocalStorageData = localStorage.getItem('files_id')
 
     var fileTypes = [
         'image/jpeg','image/gif','image/png',
@@ -605,34 +610,37 @@ $(document).ready(function () {
     ]
     var pdfFileType = ['application/pdf', 'pdf']
 
-    if(getlocalStorageData){
-      getlocalStorageData.map((index) => {
-        if(document.getElementById("upload_files")){
-          axios.get(
-            '/api/document/'+index.id.id+'/',
-          ).then(function (response) {
+    if(!$carer_profile.length){
+      if(getlocalStorageData){
+        JSON.parse(getlocalStorageData).map((index) => {
+          if(document.getElementById("upload_files")){
+            axios.get(
+              '/api/document/'+index.id.id+'/',
+            ).then(function (response) {
+              var res = response.data.data.document
 
-            var res = response.data.data.document
+              if(wordFileType.indexOf(res.file_name.split('.')[1]) !== -1){
+                $('#'+index.type_value+'').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
+              }else if(pdfFileType.indexOf(res.file_name.split('.')[1]) !== -1){
+                $('#'+index.type_value+'').attr('style', 'background-image: url(/img/PDF_logo.png)')
+              }else{
+                $('#'+index.type_value+'').attr('style', 'background-image: url(/api/document/'+index.id.id+'/preview)')
+              }
 
-            if(wordFileType.indexOf(res.file_name.split('.')[1]) !== -1){
-              $('#'+index.type_value+'').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
-            }else if(pdfFileType.indexOf(res.file_name.split('.')[1]) !== -1){
-              $('#'+index.type_value+'').attr('style', 'background-image: url(/img/PDF_logo.png)')
-            }else{
-              $('#'+index.type_value+'').attr('style', 'background-image: url(/api/document/'+index.id.id+'/preview)')
-            }
-
-            $('#'+index.type_value+'').parent().children('.add').find('.add__comment--smaller').html('<div class="file-name">'+res.file_name+'</div>')
-            $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
-            $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('style', 'display: block')
-            $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id.id)
-            $('#'+index.type_value+'').parent().parent().find('.addInfo__input').prop( "disabled", false )
-            if(response.data.data.document.title !== 'undefined'){
-              $('#'+index.type_value+'').parent().parent().find('.addInfo__input').val(res.title)
-            }
-          })
-        }
-      })
+              $('#'+index.type_value+'').parent().children('.add').find('.add__comment--smaller').html('<div class="file-name">'+res.file_name+'</div>')
+              $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
+              $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('style', 'display: block')
+              $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id.id)
+              $('#'+index.type_value+'').parent().parent().find('.addInfo__input').prop( "disabled", false )
+              if(response.data.data.document.title !== 'undefined'){
+                $('#'+index.type_value+'').parent().parent().find('.addInfo__input').val(res.title)
+              }
+            })
+          }
+        })
+      }
+    }else{
+      localStorage.setItem('files_id', JSON.stringify([]))
     }
 
     if($('#profile_photo').attr('style')){
@@ -640,17 +648,21 @@ $(document).ready(function () {
       $('#profile_photo').parent().find('.add--moreHeight').html('')
     }
 
-    $('.addInfo__input').change(function () {
+      $(document).on('change', '.addInfo__input', function(e) {
       var id = $(this).parent().parent().find('.pickfiles_img').attr('id')
       var input_name = $(this).attr('name')
-      var input_val = $("input[name="+input_name+"]").val()
+      var input_val = $(this).val()
+
+      console.log(input_name, input_val)
 
       arrFiles.map((index) => {
         if(index.unique_type === id){
-          console.log(index)
+          console.log(index.unique_type, id, input_val)
           index.title = input_val
         }
       })
+
+      console.log(arrFiles);
     })
 
     function pickfilesDelete(_this){
@@ -701,8 +713,9 @@ $(document).ready(function () {
       arrFiles = []
     })
 
-    $('.pickfiles').on('change', function() {
+    var c = 0
 
+    $(document).on('change', '.pickfiles', function(e) {
       var input_val = $(this).parent().parent().find('.addInfo__input').val('')
       $(this).parent().parent().find('.addInfo__input').prop( "disabled", false)
       $(this).parent().parent().find('.addInfo__input').attr( "readonly", false )
@@ -731,7 +744,7 @@ $(document).ready(function () {
         }
       }
 
-      var getls = JSON.parse(localStorage.getItem('files_id'))
+      var getls = localStorage.getItem('files_id') ? JSON.parse(localStorage.getItem('files_id')) : []
       if(getls){
         getls.map((index) => {
           if(index.id.id === parseInt(deleteID)){
@@ -747,6 +760,25 @@ $(document).ready(function () {
       file.type_value = input_name
       file.unique_type = pickfiles_img_id
 
+      var q = '.profileRow-'+input_name.split('-')[0]
+      c += 1
+
+      $(q).append(`
+        <div class="profileField">
+          <div class="addContainer">
+            <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+            <div id="${input_name.split('-')[0]}-${c}u" class="pickfiles_img"></div>
+              <a class="add add--moreHeight">
+                  <i class="fa fa-plus-circle"></i>
+                  <div class="add__comment add__comment--smaller"></div>
+              </a>
+          </div>
+          <div class="addInfo">
+              <input type="text" name="${input_name.split('-')[0]}-${c}u" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">
+          </div>
+        </div>
+      `)
+
       arrFiles = arrFiles.filter((index) => {
         if(index.unique_type !== pickfiles_img_id){
           return index
@@ -755,14 +787,13 @@ $(document).ready(function () {
 
       arrFiles.push(file)
       console.log(arrFiles)
+
       $(this).parent().find('.add__comment--smaller').html('')
       $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
     })
 
     $('.upload_files').on('click', function (e) {
       e.preventDefault()
-
-      console.log(arrFiles)
 
       if(arrFiles.length > 0){
         $(this).html('uploading..')
@@ -952,6 +983,7 @@ $(document).ready(function () {
 
     // -- upload files. Profile sections -------
     var arrTypeAndID = []
+    var profileRow = 'profileRow-'
 
     if($carer_profile.length){
       axios.get(
@@ -959,33 +991,103 @@ $(document).ready(function () {
       ).then( (response) => {
         var newDoc = Object.entries(response.data.data.documents)
 
-        newDoc.map((index) => {
-          var c = 0
-          index[1].map((index) => {
-            var data = {
-              type_value: c > 0 ? (index.type.toLowerCase() + c) : index.type.toLowerCase(),
-              title: index.title !== 'undefined' ? index.title : '',
-              id: index.id,
-              type_file_name: index.file_name.split('.')[1]
-            }
-            c += 1
-            arrTypeAndID.push(data)
-          })
-        })
+        console.log(newDoc)
 
-        arrTypeAndID.map((index) => {
-          if(wordFileType.indexOf(index.type_file_name) !== -1){
-            $('#'+index.type_value+'').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
-          }else if(pdfFileType.indexOf(index.type_file_name) !== -1){
-            $('#'+index.type_value+'').attr('style', 'background-image: url(/img/PDF_logo.png)')
-          }else{
-          $('#'+index.type_value+'').attr('style', 'background-image: url(/api/document/'+index.id+'/preview)')
-          }
-          $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
-          $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id)
-          $('#'+index.type_value+'').parent().parent().find('.addInfo__input').attr( "disabled", false )
-          $('#'+index.type_value+'').parent().parent().find('.addInfo__input').attr( "readonly", false )
-          $('#'+index.type_value+'').parent().parent().find('.addInfo__input').val(index.title)
+        newDoc.map((index, i) => {
+          var p = '.' + profileRow+index[0].toLowerCase()
+          var count = 3 - index[1].length
+
+          // if(index[1].length >= 3){
+            $(p).html('')
+            index[1].map((index2, i2) => {
+              $(p).append(`
+                <div class="profileField">
+                  ${
+                    i2 === 0 ?
+                    `<h2 class="profileField__title ordinaryTitle">
+                      <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
+                       ${index[0].toLowerCase()}
+                      </span>
+                    </h2>` : ''
+                  }
+                  <div class="addContainer">
+                    <div id="${index[0].toLowerCase()}${i}" class="pickfiles_img" style='background-image: url(/api/document/${index2.id}/preview)'></div>
+                    <a class="add add--moreHeight"></a>
+                  </div>
+                  <div class="addInfo">
+                      <input disabled value="${index2.title !== 'undefined' ? index2.title : ""}"
+                      type="text" name="${index[0].toLowerCase()}-${i}" class="addInfo__input profileField__input--greyBg" placeholder="Name">
+                  </div>
+                </div>
+              `)
+            })
+            if(count >= 0){
+              count === 0 ? count += 1 : ''
+              for (var i = 0; i < count; i++) {
+                $(p).append(`
+                  <div class="profileField">
+                    <div class="addContainer">
+                      <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                      <div id="${index[0].toLowerCase()}${i+1}u" class="pickfiles_img"></div>
+                        <a class="add add--moreHeight">
+                            <i class="fa fa-plus-circle"></i>
+                            <div class="add__comment add__comment--smaller"></div>
+                        </a>
+                    </div>
+                    <div class="addInfo">
+                        <input disabled type="text" name="${index[0].toLowerCase()}-${i+1}" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">
+                    </div>
+                  </div>
+                `)
+              }
+            }else{
+              $(p).append(`
+                <div class="profileField">
+                  <div class="addContainer">
+                    <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                    <div id="${index[0].toLowerCase()}${i+1}u" class="pickfiles_img"></div>
+                      <a class="add add--moreHeight">
+                          <i class="fa fa-plus-circle"></i>
+                          <div class="add__comment add__comment--smaller"></div>
+                      </a>
+                  </div>
+                  <div class="addInfo">
+                      <input disabled type="text" name="${index[0].toLowerCase()}-${i+1}" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">
+                  </div>
+                </div>
+              `)
+            }
+          // }
+          // else{
+            newDoc.map((index) => {
+              var c = 0
+              index[1].map((index) => {
+                var data = {
+                  type_value: c > 0 ? (index.type.toLowerCase() + c) : index.type.toLowerCase(),
+                  title: index.title !== 'undefined' ? index.title : '',
+                  id: index.id,
+                  type_file_name: index.file_name.split('.')[1]
+                }
+                c += 1
+                arrTypeAndID.push(data)
+              })
+            })
+
+            arrTypeAndID.map((index) => {
+              if(wordFileType.indexOf(index.type_file_name) !== -1){
+                $('#'+index.type_value+'').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
+              }else if(pdfFileType.indexOf(index.type_file_name) !== -1){
+                $('#'+index.type_value+'').attr('style', 'background-image: url(/img/PDF_logo.png)')
+              }else{
+              $('#'+index.type_value+'').attr('style', 'background-image: url(/api/document/'+index.id+'/preview)')
+              }
+              $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
+              $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id)
+              $('#'+index.type_value+'').parent().parent().find('.addInfo__input').attr( "disabled", false )
+              $('#'+index.type_value+'').parent().parent().find('.addInfo__input').attr( "readonly", false )
+              $('#'+index.type_value+'').parent().parent().find('.addInfo__input').val(index.title)
+            })
+
         })
       })
     }

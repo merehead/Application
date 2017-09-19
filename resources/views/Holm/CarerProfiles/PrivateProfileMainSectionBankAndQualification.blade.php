@@ -52,14 +52,14 @@
 </div>
 
 <div class="borderContainer" id="carerPrivateAvailability">
-    <div class="profileRow profileRow_qualifications">
+    <div class="profileRow profileRow-nvq">
+
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                NVQs
               </span>
             </h2>
-
             <div class="addContainer">
               <input disabled class="pickfiles" value=""
                 accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
@@ -72,8 +72,8 @@
             <div class="addInfo">
                 <input disabled type="text" name="nvq" class="addInfo__input" placeholder="Name">
             </div>
-
         </div>
+
         <div class="profileField">
 
           <div class="addContainer">
@@ -107,7 +107,7 @@
         </div>
     </div>
 
-    <div class="profileRow">
+    <div class="profileRow profileRow-care_certificate">
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
@@ -159,8 +159,8 @@
         </div>
     </div>
 
-    <div class="profileRow">
-        <div class="profileField ">
+    <div class="profileRow profileRow-health_and_social">
+        <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                Health and Social
@@ -212,7 +212,7 @@
     </div>
 
 
-    <div class="profileRow">
+    <div class="profileRow profileRow-training_certificate">
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
@@ -264,7 +264,7 @@
         </div>
     </div>
 
-    <div class="profileRow">
+    <div class="profileRow profileRow-additional_training_course">
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
@@ -317,7 +317,7 @@
     </div>
 
 
-    <div class="profileRow">
+    <div class="profileRow profileRow-other_relevant_qualification">
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
