@@ -445,6 +445,7 @@ $(document).ready(function () {
         $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", false);
         $(idLoadFiles).find('.addInfo__input').attr("disabled", false);
         $(idLoadFiles).find('.addInfo__input').attr("readonly", false);
+        $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: block');
 
         $(that).hide();
         $(that).parent().find('button.hidden').removeClass('hidden');
@@ -465,6 +466,7 @@ $(document).ready(function () {
         $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", true);
         $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", true);
         $(idLoadFiles).find('.addInfo__input').attr("disabled", true);
+        $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: none');
 
         that.button('loading');
 
@@ -1011,6 +1013,7 @@ $(document).ready(function () {
           // if(index[1].length >= 3){
             $(p).html('')
             index[1].map((index2, i2) => {
+              
               $(p).append(`
                 <div class="profileField">
                   ${

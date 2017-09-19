@@ -43,7 +43,9 @@ select#workingTimes {
 #sign_up_div {
     width: 200px;
 }
-
+.profilePhoto__ico{
+  display: none;
+}
 .faq__title:after {
     content: '';
     display: none;
