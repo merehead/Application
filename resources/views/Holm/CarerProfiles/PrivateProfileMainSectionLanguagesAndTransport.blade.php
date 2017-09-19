@@ -26,8 +26,8 @@
                 @endforeach
             </div>
         @endforeach
-    @if(strlen($carerProfile->language_additional))
-            <div class="profileRow">
+
+            <div class="profileRow language_additional nhide"  >
 
                 <div class="profileField profileField--two-thirds">
                     <h2 class="profileField__title ordinaryTitle">
@@ -38,7 +38,7 @@
                     {{--      <input type="text" class="profileField__input" placeholder="Details">--}}
                 </div>
             </div>
-        @endif
+
 </div>
 {{ Form::close() }}
 
@@ -55,7 +55,7 @@
 {!! Form::hidden('stage','carerPrivateTransport') !!}
 <div class="borderContainer">
     <div class="profileRow profileRow--start">
-        <div class="profileField">
+        <div class="profileField profileField-mr">
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
@@ -72,7 +72,7 @@
                 </select>--}}
             </div>
         </div>
-        <div class="profileField">
+        <div class="profileField profileField-mr">
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
@@ -88,6 +88,9 @@ null,['class'=>'profileField__select','id'=>'type_car_work']) !!}
                     <option value="Flat">Please select</option>
                 </select>--}}
             </div>
+
+        </div>
+        <div class="profileField profileField-mr">
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
@@ -98,16 +101,16 @@ null,['class'=>'profileField__select','id'=>'type_car_work']) !!}
 null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
 
 
-{{--                <select class="profileField__select ">
-                    <option value="Flat">Transport clients</option>
-                    <option value="Flat">Can not transport clients</option>
-                    <option value="Flat">Please select</option>
-                </select>--}}
+                {{--                <select class="profileField__select ">
+                                    <option value="Flat">Transport clients</option>
+                                    <option value="Flat">Can not transport clients</option>
+                                    <option value="Flat">Please select</option>
+                                </select>--}}
 
             </div>
         </div>
 
-        <div class="profileField">
+        <div class="profileField profileField-mr">
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
@@ -156,7 +159,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
             </div>
         </div>
 
-        <div class="profileField car-block">
+        <div class="profileField profileField-mr car-block">
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
