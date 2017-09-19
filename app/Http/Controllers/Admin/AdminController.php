@@ -17,9 +17,15 @@ class AdminController extends Controller
     public function __construct() {
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
-            return $next($request);
+
+            if($this->user->user_type_id == 4) {
+                return $next($request);
+            }
+            return redirect()->route('mainHomePage');
         });
+
     }
+
     public function renderOutput() {
         $this->vars = array_add($this->vars,'title',$this->title);
 

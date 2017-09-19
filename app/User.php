@@ -117,6 +117,7 @@ class User extends Authenticatable
         }
         if ($this->user_type_id == 1) { //purchaser
             if ($this->userPurchaserProfile->registration_progress == '4_1_2_1') {
+                //return true;
                 return true;
             }
         }

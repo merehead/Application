@@ -7,6 +7,9 @@
         </a>
     </div>
 </div>
+{!! Form::model($serviceUsersProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateLanguages']) !!}
+{!! Form::hidden('id',$serviceUsersProfile->id) !!}
+{!! Form::hidden('stage','languages') !!}
 
 <div class="borderContainer">
     <div class="profileRow">
@@ -15,25 +18,37 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Home is a ... </span>
             </h2>
-            <select class="profileField__select">
-                <option value="Flat">Flat</option>
-            </select>
+
+                {!! Form::select('kind_of_building',['FLAT'=>'FLAT','HOUSE'=>'HOUSE','BUNGALOW'=>'BUNGALOW'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+                @if ($errors->has('kind_of_building'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('kind_of_building') }}</strong>
+                                    </span>
+                @endif
+
         </div>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 There is a lift to the flat </span>
             </h2>
-            <select class="profileField__select">
-                <option value="Yes">Yes</option>
-            </select>
+
+            {!! Form::select('lift_available',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            @if ($errors->has('lift_available'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('lift_available') }}</strong>
+                                    </span>
+            @endif
         </div>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 The flat is  on floor</span>
             </h2>
-            <input type="text" class="profileField__input" placeholder="Floor number">
+            {!! Form::select('floor_id',$floors,null,['class'=>'profileField__input','placeholder'=>'Floor number']) !!}
+         @if ($errors->has('floor_id'))
+            <span class="help-block"><strong>{{ $errors->first('floor_id') }}</strong></span>
+        @endif
         </div>
 
         <div class="profileField">
@@ -42,9 +57,13 @@
                 Can keep the home safe and clean by themself
               </span>
             </h2>
-            <select class="profileField__select">
-                <option value="no">No</option>
-            </select>
+
+            {!! Form::select('home_safe',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            @if ($errors->has('home_safe'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('home_safe') }}</strong>
+                                    </span>
+            @endif
         </div>
 
         <div class="profileField">
@@ -53,9 +72,10 @@
                Requires assistance keeping the home safe and clean
               </span>
             </h2>
-            <select class="profileField__select">
-                <option value="no">No</option>
-            </select>
+            {!! Form::select('assistance_keeping',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            @if ($errors->has('assistance_keeping'))
+                <span class="help-block"> <strong>{{ $errors->first('assistance_keeping') }}</strong> </span>
+            @endif
         </div>
     </div>
 
@@ -67,9 +87,13 @@
                 Requires assistance moving around home
               </span>
             </h2>
-            <select class="profileField__select">
-                <option value="no">No</option>
-            </select>
+
+            {!! Form::select('move_available',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            @if ($errors->has('move_available'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('assistance_keeping') }}</strong>
+                                    </span>
+            @endif
         </div>
 
 
@@ -83,16 +107,22 @@
                 Can move around home safely by themself
               </span>
             </h2>
-            <select class="profileField__select">
-                <option value="yes">Yes</option>
-            </select>
+            {!! Form::select('assistance_moving',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            @if ($errors->has('assistance_moving'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('assistance_moving') }}</strong>
+                                    </span>
+            @endif
         </div>
         <div class="profileField profileField--two-thirds">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            <input type="text" class="profileField__input" placeholder="Type details">
+            {!! Form::text('assistance_moving_details',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            @if ($errors->has('assistance_moving_details'))
+                <span class="help-block"><strong>{{ $errors->first('assistance_moving_details') }}</strong></span>
+            @endif
         </div>
 
     </div>
@@ -107,9 +137,14 @@
         <div class="profileField profileField--full-width">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                How should the carer enter the [Service User name]’s home?    </span>
+                How should the carer enter the {{$userNameForSite}}’s home?    </span>
             </h2>
-            <textarea class="profileField__area" placeholder="Type details"></textarea>
+            {!! Form::textarea('carer_enter',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            @if ($errors->has('carer_enter'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('carer_enter') }}</strong>
+                                    </span>
+            @endif
         </div>
     </div>
 </div>
@@ -124,7 +159,14 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Is there anything else the Carer should be aware of when entering the home?    </span>
             </h2>
-            <textarea class="profileField__area" placeholder="Type details"></textarea>
+
+            {!! Form::textarea('other_detail',null,['class'=>'formArea ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            @if ($errors->has('other_detail'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('other_detail') }}</strong>
+                                    </span>
+            @endif
+
         </div>
     </div>
 </div>
@@ -136,12 +178,16 @@
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                Somebody lives with  [Service User name]
+                Somebody lives with  {{$userNameForSite}}
               </span>
             </h2>
-            <select class="profileField__select">
-                <option value="yes">Sometimes</option>
-            </select>
+            {!! Form::select('anyone_else_live',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+
+            @if ($errors->has('anyone_else_live'))
+                <span class="help-block">
+                                <strong>{{ $errors->first('anyone_else_live') }}</strong>
+                                    </span>
+            @endif
         </div>
 
 
@@ -150,9 +196,15 @@
         <div class="profileField profileField--two-thirds">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                please give their name and relationship to [[Service User name] name]   </span>
+                please give their name and relationship to {{$userNameForSite}}   </span>
             </h2>
-            <input type="text" class="profileField__input" placeholder="Type details">
+
+            {!! Form::text('anyone_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"200"]) !!}
+            @if ($errors->has('anyone_detail'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('anyone_detail') }}</strong>
+                                    </span>
+            @endif
         </div>
     </div>
     <div class="profileRow">
@@ -162,9 +214,13 @@
                 Is the other person likely to be home during care visits?
               </span>
             </h2>
-            <select class="profileField__select">
-                <option value="no">No</option>
-            </select>
+
+            {!! Form::select('anyone_friendly',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            @if ($errors->has('anyone_friendly'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('anyone_friendly') }}</strong>
+                                    </span>
+            @endif
         </div>
 
     </div>
@@ -182,16 +238,27 @@
                 Owns pets
               </span>
             </h2>
-            <select class="profileField__select">
-                <option value="yes">Yes</option>
-            </select>
+
+            {!! Form::select('own_pets',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+
+            @if ($errors->has('own_pets'))
+                <span class="help-block">
+                                <strong>{{ $errors->first('own_pets') }}</strong>
+                                    </span>
+            @endif
         </div>
         <div class="profileField profileField--two-thirds">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                Please, give details   </span>
             </h2>
-            <input type="text" class="profileField__input" placeholder="Type details">
+
+            {!! Form::text('pet_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"200"]) !!}
+            @if ($errors->has('pet_detail'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('pet_detail') }}</strong>
+                                    </span>
+            @endif
         </div>
     </div>
     <div class="profileRow">
@@ -201,9 +268,13 @@
                 Pets friendly with strangers
               </span>
             </h2>
-            <select class="profileField__select">
-                <option value="yes">Yes</option>
-            </select>
+
+            {!! Form::select('pet_friendly',['Yes'=>'Yes','No'=>'No','Normally'=>'Normally'],null,['class'=>'profileField__select ','placeholder'=>'Please select']) !!}
+            @if ($errors->has('pet_friendly'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('pet_friendly') }}</strong>
+                                    </span>
+            @endif
         </div>
 
     </div>
@@ -220,9 +291,13 @@
                 Has regular social interaction with friends / family
               </span>
             </h2>
-            <select class="profileField__select">
-                <option value="yes">Yes</option>
-            </select>
+
+            {!! Form::select('social_interaction',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            @if ($errors->has('social_interaction'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('social_interaction') }}</strong>
+                                    </span>
+            @endif
         </div>
 
         <div class="profileField profileField--two-thirds">
@@ -230,27 +305,44 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            <input type="text" class="profileField__input" placeholder="Type details">
+
+            {!! Form::text('companionship_interaction_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"200"]) !!}
+            @if ($errors->has('companionship_interaction_details'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('companionship_interaction_details') }}</strong>
+                                    </span>
+            @endif
         </div>
 
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                Would [Service User name] like someone to visit regularly for companionship?
+                Would {{$userNameForSite}} like someone to visit regularly for companionship?
               </span>
             </h2>
-            <select class="profileField__select">
-                <option value="yes">Yes</option>
-            </select>
+
+            {!! Form::select('visit_for_companionship',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            @if ($errors->has('visit_for_companionship'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('visit_for_companionship') }}</strong>
+                                    </span>
+            @endif
         </div>
         <div class="profileField profileField--two-thirds">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            <input type="text" class="profileField__input" placeholder="Type details">
+
+            {!! Form::text('companionship_visit_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"200"]) !!}
+            @if ($errors->has('companionship_visit_details'))
+                <span class="help-block">
+                                        <strong>{{ $errors->first('companionship_visit_details') }}</strong>
+                                    </span>
+            @endif
         </div>
     </div>
 
 </div>
 
+{{ Form::close() }}
