@@ -1030,7 +1030,7 @@ $(document).ready(function () {
                     i2 === 0 ?
                     `<h2 class="profileField__title ordinaryTitle">
                       <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                       ${index[0].toLowerCase().split('_').join(' ')}
+                       ${index[0].toLowerCase().split('_').join(' ')}s
                       </span>
                     </h2>` : ''
                   }
