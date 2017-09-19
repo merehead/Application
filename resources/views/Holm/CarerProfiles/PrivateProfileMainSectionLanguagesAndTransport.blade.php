@@ -38,6 +38,18 @@
                     {{--      <input type="text" class="profileField__input" placeholder="Details">--}}
                 </div>
             </div>
+        @else
+                <div class="profileRow" style="display:none">
+
+                    <div class="profileField profileField--two-thirds">
+                        <h2 class="profileField__title ordinaryTitle">
+              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
+                Other languages   </span>
+                        </h2>
+                        {!! Form::text('language_additional',null,['class'=>'profileField__input','placeholder'=>'Details']) !!}
+                        {{--      <input type="text" class="profileField__input" placeholder="Details">--}}
+                    </div>
+                </div>
         @endif
 </div>
 {{ Form::close() }}
