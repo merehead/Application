@@ -33,13 +33,6 @@ class Booking extends Model
         return $this->belongsTo('App\User','carer_id','id');
     }
 
-
-    public function frequency()
-    {
-        return $this->belongsTo('App\BookingAppointmentFrequency');
-    }
-
-
     public function bookingStatus ()
     {
         return $this->belongsTo('App\BookingStatus','status_id','id');
@@ -54,5 +47,10 @@ class Booking extends Model
     public function appointments()
     {
         return $this->hasMany('App\Appointment');
+    }
+
+    public function assistance_types()
+    {
+        return $this->belongsToMany('App\AssistanceType', 'bookings_assistance_types');
     }
 }
