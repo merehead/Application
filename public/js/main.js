@@ -445,6 +445,7 @@ $(document).ready(function () {
         $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", false);
         $(idLoadFiles).find('.addInfo__input').attr("disabled", false);
         $(idLoadFiles).find('.addInfo__input').attr("readonly", false);
+        $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: block');
 
         $(that).hide();
         $(that).parent().find('button.hidden').removeClass('hidden');
@@ -465,6 +466,7 @@ $(document).ready(function () {
         $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", true);
         $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", true);
         $(idLoadFiles).find('.addInfo__input').attr("disabled", true);
+        $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: none');
 
         that.button('loading');
 
@@ -720,7 +722,6 @@ $(document).ready(function () {
       $(this).parent().parent().find('.addInfo__input').prop( "disabled", false)
       $(this).parent().parent().find('.addInfo__input').attr( "readonly", false )
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
-      var input_id = $(this).parent().parent().find('.addInfo__input').attr('name')
       var pickfiles_img_id = $(this).parent().find('.pickfiles_img').attr('id')
       var deleteID = $(this).parent().find('.pickfiles-delete').attr('id')
 
@@ -758,7 +759,11 @@ $(document).ready(function () {
       }
 
       file.type_value = input_name
-      file.unique_type = pickfiles_img_id
+      if($carer_profile.length){
+        file.unique_type = pickfiles_img_id
+      }else{
+        file.unique_type = input_name
+      }
 
       var q = '.profileRow-'+input_name.split('-')[0]
       c += 1
@@ -779,11 +784,19 @@ $(document).ready(function () {
         </div>
       `)
 
-      arrFiles = arrFiles.filter((index) => {
-        if(index.unique_type !== pickfiles_img_id){
-          return index
-        }
-      })
+      if($carer_profile.length){
+        arrFiles = arrFiles.filter((index) => {
+          if(index.unique_type !== pickfiles_img_id){
+            return index
+          }
+        })
+      }else{
+        arrFiles = arrFiles.filter((index) => {
+          if(index.unique_type !== input_name){
+            return index
+          }
+        })
+      }
 
       arrFiles.push(file)
       console.log(arrFiles)
@@ -993,6 +1006,16 @@ $(document).ready(function () {
 
         console.log(newDoc)
 
+        function func(index, index2, i) {
+          if(wordFileType.indexOf(index2.file_name.split('.')[1]) !== -1){
+            return `<div id="${index[0].toLowerCase()}${i}" class="pickfiles_img" style='background-image: url(/img/Word-icon_thumb.png)'></div>`
+          }else if(pdfFileType.indexOf(index2.file_name.split('.')[1]) !== -1){
+            return `<div id="${index[0].toLowerCase()}${i}" class="pickfiles_img" style='background-image: url(/img/PDF_logo.png)''></div>`
+          }else{
+            return `<div id="${index[0].toLowerCase()}${i}" class="pickfiles_img" style='background-image: url(/api/document/${index2.id}/preview)'></div>`
+          }
+        }
+
         newDoc.map((index, i) => {
           var p = '.' + profileRow+index[0].toLowerCase()
           var count = 3 - index[1].length
@@ -1000,18 +1023,19 @@ $(document).ready(function () {
           // if(index[1].length >= 3){
             $(p).html('')
             index[1].map((index2, i2) => {
+
               $(p).append(`
                 <div class="profileField">
                   ${
                     i2 === 0 ?
                     `<h2 class="profileField__title ordinaryTitle">
                       <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                       ${index[0].toLowerCase()}
+                       ${index[0].toLowerCase().split('_').join(' ')}
                       </span>
                     </h2>` : ''
                   }
                   <div class="addContainer">
-                    <div id="${index[0].toLowerCase()}${i}" class="pickfiles_img" style='background-image: url(/api/document/${index2.id}/preview)'></div>
+                    ${func(index[0], index2, i)}
                     <a class="add add--moreHeight"></a>
                   </div>
                   <div class="addInfo">
