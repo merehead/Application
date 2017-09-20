@@ -1025,7 +1025,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'other_medical_conditions' => 'required|in:"Yes","No","Sometimes"',
-            'other_medical_detail' => 'required_if:other_medical_conditions,"Yes","Sometimes"|nullable|string|max:500',
+            'other_medical_detail' => 'required_if:other_medical_conditions,"Yes","Sometimes"|nullable|string|max:250',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1041,7 +1041,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'food_allergies' => 'required|in:"Yes","No","Sometimes"',
-            'food_allergies_detail' => 'required_if:food_allergies,"Yes","Sometimes"|nullable|string|max:500',
+            'food_allergies_detail' => 'required_if:food_allergies,"Yes","Sometimes"|nullable|string|max:250',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1057,7 +1057,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'dietary_requirements' => 'required|in:"Yes","No","Sometimes"',
-            'dietary_requirements_interaction' => 'required_if:dietary_requirements,"Yes","Sometimes"|nullable|string|max:500',
+            'dietary_requirements_interaction' => 'required_if:dietary_requirements,"Yes","Sometimes"|nullable|string|max:250',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1073,7 +1073,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'special_dietary_requirements' => 'required|in:"Yes","No","Sometimes"',
-            'special_dietary_requirements_detail' => 'required_if:special_dietary_requirements,"Yes","Sometimes"|nullable|string|max:500',
+            'special_dietary_requirements_detail' => 'required_if:special_dietary_requirements,"Yes","Sometimes"|nullable|string|max:250',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1106,7 +1106,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'preferences_of_food' => 'required|in:"Yes","No","Sometimes"',
-            'preferences_of_food_requirements' => 'required_if:preferences_of_food,"Yes","Sometimes"|nullable|string|max:500',
+            'preferences_of_food_requirements' => 'required_if:preferences_of_food,"Yes","Sometimes"|nullable|string|max:250',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1123,7 +1123,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'assistance_with_eating' => 'required|in:"Yes","No","Sometimes"',
-            'assistance_with_eating_detail' => 'required_if:assistance_with_eating,"Yes","Sometimes"|nullable|string|max:500',
+            'assistance_with_eating_detail' => 'required_if:assistance_with_eating,"Yes","Sometimes"|nullable|string|max:250',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1168,7 +1168,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'assistance_getting_dressed' => 'required|in:"Yes","No","Sometimes"',
-            'assistance_getting_dressed_detail' => 'required_if:assistance_getting_dressed,"Yes","Sometimes"|nullable|string|max:500',
+            'assistance_getting_dressed_detail' => 'required_if:assistance_getting_dressed,"Yes","Sometimes"|nullable|string|max:250',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1220,9 +1220,9 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'have_incontinence' => 'required|in:"Yes","No","Sometimes"',
-            'kind_of_incontinence' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|string|max:500',
+            'kind_of_incontinence' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|string|max:250',
             'incontinence_wear' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|in:"Yes","No","Sometimes"',
-            'incontinence_products_stored' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|string|max:500',
+            'incontinence_products_stored' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|string|max:250',
             'choosing_incontinence_products' => 'nullable|in:"Yes","No","Sometimes"',
         ]);
 
@@ -1260,7 +1260,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'consent' => 'required|in:"Yes","No","Sometimes"',
-            'consent_details' => 'required_if:consent,"Yes","Sometimes"|nullable|string|max:500',
+            'consent_details' => 'required_if:consent,"Yes","Sometimes"|nullable|string|max:250',
 
         ]);
 
@@ -1298,7 +1298,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'keeping_safe_at_night' => 'required|in:"Yes","No","Sometimes"',
-            'keeping_safe_at_night_details' => 'required_if:keeping_safe_at_night,"Yes","Sometimes"|nullable|String:250',
+            'keeping_safe_at_night_details' => 'required_if:keeping_safe_at_night,"Yes","Sometimes"|nullable|string|max:250',
             'time_to_night_helping' => 'nullable|string|max:16',
 
         ]);
@@ -1336,7 +1336,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'religious_beliefs' => 'required|in:"Yes","No","Sometimes"',
-            'religious_beliefs_details' => 'required_if:religious_beliefs,"Yes","Sometimes"|nullable|string|max:500',
+            'religious_beliefs_details' => 'required_if:religious_beliefs,"Yes","Sometimes"|nullable|string|max:250',
          ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1352,7 +1352,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'particular_likes' => 'required|in:"Yes","No","Sometimes"',
-            'particular_likes_details' => 'required_if:particular_likes,"Yes","Sometimes"|nullable|string|max:500',
+            'particular_likes_details' => 'required_if:particular_likes,"Yes","Sometimes"|nullable|string|max:250',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1384,7 +1384,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'interests_hobbies' => 'required|in:"Yes","No","Sometimes"',
-            'interests_hobbies_details' => 'required_if:interests_hobbies,"Yes","Sometimes"|nullable|string|max:500',
+            'interests_hobbies_details' => 'required_if:interests_hobbies,"Yes","Sometimes"|nullable|string|max:250',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
