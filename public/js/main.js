@@ -357,13 +357,27 @@ $(document).ready(function () {
         if($(this).val() !="0")
         {
             if($(this).val() == 'Yes') {
-                //$(".depend_hiding").hide();
+                $(".depend_hiding").hide();
             }
             if($(this).val() == 'No') {
                 $(".depend_hiding").hide();
             }
             if($(this).val() == 'It Depends') {
                 $(".depend_hiding").show();
+            }
+        }
+    });
+
+    if($("#depend-if-work").val() == 'Yes') {$(".depend_hiding-work").show();}else{$(".depend_hiding-work").hide();}
+
+    $("#depend-if-work").on('change',function(){
+        if($(this).val() !="0")
+        {
+            if($(this).val() == 'Yes') {
+                $(".depend_hiding-work").hide();
+            }
+            if($(this).val() == 'No') {
+                $(".depend_hiding-work").hide();
             }
         }
     });

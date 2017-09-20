@@ -118,9 +118,10 @@ null,['class'=>'profileField__select  profileField__select--greyBg','disabled','
                 <option value="Yes">Do not have restrictions to work in the uk</option>
             </select>--}}
             {!! Form::select('work_UK_restriction',['Yes'=>'Yes','No'=>'No'],
-null,['class'=>'profileField__select  profileField__select--greyBg','disabled','data-edit'=>'false']) !!}
+null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depend-if-work','disabled',
+'data-edit'=>'false']) !!}
         </div>
-        <div class="profileField">
+        <div class="profileField depend_hiding-work">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Restrictions working </span>
