@@ -7,6 +7,7 @@ use App\Behaviour;
 use App\Floor;
 use App\Language;
 use App\ServiceType;
+use App\ServiceUserCondition;
 use App\ServiceUsersProfile;
 use App\WorkingTime;
 use Illuminate\Http\Request;
@@ -60,11 +61,18 @@ class ServiceUserPrivateProfileController extends FrontController
 
             $workingTimes = WorkingTime::all();
             $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
+
             $languages = Language::all();
             $this->vars = array_add($this->vars, 'languages', $languages);
+
+            $serviceUserConditions = ServiceUserCondition::all();
+            $this->vars = array_add($this->vars, 'serviceUserConditions', $serviceUserConditions);
+
             $floors = Floor::all()->pluck('name', 'id')->toArray();
             $this->vars = array_add($this->vars, 'floors', $floors);
             $this->content = view(config('settings.frontTheme') . '.serviceUserProfiles.PrivateProfile')->with($this->vars)->render();
+
+
 
         }
 
@@ -135,6 +143,7 @@ class ServiceUserPrivateProfileController extends FrontController
                 'mobile_number' =>
                     array(
                         'required',
+                        'max:30'
                     ),
                 'address_line1' =>
                     array(
@@ -161,7 +170,7 @@ class ServiceUserPrivateProfileController extends FrontController
                     )
             ]);
 
-            $depart = "#servicePrivateGeneral";
+            $depart = "#serviceGeneral";
 
             if (isset($input['like_name'])) $serviceUsersProfile->like_name = $input['like_name'];
             if (isset($input['address_line1'])) $serviceUsersProfile->address_line1 = $input['address_line1'];
@@ -172,6 +181,7 @@ class ServiceUserPrivateProfileController extends FrontController
 
             $serviceUsersProfile->save();
             unset($serviceUsersProfile);
+
         }
 
         if ($input['stage'] == 'oneLineAbove') {
@@ -179,7 +189,7 @@ class ServiceUserPrivateProfileController extends FrontController
                 'one_line_about' => 'nullable|string|max:250',
             ]);
 
-            $depart = "#servicePrivateGeneral";
+            $depart = "#serviceGeneralone";
 
             if (isset($input['one_line_about'])) $serviceUsersProfile->one_line_about = $input['one_line_about'];
 
@@ -193,11 +203,13 @@ class ServiceUserPrivateProfileController extends FrontController
                 'other_languages' => 'nullable|string|max:200',
             ]);
 
-            $depart = "#servicePrivateGeneral";
-
+            $depart = "#languages-div";
             $languages = $request->input('languages');
-            $serviceUsersProfile->Languages()->sync(array_keys($languages));
-            $serviceUsersProfile->other_languages = $request->input('other_languages');
+
+            $serviceUsersProfile->Languages()->sync(array_map('intval', array_keys($languages)));
+
+            $serviceUsersProfile->other_languages  = $request->input('other_languages');
+
 
             $serviceUsersProfile->save();
             unset($serviceUsersProfile);
@@ -343,9 +355,8 @@ class ServiceUserPrivateProfileController extends FrontController
         if ($input['stage'] == 'typeOfCare') {
 
 
-            //dd($input);
+            $this->validate($request,[
 
-            $this->validate($request, [
                 'typeService' => 'required|array',
                 'checkSrvCare' => 'required|array',
             ]);
@@ -359,10 +370,150 @@ class ServiceUserPrivateProfileController extends FrontController
             $serviceUsersProfile->ServicesTypes()->sync(array_keys($typeService));
             $serviceUsersProfile->AssistantsTypes()->sync(array_keys($checkSrvCare));
 
-
             unset($serviceUsersProfile);
         }
 
+        if ($input['stage'] == 'health') {
+
+            $this->validate($request,[
+                'serviceUserCondition'                      => 'required|array',
+                'particular_likes'                          => 'nullable|in:"Yes","No","Sometimes"',
+                'comprehension'                             => 'nullable|in:"Yes","No","Sometimes"',
+                'communication'                             => 'nullable|in:"Yes","No","Sometimes"',
+                'speech'                                    => 'nullable|in:"Yes","No","Sometimes"',
+                'vision'                                    => 'nullable|in:"Yes","No","Sometimes"',
+                'hearing'                                   => 'nullable|in:"Yes","No","Sometimes"',
+                'assistance_in_medication'                  => 'nullable|in:"Yes","No","Sometimes"',
+                'have_any_allergies'                        => 'nullable|in:"Yes","No","Sometimes"',
+                'skin_scores'                               => 'nullable|in:"Yes","No","Sometimes"',
+                'assistance_with_dressings'                 => 'nullable|in:"Yes","No","Sometimes"',
+                'help_with_mobility'                        => 'nullable|in:"Yes","No","Sometimes"',
+                'mobility_home'                             => 'nullable|in:"Yes","No","Sometimes"',
+                'mobility_bed'                              => 'nullable|in:"Yes","No","Sometimes"',
+                'history_of_falls'                          => 'nullable|in:"Yes","No","Sometimes"',
+                'mobility_shopping'                         => 'nullable|in:"Yes","No","Sometimes"',
+                'assistance_with_eating'                    => 'nullable|in:"Yes","No","Sometimes"',
+                'prepare_food'                              => 'nullable|in:"Yes","No","Sometimes"',
+                'assistance_with_preparing_food'            => 'nullable|in:"Yes","No","Sometimes"',
+                'dietary_requirements'                      => 'nullable|in:"Yes","No","Sometimes"',
+                'special_dietary_requirements'              => 'nullable|in:"Yes","No","Sometimes"',
+                'assistance_with_personal_hygiene'          => 'nullable|in:"Yes","No","Sometimes"',
+                'appropriate_clothes'                       => 'nullable|in:"Yes","No","Sometimes"',
+                'assistance_getting_dressed'                => 'nullable|in:"Yes","No","Sometimes"',
+                'assistance_with_bathing'                   => 'nullable|in:"Yes","No","Sometimes"',
+                'managing_toilet_needs'                     => 'nullable|in:"Yes","No","Sometimes"',
+                'mobilising_to_toilet'                      => 'nullable|in:"Yes","No","Sometimes"',
+                'cleaning_themselves'                       => 'nullable|in:"Yes","No","Sometimes"',
+                'have_incontinence'                         => 'nullable|in:"Yes","No","Sometimes"',
+                'choosing_incontinence_products'            => 'nullable|in:"Yes","No","Sometimes"',
+                'incontinence_wear'                         => 'nullable|in:"Yes","No","Sometimes"',
+
+                'other_behaviour'                                   => 'nullable|string|max:250',
+                'comprehension_detail'                              => 'nullable|string|max:500',
+                'common_communication_details'                      => 'nullable|string|max:250',
+                'speech_detail'                                     => 'nullable|string|max:500',
+                'vision_detail'                                     => 'nullable|string|max:500',
+                'hearing_detail'                                    => 'nullable|string|max:500',
+                'in_medication_detail'                              => 'nullable|string|max:250',
+                'allergies_detail'                                  => 'nullable|string|max:500',
+                'skin_scores_detail'                                => 'nullable|string|max:250',
+                'dressings_detail'                                  => 'nullable|string|max:250',
+                'common_mobility_details'                           => 'nullable|string|max:250',
+                'mobility_home_detail'                              => 'nullable|string|max:500',
+                'mobility_bed_detail'                               => 'nullable|string|max:500',
+                'falls_detail'                                      => 'nullable|string|max:500',
+                'mobility_shopping_detail'                          => 'nullable|string|max:500',
+                'assistance_with_eating_detail'                     => 'nullable|string|max:250',
+                'prepare_food_details'                              => 'nullable|string|max:250',
+                'assistance_prepare_food_details'                   => 'nullable|string|max:250',
+                'dietary_requirements_interaction'                  => 'nullable|string|max:250',
+                'special_dietary_requirements_detail'               => 'nullable|string|max:250',
+                'assistance_with_personal_hygiene_detail'           => 'nullable|string|max:250',
+                'appropriate_clothes_assistance_detail'             => 'nullable|string|max:250',
+                'assistance_getting_dressed_detail'                 => 'nullable|string|max:250',
+                'assistance_with_bathing_detail'                    => 'nullable|string|max:250',
+                'managing_toilet_needs_detail'                      => 'nullable|string|max:250',
+                'mobilising_to_toilet_detail'                       => 'nullable|string|max:250',
+                'cleaning_themselves_detail'                        => 'nullable|string|max:250',
+                'kind_of_incontinence'                              => 'nullable|string|max:250',
+                'choosing_incontinence_products_detail'             => 'nullable|string|max:250',
+                'incontinence_products_stored'                      => 'nullable|string|max:250',
+                'incontinence_wear_detail'                          => 'nullable|string|max:250',
+            ]);
+
+            $depart = "#health-div";
+
+            if (isset($input[ 'particular_likes'                ])) $serviceUsersProfile-> particular_likes                = $input[ 'particular_likes'                ];
+            if (isset($input[ 'comprehension'                   ])) $serviceUsersProfile-> comprehension                   = $input[ 'comprehension'                   ];
+            if (isset($input[ 'communication'                   ])) $serviceUsersProfile-> communication                   = $input[ 'communication'                   ];
+            if (isset($input[ 'speech'                          ])) $serviceUsersProfile-> speech                          = $input[ 'speech'                          ];
+            if (isset($input[ 'vision'                          ])) $serviceUsersProfile-> vision                          = $input[ 'vision'                          ];
+            if (isset($input[ 'hearing'                         ])) $serviceUsersProfile-> hearing                         = $input[ 'hearing'                         ];
+            if (isset($input[ 'assistance_in_medication'        ])) $serviceUsersProfile-> assistance_in_medication        = $input[ 'assistance_in_medication'        ];
+            if (isset($input[ 'have_any_allergies'              ])) $serviceUsersProfile-> have_any_allergies              = $input[ 'have_any_allergies'              ];
+            if (isset($input[ 'skin_scores'                     ])) $serviceUsersProfile-> skin_scores                     = $input[ 'skin_scores'                     ];
+            if (isset($input[ 'assistance_with_dressings'       ])) $serviceUsersProfile-> assistance_with_dressings       = $input[ 'assistance_with_dressings'       ];
+            if (isset($input[ 'help_with_mobility'              ])) $serviceUsersProfile-> help_with_mobility              = $input[ 'help_with_mobility'              ];
+            if (isset($input[ 'mobility_home'                   ])) $serviceUsersProfile-> mobility_home                   = $input[ 'mobility_home'                   ];
+            if (isset($input[ 'mobility_bed'                    ])) $serviceUsersProfile-> mobility_bed                    = $input[ 'mobility_bed'                    ];
+            if (isset($input[ 'history_of_falls'                ])) $serviceUsersProfile-> history_of_falls                = $input[ 'history_of_falls'                ];
+            if (isset($input[ 'mobility_shopping'               ])) $serviceUsersProfile-> mobility_shopping               = $input[ 'mobility_shopping'               ];
+            if (isset($input[ 'assistance_with_eating'          ])) $serviceUsersProfile-> assistance_with_eating          = $input[ 'assistance_with_eating'          ];
+            if (isset($input[ 'prepare_food'                    ])) $serviceUsersProfile-> prepare_food                    = $input[ 'prepare_food'                    ];
+            if (isset($input[ 'assistance_with_preparing_food'  ])) $serviceUsersProfile-> assistance_with_preparing_food  = $input[ 'assistance_with_preparing_food'  ];
+            if (isset($input[ 'dietary_requirements'            ])) $serviceUsersProfile-> dietary_requirements            = $input[ 'dietary_requirements'            ];
+            if (isset($input[ 'special_dietary_requirements'    ])) $serviceUsersProfile-> special_dietary_requirements    = $input[ 'special_dietary_requirements'    ];
+            if (isset($input[ 'assistance_with_personal_hygiene'])) $serviceUsersProfile-> assistance_with_personal_hygiene= $input[ 'assistance_with_personal_hygiene'];
+            if (isset($input[ 'appropriate_clothes'             ])) $serviceUsersProfile-> appropriate_clothes             = $input[ 'appropriate_clothes'             ];
+            if (isset($input[ 'assistance_getting_dressed'      ])) $serviceUsersProfile-> assistance_getting_dressed      = $input[ 'assistance_getting_dressed'      ];
+            if (isset($input[ 'assistance_with_bathing'         ])) $serviceUsersProfile-> assistance_with_bathing         = $input[ 'assistance_with_bathing'         ];
+            if (isset($input[ 'managing_toilet_needs'           ])) $serviceUsersProfile-> managing_toilet_needs           = $input[ 'managing_toilet_needs'           ];
+            if (isset($input[ 'mobilising_to_toilet'            ])) $serviceUsersProfile-> mobilising_to_toilet            = $input[ 'mobilising_to_toilet'            ];
+            if (isset($input[ 'cleaning_themselves'             ])) $serviceUsersProfile-> cleaning_themselves             = $input[ 'cleaning_themselves'             ];
+            if (isset($input[ 'have_incontinence'               ])) $serviceUsersProfile-> have_incontinence               = $input[ 'have_incontinence'               ];
+            if (isset($input[ 'choosing_incontinence_products'  ])) $serviceUsersProfile-> choosing_incontinence_products  = $input[ 'choosing_incontinence_products'  ];
+            if (isset($input[ 'incontinence_wear'               ])) $serviceUsersProfile-> incontinence_wear               = $input[ 'incontinence_wear'               ];
+
+
+            if (isset($input[ 'other_behaviour'                         ])) $serviceUsersProfile-> other_behaviour                         = $input[ 'other_behaviour'                         ];
+            if (isset($input[ 'comprehension_detail'                    ])) $serviceUsersProfile-> comprehension_detail                    = $input[ 'comprehension_detail'                    ];
+            if (isset($input[ 'common_communication_details'            ])) $serviceUsersProfile-> common_communication_details            = $input[ 'common_communication_details'            ];
+            if (isset($input[ 'speech_detail'                           ])) $serviceUsersProfile-> speech_detail                           = $input[ 'speech_detail'                           ];
+            if (isset($input[ 'vision_detail'                           ])) $serviceUsersProfile-> vision_detail                           = $input[ 'vision_detail'                           ];
+            if (isset($input[ 'hearing_detail'                          ])) $serviceUsersProfile-> hearing_detail                          = $input[ 'hearing_detail'                          ];
+            if (isset($input[ 'in_medication_detail'                    ])) $serviceUsersProfile-> in_medication_detail                    = $input[ 'in_medication_detail'                    ];
+            if (isset($input[ 'allergies_detail'                        ])) $serviceUsersProfile-> allergies_detail                        = $input[ 'allergies_detail'                        ];
+            if (isset($input[ 'skin_scores_detail'                      ])) $serviceUsersProfile-> skin_scores_detail                      = $input[ 'skin_scores_detail'                      ];
+            if (isset($input[ 'dressings_detail'                        ])) $serviceUsersProfile-> dressings_detail                        = $input[ 'dressings_detail'                        ];
+            if (isset($input[ 'common_mobility_details'                 ])) $serviceUsersProfile-> common_mobility_details                 = $input[ 'common_mobility_details'                 ];
+            if (isset($input[ 'mobility_home_detail'                    ])) $serviceUsersProfile-> mobility_home_detail                    = $input[ 'mobility_home_detail'                    ];
+            if (isset($input[ 'mobility_bed_detail'                     ])) $serviceUsersProfile-> mobility_bed_detail                     = $input[ 'mobility_bed_detail'                     ];
+            if (isset($input[ 'falls_detail'                            ])) $serviceUsersProfile-> falls_detail                            = $input[ 'falls_detail'                            ];
+            if (isset($input[ 'mobility_shopping_detail'                ])) $serviceUsersProfile-> mobility_shopping_detail                = $input[ 'mobility_shopping_detail'                ];
+            if (isset($input[ 'assistance_with_eating_detail'           ])) $serviceUsersProfile-> assistance_with_eating_detail           = $input[ 'assistance_with_eating_detail'           ];
+            if (isset($input[ 'prepare_food_details'                    ])) $serviceUsersProfile-> prepare_food_details                    = $input[ 'prepare_food_details'                    ];
+            if (isset($input[ 'assistance_prepare_food_details'         ])) $serviceUsersProfile-> assistance_prepare_food_details         = $input[ 'assistance_prepare_food_details'         ];
+            if (isset($input[ 'dietary_requirements_interaction'        ])) $serviceUsersProfile-> dietary_requirements_interaction        = $input[ 'dietary_requirements_interaction'        ];
+            if (isset($input[ 'special_dietary_requirements_detail'     ])) $serviceUsersProfile-> special_dietary_requirements_detail     = $input[ 'special_dietary_requirements_detail'     ];
+            if (isset($input[ 'assistance_with_personal_hygiene_detail' ])) $serviceUsersProfile-> assistance_with_personal_hygiene_detail = $input[ 'assistance_with_personal_hygiene_detail' ];
+            if (isset($input[ 'appropriate_clothes_assistance_detail'   ])) $serviceUsersProfile-> appropriate_clothes_assistance_detail   = $input[ 'appropriate_clothes_assistance_detail'   ];
+            if (isset($input[ 'assistance_getting_dressed_detail'       ])) $serviceUsersProfile-> assistance_getting_dressed_detail       = $input[ 'assistance_getting_dressed_detail'       ];
+            if (isset($input[ 'assistance_with_bathing_detail'          ])) $serviceUsersProfile-> assistance_with_bathing_detail          = $input[ 'assistance_with_bathing_detail'          ];
+            if (isset($input[ 'managing_toilet_needs_detail'            ])) $serviceUsersProfile-> managing_toilet_needs_detail            = $input[ 'managing_toilet_needs_detail'            ];
+            if (isset($input[ 'mobilising_to_toilet_detail'             ])) $serviceUsersProfile-> mobilising_to_toilet_detail             = $input[ 'mobilising_to_toilet_detail'             ];
+            if (isset($input[ 'cleaning_themselves_detail'              ])) $serviceUsersProfile-> cleaning_themselves_detail              = $input[ 'cleaning_themselves_detail'              ];
+            if (isset($input[ 'kind_of_incontinence'                    ])) $serviceUsersProfile-> kind_of_incontinence                    = $input[ 'kind_of_incontinence'                    ];
+            if (isset($input[ 'choosing_incontinence_products_detail'   ])) $serviceUsersProfile-> choosing_incontinence_products_detail   = $input[ 'choosing_incontinence_products_detail'   ];
+            if (isset($input[ 'incontinence_products_stored'            ])) $serviceUsersProfile-> incontinence_products_stored            = $input[ 'incontinence_products_stored'            ];
+            if (isset($input[ 'incontinence_wear_detail'                ])) $serviceUsersProfile-> incontinence_wear_detail                = $input[ 'incontinence_wear_detail'                ];
+
+
+            $serviceUsersProfile->ServiceUserConditions()->sync(array_keys($input['serviceUserCondition']));
+
+            $serviceUsersProfile->save();
+
+            unset($serviceUsersProfile);
+        }
 
         return Redirect::to(URL::previous() . $depart);
 
