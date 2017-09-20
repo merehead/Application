@@ -71,13 +71,15 @@
                     </div>
                 </div>
 
-                <div class="formField hiding2">
+                <div class="formField hiding2" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Do you own a car which you intend to use for work?
                     </h2>
                     <div class="inputWrap">
 
-                        {!! Form::select('have_car',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('have_car',['Yes'=>'Yes','No'=>'No'],null,['id'=>'register_have_car',
+                        'class'=>'formSelect',
+                        'placeholder'=>'Please select']) !!}
                     </div>
                     @if ($errors->has('have_car'))
                         <span class="help-block">
@@ -86,13 +88,15 @@
                     @endif
 
                 </div>
-                <div class="formField  hiding" style="display: none">
+                <div class="formField hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Would you be interested in using your car to transport clients to the shops or for short trips?<span>*</span>
                     </h2>
                     <div class="inputWrap">
 
-                        {!! Form::select('use_car',['Yes'=>'Yes','No'=>'No'],null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('use_car',['Yes'=>'Yes','No'=>'No'],null,
+                        ['id'=>'register_use_car','class'=>'formSelect',
+                        'placeholder'=>'Please select']) !!}
                     </div>
 
                     @if ($errors->has('use_car'))

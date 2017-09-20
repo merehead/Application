@@ -111,10 +111,11 @@
             }
         }
         if ($("#main-if2").val() == 'Yes') {
-            {
-                $(".hiding2").show()
+                $(".hiding2").show();
             }
-        }
+            else{
+                $(".hiding2").hide();
+            }
 
         if ($("#sometimes-if").val() == 'Sometimes') {
             {
