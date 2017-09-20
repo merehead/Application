@@ -334,16 +334,18 @@ a.blogFilter__item.active {
 }
 .lightTitle_align-l{
   text-align: left;
-  font-weight: 700
 }
 .bigTitle_margin{
   margin: -15px 0 15px 0;
 }
 .aboutInfo{
-  text-align: left; 
+  text-align: left;
 }
 .terms-cerer_margin-l{
   margin-left: 0;
+}
+.testimonialsSection-padding{
+  padding: 50px;
 }
 .section_title .padding-b{
   padding-bottom: 10px;

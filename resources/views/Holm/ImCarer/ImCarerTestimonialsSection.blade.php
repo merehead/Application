@@ -1,4 +1,4 @@
-<section class="testimonialsSection">
+<section class="testimonialsSection testimonialsSection-padding">
     <div class="container">
         <div class="testimonialsSection__title">
             <span class="testimonialsIco">
@@ -83,6 +83,3 @@
 
     </div>
 </section>
-
-
-
