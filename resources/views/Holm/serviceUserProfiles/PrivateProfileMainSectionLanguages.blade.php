@@ -24,7 +24,7 @@
 
                         <?php $language->id<10? $tmp = '0'.$language->id  : $tmp = $language->id; ?>
 
-                        {!! Form::checkbox('languages['.$tmp.']', null,
+                        {!! Form::checkbox('languages['.(($language->id<10) ? '0'.$language->id:$language->id).']', null,
 
                         ($serviceUsersProfile->Languages->containsStrict('carer_language', $language->carer_language) ? 1 : null),
 
@@ -37,21 +37,6 @@
         </div>
     @endforeach
 
-
-
-
-{{--            <div class="profileRow">
-                @foreach($languages as $language)
-
-                    <div class="profileField profileField--fourth">
-                        <div class="checbox_wrap">
-
-                            <input type="checkbox" id="coding" name="interest" value="coding" checked>
-                            <label for="coding">Coding</label>
-                        </div>
-                    </div>
-                @endforeach
-            </div>--}}
 
 
 

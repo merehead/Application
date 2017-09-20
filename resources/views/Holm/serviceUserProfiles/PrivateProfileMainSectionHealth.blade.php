@@ -39,7 +39,7 @@
                 PLEASE, GIVE DETAILS </span>
             </h2>
 
-            {!! Form::text('other_behaviour',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::text('other_behaviour',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"200"]) !!}
             @if ($errors->has('other_behaviour'))
                 <span class="help-block"><strong>{{ $errors->first('other_behaviour') }}</strong></span>
             @endif
