@@ -166,8 +166,7 @@ class ServiceUserPrivateProfileController extends FrontController
                 'postcode' =>
                     array(
                         'required',
-                        'regex:/^([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})|([Ss][Kk][0-9]{1,2}) [0-9][A-Za-z]{1,2}$/'
-                    )
+                        'regex:/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',                    )
             ]);
 
             $depart = "#serviceGeneral";

@@ -20,7 +20,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Please upload photographic proof of your ID.
+                        Please upload photographic proof of your ID (passport or driving licence is acceptable)
                     </h2>
 
 

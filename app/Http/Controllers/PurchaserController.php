@@ -86,6 +86,44 @@ class PurchaserController extends FrontController
 
         if ($input['stage'] == 'general') {
 
+            $this->validate($request, [
+
+                'like_name' =>
+                    array(
+                        'required',
+                        'string',
+                        'max:128'
+                    ),
+                'mobile_number' =>
+                    array(
+                        'required',
+                        'max:30'
+                    ),
+                'address_line1' =>
+                    array(
+                        'required',
+                        'string',
+                        'max:256'
+                    ),
+                'address_line2' =>
+                    array(
+                        'nullable',
+                        'string',
+                        'max:256'
+                    ),
+                'town' =>
+                    array(
+                        'required',
+                        'string',
+                        'max:128'
+                    ),
+                'postcode' =>
+                    array(
+                        'required',
+                        'regex:/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',
+                        ),
+
+            ]);
             $depart = "#PrivateGeneral";
 
             if (isset($input['like_name'])) $purchaserProfile->like_name = $input['like_name'];
