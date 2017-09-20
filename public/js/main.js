@@ -650,7 +650,7 @@ $(document).ready(function () {
 
     if($('#profile_photo').attr('style')){
       $('#profile_photo').parent().find('.pickfiles-delete_profile_photo').attr('style', 'display: block')
-      $('#profile_photo').parent().find('.add--moreHeight').html('')
+      // $('#profile_photo').parent().find('.add--moreHeight').html('')
     }
 
       $(document).on('change', '.addInfo__input', function(e) {
@@ -720,7 +720,7 @@ $(document).ready(function () {
 
     var c = 0
 
-    $(document).on('change', '.pickfiles', function(e) {
+    $(document).on('change', '.pickfiles, .pickfiles-change', function(e) {
       var input_val = $(this).parent().parent().find('.addInfo__input').val('')
 
       var p = $(this).parent().parent().parent().find('.profileField_h')
