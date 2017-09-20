@@ -343,6 +343,7 @@ $(document).ready(function () {
             $('.hiddenSort').addClass('hiddenSort--visible');
         }
     });
+
     if($("#depend-if").val() == 'It Depends') {$(".depend_hiding").show()}
 
     $("#depend-if").on('change',function(){
@@ -362,16 +363,44 @@ $(document).ready(function () {
 
     if($("#type_car_work").val() == 'Yes') {
         $(".car-block").show();
+        $('#profile_use_car').parent().show();
     }else{
         $(".car-block").hide();
+        $('#profile_use_car').parent().hide();
     }
+
     $("#type_car_work").on('change',function(){
         if($("#type_car_work").val() == 'Yes') {
             $(".car-block").show();
+            $('#profile_use_car').parent().show();
         }else{
             $(".car-block").hide();
+            $('#profile_use_car').parent().hide();
         }
     });
+
+    if($('#driving_license').length>0) {
+        if($('#driving_license').val() == "Yes") {$('.hiding_profile').show();}else{$('.hiding_profile').hide();}
+    }
+
+    if($('#register_have_car').length>0) {
+        if ($('#register_have_car').val() == "Yes") {
+            $('#register_use_car').parent().parent().show();
+        } else {
+            var uc = $('#register_use_car').parent().parent();
+            $(uc).hide();
+        }
+    }
+
+    $(document).on('change','#register_have_car',function () {
+        if ($('#register_have_car').val() == "Yes") {
+            $('#register_use_car').parent().parent().show();
+        } else {
+            var uc = $('#register_use_car').parent().parent();
+            $(uc).hide();
+        }
+    });
+
     if($("#criminal_detail").val() == 'Old') {
         $(".criminal_detail").show();
     }else{
@@ -617,28 +646,7 @@ $(document).ready(function () {
         confirmPass(this);
     });
     // -- Registration Carer Step 8
-    $('select[name="have_car"]').parent().parent().hide();
-    if ($('select[name="have_car"]').val() == 'Yes') {
-        {
-            $('select[name="have_car"]').parent().parent().show()
-        }
-    } else {
-        $('select[name="have_car"]').val('');
-        $('select[name="have_car"]').parent().parent().hide()
-    }
 
-    $('select[name="driving_licence"]').on('change', function () {
-        if ($(this).val() == 'Yes') {
-            {
-                $('select[name="have_car"]').parent().parent().show()
-            }
-        } else {
-            $('select[name="have_car"]').val('No');
-            $('select[name="have_car"]').parent().parent().hide();
-            $('select[name="use_car"]').parent().parent().hide();
-            $('select[name="use_car"]').val('No');
-        }
-    });
 
     // -- upload files. Registration sections -------
     var arrLocalStorage = []
