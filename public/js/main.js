@@ -1,5 +1,7 @@
 // ------ Global Variable -----------
 var $carer_profile = null;
+var has_error_profile_form=false;
+var error_mark = '';
 var arrFiles = []
 var arrFilesProfilePhoto = []
 var arrForDeleteIDProfile = []
@@ -168,45 +170,50 @@ function cancelEditFieldsCarer() {
 
 // -- Send request to server with AJAX data ----------
 function ajaxForm(form, that) {
-    var token = $(form).find('input[name=_token]').val();
-    $.ajax({
-        url: $(form).attr('action'),
-        headers: {'X-CSRF-TOKEN': token},
-        data: $(form).serialize(),
-        type: 'POST',
-        dataType: "application/json",
-        success: function (response) {
-            if (response.status != 200) {
-                $(form).find('.error-block strong').html(response.toString());
+    if(!has_error_profile_form) {
+        var token = $(form).find('input[name=_token]').val();
+        $.ajax({
+            url: $(form).attr('action'),
+            headers: {'X-CSRF-TOKEN': token},
+            data: $(form).serialize(),
+            type: 'POST',
+            dataType: "application/json",
+            success: function (response) {
+                if (response.status != 200) {
+                    $(form).find('.error-block strong').html(response.toString());
+                }
+                that.button('reset');
+                var idForm = $(form).attr('id');
+                if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
+                    var geocoder = new google.maps.Geocoder();
+                    geocodeAddress(geocoder, map);
+                }
+                // -- processing effects ----------
+                setTimeout(function () {
+                    $(that).addClass('hidden');
+                    setNoEditableFields();
+                    $(that).parent().find('a.btn-edit').show();
+                }, 500);
+            },
+            error: function (response) {
+                that.button('reset');
+                var idForm = $(form).attr('id');
+                if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
+                    var geocoder = new google.maps.Geocoder();
+                    geocodeAddress(geocoder, map);
+                }
+                // -- processing effects -----------
+                setTimeout(function () {
+                    $(that).addClass('hidden');
+                    setNoEditableFields();
+                    $(that).parent().find('a.btn-edit').show();
+                }, 500);
             }
-            that.button('reset');
-            var idForm = $(form).attr('id');
-            if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
-                var geocoder = new google.maps.Geocoder();
-                geocodeAddress(geocoder, map);
-            }
-            // -- processing effects ----------
-            setTimeout(function () {
-                $(that).addClass('hidden');
-                setNoEditableFields();
-                $(that).parent().find('a.btn-edit').show();
-            }, 500);
-        },
-        error: function (response) {
-            that.button('reset');
-            var idForm = $(form).attr('id');
-            if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
-                var geocoder = new google.maps.Geocoder();
-                geocodeAddress(geocoder, map);
-            }
-            // -- processing effects -----------
-            setTimeout(function () {
-                $(that).addClass('hidden');
-                setNoEditableFields();
-                $(that).parent().find('a.btn-edit').show();
-            }, 500);
-        }
-    });
+        });
+    }else{
+        that.button('reset');
+        $(document).scrollTop($(error_mark).offset().top-100)
+    }
     return false;
 }
 
@@ -392,6 +399,22 @@ $(document).ready(function () {
         }
     }
 
+    $("#post_code_profile").on("change",function(e){
+       var validator = /^([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})|([Ss][Kk][0-9]{1,2}) [0-9][A-Za-z]{1,2}$/;
+       var text  = $(this).val();
+       var $this = $(this);
+       var errorText = '<span class="help-block error-post-code">\n' +
+           '             <strong>Wrong post code. Please retry enter</strong>\n' +
+           '          </span>';
+       $('.error-post-code').remove();
+        has_error_profile_form=false;
+        error_mark='';
+       if(!validator.test(text)){
+           $($this).after(errorText);
+           has_error_profile_form=true;
+           error_mark='#post_code_profile';
+       }
+    });
     $(document).on('change','#register_have_car',function () {
         if ($('#register_have_car').val() == "Yes") {
             $('#register_use_car').parent().parent().show();

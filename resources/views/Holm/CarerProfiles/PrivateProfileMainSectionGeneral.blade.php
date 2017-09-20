@@ -66,7 +66,7 @@
                 Post code <span class="requireIco">*</span>
               </span>
             </h2>
-            {!! Form::text('postcode',null,['class'=>'profileField__input']) !!}
+            {!! Form::text('postcode',null,['class'=>'profileField__input','id'=>'post_code_profile']) !!}
         </div>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
