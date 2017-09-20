@@ -168,7 +168,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','id'=>'prof
                     {!! Form::text('driver_licence_valid_until',null,['id'=>'datepicker_driver_licence','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
                 @endif
 
-                {{--<input type="text" class="profileField__input " placeholder="Valid until date">--}}
+
             </div>
         </div>
 

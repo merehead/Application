@@ -92,27 +92,46 @@
                     </h2>
                     <div class="inputWrap">
 
-                        {!! Form::select('have_car',['Yes'=>'Yes','No'=>'No'],null,['id'=>'register_have_car',
+                        {!! Form::select('have_car',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if',
                         'class'=>'formSelect',
                         'placeholder'=>'Please select']) !!}
                     </div>
                     @if ($errors->has('have_car'))
-                        <span class="help-block">
-                                        <strong>{{ $errors->first('have_car') }}</strong>
-                                    </span>
+                        <span class="help-block"><strong>{{ $errors->first('have_car') }}</strong></span>
                     @endif
 
                 </div>
 
 
 
-            <div class="formField " >  {{--style="display: none"--}}
+
+            <div class="formField hiding" style="display: none">
+                <h2 class="profileField__title ordinaryTitle">
+                <span class="ordinaryTitle__text ">
+                  Car insurance Photo
+                </span>
+                </h2>
+                <div class="addContainer">
+                    <input disabled class="pickfiles-change" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                    <div id="car_insurance_photo" class="pickfiles_img"></div>
+                    <a class="add add--moreHeight">
+                        <i class="fa fa-plus-circle"></i>
+                        <div class="add__comment add__comment--smaller"></div>
+                    </a>
+                </div>
+                <div style="display: none" class="addInfo">
+                    <input disabled type="text" name="car_insurance_photo" class="addInfo__input" placeholder="Name">
+                </div>
+
+            </div>
+
+            <div class="formField hiding" style="display: none">
                 <h2 class="formLabel questionForm__label">
 
                  Car insurance Number
 
                 </h2>
-                {!! Form::text('car_insurance_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Car insurance number','readonly','data-edit'=>'false']) !!}
+                {!! Form::text('car_insurance_number',null,['class'=>'formInput','placeholder'=>'Car insurance number']) !!}
                 @if ($errors->has('car_insurance_number'))
                     <span class="help-block">
                                         <strong>{{ $errors->first('car_insurance_number') }}</strong>
@@ -137,9 +156,7 @@
                     </div>
 
                     @if ($errors->has('use_car'))
-                        <span class="help-block">
-                                        <strong>{{ $errors->first('use_car') }}</strong>
-                                    </span>
+                        <span class="help-block"><strong>{{ $errors->first('use_car') }}</strong></span>
                     @endif
                 </div>
 

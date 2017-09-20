@@ -380,6 +380,8 @@ class CarerRegistration
             'DBS_number' => 'string|nullable|max:128',
             'have_car' => 'nullable|in:"Yes","No"',
             'use_car' => 'required_if:have_car,"Yes"|nullable|in:"Yes","No"',
+            'car_insurance_number' => 'string|nullable|max:36',
+
         ]);
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
@@ -470,7 +472,7 @@ class CarerRegistration
 
         $this->validate($request,[
             'work_with_pets' => 'required|in:"Yes","No","It Depends"',
-            'pets_description' => 'required_if:work_with_pets,"Sometimes","Yes"|string|max:250|nullable',
+            'pets_description' => 'required_if:work_with_pets,"Sometimes"|string|max:250|nullable',
         ]);
 
 /*        switch ($request->input('work_with_pets')){
