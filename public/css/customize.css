@@ -335,8 +335,17 @@ a.blogFilter__item.active {
 .lightTitle_align-l{
   text-align: left;
 }
+.bigTitle_margin{
+  margin: -15px 0 15px 0;
+}
+.aboutInfo{
+  text-align: left;
+}
 .terms-cerer_margin-l{
   margin-left: 0;
+}
+.testimonialsSection-padding{
+  padding: 0px;
 }
 .section_title .padding-b{
   padding-bottom: 10px;
@@ -360,4 +369,3 @@ a.blogFilter__item.active {
     width: 20%;
     margin-right: 0;
 }
-

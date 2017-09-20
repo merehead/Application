@@ -739,6 +739,11 @@ $(document).ready(function () {
       // $('#profile_photo').parent().find('.add--moreHeight').html('')
     }
 
+      var url =  $('#profile_photo').attr('name')
+      $('<img/>').attr('src', url).on('load', function() {
+        $('#profile_photo').parent().find('.add').attr('style', 'opacity: 0')
+      });
+
       $(document).on('change', '.addInfo__input', function(e) {
       var id = $(this).parent().parent().find('.pickfiles_img').attr('id')
       var input_name = $(this).attr('name')
@@ -1012,6 +1017,7 @@ $(document).ready(function () {
       var input_val = $(this).parent().parent().find('.addInfo__input').val('')
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
       var this_name = $(this).attr('name')
+      $('#profile_photo').remove()
 
       var val = $(this)[0].files[0]
 

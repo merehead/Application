@@ -19,7 +19,7 @@
         Invite other users and both get £100 after 20 hours of usage
     </h2>
     <div class="terms-cerer">
-      *Please refer to <a href="{{route('TermsPage')}}">Terms &amp; Conditons</a>
+      *Please refer to <a href="<?php echo e(route('TermsPage')); ?>">Terms &amp; Conditons</a>
     </div>
     <form class="inviteForm">
         <div class="inviteForm__field">

@@ -49,7 +49,7 @@
                         Join now and receive a £50 bonus just for registering.<br />
 
                         <div class="terms-cerer terms-cerer_margin-l">
-                            Please refer to <a href="{{route('TermsPage')}}">Terms &amp; Conditons</a>
+                            *Please refer to <a href="{{route('TermsPage')}}">Terms &amp; Conditons</a>
                         </div>
 
                         Use Bonus Code  <b>'REGISTER'</b> when registering.

@@ -120,7 +120,7 @@
                             <img src="{{asset('/img/founder.jpeg')}}" alt="">
                         </div>
                         <div class="founder__info">
-                            <h2 class="bigTitle">
+                            <h2 class="bigTitle bigTitle_margin">
                                 Nik Seth
                             </h2>
                             <p class="founder__subtitle">
