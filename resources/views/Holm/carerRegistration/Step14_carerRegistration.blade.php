@@ -36,7 +36,7 @@
                     Are there any restrictions on you working in the UK?<span>*</span>
                 </h2>
                 <div class="inputWrap">
-                    {!! Form::select('work_UK_restriction',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    {!! Form::select('work_UK_restriction',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select','maxlength'=>"250"]) !!}
                 </div>
                 @if ($errors->has('work_UK_restriction'))
                     <span class="help-block">
@@ -52,7 +52,7 @@
                     What restrictions are there? <span>*</span>
                 </h2>
                 <div class="inputWrap">
-                    {!! Form::text('work_UK_description',null,['class'=>'formInput','placeholder'=>'Details']) !!}
+                    {!! Form::text('work_UK_description',null,['class'=>'formInput','placeholder'=>'Details','maxlength'=>"250"]) !!}
                 </div>
                 @if ($errors->has('work_UK_description'))
                     <span class="help-block">
@@ -66,11 +66,11 @@
                     What is your National Insurance Number?
                 </h2>
                 <div class="inputWrap">
-                    {!! Form::text('national_insurance_number',null,['class'=>'formInput','placeholder'=>'Insurance number']) !!}
+                    {!! Form::text('national_insurance_number',null,['class'=>'formInput','placeholder'=>'Insurance number','maxlength'=>"120"]) !!}
                 </div>
                 @if ($errors->has('national_insurance_number'))
                     <span class="help-block">
-                                        <strong>{{ $errors->first('work_UK_restriction') }}</strong>
+                                        <strong>{{ $errors->first('national_insurance_number') }}</strong>
                                     </span>
                 @endif
 
