@@ -29,7 +29,7 @@
 
             <div class="profileRow language_additional nhide"  >
 
-                <div class="profileField profileField--two-thirds">
+                <div class="profileField profileField--full-width">
                     <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Other languages   </span>
