@@ -24,7 +24,8 @@
                           <input class="pickfiles_profile_photo" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                           <div class="pickfiles_img"></div>
 
-                          <div id="profile_photo" class="pickfiles_img" style="background-image: url(img/profile_photos/{{$carersProfile->id}}.png)"></div>
+                          <div id="profile_photo" class="pickfiles_img" name='img/profile_photos/{{$purchasersProfile->id}}.png'
+                            style="background-image: url(img/profile_photos/{{$carersProfile->id}}.png)"></div>
 
                           <a href="#" class="add add--moreHeight">
                               <i class="fa fa-plus-circle"></i>

@@ -45,15 +45,25 @@
 
                           <div class="pickfiles_img"></div>
 
-                          <img id="profile_photo" class="pickfiles_img" onerror="this.src='/img/no_photo.png'" 
+                          <div id="profile_photo" class="pickfiles_img"
+
+                            @if(empty($purchasersProfileID))
+                              name='img/service_user_profile_photos/{{$serviceUserProfile->id}}.png'
+                              style="background-image: url('img/service_user_profile_photos/{{$serviceUserProfile->id}}.png')"
+                            @else
+                              name='img/profile_photos/{{$purchasersProfile->id}}.png'
+                              style="background-image: url('img/service_user_profile_photos/{{$purchasersProfile->serviceUsers->first()->id}}.png')"
+                            @endif>
+
+                          </div>
+
+                          <!-- <img id="profile_photo" class="pickfiles_img" onerror="this.src='/img/no_photo.png'"
 
                             @if(empty($purchasersProfileID))
                               style="background-image: url('img/service_user_profile_photos/{{$serviceUserProfile->id}}.png')">
                             @else
                               style="background-image: url('img/service_user_profile_photos/{{$purchasersProfile->serviceUsers->first()->id}}.png')">
-                            @endif
-
-                          >
+                            @endif -->
 
                           <a href="#" class="add add--moreHeight">
                               <i class="fa fa-plus-circle"></i>
