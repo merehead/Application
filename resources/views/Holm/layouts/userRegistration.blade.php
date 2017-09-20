@@ -105,11 +105,11 @@
                 $(".depend_hiding").show()
             }
         }
-        if ($("#depend-if").val() == 'Yes') {
+/*        if ($("#depend-if").val() == 'Yes') {
             {
                 $(".depend_hiding").show()
             }
-        }
+        }*/
         if ($("#main-if2").val() == 'Yes') {
                 $(".hiding2").show();
             }
@@ -207,7 +207,7 @@
         $("#depend-if").change(function () {
             if ($(this).val() != "0") {
                 if ($(this).val() == 'Yes') {
-                    $(".depend_hiding").show()
+                    $(".depend_hiding").hide()
                 }
                 if ($(this).val() == 'No') {
                     $(".depend_hiding").hide()
