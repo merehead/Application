@@ -70,7 +70,7 @@
                         Please upload photographic proof of your driving licence.
                     </h2>
                     <div class="inputWrap addContainer">
-                      <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                      <input class="pickfiles" accept=".jpg,.jpeg,.png,.doc,.docx" type="file" />
                       <span class="pickfiles-delete">X</span>
                       <div id="driving_licence_photo" class="pickfiles_img"></div>
                         <a href="#" class="add add--moreHeight">
@@ -105,27 +105,30 @@
 
 
 
-            <div class="formField hiding" style="display: none">
+            <div class="formField hiding2" style="display: none">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
                   Car insurance Photo
                 </span>
                 </h2>
-                <div class="addContainer">
-                    <input disabled class="pickfiles-change" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-                    <div id="car_insurance_photo" class="pickfiles_img"></div>
-                    <a class="add add--moreHeight">
+                <div class="inputWrap addContainer">
+                  <input class="pickfiles" accept="jpg,.jpeg,.png" type="file" />
+                  <span class="pickfiles-delete">X</span>
+                  <div id="car_insurance_photo" class="pickfiles_img"></div>
+                    <a href="#" class="add add--moreHeight">
                         <i class="fa fa-plus-circle"></i>
-                        <div class="add__comment add__comment--smaller"></div>
+                        <div class="add__comment add__comment--smaller">
+                            <p>Choose a File or Drag Here</p>
+                            <span>Size limit: 10 MB</span>
+                        </div>
                     </a>
                 </div>
                 <div style="display: none" class="addInfo">
                     <input disabled type="text" name="car_insurance_photo" class="addInfo__input" placeholder="Name">
                 </div>
-
             </div>
 
-            <div class="formField hiding" style="display: none">
+            <div class="formField hiding2" style="display: none">
                 <h2 class="formLabel questionForm__label">
 
                  Car insurance Number
@@ -144,7 +147,7 @@
 
 
 
-                <div class="formField hiding" style="display: none">
+                <div class="formField hiding2" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Would you be interested in using your car to transport clients to the shops or for short trips?<span>*</span>
                     </h2>
