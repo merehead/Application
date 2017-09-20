@@ -11,7 +11,7 @@
 {!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'typeOfCare']) !!}
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('stage','typeOfCare') !!}
-{{Form::submit('Click Me!')}}
+
 
 <div class="borderContainer">
     <div class="profileRow">

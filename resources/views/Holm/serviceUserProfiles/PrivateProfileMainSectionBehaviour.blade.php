@@ -10,7 +10,6 @@
 {!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'behaviour']) !!}
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('stage','behaviour') !!}
-{{Form::submit('Click Me!')}}
 
 
 <div class="borderContainer">

@@ -9,8 +9,6 @@
 {!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'home']) !!}
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('stage','home') !!}
-{{Form::submit('Click Me!')}}
-
 
 <div class="borderContainer">
     <div class="profileRow">

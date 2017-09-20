@@ -11,7 +11,6 @@
     {!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'nightTime']) !!}
     {!! Form::hidden('id',null) !!}
     {!! Form::hidden('stage','nightTime') !!}
-    {{Form::submit('Click Me!')}}
 
 
     <div class="profileRow">

@@ -260,7 +260,7 @@ class ServiceUserPrivateProfileController extends FrontController
             if (isset($input['assistance_keeping'])) $serviceUsersProfile->assistance_keeping = $input['assistance_keeping'];
             if (isset($input['move_available'])) $serviceUsersProfile->move_available = $input['move_available'];
             if (isset($input['assistance_moving'])) $serviceUsersProfile->assistance_moving = $input['assistance_moving'];
-            if (isset($input['assistance_moving_details'])) $serviceUsersProfile->mobile_number = $input['assistance_moving_details'];
+            if (isset($input['assistance_moving_details'])) $serviceUsersProfile->assistance_moving_details = $input['assistance_moving_details'];
             if (isset($input['carer_enter'])) $serviceUsersProfile->carer_enter = $input['carer_enter'];
             if (isset($input['other_detail'])) $serviceUsersProfile->other_detail = $input['other_detail'];
             if (isset($input['anyone_else_live'])) $serviceUsersProfile->anyone_else_live = $input['anyone_else_live'];

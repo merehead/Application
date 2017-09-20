@@ -9,7 +9,7 @@
         </a>
         <span class="breadcrumbs__arrow">></span>
         <a href="" class="breadcrumbs__item">
-            {{$userNameForSite}}
+            {!! $serviceUsersProfile->first_name.'&nbsp'.mb_substr($serviceUsersProfile->family_name,0,1).'.' !!}
         </a>
 
     </div>

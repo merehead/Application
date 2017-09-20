@@ -11,7 +11,7 @@
 {!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'languages']) !!}
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('stage','languages') !!}
-{{Form::submit('Click Me!')}}
+
 
 <div class="borderContainer">
 
