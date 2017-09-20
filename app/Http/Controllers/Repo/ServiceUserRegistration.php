@@ -1401,7 +1401,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'we_missed' => 'required|in:"Yes","No","Sometimes"',
-            'we_missed_details' => 'required_if:we_missed,"Yes","Sometimes"|nullable|string|max:500',
+            'we_missed_details' => 'required_if:we_missed,"Yes","Sometimes"|nullable|string|max:250',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1418,7 +1418,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'multiple_carers' => 'required|in:"Yes","No","Sometimes"',
-            'multiple_carers_details' => 'required_if:multiple_carers,"Yes","Sometimes"|nullable|string|max:500',
+            'multiple_carers_details' => 'required_if:multiple_carers,"Yes","Sometimes"|nullable|string|max:250',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));

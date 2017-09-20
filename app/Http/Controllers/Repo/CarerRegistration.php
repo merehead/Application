@@ -266,9 +266,12 @@ class CarerRegistration
             'postcode' =>
                 array(
                     'required',
-                    'regex:/^([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})|([Ss][Kk][0-9]{1,2})$/' //[0-9][A-Za-z]{1,2}
 
-//                    'regex:/^([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})|([Ss][Kk][0-9]{1,2}) [0-9][A-Za-z]{1,2}$/'
+                    'regex:/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2}) {0,}[0-9][A-Za-z]{2})$/',
+                    //'regex:/^(([gG][iI][rR] {0,}0[aA]{2})|(([aA][sS][cC][nN]|[sS][tT][hH][lL]|[tT][dD][c‌​C][uU]|[bB][bB][nN][‌​dD]|[bB][iI][qQ][qQ]‌​|[fF][iI][qQ][qQ]|[p‌​P][cC][rR][nN]|[sS][‌​iI][qQ][qQ]|[iT][kK]‌​[cC][aA]) {0,}1[zZ]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yxA-HK-XY]?[0-9][‌​0-9]?)|(([a-pr-uwyzA‌​-PR-UWYZ][0-9][a-hjk‌​stuwA-HJKSTUW])|([a-‌​pr-uwyzA-PR-UWYZ][a-‌​hk-yA-HK-Y][0-9][abe‌​hmnprv-yABEHMNPRV-Y]‌​))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/', //[0-9][A-Za-z]{1,2}
+
+
+                    //'regex:/^([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})|([Ss][Kk][0-9]{1,2}) [0-9][A-Za-z]{1,2}$/'
 
                     //'regex:#^([BMOSWbmosw][LKANlkan0-9][0-9]{1,2})|([BMOSWbmosw][LKANlkan0-9]) [0-9][A-Za-z]{1,2}$#'
 
@@ -377,6 +380,8 @@ class CarerRegistration
             'DBS_number' => 'string|nullable|max:128',
             'have_car' => 'nullable|in:"Yes","No"',
             'use_car' => 'required_if:have_car,"Yes"|nullable|in:"Yes","No"',
+            'car_insurance_number' => 'string|nullable|max:36',
+
         ]);
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
@@ -467,7 +472,7 @@ class CarerRegistration
 
         $this->validate($request,[
             'work_with_pets' => 'required|in:"Yes","No","It Depends"',
-            'pets_description' => 'required_if:work_with_pets,"Sometimes","Yes"|string|max:250|nullable',
+            'pets_description' => 'required_if:work_with_pets,"Sometimes"|string|max:250|nullable',
         ]);
 
 /*        switch ($request->input('work_with_pets')){
