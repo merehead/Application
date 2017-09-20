@@ -334,6 +334,10 @@ a.blogFilter__item.active {
 }
 .lightTitle_align-l{
   text-align: left;
+  font-weight: 700
+}
+.bigTitle_margin{
+  margin: -15px 0 15px 0;
 }
 .terms-cerer_margin-l{
   margin-left: 0;
@@ -360,4 +364,3 @@ a.blogFilter__item.active {
     width: 20%;
     margin-right: 0;
 }
-
