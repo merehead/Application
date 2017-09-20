@@ -188,7 +188,7 @@ select#workingTimes {
 }
 #profile_photo{
   position: absolute;
-  z-index: 9;
+  /*z-index: 9;*/
 }
 .pickfiles-delete,
 .pickfiles-delete_profile_photo{
