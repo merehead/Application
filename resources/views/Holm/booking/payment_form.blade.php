@@ -74,7 +74,7 @@
                                   <label for="boxP1"> save payment details?</label>
                               </div>
                           </div>
-                          <div class="roundedBtn roundedBtn--center"  id="bookPayment__form">
+                          <div class="roundedBtn roundedBtn--center">
                               <button href="Thank_you_booking.html" class="roundedBtn__item roundedBtn__item--confirm" id="buttonPaymentCard">
                                   Confirm Payment
                               </button>
@@ -102,7 +102,7 @@
                        </div>
 
                      </div>
-                     <div class="roundedBtn roundedBtn--center"  id="bookPayment__total">
+                     <div class="roundedBtn roundedBtn--center">
                        <button href="Thank_you_booking.html" class="roundedBtn__item roundedBtn__item--confirm" id="buttonPaymentBonuses">
                          Confirm Payment
                        </button>
@@ -158,6 +158,20 @@
             if(data.status == 'success'){
 
             }
+            $('.bookPaymentWrap').html(`
+              <div class="thank">
+                <h2 class="thank__title">
+                  Thank you!
+                </h2>
+                <span class="successIco">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                </span>
+                <p class="info-p">
+                  Your carer has now received your booking request and will respond shortly. If you have not heard back within 24 hours, please do contact us.
+                </p>
+              </div>
+            `)
         });
+
     });
 </script>
