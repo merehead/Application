@@ -15,7 +15,6 @@
 
 
 
-
     <div class="registration__column  registration__column--bg">
         <div class="personal">
             <form class="questionForm">
@@ -77,10 +76,9 @@
 
             @if(empty($purchasersProfileID))
                 <form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id'=>$serviceUserProfileID]) }}">
-                    @else
+            @else
                         <form id="step" method="POST" action="{{ route('PurchaserRegistrationPost') }}">
-                            @endif
-
+            @endif
 
 
                             {{ csrf_field() }}

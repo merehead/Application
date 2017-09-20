@@ -991,7 +991,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'skin_scores' => 'required|in:"Yes","No","Sometimes"',
-            'skin_scores_detail' => 'required_if:skin_scores,"Yes","Sometimes"|nullable|string|max:500',
+            'skin_scores_detail' => 'required_if:skin_scores,"Yes","Sometimes"|nullable|string|max:250',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1008,7 +1008,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'assistance_with_dressings' => 'required|in:"Yes","No","Sometimes"',
-            'dressings_detail' => 'required_if:assistance_with_dressings,"Yes","Sometimes"|nullable|string|max:500',
+            'dressings_detail' => 'required_if:assistance_with_dressings,"Yes","Sometimes"|nullable|string|max:250',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));

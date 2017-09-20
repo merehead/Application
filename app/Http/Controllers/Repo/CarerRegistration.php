@@ -266,8 +266,9 @@ class CarerRegistration
             'postcode' =>
                 array(
                     'required',
-                    'regex:/^([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})|([Ss][Kk][0-9]{1,2}) [0-9][A-Za-z]{1,2}$/'
+                    'regex:/^([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})|([Ss][Kk][0-9]{1,2})$/' //[0-9][A-Za-z]{1,2}
 
+//                    'regex:/^([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})|([Ss][Kk][0-9]{1,2}) [0-9][A-Za-z]{1,2}$/'
 
                     //'regex:#^([BMOSWbmosw][LKANlkan0-9][0-9]{1,2})|([BMOSWbmosw][LKANlkan0-9]) [0-9][A-Za-z]{1,2}$#'
 
@@ -466,7 +467,7 @@ class CarerRegistration
 
         $this->validate($request,[
             'work_with_pets' => 'required|in:"Yes","No","It Depends"',
-            'pets_description' => 'required_if:work_with_pets,"Sometimes","Yes"|string|max:500|nullable',
+            'pets_description' => 'required_if:work_with_pets,"Sometimes","Yes"|string|max:250|nullable',
         ]);
 
 /*        switch ($request->input('work_with_pets')){
@@ -556,11 +557,11 @@ class CarerRegistration
 
         //dd($request->all());
         $this->validate($request,[
-            'name' => 'required|string|max:120',
-            'job_title' => 'required|string|max:120',
-            'relationship' => 'required|string|max:120',
+            'name' => 'required|string|max:60',
+            'job_title' => 'required|string|max:60',
+            'relationship' => 'required|string|max:60',
             'phone' => 'required|string|max:60',
-            'email' => 'required|email',
+            'email' => 'required|email|max:100',
         ]);
 
         if($request->input('id')=='0')
