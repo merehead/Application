@@ -18,67 +18,97 @@
             <div class="bookPayment">
                 <div>
                     <div class="paySwitch">
-                        <a href="Checkout_for_Purchaser__CARD.html" class="paySwitch__item paySwitch__item--active">
+                        <a href="Checkout_for_Purchaser__CARD.html" class="paySwitch__item paySwitch__item--active bookPayment__form-switch">
                             card
                         </a>
-                        <a href="Checkout_for_Purchaser__BONUS.html" class="paySwitch__item">
+                        <a href="Checkout_for_Purchaser__BONUS.html" class="paySwitch__item bonusPay-header-switch">
                             Bonus wallet
                         </a>
                     </div>
-                    <form action="" class="bookPayment__form">
-                        <div class="formField">
-                            <h2 class="formLabel">
-                                Card owner's name
-                            </h2>
-                            <div class="inputWrap">
-                                <input type="text" class="formInput" placeholder="Cris Jones">
-                            </div>
-                        </div>
-                        <div class="bookPayment__field">
-                            <h2 class="formLabel">
-                                Card Number
-                            </h2>
-                            <div class="inputWrap">
-                                <input type="text" class="formInput" placeholder="4534 3333 3333 3333 3333">
-                  <span class="bookPayment__ico">
-                    <img src="./dist/img/visa.png" alt="">
-                  </span>
-                            </div>
-                        </div>
-                        <div class="bookPayment__row">
-                            <div class="bookPayment__halfColumn">
-                                <div class="formField">
-                                    <h2 class="formLabel">
-                                        Valid Until
-                                    </h2>
-                                    <div class="inputWrap">
-                                        <input type="text" class="formInput" placeholder="7/18">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bookPayment__halfColumn">
-                                <div class="formField">
-                                    <h2 class="formLabel">
-                                        cvc code
-                                    </h2>
-                                    <div class="inputWrap">
-                                        <input type="text" class="formInput" placeholder="202">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="paymentCheckbox">
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="checkbox" class="customCheckbox" id="boxP1">
-                                <label for="boxP1"> save payment details?</label>
-                            </div>
-                        </div>
-                        <div class="roundedBtn roundedBtn--center">
-                            <a href="Thank_you_booking.html" class="roundedBtn__item roundedBtn__item--confirm">
-                                Confirm Payment
-                            </a>
-                        </div>
-                    </form>
+                    <div class="bookPayment__form-header">
+                      <form action="" class="bookPayment__form">
+                          <div class="formField">
+                              <h2 class="formLabel">
+                                  Card owner's name
+                              </h2>
+                              <div class="inputWrap">
+                                  <input type="text" class="formInput" placeholder="Cris Jones">
+                              </div>
+                          </div>
+                          <div class="bookPayment__field">
+                              <h2 class="formLabel">
+                                  Card Number
+                              </h2>
+                              <div class="inputWrap">
+                                  <input type="text" class="formInput" placeholder="4534 3333 3333 3333 3333">
+                    <span class="bookPayment__ico">
+                      <img src="./dist/img/visa.png" alt="">
+                    </span>
+                              </div>
+                          </div>
+                          <div class="bookPayment__row">
+                              <div class="bookPayment__halfColumn">
+                                  <div class="formField">
+                                      <h2 class="formLabel">
+                                          Valid Until
+                                      </h2>
+                                      <div class="inputWrap">
+                                          <input type="text" class="formInput" placeholder="7/18">
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="bookPayment__halfColumn">
+                                  <div class="formField">
+                                      <h2 class="formLabel">
+                                          cvc code
+                                      </h2>
+                                      <div class="inputWrap">
+                                          <input type="text" class="formInput" placeholder="202">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="paymentCheckbox">
+                              <div class="checkBox_item">
+                                  <input type="checkbox" name="checkbox" class="customCheckbox" id="boxP1">
+                                  <label for="boxP1"> save payment details?</label>
+                              </div>
+                          </div>
+                          <div class="roundedBtn roundedBtn--center"  id="bookPayment__form">
+                              <a href="Thank_you_booking.html" class="roundedBtn__item roundedBtn__item--confirm">
+                                  Confirm Payment
+                              </a>
+                          </div>
+                      </form>
+                    </div>
+
+                    <div class="bonusPay-header" style="display: none">
+                      <div class="bonusPay">
+                       <div class="bonusPay__item">
+                         <p>
+                           Bonuses balance
+                         </p>
+                         <p>
+                           Bonuses balance after payment
+                         </p>
+                       </div>
+                       <div class="bonusPay__item bonusPay__item--border">
+                         <span class="bonusPay__label">
+                           £1000
+                         </span>
+                         <span class="bonusPay__label">
+                           £940
+                         </span>
+                       </div>
+
+                     </div>
+                     <div class="roundedBtn roundedBtn--center"  id="bookPayment__total">
+                       <a href="Thank_you_booking.html" class="roundedBtn__item roundedBtn__item--confirm">
+                         Confirm Payment
+                       </a>
+                     </div>
+                    </div>
+
                 </div>
 
 
