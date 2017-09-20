@@ -1,6 +1,6 @@
 <div class="borderContainer">
 
-    <div id="behaviour-div" class="borderContainer">
+    <div id="nightTime-div" class="borderContainer">
         <div class="profileCategory">
             <h2 class="profileCategory__title">Night-time</h2>
             <a href="#" class="btn btn-info btn-edit"><span class="fa fa-pencil" data-id="nightTime"></span> EDIT</a>
@@ -11,7 +11,6 @@
     {!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'nightTime']) !!}
     {!! Form::hidden('id',null) !!}
     {!! Form::hidden('stage','nightTime') !!}
-    {{Form::submit('Click Me!')}}
 
 
     <div class="profileRow">
@@ -31,7 +30,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('dressed_for_bed_details',null,['class'=>'profileField__input ','placeholder'=>'Type details']) !!}
+            {!! Form::text('dressed_for_bed_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('dressed_for_bed_details'))
                 <span class="help-block"><strong>{{ $errors->first('dressed_for_bed_details') }}</strong></span>
             @endif
@@ -50,7 +49,7 @@
                 @if(empty($serviceUserProfile->time_to_bed))
                     <input name="time_to_bed" id="timepicker" class="profileField__input" placeholder="Time" type="text">
                 @else
-                    {!! Form::text('time_to_bed',null,['id'=>'timepicker','class'=>'profileField__input']) !!}
+                    {!! Form::text('time_to_bed',null,['id'=>'timepicker','class'=>'profileField__input','maxlength'=>"500"]) !!}
                 @endif
                 <span class="profileField__input-ico centeredLink">
                 <i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -75,7 +74,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('keeping_safe_at_night_details',null,['class'=>'profileField__input ','placeholder'=>'Type details']) !!}
+            {!! Form::text('keeping_safe_at_night_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('keeping_safe_at_night_details'))
                 <span class="help-block"><strong>{{ $errors->first('keeping_safe_at_night_details') }}</strong></span>
             @endif
@@ -96,7 +95,7 @@
 
                     <input name="time_to_night_helping" id="timepicker" class="profileField__input" placeholder="Time" type="text">
                 @else
-                    {!! Form::text('time_to_night_helping',null,['id'=>'timepicker','class'=>'profileField__input']) !!}
+                    {!! Form::text('time_to_night_helping',null,['id'=>'timepicker','class'=>'profileField__input','maxlength'=>"250"]) !!}
                 @endif
                 <span class="profileField__input-ico centeredLink">
                 <i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -123,7 +122,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('toiled_help_details',null,['class'=>'profileField__input ','placeholder'=>'Type details']) !!}
+            {!! Form::text('toiled_help_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('toiled_help_details'))
                 <span class="help-block"><strong>{{ $errors->first('toiled_help_details') }}</strong></span>
             @endif

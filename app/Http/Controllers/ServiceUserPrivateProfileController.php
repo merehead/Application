@@ -248,7 +248,7 @@ class ServiceUserPrivateProfileController extends FrontController
             if (isset($input['assistance_keeping'])) $serviceUsersProfile->assistance_keeping = $input['assistance_keeping'];
             if (isset($input['move_available'])) $serviceUsersProfile->move_available = $input['move_available'];
             if (isset($input['assistance_moving'])) $serviceUsersProfile->assistance_moving = $input['assistance_moving'];
-            if (isset($input['assistance_moving_details'])) $serviceUsersProfile->mobile_number = $input['assistance_moving_details'];
+            if (isset($input['assistance_moving_details'])) $serviceUsersProfile->assistance_moving_details = $input['assistance_moving_details'];
             if (isset($input['carer_enter'])) $serviceUsersProfile->carer_enter = $input['carer_enter'];
             if (isset($input['other_detail'])) $serviceUsersProfile->other_detail = $input['other_detail'];
             if (isset($input['anyone_else_live'])) $serviceUsersProfile->anyone_else_live = $input['anyone_else_live'];
@@ -270,10 +270,11 @@ class ServiceUserPrivateProfileController extends FrontController
 
 
         if ($input['stage'] == 'nightTime') {
-            $this->validate($request, [
-                'religious_beliefs' => 'nullable|in:"Yes","No","Sometimes"',
-                'religious_beliefs_details' => 'nullable|string|max:250',
-                'particular_likes' => 'nullable|string|max:16',
+
+            $this->validate($request,[
+                'getting_dressed_for_bed' => 'nullable|in:"Yes","No","Sometimes"',
+                'dressed_for_bed_details' => 'nullable|string|max:250',
+                'time_to_bed' => 'nullable|string|max:16',
                 'keeping_safe_at_night' => 'nullable|in:"Yes","No","Sometimes"',
                 'keeping_safe_at_night_details' => 'nullable|string|max:250',
                 'time_to_night_helping' => 'nullable|string|max:16',
@@ -281,11 +282,13 @@ class ServiceUserPrivateProfileController extends FrontController
                 'toiled_help_details' => 'nullable|string|max:250',
             ]);
 
-            $depart = "#nightTime";
+            //dd($input);
 
-            if (isset($input['religious_beliefs'])) $serviceUsersProfile->religious_beliefs = $input['religious_beliefs'];
-            if (isset($input['religious_beliefs_details'])) $serviceUsersProfile->religious_beliefs_details = $input['religious_beliefs_details'];
-            if (isset($input['particular_likes'])) $serviceUsersProfile->particular_likes = $input['particular_likes'];
+            $depart = "#nightTime-div";
+
+            if (isset($input['getting_dressed_for_bed'])) $serviceUsersProfile->getting_dressed_for_bed = $input['getting_dressed_for_bed'];
+            if (isset($input['dressed_for_bed_details'])) $serviceUsersProfile->dressed_for_bed_details = $input['dressed_for_bed_details'];
+            if (isset($input['time_to_bed'])) $serviceUsersProfile->time_to_bed = $input['time_to_bed'];
             if (isset($input['keeping_safe_at_night'])) $serviceUsersProfile->keeping_safe_at_night = $input['keeping_safe_at_night'];
             if (isset($input['keeping_safe_at_night_details'])) $serviceUsersProfile->keeping_safe_at_night_details = $input['keeping_safe_at_night_details'];
             if (isset($input['time_to_night_helping'])) $serviceUsersProfile->time_to_night_helping = $input['time_to_night_helping'];
@@ -360,7 +363,9 @@ class ServiceUserPrivateProfileController extends FrontController
                 'checkSrvCare' => 'required|array',
             ]);
 
-            $depart = "#typeOfCare";
+            $depart = "#typeOfCare-div";
+
+            //dd($input);
 
             $typeService = $request->input('typeService');
             $checkSrvCare = $request->input('checkSrvCare');

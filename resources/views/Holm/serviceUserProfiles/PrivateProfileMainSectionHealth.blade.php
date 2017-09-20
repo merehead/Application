@@ -9,8 +9,6 @@
 {!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'health']) !!}
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('stage','health') !!}
-{{Form::submit('Click Me!')}}
-
 
 <div class="borderContainer">
     <h2 class="fieldCategory">
@@ -39,7 +37,7 @@
                 PLEASE, GIVE DETAILS </span>
             </h2>
 
-            {!! Form::text('other_behaviour',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::text('other_behaviour',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"200"]) !!}
             @if ($errors->has('other_behaviour'))
                 <span class="help-block"><strong>{{ $errors->first('other_behaviour') }}</strong></span>
             @endif
@@ -47,96 +45,7 @@
     </div>
 
 </div>
-{{--
 
-<div class="borderContainer">
-    <h2 class="fieldCategory">
-        Conditions
-    </h2>
-    <div class="profileRow">
-        <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle">
-              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                Mental / Psychological conditions
-              </span>
-            </h2>
-            <select class="profileField__select">
-                <option value="yes">Yes</option>
-            </select>
-        </div>
-        <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle">
-              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                Deafness / Serious hearing Impairment 
-              </span>
-            </h2>
-            <select class="profileField__select">
-                <option value="yes">Yes</option>
-            </select>
-        </div>
-    </div>
-    <div class="profileRow">
-        <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle">
-              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                Has problems understanding other people
-              </span>
-            </h2>
-            <select class="profileField__select">
-                <option value="yes">Yes</option>
-            </select>
-        </div>
-        <div class="profileField profileField--two-thirds">
-            <h2 class="profileField__title ordinaryTitle">
-              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                please give their name and relationship to  [Service User name]   </span>
-            </h2>
-            <input type="text" class="profileField__input" placeholder="Type details">
-        </div>
-    </div>
-
-    <div class="profileRow">
-        <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle">
-              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                Long Term medical conditions
-              </span>
-            </h2>
-            <select class="profileField__select">
-                <option value="yes">Yes</option>
-            </select>
-        </div>
-        <div class="profileField profileField--two-thirds">
-            <h2 class="profileField__title ordinaryTitle">
-              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                What long term health conditions does [Service User name] have?   </span>
-            </h2>
-            <input type="text" class="profileField__input" placeholder="Type details">
-        </div>
-    </div>
-    <div class="profileRow">
-        <div class="profileField profileField--full-width">
-            <h2 class="profileField__title ordinaryTitle">
-              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-               HAS OTHER MEDICAL CONDITIONS
-              </span>
-            </h2>
-            <select class="profileField__select">
-                <option value="yes">Yes</option>
-            </select>
-        </div>
-        <div class="profileField profileField--two-thirds">
-            <h2 class="profileField__title ordinaryTitle">
-              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                Please, give details  </span>
-            </h2>
-            <input type="text" class="profileField__input" placeholder="Type details">
-        </div>
-
-    </div>
-</div>
-
---}}
 
 <div class="borderContainer">
     <h2 class="fieldCategory">

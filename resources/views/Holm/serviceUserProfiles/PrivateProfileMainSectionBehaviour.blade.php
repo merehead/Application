@@ -10,7 +10,6 @@
 {!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'behaviour']) !!}
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('stage','behaviour') !!}
-{{Form::submit('Click Me!')}}
 
 
 <div class="borderContainer">
@@ -77,7 +76,7 @@ array('class' => 'checkboxNew','id'=>'behaviour'.$behaviour[3]->id)) !!}
                 Details </span>
             </h2>
 
-            {!! Form::text('other_behaviour',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::text('other_behaviour',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"200"]) !!}
             @if ($errors->has('other_behaviour'))
                 <span class="help-block"><strong>{{ $errors->first('other_behaviour') }}</strong></span>
             @endif
@@ -92,7 +91,7 @@ array('class' => 'checkboxNew','id'=>'behaviour'.$behaviour[3]->id)) !!}
                Has a doctor's note or court order saying that they are not able to give consent </span>
             </h2>
 
-            {!! Form::text('consent_details',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::text('consent_details',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"200"]) !!}
             @if ($errors->has('consent_details'))
                 <span class="help-block"><strong>{{ $errors->first('consent_details') }}</strong></span>
             @endif

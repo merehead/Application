@@ -10,7 +10,7 @@
     {!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'other']) !!}
     {!! Form::hidden('id',null) !!}
     {!! Form::hidden('stage','other') !!}
-    {{Form::submit('Click Me!')}}
+
 
     <div class="profileRow">
         <div class="profileField">
