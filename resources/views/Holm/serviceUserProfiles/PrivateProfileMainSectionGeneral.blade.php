@@ -52,7 +52,7 @@
               </span>
             </h2>
 
-            {!! Form::text('like_name',null,['class'=>'profileField__input','placeholder'=>'Your name','maxlength'=>"120"]) !!}
+            {!! Form::text('like_name',null,['class'=>'profileField__input','placeholder'=>'Your name','maxlength'=>"20"]) !!}
             @if ($errors->has('like_name'))
                 <span class="help-block"><strong>{{ $errors->first('like_name') }}</strong></span>
             @endif
@@ -138,7 +138,7 @@
                Mobile Number
               </span>
             </h2>
-            {!! Form::text('mobile_number',null,['class'=>'profileField__input','placeholder'=>'Mobile number ','maxlength'=>"120"]) !!}
+            {!! Form::text('mobile_number',null,['class'=>'profileField__input','placeholder'=>'Mobile number ','maxlength'=>"30"]) !!}
             @if ($errors->has('mobile_number'))
                 <span class="help-block"><strong>{{ $errors->first('mobile_number') }}</strong></span>
             @endif
@@ -161,7 +161,7 @@
     </div>
 </div>
 
-<div id="serviceGeneral" class="borderContainer">
+<div id="serviceGeneralone" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">one line about {{$userNameForSite}}</h2>
         <a href="#" class="btn btn-info btn-edit"><span class="fa fa-pencil" data-id="oneLineAbove"></span> EDIT</a>
@@ -182,7 +182,7 @@
 
         <div class="profileField profileField--full-width">
 
-            {!! Form::text('one_line_about',null,['class'=>'profileField__input','placeholder'=>'One line about the person','maxlength'=>"120"]) !!}
+            {!! Form::text('one_line_about',null,['class'=>'profileField__input','placeholder'=>'One line about the person','maxlength'=>"250"]) !!}
             @if ($errors->has('one_line_about'))
                 <span class="help-block"><strong>{{ $errors->first('one_line_about') }}</strong></span>
             @endif

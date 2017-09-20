@@ -122,5 +122,75 @@ class PurchaserController extends FrontController
         return Redirect::to(URL::previous() . $depart);
     }
 
+    public function booking()
+    {
+
+        $this->template = config('settings.frontTheme') . '.templates.purchaserPrivateProfile';
+        $this->title = 'Holm Care';
+
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
+
+        //dd();
+
+        if (!$this->user) {
+            return;
+            //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
+        } else {
+
+            $purchaserProfile = PurchasersProfile::findOrFail($this->user->id);
+            $serviceUsers = $purchaserProfile->serviceUsers;
+
+            $this->vars = array_add($this->vars, 'user', $this->user);
+            $this->vars = array_add($this->vars, 'purchaserProfile', $purchaserProfile);
+            $this->vars = array_add($this->vars, 'serviceUsers', $serviceUsers);
+
+            $this->content = view(config('settings.frontTheme') . '.purchaserProfiles.Booking.BookingTaball')->with($this->vars)->render();
+
+        }
+
+        return $this->renderOutput();
+    }
+    public function bookingFilter($status)
+    {
+
+        $this->template = config('settings.frontTheme') . '.templates.purchaserPrivateProfile';
+        $this->title = 'Holm Care';
+
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
+
+        //dd();
+
+        if (!$this->user) {
+            return;
+            //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
+        } else {
+
+            $purchaserProfile = PurchasersProfile::findOrFail($this->user->id);
+            $serviceUsers = $purchaserProfile->serviceUsers;
+
+            $this->vars = array_add($this->vars, 'user', $this->user);
+            $this->vars = array_add($this->vars, 'purchaserProfile', $purchaserProfile);
+            $this->vars = array_add($this->vars, 'serviceUsers', $serviceUsers);
+
+            $this->content = view(config('settings.frontTheme') . '.purchaserProfiles.Booking.BookingTab'.$status)->with($this->vars)->render();
+
+        }
+
+        return $this->renderOutput();
+    }
 
 }

@@ -73,8 +73,8 @@
             dateFormat: "dd/mm/yy",
             showAnim: "slideDown",
             minDate: "-4Y",
-            maxDate: "+20Y",
-            yearRange: "-2:+10"
+            maxDate: "+0D",
+            yearRange: "-2:0"
         });
     });
 
@@ -111,10 +111,11 @@
             }
         }
         if ($("#main-if2").val() == 'Yes') {
-            {
-                $(".hiding2").show()
+                $(".hiding2").show();
             }
-        }
+            else{
+                $(".hiding2").hide();
+            }
 
         if ($("#sometimes-if").val() == 'Sometimes') {
             {

@@ -1,5 +1,7 @@
 // ------ Global Variable -----------
 var $carer_profile = null;
+var has_error_profile_form=false;
+var error_mark = '';
 var arrFiles = []
 var arrFilesProfilePhoto = []
 var arrForDeleteIDProfile = []
@@ -168,45 +170,50 @@ function cancelEditFieldsCarer() {
 
 // -- Send request to server with AJAX data ----------
 function ajaxForm(form, that) {
-    var token = $(form).find('input[name=_token]').val();
-    $.ajax({
-        url: $(form).attr('action'),
-        headers: {'X-CSRF-TOKEN': token},
-        data: $(form).serialize(),
-        type: 'POST',
-        dataType: "application/json",
-        success: function (response) {
-            if (response.status != 200) {
-                $(form).find('.error-block strong').html(response.toString());
+    if(!has_error_profile_form) {
+        var token = $(form).find('input[name=_token]').val();
+        $.ajax({
+            url: $(form).attr('action'),
+            headers: {'X-CSRF-TOKEN': token},
+            data: $(form).serialize(),
+            type: 'POST',
+            dataType: "application/json",
+            success: function (response) {
+                if (response.status != 200) {
+                    $(form).find('.error-block strong').html(response.toString());
+                }
+                that.button('reset');
+                var idForm = $(form).attr('id');
+                if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
+                    var geocoder = new google.maps.Geocoder();
+                    geocodeAddress(geocoder, map);
+                }
+                // -- processing effects ----------
+                setTimeout(function () {
+                    $(that).addClass('hidden');
+                    setNoEditableFields();
+                    $(that).parent().find('a.btn-edit').show();
+                }, 500);
+            },
+            error: function (response) {
+                that.button('reset');
+                var idForm = $(form).attr('id');
+                if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
+                    var geocoder = new google.maps.Geocoder();
+                    geocodeAddress(geocoder, map);
+                }
+                // -- processing effects -----------
+                setTimeout(function () {
+                    $(that).addClass('hidden');
+                    setNoEditableFields();
+                    $(that).parent().find('a.btn-edit').show();
+                }, 500);
             }
-            that.button('reset');
-            var idForm = $(form).attr('id');
-            if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
-                var geocoder = new google.maps.Geocoder();
-                geocodeAddress(geocoder, map);
-            }
-            // -- processing effects ----------
-            setTimeout(function () {
-                $(that).addClass('hidden');
-                setNoEditableFields();
-                $(that).parent().find('a.btn-edit').show();
-            }, 500);
-        },
-        error: function (response) {
-            that.button('reset');
-            var idForm = $(form).attr('id');
-            if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
-                var geocoder = new google.maps.Geocoder();
-                geocodeAddress(geocoder, map);
-            }
-            // -- processing effects -----------
-            setTimeout(function () {
-                $(that).addClass('hidden');
-                setNoEditableFields();
-                $(that).parent().find('a.btn-edit').show();
-            }, 500);
-        }
-    });
+        });
+    }else{
+        that.button('reset');
+        $(document).scrollTop($(error_mark).offset().top-100)
+    }
     return false;
 }
 
@@ -343,27 +350,124 @@ $(document).ready(function () {
             $('.hiddenSort').addClass('hiddenSort--visible');
         }
     });
-    if($("#depend-if").val() == 'It Depends') {$(".depend_hiding").show( )}
+
+    if($("#depend-if").val() == 'It Depends') {$(".depend_hiding").show()}
 
     $("#depend-if").on('change',function(){
         if($(this).val() !="0")
         {
-            if($(this).val() == 'Yes') {$(".depend_hiding").hide( )}
-            if($(this).val() == 'No') {$(".depend_hiding").hide( )}
-            if($(this).val() == 'It Depends') {$(".depend_hiding").show( )}
+            if($(this).val() == 'Yes') {
+                $(".depend_hiding").hide();
+            }
+            if($(this).val() == 'No') {
+                $(".depend_hiding").hide();
+            }
+            if($(this).val() == 'It Depends') {
+                $(".depend_hiding").show();
+            }
+        }
+    });
+
+    if($("#depend-if-work").val() == 'Yes') {$(".depend_hiding-work").show();}else{$(".depend_hiding-work").hide();}
+
+    $("#depend-if-work").on('change',function(){
+        if($(this).val() !="0")
+        {
+            if($(this).val() == 'Yes') {
+                $(".depend_hiding-work").hide();
+            }
+            if($(this).val() == 'No') {
+                $(".depend_hiding-work").hide();
+            }
         }
     });
 
     if($("#type_car_work").val() == 'Yes') {
         $(".car-block").show();
+        $('#profile_use_car').parent().show();
     }else{
         $(".car-block").hide();
+        $('#profile_use_car').parent().hide();
     }
+
     $("#type_car_work").on('change',function(){
         if($("#type_car_work").val() == 'Yes') {
             $(".car-block").show();
+            $('#profile_use_car').parent().show();
         }else{
             $(".car-block").hide();
+            $('#profile_use_car').parent().hide();
+        }
+    });
+
+    if($('#driving_license').length>0) {
+        if($('#driving_license').val() == "Yes") {$('.hiding_profile').show();}else{$('.hiding_profile').hide();}
+    }
+
+    if($('#register_have_car').length>0) {
+        if ($('#register_have_car').val() == "Yes") {
+            $('#register_use_car').parent().parent().show();
+        } else {
+            var uc = $('#register_use_car').parent().parent();
+            $(uc).hide();
+        }
+    }
+
+    $("#post_code_profile").on("change",function(e){
+       var validator = /^([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})|([Ss][Kk][0-9]{1,2}) [0-9][A-Za-z]{1,2}$/;
+       var text  = $(this).val();
+       var $this = $(this);
+       var errorText = '<span class="help-block error-post-code">\n' +
+           '             <strong>Wrong post code. Please retry enter</strong>\n' +
+           '          </span>';
+       $('.error-post-code').remove();
+        has_error_profile_form=false;
+        error_mark='';
+       if(!validator.test(text)){
+           $($this).after(errorText);
+           has_error_profile_form=true;
+           error_mark='#post_code_profile';
+       }
+    });
+    $(document).on('change','#register_have_car',function () {
+        if ($('#register_have_car').val() == "Yes") {
+            $('#register_use_car').parent().parent().show();
+        } else {
+            var uc = $('#register_use_car').parent().parent();
+            $(uc).hide();
+        }
+    });
+
+    if($("#criminal_detail").val() == 'Old') {
+        $(".criminal_detail").show();
+    }else{
+        $(".criminal_detail").hide();
+    }
+    $("#criminal_detail").on('change',function(){
+        if($("#criminal_detail").val() == 'Old') {
+            $(".criminal_detail").show();
+        }else{
+            $(".criminal_detail").hide();
+        }
+    });
+
+    $('a.additionalTime').on('click',function(e){
+        e.preventDefault();
+        $('.datetime').last().after($('.datetime').last().clone());
+        $('.checktime').last().after($('.checktime').last().clone());
+        return false;;
+    });
+
+    if($("#checkL12").is(':checked')) {
+        $(".language_additional").show();
+    }else{
+        $(".language_additional").hide();
+    }
+    $("#checkL12").on('click',function(){
+        if($("#checkL12").is(':checked')) {
+            $(".language_additional").show();
+        }else{
+            $(".language_additional").hide();
         }
     });
 
@@ -579,25 +683,7 @@ $(document).ready(function () {
         confirmPass(this);
     });
     // -- Registration Carer Step 8
-    $('select[name="have_car"]').parent().parent().hide();
-    if ($('select[name="have_car"]').val() == 'Yes') {
-        {
-            $('select[name="have_car"]').parent().parent().show()
-        }
-    } else {
-        $('select[name="have_car"]').val('');
-        $('select[name="have_car"]').parent().parent().hide()
-    }
-    $('select[name="driving_licence"]').on('change', function (e) {
-        if ($(this).val() == 'Yes') {
-            {
-                $('select[name="have_car"]').parent().parent().show()
-            }
-        } else {
-            $('select[name="have_car"]').val('');
-            $('select[name="have_car"]').parent().parent().hide()
-        }
-    });
+
 
     // -- upload files. Registration sections -------
     var arrLocalStorage = []
