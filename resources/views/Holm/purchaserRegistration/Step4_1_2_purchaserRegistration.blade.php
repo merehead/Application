@@ -15,7 +15,6 @@
 
 
 
-
     <div class="registration__column  registration__column--bg">
         <div class="personal">
             <form class="questionForm">
@@ -36,10 +35,26 @@
 
 
                         <div class="addContainer">
-                          <input name="{{$purchasersProfile->serviceUsers->first()->id}}" class="pickfiles_profile_photo" accept="jpg,.jpeg,.png,.doc" type="file" />
-                          <div class="pickfiles_img"></div>
 
-                          <div id="profile_photo" class="pickfiles_img" style="background-image: url('img/service_user_profile_photos/{{$purchasersProfile->serviceUsers->first()->id}}.png')"></div>
+
+                            @if(empty($purchasersProfileID))
+                                <input name="{{$serviceUserProfile->id}}" class="pickfiles_profile_photo" accept="jpg,.jpeg,.png,.doc" type="file" />
+                            @else
+                                <input class="pickfiles_profile_photo" accept="jpg,.jpeg,.png,.doc" type="file" />
+                            @endif
+
+                            <div class="pickfiles_img"></div>
+
+                          <div id="profile_photo" class="pickfiles_img"
+
+                                @if(empty($purchasersProfileID))
+                                style="background-image: url('img/service_user_profile_photos/{{$serviceUserProfile->id}}.png')">
+                                @else
+                                  style="background-image: url('img/service_user_profile_photos/{{$purchasersProfile->serviceUsers->first()->id}}.png')">
+                                @endif
+
+
+                          </div>
 
                           <a href="#" class="add add--moreHeight">
                               <i class="fa fa-plus-circle"></i>
@@ -62,10 +77,9 @@
 
             @if(empty($purchasersProfileID))
                 <form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id'=>$serviceUserProfileID]) }}">
-                    @else
+            @else
                         <form id="step" method="POST" action="{{ route('PurchaserRegistrationPost') }}">
-                            @endif
-
+            @endif
 
 
                             {{ csrf_field() }}
