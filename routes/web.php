@@ -67,7 +67,7 @@ Route::post('/serviceUser-settings/{serviceUserProfile}','ServiceUserPrivateProf
 Route::get('/serviceUser-settings/booking/{serviceUserProfile}', 'ServiceUserPrivateProfileController@booking')->name('ServiceUserBooking'); //synonym for ImCarerPage
 Route::get('/serviceUser-settings/booking/{serviceUserProfile}/{status}', 'ServiceUserPrivateProfileController@bookingFilter')->name('ServiceUserBookingStatus'); //synonym for ImCarerPage
 
-
+Route::get('/bookings/{booking}/purchase', 'Bookings\PaymentsController@payment_form');
 
 Route::post('/document/upload','DocumentsController@upload')->name('UploadDocument');
 Route::get('/documents','DocumentsController@GetDocuments')->name('GetDocuments');
