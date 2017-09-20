@@ -47,6 +47,11 @@
                         Are you a qualified Care Worker? <br />
                         Not joined Holm yet?<br />
                         Join now and receive a £50 bonus just for registering.<br />
+
+                        <div class="terms-cerer terms-cerer_margin-l">
+                            Please refer to <a href="{{route('TermsPage')}}">Terms &amp; Conditons</a>
+                        </div>
+
                         Use Bonus Code  <b>'REGISTER'</b> when registering.
                     </p>
 
@@ -58,9 +63,6 @@
                 </div>
 
             </div>
-        </div>
-        <div class="terms-cerer">
-            Please refer to <a href="{{route('TermsPage')}}">Terms &amp; Conditons</a>
         </div>
     </div>
 
@@ -75,7 +77,7 @@
             <p>
                 Holm understands the frustrations often felt by carers working for agencies.<br>
                 We are a new kind of home care service, helping connect you directly to elderly people who need help in the Manchester area. </p>
-            <p>  We are not a care agency, and don’t charge people like an agency. <br>
+            <p class="padding-b">  We are not a care agency, and don’t charge people like an agency. <br>
                 Holm gives you more time at people’s homes and helps you build lasting relationships with your clients
             </p>
 
@@ -85,7 +87,7 @@
 
 
         </div>
-        <div class="advantages">
+        <div class="advantages advantages-wcarer">
             <div class="advantages__item singleAdvantage">
                 <div class="singleAdvantage__img">
                     <img src="/img/clock.png" alt="">

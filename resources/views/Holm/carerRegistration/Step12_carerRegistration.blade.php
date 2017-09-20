@@ -44,7 +44,7 @@
                         What does it depend upon? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::text('pets_description',null,['class'=>'formInput','placeholder'=>'Details']) !!}
+                        {!! Form::text('pets_description',null,['class'=>'formInput','placeholder'=>'Details','maxlength'=>"250"]) !!}
                         @if ($errors->has('pets_description'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('pets_description') }}</strong>

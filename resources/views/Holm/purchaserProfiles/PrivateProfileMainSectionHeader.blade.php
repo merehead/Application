@@ -18,6 +18,9 @@
     <h2 class="invite__title">
         Invite other users and both get £100 after 20 hours of usage
     </h2>
+    <div class="terms-cerer">
+      *Please refer to <a href="{{route('TermsPage')}}">Terms &amp; Conditons</a>
+    </div>
     <form class="inviteForm">
         <div class="inviteForm__field">
             <input type="text" class="inviteForm__input "  placeholder="FRIEND'S EMAIL">
@@ -28,6 +31,6 @@
     </form>
 </div>
 <div class="bookingSwitcher">
-    <a href="" class="bookingSwitcher__link ">Profile settings</a>
-    <a href="" class="bookingSwitcher__link bookingSwitcher__link--active">My bookings <span>+1</span> </a>
+    <a href="/purchaser-settings" class="bookingSwitcher__link ">Profile settings</a>
+    <a href="/purchaser-settings/booking" class="bookingSwitcher__link bookingSwitcher__link--active">My bookings <span>+1</span> </a>
 </div>

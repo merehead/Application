@@ -1,5 +1,7 @@
 // ------ Global Variable -----------
 var $carer_profile = null;
+var has_error_profile_form=false;
+var error_mark = '';
 var arrFiles = []
 var arrFilesProfilePhoto = []
 var arrForDeleteIDProfile = []
@@ -168,45 +170,50 @@ function cancelEditFieldsCarer() {
 
 // -- Send request to server with AJAX data ----------
 function ajaxForm(form, that) {
-    var token = $(form).find('input[name=_token]').val();
-    $.ajax({
-        url: $(form).attr('action'),
-        headers: {'X-CSRF-TOKEN': token},
-        data: $(form).serialize(),
-        type: 'POST',
-        dataType: "application/json",
-        success: function (response) {
-            if (response.status != 200) {
-                $(form).find('.error-block strong').html(response.toString());
+    if(!has_error_profile_form) {
+        var token = $(form).find('input[name=_token]').val();
+        $.ajax({
+            url: $(form).attr('action'),
+            headers: {'X-CSRF-TOKEN': token},
+            data: $(form).serialize(),
+            type: 'POST',
+            dataType: "application/json",
+            success: function (response) {
+                if (response.status != 200) {
+                    $(form).find('.error-block strong').html(response.toString());
+                }
+                that.button('reset');
+                var idForm = $(form).attr('id');
+                if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
+                    var geocoder = new google.maps.Geocoder();
+                    geocodeAddress(geocoder, map);
+                }
+                // -- processing effects ----------
+                setTimeout(function () {
+                    $(that).addClass('hidden');
+                    setNoEditableFields();
+                    $(that).parent().find('a.btn-edit').show();
+                }, 500);
+            },
+            error: function (response) {
+                that.button('reset');
+                var idForm = $(form).attr('id');
+                if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
+                    var geocoder = new google.maps.Geocoder();
+                    geocodeAddress(geocoder, map);
+                }
+                // -- processing effects -----------
+                setTimeout(function () {
+                    $(that).addClass('hidden');
+                    setNoEditableFields();
+                    $(that).parent().find('a.btn-edit').show();
+                }, 500);
             }
-            that.button('reset');
-            var idForm = $(form).attr('id');
-            if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
-                var geocoder = new google.maps.Geocoder();
-                geocodeAddress(geocoder, map);
-            }
-            // -- processing effects ----------
-            setTimeout(function () {
-                $(that).addClass('hidden');
-                setNoEditableFields();
-                $(that).parent().find('a.btn-edit').show();
-            }, 500);
-        },
-        error: function (response) {
-            that.button('reset');
-            var idForm = $(form).attr('id');
-            if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
-                var geocoder = new google.maps.Geocoder();
-                geocodeAddress(geocoder, map);
-            }
-            // -- processing effects -----------
-            setTimeout(function () {
-                $(that).addClass('hidden');
-                setNoEditableFields();
-                $(that).parent().find('a.btn-edit').show();
-            }, 500);
-        }
-    });
+        });
+    }else{
+        that.button('reset');
+        $(document).scrollTop($(error_mark).offset().top-100)
+    }
     return false;
 }
 
@@ -343,27 +350,124 @@ $(document).ready(function () {
             $('.hiddenSort').addClass('hiddenSort--visible');
         }
     });
-    if($("#depend-if").val() == 'It Depends') {$(".depend_hiding").show( )}
+
+    if($("#depend-if").val() == 'It Depends') {$(".depend_hiding").show()}
 
     $("#depend-if").on('change',function(){
         if($(this).val() !="0")
         {
-            if($(this).val() == 'Yes') {$(".depend_hiding").hide( )}
-            if($(this).val() == 'No') {$(".depend_hiding").hide( )}
-            if($(this).val() == 'It Depends') {$(".depend_hiding").show( )}
+            if($(this).val() == 'Yes') {
+                $(".depend_hiding").hide();
+            }
+            if($(this).val() == 'No') {
+                $(".depend_hiding").hide();
+            }
+            if($(this).val() == 'It Depends') {
+                $(".depend_hiding").show();
+            }
+        }
+    });
+
+    if($("#depend-if-work").val() == 'Yes') {$(".depend_hiding-work").show();}else{$(".depend_hiding-work").hide();}
+
+    $("#depend-if-work").on('change',function(){
+        if($(this).val() !="0")
+        {
+            if($(this).val() == 'Yes') {
+                $(".depend_hiding-work").hide();
+            }
+            if($(this).val() == 'No') {
+                $(".depend_hiding-work").hide();
+            }
         }
     });
 
     if($("#type_car_work").val() == 'Yes') {
         $(".car-block").show();
+        $('#profile_use_car').parent().show();
     }else{
         $(".car-block").hide();
+        $('#profile_use_car').parent().hide();
     }
+
     $("#type_car_work").on('change',function(){
         if($("#type_car_work").val() == 'Yes') {
             $(".car-block").show();
+            $('#profile_use_car').parent().show();
         }else{
             $(".car-block").hide();
+            $('#profile_use_car').parent().hide();
+        }
+    });
+
+    if($('#driving_license').length>0) {
+        if($('#driving_license').val() == "Yes") {$('.hiding_profile').show();}else{$('.hiding_profile').hide();}
+    }
+
+    if($('#register_have_car').length>0) {
+        if ($('#register_have_car').val() == "Yes") {
+            $('#register_use_car').parent().parent().show();
+        } else {
+            var uc = $('#register_use_car').parent().parent();
+            $(uc).hide();
+        }
+    }
+
+    $("#post_code_profile").on("change",function(e){
+       var validator = /^([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})|([Ss][Kk][0-9]{1,2}) [0-9][A-Za-z]{1,2}$/;
+       var text  = $(this).val();
+       var $this = $(this);
+       var errorText = '<span class="help-block error-post-code">\n' +
+           '             <strong>Wrong post code. Please retry enter</strong>\n' +
+           '          </span>';
+       $('.error-post-code').remove();
+        has_error_profile_form=false;
+        error_mark='';
+       if(!validator.test(text)){
+           $($this).after(errorText);
+           has_error_profile_form=true;
+           error_mark='#post_code_profile';
+       }
+    });
+    $(document).on('change','#register_have_car',function () {
+        if ($('#register_have_car').val() == "Yes") {
+            $('#register_use_car').parent().parent().show();
+        } else {
+            var uc = $('#register_use_car').parent().parent();
+            $(uc).hide();
+        }
+    });
+
+    if($("#criminal_detail").val() == 'Old') {
+        $(".criminal_detail").show();
+    }else{
+        $(".criminal_detail").hide();
+    }
+    $("#criminal_detail").on('change',function(){
+        if($("#criminal_detail").val() == 'Old') {
+            $(".criminal_detail").show();
+        }else{
+            $(".criminal_detail").hide();
+        }
+    });
+
+    $('a.additionalTime').on('click',function(e){
+        e.preventDefault();
+        $('.datetime').last().after($('.datetime').last().clone());
+        $('.checktime').last().after($('.checktime').last().clone());
+        return false;;
+    });
+
+    if($("#checkL12").is(':checked')) {
+        $(".language_additional").show();
+    }else{
+        $(".language_additional").hide();
+    }
+    $("#checkL12").on('click',function(){
+        if($("#checkL12").is(':checked')) {
+            $(".language_additional").show();
+        }else{
+            $(".language_additional").hide();
         }
     });
 
@@ -441,10 +545,11 @@ $(document).ready(function () {
         $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
 
         $(idLoadFiles).find('.pickfiles').attr("disabled", false);
+        $(idLoadFiles).find('.pickfiles-change').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", false);
         $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", false);
-        $(idLoadFiles).find('.addInfo__input').attr("disabled", false);
-        $(idLoadFiles).find('.addInfo__input').attr("readonly", false);
+        // $(idLoadFiles).find('.addInfo__input').attr("disabled", false);
+        // $(idLoadFiles).find('.addInfo__input').attr("readonly", false);
         $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: block');
 
         $(that).hide();
@@ -463,6 +568,8 @@ $(document).ready(function () {
         var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');
 
         $(idLoadFiles).find('.pickfiles').attr("disabled", true);
+        $(idLoadFiles).find('.pickfiles-change').attr("disabled", true);
+        $(idLoadFiles).find('.pickfiles-delete').attr("style", 'display: none');
         $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", true);
         $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", true);
         $(idLoadFiles).find('.addInfo__input').attr("disabled", true);
@@ -576,25 +683,7 @@ $(document).ready(function () {
         confirmPass(this);
     });
     // -- Registration Carer Step 8
-    $('select[name="have_car"]').parent().parent().hide();
-    if ($('select[name="have_car"]').val() == 'Yes') {
-        {
-            $('select[name="have_car"]').parent().parent().show()
-        }
-    } else {
-        $('select[name="have_car"]').val('');
-        $('select[name="have_car"]').parent().parent().hide()
-    }
-    $('select[name="driving_licence"]').on('change', function (e) {
-        if ($(this).val() == 'Yes') {
-            {
-                $('select[name="have_car"]').parent().parent().show()
-            }
-        } else {
-            $('select[name="have_car"]').val('');
-            $('select[name="have_car"]').parent().parent().hide()
-        }
-    });
+
 
     // -- upload files. Registration sections -------
     var arrLocalStorage = []
@@ -647,7 +736,7 @@ $(document).ready(function () {
 
     if($('#profile_photo').attr('style')){
       $('#profile_photo').parent().find('.pickfiles-delete_profile_photo').attr('style', 'display: block')
-      $('#profile_photo').parent().find('.add--moreHeight').html('')
+      // $('#profile_photo').parent().find('.add--moreHeight').html('')
     }
 
       $(document).on('change', '.addInfo__input', function(e) {
@@ -717,8 +806,12 @@ $(document).ready(function () {
 
     var c = 0
 
-    $(document).on('change', '.pickfiles', function(e) {
+    $(document).on('change', '.pickfiles, .pickfiles-change', function(e) {
       var input_val = $(this).parent().parent().find('.addInfo__input').val('')
+
+      var p = $(this).parent().parent().parent().find('.profileField_h')
+      var div2 = $(this).parent().parent().addClass('profileField_h')
+
       $(this).parent().parent().find('.addInfo__input').prop( "disabled", false)
       $(this).parent().parent().find('.addInfo__input').attr( "readonly", false )
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
@@ -768,21 +861,23 @@ $(document).ready(function () {
       var q = '.profileRow-'+input_name.split('-')[0]
       c += 1
 
-      $(q).append(`
-        <div class="profileField">
-          <div class="addContainer">
-            <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-            <div id="${input_name.split('-')[0]}-${c}u" class="pickfiles_img"></div>
-              <a class="add add--moreHeight">
-                  <i class="fa fa-plus-circle"></i>
-                  <div class="add__comment add__comment--smaller"></div>
-              </a>
+      if(p.length >= 2){
+        $(q).append(`
+          <div class="profileField profileField_q profileField_h">
+            <div class="addContainer">
+              <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+              <div id="${input_name.split('-')[0]}-${c}u" class="pickfiles_img"></div>
+                <a class="add add--moreHeight">
+                    <i class="fa fa-plus-circle"></i>
+                    <div class="add__comment add__comment--smaller"></div>
+                </a>
+            </div>
+            <div class="addInfo">
+                <input type="text" name="${input_name.split('-')[0]}-${c}u" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">
+            </div>
           </div>
-          <div class="addInfo">
-              <input type="text" name="${input_name.split('-')[0]}-${c}u" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">
-          </div>
-        </div>
-      `)
+        `)
+      }
 
       if($carer_profile.length){
         arrFiles = arrFiles.filter((index) => {
@@ -1023,9 +1118,8 @@ $(document).ready(function () {
           // if(index[1].length >= 3){
             $(p).html('')
             index[1].map((index2, i2) => {
-
               $(p).append(`
-                <div class="profileField profileField_q">
+                <div class="profileField profileField_q profileField_h">
                   ${
                     i2 === 0 ?
                     `<h2 class="profileField__title ordinaryTitle">
@@ -1081,8 +1175,8 @@ $(document).ready(function () {
                 </div>
               `)
             }
-          // }
-          // else{
+
+
             newDoc.map((index) => {
               var c = 0
               index[1].map((index) => {
@@ -1107,6 +1201,7 @@ $(document).ready(function () {
               }
               $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
               $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id)
+              $('#'+index.type_value+'').parent().find('.pickfiles-change').remove()
               $('#'+index.type_value+'').parent().parent().find('.addInfo__input').attr( "disabled", false )
               $('#'+index.type_value+'').parent().parent().find('.addInfo__input').attr( "readonly", false )
               $('#'+index.type_value+'').parent().parent().find('.addInfo__input').val(index.title)
