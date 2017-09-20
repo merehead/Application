@@ -32,43 +32,45 @@
                 <div class="bookingCard__header bookingCard__header">
                     <h2>new</h2>
                 </div>
-                <div class="bookingCard__body bookInfo">
-                    <div class="bookInfo__profile">
-                        <a href="Service_user_Public_profile_page.html" class="profilePhoto bookInfo__photo">
-                            <img src="/img/profile8.jpg" alt="">
-                        </a>
-                        <div class="bookInfo__text">
-                            <p><a href="Service_user_Public_profile_page.html">Bob M.</a> booked you</p>
-                            <a href="NewAnAppointment_New.html" class="">view details</a>
-                        </div>
+                @foreach($newBookings as $booking)
+                    <div class="bookingCard__body bookInfo">
+                        <div class="bookInfo__profile">
+                            <a href="Service_user_Public_profile_page.html" class="profilePhoto bookInfo__photo">
+                                <img src="/img/profile8.jpg" alt="">
+                            </a>
+                            <div class="bookInfo__text">
+                                <p><a href="Service_user_Public_profile_page.html">Bob M.</a> booked you</p>
+                                <a href="NewAnAppointment_New.html" class="">view details</a>
+                            </div>
 
-                    </div>
-                    <div class="bookInfo__date">
-                        <span class="bookDate">15 May 2017</span>
-                        <span class="bookTime">12:00 PM - 5:00 PM</span>
-                        <p class="hourPrice">
-                            5h / <span>£50</span>
-                        </p>
-                    </div>
-                    <div class="bookInfo__btns">
-                        <div class="roundedBtn">
-                            <a href="#" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
-                                accept
-                            </a>
                         </div>
-                        <div class="roundedBtn">
-                            <a href="#" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--reject">
-                                reject
-                            </a>
+                        <div class="bookInfo__date">
+                            {{--<span class="bookDate">15 May 2017</span>--}}
+                            <span class="bookDate">{{$booking->date_start}} - {{$booking->date_end}}</span>
+                            <span class="bookTime">12:00 PM - 5:00 PM</span>
+                            <p class="hourPrice">
+                                5h / <span>£50</span>
+                            </p>
                         </div>
-                        <div class="roundedBtn">
-                            <a href="#" class="roundedBtn__item   roundedBtn__item--alternative-smal">
-                                OFFER ALTERNATIVE TIME
-                            </a>
+                        <div class="bookInfo__btns">
+                            <div class="roundedBtn">
+                                <a href="#" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
+                                    accept
+                                </a>
+                            </div>
+                            <div class="roundedBtn">
+                                <a href="#" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--reject">
+                                    reject
+                                </a>
+                            </div>
+                            <div class="roundedBtn">
+                                <a href="#" class="roundedBtn__item   roundedBtn__item--alternative-smal">
+                                    OFFER ALTERNATIVE TIME
+                                </a>
+                            </div>
                         </div>
                     </div>
-
-                </div>
+                @endforeach
             </div>
 
 

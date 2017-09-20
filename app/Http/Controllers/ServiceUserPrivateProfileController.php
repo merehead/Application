@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\AssistanceType;
+use App\Booking;
 use App\Floor;
 use App\Language;
 use App\ServiceUsersProfile;
 use App\WorkingTime;
 use Illuminate\Http\Request;
+use Auth;
 
 class ServiceUserPrivateProfileController extends FrontController
 {
@@ -104,6 +106,7 @@ class ServiceUserPrivateProfileController extends FrontController
 
     public function booking($serviceUserProfile)
     {
+        $user = Auth::user();
 
         $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
         $this->title = 'Holm Care';
@@ -130,9 +133,13 @@ class ServiceUserPrivateProfileController extends FrontController
         $languages = Language::all();
         $this->vars = array_add($this->vars, 'languages', $languages);
 
+        $newBookings = Booking::where('status_id', 2)->where('purchaser_id', $user->id)->get();
+        $this->vars = array_add($this->vars, 'newBookings', $newBookings);
+
 
         $this->content = view(config('settings.frontTheme') . '.serviceUserProfiles.Booking.BookingTaball')->with($this->vars)
             ->render();
+
 
         return $this->renderOutput();
     }

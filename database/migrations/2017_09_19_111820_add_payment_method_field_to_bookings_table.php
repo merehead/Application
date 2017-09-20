@@ -15,6 +15,7 @@ class AddPaymentMethodFieldToBookingsTable extends Migration
     {
         Schema::table('bookings', function($table) {
             $table->enum('payment_method', ['credit_card', 'bonus_wallet'])->nullable()->default(null);
+            $table->string('card_token')->nullable()->default(null);
         });
 
     }
@@ -28,6 +29,7 @@ class AddPaymentMethodFieldToBookingsTable extends Migration
     {
         Schema::table('bookings', function($table) {
             $table->dropColumn('payment_method');
+            $table->dropColumn('card_token');
         });
     }
 }

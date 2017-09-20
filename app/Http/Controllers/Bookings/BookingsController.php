@@ -37,6 +37,8 @@ class BookingsController extends Controller
     public function setPaymentMethod(Booking $booking, Request $request){
         $booking->payment_method = $request->payment_method;
         $booking->save();
+
+        return response(['status' => 'success']);
     }
 
     public function changeAppointments(Booking $booking, Request $request){

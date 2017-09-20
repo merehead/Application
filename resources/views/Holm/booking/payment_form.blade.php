@@ -75,9 +75,9 @@
                               </div>
                           </div>
                           <div class="roundedBtn roundedBtn--center"  id="bookPayment__form">
-                              <a href="Thank_you_booking.html" class="roundedBtn__item roundedBtn__item--confirm">
+                              <button href="Thank_you_booking.html" class="roundedBtn__item roundedBtn__item--confirm" id="buttonPaymentCard">
                                   Confirm Payment
-                              </a>
+                              </button>
                           </div>
                       </form>
                     </div>
@@ -103,9 +103,9 @@
 
                      </div>
                      <div class="roundedBtn roundedBtn--center"  id="bookPayment__total">
-                       <a href="Thank_you_booking.html" class="roundedBtn__item roundedBtn__item--confirm">
+                       <button href="Thank_you_booking.html" class="roundedBtn__item roundedBtn__item--confirm" id="buttonPaymentBonuses">
                          Confirm Payment
-                       </a>
+                       </button>
                      </div>
                     </div>
 
@@ -148,12 +148,16 @@
 
             </div>
         </div>
-
-
-
-
-
-
     </div>
-
 </section>
+
+<script>
+    $('#buttonPaymentBonuses').click(function () {
+        $.post('{{route('setBookingPaymentMethod', ['booking' => $booking->id])}}', {'payment_method' : 'bonus_wallet'}, function( data ) {
+            console.log(data);
+            if(data.status == 'success'){
+
+            }
+        });
+    });
+</script>

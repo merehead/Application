@@ -14,5 +14,6 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         'profile-photo',
         'service-user-profile-photo',
+        'bookings/*',
     ];
 }

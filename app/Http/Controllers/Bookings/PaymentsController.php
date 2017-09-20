@@ -11,7 +11,7 @@ use SebastianBergmann\Comparator\Book;
 
 class PaymentsController extends FrontController
 {
-    public function payment_form(Request $request/*, Booking $booking*/){
+    public function payment_form(Request $request, Booking $booking){
         $this->template = config('settings.frontTheme') . '.templates.bookings';
         $this->title = 'Payment';
 
@@ -22,6 +22,7 @@ class PaymentsController extends FrontController
         $this->vars = array_add($this->vars,'footer',$footer);
 
         $this->vars = array_add($this->vars, 'user', $this->user);
+        $this->vars = array_add($this->vars, 'booking', $booking);
 
         $this->content = view(config('settings.frontTheme') . '.booking.payment_form')->with($this->vars)
             ->render();
