@@ -39,22 +39,22 @@
                         <div class="addContainer">
 
                           @if(empty($purchasersProfileID))
-                              <input name="{{$serviceUserProfile->id}}" class="pickfiles_profile_photo" accept="jpg,.jpeg,.png,.doc" type="file" />
+                            <input name="{{$serviceUserProfile->id}}" class="pickfiles_profile_photo" accept="jpg,.jpeg,.png,.doc" type="file" />
                           @else
-                              <input name="{{$purchasersProfile->serviceUsers->first()->id}}" class="pickfiles_profile_photo" accept="jpg,.jpeg,.png,.doc" type="file" />
+                            <input name="{{$purchasersProfile->serviceUsers->first()->id}}" class="pickfiles_profile_photo" accept="jpg,.jpeg,.png,.doc" type="file" />
                           @endif
 
                           <div class="pickfiles_img"></div>
 
-                          <div id="profile_photo" class="pickfiles_img"
+                          <img id="profile_photo" class="pickfiles_img" onerror="this.src='/img/no_photo.png'" 
 
                             @if(empty($purchasersProfileID))
-                            style="background-image: url('img/service_user_profile_photos/{{$serviceUserProfile->id}}.png')">
+                              style="background-image: url('img/service_user_profile_photos/{{$serviceUserProfile->id}}.png')">
                             @else
                               style="background-image: url('img/service_user_profile_photos/{{$purchasersProfile->serviceUsers->first()->id}}.png')">
                             @endif
 
-                          </div>
+                          >
 
                           <a href="#" class="add add--moreHeight">
                               <i class="fa fa-plus-circle"></i>
