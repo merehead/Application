@@ -1260,7 +1260,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'consent' => 'required|in:"Yes","No","Sometimes"',
-            'consent_details' => 'required_if:consent,"Yes","Sometimes"|nullable|string|max:500',
+            'consent_details' => 'required_if:consent,"Yes","Sometimes"|nullable|string|max:250',
 
         ]);
 
@@ -1298,7 +1298,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'keeping_safe_at_night' => 'required|in:"Yes","No","Sometimes"',
-            'keeping_safe_at_night_details' => 'required_if:keeping_safe_at_night,"Yes","Sometimes"|nullable|String:250',
+            'keeping_safe_at_night_details' => 'required_if:keeping_safe_at_night,"Yes","Sometimes"|nullable|string|max:250',
             'time_to_night_helping' => 'nullable|string|max:16',
 
         ]);
@@ -1336,7 +1336,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'religious_beliefs' => 'required|in:"Yes","No","Sometimes"',
-            'religious_beliefs_details' => 'required_if:religious_beliefs,"Yes","Sometimes"|nullable|string|max:500',
+            'religious_beliefs_details' => 'required_if:religious_beliefs,"Yes","Sometimes"|nullable|string|max:250',
          ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1352,7 +1352,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'particular_likes' => 'required|in:"Yes","No","Sometimes"',
-            'particular_likes_details' => 'required_if:particular_likes,"Yes","Sometimes"|nullable|string|max:500',
+            'particular_likes_details' => 'required_if:particular_likes,"Yes","Sometimes"|nullable|string|max:250',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1384,7 +1384,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'interests_hobbies' => 'required|in:"Yes","No","Sometimes"',
-            'interests_hobbies_details' => 'required_if:interests_hobbies,"Yes","Sometimes"|nullable|string|max:500',
+            'interests_hobbies_details' => 'required_if:interests_hobbies,"Yes","Sometimes"|nullable|string|max:250',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
