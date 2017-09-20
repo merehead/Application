@@ -50,6 +50,21 @@
 
 
 
+
+            <div class="formField hiding2" style="display: none">
+                <h2 class="formLabel questionForm__label">
+                 Valid until
+                </h2>
+
+                @if($carersProfile->driver_licence_valid_until === "01/01/1970")
+                    <input name="driver_licence_valid_until" id="datepicker_driver_licence" class="profileField__input" placeholder="Valid until date" type="text">
+                @else
+                    {!! Form::text('driver_licence_valid_until',null,['id'=>'datepicker_driver_licence','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
+                @endif
+            </div>
+
+
+
                 <div class="formField  hiding2" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Please upload photographic proof of your driving licence.
@@ -88,6 +103,28 @@
                     @endif
 
                 </div>
+
+
+
+            <div class="formField " >  {{--style="display: none"--}}
+                <h2 class="formLabel questionForm__label">
+
+                 Car insurance Number
+
+                </h2>
+                {!! Form::text('car_insurance_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Car insurance number','readonly','data-edit'=>'false']) !!}
+                @if ($errors->has('car_insurance_number'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('car_insurance_number') }}</strong>
+                                    </span>
+                @endif
+            </div>
+
+
+
+
+
+
                 <div class="formField hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Would you be interested in using your car to transport clients to the shops or for short trips?<span>*</span>
