@@ -180,6 +180,16 @@ select#workingTimes {
   border: 1px dotted #dee1e3;
   font-size: 1.5em;
 }
+.carousel-inner>.active{
+  justify-content: center;
+}
+.pickfiles_profile_photo{
+  z-index: 10;
+}
+#profile_photo{
+  position: absolute;
+  z-index: 9;
+}
 .pickfiles-delete,
 .pickfiles-delete_profile_photo{
   position: absolute;
@@ -297,8 +307,10 @@ select#workingTimes {
 .registeredCarer__ico{font-size: 16px;}
 
 .terms-cerer {
+  font-size: 13px;
     text-align: left;
     margin: 10px;
+    color: #fff;
 }
 body > section > div > div.invite{
     margin-bottom: 0px;
@@ -315,7 +327,25 @@ a.blogFilter__item.active {
 }
 
 .section_title p {
-    padding-bottom: 80px;
+    padding-bottom: 35px;
+}
+.advantages_cust{
+  margin-top: 50px;
+}
+.lightTitle_align-l{
+  text-align: left;
+}
+.terms-cerer_margin-l{
+  margin-left: 0;
+}
+.section_title .padding-b{
+  padding-bottom: 10px;
+}
+.advantages-wcarer{
+  margin-top: 50px;
+}
+.peopleBox__info, .peopleBox{
+  width: auto
 }
 #boxG1{    margin-top: 4px;}
 
