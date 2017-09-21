@@ -174,7 +174,7 @@
                         <p  class="advantageColumn">
                             {{$item->title}}
                         </p>
-                    @endif
+                    @endforeach
                 </div>
             </div>
             @endif

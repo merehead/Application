@@ -453,8 +453,17 @@ $(document).ready(function () {
 
     $('a.additionalTime').on('click',function(e){
         e.preventDefault();
-        $('.datetime').last().after($('.datetime').last().clone());
+        $('.datetime').last().after($('.datetime').last().clone().removeClass('nhide'));
         $('.checktime').last().after($('.checktime').last().clone());
+        $( ".datepicker_message,datepicker" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"dd/mm/yy",
+            showAnim:"slideDown",
+            minDate: "+0D",
+            maxDate: "+50Y",
+            yearRange: "0:+50"
+        });
         return false;;
     });
 
