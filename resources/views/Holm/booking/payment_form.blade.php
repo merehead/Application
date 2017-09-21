@@ -26,7 +26,6 @@
                         </a>
                     </div>
                     <div class="bookPayment__form-header">
-                      <form action="" class="bookPayment__form">
                           <div class="formField">
                               <h2 class="formLabel">
                                   Card owner's name
@@ -74,11 +73,10 @@
                               </div>
                           </div>
                           <div class="roundedBtn roundedBtn--center">
-                              <button href="Thank_you_booking.html" class="roundedBtn__item roundedBtn__item--confirm" id="buttonPaymentCard">
+                              <button  class="roundedBtn__item roundedBtn__item--confirm" id="buttonPaymentCard">
                                   Confirm Payment
                               </button>
                           </div>
-                      </form>
                     </div>
 
                     <div class="bonusPay-header" style="display: none">
