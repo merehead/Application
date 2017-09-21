@@ -1,3 +1,4 @@
+
 <section class="mainSection">
     <div class="container">
         <div class="breadcrumbs">
@@ -5,12 +6,12 @@
                 Home
             </a>
             <span class="breadcrumbs__arrow">&gt;</span>
-            <a href="{{route('ServiceUserSetting',['serviceUserProfile'=>$serviceUsersProfile])}}" class="breadcrumbs__item">
+            <a href="{{route('ServiceUserSetting',['serviceUserProfile'=>$serviceUsers])}}" class="breadcrumbs__item">
                 My profile
             </a>
             <span class="breadcrumbs__arrow">&gt;</span>
-            <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUsersProfile])}}" class="breadcrumbs__item">
-                {{$carerProfile->family_name}} {{$carerProfile->first_name}}
+            <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUsers->id])}}" class="breadcrumbs__item">
+                {{$serviceUsers->family_name}} {{$serviceUsers->first_name}}
             </a>
         </div>
 
@@ -27,18 +28,17 @@
                     <div class="profileMain">
                         <div class="carer">
                             <div class="profileInfo">
-                                <div class="profilePhoto  ">
-                                    <img id="profile_photo" src="img/profile_photos/{{$carerProfile->id}}.png" onerror="this.src='/img/no_photo.png'" alt="avatar">
+                                <div class="profilePhoto profilePhoto2 ">
+                                    <img id="profile_photo" src="img/profile_photos/{{$serviceUsers->id}}.png" onerror="this.src='/img/no_photo.png'" alt="avatar">
 
                                 </div>
                                 <div class="profileInfo__item">
                                     <h2 class="profileName profileName--big">
-                                        {{$carerProfile->family_name}} {{$carerProfile->first_name}}
+                                        {{$serviceUsers->family_name}} {{$serviceUsers->first_name}}
                                     </h2>
 
                                     <p>
-                                        Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran ende salutandi no
-                                        per. Est eu pertinaciaen delacrue
+                                        {{$serviceUsers->one_line_about}}
                                     </p>
                                 </div>
                             </div>
@@ -52,11 +52,11 @@
                                 <div class="locationBox">
                                     <p class="location">
                                         <span class="location__title">town/city</span>
-                                        <span class="location__value">{{$carerProfile->town}}</span>
+                                        <span class="location__value">{{$serviceUsers->town}}</span>
                                     </p>
                                     <p class="location">
                                         <span class="location__title">post code</span>
-                                        <span class="location__value">{{$carerProfile->postcode}}</span>
+                                        <span class="location__value">{{$serviceUsers->postcode}}</span>
                                     </p>
                                 </div>
                             </div>
@@ -81,10 +81,7 @@
             </div>
             <div class="extraRow">
                 <div class="userAbout">
-                    <p>Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran ende salutandi no per. Est eu
-                        pertinaciaen delacrue instructiol vel eu natum vedi idqran ende salutandi no per. Lorem ipsum
-                        dolor sit amet, ea sit cetero assusamus, a idqran... ende salutandi no per. Est eu pertinaciaen
-                        delacrue instructiol vel eu natum vedi idqran ende salutandi no per.</p>
+                    <p></p>
                 </div>
 
                 <div class="userBox">

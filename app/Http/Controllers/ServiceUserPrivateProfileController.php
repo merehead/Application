@@ -105,7 +105,7 @@ class ServiceUserPrivateProfileController extends FrontController
             $this->vars = array_add($this->vars, 'user', $this->user);
 
             $this->vars = array_add($this->vars, 'carerProfile', $serviceUsersProfile);
-            $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
+            $this->vars = array_add($this->vars, 'serviceUsers', $serviceUsersProfile);
 
             $typeCare = AssistanceType::all();
             $this->vars = array_add($this->vars, 'typeCare', $typeCare);

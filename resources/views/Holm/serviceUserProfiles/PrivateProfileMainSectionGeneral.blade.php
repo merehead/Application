@@ -155,8 +155,8 @@
         </div>
     </div>
 
-    <div class="profileMap" style="width:100%;height:210px">
-        <div id="map_canvas" style="clear:both; height:210px;"></div>
+    <div class="profileMap" style="width:100%;height:450px">
+        <div id="map_canvas" style="clear:both; height:450px;"></div>
     </div>
 </div>
 
