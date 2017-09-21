@@ -66,8 +66,13 @@ Route::post('/serviceUser-settings/{serviceUserProfile}','ServiceUserPrivateProf
 //Route::get('/serviceUser-settings/booking/{serviceUserProfile}', 'ServiceUserPrivateProfileController@booking')->name('ServiceUserBooking'); //synonym for ImCarerPage
 Route::get('/serviceUser-settings/booking/{serviceUserProfile}/{status?}', 'ServiceUserPrivateProfileController@bookingFilter')->name('ServiceUserBookingStatus'); //synonym for ImCarerPage
 
+Route::get('/bookings/{booking}/details', 'Bookings\BookingsController@view_details');
 Route::get('/bookings/{booking}/purchase', 'Bookings\PaymentsController@payment_form');
 Route::post('/bookings/{booking}/setPaymentMethod','Bookings\BookingsController@setPaymentMethod')->name('setBookingPaymentMethod');
+Route::post('/bookings/{booking}/accept', 'Bookings\BookingsController@accept');
+Route::post('/bookings/{booking}/reject', 'Bookings\BookingsController@reject');
+Route::post('/bookings/{booking}/cancel', 'Bookings\BookingsController@cancel');
+Route::post('/bookings/{booking}/completed', 'Bookings\BookingsController@completed');
 
 Route::post('/document/upload','DocumentsController@upload')->name('UploadDocument');
 Route::get('/documents','DocumentsController@GetDocuments')->name('GetDocuments');

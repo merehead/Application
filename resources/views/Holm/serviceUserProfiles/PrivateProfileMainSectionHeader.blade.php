@@ -9,7 +9,7 @@
         </a>
         <span class="breadcrumbs__arrow">></span>
         <a href="" class="breadcrumbs__item">
-            {{$userNameForSite}}
+            {{$serviceUsersProfile->full_name}}
         </a>
 
     </div>
@@ -25,7 +25,7 @@
 
 
 <div class="bookingSwitcher">
-    <a href="{{route('purchaserSettings')}}" class="bookingSwitcher__link bookingSwitcher__link--active">Profile settings</a>
-    <a href="/serviceUser-settings/booking/{{$serviceUsersProfile->id}}" class="bookingSwitcher__link">My bookings</a>
+    <a href="{{route('purchaserSettings')}}" class="bookingSwitcher__link">Profile settings</a>
+    <a href="/serviceUser-settings/booking/{{$serviceUsersProfile->id}}" class="bookingSwitcher__link bookingSwitcher__link--active">My bookings</a>
 </div>
 

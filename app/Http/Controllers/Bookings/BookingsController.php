@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Bookings;
 
 use App\Booking;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\FrontController;
 use App\User;
 use Illuminate\Http\Request;
 use SebastianBergmann\Comparator\Book;
+use Auth;
 
-class BookingsController extends Controller
+class BookingsController extends FrontController
 {
     public function create(Request $request){
         $purchaser = User::find(2);
@@ -34,6 +36,44 @@ class BookingsController extends Controller
         }
     }
 
+    public function view_details(Booking $booking){
+
+        if(!in_array($booking->status_id, [1, 5, 7]))
+            return;
+        $user = Auth::user();
+
+        $this->template = config('settings.frontTheme') . '.templates.purchaserPrivateProfile';
+        $this->title = 'Booking details';
+
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
+        if (!$this->user) {
+            return;
+        } else {
+            $this->vars = array_add($this->vars, 'user', $this->user);
+            $this->vars = array_add($this->vars, 'booking', $booking);
+
+            $serviceUserProfile = $booking->bookingServiceUser()->first();
+            $this->vars = array_add($this->vars, 'serviceUserProfile', $serviceUserProfile);
+
+
+            $carerProfile = $booking->bookingCarer()->first()->userCarerProfile()->first();
+            $this->vars = array_add($this->vars, 'carerProfile', $carerProfile);
+
+            $this->content = view(config('settings.frontTheme') . '.booking.BookingDetails')->with($this->vars)->render();
+
+        }
+
+
+        return $this->renderOutput();
+    }
+
     public function setPaymentMethod(Booking $booking, Request $request){
         $booking->payment_method = $request->payment_method;
         $booking->save();
@@ -41,7 +81,26 @@ class BookingsController extends Controller
         return response(['status' => 'success']);
     }
 
-    public function changeAppointments(Booking $booking, Request $request){
-        // From create
+    public function accept(Booking $booking){
+        return response(['status' => 'success']);
+    }
+
+    public function reject(Booking $booking){
+        $booking->status_id = 4;
+        $booking->save();
+
+        return response(['status' => 'success']);
+    }
+
+    public function cancel(Booking $booking){
+        //todo cancel logic
+        $booking->status_id = 4;
+        $booking->save();
+
+        return response(['status' => 'success']);
+    }
+
+    public function completed(Booking $booking){
+
     }
 }

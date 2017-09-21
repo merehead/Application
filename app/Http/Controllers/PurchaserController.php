@@ -194,10 +194,21 @@ class PurchaserController extends FrontController
             $this->vars = array_add($this->vars, 'newBookings', $newBookings);
 
             $inProgressBookings = Booking::where('status_id', 5)->where('purchaser_id', $user->id)->get();
+            $inProgressAmount = 0;
+            foreach ($inProgressBookings as $booking){
+                $inProgressAmount += ($booking->hours * $booking->hour_price);
+            }
+
             $this->vars = array_add($this->vars, 'inProgressBookings', $inProgressBookings);
+            $this->vars = array_add($this->vars, 'inProgressAmount', $inProgressAmount);
 
             $completedBookings = Booking::where('status_id', 7)->where('purchaser_id', $user->id)->get();
+            $completedAmount = 0;
+            foreach ($completedBookings as $booking){
+                $completedAmount += ($booking->hours * $booking->hour_price);
+            }
             $this->vars = array_add($this->vars, 'completedBookings', $completedBookings);
+            $this->vars = array_add($this->vars, 'completedAmount', $completedAmount);
 
             $this->content = view(config('settings.frontTheme') . '.purchaserProfiles.Booking.BookingTaball')->with($this->vars)->render();
 

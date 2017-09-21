@@ -6,9 +6,9 @@
               ALL
             </span>
                 </a>
-                <a href="/purchaser-settings/booking/new" class="bookingNav__link centeredLink">
+                <a href="/purchaser-settings/booking/pending" class="bookingNav__link centeredLink">
             <span class="bookingNav__text">
-              new
+              pending
             </span>
                 </a>
                 <a href="/purchaser-settings/booking/progress" class="bookingNav__link centeredLink">
@@ -25,13 +25,33 @@
             <a href="#" class="printIco">
                 <img src="/img/print.png" alt="">
             </a>
+            @if($status == 'progress')
+                <div class="total">
+                    <div class="total__item  total__item--smaller totalBox">
+                        <div class="totalTitle">
+                            <p>Total </p>
+                        </div>
+                        <p class="totalPrice totalPrice--smaller">£{{$inProgressAmount}}</p>
+                    </div>
+                </div>
+            @endif
+            @if($status == 'completed')
+                <div class="total">
+                    <div class="total__item  total__item--smaller totalBox">
+                        <div class="totalTitle">
+                            <p>Total </p>
+                        </div>
+                        <p class="totalPrice totalPrice--smaller">£{{$completedAmount}}</p>
+                    </div>
+                </div>
+            @endif
         </div>
 
         <div class="bookings">
-            @if($status == 'all' || $status == 'new')
+            @if($status == 'all' || $status == 'pending')
             <div class="bookingCard bookingCard--new">
                 <div class="bookingCard__header bookingCard__header">
-                    <h2>new</h2>
+                    <h2>pending</h2>
                 </div>
                 @if($newBookings->count() > 0)
                     @foreach($newBookings as $booking)
@@ -42,7 +62,7 @@
                                 </a>
                                 <div class="bookInfo__text">
                                     <p>You booked <a href="Service_user_Public_profile_page.html">{{$booking->bookingCarer()->first()->full_name}}</a></p>
-                                    <a href="NewAnAppointment_New.html" class="">view details</a>
+                                    <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                                 </div>
 
                             </div>
@@ -55,14 +75,14 @@
                             </div>
                             <div class="bookInfo__btns">
                                 <div class="roundedBtn">
-                                    <a href="#" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
+                                    <button data-booking_id = "{{$booking->id}}" data-status = "accept"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
                                         accept
-                                    </a>
+                                    </button>
                                 </div>
                                 <div class="roundedBtn">
-                                    <a href="#" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--reject">
+                                    <button data-booking_id = "{{$booking->id}}" data-status = "reject" class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--reject">
                                         reject
-                                    </a>
+                                    </button>
                                 </div>
                                 <div class="roundedBtn">
                                     <a href="#" class="roundedBtn__item   roundedBtn__item--alternative-smal">
@@ -93,7 +113,7 @@
                                 </a>
                                 <div class="bookInfo__text">
                                     <p>You booked <a href="Service_user_Public_profile_page.html">{{$booking->bookingCarer()->first()->full_name}}</a></p>
-                                    <a href="NewAnAppointment_New.html" class="">view details</a>
+                                    <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                                 </div>
 
                             </div>
@@ -106,7 +126,7 @@
                             </div>
                             <div class="bookInfo__btns">
                                 <div class="roundedBtn">
-                                    <a href="#" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--cancel">
+                                    <button data-booking_id = "{{$booking->id}}" data-status = "cancel"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--cancel">
                                         cancel
                                     </a>
                                 </div>
@@ -149,7 +169,7 @@
                                 </a>
                                 <div class="bookInfo__text">
                                     <p>You booked <a href="Service_user_Public_profile_page.html">{{$booking->bookingCarer()->first()->full_name}}</a></p>
-                                    <a href="NewAnAppointment_New.html" class="">view details</a>
+                                    <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                                 </div>
 
                             </div>
@@ -178,3 +198,14 @@
 
     </div>
 </section>
+
+<script>
+    $('.changeBookingStatus').click(function () {
+        var booking_id = $(this).attr('data-booking_id');
+        var status = $(this).attr('data-status');
+        $.post('/bookings/'+booking_id+'/'+status, function (data) {
+            location.reload();
+        });
+    });
+
+</script>

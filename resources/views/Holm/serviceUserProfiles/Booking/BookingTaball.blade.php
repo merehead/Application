@@ -6,9 +6,9 @@
               ALL
             </span>
         </a>
-        <a href="/purchaser-settings/booking/new" class="bookingNav__link centeredLink">
+        <a href="/purchaser-settings/booking/pending" class="bookingNav__link centeredLink">
             <span class="bookingNav__text">
-              new
+              pending
             </span>
         </a>
         <a href="/purchaser-settings/booking/progress" class="bookingNav__link centeredLink">
@@ -28,7 +28,7 @@
 </div>
 
 <div class="bookings">
-    @if($status == 'all' || $status == 'new')
+    @if($status == 'all' || $status == 'pending')
         <div class="bookingCard bookingCard--new">
             <div class="bookingCard__header bookingCard__header">
                 <h2>new</h2>

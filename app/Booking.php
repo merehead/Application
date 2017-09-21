@@ -25,9 +25,15 @@ class Booking extends Model
     {
         return $this->belongsTo('App\User','purchaser_id','id');
     }
+
+//    public function bookingServiceUser()
+//    {
+//        return $this->belongsTo('App\User','service_user_id','id');
+//    }
+
     public function bookingServiceUser()
     {
-        return $this->belongsTo('App\User','service_user_id','id');
+        return $this->belongsTo('App\ServiceUsersProfile','service_user_id','id');
     }
     public function bookingCarer()
     {
