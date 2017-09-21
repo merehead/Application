@@ -463,7 +463,7 @@ $(document).ready(function () {
             $(uc).hide();
         }
     });
-
+//>>>>Иван 20170921 для приватного профиля пользователя
     $(document).on('change','.profileField__select.serviceUserProfile',function () {
 
         if($(this).val() == 'No') {
@@ -475,23 +475,60 @@ $(document).ready(function () {
         if($(this).val() == 'Sometimes') {
             $(this).parent().next().show();
         }
-        //alert($(this).val());
-
-
-
-        //$(this).parent().next().css('background', 'red');
-        //$(this).next().find('input').css('color', 'red');;
-
-
-
-/*        if ($('#register_have_car').val() == "Yes") {
-            $('#register_use_car').parent().parent().show();
-        } else {
-            var uc = $('#register_use_car').parent().parent();
-            $(uc).hide();
-        }*/
     });
 
+    $(document).on('change','.profileField__select.serviceUserProfilePet',function () {
+
+        if($(this).val() == 'No') {
+            $(".serviceUserProfilePetHide").hide();
+        }
+        if($(this).val() == 'Yes') {
+            $(".serviceUserProfilePetHide").show();
+        }
+
+    });
+
+    $("input[name='languages[12]']").change(function () {
+        if (this.checked) {
+            $(".otherLanguages").slideDown( "slow" );
+        } else {
+            $(".otherLanguages").slideUp();
+        }
+
+    });
+
+    $(function () {
+        $("#datepicker_when_start").datepicker({
+            //changeMonth: true,
+            //changeYear: true,
+            dateFormat: "dd/mm/yy",
+            showAnim: "slideDown",
+            minDate: "+3D",
+            maxDate: "+20Y",
+            yearRange: "0:+10"
+        });
+    });
+
+    $(".allTime").click(function () {
+        $('input.checkboxTimerGroup:checkbox').not(this).prop('checked', this.checked);
+        $('input.morning:checkbox').not(this).prop('checked', this.checked);
+        $('input.afternoon:checkbox').not(this).prop('checked', this.checked);
+        $('input.night:checkbox').not(this).prop('checked', this.checked);
+    });
+
+    $(".everyMorning").click(function () {
+        $('input.morning:checkbox').not(this).prop('checked', this.checked);
+    });
+
+    $(".everyAfternoon").click(function () {
+        $('input.afternoon:checkbox').not(this).prop('checked', this.checked);
+    });
+
+    $(".everyNight").click(function () {
+        $('input.night:checkbox').not(this).prop('checked', this.checked);
+    });
+
+//^^^^^^^Иван 20170921 для приватного профиля пользователя
     if($("#criminal_detail").val() == 'Some') {
         $(".criminal_detail").show();
     }else{

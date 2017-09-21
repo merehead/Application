@@ -39,9 +39,7 @@
 
 
 
-
-    @if(strlen($serviceUsersProfile->other_languages))
-        <div class="profileRow">
+        <div class="profileRow otherLanguages"{!!  $serviceUsersProfile->Languages->containsStrict('carer_language', "OTHER") ? '' : ' style="display:none"'!!}>
 
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
@@ -54,7 +52,7 @@
                 @endif
             </div>
         </div>
-    @endif
+
 </div>
 {{ Form::close() }}
 

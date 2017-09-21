@@ -239,7 +239,7 @@
               </span>
             </h2>
 
-            {!! Form::select('own_pets',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('own_pets',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select serviceUserProfilePet','placeholder'=>'Please select']) !!}
 
             @if ($errors->has('own_pets'))
                 <span class="help-block">
@@ -247,7 +247,7 @@
                                     </span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->own_pets == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField serviceUserProfilePetHide profileField--two-thirds"{!!  $serviceUsersProfile->own_pets == 'No' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                Please, give details   </span>
@@ -261,7 +261,7 @@
             @endif
         </div>
     </div>
-    <div class="profileRow">
+    <div class="profileRow serviceUserProfilePetHide"{!!  $serviceUsersProfile->own_pets == 'No' ? ' style="display:none"' : ''!!}>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">

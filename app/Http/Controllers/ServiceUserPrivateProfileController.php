@@ -377,6 +377,29 @@ class ServiceUserPrivateProfileController extends FrontController
             unset($serviceUsersProfile);
         }
 
+
+        if ($input['stage'] == 'timeWhenCareNeeded') {
+
+
+            $this->validate($request,[
+
+                'start_date' => 'required|string',
+                'workingTime' => 'required|array',
+            ]);
+
+            $depart = "#timeWhenCareNeeded-div";
+
+            if (isset($input[ 'start_date'])) $serviceUsersProfile->start_date= $input[ 'start_date'];
+
+
+            $serviceUsersProfile->WorkingTimes()->sync(array_keys($input['workingTime']));
+
+            $serviceUsersProfile->update();
+
+            unset($serviceUsersProfile);
+        }
+
+
         if ($input['stage'] == 'health') {
 
             $this->validate($request,[
