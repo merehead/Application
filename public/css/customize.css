@@ -369,3 +369,6 @@ a.blogFilter__item.active {
     width: 20%;
     margin-right: 0;
 }
+#ui-datepicker-div{
+  z-index: 99!important;
+}
