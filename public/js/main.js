@@ -464,6 +464,34 @@ $(document).ready(function () {
         }
     });
 
+    $(document).on('change','.profileField__select.serviceUserProfile',function () {
+
+        if($(this).val() == 'No') {
+            $(this).parent().next().css('background', 'red');
+        }
+        if($(this).val() == 'Yes') {
+            $(this).parent().next().css('background', 'blue');
+        }
+        if($(this).val() == 'Sometimes') {
+            $(this).parent().next().css('background', 'yellow');
+        }
+        //alert($(this).val());
+
+
+
+        //$(this).parent().next().css('background', 'red');
+        //$(this).next().find('input').css('color', 'red');;
+
+
+
+/*        if ($('#register_have_car').val() == "Yes") {
+            $('#register_use_car').parent().parent().show();
+        } else {
+            var uc = $('#register_use_car').parent().parent();
+            $(uc).hide();
+        }*/
+    });
+
     if($("#criminal_detail").val() == 'Some') {
         $(".criminal_detail").show();
     }else{

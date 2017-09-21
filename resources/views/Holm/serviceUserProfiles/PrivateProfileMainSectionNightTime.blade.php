@@ -20,12 +20,12 @@
               Has problems getting dressed for bed
               </span>
             </h2>
-            {!! Form::select('getting_dressed_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            {!! Form::select('getting_dressed_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
             @if ($errors->has('getting_dressed_for_bed'))
                 <span class="help-block"><strong>{{ $errors->first('getting_dressed_for_bed') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->getting_dressed_for_bed == 'No' ? 'style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -64,12 +64,12 @@
              Needs assistance keeping safe at night
               </span>
             </h2>
-            {!! Form::select('keeping_safe_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            {!! Form::select('keeping_safe_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
             @if ($errors->has('keeping_safe_at_night'))
                 <span class="help-block"><strong>{{ $errors->first('keeping_safe_at_night') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->keeping_safe_at_night == 'No' ? 'style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -112,12 +112,12 @@
              Needs help going to the toilet at night
               </span>
             </h2>
-            {!! Form::select('toilet_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            {!! Form::select('toilet_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
             @if ($errors->has('toilet_at_night'))
                 <span class="help-block"><strong>{{ $errors->first('toilet_at_night') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->toilet_at_night == 'No' ? 'style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
