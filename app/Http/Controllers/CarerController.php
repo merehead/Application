@@ -55,7 +55,8 @@ class CarerController extends FrontController
         $this->vars = array_add($this->vars, 'modals', $modals);
 
         if (!$this->user) {
-            $this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
+            return \redirect('welcome-carer');
+            //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
         } else {
 
             $carerProfile = CarersProfile::findOrFail($this->user->id);
