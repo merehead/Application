@@ -467,13 +467,13 @@ $(document).ready(function () {
     $(document).on('change','.profileField__select.serviceUserProfile',function () {
 
         if($(this).val() == 'No') {
-            $(this).parent().next().css('background', 'red');
+            $(this).parent().next().hide();
         }
         if($(this).val() == 'Yes') {
-            $(this).parent().next().css('background', 'blue');
+            $(this).parent().next().show();
         }
         if($(this).val() == 'Sometimes') {
-            $(this).parent().next().css('background', 'yellow');
+            $(this).parent().next().show();
         }
         //alert($(this).val());
 

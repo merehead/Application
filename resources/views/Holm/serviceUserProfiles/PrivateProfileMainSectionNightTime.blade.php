@@ -46,7 +46,8 @@
               </span>
             </h2>
             <div class="profileField__input-wrap">
-                @if(empty($serviceUserProfile->time_to_bed))
+
+                @if(empty($serviceUsersProfile->time_to_bed))
                     <input name="time_to_bed" id="timepicker1" class="profileField__input" placeholder="Time" type="text">
                 @else
                     {!! Form::text('time_to_bed',null,['id'=>'timepicker1','class'=>'profileField__input','maxlength'=>"500"]) !!}
@@ -91,7 +92,7 @@
               </span>
             </h2>
             <div class="profileField__input-wrap">
-                @if(empty($serviceUserProfile->time_to_night_helping))
+                @if(empty($serviceUsersProfile->time_to_night_helping))
 
                     <input name="time_to_night_helping" id="timepicker2" class="profileField__input" placeholder="Time" type="text">
                 @else
