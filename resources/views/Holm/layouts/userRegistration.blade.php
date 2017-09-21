@@ -59,9 +59,9 @@
             changeYear: true,
             dateFormat: "dd/mm/yy",
             showAnim: "slideDown",
-            minDate: "-70Y",
+            minDate: "-120Y",
             maxDate: "-18Y",
-            yearRange: "-70:+0"
+            yearRange: "-120:+0"
         });
     });
 
