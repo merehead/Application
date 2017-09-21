@@ -1119,11 +1119,22 @@ $(document).ready(function () {
       var this_name = $(this).attr('name')
       $('#profile_photo').remove()
 
-      var val = $(this)[0].files[0]
+      var file = $(this)[0].files[0]
 
       var reader  = new FileReader()
       reader.addEventListener("load", () => {
-        $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
+
+        if (fileTypes.indexOf(file.type) !== -1) {
+          $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
+        }else{
+          if(wordFileType.indexOf(file.type) !== -1){
+            $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
+          }
+          if(pdfFileType.indexOf(file.type) !== -1){
+            $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/PDF_logo.png)')
+          }
+        }
+
         $(this).parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
 
         file_profile_photo.image = reader.result
@@ -1135,7 +1146,7 @@ $(document).ready(function () {
         console.log(arrFilesProfilePhoto)
       }, false)
 
-      reader.readAsDataURL(val)
+      reader.readAsDataURL(file)
       $(this).parent().find('.add__comment--smaller').html('')
       $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
     })
@@ -1174,17 +1185,30 @@ $(document).ready(function () {
     $('.pickfiles_profile_photo--change').on('change', function () {
 
       arrFilesProfilePhoto = []
-      var val = $(this)[0].files[0]
+      var file = $(this)[0].files[0]
 
       var reader  = new FileReader()
       reader.addEventListener("load", () => {
-        $('#profile_photo').attr('src', reader.result)
-        $('.set_preview_profile_photo').attr('src', reader.result)
+
+        if (fileTypes.indexOf(file.type) !== -1) {
+          $('#profile_photo').attr('src', reader.result)
+          $('.set_preview_profile_photo').attr('src', reader.result)
+        }else{
+          if(wordFileType.indexOf(file.type) !== -1){
+            $('#profile_photo').attr('src', '/img/Word-icon_thumb.png')
+            $('.set_preview_profile_photo').attr('src', '/img/Word-icon_thumb.png')
+          }
+          if(pdfFileType.indexOf(file.type) !== -1){
+            $('#profile_photo').attr('src', '/img/PDF_logo.png')
+            $('.set_preview_profile_photo').attr('src', '/img/PDF_logo.png')
+          }
+        }
+
         file_profile_photo.image = reader.result
         arrFilesProfilePhoto.push(file_profile_photo)
         console.log(arrFilesProfilePhoto)
       }, false)
-      reader.readAsDataURL(val)
+      reader.readAsDataURL(file)
     })
 
     $('.searchContainer__input').on('change',function (e) {

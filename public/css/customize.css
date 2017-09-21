@@ -369,6 +369,7 @@ a.blogFilter__item.active {
     width: 20%;
     margin-right: 0;
 }
+
 .profilePhoto2 img {
     width:110px;
     height: 110px;
@@ -378,3 +379,4 @@ a.blogFilter__item.active {
 {
     z-index : 99!important; ;
 }
+
