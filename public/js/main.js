@@ -438,13 +438,13 @@ $(document).ready(function () {
         }
     });
 
-    if($("#criminal_detail").val() == 'Old') {
+    if($("#criminal_detail").val() == 'Some') {
         $(".criminal_detail").show();
     }else{
         $(".criminal_detail").hide();
     }
     $("#criminal_detail").on('change',function(){
-        if($("#criminal_detail").val() == 'Old') {
+        if($("#criminal_detail").val() == 'Some') {
             $(".criminal_detail").show();
         }else{
             $(".criminal_detail").hide();
