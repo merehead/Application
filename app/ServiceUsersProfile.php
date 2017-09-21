@@ -58,8 +58,8 @@ class ServiceUsersProfile extends Model
     public function setStartDateAttribute($value)
     {
         $date = DateTime::createFromFormat('d/m/Y', $value);
-
         $this->attributes['start_date'] = $date->format('Y-m-d H:i:s');
+        //dd($date->format('Y-m-d H:i:s'));
 
     }
 
@@ -68,6 +68,13 @@ class ServiceUsersProfile extends Model
         return date('d/m/Y',strtotime($value));
     }
 
+    public function isDeleted()
+    {
+        if ($this->deleted == 'Yes') {
+            return true;
+        }
+        return false;
+    }
 /*    public function setTimeToBedAttribute($value)
     {
         $date = DateTime::createFromFormat('d/m/Y', $value);

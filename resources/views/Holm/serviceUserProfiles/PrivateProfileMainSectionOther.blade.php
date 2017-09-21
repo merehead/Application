@@ -20,12 +20,12 @@
               </span>
             </h2>
 
-            {!! Form::select('religious_beliefs',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            {!! Form::select('religious_beliefs',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
             @if ($errors->has('religious_beliefs'))
                 <span class="help-block"><strong>{{ $errors->first('religious_beliefs') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->religious_beliefs == 'No' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -46,12 +46,12 @@
               </span>
             </h2>
 
-            {!! Form::select('particular_likes',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            {!! Form::select('particular_likes',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
             @if ($errors->has('particular_likes'))
                 <span class="help-block"><strong>{{ $errors->first('particular_likes') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->particular_likes == 'No' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -70,13 +70,13 @@
               Needs the assistance of more than one person at a time to achieve any particular task
               </span>
             </h2>
-            {!! Form::select('multiple_carers',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            {!! Form::select('multiple_carers',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
             @if ($errors->has('multiple_carers'))
                 <span class="help-block"><strong>{{ $errors->first('multiple_carers') }}</strong></span>
             @endif
 
         </div>
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->multiple_carers == 'No' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -95,12 +95,12 @@
               Likes socialising with other people / groups
               </span>
             </h2>
-            {!! Form::select('socialising_with_other',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            {!! Form::select('socialising_with_other',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
             @if ($errors->has('socialising_with_other'))
                 <span class="help-block"><strong>{{ $errors->first('socialising_with_other') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->socialising_with_other == 'No' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -119,12 +119,12 @@
               Has interests or hobbies which {{$userNameForSite}} enjoy
               </span>
             </h2>
-            {!! Form::select('interests_hobbies',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            {!! Form::select('interests_hobbies',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
             @if ($errors->has('interests_hobbies'))
                 <span class="help-block"><strong>{{ $errors->first('interests_hobbies') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->interests_hobbies == 'No' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -143,12 +143,12 @@
               Are there any other medical conditions, disabilities, or other pieces of information not already covered which you feel may be of use?
               </span>
             </h2>
-            {!! Form::select('we_missed',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            {!! Form::select('we_missed',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
             @if ($errors->has('we_missed'))
                 <span class="help-block"><strong>{{ $errors->first('we_missed') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->we_missed == 'No' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>

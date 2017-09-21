@@ -1,4 +1,4 @@
-{{--
+
 <section class="mainSection">
     <script>
         var geocoder;
@@ -40,7 +40,7 @@
         $(document).ready(function(){
             initMap();
         });
-    </script>--}}
+    </script>
 
     <link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJaLv-6bVXViUGJ_e_-nR5RZlt9GUuC4M"></script>

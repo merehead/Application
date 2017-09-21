@@ -240,6 +240,8 @@ class CarerRegistration
             'mobile_number' =>
                 array(
                     'required',
+                    'regex:/^07[0-9]{9}$/',
+
                 ),
             'address_line1' =>
                 array(
@@ -389,13 +391,16 @@ class CarerRegistration
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
 
+        $input = $request->all();
+
+
         $carerProfile->driving_licence  = $request->input('driving_licence');
         $carerProfile->have_car  = $request->input('have_car');
         $carerProfile->use_car  = $request->input('use_car');
         $carerProfile->DBS_number  = $request->input('DBS_number');
         $carerProfile->car_insurance_number  = $request->input('car_insurance_number');
-        $carerProfile->driver_licence_valid_until  = $request->input('driver_licence_valid_until');
-        $carerProfile->car_insurance_valid_until  = $request->input('car_insurance_valid_until');
+        if(isset($input['driver_licence_valid_until'])) $carerProfile->driver_licence_valid_until  = $request->input('driver_licence_valid_until');
+        if(isset($input['car_insurance_valid_until'])) $carerProfile->car_insurance_valid_until  = $request->input('car_insurance_valid_until');
 
 
         $carerProfile->update();

@@ -503,7 +503,72 @@ $(document).ready(function () {
             $(uc).hide();
         }
     });
+//>>>>Иван 20170921 для приватного профиля пользователя
+    $(document).on('change','.profileField__select.serviceUserProfile',function () {
 
+        if($(this).val() == 'No') {
+            $(this).parent().next().hide();
+        }
+        if($(this).val() == 'Yes') {
+            $(this).parent().next().show();
+        }
+        if($(this).val() == 'Sometimes') {
+            $(this).parent().next().show();
+        }
+    });
+
+    $(document).on('change','.profileField__select.serviceUserProfilePet',function () {
+
+        if($(this).val() == 'No') {
+            $(".serviceUserProfilePetHide").hide();
+        }
+        if($(this).val() == 'Yes') {
+            $(".serviceUserProfilePetHide").show();
+        }
+
+    });
+
+    $("input[name='languages[12]']").change(function () {
+        if (this.checked) {
+            $(".otherLanguages").slideDown( "slow" );
+        } else {
+            $(".otherLanguages").slideUp();
+        }
+
+    });
+
+    $(function () {
+        $("#datepicker_when_start").datepicker({
+            //changeMonth: true,
+            //changeYear: true,
+            dateFormat: "dd/mm/yy",
+            showAnim: "slideDown",
+            minDate: "+3D",
+            maxDate: "+20Y",
+            yearRange: "0:+10"
+        });
+    });
+
+    $(".allTime").click(function () {
+        $('input.checkboxTimerGroup:checkbox').not(this).prop('checked', this.checked);
+        $('input.morning:checkbox').not(this).prop('checked', this.checked);
+        $('input.afternoon:checkbox').not(this).prop('checked', this.checked);
+        $('input.night:checkbox').not(this).prop('checked', this.checked);
+    });
+
+    $(".everyMorning").click(function () {
+        $('input.morning:checkbox').not(this).prop('checked', this.checked);
+    });
+
+    $(".everyAfternoon").click(function () {
+        $('input.afternoon:checkbox').not(this).prop('checked', this.checked);
+    });
+
+    $(".everyNight").click(function () {
+        $('input.night:checkbox').not(this).prop('checked', this.checked);
+    });
+
+//^^^^^^^Иван 20170921 для приватного профиля пользователя
     if($("#criminal_detail").val() == 'Some') {
         $(".criminal_detail").show();
     }else{
@@ -1094,11 +1159,22 @@ $(document).ready(function () {
       var this_name = $(this).attr('name')
       $('#profile_photo').remove()
 
-      var val = $(this)[0].files[0]
+      var file = $(this)[0].files[0]
 
       var reader  = new FileReader()
       reader.addEventListener("load", () => {
-        $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
+
+        if (fileTypes.indexOf(file.type) !== -1) {
+          $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
+        }else{
+          if(wordFileType.indexOf(file.type) !== -1){
+            $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
+          }
+          if(pdfFileType.indexOf(file.type) !== -1){
+            $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/PDF_logo.png)')
+          }
+        }
+
         $(this).parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
 
         file_profile_photo.image = reader.result
@@ -1110,7 +1186,7 @@ $(document).ready(function () {
         console.log(arrFilesProfilePhoto)
       }, false)
 
-      reader.readAsDataURL(val)
+      reader.readAsDataURL(file)
       $(this).parent().find('.add__comment--smaller').html('')
       $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
     })
@@ -1149,17 +1225,30 @@ $(document).ready(function () {
     $('.pickfiles_profile_photo--change').on('change', function () {
 
       arrFilesProfilePhoto = []
-      var val = $(this)[0].files[0]
+      var file = $(this)[0].files[0]
 
       var reader  = new FileReader()
       reader.addEventListener("load", () => {
-        $('#profile_photo').attr('src', reader.result)
-        $('.set_preview_profile_photo').attr('src', reader.result)
+
+        if (fileTypes.indexOf(file.type) !== -1) {
+          $('#profile_photo').attr('src', reader.result)
+          $('.set_preview_profile_photo').attr('src', reader.result)
+        }else{
+          if(wordFileType.indexOf(file.type) !== -1){
+            $('#profile_photo').attr('src', '/img/Word-icon_thumb.png')
+            $('.set_preview_profile_photo').attr('src', '/img/Word-icon_thumb.png')
+          }
+          if(pdfFileType.indexOf(file.type) !== -1){
+            $('#profile_photo').attr('src', '/img/PDF_logo.png')
+            $('.set_preview_profile_photo').attr('src', '/img/PDF_logo.png')
+          }
+        }
+
         file_profile_photo.image = reader.result
         arrFilesProfilePhoto.push(file_profile_photo)
         console.log(arrFilesProfilePhoto)
       }, false)
-      reader.readAsDataURL(val)
+      reader.readAsDataURL(file)
     })
 
     $('.searchContainer__input').on('change',function (e) {

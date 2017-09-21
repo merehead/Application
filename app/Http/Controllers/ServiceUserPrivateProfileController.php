@@ -6,11 +6,13 @@ use App\AssistanceType;
 use App\Behaviour;
 use App\Floor;
 use App\Language;
+use App\PurchasersProfile;
 use App\ServiceType;
 use App\ServiceUserCondition;
 use App\ServiceUsersProfile;
 use App\WorkingTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 
@@ -120,6 +122,37 @@ class ServiceUserPrivateProfileController extends FrontController
 
         return $this->renderOutput();
     }
+
+    public function delete($serviceUserProfileId) {
+
+        $activeUser = Auth::user();
+
+        if(!$activeUser) return redirect('/');
+
+        if(!$activeUser->isPurchaser()) return redirect('/');
+
+        $purchaser = PurchasersProfile::findorfail($activeUser->id);
+
+        $serviceUsers = $purchaser->serviceUsers;
+
+        if(count($serviceUsers)) {
+
+            if($serviceUsers->contains('id', $serviceUserProfileId)){
+
+                $serviceUser = ServiceUsersProfile::findorfail($serviceUserProfileId);
+                $serviceUser->deleted = 'Yes';
+                $serviceUser->update();
+            }
+        }
+
+        //dd($profileId);
+
+
+        return redirect()->back();
+    }
+
+
+
 
 
     public function update(Request $request, $serviceUserProfileID)
@@ -376,6 +409,29 @@ class ServiceUserPrivateProfileController extends FrontController
 
             unset($serviceUsersProfile);
         }
+
+
+        if ($input['stage'] == 'timeWhenCareNeeded') {
+
+
+            $this->validate($request,[
+
+                'start_date' => 'required|string',
+                'workingTime' => 'required|array',
+            ]);
+
+            $depart = "#timeWhenCareNeeded-div";
+
+            if (isset($input[ 'start_date'])) $serviceUsersProfile->start_date= $input[ 'start_date'];
+
+
+            $serviceUsersProfile->WorkingTimes()->sync(array_keys($input['workingTime']));
+
+            $serviceUsersProfile->update();
+
+            unset($serviceUsersProfile);
+        }
+
 
         if ($input['stage'] == 'health') {
 

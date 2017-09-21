@@ -107,14 +107,14 @@
                 Can move around home safely by themself
               </span>
             </h2>
-            {!! Form::select('assistance_moving',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            {!! Form::select('assistance_moving',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
             @if ($errors->has('assistance_moving'))
                 <span class="help-block">
                                         <strong>{{ $errors->first('assistance_moving') }}</strong>
                                     </span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->assistance_moving == 'No' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -181,7 +181,7 @@
                 Somebody lives with  {{$userNameForSite}}
               </span>
             </h2>
-            {!! Form::select('anyone_else_live',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            {!! Form::select('anyone_else_live',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
 
             @if ($errors->has('anyone_else_live'))
                 <span class="help-block">
@@ -193,7 +193,7 @@
 
 
 
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->anyone_else_live == 'No' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 please give their name and relationship to {{$userNameForSite}}   </span>
@@ -239,7 +239,7 @@
               </span>
             </h2>
 
-            {!! Form::select('own_pets',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            {!! Form::select('own_pets',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select serviceUserProfilePet','placeholder'=>'Please select']) !!}
 
             @if ($errors->has('own_pets'))
                 <span class="help-block">
@@ -247,7 +247,7 @@
                                     </span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField serviceUserProfilePetHide profileField--two-thirds"{!!  $serviceUsersProfile->own_pets == 'No' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                Please, give details   </span>
@@ -261,7 +261,7 @@
             @endif
         </div>
     </div>
-    <div class="profileRow">
+    <div class="profileRow serviceUserProfilePetHide"{!!  $serviceUsersProfile->own_pets == 'No' ? ' style="display:none"' : ''!!}>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
@@ -292,7 +292,7 @@
               </span>
             </h2>
 
-            {!! Form::select('social_interaction',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            {!! Form::select('social_interaction',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
             @if ($errors->has('social_interaction'))
                 <span class="help-block">
                                         <strong>{{ $errors->first('social_interaction') }}</strong>
@@ -300,7 +300,7 @@
             @endif
         </div>
 
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->social_interaction == 'No' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -322,14 +322,14 @@
               </span>
             </h2>
 
-            {!! Form::select('visit_for_companionship',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+            {!! Form::select('visit_for_companionship',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
             @if ($errors->has('visit_for_companionship'))
                 <span class="help-block">
                                         <strong>{{ $errors->first('visit_for_companionship') }}</strong>
                                     </span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField profileField--two-thirds" {!!  $serviceUsersProfile->visit_for_companionship == 'No' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
