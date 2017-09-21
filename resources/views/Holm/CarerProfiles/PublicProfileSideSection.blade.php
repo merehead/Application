@@ -24,7 +24,7 @@
 </div>
 <div class="availability">
     @foreach ($workingTimes as $item)
-        <p class="availability__item @if (strlen($item->name)>14) availability__item--full @endif ">
+        <p class="availability__item availability__item--full">
             <i class="fa fa-check"></i>
             {{$item->name}}
         </p>
