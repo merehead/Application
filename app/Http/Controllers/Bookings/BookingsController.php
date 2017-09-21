@@ -78,6 +78,7 @@ class BookingsController extends FrontController
     }
 
     public function setPaymentMethod(Booking $booking, Request $request){
+        dd($request);
         $booking->payment_method = $request->payment_method;
         $booking->save();
 
@@ -85,6 +86,7 @@ class BookingsController extends FrontController
     }
 
     public function accept(Booking $booking){
+        //todo take money from purchaser
         return response(['status' => 'success']);
     }
 

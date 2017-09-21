@@ -70,6 +70,50 @@
                     </div>
                 </div>
             @else
+                <a href="Service_user_Public_profile_page.html" class="profilePhoto orderInfo__photo">
+                    <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" alt="">
+                </a>
+                <div class="orderInfo__item orderInfo__item--rightPadding">
+                    <h2 class="ordinaryTitle">
+                        <span class="ordinaryTitle__text ordinaryTitle__text--bigger"><a href="Service_user_Public_profile_page.html">{{$booking->bookingServiceUser()->first()->full_name}}</a></span>
+                    </h2>
+                    <div class="viewProfile">
+                        <a href="Service_user_Public_profile_page.html" class="viewProfile__item centeredLink">
+                            view profile
+                        </a>
+                    </div>
+                </div>
+                <div class="orderInfo__separate"></div>
+                <div class="orderInfo__item ">
+                    <div class="orderOptions">
+                        <h2 class="ordinaryTitle">
+                            <span class="ordinaryTitle__text ordinaryTitle__text--bigger">DATE</span>
+                        </h2>
+                        <span class="orderOptions__value">15 May 2017</span>
+                    </div>
+                    <div class="orderOptions">
+                        <h2 class="ordinaryTitle">
+                            <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Time</span>
+                        </h2>
+                        <span class="orderOptions__value">12:00 PM - 5:00 PM</span>
+                    </div>
+                    <div class="orderOptions">
+                        <h2 class="ordinaryTitle">
+                            <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Distance</span>
+                        </h2>
+                        <span class="orderOptions__value">12 (miles)</span>
+                    </div>
+                    <div class="orderOptions">
+                        <h2 class="ordinaryTitle">
+                            <span class="ordinaryTitle__text ordinaryTitle__text--bigger">By car</span>
+                        </h2>
+                        <span class="orderOptions__value">30 (min)</span>
+                    </div>
+                </div>
+                <div class="orderInfo__map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d317715.71192633547!2d-0.3818036193070037!3d51.52873519756609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2z0JvQvtC90LTQvtC9LCDQktC10LvQuNC60L7QsdGA0LjRgtCw0L3QuNGP!5e0!3m2!1sru!2sru!4v1497972116028"   frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+        </div>
             @endif
         </div>
     </div>
@@ -150,13 +194,18 @@
                 Current booking staus
             </p>
         <span>
-           BOOKING AWAITING CONFIRMATION
-
+            @if($booking->status_id == 2)
+                BOOKING AWAITING CONFIRMATION
+            @elseif($booking->status_id == 5)
+                BOOKING CONFIRMED
+            @elseif($booking->status_id == 7)
+                BOOKING COMPLETED
+            @endif
         </span>
         </div>
         <div class="bookConfirm">
             <p class="bookConfirm__info ">
-                Please      <a href="Contact_Us.html" > Contact us   </a>
+                Please      <a href="{{route('ContactPage')}}" > Contact us   </a>
                 if there is a problem with the booking
 
             </p>

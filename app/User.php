@@ -139,4 +139,8 @@ class User extends Authenticatable
         }
     }
 
+    public function getBonusBalanceAttribute(){
+        return 2000;
+    }
+
 }

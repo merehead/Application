@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AssistanceType;
+use App\Booking;
 use App\CarerReference;
 use App\CarersProfile;
 use App\Language;
@@ -12,6 +13,7 @@ use App\WorkingTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
+use Auth;
 
 class CarerController extends FrontController
 {
@@ -136,8 +138,9 @@ class CarerController extends FrontController
         return $this->renderOutput();
     }
 
-    public function booking()
+    public function bookingFilter($status = 'all')
     {
+        $user = Auth::user();
 
         $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
         $this->title = 'Holm Care';
@@ -149,28 +152,31 @@ class CarerController extends FrontController
         $this->vars = array_add($this->vars,'header',$header);
         $this->vars = array_add($this->vars,'footer',$footer);
         $this->vars = array_add($this->vars,'modals',$modals);
+
+
+        $this->vars = array_add($this->vars, 'status', $status);
+
+        $newBookings = Booking::where('status_id', 2)->where('carer_id', $user->id)->get();
+        $this->vars = array_add($this->vars, 'newBookings', $newBookings);
+
+        $inProgressBookings = Booking::where('status_id', 5)->where('carer_id', $user->id)->get();
+        $inProgressAmount = 0;
+        foreach ($inProgressBookings as $booking){
+            $inProgressAmount += ($booking->hours * $booking->hour_price);
+        }
+
+        $this->vars = array_add($this->vars, 'inProgressBookings', $inProgressBookings);
+        $this->vars = array_add($this->vars, 'inProgressAmount', $inProgressAmount);
+
+        $completedBookings = Booking::where('status_id', 7)->where('carer_id', $user->id)->get();
+        $completedAmount = 0;
+        foreach ($completedBookings as $booking){
+            $completedAmount += ($booking->hours * $booking->hour_price);
+        }
+        $this->vars = array_add($this->vars, 'completedBookings', $completedBookings);
+        $this->vars = array_add($this->vars, 'completedAmount', $completedAmount);
 
         $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarerall')->with($this->vars)
-            ->render();
-
-        return $this->renderOutput();
-    }
-
-    public function bookingFilter($status)
-    {
-
-        $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
-        $this->title = 'Holm Care';
-
-        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
-        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
-        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
-
-        $this->vars = array_add($this->vars,'header',$header);
-        $this->vars = array_add($this->vars,'footer',$footer);
-        $this->vars = array_add($this->vars,'modals',$modals);
-
-        $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarer'.$status)->with($this->vars)
             ->render();
 
 

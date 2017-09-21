@@ -40,7 +40,7 @@
                                   Card Number
                               </h2>
                               <div class="inputWrap">
-                                  <input type="text" class="formInput" placeholder="4534 3333 3333 3333 3333">
+                                  <input type="text" class="formInput" id="cardNumber" placeholder="4534 3333 3333 3333 3333">
                     <span class="bookPayment__ico">
                       <img src="./dist/img/visa.png" alt="">
                     </span>
@@ -53,7 +53,8 @@
                                           Valid Until
                                       </h2>
                                       <div class="inputWrap">
-                                          <input type="text" class="formInput" placeholder="7/18">
+                                          <input type="text" class="formInput" id="cardMonth" placeholder="MM">
+                                          <input type="text" class="formInput" id="cardYear" placeholder="YY">
                                       </div>
                                   </div>
                               </div>
@@ -63,15 +64,13 @@
                                           cvc code
                                       </h2>
                                       <div class="inputWrap">
-                                          <input type="text" class="formInput" placeholder="202">
+                                          <input type="text" class="formInput" id="cardCVC" placeholder="202">
                                       </div>
                                   </div>
                               </div>
                           </div>
                           <div class="paymentCheckbox">
                               <div class="checkBox_item">
-                                  <input type="checkbox" name="checkbox" class="customCheckbox" id="boxP1">
-                                  <label for="boxP1"> save payment details?</label>
                               </div>
                           </div>
                           <div class="roundedBtn roundedBtn--center">
@@ -94,16 +93,16 @@
                        </div>
                        <div class="bonusPay__item bonusPay__item--border">
                          <span class="bonusPay__label">
-                           £1000
+                           £{{$user->bonus_balance}}
                          </span>
                          <span class="bonusPay__label">
-                           £940
+                           £{{$user->bonus_balance - $booking->hour_price * $booking->hours}}
                          </span>
                        </div>
 
                      </div>
                      <div class="roundedBtn roundedBtn--center">
-                       <button href="Thank_you_booking.html" class="roundedBtn__item roundedBtn__item--confirm" id="buttonPaymentBonuses">
+                       <button  class="roundedBtn__item roundedBtn__item--confirm" id="buttonPaymentBonuses">
                          Confirm Payment
                        </button>
                      </div>
@@ -129,10 +128,10 @@
                         </div>
                         <div class="paymentTotal__item">
                             <p class="paymentTotal__value">
-                                5 Hours
+                                {{$booking->hours}} Hour{{($booking->hours > 1 ? 's' : '')}}
                             </p>
                             <p class="paymentTotal__value">
-                                £60.00
+                                £{{$booking->hour_price * $booking->hours}}
                             </p>
                         </div>
 
@@ -153,7 +152,9 @@
 
 <script>
     $('#buttonPaymentBonuses').click(function () {
-        $('.bookPaymentWrap').html(`
+        $.post('{{route('setBookingPaymentMethod', ['booking' => $booking->id])}}', {'payment_method' : 'bonus_wallet'}, function( data ) {
+            if(data.status == 'success'){
+                $('.bookPaymentWrap').html(`
               <div class="thank">
                 <h2 class="thank__title">
                   Thank you!
@@ -166,13 +167,39 @@
                 </p>
               </div>
             `);
-        {{--$.post('{{route('setBookingPaymentMethod', ['booking' => $booking->id])}}', {'payment_method' : 'bonus_wallet'}, function( data ) {--}}
-            {{--console.log(data);--}}
-            {{--if(data.status == 'success'){--}}
+            }
+        });
+    });
 
-            {{--}--}}
-            {{----}}
-        {{--});--}}
-
+    $('#buttonPaymentCard').click(function () {
+        var cardNumber = $('#cardNumber').val();
+        var cardMonth = $('#cardMonth').val();
+        var cardYear = $('#cardYear').val();
+        var cardCVC = $('#cardCVC').val();
+        $.post('{{route('setBookingPaymentMethod', ['booking' => $booking->id])}}',
+            {
+                'payment_method': 'credit_card',
+                'card_number': cardNumber,
+                'card_month': cardMonth,
+                'card_year': cardYear,
+                'card_cvc': cardCVC
+            },
+            function( data ) {
+            if(data.status == 'success'){
+                $('.bookPaymentWrap').html(`
+              <div class="thank">
+                <h2 class="thank__title">
+                  Thank you!
+                </h2>
+                <span class="successIco">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                </span>
+                <p class="info-p">
+                  Your carer has now received your booking request and will respond shortly. If you have not heard back within 24 hours, please do contact us.
+                </p>
+              </div>
+            `);
+            }
+        });
     });
 </script>
