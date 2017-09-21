@@ -17,21 +17,25 @@
     <link rel="stylesheet" href="{{asset('css/main.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/customize.css')}}">
     <link rel="stylesheet" href="{{asset('css/cupertino/jquery-ui.min.css')}}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 </head>
 <body>
 @yield('header')
 @yield('content')
 @yield('footer')
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 <!-- <script src="{{asset('js/plupload.full.min.js')}}"></script> -->
 <script src="{{asset('js/main.js')}}"></script>
 @yield('modals')
 
-<script src="{{asset('js/jquery-ui.min.js')}}"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+
 <script>
 
     $('.footerSocial a, .headerSocial a').click(function (e) {
