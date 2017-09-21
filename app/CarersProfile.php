@@ -70,6 +70,10 @@ class CarersProfile extends Model
 
     }
 
+    /**
+     * @param $value
+     * @return bool|false|string
+     */
     public function getDateCertificateAttribute($value)
     {
         return (!empty($value))?date('d/m/Y',strtotime($value)):false;

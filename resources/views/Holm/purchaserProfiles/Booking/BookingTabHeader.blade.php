@@ -6,25 +6,20 @@
             Home
         </a>
         <span class="breadcrumbs__arrow">&gt;</span>
-        <a href="/serviceUser-settings/booking/" class="breadcrumbs__item">
+        <a href="/purchaser-settings/" class="breadcrumbs__item">
             MY Profile
         </a>
-        <!-- <span class="breadcrumbs__arrow">></span>
+          <span class="breadcrumbs__arrow">></span>
          <a href="#" class="breadcrumbs__item">
            My Bookings
          </a>
--->
+
 
     </div>
     <div class="bookingGroup">
         <!-- <a href="#" class="printIco">
            <img src="./dist/img/print.png" alt="">
          </a> -->
-        <div class="roundedBtn">
-            <a href="/purchaser-settings/profile/" class="roundedBtn__item roundedBtn__item--preview">
-                Preview public profile
-            </a>
-        </div>
     </div>
 </div>
 
