@@ -51,7 +51,7 @@
                               name='img/service_user_profile_photos/{{$serviceUserProfile->id}}.png'
                               style="background-image: url('img/service_user_profile_photos/{{$serviceUserProfile->id}}.png')"
                             @else
-                              name='img/profile_photos/{{$purchasersProfile->id}}.png'
+                              name='img/service_user_profile_photos/{{$purchasersProfile->serviceUsers->first()->id}}.png'
                               style="background-image: url('img/service_user_profile_photos/{{$purchasersProfile->serviceUsers->first()->id}}.png')"
                             @endif>
 
