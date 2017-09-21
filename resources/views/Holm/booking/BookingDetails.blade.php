@@ -321,126 +321,81 @@
             </div>
         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-        <div class="comments ">
+        <div class="comments">
             <div class="comments__forMessage">
-                <div class="messageBox">
-                    <h2 class="formLabel">
-                        Your Message
-                    </h2>
-                    <textarea  class="messageBox__item"  placeholder="Type your message"></textarea>
-                    <div class="roundedBtn roundedBtn--center">
-                        <button class=" roundedBtn__item roundedBtn__item--send
-                  roundedBtn__item--smaller">
-                            send
-                        </button>
+                <form method="post" action="{{url('bookings/'.$booking->id.'/message')}}">
+                    <div class="messageBox">
+                        <h2 class="formLabel">
+                            Your Message
+                        </h2>
+                        <textarea name="message" class="messageBox__item"  placeholder="Type your message"></textarea>
+                        <div class="roundedBtn roundedBtn--center">
+                            <button type="submit" class=" roundedBtn__item roundedBtn__item--send
+                      roundedBtn__item--smaller">
+                                send
+                            </button>
+                        </div>
                     </div>
-
-                </div>
+                </form>
             </div>
 
             <div class="innerContainer">
-                <div class="comment">
-                    <a href="Carer_Public_profile_page.html"  class="profilePhoto comment__photo">
-                        <img src="./dist/img/profile4.png" alt="">
-                    </a>
-                    <div class="comment__info">
-                        <div class="commentHeader">
-                            <h2 class="profileName"> <a href="Carer_Public_profile_page.html"> Rosie P.</a>
-
+                @foreach($bookingMessage as $message)
+                    @if($message->type == 'message')
+                        <div class="comment">
+                            @if($message->sender == 'carer')
+                            <a href="Service_user_Public_profile_page.html" class="profilePhoto comment__photo">
+                                <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
+                            </a>
+                            @elseif($message->sender == 'service_user')
+                            <a href="Service_user_Public_profile_page.html" class="profilePhoto comment__photo">
+                                <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" alt="">
+                            </a>
+                            @endif
+                            <div class="comment__info">
+                                <div class="commentHeader">
+                                    <h2 class="profileName">
+                                        <a href="Service_user_Public_profile_page.html">
+                                            @if($message->sender == 'carer')
+                                                {{$booking->bookingCarer()->first()->full_name}}
+                                            @elseif($message->sender == 'service_user')
+                                                {{$booking->bookingServiceUser()->first()->full_name}}
+                                            @endif
+                                        </a>
+                                    </h2>
+                                    <p class="commentHeader__date">
+                                        <span>{{Carbon\Carbon::parse($message->created_at)->format('g:i A')}}</span>
+                                        <span>{{Carbon\Carbon::parse($message->created_at)->format('d.m.Y')}}</span>
+                                    </p>
+                                </div>
+                                <div class="commentText">
+                                    <p>
+                                        {{$message->text}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    @elseif($message->type == 'status_change')
+                        <div class="bookConfirm bookConfirm--with-time bookConfirm--with-border">
+                            <h2 class="bookConfirm__title">
+                                <span><i class="fa fa-check"></i></span>
+                                @if($message->new_status == 'pending')
+                                    booking awaiting confirmation
+                                @elseif($message->new_status == 'in_progress')
+                                    booking confirmed
+                                @elseif($message->new_status == 'completed')
+                                    booking completed
+                                @endif
                             </h2>
-                            <p class="commentHeader__date">
-                                <span >12:06 AM</span>
-                                <span>14.05.2017</span>
+                            <p class="bookConfirm__time">
+                                <span>{{Carbon\Carbon::parse($message->created_at)->format('g:i A')}}</span>
+                                <span>{{Carbon\Carbon::parse($message->created_at)->format('d.m.Y')}}</span>
                             </p>
                         </div>
-                        <div class="commentText">
-                            <p>
-                                Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran ende salutandi no per. Est eu pertinaciaen delacrue instructiol vel eu natum vedi idqran endesalutandi no per. Est eu pertinaciaen delacrue instructiol vel eu natum vedi idqran ende salutandi no per. Lorem ipsum dolor sit amet, ea sit ceteroassusamus, a idqran ende salutandi no per.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="comment">
-                    <a href="Carer_Public_profile_page.html"  class="profilePhoto comment__photo">
-                        <img src="./dist/img/profile4.png" alt="">
-                    </a>
-                    <div class="comment__info">
-                        <div class="commentHeader">
-                            <h2 class="profileName"><a href="Carer_Public_profile_page.html"> Rosie P.</a></h2>
-                            <p class="commentHeader__date">
-                                <span >12:05 AM</span>
-                                <span>14.05.2017</span>
-                            </p>
-                        </div>
-                        <div class="commentText">
-                            <p>
-                                Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran ende salutandi no per. Est eu pertinaciaen delacrue instructiol vel eu natum vedi idqran endesalutandi no per. Est eu pertinaciaen delacrue instructiol vel eu natum vedi idqran ende salutandi no per. Lorem ipsum dolor sit amet, ea sit ceteroassusamus, a idqran ende salutandi no per.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="comment">
-                    <a href="Service_user_Public_profile_page.html" class="profilePhoto comment__photo">
-                        <img src="./dist/img/profile8.jpg" alt="">
-                    </a>
-                    <div class="comment__info">
-                        <div class="commentHeader">
-                            <h2 class="profileName"><a href="Service_user_Public_profile_page.html">   Bob M.</a></h2>
-                            <p class="commentHeader__date">
-                                <span >12:04 AM</span>
-                                <span>14.05.2017</span>
-                            </p>
-                        </div>
-                        <div class="commentText">
-                            <p>
-                                Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran ende salutandi no per. Est eu pertinaciaen delacrue instructiol vel eu natum vedi idqran endesalutandi no per. Est eu pertinaciaen delacrue instructiol vel eu natum vedi idqran ende salutandi no per. Lorem ipsum dolor sit amet, ea sit ceteroassusamus, a idqran ende salutandi no per.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="bookConfirm bookConfirm--with-time bookConfirm--with-border">
-                    <h2 class="bookConfirm__title">
-                        <span><i class="fa fa-check"></i></span>
-                        Booking Awaiting Confirmation
-                    </h2>
-                    <p class="bookConfirm__time">
-                        <span >12:04 AM</span>
-                        <span>14.05.2017</span>
-                    </p>
-
-                </div>
-
-
-
-
-
+                    @endif
+                @endforeach
             </div>
-
-
-
-
-
-
-
         </div>
-
-
     </div>
 </section>
 

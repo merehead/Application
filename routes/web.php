@@ -68,6 +68,7 @@ Route::get('/serviceUser-settings/booking/{serviceUserProfile}/{status?}', 'Serv
 
 Route::get('/bookings/{booking}/details', 'Bookings\BookingsController@view_details');
 Route::get('/bookings/{booking}/purchase', 'Bookings\PaymentsController@payment_form');
+Route::post('/bookings/{booking}/message','Bookings\BookingsController@create_message');
 Route::post('/bookings/{booking}/setPaymentMethod','Bookings\BookingsController@setPaymentMethod')->name('setBookingPaymentMethod');
 Route::post('/bookings/{booking}/accept', 'Bookings\BookingsController@accept');
 Route::post('/bookings/{booking}/reject', 'Bookings\BookingsController@reject');

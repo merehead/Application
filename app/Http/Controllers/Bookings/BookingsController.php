@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Bookings;
 
 use App\Booking;
+use App\BookingsMessage;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FrontController;
 use App\User;
@@ -38,7 +39,7 @@ class BookingsController extends FrontController
 
     public function view_details(Booking $booking){
 
-        if(!in_array($booking->status_id, [1, 5, 7]))
+        if(!in_array($booking->status_id, [2, 5, 7]))
             return;
         $user = Auth::user();
 
@@ -58,6 +59,8 @@ class BookingsController extends FrontController
         } else {
             $this->vars = array_add($this->vars, 'user', $this->user);
             $this->vars = array_add($this->vars, 'booking', $booking);
+            $bookingMessage = BookingsMessage::where('booking_id', $booking->id)->orderByDesc('id')->get();
+            $this->vars = array_add($this->vars, 'bookingMessage', $bookingMessage);
 
             $serviceUserProfile = $booking->bookingServiceUser()->first();
             $this->vars = array_add($this->vars, 'serviceUserProfile', $serviceUserProfile);
@@ -102,5 +105,18 @@ class BookingsController extends FrontController
 
     public function completed(Booking $booking){
 
+    }
+
+    public function create_message(Booking $booking, Request $request){
+        $user = Auth::user();
+        $sender  = ($user->user_type_id == 3 ? 'carer' : 'service_user');
+        $BookingsMessage = BookingsMessage::create([
+            'booking_id' => $booking->id,
+            'sender' => $sender,
+            'type' => 'message',
+            'text' => $request->message,
+        ]);
+
+        return redirect()->back();
     }
 }
