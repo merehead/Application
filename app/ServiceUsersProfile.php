@@ -58,8 +58,8 @@ class ServiceUsersProfile extends Model
     public function setStartDateAttribute($value)
     {
         $date = DateTime::createFromFormat('d/m/Y', $value);
-
         $this->attributes['start_date'] = $date->format('Y-m-d H:i:s');
+        //dd($date->format('Y-m-d H:i:s'));
 
     }
 

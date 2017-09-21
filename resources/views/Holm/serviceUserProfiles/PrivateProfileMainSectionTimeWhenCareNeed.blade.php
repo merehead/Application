@@ -1,5 +1,5 @@
 
-<div id="languages-div" class="borderContainer">
+<div id="timeWhenCareNeeded-div" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">TIME  WHEN CARE NEEDED</h2>
         <a href="#" class="btn btn-info btn-edit"><span class="fa fa-pencil" data-id="timeWhenCareNeeded"></span> EDIT</a>
@@ -10,7 +10,6 @@
 {!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'timeWhenCareNeeded']) !!}
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('stage','timeWhenCareNeeded') !!}
-{{Form::submit('Click Me!')}}
 
 <div class="borderContainer">
     <div class="profileRow">
@@ -23,9 +22,9 @@
             <div class="profileField__input-wrap">
                 {{--<input type="text" class="profileField__input" placeholder="06/06/2017">--}}
                 @if($serviceUsersProfile->start_date === "01/01/1970")
-                    <input name="start_date" id="datepicker_when_start" class="personalForm__input" placeholder="Start date (dd/mm/yyyy)" type="text">
+                    <input name="start_date" id="datepicker_when_start" class="formInput profileField__input" placeholder="Start date (dd/mm/yyyy)" type="text">
                 @else
-                    {!! Form::text('start_date',null,['id'=>'datepicker_when_start','class'=>'formInput personalForm__input']) !!}
+                    {!! Form::text('start_date',null,['id'=>'datepicker_when_start','class'=>'formInput profileField__input']) !!}
                 @endif
                 <span class="profileField__input-ico centeredLink"><i class="fa fa-calendar" aria-hidden="true"></i></span>
             </div>
