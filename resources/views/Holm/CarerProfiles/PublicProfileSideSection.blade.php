@@ -4,7 +4,7 @@
 £ 12</span><span class="hourPrice__timing">/hour</span>
     </p>
     <div class="bookBtn">
-        <a href="Message.html" class="bookBtn__item  centeredLink">
+        <a href="#" class="bookBtn__item  centeredLink" data-toggle="modal" data-target="#message-carer">
             book carer
         </a>
     </div>
@@ -24,7 +24,7 @@
 </div>
 <div class="availability">
     @foreach ($workingTimes as $item)
-        <p class="availability__item @if (strlen($item->name)>14) availability__item--full @endif ">
+        <p class="availability__item availability__item--full">
             <i class="fa fa-check"></i>
             {{$item->name}}
         </p>

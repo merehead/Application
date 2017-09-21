@@ -72,7 +72,7 @@ class CarersProfile extends Model
 
     public function getDateCertificateAttribute($value)
     {
-        return date('d/m/Y',strtotime($value));
+        return (!empty($value))?date('d/m/Y',strtotime($value)):false;
     }
 
     public function setCarInsuranceValidUntilAttribute($value)

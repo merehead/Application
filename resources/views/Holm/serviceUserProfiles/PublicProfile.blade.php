@@ -28,11 +28,12 @@
                         <div class="carer">
                             <div class="profileInfo">
                                 <div class="profilePhoto  ">
-                                    <img src="./dist/img/profile8.jpg" alt="">
+                                    <img id="profile_photo" src="img/profile_photos/{{$carerProfile->id}}.png" onerror="this.src='/img/no_photo.png'" alt="avatar">
+
                                 </div>
                                 <div class="profileInfo__item">
                                     <h2 class="profileName profileName--big">
-                                        bob m.
+                                        {{$carerProfile->family_name}} {{$carerProfile->first_name}}
                                     </h2>
 
                                     <p>
@@ -51,11 +52,11 @@
                                 <div class="locationBox">
                                     <p class="location">
                                         <span class="location__title">town/city</span>
-                                        <span class="location__value">MANCHESTER</span>
+                                        <span class="location__value">{{$carerProfile->town}}</span>
                                     </p>
                                     <p class="location">
                                         <span class="location__title">post code</span>
-                                        <span class="location__value">WA14 5GR</span>
+                                        <span class="location__value">{{$carerProfile->postcode}}</span>
                                     </p>
                                 </div>
                             </div>

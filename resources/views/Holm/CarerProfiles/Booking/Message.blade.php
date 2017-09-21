@@ -18,17 +18,16 @@
               </span>
                     </h2>
                     <div class="needCareContainer">
-                        <div class="needCare">
+                        <div class="needCare" data-html="Service_user_Public_profile_page">
                             <a href="" class="needCare__item centeredLink">
                                 Bob M.
                             </a>
-                            <!--
-                                            <a href="Service_user_Public_profile_page.html" class="needCare__item centeredLink">
-                                              Alice W.
-                                            </a>
-                                            <a href="Service_user_Public_profile_page.html" class="needCare__item centeredLink">
-                                              Mike D.
-                                            </a> -->
+                            <a href="" class="needCare__item centeredLink">
+                              Alice W.
+                            </a>
+                            <a href="" class="needCare__item centeredLink">
+                              Mike D.
+                            </a>
                         </div>
                         <div class="messageMap">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d317715.71192633547!2d-0.3818036193070037!3d51.52873519756609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2z0JvQvtC90LTQvtC9LCDQktC10LvQuNC60L7QsdGA0LjRgtCw0L3QuNGP!5e0!3m2!1sru!2sru!4v1497972116028"
@@ -104,21 +103,43 @@
                 select date and time
               </span>
                     </h2>
-                    <div class="messageInputs datetime">
+                    <div class="messageInputs datetime nhide">
                         <div class="messageInputs__field messageDate">
-                            <input type="text" class="messageInput" placeholder="06.06.2017 ">
+                            <input type="text" class="messageInput datepicker" placeholder="06.06.2017 ">
+
                             <a href="#" class="messageIco centeredLink">
                                 <i class="fa fa-calendar" aria-hidden="true"></i>
                             </a>
                         </div>
                         <div class="messageInputs__field messageDate">
-                            <input type="text" class="messageInput" placeholder=" 08.08.2017">
+                            <input type="text" class="messageInput datepicker" placeholder=" 08.08.2017">
                             <a href="#" class="messageIco centeredLink">
                                 <i class="fa fa-calendar" aria-hidden="true"></i>
                             </a>
                         </div>
                         <div class="messageInputs__field messageTime ">
-                            <input type="text" class="messageInput" placeholder="12:00 AM - 5:00 PM">
+                            <input type="text" class="messageInput timepicker_message" placeholder="12:00 AM - 5:00 PM">
+                            <a href="#" class="messageIco centeredLink">
+                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="messageInputs">
+                        <div class="messageInputs__field messageDate">
+                            <input type="text" class="messageInput datepicker_message" placeholder="06.06.2017 ">
+
+                            <a href="#" class="messageIco centeredLink">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="messageInputs__field messageDate">
+                            <input type="text" class="messageInput datepicker_message" placeholder=" 08.08.2017">
+                            <a href="#" class="messageIco centeredLink">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="messageInputs__field messageTime ">
+                            <input type="text" class="messageInput timepicker_message" placeholder="12:00 AM - 5:00 PM">
                             <a href="#" class="messageIco centeredLink">
                                 <i class="fa fa-clock-o" aria-hidden="true"></i>
                             </a>

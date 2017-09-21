@@ -440,7 +440,7 @@ $(document).ready(function () {
     }
 
     $("#post_code_profile").on("change",function(e){
-       var validator = /^([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})|([Ss][Kk][0-9]{1,2}) [0-9][A-Za-z]{1,2}$/;
+       var validator = /^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/;
        var text  = $(this).val();
        var $this = $(this);
        var errorText = '<span class="help-block error-post-code">\n' +
@@ -464,13 +464,13 @@ $(document).ready(function () {
         }
     });
 
-    if($("#criminal_detail").val() == 'Old') {
+    if($("#criminal_detail").val() == 'Some') {
         $(".criminal_detail").show();
     }else{
         $(".criminal_detail").hide();
     }
     $("#criminal_detail").on('change',function(){
-        if($("#criminal_detail").val() == 'Old') {
+        if($("#criminal_detail").val() == 'Some') {
             $(".criminal_detail").show();
         }else{
             $(".criminal_detail").hide();
@@ -479,8 +479,17 @@ $(document).ready(function () {
 
     $('a.additionalTime').on('click',function(e){
         e.preventDefault();
-        $('.datetime').last().after($('.datetime').last().clone());
+        $('.datetime').last().after($('.datetime').last().clone().removeClass('nhide'));
         $('.checktime').last().after($('.checktime').last().clone());
+        $( ".datepicker_message,datepicker" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"dd/mm/yy",
+            showAnim:"slideDown",
+            minDate: "+0D",
+            maxDate: "+50Y",
+            yearRange: "0:+50"
+        });
         return false;;
     });
 

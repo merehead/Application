@@ -40,7 +40,8 @@
                 </span>
                 </h2>
 
-                {!! Form::select('criminal_conviction',['Old'=>'Yes, but they are very old, and for a minor offence.','Yes'=>'Yes','No'=>'Do not have criminal convictions'],
+                {!! Form::select('criminal_conviction',['Some'=>'Yes, but they are very old, and for a minor offence.',
+                'Yes'=>'Yes','No'=>'Do not have criminal convictions'],
 null,['class'=>'profileField__select','placeholder'=>'Please select','readonly','id'=>'criminal_detail','data-edit'=>'false']) !!}
 
 {{--                <select class="profileField__select profileField__select--greyBg">
@@ -51,7 +52,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','readonly',
             <div class="profileField profileField--full-width criminal_detail nhide">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
-                Details
+                CRIMINAL CONVICTIONS Details
                      </span></h2>
                 <div class="inputWrap criminal_detail">
 
@@ -112,12 +113,12 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','readonly',
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
-                 DBS date certificate
+                 DBS date certificate {{($carerProfile->date_certificate)}}
                 </span>
 
                 </h2>
 
-                @if($carerProfile->date_sertificate == "01/01/1970")
+                @if($carerProfile->date_sertificate === false)
                     <input name="date_certificate" id="datepicker_date_sertificate" class="profileField__input"
                            placeholder="Valid until date" type="text">
                 @else
