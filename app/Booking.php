@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Booking extends Model
 {
@@ -53,4 +54,23 @@ class Booking extends Model
     {
         return $this->belongsToMany('App\AssistanceType', 'bookings_assistance_types');
     }
+
+    //Accessors
+    public function getHoursAttribute(){
+        $hours = 0;
+        $appointments = $this->appointments()->get();
+        foreach ($appointments as $appointment)
+            $hours += $appointment->hours;
+
+        return $hours;
+    }
+
+    public function getHourPriceAttribute(){
+        $user = Auth::user();
+        if($user->user_type_id == 3)
+            return 10;
+        else
+            return 13;
+    }
+
 }

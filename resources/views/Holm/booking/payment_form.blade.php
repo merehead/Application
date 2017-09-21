@@ -153,12 +153,7 @@
 
 <script>
     $('#buttonPaymentBonuses').click(function () {
-        $.post('{{route('setBookingPaymentMethod', ['booking' => $booking->id])}}', {'payment_method' : 'bonus_wallet'}, function( data ) {
-            console.log(data);
-            if(data.status == 'success'){
-
-            }
-            $('.bookPaymentWrap').html(`
+        $('.bookPaymentWrap').html(`
               <div class="thank">
                 <h2 class="thank__title">
                   Thank you!
@@ -170,8 +165,14 @@
                   Your carer has now received your booking request and will respond shortly. If you have not heard back within 24 hours, please do contact us.
                 </p>
               </div>
-            `)
-        });
+            `);
+        {{--$.post('{{route('setBookingPaymentMethod', ['booking' => $booking->id])}}', {'payment_method' : 'bonus_wallet'}, function( data ) {--}}
+            {{--console.log(data);--}}
+            {{--if(data.status == 'success'){--}}
+
+            {{--}--}}
+            {{----}}
+        {{--});--}}
 
     });
 </script>

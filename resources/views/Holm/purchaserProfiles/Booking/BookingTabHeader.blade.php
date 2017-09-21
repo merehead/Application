@@ -30,5 +30,5 @@
 
 <div class="bookingSwitcher">
     <a href="/purchaser-settings/" class="bookingSwitcher__link ">Profile settings</a>
-    <a href="/purchaser-settings/booking/" class="bookingSwitcher__link bookingSwitcher__link--active">My bookings <span>+1</span> </a>
+    <a href="/purchaser-settings/booking/" class="bookingSwitcher__link bookingSwitcher__link--active">My bookings</a>
 </div>
