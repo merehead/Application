@@ -375,13 +375,16 @@ class CarerRegistration
     }
     private function saveStep8($request) {
 
+        //dd($request->all());
+
         $this->validate($request,[
             'driving_licence' => 'required|in:"Yes","No"',
             'DBS_number' => 'string|nullable|max:128',
             'have_car' => 'nullable|in:"Yes","No"',
             'use_car' => 'required_if:have_car,"Yes"|nullable|in:"Yes","No"',
             'car_insurance_number' => 'string|nullable|max:36',
-
+            'driver_licence_valid_until'=>'string|nullable|max:36',
+            'car_insurance_valid_until'=>'string|nullable|max:36',
         ]);
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
@@ -390,6 +393,10 @@ class CarerRegistration
         $carerProfile->have_car  = $request->input('have_car');
         $carerProfile->use_car  = $request->input('use_car');
         $carerProfile->DBS_number  = $request->input('DBS_number');
+        $carerProfile->car_insurance_number  = $request->input('car_insurance_number');
+        $carerProfile->driver_licence_valid_until  = $request->input('driver_licence_valid_until');
+        $carerProfile->car_insurance_valid_until  = $request->input('car_insurance_valid_until');
+
 
         $carerProfile->update();
 

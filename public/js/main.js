@@ -232,6 +232,32 @@ function scale(block) {
 }
 // -- Document events ---------------
 $(document).ready(function () {
+
+
+
+    $('#timepicker1').timepicker({
+        timeFormat: 'h:mm p',
+        interval: 30,
+        //minTime: '10',
+        //maxTime: '6:00pm',
+        //defaultTime: '18',
+        startTime: '18:00',
+        dynamic: true,
+        dropdown: true,
+        scrollbar: true
+    });
+    $('#timepicker2').timepicker({
+        timeFormat: 'h:mm p',
+        interval: 30,
+//minTime: '10',
+//maxTime: '6:00pm',
+//defaultTime: '18',
+        startTime: '18:00',
+        dynamic: true,
+        dropdown: true,
+        scrollbar: true
+    });
+
     // Иван функция уменшает автоматом шрифт у имени пользователя в шапке
     if($('.profileName').lenght>0)
         scale($('.profileName').parent()[0]);

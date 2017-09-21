@@ -142,7 +142,19 @@
                 @endif
             </div>
 
+            <div class="formField hiding2" style="display: none">
+                <h2 class="formLabel questionForm__label">
+                 Valid until
 
+                </h2>
+
+                @if($carersProfile->car_insurance_valid_until === "01/01/1970")
+                    <input name="car_insurance_valid_until" id="datepicker_insurance" class="profileField__input" placeholder="Valid until date" type="text">
+                @else
+                    {!! Form::text('car_insurance_valid_until',null,['id'=>'datepicker_insurance','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
+                @endif
+
+            </div>
 
 
 

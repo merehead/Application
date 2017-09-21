@@ -101,6 +101,17 @@
             yearRange: "0:+50"
         });
     } );
+    $( function() {
+        $( "#datepicker_insurance" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"dd/mm/yy",
+            showAnim:"slideDown",
+            minDate: "+0D",
+            maxDate: "+50Y",
+            yearRange: "0:+50"
+        });
+    } );
     $(document).ready(function () {
 
         //alert($("#main-if").val());
