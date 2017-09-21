@@ -216,6 +216,7 @@ class PurchaserRegistration
             'mobile_number' =>
                 array(
                     'required',
+                    'regex:/^07[0-9]{9}$/',
                 ),
             'address_line1' =>
                 array(
@@ -320,6 +321,7 @@ class PurchaserRegistration
             'mobile_number' =>
                 array(
                     'required',
+                    'regex:/^07[0-9]{9}$/',
                 ),
             'address_line1' =>
                 array(

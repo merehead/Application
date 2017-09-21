@@ -11,35 +11,37 @@
             @if(count($serviceUsers))
                 @foreach($serviceUsers as $serviceUser)
 
+                    @if(!$serviceUser->isDeleted())
 
-                    <?php if ($serviceUser->registration_progress!='61')
-                            $uncompliteUser = $serviceUser->id;
-                        ?>
-                    <div class="peopleCare">
+                        <?php if ($serviceUser->registration_progress!='61')
+                                $uncompliteUser = $serviceUser->id;
+                            ?>
+                        <div class="peopleCare">
 
-                        <div class="peopleCare__item">
-                            <div class="profilePhoto peopleCare__photo">
-                                <a href="" target="blank"> <img src="img/service_user_profile_photos/{{$serviceUser->id}}.png" onerror="this.src='/img/no_photo.png'" alt=""> </a>
+                            <div class="peopleCare__item">
+                                <div class="profilePhoto peopleCare__photo">
+                                    <a href="" target="blank"> <img src="img/service_user_profile_photos/{{$serviceUser->id}}.png" onerror="this.src='/img/no_photo.png'" alt=""> </a>
+                                </div>
+
+                                <h2 class="peopleCare__name">
+                                    <a href="{{ $serviceUser->registration_progress!='61'
+                                    ? route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUser->id])
+                                    : route('ServiceUserSetting',['id'=>$serviceUser->id])}}"
+                                       target="blank">
+                                        @if(strlen($serviceUser->first_name))
+                                            {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
+                                        @else
+                                            New
+                                        @endif
+                                    </a>
+                                </h2>
+                                <a href="{{route('ServiceUserProfileDelete', ['serviceUserProfile' => $serviceUser->id])}}" class="peopleCare__delete">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
                             </div>
 
-                            <h2 class="peopleCare__name">
-                                <a href="{{ $serviceUser->registration_progress!='61'
-                                ? route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUser->id])
-                                : route('ServiceUserSetting',['id'=>$serviceUser->id])}}"
-                                   target="blank">
-                                    @if(strlen($serviceUser->first_name))
-                                        {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
-                                    @else
-                                        New
-                                    @endif
-                                </a>
-                            </h2>
-                            <a href="" class="peopleCare__delete">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
                         </div>
-
-                    </div>
+                    @endif
 
                 @endforeach
             @endif
@@ -53,7 +55,7 @@
                 </a>
                 @else
                     <a href="{{route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUser->id])}}" class="roundedBtn__item roundedBtn__item--accept">
-                        <span style="font-size: 80%">CONTINUE REGISTRATION<span>
+                        <span style="font-size: 80%">CONTINUE REGISTRATION</span>
                     </a>
                 @endif
             </div>

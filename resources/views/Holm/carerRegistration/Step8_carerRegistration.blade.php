@@ -105,7 +105,7 @@
 
 
 
-            <div class="formField hiding2" style="display: none">
+            <div class="formField hiding" style="display: none">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
                   Car insurance Photo
@@ -128,7 +128,7 @@
                 </div>
             </div>
 
-            <div class="formField hiding2" style="display: none">
+            <div class="formField hiding" style="display: none">
                 <h2 class="formLabel questionForm__label">
 
                  Car insurance Number
@@ -142,7 +142,7 @@
                 @endif
             </div>
 
-            <div class="formField hiding2" style="display: none">
+            <div class="formField hiding" style="display: none">
                 <h2 class="formLabel questionForm__label">
                  Valid until
 
@@ -159,7 +159,7 @@
 
 
 
-                <div class="formField hiding2" style="display: none">
+                <div class="formField hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Would you be interested in using your car to transport clients to the shops or for short trips?<span>*</span>
                     </h2>

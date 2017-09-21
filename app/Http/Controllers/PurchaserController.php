@@ -97,7 +97,7 @@ class PurchaserController extends FrontController
                 'mobile_number' =>
                     array(
                         'required',
-                        'max:30'
+                        'regex:/^07[0-9]{9}$/',
                     ),
                 'address_line1' =>
                     array(
