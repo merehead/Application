@@ -1,7 +1,8 @@
 <div class="carer">
     <div class="profileInfo">
-        <a href="#" class="profilePhoto  ">
-            <img src="/img/no_photo.png" alt="">
+
+        <a href="#" class="profilePhoto profilePhoto2 invite__photo ">
+            <img id="profile_photo" src="img/profile_photos/{{$carerProfile->id}}.png" onerror="this.src='/img/no_photo.png'" alt="avatar">
         </a>
         <div class="profileInfo__item">
             <h2 class="profileName profileName--big">
@@ -160,66 +161,24 @@
         QUALIFICATIONS
     </h2>
     <div class="profileAdvantages">
-        <div class="profileAdvantages__row">
-            <div class="advantageColumn">
-                <h2>
-                    NVQs
-                </h2>
+        @foreach($documents_type as $dt)
+            @if(isset($documents[$dt])&&!empty($documents[$dt]->count()))
+            <div class="profileAdvantages__row">
+                <div class="advantageColumn">
+                    <h2>
+                        {{$documents_name[$dt]}}
+                    </h2>
+                </div>
+                <div class="advantageColumn">
+                    @foreach($documents[$dt] as $item)
+                        <p  class="advantageColumn">
+                            {{$item->title}}
+                        </p>
+                    @endif
+                </div>
             </div>
-            <div class="advantageColumn">
-                <p>
-                    NVQ level 4
-                </p>
-                <!--
-                <p>
-                Title of Qualifications
-                </p>
-                <p>
-                Title of Qualifications
-                </p>
-                </div>
-                <div class="advantageColumn">
-                <p>
-                Title of Qualifications
-                </p>
-                <p>
-                Title of Qualifications
-                </p>
-                <p>
-                Title of Qualifications
-                </p>
-                </div>
-                </div>
-                <div class="profileAdvantages__row">
-                <div class="advantageColumn">
-                <h2>
-                Care Certificates
-                </h2>
-                </div>
-                <div class="advantageColumn">
-                <p>
-                Title of Qualifications
-                </p>
-                <p>
-                Title of Qualifications
-                </p>
-                <p>
-                Title of Qualifications
-                </p>
-                </div>
-                <div class="advantageColumn">
-                <p>
-                Title of Qualifications
-                </p>
-                <p>
-                Title of Qualifications
-                </p>
-                <p>
-                Title of Qualifications
-                </p>
-                -->
-            </div>
-        </div>
+            @endif
+        @endforeach
 
     </div>
 </div>
@@ -237,33 +196,7 @@
                 </p>
                 @endforeach
 
-                <!--
-                <p>
-                Respite care
-                </p>
-                </div>
-                <div class="advantageColumn">
-                <p>
-                Personal Care
-                </p>
-                <p>
-                Housekeeping
-                </p>
-                <p>
-                Food preparation
-                </p>
-                </div>
-                <div class="advantageColumn">
-                <p>
-                Medication and Wound
-                </p>
-                <p>
-                Companionship
-                </p>
-                <p>
-                Travel / Visits
-                </p>
-                -->
+
             </div>
         </div>
     </div>

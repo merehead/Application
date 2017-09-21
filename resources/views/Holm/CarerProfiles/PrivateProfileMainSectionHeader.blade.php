@@ -15,7 +15,8 @@
         -->
     </div>
     <div class="roundedBtn">
-        <a href="{{route('carerPublicProfile')}}" class="roundedBtn__item roundedBtn__item--preview">
+        <a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}" class="roundedBtn__item
+        roundedBtn__item--preview">
             Preview public profile
         </a>
     </div>
