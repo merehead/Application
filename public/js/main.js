@@ -527,7 +527,7 @@ $(document).ready(function () {
         }
     }
 
-    $("#post_code_profile").on("change",function(e){
+    $("#post_code_profile").on("keyup",function(e){
        var validator = /^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/;
        var text  = $(this).val();
        var $this = $(this);
@@ -543,6 +543,7 @@ $(document).ready(function () {
            error_mark='#post_code_profile';
        }
     });
+
     $(document).on('change','#register_have_car',function () {
         if ($('#register_have_car').val() == "Yes") {
             $('#register_use_car').parent().parent().show();
