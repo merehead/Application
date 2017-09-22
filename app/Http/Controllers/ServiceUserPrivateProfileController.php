@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\AssistanceType;
 use App\Booking;
 use App\Floor;
+use App\Interfaces\Constants;
 use App\Language;
 use App\ServiceUsersProfile;
 use App\WorkingTime;
 use Illuminate\Http\Request;
 use Auth;
 
-class ServiceUserPrivateProfileController extends FrontController
+class ServiceUserPrivateProfileController extends FrontController implements Constants
 {
     public function __construct()
     {
@@ -175,7 +176,7 @@ class ServiceUserPrivateProfileController extends FrontController
 
         $this->vars = array_add($this->vars, 'status', $status);
 
-        $newBookings = Booking::where('status_id', 2)->where('purchaser_id', $user->id)->where('service_user_id', $serviceUserProfile->id)->get();
+        $newBookings = Booking::whereIn('status_id', [self::NEW, self::AWAITING_CONFIRMATION])->where('purchaser_id', $user->id)->where('service_user_id', $serviceUserProfile->id)->get();
         $this->vars = array_add($this->vars, 'newBookings', $newBookings);
 
         $inProgressBookings = Booking::where('status_id', 5)->where('purchaser_id', $user->id)->where('service_user_id', $serviceUserProfile->id)->get();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Booking;
+use App\Interfaces\Constants;
 use App\PurchasersProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\URL;
 
 use Auth;
 
-class PurchaserController extends FrontController
+class PurchaserController extends FrontController implements Constants
 {
     public function __construct()
     {
@@ -190,10 +191,10 @@ class PurchaserController extends FrontController
 
             $this->vars = array_add($this->vars, 'status', $status);
 
-            $newBookings = Booking::where('status_id', 2)->where('purchaser_id', $user->id)->get();
+            $newBookings = Booking::whereIn('status_id', [self::NEW, self::AWAITING_CONFIRMATION])->where('purchaser_id', $user->id)->get();
             $this->vars = array_add($this->vars, 'newBookings', $newBookings);
 
-            $inProgressBookings = Booking::where('status_id', 5)->where('purchaser_id', $user->id)->get();
+            $inProgressBookings = Booking::whereIn('status_id', [self::CONFIRMED, self::IN_PROGRESS, self::DISPUTE])->where('purchaser_id', $user->id)->get();
             $inProgressAmount = 0;
             foreach ($inProgressBookings as $booking){
                 $inProgressAmount += ($booking->hours * $booking->hour_price);

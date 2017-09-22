@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Bookings;
 
 use App\Booking;
 use App\BookingsMessage;
+use App\Interfaces\Constants;
+use App\PaymentServices\StripeService;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FrontController;
 use App\User;
@@ -11,7 +13,7 @@ use Illuminate\Http\Request;
 use SebastianBergmann\Comparator\Book;
 use Auth;
 
-class BookingsController extends FrontController
+class BookingsController extends FrontController implements Constants
 {
     public function create(Request $request){
         $purchaser = User::find(2);
@@ -77,36 +79,86 @@ class BookingsController extends FrontController
         return $this->renderOutput();
     }
 
-    public function setPaymentMethod(Booking $booking, Request $request){
-        dd($request);
+    public function setPaymentMethod(Booking $booking, Request $request, StripeService $stripeService){
         $booking->payment_method = $request->payment_method;
+
+        if($request->payment_method == 'credit_card'){
+            $cardToken = $stripeService->createCreditCardToken([
+                'card_number' => $request->card_number,
+                'exp_month' => $request->card_month,
+                'exp_year' => $request->card_year,
+                'cvc' => $request->card_cvc,
+            ]);
+            $booking->card_token = $cardToken->id;
+        }
         $booking->save();
 
         return response(['status' => 'success']);
     }
 
-    public function accept(Booking $booking){
-        //todo take money from purchaser
+    public function accept(Booking $booking, StripeService $stripeService){
+        $user = Auth::user();
+//        if($booking->status_id == 2){
+            if($booking->payment_method == 'credit_card'){
+                $purchase = $stripeService->createCharge([
+                    'amount' => $booking->carer_amount * 100,
+                ], $booking->card_token);
+//                dd($purchase);
+            }
+            else{
+
+            }
+            $booking->status_id = $booking->carer_status_id = $booking->purchaser_status_id = self::IN_PROGRESS;
+            $booking->save();
+//        }
+
         return response(['status' => 'success']);
     }
 
     public function reject(Booking $booking){
-        $booking->status_id = 4;
+        $booking->status_id = self::CANCELLED;
+        $booking->carer_status_id = self::CANCELLED;
+        $booking->purchaser_status_id = self::CANCELLED;
         $booking->save();
 
         return response(['status' => 'success']);
     }
 
     public function cancel(Booking $booking){
-        //todo cancel logic
-        $booking->status_id = 4;
+        $user = Auth::user();
+        if($user->user_type_id == 3){
+            //Carer
+            $booking->status_id = self::CANCELLED;
+            $booking->carer_status_id = self::CANCELLED;
+        } else {
+            if($booking->carer_status_id == self::COMPLETED){
+                $booking->status_id = self::DISPUTE;
+                $booking->purchaser_status_id = self::CANCELLED;
+            }
+        }
+
         $booking->save();
 
         return response(['status' => 'success']);
     }
 
     public function completed(Booking $booking){
+        $user = Auth::user();
+        if($user->user_type_id == 3){
+            //Carer
+            $booking->carer_status_id = self::COMPLETED;
+            if($booking->purchaser_status_id == self::COMPLETED)
+                $booking->status_id = self::COMPLETED;
 
+        } else {
+            //Purchaser
+            $booking->purchaser_status_id = self::COMPLETED;
+            $booking->status_id = self::COMPLETED;
+        }
+
+        $booking->save();
+
+        return response(['status' => 'success']);
     }
 
     public function create_message(Booking $booking, Request $request){

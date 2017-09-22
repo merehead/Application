@@ -31,7 +31,7 @@
     @if($status == 'all' || $status == 'pending')
         <div class="bookingCard bookingCard--new">
             <div class="bookingCard__header bookingCard__header">
-                <h2>new</h2>
+                <h2>pending</h2>
             </div>
             @if($newBookings->count() > 0)
                 @foreach($newBookings as $booking)
@@ -42,7 +42,7 @@
                             </a>
                             <div class="bookInfo__text">
                                 <p>You booked <a href="Service_user_Public_profile_page.html">{{$booking->bookingCarer()->first()->full_name}}</a></p>
-                                <a href="NewAnAppointment_New.html" class="">view details</a>
+                                <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                             </div>
 
                         </div>
@@ -55,19 +55,19 @@
                         </div>
                         <div class="bookInfo__btns">
                             <div class="roundedBtn">
-                                <a href="#" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
+                                <button {{!in_array($booking->purchaser_status_id, [2]) ? 'disabled' : ''}} data-booking_id = "{{$booking->id}}" data-status = "accept"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
                                     accept
-                                </a>
+                                </button>
                             </div>
                             <div class="roundedBtn">
-                                <a href="#" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--reject">
+                                <button {{!in_array($booking->purchaser_status_id, [2]) ? 'disabled' : ''}} data-booking_id = "{{$booking->id}}" data-status = "reject" class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--reject">
                                     reject
-                                </a>
+                                </button>
                             </div>
                             <div class="roundedBtn">
-                                <a href="#" class="roundedBtn__item   roundedBtn__item--alternative-smal">
+                                <button {{!in_array($booking->purchaser_status_id, [2]) ? 'disabled' : ''}} class="roundedBtn__item   roundedBtn__item--alternative-smal">
                                     OFFER ALTERNATIVE TIME
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                             </a>
                             <div class="bookInfo__text">
                                 <p>You booked <a href="Service_user_Public_profile_page.html">{{$booking->bookingCarer()->first()->full_name}}</a></p>
-                                <a href="NewAnAppointment_New.html" class="">view details</a>
+                                <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                             </div>
 
                         </div>
@@ -106,14 +106,14 @@
                         </div>
                         <div class="bookInfo__btns">
                             <div class="roundedBtn">
-                                <a href="#" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--cancel">
+                                <button  {{!in_array($booking->purchaser_status_id, [3, 5]) ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "cancel"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--cancel">
                                     cancel
-                                </a>
+                                    </a>
                             </div>
                             <div class="roundedBtn">
-                                <a href="#" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
+                                <button  {{!in_array($booking->purchaser_status_id, [3, 5]) ? 'disabled' : ''}}   data-booking_id = "{{$booking->id}}"  data-status = "completed"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
                                     completed
-                                </a>
+                                </button>
                             </div>
 
                         </div>
@@ -149,7 +149,7 @@
                             </a>
                             <div class="bookInfo__text">
                                 <p>You booked <a href="Service_user_Public_profile_page.html">{{$booking->bookingCarer()->first()->full_name}}</a></p>
-                                <a href="NewAnAppointment_New.html" class="">view details</a>
+                                <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                             </div>
 
                         </div>
@@ -178,3 +178,16 @@
 
 </div>
 </section>
+
+<script>
+    $('.changeBookingStatus').click(function () {
+        var booking_id = $(this).attr('data-booking_id');
+        var status = $(this).attr('data-status');
+        $.post('/bookings/'+booking_id+'/'+status, function (data) {
+            if(data.status == 'success'){
+                location.reload();
+            }
+        });
+    });
+
+</script>

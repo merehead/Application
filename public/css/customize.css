@@ -302,3 +302,6 @@ a.blogFilter__item.active {
 
 .nhide{display: none;}
 .profileField-mr{margin-right: 2.2%}
+
+button:disabled { background: #d7d7d7; color: #f8f4f4;}
+button:disabled:hover { background: #d7d7d7; color: #f8f4f4;}

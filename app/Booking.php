@@ -62,6 +62,14 @@ class Booking extends Model
     }
 
     //Accessors
+    public function getCarerRateAttribute(){
+        return 10;
+    }
+
+    public function getPurchaserRateAttribute(){
+        return 13;
+    }
+
     public function getHoursAttribute(){
         $hours = 0;
         $appointments = $this->appointments()->get();
@@ -77,6 +85,10 @@ class Booking extends Model
             return 10;
         else
             return 13;
+    }
+
+    public function getCarerAmountAttribute(){
+        return $this->hours * $this->purchaser_rate;
     }
 
 }

@@ -75,19 +75,19 @@
                             </div>
                             <div class="bookInfo__btns">
                                 <div class="roundedBtn">
-                                    <button data-booking_id = "{{$booking->id}}" data-status = "accept"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
+                                    <button {{!in_array($booking->purchaser_status_id, [2]) ? 'disabled' : ''}} data-booking_id = "{{$booking->id}}" data-status = "accept"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
                                         accept
                                     </button>
                                 </div>
                                 <div class="roundedBtn">
-                                    <button data-booking_id = "{{$booking->id}}" data-status = "reject" class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--reject">
+                                    <button {{!in_array($booking->purchaser_status_id, [2]) ? 'disabled' : ''}} data-booking_id = "{{$booking->id}}" data-status = "reject" class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--reject">
                                         reject
                                     </button>
                                 </div>
                                 <div class="roundedBtn">
-                                    <a href="#" class="roundedBtn__item   roundedBtn__item--alternative-smal">
+                                    <button {{!in_array($booking->purchaser_status_id, [2]) ? 'disabled' : ''}} class="roundedBtn__item   roundedBtn__item--alternative-smal">
                                         OFFER ALTERNATIVE TIME
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -126,14 +126,14 @@
                             </div>
                             <div class="bookInfo__btns">
                                 <div class="roundedBtn">
-                                    <button data-booking_id = "{{$booking->id}}" data-status = "cancel"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--cancel">
+                                    <button  {{!in_array($booking->purchaser_status_id, [3, 5]) ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "cancel"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--cancel">
                                         cancel
                                     </a>
                                 </div>
                                 <div class="roundedBtn">
-                                    <a href="#" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
+                                    <button  {{!in_array($booking->purchaser_status_id, [3, 5]) ? 'disabled' : ''}}   data-booking_id = "{{$booking->id}}"  data-status = "completed"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
                                         completed
-                                    </a>
+                                    </button>
                                 </div>
 
                             </div>
@@ -204,7 +204,9 @@
         var booking_id = $(this).attr('data-booking_id');
         var status = $(this).attr('data-status');
         $.post('/bookings/'+booking_id+'/'+status, function (data) {
-            location.reload();
+            if(data.status == 'success'){
+                location.reload();
+            }
         });
     });
 

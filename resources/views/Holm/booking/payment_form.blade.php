@@ -12,6 +12,7 @@
         </div>
 
         <div class="bookPaymentWrap">
+            {{--@if($booking->payment_method == null)--}}
             <h2 class="paymentDetails">
                 Payment details
             </h2>
@@ -141,9 +142,20 @@
                         </p>
                     </div>
                 </div>
-
-
             </div>
+            {{--@else--}}
+                {{--<div class="thank">--}}
+                    {{--<h2 class="thank__title">--}}
+                        {{--Thank you!--}}
+                    {{--</h2>--}}
+                {{--<span class="successIco">--}}
+                  {{--<i class="fa fa-check" aria-hidden="true"></i>--}}
+                {{--</span>--}}
+                    {{--<p class="info-p">--}}
+                        {{--Your carer has now received your booking request and will respond shortly. If you have not heard back within 24 hours, please do contact us.--}}
+                    {{--</p>--}}
+                {{--</div>--}}
+            {{--@endif--}}
         </div>
     </div>
 </section>

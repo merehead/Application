@@ -6,6 +6,7 @@ use App\AssistanceType;
 use App\Booking;
 use App\CarerReference;
 use App\CarersProfile;
+use App\Interfaces\Constants;
 use App\Language;
 use App\Postcode;
 use App\User;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Auth;
 
-class CarerController extends FrontController
+class CarerController extends FrontController implements Constants
 {
 
     public function __construct()
@@ -156,10 +157,10 @@ class CarerController extends FrontController
 
         $this->vars = array_add($this->vars, 'status', $status);
 
-        $newBookings = Booking::where('status_id', 2)->where('carer_id', $user->id)->get();
+        $newBookings = Booking::whereIn('status_id', [self::NEW, self::AWAITING_CONFIRMATION])->where('carer_id', $user->id)->get();
         $this->vars = array_add($this->vars, 'newBookings', $newBookings);
 
-        $inProgressBookings = Booking::where('status_id', 5)->where('carer_id', $user->id)->get();
+        $inProgressBookings = Booking::whereIn('status_id', [self::CONFIRMED, self::IN_PROGRESS, self::DISPUTE])->where('carer_id', $user->id)->get();
         $inProgressAmount = 0;
         foreach ($inProgressBookings as $booking){
             $inProgressAmount += ($booking->hours * $booking->hour_price);
