@@ -12,14 +12,17 @@
             <div class="row">
                 <div class="col-md-offset-1 col-md-10">
                     <div class="home__search">
-                        <form class="homeForm">
-                            <input type="text"   class="homeForm__input" placeholder="enter your postcode">
-                            <a href="#" type="submit" class="homeForm__btn">
+                        {!! Form::model(null, ['method'=>'POST','route'=>'searchPagePost','class'=>'homeForm','id'=>'carerSearchForm']) !!}
+                        {!! Form::hidden('stage','carerSearch') !!}
+                            {{--<input type="text"   class="homeForm__input" placeholder="enter your postcode">--}}
+                        {!! Form::text('postCode',null,['class'=>'homeForm__input','placeholder'=>'enter your postcode','maxlength'=>16,'onkeydown'=>"if(event.keyCode==13){document.getElementById('carerSearchForm').submit();}"]) !!}
+
+                        <a href="#" type="submit" class="homeForm__btn" onclick="event.preventDefault();document.getElementById('carerSearchForm').submit();">
                   <span>
                     <i class="fa fa-search"></i>
                   </span>
                             </a>
-                        </form>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

@@ -31,6 +31,9 @@ Route::get('/blog/filter/{month}-{year}', 'BlogController@viewFilter')->name('Bl
 Route::get('/blog/{blogId}', 'BlogController@view')->name('BlogViewPage');
 
 Route::get('/search', 'SearchController@index')->name('searchPage');
+Route::post('/search', 'SearchController@index')->name('searchPagePost');
+Route::get('/search/page/{page}', 'SearchController@index')->name('searchPagePaginate');
+Route::post('/search/page/{page}', 'SearchController@index')->name('searchPagePaginatePost');
 
 Route::get('/terms', 'TermsController@index')->name('TermsPage');
 
