@@ -419,6 +419,9 @@ class PurchaserRegistration
 
         $activeSubStep=0;
 
+
+
+
         $step = $this->model->find($id)->registration_progress;
 
         if ($step == 3)
