@@ -30,6 +30,8 @@ Route::get('/blog', 'BlogController@index')->name('BlogPage');
 Route::get('/blog/filter/{month}-{year}', 'BlogController@viewFilter')->name('BlogFilter');
 Route::get('/blog/{blogId}', 'BlogController@view')->name('BlogViewPage');
 
+Route::get('/search', 'SearchController@index')->name('searchPage');
+
 Route::get('/terms', 'TermsController@index')->name('TermsPage');
 
 Route::get('/welcome-carer', 'CarerController@welcome')->name('welcomeCarer');
