@@ -119,10 +119,10 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','readonly',
                 </h2>
 
                 @if($carerProfile->date_sertificate === false)
-                    <input name="date_certificate" id="datepicker_date_sertificate" class="profileField__input"
+                    <input name="dbs_date" id="datepicker_date_sertificate" class="profileField__input"
                            placeholder="Valid until date" type="text">
                 @else
-                    {!! Form::text('date_certificate',null,['id'=>'datepicker_date_sertificate',
+                    {!! Form::text('dbs_date',null,['id'=>'datepicker_date_sertificate',
                     'class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
                 @endif
             </div>

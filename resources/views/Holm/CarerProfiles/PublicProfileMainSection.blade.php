@@ -2,7 +2,8 @@
     <div class="profileInfo">
 
         <a href="#" class="profilePhoto profilePhoto2 invite__photo ">
-            <img id="profile_photo" src="img/profile_photos/{{$carerProfile->id}}.png" onerror="this.src='/img/no_photo.png'" alt="avatar">
+            <img id="profile_photo" src="/img/profile_photos/{{$carerProfile->id}}.png" onerror="this
+            .src='/img/no_photo.png'" alt="avatar">
         </a>
         <div class="profileInfo__item">
             <h2 class="profileName profileName--big">
@@ -194,6 +195,9 @@
                 <p>
                     {{$item->name}}
                 </p>
+                @if($loop->iteration%3==0)
+                    </div> <div class="advantageColumn">
+                @endif
                 @endforeach
 
 

@@ -114,12 +114,13 @@ class CarerController extends FrontController
             $this->vars = array_add($this->vars, 'carerProfile', $carerProfile);
             $postcodes = Postcode::all()->pluck('name', 'id')->toArray();
             $this->vars = array_add($this->vars, 'postcodes', $postcodes);
-            $typeCare = AssistanceType::all();
+            $typeCare = $carerProfile->AssistantsTypes()->get();
             $this->vars = array_add($this->vars, 'typeCare', $typeCare);
-            $workingTimes = WorkingTime::all();
+            $workingTimes = $carerProfile->WorkingTimes()->get();
             $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
-            $languages = Language::all();
+            $languages = $carerProfile->Languages()->get();
             $this->vars = array_add($this->vars, 'languages', $languages);
+
             $documents_type = array(
                 'nvq',
                 'care_certificate',
@@ -129,15 +130,15 @@ class CarerController extends FrontController
                 'other_relevant_qualification'
             );
             $documents_name = array(
-                'nvq' => 'NVQS',
-                'care_certificate' => 'Care certificate',
+                'nvq' => 'NVQ',
+                'care_certificate' => 'CARE_CERTIFICATE',
                 'health_and_social' => 'Health and social',
                 'training_certificate' => 'Training certificate',
                 'additional_training_course' => 'Additional training course',
                 'other_relevant_qualification' => 'Other relevant qualification'
             );
             foreach ($documents_type as $dt) {
-                $documents[$dt] = Document::where('user_id', '=', 16)->where('type', '=', $dt)->get(['title']);
+                $documents[$dt] = Document::where('user_id', '=', $user_id)->where('type', '=', $dt)->get(['title']);
             }
             $this->vars = array_add($this->vars, 'documents', $documents);
             $this->vars = array_add($this->vars, 'documents_name', $documents_name);

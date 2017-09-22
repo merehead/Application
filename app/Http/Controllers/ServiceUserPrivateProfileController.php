@@ -103,19 +103,29 @@ class ServiceUserPrivateProfileController extends FrontController
 
             $serviceUsersProfile = ServiceUsersProfile::findOrFail($serviceUserProfile);
 
-
             $this->vars = array_add($this->vars, 'user', $this->user);
 
-            $this->vars = array_add($this->vars, 'carerProfile', $serviceUsersProfile);
             $this->vars = array_add($this->vars, 'serviceUsers', $serviceUsersProfile);
+            $this->vars = array_add($this->vars, 'userNameForSite', $serviceUsersProfile->like_name);
 
-            $typeCare = AssistanceType::all();
+            $typeCare = $serviceUsersProfile->AssistantsTypes()->get()->sortBy('id');
             $this->vars = array_add($this->vars, 'typeCare', $typeCare);
-            $workingTimes = WorkingTime::all();
+
+            $typeService = $serviceUsersProfile->ServicesTypes()->get()->sortBy('id');
+            $this->vars = array_add($this->vars, 'typeService', $typeService);
+
+            $behaviour = $serviceUsersProfile->Behaviours()->get();
+            $this->vars = array_add($this->vars, 'behaviour', $behaviour);
+
+            $workingTimes = $serviceUsersProfile->WorkingTimes()->get();
             $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
-            $languages = Language::all();
+
+            $languages =  $serviceUsersProfile->Languages()->get();
             $this->vars = array_add($this->vars, 'languages', $languages);
-            //dd($this->user,$carerProfile);
+
+            $serviceUserConditions = $serviceUsersProfile->ServiceUserConditions()->get();
+            $this->vars = array_add($this->vars, 'serviceUserConditions', $serviceUserConditions);
+//dd($serviceUserConditions);
             $this->content = view(config('settings.frontTheme') . '.serviceUserProfiles.PublicProfile')->with($this->vars)->render();
 
         }

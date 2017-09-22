@@ -13,7 +13,8 @@
 
 <div class="invite">
     <div class="profilePhoto invite__photo">
-      <img class="set_preview_profile_photo" src="img/profile_photos/{{$purchaserProfile->id}}.png" onerror="this.src='/img/no_photo.png'" alt="avatar">
+      <img class="set_preview_profile_photo" src="/img/profile_photos/{{$purchaserProfile->id}}.png" onerror="this
+      .src='/img/no_photo.png'" alt="avatar">
     </div>
     <h2 class="invite__title">
         Invite other users and both get £100 after 20 hours of usage
