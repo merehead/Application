@@ -93,6 +93,7 @@ function confirmPass($this){
         $('#password_confirmation').parent().find('span.registrationForm__ico--right').removeClass('registrationForm__ico--wrong');
     }
 }
+
 function checkStrength(password) {
     var strength = 0;
     $('.passStrength').show();
@@ -333,6 +334,17 @@ $(document).ready(function () {
 //         dropdown: true,
 //         scrollbar: true
 //     });
+
+    $('.onlyNumber').on('keyup',function(){
+        $('.error-onlyNumber').remove();
+        var errorText = '<span class="help-block error-onlyNumber">\n' +
+            '             <strong>Wrong input. Please enter only number</strong>\n' +
+            '          </span>';
+        if(this.value.match(/[^0-9]/g)){
+            $(this).before(errorText);
+            this.value = this.value.replace(/[^0-9]/g, '');
+        }
+    });
 
     // Иван функция уменшает автоматом шрифт у имени пользователя в шапке
     if($('.profileName').lenght>0)
