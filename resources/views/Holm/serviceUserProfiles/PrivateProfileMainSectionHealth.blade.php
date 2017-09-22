@@ -63,7 +63,7 @@
                 <span class="help-block"><strong>{{ $errors->first('comprehension') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->comprehension == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->comprehension == 'No' || is_null($serviceUsersProfile->comprehension) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -86,7 +86,7 @@
                 <span class="help-block"><strong>{{ $errors->first('communication') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->communication == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->communication == 'No' || is_null($serviceUsersProfile->communication) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -111,7 +111,7 @@
                 <span class="help-block"><strong>{{ $errors->first('speech') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->speech == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->speech == 'No' || is_null($serviceUsersProfile->speech) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -135,7 +135,7 @@
                 <span class="help-block"><strong>{{ $errors->first('vision') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->vision == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->vision == 'No' || is_null($serviceUsersProfile->vision) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -159,7 +159,7 @@
                 <span class="help-block"><strong>{{ $errors->first('hearing_detail') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->hearing == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->hearing == 'No' || is_null($serviceUsersProfile->hearing) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -188,7 +188,7 @@
                 <span class="help-block"><strong>{{ $errors->first('assistance_in_medication') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->assistance_in_medication == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_in_medication == 'No' || is_null($serviceUsersProfile->assistance_in_medication) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -220,7 +220,7 @@
                 <span class="help-block"><strong>{{ $errors->first('assistance_in_medication') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->have_any_allergies == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->have_any_allergies == 'No' || is_null($serviceUsersProfile->have_any_allergies) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -251,7 +251,7 @@
                 <span class="help-block"><strong>{{ $errors->first('skin_scores') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->skin_scores == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->skin_scores == 'No' || is_null($serviceUsersProfile->skin_scores) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -274,7 +274,7 @@
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_dressings') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->assistance_with_dressings == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_with_dressings == 'No' || is_null($serviceUsersProfile->assistance_with_dressings) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -306,7 +306,7 @@
                 <span class="help-block"><strong>{{ $errors->first('help_with_mobility') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->help_with_mobility == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->help_with_mobility == 'No' || is_null($serviceUsersProfile->help_with_mobility) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -332,7 +332,7 @@
                 <span class="help-block"><strong>{{ $errors->first('mobility_home') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->mobility_home == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->mobility_home == 'No' || is_null($serviceUsersProfile->mobility_home) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -358,7 +358,7 @@
                 <span class="help-block"><strong>{{ $errors->first('mobility_bed') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->mobility_bed == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->mobility_bed == 'No' || is_null($serviceUsersProfile->mobility_bed) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -385,7 +385,7 @@
                 <span class="help-block"><strong>{{ $errors->first('history_of_falls') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->history_of_falls == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->history_of_falls == 'No' || is_null($serviceUsersProfile->history_of_falls) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -410,7 +410,7 @@
                 <span class="help-block"><strong>{{ $errors->first('mobility_shopping') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->mobility_shopping == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->mobility_shopping == 'No' || is_null($serviceUsersProfile->mobility_shopping) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -442,7 +442,7 @@
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_eating') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->assistance_with_eating == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_with_eating == 'No' || is_null($serviceUsersProfile->assistance_with_eating) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -467,7 +467,7 @@
                 <span class="help-block"><strong>{{ $errors->first('prepare_food') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->prepare_food == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->prepare_food == 'No' || is_null($serviceUsersProfile->prepare_food) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -492,7 +492,7 @@
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_preparing_food') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->assistance_with_preparing_food == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_with_preparing_food == 'No' || is_null($serviceUsersProfile->assistance_with_preparing_food) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -518,7 +518,7 @@
                 <span class="help-block"><strong>{{ $errors->first('dietary_requirements') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->dietary_requirements == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->dietary_requirements == 'No'  || is_null($serviceUsersProfile->dietary_requirements) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -543,7 +543,7 @@
                 <span class="help-block"><strong>{{ $errors->first('special_dietary_requirements') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->special_dietary_requirements == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->special_dietary_requirements == 'No' || is_null($serviceUsersProfile->special_dietary_requirements) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -576,7 +576,7 @@
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_personal_hygiene') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->assistance_with_personal_hygiene == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_with_personal_hygiene == 'No' || is_null($serviceUsersProfile->assistance_with_personal_hygiene) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -601,7 +601,7 @@
                 <span class="help-block"><strong>{{ $errors->first('appropriate_clothes') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->appropriate_clothes == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->appropriate_clothes == 'No' || is_null($serviceUsersProfile->appropriate_clothes) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -626,7 +626,7 @@
                 <span class="help-block"><strong>{{ $errors->first('assistance_getting_dressed') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->assistance_getting_dressed == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_getting_dressed == 'No' || is_null($serviceUsersProfile->assistance_getting_dressed) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -652,7 +652,7 @@
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_bathing') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->assistance_with_bathing == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_with_bathing == 'No' || is_null($serviceUsersProfile->assistance_with_bathing) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -677,7 +677,7 @@
                 <span class="help-block"><strong>{{ $errors->first('managing_toilet_needs') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->managing_toilet_needs == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->managing_toilet_needs == 'No' || is_null($serviceUsersProfile->managing_toilet_needs) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -701,7 +701,7 @@
                 <span class="help-block"><strong>{{ $errors->first('mobilising_to_toilet') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->mobilising_to_toilet == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->mobilising_to_toilet == 'No' || is_null($serviceUsersProfile->mobilising_to_toilet) ) ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -725,7 +725,7 @@
                 <span class="help-block"><strong>{{ $errors->first('cleaning_themselves') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->cleaning_themselves == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->cleaning_themselves == 'No' || is_null($serviceUsersProfile->cleaning_themselves) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -749,7 +749,7 @@
                 <span class="help-block"><strong>{{ $errors->first('have_incontinence') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->have_incontinence == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->have_incontinence == 'No' || is_null($serviceUsersProfile->have_incontinence) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -773,7 +773,7 @@
                 <span class="help-block"><strong>{{ $errors->first('choosing_incontinence_products') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->choosing_incontinence_products == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->choosing_incontinence_products == 'No' || is_null($serviceUsersProfile->choosing_incontinence_products) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -813,7 +813,7 @@
                 <span class="help-block"><strong>{{ $errors->first('incontinence_wear') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->incontinence_wear == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->incontinence_wear == 'No' || is_null($serviceUsersProfile->incontinence_wear) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>

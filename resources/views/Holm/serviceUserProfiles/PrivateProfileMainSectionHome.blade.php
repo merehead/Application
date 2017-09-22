@@ -114,7 +114,7 @@
                                     </span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->assistance_moving == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_moving == 'No' || is_null($serviceUsersProfile->assistance_moving) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -207,7 +207,7 @@
             @endif
         </div>
     </div>
-    <div class="inhabitantsDepend profileRow" {!!  $serviceUsersProfile->anyone_else_live == 'No' ? ' style="display:none"' : ''!!}>
+    <div class="inhabitantsDepend profileRow" {!!  ($serviceUsersProfile->anyone_else_live == 'No' || is_null($serviceUsersProfile->anyone_else_live) )? ' style="display:none"' : ''!!}>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
@@ -247,7 +247,7 @@
                                     </span>
             @endif
         </div>
-        <div class="profileField serviceUserProfilePetHide profileField--two-thirds"{!!  $serviceUsersProfile->own_pets == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField serviceUserProfilePetHide profileField--two-thirds"{!!  ($serviceUsersProfile->own_pets == 'No' || is_null($serviceUsersProfile->own_pets) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                Please, give details   </span>
@@ -261,7 +261,7 @@
             @endif
         </div>
     </div>
-    <div class="profileRow serviceUserProfilePetHide"{!!  $serviceUsersProfile->own_pets == 'No' ? ' style="display:none"' : ''!!}>
+    <div class="profileRow serviceUserProfilePetHide"{!!  ($serviceUsersProfile->own_pets == 'No' || is_null($serviceUsersProfile->own_pets) )? ' style="display:none"' : ''!!}>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
@@ -300,7 +300,7 @@
             @endif
         </div>
 
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->social_interaction == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->social_interaction == 'No'  || is_null($serviceUsersProfile->social_interaction) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -329,7 +329,7 @@
                                     </span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds" {!!  $serviceUsersProfile->visit_for_companionship == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds" {!!  ($serviceUsersProfile->visit_for_companionship == 'No' || is_null($serviceUsersProfile->visit_for_companionship) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>

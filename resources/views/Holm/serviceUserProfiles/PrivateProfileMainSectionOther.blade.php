@@ -25,7 +25,10 @@
                 <span class="help-block"><strong>{{ $errors->first('religious_beliefs') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->religious_beliefs == 'No' ? ' style="display:none"' : ''!!}>
+
+
+
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->religious_beliefs == 'No' || is_null($serviceUsersProfile->religious_beliefs) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -51,7 +54,7 @@
                 <span class="help-block"><strong>{{ $errors->first('particular_likes') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->particular_likes == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->particular_likes == 'No' || is_null($serviceUsersProfile->particular_likes) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -76,7 +79,7 @@
             @endif
 
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->multiple_carers == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->multiple_carers == 'No' || is_null($serviceUsersProfile->multiple_carers) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -100,7 +103,7 @@
                 <span class="help-block"><strong>{{ $errors->first('socialising_with_other') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->socialising_with_other == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->socialising_with_other == 'No' || is_null($serviceUsersProfile->socialising_with_other) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -124,7 +127,7 @@
                 <span class="help-block"><strong>{{ $errors->first('interests_hobbies') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->interests_hobbies == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->interests_hobbies == 'No' || is_null($serviceUsersProfile->interests_hobbies) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -148,7 +151,7 @@
                 <span class="help-block"><strong>{{ $errors->first('we_missed') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->we_missed == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->we_missed == 'No' || is_null($serviceUsersProfile->we_missed) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>

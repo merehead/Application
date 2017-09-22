@@ -76,9 +76,9 @@
             changeYear: true,
             dateFormat: "dd/mm/yy",
             showAnim: "slideDown",
-            minDate: "-4Y",
-            maxDate: "+0D",
-            yearRange: "-2:0"
+            minDate: "-2Y",
+            maxDate: "-1D",
+            yearRange: "-2:+2"
         });
     });
 

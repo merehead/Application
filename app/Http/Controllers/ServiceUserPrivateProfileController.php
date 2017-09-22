@@ -61,7 +61,7 @@ class ServiceUserPrivateProfileController extends FrontController
             $behaviour = Behaviour::all();
             $this->vars = array_add($this->vars, 'behaviour', $behaviour);
 
-            $workingTimes = WorkingTime::all()->sortBy('sort');
+            $workingTimes = WorkingTime::all()->sortBy('byDay');
             $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
 
             $languages = Language::all();

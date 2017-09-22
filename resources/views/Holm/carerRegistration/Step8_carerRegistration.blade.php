@@ -131,7 +131,7 @@
             <div class="formField hiding" style="display: none">
                 <h2 class="formLabel questionForm__label">
 
-                 Car insurance Number
+                    Car Insurance Policy Number
 
                 </h2>
                 {!! Form::text('car_insurance_number',null,['class'=>'formInput','placeholder'=>'Car insurance number']) !!}

@@ -135,7 +135,9 @@ class PurchaserRegistration
             'referral_code'=>'string|nullable|max:128',
         ]);
 
-        (isset($request['referral_code']))? $referal_code = $request['referral_code'] : $referral_code = 0;
+        $referral_code = 0;
+
+        (isset($request['referral_code'])) ? $referral_code = $request['referral_code'] : $referral_code = 0;
 
         $user = User::create([
             'email' => $request['email'],

@@ -25,7 +25,7 @@
                 <span class="help-block"><strong>{{ $errors->first('getting_dressed_for_bed') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->getting_dressed_for_bed == 'No' ? 'style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->getting_dressed_for_bed == 'No' || is_null($serviceUsersProfile->getting_dressed_for_bed) )? 'style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -70,7 +70,7 @@
                 <span class="help-block"><strong>{{ $errors->first('keeping_safe_at_night') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->keeping_safe_at_night == 'No' ? 'style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night) )? 'style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -118,7 +118,7 @@
                 <span class="help-block"><strong>{{ $errors->first('toilet_at_night') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->toilet_at_night == 'No' ? 'style="display:none"' : ''!!}>
+        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->toilet_at_night == 'No' || is_null($serviceUsersProfile->toilet_at_night) )? 'style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>

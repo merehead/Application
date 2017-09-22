@@ -174,8 +174,8 @@ class CarerRegistration
             'password' => 'required|string|min:6|confirmed',
             'referral_code'=>'string|nullable|max:128',
         ]);
-
-        (isset($request['referral_code']))? $referal_code = $request['referral_code'] : $referral_code = 0;
+        $referral_code = 0;
+        (isset($request['referral_code']))? $referral_code = $request['referral_code'] : $referral_code = 0;
 
         $user = User::create([
             'email' => $request['email'],
@@ -183,6 +183,7 @@ class CarerRegistration
             'referral_code' => $referral_code,
             'user_type_id' => 3,
         ]);
+
 
 
         if ($user) {
@@ -197,8 +198,11 @@ class CarerRegistration
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']],TRUE)) {
             Auth::login($user, true);
 
-            Mail::send('errors.404', ['userName' => $user->email, 'password' => $request['password']],
+            Mail::send(config('settings.frontTheme').'.emails.continue_sign_up_carer', ['userName' => $user->email, 'password' => $request['password']],
                 function ($m) use ($request) {$m->to($request['email'])->subject('Registration');});
+
+
+
 
         }
 
