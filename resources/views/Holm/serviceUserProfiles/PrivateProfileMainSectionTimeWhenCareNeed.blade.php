@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="profileField profileField--two-thirds">
+        <div class="profileField profileField--two-thirds serviceUserTimeNeed">
             <div class="checkRow">
                 <div class="checkBox_item">
                     {!! Form::checkbox('workingTime['.$workingTimes[1]->id.']', null,($serviceUsersProfile->WorkingTimes->contains('id', $workingTimes[1]->id)? 1 : null),
