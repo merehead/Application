@@ -15,6 +15,42 @@ var is_data_changed=false;
 //     return (is_data_changed ? "Измененные данные не сохранены. Закрыть страницу?" : null);
 // }
 
+function carerSearchAjax(){
+    var form = $('#carerSearchForm');
+    //$(form).submit();
+    var token = $(form).find('input[name=_token]').val();
+    $('.result').remove();
+    $('.loader').show();
+    $('.error-text').hide();
+    $('.moreBtn__item').hide();
+
+    $.ajax({
+        url: $(form).attr('action'),
+        headers: {'X-CSRF-TOKEN': token},
+        data: $(form).serialize()+'&carerSearchAjax=true',
+        type: 'POST',
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+            $('.result').remove();
+            $('.loader').hide();
+            if (response.success == true) {
+                $('.loader').after(response.html);
+                $('.Paginator').html(response.htmlHeader);
+                $('.moreBtn__item').show();
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+            $('.result').remove();
+            $('.loader').hide();
+            $('.error-text').show();
+        }
+    });
+}
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map_canvas'), {
         zoom: 17,

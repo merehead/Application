@@ -235,7 +235,7 @@ select#workingTimes {
 
 .loader {
     display: none;
-    color: #efefef;
+    color: #80cb2d;
     font-size: 20px;
     margin: 100px auto;
     width: 1em;
@@ -383,7 +383,15 @@ a.blogFilter__item.active {
     z-index : 99!important; ;
 }
 
+
 .serviceUserTimeNeed {
     padding-bottom: 7px;
     margin-left: -30px;
+}
+
+a.sortLink__item .active {
+    color: #7ab7dc;
+    font-weight: 900;
+    text-decoration: none;
+
 }
