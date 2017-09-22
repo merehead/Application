@@ -379,7 +379,7 @@ class CarerController extends FrontController
         if ($input['stage'] == 'carerPrivateLanguages') {
 
             $depart = "#carerLanguages";
-
+            DB::query('delete from carer_profile_language where carer_profile_id=:?',[$input['id']]);
             if (isset($input['languages'])) {
                 $carerProfiles->Languages()->sync(array_keys($input['languages']));
             }
