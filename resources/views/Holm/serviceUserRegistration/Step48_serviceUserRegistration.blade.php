@@ -43,7 +43,7 @@
                         Does {{$userNameForSite}} have their own supply of incontinence wear? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('incontinence_wear',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('incontinence_wear',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if2','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('incontinence_wear'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('incontinence_wear') }}</strong>
@@ -51,7 +51,7 @@
                         @endif
                     </div>
                 </div>
-            <div class="formField sometimes_hiding" style="display: none">
+            <div class="formField sometimes_hiding2" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Where are the incontinence products stored? <span>*</span>
                     </h2>
@@ -65,7 +65,7 @@
                         @endif
                     </div>
                 </div>
-            <div class="formField sometimes_hiding" style="display: none">
+            <div class="formField sometimes_hiding2" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Would {{$userNameForSite}} like help in choosing incontinence products?
                     </h2>

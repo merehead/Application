@@ -29,7 +29,7 @@
                         Would {{$userNameForSite}} like someone to visit regularly for companionship?
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('visit_for_companionship',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        {!! Form::select('visit_for_companionship',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                         @if ($errors->has('visit_for_companionship'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('visit_for_companionship') }}</strong>

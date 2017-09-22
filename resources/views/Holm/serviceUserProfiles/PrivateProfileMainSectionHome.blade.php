@@ -18,7 +18,7 @@
                 Home is a ... </span>
             </h2>
 
-                {!! Form::select('kind_of_building',['FLAT'=>'FLAT','HOUSE'=>'HOUSE','BUNGALOW'=>'BUNGALOW'],null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+                {!! Form::select('kind_of_building',['FLAT'=>'FLAT','HOUSE'=>'HOUSE','BUNGALOW'=>'BUNGALOW'],null,['class'=>'profileField__select home-is-flat','placeholder'=>'Please select']) !!}
                 @if ($errors->has('kind_of_building'))
                     <span class="help-block">
                                         <strong>{{ $errors->first('kind_of_building') }}</strong>
@@ -26,7 +26,7 @@
                 @endif
 
         </div>
-        <div class="profileField">
+        <div class="profileField home-is-flat" {!!  $serviceUsersProfile->kind_of_building != 'FLAT' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 There is a lift to the flat </span>
@@ -39,7 +39,7 @@
                                     </span>
             @endif
         </div>
-        <div class="profileField">
+        <div class="profileField home-is-flat" {!!  $serviceUsersProfile->kind_of_building != 'FLAT' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 The flat is  on floor</span>
@@ -181,7 +181,7 @@
                 Somebody lives with  {{$userNameForSite}}
               </span>
             </h2>
-            {!! Form::select('anyone_else_live',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('anyone_else_live',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfileInhabitants','placeholder'=>'Please select']) !!}
 
             @if ($errors->has('anyone_else_live'))
                 <span class="help-block">
@@ -193,7 +193,7 @@
 
 
 
-        <div class="profileField profileField--two-thirds"{!!  $serviceUsersProfile->anyone_else_live == 'No' ? ' style="display:none"' : ''!!}>
+        <div class="inhabitantsDepend profileField profileField--two-thirds"{!!  $serviceUsersProfile->anyone_else_live == 'No' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 please give their name and relationship to {{$userNameForSite}}   </span>
@@ -207,7 +207,7 @@
             @endif
         </div>
     </div>
-    <div class="profileRow">
+    <div class="inhabitantsDepend profileRow" {!!  $serviceUsersProfile->anyone_else_live == 'No' ? ' style="display:none"' : ''!!}>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">

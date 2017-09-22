@@ -48,7 +48,7 @@
                 <a href="https://twitter.com/holmcare" class="footerSocial__item">
                     <i class="fa fa-twitter" aria-hidden="true"></i>
                 </a>
-                <a href="#" class="footerSocial__item">
+                <a href="https://plus.google.com/communities/102900900688938220709" class="footerSocial__item">
                     <i class="fa fa-google-plus" aria-hidden="true"></i>
                 </a>
                 <!--

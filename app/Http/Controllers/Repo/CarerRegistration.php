@@ -570,16 +570,45 @@ class CarerRegistration
     }
 
     private function saveStep17($request) {
+        $this->validate($request, [
+            'name' =>
+                array(
+                    'required',
+                    'string',
+                    'max:60'
+                ),
+            'job_title' =>
+                array(
+                    'required',
+                    'string',
+                    'max:60'
+                ),
+            'relationship' =>
+                array(
+                    'required',
+                    'string',
+                    'max:60'
+                ),
+            'mobile_number' =>
+                array(
+                    'required',
+                    'regex:/^07[0-9]{9}$/',
+                ),
+            'email' =>
+                array(
+                    'required',
+                    'email',
+                    'max:100'
+                ),
 
-
-        //dd($request->all());
-        $this->validate($request,[
+        ]);
+/*        $this->validate($request,[
             'name' => 'required|string|max:60',
             'job_title' => 'required|string|max:60',
             'relationship' => 'required|string|max:60',
             'phone' => 'required|string|max:60',
             'email' => 'required|email|max:100',
-        ]);
+        ]);*/
 
         if($request->input('id')=='0')
             $reference = new CarerReference();

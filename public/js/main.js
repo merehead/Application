@@ -569,6 +569,32 @@ $(document).ready(function () {
     });
 
 //^^^^^^^Иван 20170921 для приватного профиля пользователя
+//>>>>Иван 20170922 для приватного профиля пользователя
+    $(document).on('change','.serviceUserProfileInhabitants',function () {
+
+        if($(this).val() == 'No') {
+            $(".inhabitantsDepend").hide();
+        }
+        if($(this).val() == 'Yes') {
+            $(".inhabitantsDepend").show();
+        }
+        if($(this).val() == 'Sometimes') {
+            $(".inhabitantsDepend").show();
+        }
+    });
+    $(document).on('change','.profileField__select.home-is-flat',function () {
+
+        if($(this).val() == 'HOUSE') {
+            $(".profileField.home-is-flat").hide();
+        }
+        if($(this).val() == 'FLAT') {
+            $(".profileField.home-is-flat").show();
+        }
+        if($(this).val() == 'BUNGALOW') {
+            $(".profileField.home-is-flat").hide();
+        }
+    });
+//^^^^^^^Иван 20170922 для регистрации профиля пользователя
     if($("#criminal_detail").val() == 'Some') {
         $(".criminal_detail").show();
     }else{

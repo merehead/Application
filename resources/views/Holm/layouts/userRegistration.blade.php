@@ -259,7 +259,21 @@
             }
         });
     });
-
+    $(function () {
+        $("#sometimes-if2").change(function () {
+            if ($(this).val() != "0") {
+                if ($(this).val() == 'Yes') {
+                    $(".sometimes_hiding2").show()
+                }
+                if ($(this).val() == 'No') {
+                    $(".sometimes_hiding2").hide()
+                }
+                if ($(this).val() == 'Sometimes') {
+                    $(".sometimes_hiding2").show()
+                }
+            }
+        });
+    });
     $(function () {
         $("#sometimes-noif").change(function () {
             if ($(this).val() != "0") {
