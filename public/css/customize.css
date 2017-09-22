@@ -326,11 +326,14 @@ a.blogFilter__item.active {
     color: white;
 }
 
-.section_title p {
-    padding-bottom: 35px;
+/*.section_title p {
+    padding-bottom: 20px;
+}*/
+.sliderContainer{
+  height: 120px
 }
 .advantages_cust{
-  margin-top: 50px;
+  margin-top: 10px;
 }
 .lightTitle_align-l{
   text-align: left;
