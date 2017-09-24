@@ -643,6 +643,27 @@ $(document).ready(function () {
             $(".profileField.home-is-flat").hide();
         }
     });
+
+    //$('#email').attr('name')
+
+    $( "input[maxlength], textarea" ).focus(function() {
+        var maxLenght = $( this ).attr('maxlength');
+        var currentLength = $( this ).val().length;
+        var symbolsLeft = maxLenght - currentLength;
+        $( this ).before('<span class="help-block" style="margin: 0;padding: 0;">Symbols left '+ symbolsLeft +'</span>');
+    });
+
+    $( "input[maxlength], textarea" ).keyup(function() {
+        var maxLenght = $( this ).attr('maxlength');
+        var currentLength = $( this ).val().length;
+        var symbolsLeft = maxLenght - currentLength;
+        $( this ).prev( "span" ).text('Symbols left '+ symbolsLeft);
+    });
+
+    $( "input[maxlength], textarea" ).focusout(function() {
+        $( this ).prev( "span" ).remove();
+    });
+
 //^^^^^^^Иван 20170922 для регистрации профиля пользователя
     if($("#criminal_detail").val() == 'Some') {
         $(".criminal_detail").show();
