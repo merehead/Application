@@ -108,9 +108,9 @@ class CarerRegistrationController extends FrontController
 
     public function update(Request $request) {
 
+//dd($request->all());
 
         if ($request->has('stepback')) {
-            //dd($request->all());
 
             $stepback = $request->stepback;
 

@@ -97,9 +97,10 @@ class ServiceUserPrivateProfileController extends FrontController
         $this->vars = array_add($this->vars, 'footer', $footer);
         $this->vars = array_add($this->vars, 'modals', $modals);
 
-        if (!$this->user) {
+/*        if (!$this->user) {
             abort(404);
-        } else {
+
+        } else {*/
 
             $serviceUsersProfile = ServiceUsersProfile::findOrFail($serviceUserProfile);
 
@@ -128,7 +129,7 @@ class ServiceUserPrivateProfileController extends FrontController
 //dd($serviceUserConditions);
             $this->content = view(config('settings.frontTheme') . '.serviceUserProfiles.PublicProfile')->with($this->vars)->render();
 
-        }
+        //}
 
         return $this->renderOutput();
     }

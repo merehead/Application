@@ -41,7 +41,7 @@ class ServiceUserRegistration
             case '4_1' : $step = 'Step4_1_2_purchaserRegistration';break;
 
 
-            //case '4_1_2_1' : $step = 'Step4_1_2_1_Thank__you_Sign_up';break;
+            case '4_3' : $step = 'Step4_3_StopRegistration';break;
 
 
 
@@ -233,6 +233,8 @@ class ServiceUserRegistration
             case '4_1' : $nextStep = '4_1';break;
             case '4_1_2' : $nextStep = '4_1_2_1';break;
 
+            case '4_3' : $nextStep = '4_3';break;
+
             case '4_1_2_1' : $nextStep = '4_1_2_1';break;
             case '4_1_2_3' : $nextStep = '4_1_2_3';break;
             case '4_1_2_4' : $nextStep = '4_1_2_4';break;
@@ -307,19 +309,12 @@ class ServiceUserRegistration
 
         $serviceUserProfile->registration_progress = $nextStep;
 
-/*        if ($request->input('step')==5 && $request->input('criminal_conviction')=="No") { // no a criminal backend
-            $purchaserProfile->registration_progress = '5_2';
+        if ($request->input('step')=='4_1' &&
+            preg_match('/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',$serviceUserProfile->postcode)!=1
+        )
+        { // недоступный регион
+            $serviceUserProfile->registration_progress = '4_3';
         }
-
-        if (($request->input('step')=='5' && $request->input('criminal_conviction')=="Yes") // has the criminal backend
-        ||($request->input('step')=='14' && $request->input('work_UK')=="No")) {            // restricted in UK
-            $purchaserProfile->registration_progress = '5_1';
-            //return redirect()->action('HomePageController@index');
-        }
-
-        if ($request->input('step')=='5_1' && $purchaserProfile->criminal_conviction=='Some') { // has some criminal backend
-            $purchaserProfile->registration_progress = '5_2';
-        }*/
 
 
         $serviceUserProfile->update();
@@ -337,6 +332,7 @@ class ServiceUserRegistration
 
         switch ($step) {
             case '4_1'    : $this->saveStep4_1($request);break;
+
 
             case '5'    : $this->saveStep5($request);break;
             case '5_1'    : $this->saveStep5_1($request);break;
@@ -464,34 +460,13 @@ class ServiceUserRegistration
             'postcode' =>
                 array(
                     'required',
-                    'regex:/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',
+                    'regex:#^([A-Za-z]{1,2}[0-9]{1,2}) [0-9][A-Za-z]{1,2}$#',
+                    //'regex:/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',
                 )
         ]);
 
-
-
-        /*        $this->validate($request,[
-                    'title' => 'required|numeric:1',
-                    'first_name' => 'required|string|max:128',
-                    'family_name' => 'required|string|max:128',
-                    'like_name' => 'required|string|max:128',
-                    'gender' => 'required|string|max:14',
-                    'mobile_number' => 'required',
-                    'address_line1'=>'required|string|max:256',
-                    'address_line2' => 'nullable|string|max:256',
-                    'town' => 'required|string|max:128',
-                    'postcode' => 'required|string|max:32',
-                    'DoB'=>'required',
-                ]);*/
-
-        //dd($request->all());
-
         $serviceUsersProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
 
-        //$serviceUsersProfile = $purchaserProfile->serviceUsers->first();
-
-
-        //dd($purchaserProfile);
 
         if ($serviceUsersProfile) {
             $serviceUsersProfile->title = $request->input('title');

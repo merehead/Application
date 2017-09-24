@@ -9,7 +9,9 @@
         </a>
         <span class="breadcrumbs__arrow">&gt;</span>
         <a href="Carer_Public_profile_page.html" class="breadcrumbs__item">
-            <?php echo Auth::user()->userName(); ?>
+
+            {{$carerProfile->first_name.'&nbsp'.mb_substr($carerProfile->family_name,0,1).'.'}}
+
         </a>
     </div>
 <!--    <div class="backBtn">-->

@@ -48,7 +48,7 @@
 
                     </td>
                     <td style="padding-left: 30px;">
-                        <img src="{{asset('img/l2.png')}}" alt="" class=""  style="width:  100% ; float: right; "  >
+                        <img src="{{asset('img/l1.png')}}" alt="" class=""  style="width:  100% ; float: right; "  >
                     </td>
                 </tr>
 
@@ -62,30 +62,51 @@
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; font-family: 'Roboto', sans-serif; line-height: 1.5; "  valign="top" class="">
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
-{{--
-                            Hello [user_first_name]!
---}}
-                            Hello!
+
+                            @if($user->isCarer())
+                                Hello  {{$user->userCarerProfile->like_name}}!
+                            @endif
+                            @if($user->isPurchaser())
+                                Hello  {{$user->userPurchaserProfile->like_name}}!
+                            @endif
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-                            It looks like you haven’t completed your registration at <a href="{{route('mainHomePage')}}"> HOLM </a>  yet. No one can book you until then.<br>
-                            You will be able to continue sign up until {{$regTime}}.
+                            Your
+                            @if($user->isCarer())
+                                carer
+                            @endif
+                            @if($user->isPurchaser())
+                                purchaser
+                            @endif account at  <a href="{{route('mainHomePage')}}"> HOLM </a>  was confirmed and is now active. You are now free to use all our services.<br>
+                            <br>
+                            We hope you will enjoy HOLM!
+
                         </p>
 
-                        <a href="{{route('CarerRegistration')}}" class=""
-                           style="text-transform: uppercase;
-                  color: #7bb7dc;
-                  font-weight: 700;
-                  text-decoration: underline;">
-                            Please click here to complete your signing up.
-                        </a>
+                        <!--<a href="#" class=""
+                          style="text-transform: uppercase;
+                          color: #7bb7dc;
+                          font-weight: 700;
+                          text-decoration: underline;">
+                          Est eu pertinaciaen delacrue instructiol
+                        </a> -->
                     </td>
                 </tr>
             </table>
         </td>
     </tr>
+
+
+
+
+
+
+
+
+
     <tr>
+
         <td   valign="top" align="left" bgcolor="#ffffff"  style="font-family: 'Roboto', sans-serif;">
             <table cellpadding="0" cellspacing="0" border="0"  style="    margin: 0; " width="100%"  class="t-content">
 
@@ -95,7 +116,7 @@
                    text-transform: uppercase;
                    font-size: 14px;
                  margin-bottom:0;">
-                            best wishes <br / >
+                            best wishes <br />
                             the holm team
                         </p>
                         <a href="#" class=""
@@ -124,16 +145,12 @@
                                     <img src="{{asset('img/s3.png')}}" alt="">
                                 </a>
                             </li>
-{{--                            <li style="list-style: none;display: inline-block;">
-                                <a href="#" style="margin-left: 10px; color: #a5a7af;">
-                                    <img src="{{asset('img/s4.png')}}" alt="">
-                                </a>
-                            </li>--}}
-                            <li style="list-style: none;display: inline-block;">
-                                <a href="{{route('CarerRegistration')}}" style="margin-left: 10px; color: #a5a7af; ">
-                                    <img src="{{asset('img/s5.png')}}" alt="">
-                                </a>
-                            </li>
+                            {{--                            <li style="list-style: none;display: inline-block;">
+                                                            <a href="#" style="margin-left: 10px; color: #a5a7af;">
+                                                                <img src="{{asset('img/s4.png')}}" alt="">
+                                                            </a>
+                                                        </li>--}}
+
                         </ul>
                     </td>
                 </tr>

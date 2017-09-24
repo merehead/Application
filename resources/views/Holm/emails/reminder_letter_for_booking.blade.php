@@ -36,7 +36,7 @@
        style="margin-top: 30px;
       border-collapse: collapse;
       -webkit-box-shadow: 0px 0px 101px 0px rgba(31, 31, 33, 0.15);
-      box-shadow: 0px 0px 101px 0px rgba(31, 31, 33, 0.15); width: 100%; max-width: 940px;  background: url('img/letter_bg.png') no-repeat bottom center;"
+      box-shadow: 0px 0px 101px 0px rgba(31, 31, 33, 0.15); width: 100%; max-width: 940px;  background: url({{asset('img/letter_bg.png')}}) no-repeat bottom center;"
        bgcolor="#ffffff"
        class="container">
     <tr>
@@ -48,7 +48,7 @@
 
                     </td>
                     <td style="padding-left: 30px;">
-                        <img src="{{asset('img/l2.png')}}" alt="" class=""  style="width:  100% ; float: right; "  >
+                        <img src="{{asset('img/l4.png')}}" alt="" class=""  style="width:  100% ; float: right; "  >
                     </td>
                 </tr>
 
@@ -60,25 +60,28 @@
             <table cellpadding="0" cellspacing="0" border="0"  style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"  class="t-content">
 
                 <tr>
-                    <td style="padding: 30px 40px; background: #f9f9f9; font-family: 'Roboto', sans-serif; line-height: 1.5; "  valign="top" class="">
+                    <td style="padding: 30px 40px; background: #f9f9f9; "  valign="top" class="">
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
-{{--
                             Hello [user_first_name]!
---}}
-                            Hello!
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-                            It looks like you haven’t completed your registration at <a href="{{route('mainHomePage')}}"> HOLM </a>  yet. No one can book you until then.<br>
-                            You will be able to continue sign up until {{$regTime}}.
+                            Don’t forget your booked appointment!<br />
+                            Please don’t forget the following appointment.<br />
+                            [service user name]<br />
+                            [Carer name] <br />
+                            [address] <br />
+                            [date] <br />
+                            [time]
+
                         </p>
 
-                        <a href="{{route('CarerRegistration')}}" class=""
+                        <a href="#" class=""
                            style="text-transform: uppercase;
                   color: #7bb7dc;
                   font-weight: 700;
                   text-decoration: underline;">
-                            Please click here to complete your signing up.
+                            Click here to view your appointment booking
                         </a>
                     </td>
                 </tr>
@@ -95,7 +98,7 @@
                    text-transform: uppercase;
                    font-size: 14px;
                  margin-bottom:0;">
-                            best wishes <br / >
+                            best wishes <br />
                             the holm team
                         </p>
                         <a href="#" class=""
@@ -124,16 +127,11 @@
                                     <img src="{{asset('img/s3.png')}}" alt="">
                                 </a>
                             </li>
-{{--                            <li style="list-style: none;display: inline-block;">
-                                <a href="#" style="margin-left: 10px; color: #a5a7af;">
-                                    <img src="{{asset('img/s4.png')}}" alt="">
-                                </a>
-                            </li>--}}
-                            <li style="list-style: none;display: inline-block;">
-                                <a href="{{route('CarerRegistration')}}" style="margin-left: 10px; color: #a5a7af; ">
-                                    <img src="{{asset('img/s5.png')}}" alt="">
-                                </a>
-                            </li>
+                            {{--                            <li style="list-style: none;display: inline-block;">
+                                                            <a href="#" style="margin-left: 10px; color: #a5a7af;">
+                                                                <img src="{{asset('img/s4.png')}}" alt="">
+                                                            </a>
+                                                        </li>--}}
                         </ul>
                     </td>
                 </tr>

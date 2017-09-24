@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Repo;
 use App\CarerReference;
 use App\CarersProfile;
 use App\Http\Requests\CarerRegistrationRequest;
+use App\ServiceUsersProfile;
 use App\User;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
@@ -44,6 +45,7 @@ class CarerRegistration
 
             $currentStep = $this->model->find($user->id)->registration_progress;
 
+        $step = 'Step1_carerRegistration';
 
         switch ($currentStep) {
             case '0' : $step = 'Step1_carerRegistration';break;
@@ -51,6 +53,9 @@ class CarerRegistration
             case '2' : $step = 'Step3_carerRegistration';break;
             case '3' : $step = 'Step4_carerRegistration';break;
             case '4' : $step = 'Step5_carerRegistration';break;
+
+            case '4_1' : $step = 'Step4_1_carerRegistration';break;
+
             case '5' : $step = 'Step5_1_carerRegistration';break;
             case '5_1' : $step = 'Step5_2_carerRegistration';break;
             case '5_2' : $step = 'Step6_carerRegistration';break;
@@ -91,6 +96,7 @@ class CarerRegistration
             case '2' : $nextStep = '2';break;
             case '3' : $nextStep = '3';break;
             case '4' : $nextStep = '4';break;
+            case '4_1' : $nextStep = '4_1';break;
             case '5' : $nextStep = '5';break;
             case '5_1' : $nextStep = '5_1';break;
             case '5_2' : $nextStep = '5_2';break;
@@ -130,6 +136,12 @@ class CarerRegistration
 
         if ($request->input('step')=='5_1' && $carersProfile->criminal_conviction=='Some') { // has some criminal backend
             $carersProfile->registration_progress = '5_2';
+        }
+
+        if ($request->input('step')=='4' &&
+            preg_match('/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',$carersProfile->postcode)!=1
+        ) { // недоступный регион
+            $carersProfile->registration_progress = '4_1';
         }
 
 
@@ -198,9 +210,12 @@ class CarerRegistration
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']],TRUE)) {
             Auth::login($user, true);
 
-            Mail::send(config('settings.frontTheme').'.emails.continue_sign_up_carer', ['userName' => $user->email, 'password' => $request['password']],
-                function ($m) use ($request) {$m->to($request['email'])->subject('Registration');});
 
+
+
+            Mail::send(config('settings.frontTheme').'.emails.continue_sign_up_carer',
+                ['user' => $user, 'password' => $request['password'], 'regTime'=>$user->created_at->addWeek()->format('d/m/Y h:i A')],
+                function ($m) use ($request) {$m->to($request['email'])->subject('Registration on HOLM');});
 
 
 
@@ -210,6 +225,10 @@ class CarerRegistration
     }
 
     private function saveStep4($request) {
+
+
+
+
 
         $this->validate($request, [
             'title' =>
@@ -272,8 +291,11 @@ class CarerRegistration
             'postcode' =>
                 array(
                     'required',
+                    'regex:#^([A-Za-z]{1,2}[0-9]{1,2}) [0-9][A-Za-z]{1,2}$#'
 
-                    'regex:/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',
+
+                    //'regex:/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',
+
                     //'regex:/^(([gG][iI][rR] {0,}0[aA]{2})|(([aA][sS][cC][nN]|[sS][tT][hH][lL]|[tT][dD][c‌​C][uU]|[bB][bB][nN][‌​dD]|[bB][iI][qQ][qQ]‌​|[fF][iI][qQ][qQ]|[p‌​P][cC][rR][nN]|[sS][‌​iI][qQ][qQ]|[iT][kK]‌​[cC][aA]) {0,}1[zZ]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yxA-HK-XY]?[0-9][‌​0-9]?)|(([a-pr-uwyzA‌​-PR-UWYZ][0-9][a-hjk‌​stuwA-HJKSTUW])|([a-‌​pr-uwyzA-PR-UWYZ][a-‌​hk-yA-HK-Y][0-9][abe‌​hmnprv-yABEHMNPRV-Y]‌​))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/', //[0-9][A-Za-z]{1,2}
 
 
@@ -285,25 +307,6 @@ class CarerRegistration
 //[0-9][A-Za-z]{2})$#',
                 )
         ]);
-
-
-        //dd($request->all());
-
-
-/*        $this->validate($request,[
-            'title' => 'required|numeric:1',
-            'first_name' => 'required|string|max:128',
-            'family_name' => 'required|string|max:128',
-            'like_name' => 'required|string|max:128',
-            'gender' => 'required|string|max:14',
-            'mobile_number' => 'required',
-            'address_line1'=>'required|string|max:256',
-            'address_line2' => 'nullable|string|max:256',
-            'town' => 'required|string|max:128',
-            'postcode' => 'required|string|max:32',
-            'DoB'=>'required',
-            'postcode_second_part' => 'nullable|string|max:16',
-        ]);*/
 
 
         $carerProfile = $this->model->findOrFail($request->input('carersProfileID'));
@@ -574,6 +577,9 @@ class CarerRegistration
     }
 
     private function saveStep17($request) {
+
+        //dd($request->all());
+
         $this->validate($request, [
             'name' =>
                 array(
@@ -593,7 +599,7 @@ class CarerRegistration
                     'string',
                     'max:60'
                 ),
-            'mobile_number' =>
+            'phone' =>
                 array(
                     'required',
                     'regex:/^07[0-9]{9}$/',
