@@ -93,6 +93,7 @@ function confirmPass($this){
         $('#password_confirmation').parent().find('span.registrationForm__ico--right').removeClass('registrationForm__ico--wrong');
     }
 }
+
 function checkStrength(password) {
     var strength = 0;
     $('.passStrength').show();
@@ -334,6 +335,17 @@ $(document).ready(function () {
 //         scrollbar: true
 //     });
 
+    $('.onlyNumber').on('keyup',function(){
+        $('.error-onlyNumber').remove();
+        var errorText = '<span class="help-block error-onlyNumber">\n' +
+            '             <strong>Wrong input. Please enter only number</strong>\n' +
+            '          </span>';
+        if(this.value.match(/[^0-9]/g)){
+            $(this).before(errorText);
+            this.value = this.value.replace(/[^0-9]/g, '');
+        }
+    });
+
     // Иван функция уменшает автоматом шрифт у имени пользователя в шапке
     if($('.profileName').lenght>0)
         scale($('.profileName').parent()[0]);
@@ -515,7 +527,7 @@ $(document).ready(function () {
         }
     }
 
-    $("#post_code_profile").on("change",function(e){
+    $("#post_code_profile").on("keyup",function(e){
        var validator = /^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/;
        var text  = $(this).val();
        var $this = $(this);
@@ -531,6 +543,7 @@ $(document).ready(function () {
            error_mark='#post_code_profile';
        }
     });
+
     $(document).on('change','#register_have_car',function () {
         if ($('#register_have_car').val() == "Yes") {
             $('#register_use_car').parent().parent().show();
