@@ -453,4 +453,24 @@ class CarerController extends FrontController
         return response(json_encode(['status' => 'save']), 200);
 
     }
+
+
+    public function getAddress(Request $request){
+        $query = $request->get('query');
+        $url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyDJaLv-6bVXViUGJ_e_-nR5RZlt9GUuC4M&input=".urlencode($query);
+
+        $data= file_get_contents($url);
+        $items=json_decode($data,true);
+        $response=array();
+        $response['query']=$query;
+        foreach ($items['predictions'] as $item){
+            $response['suggestions'][]=array(
+                "value"=>$item['description'],
+                "data"=>$item
+            );
+        }
+
+        return response(json_encode($response),200);
+
+    }
 }
