@@ -920,7 +920,6 @@ $(document).ready(function () {
         params:{query:$('input[name="postcode"]').val()},
         minChars: 1,
         onSelect: function( suggestion ) {
-            console.log(suggestion.data.terms[0].value);
             $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
             $('input[name="town"]').val(suggestion.data.terms[1].value);
             $('input[name="postcode"]').val(suggestion.data.terms[2].value);
