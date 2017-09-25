@@ -515,7 +515,18 @@ $(document).ready(function () {
     });
 
     if($('#driving_license').length>0) {
-        if($('#driving_license').val() == "Yes") {$('.hiding_profile').show();}else{$('.hiding_profile').hide();}
+        if($('#driving_license').val() == "Yes") {
+            $('.hiding_profile').show();
+        }else{
+            $('.hiding_profile').hide();
+        }
+        if($("#type_car_work").val() == 'Yes') {
+            $(".car-block").show();
+            $('#profile_use_car').parent().show();
+        }else{
+            $(".car-block").hide();
+            $('#profile_use_car').parent().hide();
+        }
     }
 
     if($('#register_have_car').length>0) {

@@ -94,7 +94,7 @@
                 </span>
                 </h2>
                 {!! Form::select('have_car',['Yes'=>'Car for work','No'=>'Do not have a car'],
-null,['class'=>'profileField__select','id'=>'type_car_work']) !!}
+null,['class'=>'profileField__select','id'=>'type_car_work','placeholder'=>'Please select']) !!}
 
                 {{--                <select class="profileField__select ">
                                     <option value="Flat">Car for work</option>
