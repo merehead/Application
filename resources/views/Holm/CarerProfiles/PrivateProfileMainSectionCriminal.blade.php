@@ -28,7 +28,7 @@
                   Have up to date DBS certificate
                 </span>
                 </h2>
-                {!! Form::select('DBS',['Yes'=>'Have an up to date DBS','No'=>'Have not a DBS'],null,['id'=>'main-if','class'=>'profileField__select profileField__select--greyBg','placeholder'=>'Please select','readonly','data-edit'=>'false']) !!}
+                {!! Form::select('DBS',['Yes'=>'Have up to date DBS certificate','No'=>'Have not a DBS'],null,['id'=>'main-if','class'=>'profileField__select profileField__select--greyBg','placeholder'=>'Please select','readonly','data-edit'=>'false']) !!}
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Have an up to date DBS</option>
                 </select>--}}
