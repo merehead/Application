@@ -58,22 +58,11 @@
             <p class="userRating__name">
                 <span>Punctuality</span>
             </p>
-            <div class="profileRating ">
-<span class="profileRating__item ">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item ">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item ">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item ">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item ">
-<i class="fa fa-heart"></i>
-</span>
+            <div class="profileRating "><span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
             </div>
         </div>
         <div class="userRating__item">
@@ -82,21 +71,11 @@
                 <span>Friendliness</span>s
             </p>
             <div class="profileRating ">
-<span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
             </div>
         </div>
         <div class="userRating__item">
@@ -105,21 +84,11 @@
                 <span>Communication</span>
             </p>
             <div class="profileRating ">
-<span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item">
-<i class="fa fa-heart"></i>
-</span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
             </div>
         </div>
         <div class="userRating__item">
@@ -128,21 +97,11 @@
                 <span>Performance</span>
             </p>
             <div class="profileRating ">
-<span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item">
-<i class="fa fa-heart"></i>
-</span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
             </div>
         </div>
     </div>
@@ -157,6 +116,7 @@
         {{$carerProfile->description_yourself}}
     </p>
 </div>
+
 <div class="profileExtraInfo">
     <h2 class="profileTitle">
         QUALIFICATIONS
@@ -183,7 +143,7 @@
 
     </div>
 </div>
-
+@if($typeCare->count()!=0)
 <div class="profileExtraInfo">
     <h2 class="profileTitle">
         TYPE OF CARE
@@ -205,7 +165,7 @@
         </div>
     </div>
 </div>
-
+@endif
 <div class="profileExtraInfo">
     <h2 class="profileTitle">
         ADDITIONAL
@@ -229,7 +189,7 @@
     </div>
 </div>
 
-
+@if($languages->count()!=0)
 <div class="profileExtraInfo">
     <h2 class="profileTitle">
         Languages
@@ -247,39 +207,13 @@
                     </h2>
                 @endforeach
 
-                <!-- <h2>
-                Spanish
-                </h2>
-                <h2>
-                German
-                </h2>
-                </div>
-                <div class="advantageColumn centerText">
-                <h2>
-                English
-                </h2>
-                <h2>
-                Spanish
-                </h2>
-                <h2>
-                German
-                </h2>
-                </div>
-                <div class="advantageColumn rightText">
-                <h2>
-                English
-                </h2>
-                <h2>
-                Spanish
-                </h2>
-                <h2>
-                German
-                </h2>-->
+
             </div>
 
         </div>
     </div>
 </div>
+@endif
 
 <div class="profileExtraInfo">
     <h2 class="profileTitle">
