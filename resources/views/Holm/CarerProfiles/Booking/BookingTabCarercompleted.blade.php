@@ -54,7 +54,7 @@
                 </a>
                 <div class="bookInfo__text">
                     <p><a href="Service_user_Public_profile_page.html">bob m.</a> booked you</p>
-                    <a href="NewAnAppointment_Completed.html" class="">view details</a>
+                    <a href="/carer/appointment/23" class="">view details</a>
                 </div>
 
             </div>
