@@ -403,6 +403,9 @@ span.charsLeft{
     transition: right 0.2s;
 }
 
-input[data-limit]{
-
+.advantageColumn p {
+    font-weight: 600;
+    font-size: .95em;
+    margin-bottom: 7px;
+    padding-left: 7px;
 }
