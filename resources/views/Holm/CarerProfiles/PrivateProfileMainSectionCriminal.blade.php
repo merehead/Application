@@ -66,7 +66,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','readonly',
                 Using the new DBS update service
                 </span>
                 </h2>
-                {!! Form::select('DBS_use',['Yes'=>'Use the new DBS update service','No'=>'Do not use the new DBS update service'],null,['class'=>'profileField__select profileField__select--greyBg','placeholder'=>'Please select']) !!}
+                {!! Form::select('DBS_use',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select profileField__select--greyBg','placeholder'=>'Please select']) !!}
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Use the new DBS update service</option>
                 </select>--}}
