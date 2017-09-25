@@ -103,54 +103,48 @@ class CarerController extends FrontController
         $this->vars = array_add($this->vars, 'footer', $footer);
         $this->vars = array_add($this->vars, 'modals', $modals);
 
-/*        if (!$this->user) {
-            return \redirect('welcome-carer');
-            //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
-        } else {*/
 
-            $carerProfile = CarersProfile::findOrFail($user_id);
+        $carerProfile = CarersProfile::findOrFail($user_id);
 
-            if ($carerProfile->registration_progress != '20') {
-                return redirect()->action('CarerRegistrationController@index');
-            }
-            $this->vars = array_add($this->vars, 'user', $this->user);
-            $this->vars = array_add($this->vars, 'carerProfile', $carerProfile);
-            $postcodes = Postcode::all()->pluck('name', 'id')->toArray();
-            $this->vars = array_add($this->vars, 'postcodes', $postcodes);
-            $typeCare = $carerProfile->AssistantsTypes()->get();
-            $this->vars = array_add($this->vars, 'typeCare', $typeCare);
-            $workingTimes = $carerProfile->WorkingTimes()->get();
-            $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
-            $languages = $carerProfile->Languages()->get();
-            $this->vars = array_add($this->vars, 'languages', $languages);
+        $this->vars = array_add($this->vars, 'user', $this->user);
+        $this->vars = array_add($this->vars, 'carerProfile', $carerProfile);
+        $postcodes = Postcode::all()->pluck('name', 'id')->toArray();
+        $this->vars = array_add($this->vars, 'postcodes', $postcodes);
+        $typeCare = $carerProfile->AssistantsTypes()->get();
+        $this->vars = array_add($this->vars, 'typeCare', $typeCare);
+        $workingTimes = $carerProfile->WorkingTimes()->get();
+        $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
+        $languages = $carerProfile->Languages()->get();
+        $this->vars = array_add($this->vars, 'languages', $languages);
 
-            $documents_type = array(
-                'nvq',
-                'care_certificate',
-                'health_and_social',
-                'training_certificate',
-                'additional_training_course',
-                'other_relevant_qualification'
-            );
-            $documents_name = array(
-                'nvq' => 'NVQ',
-                'care_certificate' => 'CARE_CERTIFICATE',
-                'health_and_social' => 'Health and social',
-                'training_certificate' => 'Training certificate',
-                'additional_training_course' => 'Additional training course',
-                'other_relevant_qualification' => 'Other relevant qualification'
-            );
-            foreach ($documents_type as $dt) {
-                $documents[$dt] = Document::where('user_id', '=', $user_id)->where('type', '=', $dt)->get(['title']);
-            }
-            $this->vars = array_add($this->vars, 'documents', $documents);
-            $this->vars = array_add($this->vars, 'documents_name', $documents_name);
-            $this->vars = array_add($this->vars, 'documents_type', $documents_type);
+        $times = array(2=>array(5,8,11,14,17,20,23),
+            3=>array(6,9,12,15,18,21,24),
+            4=>array(7,10,13,16,19,22,25));
+        $this->vars = array_add($this->vars, 'times', json_encode($times));
+        $documents_type = array(
+            'nvq',
+            'care_certificate',
+            'health_and_social',
+            'training_certificate',
+            'additional_training_course',
+            'other_relevant_qualification'
+        );
+        $documents_name = array(
+            'nvq' => 'NVQ',
+            'care_certificate' => 'CARE CERTIFICATE',
+            'health_and_social' => 'Health and social',
+            'training_certificate' => 'Training certificate',
+            'additional_training_course' => 'Additional training course',
+            'other_relevant_qualification' => 'Other relevant qualification'
+        );
+        foreach ($documents_type as $dt) {
+            $documents[$dt] = Document::where('user_id', '=', $user_id)->where('type', '=', $dt)->get(['title']);
+        }
+        $this->vars = array_add($this->vars, 'documents', $documents);
+        $this->vars = array_add($this->vars, 'documents_name', $documents_name);
+        $this->vars = array_add($this->vars, 'documents_type', $documents_type);
 //            dd($documents);
-            $this->content = view(config('settings.frontTheme') . '.CarerProfiles.PublicProfile')->with($this->vars)
-                ->render();
-
-        //}
+        $this->content = view(config('settings.frontTheme') . '.CarerProfiles.PublicProfile')->with($this->vars)->render();
 
         return $this->renderOutput();
     }
@@ -280,6 +274,9 @@ class CarerController extends FrontController
             }
             if (isset($input['national_insurance_number'])) {
                 $carerProfiles->national_insurance_number = $input['national_insurance_number'];
+            }
+            if (isset($input['like_name'])) {
+                $carerProfiles->like_name = $input['like_name'];
             }
 
             $carerProfiles->save();

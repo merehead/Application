@@ -123,3 +123,7 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
 Route::get('/test_document_upload', function (){
     return view('test_document_upload');
 });
+
+Route::get('/appan', function (){
+    return view('resources/views/Holm/purchaserProfiles/Booking/NewAnAppointment');
+});

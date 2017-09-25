@@ -1,3 +1,35 @@
+<script>
+    var times = [];
+
+    times[2] = [5, 8, 11, 14, 17, 20, 23];
+    times[3] = [6, 9, 12, 15, 18, 21, 24];
+    times[4] = [7, 10, 13, 16, 19, 22, 25];
+    $(document).ready(function () {
+        if($('p#2').length>0){
+            console.log('df');
+            $.each(times[2], function( index, value ) {
+
+                $('p#'+value).hide();
+            });
+        }
+         if($('p#3').length>0){
+            console.log('df');
+            $.each(times[3], function( index, value ) {
+
+                $('p#'+value).hide();
+            });
+        }
+         if($('p#4').length>0){
+            console.log('df');
+            $.each(times[4], function( index, value ) {
+
+                $('p#'+value).hide();
+            });
+        }
+
+    });
+</script>
+
 <div class="profilePricing">
     <p class="hourPrice hourPrice">
 <span class="hourPrice__price hourPrice__price--big">
@@ -22,61 +54,14 @@
         Availability
     </h2>
 </div>
+
 <div class="availability">
     @foreach ($workingTimes as $item)
-        <p class="availability__item availability__item--full">
+        <p class="availability__item availability__item--full" id="{{$item->id}}">
             <i class="fa fa-check"></i>
             {{$item->name}}
         </p>
     @endforeach
-
-    <!--
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Monday afternoon
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Monday night
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Tuesday night
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Wednesday morning
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Thursday morning
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Thursday afternoon
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Every night
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Tuesday morning
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Wednesday afternoon
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Wednesday afternoon
-    </p>
-    <p class="availability__item availability__item--full">
-        <i class="fa fa-check"></i>
-        Availability on bank holidays
-    </p>
-    -->
-
 </div>
 <div class="profileSide__title">
     <h2 class="profileTitle">

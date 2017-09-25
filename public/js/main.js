@@ -552,6 +552,18 @@ $(document).ready(function () {
             $(uc).hide();
         }
     });
+
+    $('.text-limit').parent().css('margin-right',0);
+    $('.text-limit').parent().css('position','relative');
+
+    $('.text-limit').on('keyup',function () {
+
+        if($(this).parent().find('#charsLeft').length==0)
+        $(this).after('<span class="charsLeft" id="charsLeft"></span>');
+        var limit = $(this).attr('data-limit');
+        if(limit<=0) limit =50;
+        $(this).limit(limit,'#charsLeft');
+    });
 //>>>>Иван 20170921 для приватного профиля пользователя
     $(document).on('change','.profileField__select.serviceUserProfile',function () {
 
