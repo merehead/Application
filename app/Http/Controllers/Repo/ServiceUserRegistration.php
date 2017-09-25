@@ -1063,7 +1063,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'prepare_food' => 'required|in:"Yes","No","Sometimes"',
-            'assistance_with_preparing_food' => 'required_if:prepare_food,"Yes","Sometimes"|nullable||in:"Yes","No","Sometimes"',
+            'assistance_with_preparing_food' => 'required_if:prepare_food,"No","Sometimes"|nullable||in:"Yes","No","Sometimes"',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
