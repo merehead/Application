@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
-class ForgotPasswordController extends Controller
+class ForgotPasswordController extends FrontController
 {
     /*
     |--------------------------------------------------------------------------
@@ -28,5 +29,27 @@ class ForgotPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->title ='Holm - Reset Password';
+        $this->template = config('settings.frontTheme').'.templates.homePage';
+    }
+
+    public function showLinkRequestForm()
+    {
+        $this->title ='Holm - Reset Password';
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
+        $this->vars = array_add($this->vars,'title', $this->title);
+
+        $this->content = view('auth.passwords.email',$this->vars)->render();
+        $this->vars = array_add($this->vars,'content',$this->content);
+        return $this->renderOutput();
+
     }
 }
