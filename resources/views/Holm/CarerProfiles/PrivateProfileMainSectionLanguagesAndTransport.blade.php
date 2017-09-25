@@ -64,7 +64,7 @@
                 Other languages   </span>
                     </h2>
                     {!! Form::text('language_additional',null,['class'=>'profileField__input','placeholder'=>'Details','maxlength'=>'250']) !!}
-                    {{--      <input type="text" class="profileField__input" placeholder="Details">--}}
+                    {{--      <input type="text" class="profileField__input" noPlaceholder="Details">--}}
                 </div>
             </div>
 
@@ -126,7 +126,7 @@ null,['class'=>'profileField__select','id'=>'type_car_work']) !!}
                 </span>
                 </h2>
                 {!! Form::select('use_car',['Yes'=>'Transport clients','No'=>'Can not transport clients'],
-null,['class'=>'profileField__select','placeholder'=>'Please select','id'=>'profile_use_car']) !!}
+null,['class'=>'profileField__select','noPlaceholder'=>'Please select','id'=>'profile_use_car']) !!}
 
 
                 {{--                <select class="profileField__select ">
@@ -170,7 +170,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','id'=>'prof
                 </span>
                 </h2>
                 {!! Form::text('DBS_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Driving licence number','readonly','data-edit'=>'false']) !!}
-                {{--<input type="text" class="profileField__input profileField__input--greyBg" placeholder="UK\EEA Driving licence Number">--}}
+                {{--<input type="text" class="profileField__input profileField__input--greyBg" noPlaceholder="UK\EEA Driving licence Number">--}}
             </div>
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
@@ -180,7 +180,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','id'=>'prof
                 </h2>
 
                 @if($carerProfile->driver_licence_valid_until === "01/01/1970")
-                    <input name="driver_licence_valid_until" id="datepicker_driver_licence" class="profileField__input" placeholder="Valid until date" type="text">
+                    <input name="driver_licence_valid_until" id="datepicker_driver_licence" class="profileField__input" noPlaceholder="Valid until date" type="text">
                 @else
                     {!! Form::text('driver_licence_valid_until',null,['id'=>'datepicker_driver_licence','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
                 @endif
@@ -216,7 +216,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','id'=>'prof
                 </span>
                 </h2>
                 {!! Form::text('car_insurance_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Car insurance number','readonly','data-edit'=>'false']) !!}
-               {{-- <input type="text" class="profileField__input profileField__input--greyBg" placeholder="Car insurance number">--}}
+               {{-- <input type="text" class="profileField__input profileField__input--greyBg" noPlaceholder="Car insurance number">--}}
             </div>
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">

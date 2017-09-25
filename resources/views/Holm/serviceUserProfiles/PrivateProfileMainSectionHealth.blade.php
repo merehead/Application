@@ -22,7 +22,7 @@
 
                         {!! Form::checkbox('serviceUserCondition['.$serviceUserCondition->id.']', null,
                         ($serviceUsersProfile->ServiceUserConditions->contains('id', $serviceUserCondition->id)? 1 : null),
-                        array('placeholder'=>'1','class' => 'checkboxNew checkHealthCondition','id'=>'serviceUserCondition'.$serviceUserCondition->id)) !!}
+                        array('noplaceholder'=>'1','class' => 'checkboxNew checkHealthCondition','id'=>'serviceUserCondition'.$serviceUserCondition->id)) !!}
                         <label for="serviceUserCondition{{$serviceUserCondition->id}}"><span>{{$serviceUserCondition->name}}</span></label>
 
                     </div>
@@ -58,7 +58,7 @@
                Has problems understanding other people
               </span>
             </h2>
-            {!! Form::select('comprehension',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('comprehension',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('comprehension'))
                 <span class="help-block"><strong>{{ $errors->first('comprehension') }}</strong></span>
             @endif
@@ -81,7 +81,7 @@
                Has difficulties understanding or  communicating with other
               </span>
             </h2>
-            {!! Form::select('communication',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('communication',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('communication'))
                 <span class="help-block"><strong>{{ $errors->first('communication') }}</strong></span>
             @endif
@@ -106,7 +106,7 @@
                Needs help with speech
               </span>
             </h2>
-            {!! Form::select('speech',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('speech',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('speech'))
                 <span class="help-block"><strong>{{ $errors->first('speech') }}</strong></span>
             @endif
@@ -130,7 +130,7 @@
                Has serious impediments seeing
               </span>
             </h2>
-            {!! Form::select('vision',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('vision',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('vision'))
                 <span class="help-block"><strong>{{ $errors->first('vision') }}</strong></span>
             @endif
@@ -154,7 +154,7 @@
                Has serious impediments hearing
               </span>
             </h2>
-            {!! Form::select('hearing',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('hearing',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('hearing_detail'))
                 <span class="help-block"><strong>{{ $errors->first('hearing_detail') }}</strong></span>
             @endif
@@ -183,7 +183,7 @@
                Requires assistance in taking medication / treatments
               </span>
             </h2>
-            {!! Form::select('assistance_in_medication',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('assistance_in_medication',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('assistance_in_medication'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_in_medication') }}</strong></span>
             @endif
@@ -215,7 +215,7 @@
                Has allergies to food / medication / anything else
               </span>
             </h2>
-            {!! Form::select('have_any_allergies',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('have_any_allergies',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('have_any_allergies'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_in_medication') }}</strong></span>
             @endif
@@ -246,7 +246,7 @@
                Has  risk of developing pressure sores on their skin
               </span>
             </h2>
-            {!! Form::select('skin_scores',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('skin_scores',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('skin_scores'))
                 <span class="help-block"><strong>{{ $errors->first('skin_scores') }}</strong></span>
             @endif
@@ -269,7 +269,7 @@
                Needs assistance with changing wound dressings
               </span>
             </h2>
-            {!! Form::select('assistance_with_dressings',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('assistance_with_dressings',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('assistance_with_dressings'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_dressings') }}</strong></span>
             @endif
@@ -301,7 +301,7 @@
               </span>
             </h2>
 
-            {!! Form::select('help_with_mobility',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('help_with_mobility',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('help_with_mobility'))
                 <span class="help-block"><strong>{{ $errors->first('help_with_mobility') }}</strong></span>
             @endif
@@ -327,7 +327,7 @@
                Needs help moving around home
               </span>
             </h2>
-            {!! Form::select('mobility_home',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('mobility_home',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('mobility_home'))
                 <span class="help-block"><strong>{{ $errors->first('mobility_home') }}</strong></span>
             @endif
@@ -353,7 +353,7 @@
               </span>
             </h2>
 
-            {!! Form::select('mobility_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('mobility_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('mobility_bed'))
                 <span class="help-block"><strong>{{ $errors->first('mobility_bed') }}</strong></span>
             @endif
@@ -380,7 +380,7 @@
                Has  a history of falls
               </span>
             </h2>
-            {!! Form::select('history_of_falls',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('history_of_falls',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('history_of_falls'))
                 <span class="help-block"><strong>{{ $errors->first('history_of_falls') }}</strong></span>
             @endif
@@ -405,7 +405,7 @@
                Needs help going shopping, or to other local facilities / events
               </span>
             </h2>
-            {!! Form::select('mobility_shopping',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('mobility_shopping',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('mobility_shopping'))
                 <span class="help-block"><strong>{{ $errors->first('mobility_shopping') }}</strong></span>
             @endif
@@ -437,7 +437,7 @@
                Requires assistance with eating / drinking
               </span>
             </h2>
-            {!! Form::select('assistance_with_eating',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('assistance_with_eating',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('assistance_with_eating'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_eating') }}</strong></span>
             @endif
@@ -462,7 +462,7 @@
                Can prepare food for themselves
               </span>
             </h2>
-            {!! Form::select('prepare_food',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('prepare_food',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('prepare_food'))
                 <span class="help-block"><strong>{{ $errors->first('prepare_food') }}</strong></span>
             @endif
@@ -487,7 +487,7 @@
                Would  like assistance with preparing meals
               </span>
             </h2>
-            {!! Form::select('assistance_with_preparing_food',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('assistance_with_preparing_food',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('assistance_with_preparing_food'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_preparing_food') }}</strong></span>
             @endif
@@ -513,7 +513,7 @@
                Has special nutritional or belief based dietary requirements
               </span>
             </h2>
-            {!! Form::select('dietary_requirements',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('dietary_requirements',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('dietary_requirements'))
                 <span class="help-block"><strong>{{ $errors->first('dietary_requirements') }}</strong></span>
             @endif
@@ -538,7 +538,7 @@
               Has other special dietary requirements
               </span>
             </h2>
-            {!! Form::select('special_dietary_requirements',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('special_dietary_requirements',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('special_dietary_requirements'))
                 <span class="help-block"><strong>{{ $errors->first('special_dietary_requirements') }}</strong></span>
             @endif
@@ -571,7 +571,7 @@
                Requires assistance in getting dressed / bathing or toileting
               </span>
             </h2>
-            {!! Form::select('assistance_with_personal_hygiene',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('assistance_with_personal_hygiene',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('assistance_with_personal_hygiene'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_personal_hygiene') }}</strong></span>
             @endif
@@ -596,7 +596,7 @@
                Needs assistance in choosing appropriate clothes
               </span>
             </h2>
-            {!! Form::select('appropriate_clothes',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('appropriate_clothes',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('appropriate_clothes'))
                 <span class="help-block"><strong>{{ $errors->first('appropriate_clothes') }}</strong></span>
             @endif
@@ -621,7 +621,7 @@
                Needs assistance getting dressed / undressed
               </span>
             </h2>
-            {!! Form::select('assistance_getting_dressed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('assistance_getting_dressed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('assistance_getting_dressed'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_getting_dressed') }}</strong></span>
             @endif
@@ -647,7 +647,7 @@
                Needs assistance with bathing / showering
               </span>
             </h2>
-            {!! Form::select('assistance_with_bathing',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('assistance_with_bathing',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('assistance_with_bathing'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_bathing') }}</strong></span>
             @endif
@@ -672,7 +672,7 @@
               Needs  assistance managing their toilet needs
               </span>
             </h2>
-            {!! Form::select('managing_toilet_needs',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('managing_toilet_needs',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('managing_toilet_needs'))
                 <span class="help-block"><strong>{{ $errors->first('managing_toilet_needs') }}</strong></span>
             @endif
@@ -696,7 +696,7 @@
               Needs help mobilising themselves to the toilet
               </span>
             </h2>
-            {!! Form::select('mobilising_to_toilet',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('mobilising_to_toilet',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('mobilising_to_toilet'))
                 <span class="help-block"><strong>{{ $errors->first('mobilising_to_toilet') }}</strong></span>
             @endif
@@ -720,7 +720,7 @@
               Needs help cleaning themselves when using the toilet
               </span>
             </h2>
-            {!! Form::select('cleaning_themselves',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('cleaning_themselves',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('cleaning_themselves'))
                 <span class="help-block"><strong>{{ $errors->first('cleaning_themselves') }}</strong></span>
             @endif
@@ -744,7 +744,7 @@
               Has incontinence
               </span>
             </h2>
-            {!! Form::select('have_incontinence',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('have_incontinence',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('have_incontinence'))
                 <span class="help-block"><strong>{{ $errors->first('have_incontinence') }}</strong></span>
             @endif
@@ -768,7 +768,7 @@
               Needs help in choosing incontinence products
               </span>
             </h2>
-            {!! Form::select('choosing_incontinence_products',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('choosing_incontinence_products',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('choosing_incontinence_products'))
                 <span class="help-block"><strong>{{ $errors->first('choosing_incontinence_products') }}</strong></span>
             @endif
@@ -808,7 +808,7 @@
               Has own supply of incontinence wear
               </span>
             </h2>
-            {!! Form::select('incontinence_wear',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
+            {!! Form::select('incontinence_wear',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
             @if ($errors->has('incontinence_wear'))
                 <span class="help-block"><strong>{{ $errors->first('incontinence_wear') }}</strong></span>
             @endif

@@ -66,7 +66,7 @@
             <div class="profileField profileField--half">
 
                 {!! Form::select('work_at_holiday',['Yes'=>'Work on bank holidays','No'=>'Can not work bank holidays'],
-null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+null,['class'=>'profileField__select','noPlaceholder'=>'Please select']) !!}
 
             </div>
 
@@ -118,7 +118,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
             </h2>
 
             {!! Form::select('work_with_pets',['Yes'=>'Yes','No'=>'No','It Depends'=>'It Depends'],
-null,['id'=>'depend-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+null,['id'=>'depend-if','class'=>'formSelect','noPlaceholder'=>'Please select']) !!}
 
         </div>
         <div class="profileField profileField--two-thirds depend_hiding" style="display: none">
