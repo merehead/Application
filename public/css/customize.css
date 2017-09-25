@@ -414,3 +414,23 @@ a.blogFilter__item.active {
 
 button:disabled { background: #d7d7d7; color: #f8f4f4;}
 button:disabled:hover { background: #d7d7d7; color: #f8f4f4;}
+
+.carers-below{
+  margin: 0 auto 75px auto!important;
+}
+.appointmentSliderWrap .sliderContainer{
+  height: auto;
+}
+.appointmentSlider .owl-stage{
+  display: flex;
+  justify-content: space-between;
+}
+.appointmentSlider .owl-item{
+  margin: 0 10px;
+}
+.singleAppointment{
+  width: auto
+}
+.singleAppointment__header h2{
+  width: 100%
+}

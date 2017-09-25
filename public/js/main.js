@@ -520,6 +520,37 @@ $(document).ready(function () {
       e.preventDefault()
     })
 
+    /*-------------- Home page slider (popular carers) ------------*/
+    if ($('div').is('.appointmentSlider')) {
+        $('.appointmentSlider').owlCarousel({
+            items: 3,
+            loop: true,
+            dots: true,
+            nav: true,
+            navText: [
+              `<a href="#theCarousel" data-slide="prev" class="sliderControl sliderControl--left centeredLink">
+                <i class="fa fa-angle-left"></i>
+              </a>`,
+              `<a href="#theCarousel" data-slide="next" class="sliderControl sliderControl--right centeredLink">
+                <i class="fa fa-angle-right"></i>
+              </a>`
+            ],
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplayHoverPause: true,
+            responsive:{
+               0    : { items:1 },
+               600  : { items:1 },
+               992  : { items:2 },
+               1200  : { items:3 }
+           }
+        });
+    }
+
+    $('.sliderControl').on('click', function (e) {
+      e.preventDefault()
+    })
+
     /*-------------- Home/welcome-carer page slider (recalls) ------------*/
     // Carousel
     $('.multi-item-carousel').carousel({
