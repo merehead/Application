@@ -62,54 +62,6 @@
             {{$item->name}}
         </p>
     @endforeach
-
-    <!--
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Monday afternoon
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Monday night
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Tuesday night
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Wednesday morning
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Thursday morning
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Thursday afternoon
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Every night
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Tuesday morning
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Wednesday afternoon
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Wednesday afternoon
-    </p>
-    <p class="availability__item availability__item--full">
-        <i class="fa fa-check"></i>
-        Availability on bank holidays
-    </p>
-    -->
-
 </div>
 <div class="profileSide__title">
     <h2 class="profileTitle">
