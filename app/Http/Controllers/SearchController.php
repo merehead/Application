@@ -52,7 +52,7 @@ class SearchController extends FrontController
         if ($request->get('typeCare')) {
             $where .= 'inner join carer_profile_assistance_type cs on cs.carer_profile_id = cp.id and cs.assistance_types_id in ('.implode(',',array_keys($request->get('typeCare'))).')';
         }
-        $where .=' where 1';
+        $where .=' where registration_progress=20';
         if ($request->get('gender'))
             $where .= " and cp.gender='" . array_keys($request->get('gender'))[0] . "'";
 
@@ -68,56 +68,9 @@ class SearchController extends FrontController
         $sql = 'select cp.id,first_name,family_name,sentence_yourself,town from carers_profiles cp '.$where;
         $carerResult = DB::select($sql);
 
-       // dd($request->all(),$sql,$results);
-
-//        $carerResult = CarersProfile::with([
-//            'ServicesTypes', 'Languages'])->get();
-//        if ($request->get('have_car'))
-//            $carerResult = $carerResult->where('have_car', '=', 'Yes');
-//        if ($request->get('work_with_pets'))
-//            $carerResult = $carerResult->whereNotIn('work_with_pets', 'No');
-//        if ($request->get('gender'))
-//            $carerResult = $carerResult->whereIn('gender', array_keys($request->get('gender')));
-//
-//        if ($request->get('language')) {
-//
-//            $where .= 'inner join carer_profile_language cl on cl.carer_profile_id = cp.id and cl.language_id in (1,2)'
-//
-//            $UserId = $users = DB::table('carer_profile_language')->whereIn('language_id', array_keys($request->get('language')))->get(['carer_profile_id as id']);
-//            $arr = collect($UserId)->map(function ($item, $key) {
-//                return $item->id;
-//            })->toArray();
-//            $carerResult = $carerResult->whereIn('id', $arr);
-//        }
-//
-//        if ($request->get('typeCare')) {
-//            $UserId = $users = DB::table('carer_profile_assistance_type')
-//                ->where('assistance_types_id', '=', $request->get('typeCare'))
-//                ->get(['carer_profile_id as id']);
-//
-//            $arr = collect($UserId)->map(function ($item, $key) {
-//                return $item->id;
-//            })->toArray();
-//            $carerResult = $carerResult->whereIn('id', $arr);
-//        }
-//        if ($request->get('typeService')) {
-//            $UserId = $users = DB::table('carer_profile_service_type')
-//                ->where('service_type_id', '=', $request->get('typeService'))
-//                ->get(['carer_profile_id as id']);
-//
-//            $arr = collect($UserId)->map(function ($item, $key) {
-//                return $item->id;
-//            })->toArray();
-//            $carerResult = $carerResult->whereIn('id', $arr);
-//        }
-//        if ($request->get('postCode')) {
-//            $carerResult = $carerResult->where('postcode', '=', $request->get('postCode'));
-//        }
-//
-//        $carerResult = $carerResult->where('gender', '!=', '');
-//        $carerResult = $carerResult->sortBy('created_at');
 
         $start = (($page*$perPage)-$perPage==0)?'1':($page*$perPage)-$perPage;
+        if(count($carerResult)==1)$start=0;
         $this->vars = array_add($this->vars, 'carerResult', array_slice($carerResult,$start,$perPage));
         $this->vars = array_add($this->vars, 'perPage', $perPage);
         $this->vars = array_add($this->vars, 'carerResultCount', count($carerResult));
