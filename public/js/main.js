@@ -846,7 +846,10 @@ $(document).ready(function () {
             arrFilesProfilePhoto[0],
           ).then(function (response) {
             console.log(response)
-          })
+          }).catch(function (error) {
+              resultElement.innerHTML = generateErrorHTMLOutput(error);
+              alert('error');
+          });
         }
 
         if(arrFiles.length > 0){
