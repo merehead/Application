@@ -1334,4 +1334,19 @@ $(document).ready(function () {
       $('.bonusPay-header').attr('style', 'display: block')
     })
 
+
+    // -- PROFILE RATING -------
+
+    $('.profileRating__item').on('click', function() {
+      var raiting = $(this).parent().children()
+      var id = $(this).attr('id').split('_')[1]
+
+      raiting.removeClass('active')
+      $.each(raiting, function(i, elem) {
+        if(i < id){
+          $(this).addClass('active')
+        }
+      })
+    })
+
 });
