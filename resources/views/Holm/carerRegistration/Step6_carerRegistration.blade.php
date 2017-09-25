@@ -103,7 +103,7 @@
 
                 <div class="inputWrap">
 
-                    {!! Form::text('DBS_identifier',null,['class'=>'formInput','placeholder'=>'Details']) !!}
+                    {!! Form::text('DBS_identifier',null,['class'=>'formInput','placeholder'=>'Details','maxlength'=>'60']) !!}
                 </div>
                 @if ($errors->has('DBS_identifier'))
                     <span class="help-block">

@@ -107,7 +107,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','readonly',
                 </span>
 
                 </h2>
-                {!! Form::text('DBS_identifier',null,['class'=>'profileField__input','placeholder'=>'DBS certificate number']) !!}
+                {!! Form::text('DBS_identifier',null,['class'=>'profileField__input','placeholder'=>'DBS certificate number','maxlength'=>'20']) !!}
                 {{--<input type="text" class="profileField__input " placeholder="DBS certificate number">--}}
             </div>
             <div class="profileField profileField--full-width">

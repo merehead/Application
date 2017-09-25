@@ -644,13 +644,11 @@ $(document).ready(function () {
         }
     });
 
-    //$('#email').attr('name')
-
     $( "input[maxlength], textarea" ).focus(function() {
         var maxLenght = $( this ).attr('maxlength');
         var currentLength = $( this ).val().length;
         var symbolsLeft = maxLenght - currentLength;
-        $( this ).before('<span class="help-block" style="margin: 0;padding: 0;">Symbols left '+ symbolsLeft +'</span>');
+        $( this ).before('<span class="help-block" style="margin: 0;padding: 0;color: green">Symbols left '+ symbolsLeft +'</span>');
     });
 
     $( "input[maxlength], textarea" ).keyup(function() {
@@ -701,6 +699,19 @@ $(document).ready(function () {
     }
     $("#checkL12").on('click',function(){
         if($("#checkL12").is(':checked')) {
+            $(".language_additional").show();
+        }else{
+            $(".language_additional").hide();
+        }
+    });
+
+    if($("#checkLOTHER").is(':checked')) {
+        $(".language_additional").show();
+    }else{
+        $(".language_additional").hide();
+    }
+    $("#checkLOTHER").on('click',function(){
+        if($("#checkLOTHER").is(':checked')) {
             $(".language_additional").show();
         }else{
             $(".language_additional").hide();

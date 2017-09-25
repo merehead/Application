@@ -38,7 +38,7 @@
                     </h2>
                     <div class="inputWrap">
 
-                        {!! Form::text('DBS_number',null,['class'=>'formInput','placeholder'=>'Driving licence number']) !!}
+                        {!! Form::text('DBS_number',null,['class'=>'formInput','placeholder'=>'Driving licence number','maxlength'=>'20']) !!}
                     </div>
 
                     @if ($errors->has('DBS_number'))
@@ -134,7 +134,7 @@
                     Car Insurance Policy Number
 
                 </h2>
-                {!! Form::text('car_insurance_number',null,['class'=>'formInput','placeholder'=>'Car insurance number']) !!}
+                {!! Form::text('car_insurance_number',null,['class'=>'formInput','placeholder'=>'Car insurance number','maxlength'=>'20']) !!}
                 @if ($errors->has('car_insurance_number'))
                     <span class="help-block">
                                         <strong>{{ $errors->first('car_insurance_number') }}</strong>
