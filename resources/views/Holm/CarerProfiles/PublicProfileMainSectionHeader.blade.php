@@ -8,7 +8,7 @@
             Carers
         </a>
         <span class="breadcrumbs__arrow">&gt;</span>
-        <a href="Carer_Public_profile_page.html" class="breadcrumbs__item">
+        <a href="{{route('carerPublicProfile',[$carerProfile->id])}}" class="breadcrumbs__item">
 
             {!! $carerProfile->first_name.' &nbsp '.mb_substr($carerProfile->family_name,0,1).'.'!!}
 
