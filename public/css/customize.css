@@ -395,3 +395,14 @@ a.sortLink__item .active {
     text-decoration: none;
 
 }
+
+span.charsLeft{
+    position: absolute;
+    top: 55px;
+    right: 5px;
+    transition: right 0.2s;
+}
+
+input[data-limit]{
+
+}

@@ -150,7 +150,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
     <div class="profileRow">
 
         <div class="profileField profileField--full-width">
-            {!! Form::text('sentence_yourself',null,['class'=>'profileField__input','maxlength'=>"50"]) !!}
+            {!! Form::text('sentence_yourself',null,['class'=>'profileField__input','maxlength'=>512]) !!}
             {{--
                         <input type="text" class="profileField__input" placeholder="{{$carerProfile->sentence_yourself}}">
             --}}
@@ -170,7 +170,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
                  <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                    How should the carer enter the Service User’s home?    </span>
                </h2>-->
-            {!! Form::textarea('description_yourself',null,['class'=>'formArea','placeholder'=>'Your text']) !!}
+            {!! Form::textarea('description_yourself',null,['class'=>'formArea','maxlength'=>1024,'placeholder'=>'Your text']) !!}
 
             {{--
                         <textarea class="profileField__area" placeholder="{{$carerProfile->description_yourself}}"></textarea>
