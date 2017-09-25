@@ -30,7 +30,7 @@
                         Please mention what requirements (we will contact you for greater detail at a later date). <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::textarea('preferences_of_food_requirements',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('preferences_of_food_requirements',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('preferences_of_food_requirements'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('preferences_of_food_requirements') }}</strong>

@@ -32,7 +32,7 @@
                         Please give further details <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::textarea('particular_likes_details',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('particular_likes_details',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('particular_likes_details'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('particular_likes_details') }}</strong>

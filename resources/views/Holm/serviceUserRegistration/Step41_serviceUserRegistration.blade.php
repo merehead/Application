@@ -32,7 +32,7 @@
                         Please briefly explain what assistance is needed - (we will contact you for greater detail at a later date). <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::textarea('assistance_with_eating_detail',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('assistance_with_eating_detail',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('assistance_with_eating_detail'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('assistance_with_eating_detail') }}</strong>

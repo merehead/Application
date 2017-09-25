@@ -30,7 +30,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('kind_of_incontinence',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('kind_of_incontinence',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('kind_of_incontinence'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('kind_of_incontinence') }}</strong>
@@ -57,7 +57,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('incontinence_products_stored',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('incontinence_products_stored',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('incontinence_products_stored'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('incontinence_products_stored') }}</strong>

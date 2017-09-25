@@ -229,7 +229,7 @@ class ServiceUserPrivateProfileController extends FrontController
 
         if ($input['stage'] == 'oneLineAbove') {
             $this->validate($request, [
-                'one_line_about' => 'nullable|string|max:250',
+                'one_line_about' => 'nullable|string|max:255',
             ]);
 
             $depart = "#serviceGeneralone";
@@ -268,19 +268,19 @@ class ServiceUserPrivateProfileController extends FrontController
                 'assistance_keeping' => 'nullable|in:"Yes","No","Sometimes"',
                 'move_available' => 'required|in:"Yes","No","Sometimes"',
                 'assistance_moving' => 'nullable|in:"Yes","No","Sometimes"',
-                'assistance_moving_details' => 'nullable|string|max:250',
-                'carer_enter' => 'nullable|string|max:500',
-                'other_detail' => 'nullable|string|max:500',
+                'assistance_moving_details' => 'nullable|string|max:255',
+                'carer_enter' => 'nullable|string|max:510',
+                'other_detail' => 'nullable|string|max:510',
                 'anyone_else_live' => 'nullable|in:"Yes","No","Sometimes"',
-                'anyone_detail' => 'nullable|string|max:250',
+                'anyone_detail' => 'nullable|string|max:255',
                 'anyone_friendly' => 'nullable|in:"Yes","No","Sometimes","Normally"',
                 'own_pets' => 'nullable|in:"Yes","No","Sometimes"',
-                'pet_detail' => 'nullable:own_pets,"Yes","Sometimes"|string|max:250|nullable',
+                'pet_detail' => 'nullable:own_pets,"Yes","Sometimes"|string|max:255|nullable',
                 'pet_friendly' => 'nullable:own_pets,"Yes","Sometimes"|in:"Yes","No","Sometimes","Normally"|nullable',
                 'social_interaction' => 'nullable|in:"Yes","No","Sometimes"',
                 'visit_for_companionship' => 'nullable|in:"Yes","No","Sometimes"',
-                'companionship_interaction_details' => 'nullable|string|max:250',
-                'companionship_visit_details' => 'nullable|string|max:250',
+                'companionship_interaction_details' => 'nullable|string|max:255',
+                'companionship_visit_details' => 'nullable|string|max:255',
             ]);
 
             $depart = "#home";
@@ -317,13 +317,13 @@ class ServiceUserPrivateProfileController extends FrontController
 
             $this->validate($request,[
                 'getting_dressed_for_bed' => 'nullable|in:"Yes","No","Sometimes"',
-                'dressed_for_bed_details' => 'nullable|string|max:250',
+                'dressed_for_bed_details' => 'nullable|string|max:255',
                 'time_to_bed' => 'nullable|string|max:16',
                 'keeping_safe_at_night' => 'nullable|in:"Yes","No","Sometimes"',
-                'keeping_safe_at_night_details' => 'nullable|string|max:250',
+                'keeping_safe_at_night_details' => 'nullable|string|max:255',
                 'time_to_night_helping' => 'nullable|string|max:16',
                 'toilet_at_night' => 'nullable|in:"Yes","No","Sometimes"',
-                'toiled_help_details' => 'nullable|string|max:250',
+                'toiled_help_details' => 'nullable|string|max:255',
             ]);
 
             //dd($input);
@@ -348,17 +348,17 @@ class ServiceUserPrivateProfileController extends FrontController
         if ($input['stage'] == 'other') {
             $this->validate($request, [
                 'religious_beliefs' => 'nullable|in:"Yes","No","Sometimes"',
-                'religious_beliefs_details' => 'nullable|string|max:500',
+                'religious_beliefs_details' => 'nullable|string|max:510',
                 'particular_likes' => 'nullable|in:"Yes","No","Sometimes"',
-                'particular_likes_details' => 'nullable|string|max:500',
+                'particular_likes_details' => 'nullable|string|max:510',
                 'multiple_carers' => 'nullable|in:"Yes","No","Sometimes"',
-                'multiple_carers_details' => 'nullable|string|max:500',
+                'multiple_carers_details' => 'nullable|string|max:510',
                 'socialising_with_other' => 'nullable|in:"Yes","No","Sometimes"',
-                'socialising_with_other_details' => 'nullable|string|max:500',
+                'socialising_with_other_details' => 'nullable|string|max:510',
                 'interests_hobbies' => 'nullable|in:"Yes","No","Sometimes"',
-                'interests_hobbies_details' => 'nullable|string|max:500',
+                'interests_hobbies_details' => 'nullable|string|max:510',
                 'we_missed' => 'nullable|in:"Yes","No","Sometimes"',
-                'we_missed_details' => 'nullable|string|max:500',
+                'we_missed_details' => 'nullable|string|max:510',
             ]);
 
             $depart = "#nightTime";
@@ -384,7 +384,7 @@ class ServiceUserPrivateProfileController extends FrontController
             $this->validate($request, [
                 'behaviour' => 'required|array',
                 'other_behaviour' => 'nullable|string|max:200',
-                'consent_details' => 'nullable|string|max:500',
+                'consent_details' => 'nullable|string|max:510',
             ]);
 
             $depart = "#behaviour";
@@ -479,37 +479,37 @@ class ServiceUserPrivateProfileController extends FrontController
                 'choosing_incontinence_products'            => 'nullable|in:"Yes","No","Sometimes"',
                 'incontinence_wear'                         => 'nullable|in:"Yes","No","Sometimes"',
 
-                'other_behaviour'                                   => 'nullable|string|max:250',
-                'comprehension_detail'                              => 'nullable|string|max:500',
-                'common_communication_details'                      => 'nullable|string|max:250',
-                'speech_detail'                                     => 'nullable|string|max:500',
-                'vision_detail'                                     => 'nullable|string|max:500',
-                'hearing_detail'                                    => 'nullable|string|max:500',
-                'in_medication_detail'                              => 'nullable|string|max:250',
-                'allergies_detail'                                  => 'nullable|string|max:500',
-                'skin_scores_detail'                                => 'nullable|string|max:250',
-                'dressings_detail'                                  => 'nullable|string|max:250',
-                'common_mobility_details'                           => 'nullable|string|max:250',
-                'mobility_home_detail'                              => 'nullable|string|max:500',
-                'mobility_bed_detail'                               => 'nullable|string|max:500',
-                'falls_detail'                                      => 'nullable|string|max:500',
-                'mobility_shopping_detail'                          => 'nullable|string|max:500',
-                'assistance_with_eating_detail'                     => 'nullable|string|max:250',
-                'prepare_food_details'                              => 'nullable|string|max:250',
-                'assistance_prepare_food_details'                   => 'nullable|string|max:250',
-                'dietary_requirements_interaction'                  => 'nullable|string|max:250',
-                'special_dietary_requirements_detail'               => 'nullable|string|max:250',
-                'assistance_with_personal_hygiene_detail'           => 'nullable|string|max:250',
-                'appropriate_clothes_assistance_detail'             => 'nullable|string|max:250',
-                'assistance_getting_dressed_detail'                 => 'nullable|string|max:250',
-                'assistance_with_bathing_detail'                    => 'nullable|string|max:250',
-                'managing_toilet_needs_detail'                      => 'nullable|string|max:250',
-                'mobilising_to_toilet_detail'                       => 'nullable|string|max:250',
-                'cleaning_themselves_detail'                        => 'nullable|string|max:250',
-                'kind_of_incontinence'                              => 'nullable|string|max:250',
-                'choosing_incontinence_products_detail'             => 'nullable|string|max:250',
-                'incontinence_products_stored'                      => 'nullable|string|max:250',
-                'incontinence_wear_detail'                          => 'nullable|string|max:250',
+                'other_behaviour'                                   => 'nullable|string|max:255',
+                'comprehension_detail'                              => 'nullable|string|max:510',
+                'common_communication_details'                      => 'nullable|string|max:255',
+                'speech_detail'                                     => 'nullable|string|max:510',
+                'vision_detail'                                     => 'nullable|string|max:510',
+                'hearing_detail'                                    => 'nullable|string|max:510',
+                'in_medication_detail'                              => 'nullable|string|max:255',
+                'allergies_detail'                                  => 'nullable|string|max:510',
+                'skin_scores_detail'                                => 'nullable|string|max:255',
+                'dressings_detail'                                  => 'nullable|string|max:255',
+                'common_mobility_details'                           => 'nullable|string|max:255',
+                'mobility_home_detail'                              => 'nullable|string|max:510',
+                'mobility_bed_detail'                               => 'nullable|string|max:510',
+                'falls_detail'                                      => 'nullable|string|max:510',
+                'mobility_shopping_detail'                          => 'nullable|string|max:510',
+                'assistance_with_eating_detail'                     => 'nullable|string|max:255',
+                'prepare_food_details'                              => 'nullable|string|max:255',
+                'assistance_prepare_food_details'                   => 'nullable|string|max:255',
+                'dietary_requirements_interaction'                  => 'nullable|string|max:255',
+                'special_dietary_requirements_detail'               => 'nullable|string|max:255',
+                'assistance_with_personal_hygiene_detail'           => 'nullable|string|max:255',
+                'appropriate_clothes_assistance_detail'             => 'nullable|string|max:255',
+                'assistance_getting_dressed_detail'                 => 'nullable|string|max:255',
+                'assistance_with_bathing_detail'                    => 'nullable|string|max:255',
+                'managing_toilet_needs_detail'                      => 'nullable|string|max:255',
+                'mobilising_to_toilet_detail'                       => 'nullable|string|max:255',
+                'cleaning_themselves_detail'                        => 'nullable|string|max:255',
+                'kind_of_incontinence'                              => 'nullable|string|max:255',
+                'choosing_incontinence_products_detail'             => 'nullable|string|max:255',
+                'incontinence_products_stored'                      => 'nullable|string|max:255',
+                'incontinence_wear_detail'                          => 'nullable|string|max:255',
             ]);
 
             $depart = "#health-div";

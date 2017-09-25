@@ -29,7 +29,7 @@
                         Please give details. <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::textarea('religious_beliefs_details',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('religious_beliefs_details',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('religious_beliefs_details'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('religious_beliefs_details') }}</strong>

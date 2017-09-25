@@ -29,7 +29,7 @@
                         Please give details of what kind of assistance. <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::textarea('keeping_safe_at_night_details',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('keeping_safe_at_night_details',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('keeping_safe_at_night_details'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('keeping_safe_at_night_details') }}</strong>

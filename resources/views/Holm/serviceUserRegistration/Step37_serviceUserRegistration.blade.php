@@ -31,7 +31,7 @@
                 </h2>
 
                 <div class="inputWrap">
-                    {!! Form::textarea('food_allergies_detail',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                    {!! Form::textarea('food_allergies_detail',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                     @if ($errors->has('food_allergies_detail'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('food_allergies_detail') }}</strong>
