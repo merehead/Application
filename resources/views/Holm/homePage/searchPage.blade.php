@@ -5,7 +5,7 @@
                 Home
             </a>
             <span class="breadcrumbs__arrow">&gt;</span>
-            <a href="SearchPage.html" class="breadcrumbs__item">
+            <a href="/search" class="breadcrumbs__item">
                 Search results
             </a>
 
@@ -108,9 +108,7 @@
                             <span class="fieldIco"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                         </div>
                         <div class="sortFilters__item">
-
-                            {!! Form::select('typeService',['1'=>'SINGLE / REGULAR VISITS','2'=>'LIVE IN CARE','3'=>'RESPITE CARE'],null,['id'=>'typeService','class'=>'formSelect','onchange'=>'carerSearchAjax()']) !!}
-
+                            {!! Form::select('typeService',[''=>'--TYPE OF SERVICE--','1'=>'SINGLE / REGULAR VISITS','2'=>'LIVE IN CARE','3'=>'RESPITE CARE'],null,['id'=>'typeService','class'=>'formSelect','onchange'=>'carerSearchAjax()']) !!}
                         </div>
                     </div>
                 </div>
