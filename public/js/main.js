@@ -1286,4 +1286,21 @@ $(document).ready(function () {
       })
     }
 
+
+    // -- BOOKING PAYMENT -------
+    $('.bookPayment__form-switch').on('click', function(e) {
+      e.preventDefault()
+      $(this).addClass('paySwitch__item--active')
+      $('.bookPayment__form-header').attr('style', 'display: block')
+      $('.bonusPay-header').attr('style', 'display: none')
+      $('.bonusPay-header-switch').removeClass('paySwitch__item--active')
+    })
+    $('.bonusPay-header-switch').on('click', function(e) {
+      e.preventDefault()
+      $(this).addClass('paySwitch__item--active')
+      $('.bookPayment__form-header').attr('style', 'display: none')
+      $('.bookPayment__form-switch').removeClass('paySwitch__item--active')
+      $('.bonusPay-header').attr('style', 'display: block')
+    })
+
 });

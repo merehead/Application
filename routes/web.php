@@ -35,8 +35,7 @@ Route::get('/terms', 'TermsController@index')->name('TermsPage');
 Route::get('/welcome-carer', 'CarerController@welcome')->name('welcomeCarer');
 Route::get('/carer-settings', 'CarerController@index')->name('carerSettings'); //synonym for ImCarerPage
 Route::get('/carer-settings/profile', 'CarerController@profile')->name('carerPublicProfile'); //synonym for ImCarerPage
-Route::get('/carer-settings/booking', 'CarerController@booking')->name('carerBooking'); //synonym for ImCarerPage
-Route::get('/carer-settings/booking/{status}', 'CarerController@bookingFilter')->name('carerBookingStatus'); //synonym for ImCarerPage
+Route::get('/carer-settings/booking/{status?}', 'CarerController@bookingFilter')->name('carerBooking'); //synonym for ImCarerPage
 
 Route::get('/im-carer', 'CarerController@index')->name('ImCarerPage');
 Route::post('/im-carer', 'CarerController@update')->name('ImCarerPrivatePage');
@@ -61,8 +60,7 @@ Route::post('/purchaser-settings','PurchaserController@update')->name('purchaser
 
 Route::get('/purchaser-settings', 'PurchaserController@index')->name('purchaserSettings');
 Route::post('/purchaser-settings','PurchaserController@update')->name('purchaserSettingsPost');
-Route::get('/purchaser-settings/booking', 'PurchaserController@booking')->name('purchaserBooking'); //synonym for ImCarerPage
-Route::get('/purchaser-settings/booking/{status}', 'PurchaserController@bookingFilter')->name('purchaserBookingStatus'); //synonym for ImCarerPage
+Route::get('/purchaser-settings/booking/{status?}', 'PurchaserController@bookingFilter')->name('purchaserBookingStatus'); //synonym for ImCarerPage
 
 
 Route::get('/purchaser-registration/','PurchaserRegistrationController@index')->name('PurchaserRegistration');
@@ -77,10 +75,18 @@ Route::get('/serviceUser-settings/{serviceUserProfile}','ServiceUserPrivateProfi
 Route::get('/serviceUser/profile/{serviceUserProfile}','ServiceUserPrivateProfileController@profile')->name('ServiceUserProfilePublic');
 
 Route::post('/serviceUser-settings/{serviceUserProfile}','ServiceUserPrivateProfileController@update')->name('ServiceUserSettingPost');
-Route::get('/serviceUser-settings/booking/{serviceUserProfile}', 'ServiceUserPrivateProfileController@booking')->name('ServiceUserBooking'); //synonym for ImCarerPage
-Route::get('/serviceUser-settings/booking/{serviceUserProfile}/{status}', 'ServiceUserPrivateProfileController@bookingFilter')->name('ServiceUserBookingStatus'); //synonym for ImCarerPage
+//Route::get('/serviceUser-settings/booking/{serviceUserProfile}', 'ServiceUserPrivateProfileController@booking')->name('ServiceUserBooking'); //synonym for ImCarerPage
+Route::get('/serviceUser-settings/booking/{serviceUserProfile}/{status?}', 'ServiceUserPrivateProfileController@bookingFilter')->name('ServiceUserBookingStatus'); //synonym for ImCarerPage
 
-
+Route::get('/bookings/{booking}/details', 'Bookings\BookingsController@view_details');
+Route::get('/bookings/{booking}/purchase', 'Bookings\PaymentsController@payment_form');
+Route::post('/bookings/{booking}/message','Bookings\BookingsController@create_message');
+Route::post('/bookings/{booking}/setPaymentMethod','Bookings\BookingsController@setPaymentMethod')->name('setBookingPaymentMethod');
+Route::post('/bookings/{booking}/accept', 'Bookings\BookingsController@accept');
+Route::post('/bookings/{booking}/reject', 'Bookings\BookingsController@reject');
+Route::post('/bookings/{booking}/cancel', 'Bookings\BookingsController@cancel');
+Route::post('/bookings/{booking}/completed', 'Bookings\BookingsController@completed');
+Route::get('/bookings/{booking}/leave_review', 'Bookings\BookingsController@leaveReviewPage');
 
 Route::post('/document/upload','DocumentsController@upload')->name('UploadDocument');
 Route::get('/documents','DocumentsController@GetDocuments')->name('GetDocuments');

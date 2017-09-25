@@ -68,6 +68,10 @@ class ServiceUsersProfile extends Model
         return date('d/m/Y',strtotime($value));
     }
 
+    public function getFullNameAttribute(){
+        return $this->first_name.' '.$this->family_name;
+    }
+
 /*    public function setTimeToBedAttribute($value)
     {
         $date = DateTime::createFromFormat('d/m/Y', $value);

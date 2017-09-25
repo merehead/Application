@@ -410,3 +410,7 @@ a.blogFilter__item.active {
     font-size: 1.6em
   }
 }
+
+
+button:disabled { background: #d7d7d7; color: #f8f4f4;}
+button:disabled:hover { background: #d7d7d7; color: #f8f4f4;}

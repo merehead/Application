@@ -28,6 +28,9 @@ class CreateBookingsTable extends Migration
             $table->integer     ('amount_for_purchaser')    ->default('0');
             $table->integer     ('amount_for_carer')        ->default('0');
 
+            $table->integer     ('carer_status_id')     ->unsigned()->default('0');
+            $table->integer     ('purchaser_status_id') ->unsigned()->default('0');
+
             $table->integer     ('status_id')               ->unsigned();
             //$table->integer     ('carer_status_id')     ->unsigned();
             //$table->integer     ('purchaser_status_id') ->unsigned();
