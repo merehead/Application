@@ -134,7 +134,7 @@ class CarerController extends FrontController
             );
             $documents_name = array(
                 'nvq' => 'NVQ',
-                'care_certificate' => 'CARE_CERTIFICATE',
+                'care_certificate' => 'CARE CERTIFICATE',
                 'health_and_social' => 'Health and social',
                 'training_certificate' => 'Training certificate',
                 'additional_training_course' => 'Additional training course',
