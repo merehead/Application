@@ -278,6 +278,9 @@ class CarerController extends FrontController
             if (isset($input['national_insurance_number'])) {
                 $carerProfiles->national_insurance_number = $input['national_insurance_number'];
             }
+            if (isset($input['like_name'])) {
+                $carerProfiles->like_name = $input['like_name'];
+            }
 
             $carerProfiles->save();
 
