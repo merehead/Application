@@ -13,11 +13,11 @@
             <div class="userRating">
                 <div class="avarageRate">
                     <div class="profileRating ">
-                        <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
-                        <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
-                        <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
-                        <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
-                        <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
+                        <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                        <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                        <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                        <span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                        <span class="profileRating__item "><i class="fa fa-heart"></i></span>
                     </div>
                 </div>
             </div>
@@ -59,19 +59,19 @@
                 <span>Punctuality</span>
             </p>
             <div class="profileRating ">
-<span class="profileRating__item active">
+<span class="profileRating__item ">
 <i class="fa fa-heart"></i>
 </span>
-                <span class="profileRating__item active">
+                <span class="profileRating__item ">
 <i class="fa fa-heart"></i>
 </span>
-                <span class="profileRating__item active">
+                <span class="profileRating__item ">
 <i class="fa fa-heart"></i>
 </span>
-                <span class="profileRating__item active">
+                <span class="profileRating__item ">
 <i class="fa fa-heart"></i>
 </span>
-                <span class="profileRating__item active">
+                <span class="profileRating__item ">
 <i class="fa fa-heart"></i>
 </span>
             </div>
