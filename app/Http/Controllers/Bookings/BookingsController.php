@@ -173,4 +173,25 @@ class BookingsController extends FrontController implements Constants
 
         return redirect()->back();
     }
+
+    public function leaveReviewPage(Booking $booking){
+        $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
+        $this->title = 'Holm Care';
+
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
+        $this->vars = array_add($this->vars, 'user', $this->user);
+        $this->vars = array_add($this->vars, 'booking', $booking);
+
+        $this->content = view(config('settings.frontTheme') . '.booking.leave_review')->with($this->vars)
+            ->render();
+
+        return $this->renderOutput();
+    }
 }

@@ -73,6 +73,7 @@ Route::post('/bookings/{booking}/accept', 'Bookings\BookingsController@accept');
 Route::post('/bookings/{booking}/reject', 'Bookings\BookingsController@reject');
 Route::post('/bookings/{booking}/cancel', 'Bookings\BookingsController@cancel');
 Route::post('/bookings/{booking}/completed', 'Bookings\BookingsController@completed');
+Route::get('/bookings/{booking}/leave_review', 'Bookings\BookingsController@leaveReviewPage');
 
 Route::post('/document/upload','DocumentsController@upload')->name('UploadDocument');
 Route::get('/documents','DocumentsController@GetDocuments')->name('GetDocuments');
