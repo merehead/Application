@@ -335,19 +335,19 @@ $(document).ready(function () {
 //         scrollbar: true
 //     });
 
-    $('.onlyNumber').on('keyup',function(){
+    $('.onlyNumber').on('keyup', function () {
         $('.error-onlyNumber').remove();
         var errorText = '<span class="help-block error-onlyNumber">\n' +
             '             <strong>Wrong input. Please enter only number</strong>\n' +
             '          </span>';
-        if(this.value.match(/[^0-9]/g)){
+        if (this.value.match(/[^0-9]/g)) {
             $(this).before(errorText);
             this.value = this.value.replace(/[^0-9]/g, '');
         }
     });
 
     // Иван функция уменшает автоматом шрифт у имени пользователя в шапке
-    if($('.profileName').lenght>0)
+    if ($('.profileName').lenght > 0)
         scale($('.profileName').parent()[0]);
     $('.sortLinkXs').click(function (e) {
 
@@ -465,60 +465,75 @@ $(document).ready(function () {
         }
     });
 
-    if($("#depend-if").val() == 'It Depends') {$(".depend_hiding").show()}
+    if ($("#depend-if").val() == 'It Depends') {
+        $(".depend_hiding").show()
+    }
 
-    $("#depend-if").on('change',function(){
-        if($(this).val() !="0")
-        {
-            if($(this).val() == 'Yes') {
+    $("#depend-if").on('change', function () {
+        if ($(this).val() != "0") {
+            if ($(this).val() == 'Yes') {
                 $(".depend_hiding").hide();
             }
-            if($(this).val() == 'No') {
+            if ($(this).val() == 'No') {
                 $(".depend_hiding").hide();
             }
-            if($(this).val() == 'It Depends') {
+            if ($(this).val() == 'It Depends') {
                 $(".depend_hiding").show();
             }
         }
     });
 
-    if($("#depend-if-work").val() == 'Yes') {$(".depend_hiding-work").show();}else{$(".depend_hiding-work").hide();}
+    if ($("#depend-if-work").val() == 'Yes') {
+        $(".depend_hiding-work").show();
+    } else {
+        $(".depend_hiding-work").hide();
+    }
 
-    $("#depend-if-work").on('change',function(){
-        if($(this).val() !="0")
-        {
-            if($(this).val() == 'Yes') {
+    $("#depend-if-work").on('change', function () {
+        if ($(this).val() != "0") {
+            if ($(this).val() == 'Yes') {
                 $(".depend_hiding-work").hide();
             }
-            if($(this).val() == 'No') {
+            if ($(this).val() == 'No') {
                 $(".depend_hiding-work").hide();
             }
         }
     });
 
-    if($("#type_car_work").val() == 'Yes') {
+    if ($("#type_car_work").val() == 'Yes') {
         $(".car-block").show();
         $('#profile_use_car').parent().show();
-    }else{
+    } else {
         $(".car-block").hide();
         $('#profile_use_car').parent().hide();
     }
 
-    $("#type_car_work").on('change',function(){
-        if($("#type_car_work").val() == 'Yes') {
+    $("#type_car_work").on('change', function () {
+        if ($("#type_car_work").val() == 'Yes') {
             $(".car-block").show();
             $('#profile_use_car').parent().show();
-        }else{
+        } else {
             $(".car-block").hide();
             $('#profile_use_car').parent().hide();
         }
     });
 
-    if($('#driving_license').length>0) {
-        if($('#driving_license').val() == "Yes") {$('.hiding_profile').show();}else{$('.hiding_profile').hide();}
+    if ($('#driving_license').length > 0) {
+        if ($('#driving_license').val() == "Yes") {
+            $('.hiding_profile').show();
+        } else {
+            $('.hiding_profile').hide();
+        }
+        if ($("#type_car_work").val() == 'Yes') {
+            $(".car-block").show();
+            $('#profile_use_car').parent().show();
+        } else {
+            $(".car-block").hide();
+            $('#profile_use_car').parent().hide();
+        }
     }
 
-    if($('#register_have_car').length>0) {
+    if ($('#register_have_car').length > 0) {
         if ($('#register_have_car').val() == "Yes") {
             $('#register_use_car').parent().parent().show();
         } else {
@@ -527,24 +542,24 @@ $(document).ready(function () {
         }
     }
 
-    $("#post_code_profile").on("keyup",function(e){
-       var validator = /^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/;
-       var text  = $(this).val();
-       var $this = $(this);
-       var errorText = '<span class="help-block error-post-code">\n' +
-           '             <strong>Wrong post code. Please retry enter</strong>\n' +
-           '          </span>';
-       $('.error-post-code').remove();
-        has_error_profile_form=false;
-        error_mark='';
-       if(!validator.test(text)){
-           $($this).after(errorText);
-           has_error_profile_form=true;
-           error_mark='#post_code_profile';
-       }
+    $("#post_code_profile").on("keyup", function (e) {
+        var validator = /^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/;
+        var text = $(this).val();
+        var $this = $(this);
+        var errorText = '<span class="help-block error-post-code">\n' +
+            '             <strong>Wrong post code. Please retry enter</strong>\n' +
+            '          </span>';
+        $('.error-post-code').remove();
+        has_error_profile_form = false;
+        error_mark = '';
+        if (!validator.test(text)) {
+            $($this).after(errorText);
+            has_error_profile_form = true;
+            error_mark = '#post_code_profile';
+        }
     });
 
-    $(document).on('change','#register_have_car',function () {
+    $(document).on('change', '#register_have_car', function () {
         if ($('#register_have_car').val() == "Yes") {
             $('#register_use_car').parent().parent().show();
         } else {
@@ -553,37 +568,37 @@ $(document).ready(function () {
         }
     });
 
-    $('.text-limit').parent().css('margin-right',0);
-    $('.text-limit').parent().css('position','relative');
+    $('.text-limit').parent().css('margin-right', 0);
+    $('.text-limit').parent().css('position', 'relative');
 
-    $('.text-limit').on('keyup',function () {
+    $('.text-limit').on('keyup', function () {
 
-        if($(this).parent().find('#charsLeft').length==0)
-        $(this).after('<span class="charsLeft" id="charsLeft"></span>');
+        if ($(this).parent().find('#charsLeft').length == 0)
+            $(this).after('<span class="charsLeft" id="charsLeft"></span>');
         var limit = $(this).attr('data-limit');
-        if(limit<=0) limit =50;
-        $(this).limit(limit,'#charsLeft');
+        if (limit <= 0) limit = 50;
+        $(this).limit(limit, '#charsLeft');
     });
 //>>>>Иван 20170921 для приватного профиля пользователя
-    $(document).on('change','.profileField__select.serviceUserProfile',function () {
+    $(document).on('change', '.profileField__select.serviceUserProfile', function () {
 
-        if($(this).val() == 'No') {
+        if ($(this).val() == 'No') {
             $(this).parent().next().hide();
         }
-        if($(this).val() == 'Yes') {
+        if ($(this).val() == 'Yes') {
             $(this).parent().next().show();
         }
-        if($(this).val() == 'Sometimes') {
+        if ($(this).val() == 'Sometimes') {
             $(this).parent().next().show();
         }
     });
 
-    $(document).on('change','.profileField__select.serviceUserProfilePet',function () {
+    $(document).on('change', '.profileField__select.serviceUserProfilePet', function () {
 
-        if($(this).val() == 'No') {
+        if ($(this).val() == 'No') {
             $(".serviceUserProfilePetHide").hide();
         }
-        if($(this).val() == 'Yes') {
+        if ($(this).val() == 'Yes') {
             $(".serviceUserProfilePetHide").show();
         }
 
@@ -591,7 +606,7 @@ $(document).ready(function () {
 
     $("input[name='languages[12]']").change(function () {
         if (this.checked) {
-            $(".otherLanguages").slideDown( "slow" );
+            $(".otherLanguages").slideDown("slow");
         } else {
             $(".otherLanguages").slideUp();
         }
@@ -631,88 +646,99 @@ $(document).ready(function () {
 
 //^^^^^^^Иван 20170921 для приватного профиля пользователя
 //>>>>Иван 20170922 для приватного профиля пользователя
-    $(document).on('change','.serviceUserProfileInhabitants',function () {
+    $(document).on('change', '.serviceUserProfileInhabitants', function () {
 
-        if($(this).val() == 'No') {
+        if ($(this).val() == 'No') {
             $(".inhabitantsDepend").hide();
         }
-        if($(this).val() == 'Yes') {
+        if ($(this).val() == 'Yes') {
             $(".inhabitantsDepend").show();
         }
-        if($(this).val() == 'Sometimes') {
+        if ($(this).val() == 'Sometimes') {
             $(".inhabitantsDepend").show();
         }
     });
-    $(document).on('change','.profileField__select.home-is-flat',function () {
+    $(document).on('change', '.profileField__select.home-is-flat', function () {
 
-        if($(this).val() == 'HOUSE') {
+        if ($(this).val() == 'HOUSE') {
             $(".profileField.home-is-flat").hide();
         }
-        if($(this).val() == 'FLAT') {
+        if ($(this).val() == 'FLAT') {
             $(".profileField.home-is-flat").show();
         }
-        if($(this).val() == 'BUNGALOW') {
+        if ($(this).val() == 'BUNGALOW') {
             $(".profileField.home-is-flat").hide();
         }
     });
 
+<<<<<<< HEAD
     $( "input[maxlength], textarea" ).focus(function() {
         var maxLenght = $( this ).attr('maxlength');
         var currentLength = $( this ).val().length;
         var symbolsLeft = maxLenght - currentLength;
         $( this ).before('<span class="help-block" style="margin: 0;padding: 0;color: green">Symbols left '+ symbolsLeft +'</span>');
-    });
+=======
+    //$('#email').attr('name')
 
-    $( "input[maxlength], textarea" ).keyup(function() {
-        var maxLenght = $( this ).attr('maxlength');
-        var currentLength = $( this ).val().length;
+    $("input[maxlength], textarea").focus(function () {
+        var maxLenght = $(this).attr('maxlength');
+        var currentLength = $(this).val().length;
         var symbolsLeft = maxLenght - currentLength;
-        $( this ).prev( "span" ).text('Symbols left '+ symbolsLeft);
+        $(this).before('<span class="help-block" style="margin: 0;padding: 0;">Symbols left ' + symbolsLeft + '</span>');
+>>>>>>> origin2/Anton
     });
 
-    $( "input[maxlength], textarea" ).focusout(function() {
-        $( this ).prev( "span" ).remove();
+    $("input[maxlength], textarea").keyup(function () {
+        var maxLenght = $(this).attr('maxlength');
+        var currentLength = $(this).val().length;
+        var symbolsLeft = maxLenght - currentLength;
+        $(this).prev("span").text('Symbols left ' + symbolsLeft);
+    });
+
+    $("input[maxlength], textarea").focusout(function () {
+        $(this).prev("span").remove();
     });
 
 //^^^^^^^Иван 20170922 для регистрации профиля пользователя
-    if($("#criminal_detail").val() == 'Some') {
+    if ($("#criminal_detail").val() == 'Some') {
         $(".criminal_detail").show();
-    }else{
+    } else {
         $(".criminal_detail").hide();
     }
-    $("#criminal_detail").on('change',function(){
-        if($("#criminal_detail").val() == 'Some') {
+    $("#criminal_detail").on('change', function () {
+        if ($("#criminal_detail").val() == 'Some') {
             $(".criminal_detail").show();
-        }else{
+        } else {
             $(".criminal_detail").hide();
         }
     });
 
-    $('a.additionalTime').on('click',function(e){
+    $('a.additionalTime').on('click', function (e) {
         e.preventDefault();
         $('.datetime').last().after($('.datetime').last().clone().removeClass('nhide'));
         $('.checktime').last().after($('.checktime').last().clone());
-        $( ".datepicker_message,datepicker" ).datepicker({
+        $(".datepicker_message,datepicker").datepicker({
             changeMonth: true,
             changeYear: true,
-            dateFormat:"dd/mm/yy",
-            showAnim:"slideDown",
+            dateFormat: "dd/mm/yy",
+            showAnim: "slideDown",
             minDate: "+0D",
             maxDate: "+50Y",
             yearRange: "0:+50"
         });
-        return false;;
+        return false;
+        ;
     });
 
-    if($("#checkL12").is(':checked')) {
+    if ($("#checkL12").is(':checked')) {
         $(".language_additional").show();
-    }else{
+    } else {
         $(".language_additional").hide();
     }
-    $("#checkL12").on('click',function(){
-        if($("#checkL12").is(':checked')) {
+    $("#checkL12").on('click', function () {
+        if ($("#checkL12").is(':checked')) {
             $(".language_additional").show();
-        }else{
+        } else {
             $(".language_additional").hide();
         }
     });
@@ -794,7 +820,7 @@ $(document).ready(function () {
     // -- Edit Carer Profile -------
     $carer_profile.find('a.btn-edit').on('click', function (e) {
         e.preventDefault();
-        is_data_changed=true;
+        is_data_changed = true;
         var that = $(this);
         var idForm = 'form#' + $(that).find('span').attr('data-id');
         var idLoadFiles = '#' + $(that).find('span').attr('data-id');
@@ -821,7 +847,7 @@ $(document).ready(function () {
     // -- Save Carer Profile -------
     $carer_profile.find('button.btn-success').on('click', function (e) {
         e.preventDefault();
-        is_data_changed=false;
+        is_data_changed = false;
         var that = $(this);
         var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
         var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');
@@ -836,6 +862,7 @@ $(document).ready(function () {
 
         that.button('loading');
 
+/*<<<<<<< HEAD
         if(arrFilesProfilePhoto.length > 0){
           var url = '/profile-photo'
           if(arrFilesProfilePhoto[0].service_user_id){
@@ -870,60 +897,112 @@ $(document).ready(function () {
                 start += sliceSize
                 end += blob.size
               }
+=======
+        if (arrFilesProfilePhoto.length > 0) {
+            var url = '/profile-photo'
+            if (arrFilesProfilePhoto[0].service_user_id) {
+                url = '/service-user-profile-photo'
+>>>>>>> origin2/Anton*/
             }
-          }
-          loop()
-
-          function send(fileSend) {
-            var formdata = new FormData()
-            formdata.append('name', file.name)
-            formdata.append('chunk', chunk)
-            formdata.append('chunks', chunks)
-            formdata.append('title', file.title)
-            formdata.append('type', file.type_value.split('-')[0])
-            formdata.append('file', fileSend)
-            chunk += 1
             axios.post(
-              '/document/upload',
-              formdata,
+                url,
+                arrFilesProfilePhoto[0],
             ).then(function (response) {
-              if(chunk === chunks){
-                if(arrFiles[fileChunk + 1]){
-                  fileChunk += 1
-                  file = arrFiles[fileChunk]
-                  chunks = Math.ceil(file.size / sliceSize)
-                  chunk = 0
-                  start = 0
-                  end = sliceSize
-                  loop()
-                }else{
-                  $('.pickfiles').val('')
-                  arrFiles = []
-                  if(arrForDeleteIDProfile.length > 0){
-                    axios.delete(
-                      '/api/document/'+arrForDeleteIDProfile+'/',
-                    ).then( (response) => {
-                      console.log(response)
-                    })
-                    ajaxForm($(idForm), that);
-                  }else{
-                    ajaxForm($(idForm), that);
-                  }
+                console.log(response)
+            })
+        }
+
+        if (arrFiles.length > 0) {
+            var fileChunk = 0
+            file = arrFiles[fileChunk]
+            var sliceSize = 524288 // 512 kib
+            var chunks = Math.ceil(file.size / sliceSize)
+            var chunk = 0
+            var start = 0
+            var end = sliceSize
+
+            function loop() {
+                var blob = file.slice(start, end)
+                if (blob.size !== 0) {
+                    if (blob.size === sliceSize) {
+                        send(blob)
+                        start += sliceSize
+                        end += blob.size
+                    } else {
+                        send(blob)
+                        start += sliceSize
+                        end += blob.size
+                    }
                 }
-              }else{
-                loop()
-              }
-            })
-            .catch(function (error) {
-              console.log(error)
-            })
-          }
-        }else{
-          ajaxForm($(idForm), that);
+            }
+
+            loop()
+
+            function send(fileSend) {
+                var formdata = new FormData()
+                formdata.append('name', file.name)
+                formdata.append('chunk', chunk)
+                formdata.append('chunks', chunks)
+                formdata.append('title', file.title)
+                formdata.append('type', file.type_value.split('-')[0])
+                formdata.append('file', fileSend)
+                chunk += 1
+                axios.post(
+                    '/document/upload',
+                    formdata,
+                ).then(function (response) {
+                    if (chunk === chunks) {
+                        if (arrFiles[fileChunk + 1]) {
+                            fileChunk += 1
+                            file = arrFiles[fileChunk]
+                            chunks = Math.ceil(file.size / sliceSize)
+                            chunk = 0
+                            start = 0
+                            end = sliceSize
+                            loop()
+                        } else {
+                            $('.pickfiles').val('')
+                            arrFiles = []
+                            if (arrForDeleteIDProfile.length > 0) {
+                                axios.delete(
+                                    '/api/document/' + arrForDeleteIDProfile + '/',
+                                ).then((response) => {
+                                    console.log(response)
+                            })
+                                ajaxForm($(idForm), that);
+                            } else {
+                                ajaxForm($(idForm), that);
+                            }
+                        }
+                    } else {
+                        loop()
+                    }
+                })
+                    .catch(function (error) {
+                        console.log(error)
+                    })
+            }
+        } else {
+            ajaxForm($(idForm), that);
         }
 
         return false;
-    })
+    });
+
+//------------Google Address search -----------------------
+    if ($.isFunction($.fn.autocomplete)) {
+
+        $('input[name="postcode"]').autocomplete({
+            serviceUrl: '/address/',
+            params: {query: $('input[name="postcode"]').val()},
+            minChars: 1,
+            onSelect: function (suggestion) {
+                $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
+                $('input[name="town"]').val(suggestion.data.terms[1].value);
+                $('input[name="postcode"]').val(suggestion.data.terms[2].value);
+            }
+        });
+    }
 
     $('.passStrength__bar').css('width','5%');
     $('.passStrength__bar').css('background','red');

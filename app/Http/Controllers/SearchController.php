@@ -52,6 +52,20 @@ class SearchController extends FrontController
         if ($request->get('typeCare')) {
             $where .= 'inner join carer_profile_assistance_type cs on cs.carer_profile_id = cp.id and cs.assistance_types_id in ('.implode(',',array_keys($request->get('typeCare'))).')';
         }
+        $working_times[1]=[5,6,7];
+        $working_times[2]=[8,9,10];
+        $working_times[3]=[11,12,13];
+        $working_times[4]=[14,15,16];
+        $working_times[5]=[17,18,19];
+        $working_times[6]=[20,21,22];
+        $working_times[0]=[22,24,25];
+        if($request->get('findDate')){
+            $date=$request->get('findDate');
+            $date=explode("/", $date);
+            $dayofweek =  date("w", mktime(0, 0, 0, $date[1], $date[0], $date[2]));
+            $where .= 'inner join carer_profile_working_time cw on cw.carer_profile_id = cp.id and cw.working_times_id in ('.implode(',',$working_times[$dayofweek]).')';
+        }
+
         $where .=' where registration_progress=20';
         if ($request->get('gender'))
             $where .= " and cp.gender='" . array_keys($request->get('gender'))[0] . "'";

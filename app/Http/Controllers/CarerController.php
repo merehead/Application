@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\AssistanceType;
+use App\Booking;
 use App\CarerReference;
 use App\CarersProfile;
 use App\Language;
 use App\Postcode;
+use App\PurchasersProfile;
+use App\ServiceUsersProfile;
 use App\User;
 use App\Document;
 use App\WorkingTime;
@@ -148,7 +151,6 @@ class CarerController extends FrontController
 
         return $this->renderOutput();
     }
-
 
     public function booking()
     {
@@ -464,4 +466,75 @@ class CarerController extends FrontController
         return response(json_encode(['status' => 'save']), 200);
 
     }
+
+    public function getAddress(Request $request){
+        $query = $request->get('query');
+        $url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyDJaLv-6bVXViUGJ_e_-nR5RZlt9GUuC4M&input=".urlencode($query);
+
+        $data= file_get_contents($url);
+        $items=json_decode($data,true);
+        $response=array();
+        $response['query']=$query;
+        foreach ($items['predictions'] as $item){
+            $response['suggestions'][]=array(
+                "value"=>$item['description'],
+                "data"=>$item
+            );
+        }
+
+        return response(json_encode($response),200);
+
+    }
+
+    public function review($bookings_id){
+
+        $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
+        $this->title = 'Holm Care - Leave review';
+
+        $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme') . '.includes.modals')->render();
+
+        $this->vars = array_add($this->vars, 'header', $header);
+        $this->vars = array_add($this->vars, 'footer', $footer);
+        $this->vars = array_add($this->vars, 'modals', $modals);
+
+        $bookings = Booking::findOrFail($bookings_id);
+        $service_user_id = $bookings->service_user_id;
+        $purchaser_id = $bookings->purchaser_id;
+
+        $service_user = ServiceUsersProfile::findOrFail($service_user_id);
+        $purchaser = PurchasersProfile::findOrFail($purchaser_id);
+
+        $this->vars = array_add($this->vars, 'carerProfile', $bookings);
+        $this->vars = array_add($this->vars, 'service_user', $service_user);
+        $this->vars = array_add($this->vars, 'purchaser', $purchaser);
+
+
+        $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.CarerLeaveReview')->with($this->vars)
+            ->render();
+        return $this->renderOutput();
+    }
+
+    public function appointment(Request $request, $service_user_id){
+        $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
+        $this->title = 'Holm Care - Leave review';
+
+        $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme') . '.includes.modals')->render();
+
+        $this->vars = array_add($this->vars, 'header', $header);
+        $this->vars = array_add($this->vars, 'footer', $footer);
+        $this->vars = array_add($this->vars, 'modals', $modals);
+
+        $service_user = ServiceUsersProfile::findOrFail($service_user_id);
+        $this->vars = array_add($this->vars, 'service_user', $service_user);
+
+        $this->content = view(config('settings.frontTheme') . '.purchaserProfiles.Booking.NewAnAppointment')->with($this->vars)
+            ->render();
+
+        return $this->renderOutput();
+    }
+
 }

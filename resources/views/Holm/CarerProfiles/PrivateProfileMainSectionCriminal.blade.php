@@ -28,7 +28,9 @@
                   Have up to date DBS certificate
                 </span>
                 </h2>
-                {!! Form::select('DBS',['Yes'=>'Have an up to date DBS','No'=>'Have not a DBS'],null,['id'=>'main-if','class'=>'profileField__select profileField__select--greyBg','noPlaceholder'=>'Please select','readonly','data-edit'=>'false']) !!}
+
+                {!! Form::select('DBS',['Yes'=>'Have up to date DBS certificate','No'=>'Have not a DBS'],null,['id'=>'main-if','class'=>'profileField__select profileField__select--greyBg','placeholder'=>'Please select','readonly','data-edit'=>'false']) !!}
+
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Have an up to date DBS</option>
                 </select>--}}
@@ -66,7 +68,13 @@ null,['class'=>'profileField__select','noPlaceholder'=>'Please select','readonly
                 Using the new DBS update service
                 </span>
                 </h2>
+
+{{--
                 {!! Form::select('DBS_use',['Yes'=>'Use the new DBS update service','No'=>'Do not use the new DBS update service'],null,['class'=>'profileField__select profileField__select--greyBg','noPlaceholder'=>'Please select']) !!}
+--}}
+
+                {!! Form::select('DBS_use',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select profileField__select--greyBg','placeholder'=>'Please select']) !!}
+
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Use the new DBS update service</option>
                 </select>--}}

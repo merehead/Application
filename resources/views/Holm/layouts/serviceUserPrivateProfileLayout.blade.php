@@ -22,7 +22,7 @@
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
 
 
-
+    <script src="{{asset('js/jquery.autocomplete.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
 
 

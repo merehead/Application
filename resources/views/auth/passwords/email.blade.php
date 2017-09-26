@@ -1,7 +1,9 @@
-@extends(config('settings.theme').'.layouts.login')
+@include(config('settings.frontTheme').'.layouts.homePage')
 
+
+@section('content')
 @if (session('status'))
-    @section('content')
+
     <section class="loginSection">
         <div class="loginLogo">
             <a href="/" class="loginLogo__item"></a>
@@ -21,9 +23,9 @@
             </div>
         </div>
     </section>
-    @endsection
+
 @else
-    @section('content')
+
     <section class="loginSection">
         <div class="loginLogo">
             <a href="\" class="loginLogo__item"></a>
@@ -73,10 +75,10 @@
             </div>
         </div>
     </section>
-    @endsection
+
 
 @endif
-
+@endsection
 
 
 

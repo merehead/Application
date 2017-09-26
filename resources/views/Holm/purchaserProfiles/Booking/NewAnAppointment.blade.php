@@ -1,3 +1,4 @@
+@include(config('settings.frontTheme').'.CarerProfiles.Booking.BookingTabCarerHeader')
 <section class="mainSection">
     <div class="container">
         <div class="breadcrumbs">
@@ -5,16 +6,16 @@
                 Home
             </a>
             <span class="breadcrumbs__arrow">&gt;</span>
-            <a href="Carer_Private_profile_page.html" class="breadcrumbs__item">
+            <a href="{{route('carerPublicProfile',['user_id'=>Auth::user()->id])}}" class="breadcrumbs__item">
                 My profile
             </a>
             <span class="breadcrumbs__arrow">&gt;</span>
-            <a href="MY_BOOKINGS_TAB_CARER_All.html" class="breadcrumbs__item">
+            <a href="{{route('carerBooking')}}" class="breadcrumbs__item">
                 My Bookings
             </a>
 
             <span class="breadcrumbs__arrow">&gt;</span>
-            <a href="NewAnAppointment.html" class="breadcrumbs__item">
+            <a href="{{route('carerBooking')}}" class="breadcrumbs__item">
                 Booking
             </a>
 
@@ -27,7 +28,7 @@
         <div class="container">
             <div class="orderInfo">
                 <a href="Service_user_Public_profile_page.html" class="profilePhoto orderInfo__photo">
-                    <img src="./dist/img/profile8.jpg" alt="">
+                    <img src="/img/profile8.jpg" alt="">
                 </a>
                 <div class="orderInfo__item orderInfo__item--rightPadding">
                     <h2 class="ordinaryTitle">
@@ -54,10 +55,6 @@
                         <span class="orderOptions__value">12:00 PM - 5:00 PM</span>
                     </div>
 
-
-
-
-
                     <div class="orderOptions">
                         <h2 class="ordinaryTitle">
                             <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Distance</span>
@@ -71,11 +68,6 @@
                         </h2>
                         <span class="orderOptions__value">30 (min)</span>
                     </div>
-
-
-
-
-
 
                     <!--           <div class="orderOptions">
                                  <h2 class="ordinaryTitle">

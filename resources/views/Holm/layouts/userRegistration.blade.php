@@ -31,6 +31,7 @@
 @yield('footer')
 
 <!-- <script src="{{asset('js/plupload.full.min.js')}}"></script> -->
+<script src="{{asset('js/jquery.autocomplete.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
 @yield('modals')
 

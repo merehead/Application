@@ -85,7 +85,7 @@
             </div>
 
 
-            <a href="Forgot_password.html" class="login__forgot">
+            <a href="{{route('password.request')}}" class="login__forgot">
                 Forgot password?
             </a>
         </div>

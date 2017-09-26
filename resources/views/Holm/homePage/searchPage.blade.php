@@ -1,3 +1,18 @@
+<script>
+    $(document).ready(function(){
+        $(function () {
+            $(".datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "dd/mm/yy",
+                showAnim: "slideDown",
+
+                maxDate: "+20Y",
+                yearRange: "0:+10"
+            });
+        });
+    });
+</script>
 <section class="searchSection">
     <div class="container">
         <div class="breadcrumbs">
@@ -104,7 +119,7 @@
                             <span class="fieldIco"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
                         </div>
                         <div class="sortFilters__item">
-                            <input type="text" class="sortField" placeholder="DATE">
+                            <input type="text" name="findDate" onchange="carerSearchAjax();" class="sortField datepicker" placeholder="DATE">
                             <span class="fieldIco"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                         </div>
                         <div class="sortFilters__item">

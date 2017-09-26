@@ -1,32 +1,29 @@
 <script>
     var times = [];
-
     times[2] = [5, 8, 11, 14, 17, 20, 23];
     times[3] = [6, 9, 12, 15, 18, 21, 24];
     times[4] = [7, 10, 13, 16, 19, 22, 25];
     $(document).ready(function () {
-        if($('p#2').length>0){
-            console.log('df');
-            $.each(times[2], function( index, value ) {
-
-                $('p#'+value).hide();
+        if ($('p#2').length > 0) {
+            $('p#2').hide();
+            $('p#3').hide();
+            $('p#4').hide();
+        }
+        if ($('p#2').length > 0) {
+            $.each(times[2], function (index, value) {
+                $('p#' + value).hide();
             });
         }
-         if($('p#3').length>0){
-            console.log('df');
-            $.each(times[3], function( index, value ) {
-
-                $('p#'+value).hide();
+        if ($('p#3').length > 0) {
+            $.each(times[3], function (index, value) {
+                $('p#' + value).hide();
             });
         }
-         if($('p#4').length>0){
-            console.log('df');
-            $.each(times[4], function( index, value ) {
-
-                $('p#'+value).hide();
+        if ($('p#4').length > 0) {
+            $.each(times[4], function (index, value) {
+                $('p#' + value).hide();
             });
         }
-
     });
 </script>
 
