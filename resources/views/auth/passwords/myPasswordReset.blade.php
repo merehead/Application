@@ -1,11 +1,11 @@
 <section class="mainSection">
     <div class="container">
         <div class="breadcrumbs">
-            <a href="index.html" class="breadcrumbs__item">
+            <a href="/" class="breadcrumbs__item">
                 Home
             </a>
             <span class="breadcrumbs__arrow">></span>
-            <a href="Forgot_password.html" class="breadcrumbs__item">
+            <a href="/password/reset" class="breadcrumbs__item">
                 Forgotten password
             </a>
 
@@ -24,7 +24,7 @@
                 <form  class="forgotPass__form">
                     <div class="formField">
                         <div class="inputWrap">
-                            <input type="text" class="formInput forgotPass__input" placeholder="Your email">
+                            <input type="text" name="email" class="formInput forgotPass__input" placeholder="Your email">
                             <span class="forgotPass__ico inputIco">
                   <i class="fa fa-envelope"></i>
                 </span>

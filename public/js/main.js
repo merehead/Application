@@ -909,7 +909,7 @@ $(document).ready(function () {
                                 if (arrForDeleteIDProfile.length > 0) {
                                     axios.delete(
                                         '/api/document/' + arrForDeleteIDProfile + '/'
-                                    ).then((response) = > {
+                                    ).then((response) => {
                                         console.log(response)
                                 })
                                     ajaxForm($(idForm), that);
@@ -942,9 +942,15 @@ $(document).ready(function () {
             params: {query: $('input[name="postcode"]').val()},
             minChars: 1,
             onSelect: function (suggestion) {
-                $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
-                $('input[name="town"]').val(suggestion.data.terms[1].value);
-                $('input[name="postcode"]').val(suggestion.data.terms[2].value);
+                if(suggestion.data.terms.length>3) {
+                    $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
+                    $('input[name="town"]').val(suggestion.data.terms[1].value);
+                    $('input[name="postcode"]').val(suggestion.data.terms[2].value);
+                }else{
+                    $('input[name="address_line1"]').val('');
+                    $('input[name="town"]').val(suggestion.data.terms[0].value);
+                    $('input[name="postcode"]').val(suggestion.data.terms[1].value);
+                }
             }
         });
     }
