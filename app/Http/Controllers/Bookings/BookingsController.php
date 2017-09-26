@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Bookings;
 
 use App\Booking;
+use App\BookingOverview;
 use App\BookingsMessage;
 use App\Interfaces\Constants;
 use App\PaymentServices\StripeService;
@@ -193,5 +194,18 @@ class BookingsController extends FrontController implements Constants
             ->render();
 
         return $this->renderOutput();
+    }
+
+    public function createReview(Booking $booking, Request $request){
+        BookingOverview::create([
+            'booking_id' => $booking->id,
+            'punctuality' => $request->punctuality,
+            'friendliness' => $request->friendliness,
+            'communication' => $request->communication,
+            'performance' => $request->performance,
+            'comment' => $request->comment,
+        ]);
+
+        return response(['status' => 'success']);
     }
 }

@@ -29,5 +29,5 @@
 </div>
 <div class="bookingSwitcher">
     <a href="/purchaser-settings" class="bookingSwitcher__link">Profile settings</a>
-    <a href="/purchaser-settings/booking" class="bookingSwitcher__link bookingSwitcher__link--active">My bookings</a>
+    <a href="/purchaser-settings/booking" class="bookingSwitcher__link bookingSwitcher__link--active">My bookings {!! $newBookings->count() ? '<span>+'.$newBookings->count().'</span>' : '' !!}</a>
 </div>
