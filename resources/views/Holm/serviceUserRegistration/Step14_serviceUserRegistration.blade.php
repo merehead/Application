@@ -29,6 +29,7 @@
                     </h2>
 
                     <div class="inputWrap">
+
                         {!! Form::textarea('carer_enter',null,['class'=>'formArea ','placeholder'=>'Details','maxlength'=>"500"]) !!}
                         @if ($errors->has('carer_enter'))
                             <span class="help-block">

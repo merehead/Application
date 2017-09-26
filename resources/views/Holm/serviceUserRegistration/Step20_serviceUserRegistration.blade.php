@@ -17,11 +17,15 @@
 
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('history_of_falls',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id'=>'sometimes-if','class'=>'formSelect'];
+                        if (is_null($serviceUserProfile->history_of_falls))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('history_of_falls',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                         @if ($errors->has('history_of_falls'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('history_of_falls') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('history_of_falls') }}</strong></span>
                         @endif
                     </div>
                 </div>

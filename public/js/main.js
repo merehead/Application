@@ -672,23 +672,19 @@ $(document).ready(function () {
     });
 
 
-    $( "input[maxlength], textarea" ).focus(function() {
+    $( "textarea" ).focus(function() {
         var maxLenght = $( this ).attr('maxlength');
         var currentLength = $( this ).val().length;
         var symbolsLeft = maxLenght - currentLength;
-        $( this ).before('<span class="help-block" style="margin: 0;padding: 0;color: green">Symbols left '+ symbolsLeft +'</span>');
-
-/*    //$('#email').attr('name')
-
-    $("input[maxlength], textarea").focus(function () {
-        var maxLenght = $(this).attr('maxlength');
-        var currentLength = $(this).val().length;
-        var symbolsLeft = maxLenght - currentLength;
-        $(this).before('<span class="help-block" style="margin: 0;padding: 0;">Symbols left ' + symbolsLeft + '</span>');*/
-
-
+        $( this ).before('<span class="help-block" style="margin: 0;padding: 0;color: green">Characters remaining ('+currentLength+'/'+maxLenght+')</span>');
     });
-    $("input[maxlength], textarea").focusout(function () {
+    $( "textarea" ).keyup(function() {
+        var maxLenght = $( this ).attr('maxlength');
+        var currentLength = $( this ).val().length;
+        var symbolsLeft = maxLenght - currentLength;
+        $( this ).prev( "span" ).text('Characters remaining ('+currentLength+'/'+maxLenght+')');
+    });
+    $("textarea").focusout(function () {
         $(this).prev("span").remove();
     });
 
