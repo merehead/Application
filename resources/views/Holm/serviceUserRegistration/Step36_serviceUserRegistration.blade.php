@@ -30,7 +30,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('other_medical_detail',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('other_medical_detail',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('other_medical_detail'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('other_medical_detail') }}</strong>

@@ -30,7 +30,7 @@
                         Please give further details. <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::textarea('multiple_carers_details',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('multiple_carers_details',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('multiple_carers_details'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('multiple_carers_details') }}</strong>

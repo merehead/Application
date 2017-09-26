@@ -66,7 +66,7 @@
             <div class="profileField profileField--half">
 
                 {!! Form::select('work_at_holiday',['Yes'=>'Work on bank holidays','No'=>'Can not work bank holidays'],
-null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+null,['class'=>'profileField__select','noPlaceholder'=>'Please select']) !!}
 
             </div>
 
@@ -116,18 +116,9 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                 Work with pets
               </span>
             </h2>
-{{--            <select class="profileField__select">
-
-
-                <option value="yes">It depends</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-                <option value="select">Please select</option>
-
-            </select>--}}
 
             {!! Form::select('work_with_pets',['Yes'=>'Yes','No'=>'No','It Depends'=>'It Depends'],
-null,['id'=>'depend-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+null,['id'=>'depend-if','class'=>'formSelect','noPlaceholder'=>'Please select']) !!}
 
         </div>
         <div class="profileField profileField--two-thirds depend_hiding" style="display: none">
@@ -135,8 +126,8 @@ null,['id'=>'depend-if','class'=>'formSelect','placeholder'=>'Please select']) !
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Details   </span>
             </h2>
-            {!! Form::text('pets_description',null,['class'=>'profileField__input','placeholder'=>'Details']) !!}
-      {{--      <input type="text" class="profileField__input" placeholder="Details">--}}
+            {!! Form::text('pets_description',null,['class'=>'profileField__input','placeholder'=>'Details','maxlength'=>'250']) !!}
+
         </div>
     </div>
 </div>

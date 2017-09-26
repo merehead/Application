@@ -671,6 +671,13 @@ $(document).ready(function () {
         }
     });
 
+<<<<<<< HEAD
+    $( "input[maxlength], textarea" ).focus(function() {
+        var maxLenght = $( this ).attr('maxlength');
+        var currentLength = $( this ).val().length;
+        var symbolsLeft = maxLenght - currentLength;
+        $( this ).before('<span class="help-block" style="margin: 0;padding: 0;color: green">Symbols left '+ symbolsLeft +'</span>');
+=======
     //$('#email').attr('name')
 
     $("input[maxlength], textarea").focus(function () {
@@ -678,6 +685,7 @@ $(document).ready(function () {
         var currentLength = $(this).val().length;
         var symbolsLeft = maxLenght - currentLength;
         $(this).before('<span class="help-block" style="margin: 0;padding: 0;">Symbols left ' + symbolsLeft + '</span>');
+>>>>>>> origin2/Anton
     });
 
     $("input[maxlength], textarea").keyup(function () {
@@ -731,6 +739,19 @@ $(document).ready(function () {
         if ($("#checkL12").is(':checked')) {
             $(".language_additional").show();
         } else {
+            $(".language_additional").hide();
+        }
+    });
+
+    if($("#checkLOTHER").is(':checked')) {
+        $(".language_additional").show();
+    }else{
+        $(".language_additional").hide();
+    }
+    $("#checkLOTHER").on('click',function(){
+        if($("#checkLOTHER").is(':checked')) {
+            $(".language_additional").show();
+        }else{
             $(".language_additional").hide();
         }
     });
@@ -841,10 +862,47 @@ $(document).ready(function () {
 
         that.button('loading');
 
+/*<<<<<<< HEAD
+        if(arrFilesProfilePhoto.length > 0){
+          var url = '/profile-photo'
+          if(arrFilesProfilePhoto[0].service_user_id){
+            url = '/service-user-profile-photo'
+          }
+          axios.post(
+            url,
+            arrFilesProfilePhoto[0]
+          ).then(function (response) {
+            console.log(response)
+          })
+        }
+
+        if(arrFiles.length > 0){
+          var fileChunk = 0
+          file = arrFiles[fileChunk]
+          var sliceSize = 524288 // 512 kib
+          var chunks = Math.ceil(file.size / sliceSize)
+          var chunk = 0
+          var start = 0
+          var end = sliceSize
+
+          function loop() {
+            var blob = file.slice(start, end)
+            if(blob.size !== 0){
+              if(blob.size === sliceSize){
+                send(blob)
+                start += sliceSize
+                end += blob.size
+              }else{
+                send(blob)
+                start += sliceSize
+                end += blob.size
+              }
+=======
         if (arrFilesProfilePhoto.length > 0) {
             var url = '/profile-photo'
             if (arrFilesProfilePhoto[0].service_user_id) {
                 url = '/service-user-profile-photo'
+>>>>>>> origin2/Anton*/
             }
             axios.post(
                 url,

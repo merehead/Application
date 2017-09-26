@@ -30,7 +30,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('consent_details',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('consent_details',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('consent_details'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('consent_details') }}</strong>

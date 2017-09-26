@@ -35,7 +35,7 @@ null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
                     What questions do you have? We will get back to you as soon as possible with answers.
                 </h2>
                 <div class="inputWrap">
-                    {!! Form::textarea('questions',null,['class'=>'formArea','placeholder'=>'Your text']) !!}
+                    {!! Form::textarea('questions',null,['class'=>'formArea','placeholder'=>'Your text','maxlength'=>"1000"]) !!}
                 </div>
                 @if ($errors->has('questions'))
                     <span class="help-block">

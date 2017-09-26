@@ -247,6 +247,9 @@ class CarerController extends FrontController
 
             $depart = "#carerGeneral";
 
+            if (isset($input['like_name'])) {
+                $carerProfiles->like_name = $input['like_name'];
+            }
             if (isset($input['address_line1'])) {
                 $carerProfiles->address_line1 = $input['address_line1'];
             }
@@ -312,6 +315,7 @@ class CarerController extends FrontController
 
             $this->validate($request, [
                 'account_number' => 'nullable|integer',
+                'sort_code' => 'nullable|string|max:15',
             ]);
 
             $depart = "#carerBank";
@@ -380,15 +384,22 @@ class CarerController extends FrontController
 
         if ($input['stage'] == 'carerPrivateLanguages') {
 
+            //dd($input);
+
             $depart = "#carerLanguages";
-            DB::query('delete from carer_profile_language where carer_profile_id=:?',[$input['id']]);
+            //DB::query('delete from carer_profile_language where carer_profile_id=:?',[$input['id']]);
             if (isset($input['languages'])) {
-                $carerProfiles->Languages()->sync(array_keys($input['languages']));
+
+                $languages = $request->input('languages');
+                $carerProfiles->Languages()->sync(array_map('intval', array_keys($languages)));
             }
             if (isset($input['language_additional'])) {
                 $carerProfiles->language_additional = $input['language_additional'];
             }
             $carerProfiles->save();
+
+/*            $serviceUsersProfile->Languages()->sync(array_map('intval', array_keys($languages)));
+            */
 
             unset($carerProfiles);
         }
