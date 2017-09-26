@@ -20,13 +20,16 @@
                     Do you have any other questions?
                 </h2>
                 <div class="inputWrap">
-                    {!! Form::select('have_questions',['Yes'=>'Yes','No'=>'No'],
-null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    <?php
+                    if (isset($atrr)) unset($atrr);
+                    $atrr = ['class'=>'formSelect','id'=>'main-if'];
+                    if (is_null($carersProfile->have_questions))
+                        $atrr['placeholder'] = 'Please select';
+                    ?>
+                    {!! Form::select('have_questions',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                 </div>
                 @if ($errors->has('have_questions'))
-                    <span class="help-block">
-                                        <strong>{{ $errors->first('have_questions') }}</strong>
-                                    </span>
+                    <span class="help-block"><strong>{{ $errors->first('have_questions') }}</strong></span>
                 @endif
 
             </div>

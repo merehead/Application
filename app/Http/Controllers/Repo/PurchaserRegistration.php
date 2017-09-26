@@ -11,11 +11,13 @@ namespace App\Http\Controllers\Repo;
 
 use App\CarerReference;
 use App\CarersProfile;
+use App\MailError;
 use App\PurchasersProfile;
 use App\User;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Swift_TransportException;
 
 class PurchaserRegistration
 {
@@ -170,9 +172,23 @@ class PurchaserRegistration
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']],TRUE)) {
             Auth::login($user, true);
 
-            Mail::send(config('settings.frontTheme').'.emails.continue_sign_up_service_user',
-                ['user' => $user, 'password' => $request['password']],
-                function ($m) use ($request) {$m->to($request['email'])->subject('Registration on HOLM');});
+            try {
+
+                Mail::send(config('settings.frontTheme') . '.emails.continue_sign_up_service_user',
+                    ['user' => $user, 'password' => $request['password']],
+                    function ($m) use ($request) {
+                        $m->to($request['email'])->subject('Registration on HOLM');
+                    });
+            }
+            catch (Swift_TransportException $STe){
+
+                    $error = MailError::create([
+                        'error_message'=>$STe->getMessage(),
+                        'function'=>__METHOD__,
+                        'action'=>'Try to sent continue_sign_up_service_user',
+                        'user_id'=>$user->id
+                    ]);
+                }
 
         }
 

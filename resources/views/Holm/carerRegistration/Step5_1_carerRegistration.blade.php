@@ -23,7 +23,7 @@
 
                     <div class="inputWrap">
 
-                        {!! Form::textarea('criminal_detail',null,['class'=>'formArea','placeholder'=>' Detailed response']) !!}
+                        {!! Form::textarea('criminal_detail',null,['class'=>'formArea','placeholder'=>' Detailed response','maxlength'=>'255' ]) !!}
 
                     </div>
 
