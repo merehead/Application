@@ -35,6 +35,9 @@ class ForgotPasswordController extends FrontController
 
     public function showLinkRequestForm()
     {
+
+
+
         $this->title ='Holm - Reset Password';
         $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
         $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
@@ -47,7 +50,10 @@ class ForgotPasswordController extends FrontController
 
         $this->vars = array_add($this->vars,'title', $this->title);
 
-        $this->content = view('auth.passwords.email',$this->vars)->render();
+        $this->content = view('auth.passwords.myPasswordReset',$this->vars)->render();
+
+        //dd($this->content);
+
         $this->vars = array_add($this->vars,'content',$this->content);
         return $this->renderOutput();
 
