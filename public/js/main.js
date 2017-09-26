@@ -671,11 +671,22 @@ $(document).ready(function () {
         }
     });
 
+
     $( "input[maxlength], textarea" ).focus(function() {
         var maxLenght = $( this ).attr('maxlength');
         var currentLength = $( this ).val().length;
         var symbolsLeft = maxLenght - currentLength;
         $( this ).before('<span class="help-block" style="margin: 0;padding: 0;color: green">Symbols left '+ symbolsLeft +'</span>');
+
+/*    //$('#email').attr('name')
+
+    $("input[maxlength], textarea").focus(function () {
+        var maxLenght = $(this).attr('maxlength');
+        var currentLength = $(this).val().length;
+        var symbolsLeft = maxLenght - currentLength;
+        $(this).before('<span class="help-block" style="margin: 0;padding: 0;">Symbols left ' + symbolsLeft + '</span>');*/
+
+
     });
     $("input[maxlength], textarea").focusout(function () {
         $(this).prev("span").remove();
@@ -909,7 +920,7 @@ $(document).ready(function () {
                                 if (arrForDeleteIDProfile.length > 0) {
                                     axios.delete(
                                         '/api/document/' + arrForDeleteIDProfile + '/'
-                                    ).then((response) = > {
+                                    ).then((response) => {
                                         console.log(response)
                                 })
                                     ajaxForm($(idForm), that);

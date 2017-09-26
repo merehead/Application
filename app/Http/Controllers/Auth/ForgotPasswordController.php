@@ -50,9 +50,8 @@ class ForgotPasswordController extends FrontController
 
         $this->vars = array_add($this->vars,'title', $this->title);
 
-        $this->content = view('auth.passwords.myPasswordReset',$this->vars)->render();
 
-        //dd($this->content);
+        $this->content = view('auth.passwords.myPasswordReset',$this->vars)->render();
 
         $this->vars = array_add($this->vars,'content',$this->content);
         return $this->renderOutput();

@@ -227,7 +227,7 @@ class CarerRegistration
     private function saveStep4($request) {
 
 
-
+//dd($request->all());
 
 
         $this->validate($request, [
