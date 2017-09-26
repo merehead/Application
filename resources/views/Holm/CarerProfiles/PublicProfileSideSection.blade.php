@@ -42,7 +42,13 @@
             <img src="/img/pay1.png" alt="">
         </a>
         <a href="" class="payment__item">
+            <img src="/img/pay2.png" alt="">
+        </a>
+        <a href="" class="payment__item">
             <img src="/img/pay3.png" alt="">
+        </a>
+        <a href="" class="payment__item">
+            <img src="/img/pay4.png" alt="">
         </a>
     </div>
 </div>
@@ -51,7 +57,6 @@
         Availability
     </h2>
 </div>
-
 <div class="availability">
     @foreach ($workingTimes as $item)
         <p class="availability__item availability__item--full" id="{{$item->id}}">

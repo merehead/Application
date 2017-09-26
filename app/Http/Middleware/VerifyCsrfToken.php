@@ -19,5 +19,6 @@ class VerifyCsrfToken extends BaseVerifier
         'purchaser-registration',
         'purchaser-settings',
         'carer-settings'
+        'bookings/*',
     ];
 }

@@ -58,14 +58,18 @@ class ServiceUsersProfile extends Model
     public function setStartDateAttribute($value)
     {
         $date = DateTime::createFromFormat('d/m/Y', $value);
+
         $this->attributes['start_date'] = $date->format('Y-m-d H:i:s');
-        //dd($date->format('Y-m-d H:i:s'));
 
     }
 
     public function getStartDateAttribute($value)
     {
         return date('d/m/Y',strtotime($value));
+    }
+
+    public function getFullNameAttribute(){
+        return $this->first_name.' '.$this->family_name;
     }
 
     public function isDeleted()

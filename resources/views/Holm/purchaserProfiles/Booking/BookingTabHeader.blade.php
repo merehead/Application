@@ -6,24 +6,22 @@
             Home
         </a>
         <span class="breadcrumbs__arrow">&gt;</span>
-        <a href="/purchaser-settings/" class="breadcrumbs__item">
+        <a href="/serviceUser-settings/booking/" class="breadcrumbs__item">
             MY Profile
         </a>
-          <span class="breadcrumbs__arrow">></span>
+        <!-- <span class="breadcrumbs__arrow">></span>
          <a href="#" class="breadcrumbs__item">
            My Bookings
          </a>
-
+-->
 
     </div>
     <div class="bookingGroup">
-        <!-- <a href="#" class="printIco">
-           <img src="./dist/img/print.png" alt="">
-         </a> -->
+
     </div>
 </div>
 
 <div class="bookingSwitcher">
-    <a href="/purchaser-settings/" class="bookingSwitcher__link ">Profile settings</a>
-    <a href="/purchaser-settings/booking/" class="bookingSwitcher__link bookingSwitcher__link--active">My bookings <span>+1</span> </a>
+    <a href="/purchaser-settings/" class="bookingSwitcher__link bookingSwitcher__link--active">Profile settings</a>
+    <a href="/purchaser-settings/booking/" class="bookingSwitcher__link">My bookings</a>
 </div>
