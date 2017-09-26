@@ -927,7 +927,7 @@ $(document).ready(function () {
                                 if (arrForDeleteIDProfile.length > 0) {
                                     axios.delete(
                                         '/api/document/' + arrForDeleteIDProfile + '/'
-                                    ).then((response) = > {
+                                    ).then((response) => {
                                         console.log(response)
                                 })
                                     ajaxForm($(idForm), that);
