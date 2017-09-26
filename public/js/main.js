@@ -644,7 +644,7 @@ $(document).ready(function () {
         $('input.night:checkbox').not(this).prop('checked', this.checked);
     });
 
-//^^^^^^^Иван 20170921 для приватного профиля пользователя
+
 //>>>>Иван 20170922 для приватного профиля пользователя
     $(document).on('change', '.serviceUserProfileInhabitants', function () {
 
@@ -671,30 +671,12 @@ $(document).ready(function () {
         }
     });
 
-<<<<<<< HEAD
     $( "input[maxlength], textarea" ).focus(function() {
         var maxLenght = $( this ).attr('maxlength');
         var currentLength = $( this ).val().length;
         var symbolsLeft = maxLenght - currentLength;
         $( this ).before('<span class="help-block" style="margin: 0;padding: 0;color: green">Symbols left '+ symbolsLeft +'</span>');
-=======
-    //$('#email').attr('name')
-
-    $("input[maxlength], textarea").focus(function () {
-        var maxLenght = $(this).attr('maxlength');
-        var currentLength = $(this).val().length;
-        var symbolsLeft = maxLenght - currentLength;
-        $(this).before('<span class="help-block" style="margin: 0;padding: 0;">Symbols left ' + symbolsLeft + '</span>');
->>>>>>> origin2/Anton
     });
-
-    $("input[maxlength], textarea").keyup(function () {
-        var maxLenght = $(this).attr('maxlength');
-        var currentLength = $(this).val().length;
-        var symbolsLeft = maxLenght - currentLength;
-        $(this).prev("span").text('Symbols left ' + symbolsLeft);
-    });
-
     $("input[maxlength], textarea").focusout(function () {
         $(this).prev("span").remove();
     });
