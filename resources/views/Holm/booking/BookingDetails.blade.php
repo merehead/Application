@@ -231,7 +231,7 @@
                         <div class="singleAppointment singleAppointment--progress">
                             <div class="singleAppointment__header">
                               <span>
-                                #1
+                                #3
                               </span>
                                 <h2>
                                     in progress
@@ -239,114 +239,7 @@
                             </div>
                             <div class="singleAppointment__body">
                                 <p>
-                                    <span>Date: </span> 15 june 2017
-                                </p>
-                                <p>
-                                    <span>Time: </span>  13:00 PM - 18:00 PM
-                                </p>
-                                <div class="appointmentBtn">
-                                    <a href="#" class="appointmentBtn__item appointmentBtn__item--compl">
-                                        Completed
-                                    </a>
-                                    <a href="#" class="appointmentBtn__item appointmentBtn__item--rej">
-                                        Rejected
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="singleAppointment singleAppointment--progress">
-                            <div class="singleAppointment__header">
-                              <span>
-                                #1
-                              </span>
-                                <h2>
-                                    in progress
-                                </h2>
-                            </div>
-                            <div class="singleAppointment__body">
-                                <p>
-                                    <span>Date: </span> 15 june 2017
-                                </p>
-                                <p>
-                                    <span>Time: </span>  13:00 PM - 18:00 PM
-                                </p>
-                                <div class="appointmentBtn">
-                                    <a href="#" class="appointmentBtn__item appointmentBtn__item--compl">
-                                        Completed
-                                    </a>
-                                    <a href="#" class="appointmentBtn__item appointmentBtn__item--rej">
-                                        Rejected
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="singleAppointment singleAppointment--progress">
-                            <div class="singleAppointment__header">
-                              <span>
-                                #1
-                              </span>
-                                <h2>
-                                    in progress
-                                </h2>
-                            </div>
-                            <div class="singleAppointment__body">
-                                <p>
-                                    <span>Date: </span> 15 june 2017
-                                </p>
-                                <p>
-                                    <span>Time: </span>  13:00 PM - 18:00 PM
-                                </p>
-                                <div class="appointmentBtn">
-                                    <a href="#" class="appointmentBtn__item appointmentBtn__item--compl">
-                                        Completed
-                                    </a>
-                                    <a href="#" class="appointmentBtn__item appointmentBtn__item--rej">
-                                        Rejected
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="singleAppointment  ">
-                            <div class="singleAppointment__header">
-                              <span>
-                                #1
-                              </span>
-                                <h2>
-                                    in progress
-                                </h2>
-                            </div>
-                            <div class="singleAppointment__body">
-                                <p>
-                                    <span>Date: </span> 15 june 2017
-                                </p>
-                                <p>
-                                    <span>Time: </span>  13:00 PM - 18:00 PM
-                                </p>
-                                <div class="appointmentBtn">
-                                    <a href="#" class="appointmentBtn__item appointmentBtn__item--compl">
-                                        Completed
-                                    </a>
-                                    <a href="#" class="appointmentBtn__item appointmentBtn__item--rej">
-                                        Rejected
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="singleAppointment  ">
-                            <div class="singleAppointment__header">
-                              <span>
-                                #1
-                              </span>
-                                <h2>
-                                    in progress
-                                </h2>
-                            </div>
-                            <div class="singleAppointment__body">
-                                <p>
-                                    <span>Date: </span> 15 june 2017
+                                    <span>Date: </span> 16 june 2017
                                 </p>
                                 <p>
                                     <span>Time: </span>  13:00 PM - 18:00 PM

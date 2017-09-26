@@ -61,8 +61,8 @@ class BookingsController extends FrontController implements Constants
 
     public function view_details(Booking $booking){
 
-        if(!in_array($booking->status_id, [2, 5, 7]))
-            return;
+//        if(!in_array($booking->status_id, [2, 5, 7]))
+//            return;
         $user = Auth::user();
 
         $this->template = config('settings.frontTheme') . '.templates.purchaserPrivateProfile';
