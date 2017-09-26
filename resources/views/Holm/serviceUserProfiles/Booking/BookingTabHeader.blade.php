@@ -6,14 +6,13 @@
             Home
         </a>
         <span class="breadcrumbs__arrow">&gt;</span>
-        <a href="/serviceUser-settings/booking/{{$serviceUsersProfile->id}}" class="breadcrumbs__item">
+        <a href="/serviceUser-settings/booking/{{$serviceUser->id}}" class="breadcrumbs__item">
             MY Profile
         </a>
-        <!-- <span class="breadcrumbs__arrow">></span>
+        <span class="breadcrumbs__arrow">></span>
          <a href="#" class="breadcrumbs__item">
-           My Bookings
+             {{$serviceUser->full_name}}
          </a>
--->
 
     </div>
     <div class="bookingGroup">
@@ -29,6 +28,6 @@
 </div>
 
 <div class="bookingSwitcher">
-    <a href="/serviceUser-settings/{{$serviceUsersProfile->id}}" class="bookingSwitcher__link ">Profile settings</a>
-    <a href="/serviceUser-settings/booking/{{$serviceUsersProfile->id}}" class="bookingSwitcher__link bookingSwitcher__link--active">My bookings <span>+1</span> </a>
+    <a href="/serviceUser-settings/{{$serviceUser->id}}" class="bookingSwitcher__link bookingSwitcher__link--active">Profile settings</a>
+    <a href="/serviceUser-settings/booking/{{$serviceUser->id}}" class="bookingSwitcher__link">My bookings</a>
 </div>
