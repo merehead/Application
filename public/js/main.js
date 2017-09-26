@@ -524,7 +524,7 @@ $(document).ready(function () {
     if ($('div').is('.appointmentSlider')) {
         $('.appointmentSlider').owlCarousel({
             items: 3,
-            loop: true,
+            loop: false,
             dots: true,
             nav: true,
             navText: [
