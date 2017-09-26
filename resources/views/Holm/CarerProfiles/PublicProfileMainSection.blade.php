@@ -191,7 +191,7 @@ $documents['other_relevant_qualification']->count()>0)
 </div>
 @endif
 
-@if($languages->count()!=0 && !empty($carerProfile->language_additional))
+@if($languages->count()!=0 || !empty($carerProfile->language_additional))
 <div class="profileExtraInfo">
     <h2 class="profileTitle">
         Languages
