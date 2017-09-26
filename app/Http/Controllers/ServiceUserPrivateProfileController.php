@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AssistanceType;
+use App\Behaviour;
 use App\Booking;
 use App\Floor;
 use App\Interfaces\Constants;
