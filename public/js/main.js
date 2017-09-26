@@ -767,6 +767,82 @@ $(document).ready(function () {
         });
     }
 
+    /*-------------- Home page slider (popular carers) ------------*/
+    if ($('div').is('.HomePageBanner')) {
+        $('.HomePageBanner').owlCarousel({
+            items: 1,
+            loop: true,
+            dots: true,
+            nav: true,
+            navText: [
+              `<a href="#theCarousel" data-slide="prev" class="sliderControl sliderControl--left centeredLink">
+                <i class="fa fa-angle-left"></i>
+              </a>`,
+              `<a href="#theCarousel" data-slide="next" class="sliderControl sliderControl--right centeredLink">
+                <i class="fa fa-angle-right"></i>
+              </a>`
+            ],
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplayHoverPause: true,
+            responsive:{
+               0    : { items:1 },
+               600  : { items:2 },
+               992  : { items:3 },
+               1200 : { items:4 }
+           }
+        });
+    }
+
+    $('.sliderControl').on('click', function (e) {
+      e.preventDefault()
+    })
+
+    /*-------------- Home page slider (popular carers) ------------*/
+    if ($('div').is('.appointmentSlider')) {
+        $('.appointmentSlider').owlCarousel({
+            items: 3,
+            loop: true,
+            dots: true,
+            nav: true,
+            navText: [
+              `<a href="#theCarousel" data-slide="prev" class="sliderControl sliderControl--left centeredLink">
+                <i class="fa fa-angle-left"></i>
+              </a>`,
+              `<a href="#theCarousel" data-slide="next" class="sliderControl sliderControl--right centeredLink">
+                <i class="fa fa-angle-right"></i>
+              </a>`
+            ],
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplayHoverPause: true,
+            responsive:{
+               0    : { items:1 },
+               600  : { items:1 },
+               992  : { items:2 },
+               1200  : { items:3 }
+           }
+        });
+    }
+
+    $('.sliderControl').on('click', function (e) {
+      e.preventDefault()
+    })
+
+    /*-------------- Home/welcome-carer page slider (recalls) ------------*/
+    // Carousel
+    $('.multi-item-carousel').carousel({
+        interval: 5000
+    });
+
+    // change quote
+    $('.peopleBox').on('click', function (e) {
+        e.preventDefault();
+        var quote = $(this).find('.people_quote').text().trim();
+        $('#testimonialSlider__item p').text(quote)
+    });
+
+
     $(".toggler").click(function (e) {
         e.preventDefault();
 
@@ -1534,5 +1610,37 @@ $(document).ready(function () {
         })
       })
     }
+
+
+    // -- BOOKING PAYMENT -------
+    $('.bookPayment__form-switch').on('click', function(e) {
+      e.preventDefault()
+      $(this).addClass('paySwitch__item--active')
+      $('.bookPayment__form-header').attr('style', 'display: block')
+      $('.bonusPay-header').attr('style', 'display: none')
+      $('.bonusPay-header-switch').removeClass('paySwitch__item--active')
+    })
+    $('.bonusPay-header-switch').on('click', function(e) {
+      e.preventDefault()
+      $(this).addClass('paySwitch__item--active')
+      $('.bookPayment__form-header').attr('style', 'display: none')
+      $('.bookPayment__form-switch').removeClass('paySwitch__item--active')
+      $('.bonusPay-header').attr('style', 'display: block')
+    })
+
+
+    // -- PROFILE RATING -------
+
+    $('.profileRating__item').on('click', function() {
+      var raiting = $(this).parent().children()
+      var id = $(this).attr('id').split('_')[1]
+
+      raiting.removeClass('active')
+      $.each(raiting, function(i, elem) {
+        if(i < id){
+          $(this).addClass('active')
+        }
+      })
+    })
 
 });

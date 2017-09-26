@@ -415,3 +415,65 @@ span.charsLeft{
 .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
 .autocomplete-group { padding: 2px 5px; }
 .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+.HomePageBanner-carerBanner__box,
+.HomePageBanner .owl-item{
+  display: flex;
+  justify-content: center;
+}
+
+/*
+* mobile remarks
+*/
+
+.lightTitle {
+  line-height: 1.3;
+}
+@media screen and (max-width: 768px) {
+
+  .advantages__item{ margin-top: 45px;}
+
+  .about_section { padding: 50px 0 100px 0;margin-top: 0;background-position: 30%;}
+
+  .singleAdvantage__info p { margin-top: 10px;}
+
+  /*.gender__item + .gender__item { margin-left: 0; margin-top: 10px;}*/
+  .gender{
+    flex-direction: row;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body{
+    line-height: 1.4em;
+  }
+  .lightTitle{
+    font-size: 1.6em
+  }
+}
+
+
+button:disabled { background: #d7d7d7; color: #f8f4f4;}
+button:disabled:hover { background: #d7d7d7; color: #f8f4f4;}
+
+.carers-below{
+  margin: 0 auto 75px auto!important;
+}
+.appointmentSliderWrap .sliderContainer{
+  height: auto;
+}
+.appointmentSlider .owl-stage{
+  display: flex;
+  justify-content: space-between;
+}
+.appointmentSlider .owl-item{
+  margin: 0 10px;
+}
+.singleAppointment{
+  width: auto
+}
+.singleAppointment__header h2{
+  width: 100%
+}
+.profileRating__item{
+  cursor: pointer;
+}

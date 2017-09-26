@@ -3,10 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Booking extends Model
 {
-    protected $fillable = ['purchaser_id','service_user_id','carer_id','date_start','date_end','frequency_id','amount_for_purchaser','amount_for_carer','status_id'];
+    protected $fillable = ['purchaser_id','service_user_id','carer_id','date_start','date_end','frequency_id','amount_for_purchaser','amount_for_carer','status_id', 'payment_method'];
 
     public function getDateStartAttribute($value)
     {
@@ -24,21 +25,20 @@ class Booking extends Model
     {
         return $this->belongsTo('App\User','purchaser_id','id');
     }
+
+//    public function bookingServiceUser()
+//    {
+//        return $this->belongsTo('App\User','service_user_id','id');
+//    }
+
     public function bookingServiceUser()
     {
-        return $this->belongsTo('App\User','service_user_id','id');
+        return $this->belongsTo('App\ServiceUsersProfile','service_user_id','id');
     }
     public function bookingCarer()
     {
         return $this->belongsTo('App\User','carer_id','id');
     }
-
-
-    public function frequency()
-    {
-        return $this->belongsTo('App\BookingAppointmentFrequency');
-    }
-
 
     public function bookingStatus ()
     {
@@ -55,4 +55,40 @@ class Booking extends Model
     {
         return $this->hasMany('App\Appointment');
     }
+
+    public function assistance_types()
+    {
+        return $this->belongsToMany('App\AssistanceType', 'bookings_assistance_types');
+    }
+
+    //Accessors
+    public function getCarerRateAttribute(){
+        return 10;
+    }
+
+    public function getPurchaserRateAttribute(){
+        return 13;
+    }
+
+    public function getHoursAttribute(){
+        $hours = 0;
+        $appointments = $this->appointments()->get();
+        foreach ($appointments as $appointment)
+            $hours += $appointment->hours;
+
+        return $hours;
+    }
+
+    public function getHourPriceAttribute(){
+        $user = Auth::user();
+        if($user->user_type_id == 3)
+            return 10;
+        else
+            return 13;
+    }
+
+    public function getCarerAmountAttribute(){
+        return $this->hours * $this->purchaser_rate;
+    }
+
 }

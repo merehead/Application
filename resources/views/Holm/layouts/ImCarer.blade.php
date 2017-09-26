@@ -38,11 +38,6 @@
         window.open(href, '_blank').focus();
     });
 
-    // Carousel
-    $('.multi-item-carousel').carousel({
-        interval: false
-    });
-
     // change quote
     $('.peopleBox').on('click', function (e) {
         e.preventDefault()

@@ -1,6 +1,8 @@
 /node_modules
 /public/hot
 /public/storage
+/public/img/profile_photos
+/public/img/service_user_profile_photos
 /storage/*.key
 /public/img/profile_photos
 /public/img/service_user_profile_photos

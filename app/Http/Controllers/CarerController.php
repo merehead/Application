@@ -6,6 +6,7 @@ use App\AssistanceType;
 use App\Booking;
 use App\CarerReference;
 use App\CarersProfile;
+use App\Interfaces\Constants;
 use App\Language;
 use App\Postcode;
 use App\PurchasersProfile;
@@ -16,8 +17,9 @@ use App\WorkingTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
+use Auth;
 
-class CarerController extends FrontController
+class CarerController extends FrontController implements Constants
 {
 
     public function __construct()
@@ -56,6 +58,9 @@ class CarerController extends FrontController
         $this->vars = array_add($this->vars, 'header', $header);
         $this->vars = array_add($this->vars, 'footer', $footer);
         $this->vars = array_add($this->vars, 'modals', $modals);
+
+        $newBookings = Booking::whereIn('status_id', [self::NEW, self::AWAITING_CONFIRMATION])->where('purchaser_id', $this->user->id)->get();
+        $this->vars = array_add($this->vars, 'newBookings', $newBookings);
 
         if (!$this->user) {
             return \redirect('welcome-carer');
@@ -152,8 +157,9 @@ class CarerController extends FrontController
         return $this->renderOutput();
     }
 
-    public function booking()
+    public function bookingFilter($status = 'all')
     {
+        $user = Auth::user();
 
         $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
         $this->title = 'Holm Care';
@@ -167,28 +173,29 @@ class CarerController extends FrontController
         $this->vars = array_add($this->vars, 'modals', $modals);
 
 
-        $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarerall')->with($this->vars)
-            ->render();
+        $this->vars = array_add($this->vars, 'status', $status);
 
-        return $this->renderOutput();
-    }
+        $newBookings = Booking::whereIn('status_id', [self::NEW, self::AWAITING_CONFIRMATION])->where('carer_id', $user->id)->get();
+        $this->vars = array_add($this->vars, 'newBookings', $newBookings);
 
-    public function bookingFilter($status)
-    {
+        $inProgressBookings = Booking::whereIn('status_id', [self::CONFIRMED, self::IN_PROGRESS, self::DISPUTE])->where('carer_id', $user->id)->get();
+        $inProgressAmount = 0;
+        foreach ($inProgressBookings as $booking){
+            $inProgressAmount += ($booking->hours * $booking->hour_price);
+        }
 
-        $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
-        $this->title = 'Holm Care';
+        $this->vars = array_add($this->vars, 'inProgressBookings', $inProgressBookings);
+        $this->vars = array_add($this->vars, 'inProgressAmount', $inProgressAmount);
 
-        $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
-        $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
-        $modals = view(config('settings.frontTheme') . '.includes.modals')->render();
+        $completedBookings = Booking::where('status_id', 7)->where('carer_id', $user->id)->get();
+        $completedAmount = 0;
+        foreach ($completedBookings as $booking){
+            $completedAmount += ($booking->hours * $booking->hour_price);
+        }
+        $this->vars = array_add($this->vars, 'completedBookings', $completedBookings);
+        $this->vars = array_add($this->vars, 'completedAmount', $completedAmount);
 
-        $this->vars = array_add($this->vars, 'header', $header);
-        $this->vars = array_add($this->vars, 'footer', $footer);
-        $this->vars = array_add($this->vars, 'modals', $modals);
-
-        $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarer' . $status)->with($this->vars)
-            ->render();
+        $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarerall')->with($this->vars)->render();
 
 
         return $this->renderOutput();
@@ -390,18 +397,13 @@ class CarerController extends FrontController
             //DB::query('delete from carer_profile_language where carer_profile_id=:?',[$input['id']]);
             if (isset($input['languages'])) {
 
-                $languages = $request->input('languages');
-                $carerProfiles->Languages()->sync(array_map('intval', array_keys($languages)));
-            }
-            if (isset($input['language_additional'])) {
-                $carerProfiles->language_additional = $input['language_additional'];
-            }
-            $carerProfiles->save();
+                if (isset($input['languages']))
+                    $carerProfiles->Languages()->sync(array_keys($input['languages']));
+                if (isset($input['language_additional'])) $carerProfiles->language_additional = $input['language_additional'];
+                $carerProfiles->save();
 
-/*            $serviceUsersProfile->Languages()->sync(array_map('intval', array_keys($languages)));
-            */
-
-            unset($carerProfiles);
+                unset($carerProfiles);
+            }
         }
 
         if ($input['stage'] == 'carerPrivateTransport') {

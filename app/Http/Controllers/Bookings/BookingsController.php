@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Bookings;
 
+use App\Appointment;
 use App\Booking;
+use App\BookingOverview;
 use App\BookingsMessage;
 use App\Interfaces\Constants;
 use App\PaymentServices\StripeService;
@@ -16,7 +18,8 @@ use Auth;
 class BookingsController extends FrontController implements Constants
 {
     public function create(Request $request){
-        $purchaser = User::find(2);
+//        $purchaser = User::find(2);
+        $purchaser = Auth::user();
         $carer = User::find($request->carer_id);
 
 
@@ -35,14 +38,31 @@ class BookingsController extends FrontController implements Constants
                 'status_id' => 2
             ]);
 
+
+
+            foreach ($booking_item['appointments'] as $appointment_item){
+                $booking->appointments()->create([
+                    'date_start' => $appointment_item['date_start'],
+                    'date_end' => $appointment_item['date_end'],
+                    'time_from' => $appointment_item['time_from'],
+                    'time_to' => $appointment_item['time_to'],
+                    'periodicity' => $appointment_item['periodicity'],
+                    'status_id' => 1,
+                    'carer_status_id' => 1,
+                    'purchaser_status_id' => 1,
+                ]);
+            }
+
             $booking->assistance_types()->attach($booking_item['assistance_types']);
+
+            return response(['status' => 'success']);
         }
     }
 
     public function view_details(Booking $booking){
 
-        if(!in_array($booking->status_id, [2, 5, 7]))
-            return;
+//        if(!in_array($booking->status_id, [2, 5, 7]))
+//            return;
         $user = Auth::user();
 
         $this->template = config('settings.frontTheme') . '.templates.purchaserPrivateProfile';
@@ -99,17 +119,17 @@ class BookingsController extends FrontController implements Constants
     public function accept(Booking $booking, StripeService $stripeService){
         $user = Auth::user();
 //        if($booking->status_id == 2){
-            if($booking->payment_method == 'credit_card'){
-                $purchase = $stripeService->createCharge([
-                    'amount' => $booking->carer_amount * 100,
-                ], $booking->card_token);
+        if($booking->payment_method == 'credit_card'){
+            $purchase = $stripeService->createCharge([
+                'amount' => $booking->carer_amount * 100,
+            ], $booking->card_token);
 //                dd($purchase);
-            }
-            else{
+        }
+        else{
 
-            }
-            $booking->status_id = $booking->carer_status_id = $booking->purchaser_status_id = self::IN_PROGRESS;
-            $booking->save();
+        }
+        $booking->status_id = $booking->carer_status_id = $booking->purchaser_status_id = self::IN_PROGRESS;
+        $booking->save();
 //        }
 
         return response(['status' => 'success']);
@@ -193,5 +213,18 @@ class BookingsController extends FrontController implements Constants
             ->render();
 
         return $this->renderOutput();
+    }
+
+    public function createReview(Booking $booking, Request $request){
+        BookingOverview::create([
+            'booking_id' => $booking->id,
+            'punctuality' => $request->punctuality,
+            'friendliness' => $request->friendliness,
+            'communication' => $request->communication,
+            'performance' => $request->performance,
+            'comment' => $request->comment,
+        ]);
+
+        return response(['status' => 'success']);
     }
 }

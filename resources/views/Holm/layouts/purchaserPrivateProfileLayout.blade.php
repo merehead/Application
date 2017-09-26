@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,900" rel="stylesheet">
     <link rel="stylesheet" href="/css/main.min.css">
+    <link rel="stylesheet" href="/css/owl.carousel.css">
     <link rel="stylesheet" href="/css/cupertino/jquery-ui.min.css">
     <link rel="stylesheet" href="/css/customize.css">
     <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -17,6 +18,7 @@
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     <script src="{{asset('js/jquery.autocomplete.js')}}"></script>
+    <script  src="{{asset('js/owl.carousel.min.js')}}" defer ></script>
     <script src="{{asset('js/main.js')}}"></script>
 </head>
 <body>
