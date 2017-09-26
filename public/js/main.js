@@ -671,21 +671,21 @@ $(document).ready(function () {
         }
     });
 
-<<<<<<< HEAD
+
     $( "input[maxlength], textarea" ).focus(function() {
         var maxLenght = $( this ).attr('maxlength');
         var currentLength = $( this ).val().length;
         var symbolsLeft = maxLenght - currentLength;
         $( this ).before('<span class="help-block" style="margin: 0;padding: 0;color: green">Symbols left '+ symbolsLeft +'</span>');
-=======
-    //$('#email').attr('name')
+
+/*    //$('#email').attr('name')
 
     $("input[maxlength], textarea").focus(function () {
         var maxLenght = $(this).attr('maxlength');
         var currentLength = $(this).val().length;
         var symbolsLeft = maxLenght - currentLength;
-        $(this).before('<span class="help-block" style="margin: 0;padding: 0;">Symbols left ' + symbolsLeft + '</span>');
->>>>>>> origin2/Anton
+        $(this).before('<span class="help-block" style="margin: 0;padding: 0;">Symbols left ' + symbolsLeft + '</span>');*/
+
     });
 
     $("input[maxlength], textarea").keyup(function () {
