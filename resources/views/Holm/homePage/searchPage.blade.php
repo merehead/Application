@@ -123,7 +123,7 @@
                             <span class="fieldIco"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                         </div>
                         <div class="sortFilters__item">
-                            {!! Form::select('typeService',[''=>'--TYPE OF SERVICE--','1'=>'SINGLE / REGULAR VISITS','2'=>'LIVE IN CARE','3'=>'RESPITE CARE'],null,['id'=>'typeService','class'=>'formSelect','onchange'=>'carerSearchAjax()']) !!}
+                            {!! Form::select('typeService',[''=>'TYPE OF SERVICE','1'=>'SINGLE / REGULAR VISITS','2'=>'LIVE IN CARE','3'=>'RESPITE CARE'],null,['id'=>'typeService','class'=>'formSelect','onchange'=>'carerSearchAjax()']) !!}
                         </div>
                     </div>
                 </div>
