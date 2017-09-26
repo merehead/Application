@@ -43,7 +43,7 @@
                 <h2 class="formLabel questionForm__label">
                     Name <span>*</span>
                 </h2>
-                {!! Form::text('name',null,['class'=>'formInput','placeholder'=>'Name']) !!}
+                {!! Form::text('name',null,['class'=>'formInput','placeholder'=>'Name','maxlength'=>"60"]) !!}
                 @if ($errors->has('name'))
                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -56,7 +56,7 @@
                 <h2 class="formLabel questionForm__label">
                     Job title <span>*</span>
                 </h2>
-                {!! Form::text('job_title',null,['class'=>'formInput','placeholder'=>'Job title']) !!}
+                {!! Form::text('job_title',null,['class'=>'formInput','placeholder'=>'Job title','maxlength'=>"60"]) !!}
                 @if ($errors->has('job_title'))
                     <span class="help-block">
                                         <strong>{{ $errors->first('job_title') }}</strong>
@@ -69,7 +69,7 @@
                 <h2 class="formLabel questionForm__label">
                     Relationship <span>*</span>
                 </h2>
-                {!! Form::text('relationship',null,['class'=>'formInput','placeholder'=>'Relationship']) !!}
+                {!! Form::text('relationship',null,['class'=>'formInput','placeholder'=>'Relationship','maxlength'=>"60"]) !!}
                 @if ($errors->has('relationship'))
                     <span class="help-block">
                                         <strong>{{ $errors->first('relationship') }}</strong>
@@ -80,7 +80,7 @@
                 <h2 class="formLabel questionForm__label">
                     Phone <span>*</span>
                 </h2>
-                {!! Form::text('phone',null,['class'=>'formInput','placeholder'=>'Phone']) !!}
+                {!! Form::text('phone',null,['class'=>'formInput','placeholder'=>'Phone','maxlength'=>"50"]) !!}
                 @if ($errors->has('phone'))
                     <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>
@@ -92,7 +92,7 @@
                     Email <span>*</span>
                 </h2>
 
-                {!! Form::text('email',null,['class'=>'formInput','placeholder'=>'Email']) !!}
+                {!! Form::text('email',null,['class'=>'formInput','placeholder'=>'Email','maxlength'=>"110"]) !!}
                 @if ($errors->has('email'))
                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>

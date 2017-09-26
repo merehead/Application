@@ -53,6 +53,7 @@
                                 <option value="I have a payment question">I have a payment question</option>
                                 <option value="I would like to change a booking">I would like to change a booking</option>
                                 <option value="I need help with a recent appointment">I need help with a recent appointment</option>
+                                <option value="I would like Holm to come to my town / city">I would like Holm to come to my town / city</option>
                                 <option value="Something else">Something else</option>
                             </select>
                             <span class="contactForm__ico"><i class="fa fa-file"></i></span>

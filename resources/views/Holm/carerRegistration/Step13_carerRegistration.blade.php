@@ -46,7 +46,7 @@
                             </h2>
 
                             <div class="inputWrap">
-                                {!! Form::text('language_additional',null,['class'=>'formInput','placeholder'=>'Other']) !!}
+                                {!! Form::text('language_additional',null,['class'=>'formInput','placeholder'=>'Other','maxlength'=>"100"]) !!}
 
                             </div>
                             @if ($errors->has('language_additional'))

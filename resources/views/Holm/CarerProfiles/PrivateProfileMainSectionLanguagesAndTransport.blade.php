@@ -29,7 +29,7 @@
 
             <div class="profileRow language_additional nhide"  >
 
-                <div class="profileField profileField--two-thirds">
+                <div class="profileField profileField--full-width">
                     <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Other languages   </span>
@@ -38,6 +38,20 @@
                     {{--      <input type="text" class="profileField__input" placeholder="Details">--}}
                 </div>
             </div>
+
+{{--        @else
+                <div class="profileRow" style="display:none">
+
+                    <div class="profileField profileField--two-thirds">
+                        <h2 class="profileField__title ordinaryTitle">
+              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
+                Other languages   </span>
+                        </h2>
+                        {!! Form::text('language_additional',null,['class'=>'profileField__input','placeholder'=>'Details']) !!}
+                        --}}{{--      <input type="text" class="profileField__input" placeholder="Details">--}}{{--
+                    </div>
+                </div>
+        @endif--}}
 
 </div>
 {{ Form::close() }}
@@ -64,16 +78,16 @@
                 </h2>
 
                 {!! Form::select('driving_licence',['Yes'=>'Have UK/EEA Driving Licence','No'=>'Do not have a driving licence'],
-                null,['class'=>'profileField__select profileField__select--greyBg','disabled','data-edit'=>'false']) !!}
+                null,['class'=>'profileField__select profileField__select--greyBg','disabled','data-edit'=>'false',
+                'id'=>'driving_license'])
+                 !!}
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Have UK/EEA Driving Licence</option>
                     <option value="Flat">Do not have a driving licence</option>
                     <option value="Flat">Please select</option>
                 </select>--}}
             </div>
-        </div>
-        <div class="profileField profileField-mr">
-            <div class="profileField profileField--full-width">
+            <div class="profileField hiding_profile profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
                  Car for Work
@@ -82,23 +96,20 @@
                 {!! Form::select('have_car',['Yes'=>'Car for work','No'=>'Do not have a car'],
 null,['class'=>'profileField__select','id'=>'type_car_work']) !!}
 
-{{--                <select class="profileField__select ">
-                    <option value="Flat">Car for work</option>
-                    <option value="Flat">Do not have a car</option>
-                    <option value="Flat">Please select</option>
-                </select>--}}
+                {{--                <select class="profileField__select ">
+                                    <option value="Flat">Car for work</option>
+                                    <option value="Flat">Do not have a car</option>
+                                    <option value="Flat">Please select</option>
+                                </select>--}}
             </div>
-
-        </div>
-        <div class="profileField profileField-mr">
-            <div class="profileField profileField--full-width">
+            <div class="profileField hiding_profile profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
                 Transport clients
                 </span>
                 </h2>
                 {!! Form::select('use_car',['Yes'=>'Transport clients','No'=>'Can not transport clients'],
-null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
+null,['class'=>'profileField__select','placeholder'=>'Please select','id'=>'profile_use_car']) !!}
 
 
                 {{--                <select class="profileField__select ">
@@ -109,8 +120,12 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
 
             </div>
         </div>
+        {{--<div class="profileField profileField-mr">--}}
+        {{--</div>--}}
+        {{--<div class="profileField profileField-mr">--}}
+        {{--</div>--}}
 
-        <div class="profileField profileField-mr">
+        <div class="profileField hiding_profile profileField-mr">
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
@@ -119,9 +134,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                 </h2>
 
                 <div class="addContainer">
-                    <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-                    <span class="pickfiles-delete">X</span>
-
+                    <input disabled class="pickfiles-change" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                     <div id="driving_licence_photo" class="pickfiles_img"></div>
                     <a class="add add--moreHeight">
                         <i class="fa fa-plus-circle"></i>
@@ -155,11 +168,11 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                     {!! Form::text('driver_licence_valid_until',null,['id'=>'datepicker_driver_licence','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
                 @endif
 
-                {{--<input type="text" class="profileField__input " placeholder="Valid until date">--}}
+
             </div>
         </div>
 
-        <div class="profileField profileField-mr car-block">
+        <div class="profileField hiding_profile profileField-mr car-block">
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
@@ -167,9 +180,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select']) !!}
                 </span>
                 </h2>
                 <div class="addContainer">
-                  <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-                  <span class="pickfiles-delete">X</span>
-
+                  <input disabled class="pickfiles-change" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
                   <div id="car_insurance_photo" class="pickfiles_img"></div>
                     <a class="add add--moreHeight">
                         <i class="fa fa-plus-circle"></i>

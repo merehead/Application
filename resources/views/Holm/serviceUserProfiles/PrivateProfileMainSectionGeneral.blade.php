@@ -1,19 +1,25 @@
 <div id="serviceGeneral" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">General</h2>
-        <a href="#" class="btn btn-info btn-edit"><span class="fa fa-pencil" data-id="carerPrivateGeneral"></span> EDIT</a>
+        <a href="#" class="btn btn-info btn-edit"><span class="fa fa-pencil" data-id="servicePrivateGeneral"></span> EDIT</a>
         <button type="button" class="btn btn-success hidden" id="load" data-loading-text="<i class='fa fa-spinner
         fa-spin '></i> Processing"><i class="fa fa-floppy-o"></i>  Save</button>
     </div>
 </div>
-{!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUsersProfile->id],'id'=>'servicePrivateGeneral']) !!}
+{!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'servicePrivateGeneral']) !!}
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('stage','general') !!}
+
+{{Form::submit('Click Me!')}}
+
 <div class="borderContainer">
     <div class="profileInfoContainer">
         <div class="generalInfo">
             <div class="profilePhoto profilePhoto--change">
-                <img src="/img/no_photo.png" alt="">
+
+              <input name="{{$serviceUsersProfile->id}}" class="pickfiles_profile_photo" accept=".jpg,.jpeg,.png,.doc" type="file" />
+              <img id="profile_photo" src="/img/service_user_profile_photos/{{$serviceUsersProfile->id}}.png" onerror="this.src='/img/no_photo.png'" alt="avatar">
+
                 <a href="#" class="profilePhoto__ico">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                 </a>
@@ -46,7 +52,7 @@
               </span>
             </h2>
 
-            {!! Form::text('like_name',null,['class'=>'profileField__input','placeholder'=>'Your name','maxlength'=>"120"]) !!}
+            {!! Form::text('like_name',null,['class'=>'profileField__input','placeholder'=>'Your name','maxlength'=>"20"]) !!}
             @if ($errors->has('like_name'))
                 <span class="help-block"><strong>{{ $errors->first('like_name') }}</strong></span>
             @endif
@@ -132,7 +138,7 @@
                Mobile Number
               </span>
             </h2>
-            {!! Form::text('mobile_number',null,['class'=>'profileField__input','placeholder'=>'Mobile number ','maxlength'=>"120"]) !!}
+            {!! Form::text('mobile_number',null,['class'=>'profileField__input','placeholder'=>'Mobile number ','maxlength'=>"30"]) !!}
             @if ($errors->has('mobile_number'))
                 <span class="help-block"><strong>{{ $errors->first('mobile_number') }}</strong></span>
             @endif
@@ -154,26 +160,29 @@
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d317715.7119257097!2d-0.38180351472723606!3d51.528735197655706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2z0JvQvtC90LTQvtC9LCDQktC10LvQuNC60L7QsdGA0LjRgtCw0L3QuNGP!5e0!3m2!1sru!2sru!4v1498824096837" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
     </div>
 </div>
-<div class="borderContainer">
+
+<div id="serviceGeneralone" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">one line about {{$userNameForSite}}</h2>
-        <a href="#" class="profileCategory__link">
-            <i class="fa fa-pencil"></i>
-        </a>
+        <a href="#" class="btn btn-info btn-edit"><span class="fa fa-pencil" data-id="oneLineAbove"></span> EDIT</a>
+        <button type="button" class="btn btn-success hidden" id="load" data-loading-text="<i class='fa fa-spinner
+        fa-spin '></i> Processing"><i class="fa fa-floppy-o"></i>  Save</button>
     </div>
 </div>
+
 {!! Form::close()!!}
 
-{!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUsersProfile->id],'id'=>'servicePrivateGeneral']) !!}
+{!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'oneLineAbove']) !!}
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('stage','oneLineAbove') !!}
+{{Form::submit('Click Me!')}}
 <div class="borderContainer">
 
     <div class="profileRow">
 
         <div class="profileField profileField--full-width">
 
-            {!! Form::text('one_line_about',null,['class'=>'profileField__input','placeholder'=>'One line about the person','maxlength'=>"120"]) !!}
+            {!! Form::text('one_line_about',null,['class'=>'profileField__input','placeholder'=>'One line about the person','maxlength'=>"250"]) !!}
             @if ($errors->has('one_line_about'))
                 <span class="help-block"><strong>{{ $errors->first('one_line_about') }}</strong></span>
             @endif

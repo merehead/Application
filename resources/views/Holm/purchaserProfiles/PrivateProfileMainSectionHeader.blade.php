@@ -13,11 +13,14 @@
 
 <div class="invite">
     <div class="profilePhoto invite__photo">
-        <img src="/img/no_photo.png" alt="">
+      <img class="set_preview_profile_photo" src="img/profile_photos/{{$purchaserProfile->id}}.png" onerror="this.src='/img/no_photo.png'" alt="avatar">
     </div>
     <h2 class="invite__title">
         Invite other users and both get £100 after 20 hours of usage
     </h2>
+    <div class="terms-cerer">
+      *Please refer to <a href="<?php echo e(route('TermsPage')); ?>">Terms &amp; Conditons</a>
+    </div>
     <form class="inviteForm">
         <div class="inviteForm__field">
             <input type="text" class="inviteForm__input "  placeholder="FRIEND'S EMAIL">

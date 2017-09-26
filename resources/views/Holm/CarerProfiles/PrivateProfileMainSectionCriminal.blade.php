@@ -25,7 +25,7 @@
 
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
-                  DBS/CRB
+                  Have up to date DBS certificate
                 </span>
                 </h2>
                 {!! Form::select('DBS',['Yes'=>'Have an up to date DBS','No'=>'Have not a DBS'],null,['id'=>'main-if','class'=>'profileField__select profileField__select--greyBg','placeholder'=>'Please select','readonly','data-edit'=>'false']) !!}

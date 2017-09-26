@@ -20,22 +20,26 @@
                         <h2 class=" formLabel questionForm__label">
                             You can add a photo of yourself to be added to your personal profile. Don't worry. Other people won't see it!
                         </h2>
+
                         <div class="addContainer">
-                          <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-                          <span class="pickfiles-delete">X</span>
+                          <input class="pickfiles_profile_photo" accept="jpg,.jpeg,.png,.doc" type="file" />
                           <div class="pickfiles_img"></div>
-                          <div id="purchaser_personal_photo_2" class="pickfiles_img"></div>
-                            <a href="#" class="add add--moreHeight">
-                                <i class="fa fa-plus-circle"></i>
-                                <div class="add__comment add__comment--smaller">
-                                    <p>Choose a File or Drag Here</p>
-                                    <span>Size limit: 10 MB</span>
-                                </div>
-                            </a>
+
+                          <div id="profile_photo" class="pickfiles_img" name='img/profile_photos/{{$purchasersProfile->id}}.png'
+                            style="background-image: url('img/profile_photos/{{$purchasersProfile->id}}.png')"></div>
+
+                          <a href="#" class="add add--moreHeight">
+                              <i class="fa fa-plus-circle"></i>
+                              <div class="add__comment add__comment--smaller">
+                                  <p>Choose a File or Drag Here</p>
+                                  <span>Size limit: 10 MB</span>
+                              </div>
+                          </a>
                         </div>
                         <div style="display: none" class="addInfo">
-                            <input disabled type="text" name="purchaser_personal_photo" class="addInfo__input" placeholder="Name" >
+                            <input disabled type="text" name="profile_photo" class="addInfo__input" placeholder="Name">
                         </div>
+
                     </div>
                 </div>
             </form>
@@ -61,7 +65,7 @@
         </a>--}}
     </div>
 
-    <a href="#" id="upload_files" class="registrationBtns__item upload_files">
+    <a href="#" id="upload_files" class="registrationBtns__item upload_files_profile_photo">
         next step
         <i class="fa fa-arrow-right"></i>
     </a>

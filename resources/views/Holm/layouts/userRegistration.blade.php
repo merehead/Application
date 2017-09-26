@@ -73,8 +73,8 @@
             dateFormat: "dd/mm/yy",
             showAnim: "slideDown",
             minDate: "-4Y",
-            maxDate: "+20Y",
-            yearRange: "-2:+10"
+            maxDate: "+0D",
+            yearRange: "-2:0"
         });
     });
 
@@ -90,7 +90,17 @@
         });
     });
 
-
+    $( function() {
+        $( "#datepicker_driver_licence" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"dd/mm/yy",
+            showAnim:"slideDown",
+            minDate: "+0D",
+            maxDate: "+50Y",
+            yearRange: "0:+50"
+        });
+    } );
     $(document).ready(function () {
 
         //alert($("#main-if").val());
@@ -105,16 +115,17 @@
                 $(".depend_hiding").show()
             }
         }
-        if ($("#depend-if").val() == 'Yes') {
+/*        if ($("#depend-if").val() == 'Yes') {
             {
                 $(".depend_hiding").show()
             }
-        }
+        }*/
         if ($("#main-if2").val() == 'Yes') {
-            {
-                $(".hiding2").show()
+                $(".hiding2").show();
             }
-        }
+            else{
+                $(".hiding2").hide();
+            }
 
         if ($("#sometimes-if").val() == 'Sometimes') {
             {
@@ -206,7 +217,7 @@
         $("#depend-if").change(function () {
             if ($(this).val() != "0") {
                 if ($(this).val() == 'Yes') {
-                    $(".depend_hiding").show()
+                    $(".depend_hiding").hide()
                 }
                 if ($(this).val() == 'No') {
                     $(".depend_hiding").hide()

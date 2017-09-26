@@ -40,7 +40,7 @@ class PurchaserController extends FrontController implements Constants
         //dd();
 
         if (!$this->user) {
-            return;
+            return redirect('/');
             //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
         } else {
 
@@ -108,6 +108,9 @@ class PurchaserController extends FrontController implements Constants
 
             unset($carerProfiles);
         }
+
+
+
         if ($input['stage'] == 'payment') {
 
             $depart = "#Payment";

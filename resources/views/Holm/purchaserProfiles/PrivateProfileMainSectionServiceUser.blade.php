@@ -7,14 +7,19 @@
     <div class="row">
         <div class="col-md-9">
 
+            <?php $uncompliteUser = 0;  ?>
             @if(count($serviceUsers))
                 @foreach($serviceUsers as $serviceUser)
 
+
+                    <?php if ($serviceUser->registration_progress!='61')
+                            $uncompliteUser = $serviceUser->id;
+                        ?>
                     <div class="peopleCare">
 
                         <div class="peopleCare__item">
                             <div class="profilePhoto peopleCare__photo">
-                                <a href="" target="blank"> <img src="/img/no_photo.png" alt=""> </a>
+                                <a href="" target="blank"> <img src="img/service_user_profile_photos/{{$serviceUser->id}}.png" onerror="this.src='/img/no_photo.png'" alt=""> </a>
                             </div>
 
                             <h2 class="peopleCare__name">
@@ -42,9 +47,15 @@
         </div>
         <div class="col-md-3">
             <div class="roundedBtn roundedBtn--peopleCare">
+                @if($uncompliteUser == 0)
                 <a href="{{route('ServiceUserCreate')}}" class="roundedBtn__item roundedBtn__item--accept">
                     ADD SERVICE USER
                 </a>
+                @else
+                    <a href="{{route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUser->id])}}" class="roundedBtn__item roundedBtn__item--accept">
+                        <span style="font-size: 80%">CONTINUE REGISTRATION<span>
+                    </a>
+                @endif
             </div>
         </div>
     </div>

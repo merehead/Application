@@ -7,6 +7,8 @@ use App\Booking;
 use App\Floor;
 use App\Interfaces\Constants;
 use App\Language;
+use App\ServiceType;
+use App\ServiceUserCondition;
 use App\ServiceUsersProfile;
 use App\WorkingTime;
 use Illuminate\Http\Request;
@@ -38,7 +40,7 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
         $this->vars = array_add($this->vars,'modals',$modals);
 
         if (!$this->user) {
-            abort(404);
+            return redirect('/');
         } else {
 
             $serviceUsersProfile = ServiceUsersProfile::findOrFail($serviceUserProfile);
@@ -48,15 +50,29 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
             $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
             $this->vars = array_add($this->vars, 'userNameForSite', $serviceUsersProfile->like_name);
 
-            $typeCare = AssistanceType::all();
+            $typeCare = AssistanceType::all()->sortBy('id');
             $this->vars = array_add($this->vars, 'typeCare', $typeCare);
+
+            $typeService = ServiceType::all()->sortBy('id');
+            $this->vars = array_add($this->vars, 'typeService', $typeService);
+
+            $behaviour = Behaviour::all();
+            $this->vars = array_add($this->vars, 'behaviour', $behaviour);
+
             $workingTimes = WorkingTime::all();
             $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
+
             $languages = Language::all();
             $this->vars = array_add($this->vars, 'languages', $languages);
+
+            $serviceUserConditions = ServiceUserCondition::all();
+            $this->vars = array_add($this->vars, 'serviceUserConditions', $serviceUserConditions);
+
             $floors = Floor::all()->pluck('name', 'id')->toArray();
             $this->vars = array_add($this->vars, 'floors', $floors);
             $this->content = view(config('settings.frontTheme') . '.serviceUserProfiles.PrivateProfile')->with($this->vars)->render();
+
+
 
         }
 
@@ -71,13 +87,13 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
         $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
         $this->title = 'Holm Care';
 
-        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
-        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
-        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+        $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme') . '.includes.modals')->render();
 
-        $this->vars = array_add($this->vars,'header',$header);
-        $this->vars = array_add($this->vars,'footer',$footer);
-        $this->vars = array_add($this->vars,'modals',$modals);
+        $this->vars = array_add($this->vars, 'header', $header);
+        $this->vars = array_add($this->vars, 'footer', $footer);
+        $this->vars = array_add($this->vars, 'modals', $modals);
 
         if (!$this->user) {
             abort(404);
@@ -191,5 +207,6 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
 
 
         return $this->renderOutput();
+
     }
 }

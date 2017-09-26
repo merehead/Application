@@ -4,7 +4,7 @@
         <h2 class="lightTitle">
           Popular Carers
         </h2>
-        <p>
+        <p class="carers-below">
           Check some of our popular carers below
         </p>
       </div>

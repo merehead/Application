@@ -33,7 +33,7 @@
                         <p>We believe that everyone deserves excellent care when they need it</p>
                         <p>This is why :-</p>
                     </div>
-                    <div class="advantages">
+                    <div class="advantages advantages_cust">
                         <div class="advantages__item singleAdvantage">
                             <div class="singleAdvantage__img">
                                 <img src="{{asset('/img/advantage1.png')}}" alt="">
@@ -96,7 +96,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="aboutInfo">
-                            <h2 class="lightTitle lightTitle--uppercase">
+                            <h2 class="lightTitle lightTitle--uppercase lightTitle_align-l">
                                 Our Mission
                             </h2>
                             <p class="info-p info-p--biger">
@@ -120,7 +120,7 @@
                             <img src="{{asset('/img/founder.jpeg')}}" alt="">
                         </div>
                         <div class="founder__info">
-                            <h2 class="bigTitle">
+                            <h2 class="bigTitle bigTitle_margin">
                                 Nik Seth
                             </h2>
                             <p class="founder__subtitle">

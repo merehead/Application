@@ -12,12 +12,23 @@
 <div class="borderContainer">
     <div class="profileInfoContainer">
         <div class="generalInfo">
-            <div class="profilePhoto profilePhoto--change">
-                <img src="/img/no_photo.png" alt="">
-                <a href="#" class="profilePhoto__ico">
-                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                </a>
-            </div>
+
+          <div class="profilePhoto profilePhoto--change">
+            <div class="formField">
+              </div>
+
+              <input class="pickfiles_profile_photo--change" accept=".jpg,.jpeg,.png,.doc" type="file" />
+              <img id="profile_photo" src="img/profile_photos/{{$purchaserProfile->id}}.png" onerror="this.src='/img/no_photo.png'" alt="avatar">
+
+              <a href="#" class="profilePhoto__ico">
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i>
+              </a>
+          </div>
+
+          <div style="display: none" class="addInfo">
+              <input disabled type="text" name="profile_photo" class="addInfo__input" placeholder="Name">
+          </div>
+
             <div class="generalInfo__text">
                 <div class="generalInfo__elem">
                     <p>first name</p><span>{{$purchaserProfile->first_name}} </span>

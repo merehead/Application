@@ -1,15 +1,16 @@
-
-<div class="borderContainer">
+<div id="serviceGeneral" class="borderContainer">
     <div class="profileCategory">
-        <h2 class="profileCategory__title">home</h2>
-        <a href="#" class="profileCategory__link">
-            <i class="fa fa-pencil"></i>
-        </a>
+        <h2 class="profileCategory__title">HOME</h2>
+        <a href="#" class="btn btn-info btn-edit"><span class="fa fa-pencil" data-id="home"></span> EDIT</a>
+        <button type="button" class="btn btn-success hidden" id="load" data-loading-text="<i class='fa fa-spinner
+        fa-spin '></i> Processing"><i class="fa fa-floppy-o"></i>  Save</button>
     </div>
 </div>
-{!! Form::model($serviceUsersProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateLanguages']) !!}
-{!! Form::hidden('id',$serviceUsersProfile->id) !!}
-{!! Form::hidden('stage','languages') !!}
+{!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'home']) !!}
+{!! Form::hidden('id',null) !!}
+{!! Form::hidden('stage','home') !!}
+{{Form::submit('Click Me!')}}
+
 
 <div class="borderContainer">
     <div class="profileRow">
@@ -50,7 +51,8 @@
             <span class="help-block"><strong>{{ $errors->first('floor_id') }}</strong></span>
         @endif
         </div>
-
+    </div>
+    <div class="profileRow">
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
@@ -77,9 +79,9 @@
                 <span class="help-block"> <strong>{{ $errors->first('assistance_keeping') }}</strong> </span>
             @endif
         </div>
-    </div>
+{{--    </div>
 
-    <div class="profileRow">
+    <div class="profileRow">--}}
 
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
@@ -313,7 +315,8 @@
                                     </span>
             @endif
         </div>
-
+    </div>
+    <div class="profileRow">
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">

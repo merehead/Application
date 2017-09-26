@@ -1,6 +1,9 @@
 // ------ Global Variable -----------
 var $carer_profile = null;
+var has_error_profile_form=false;
+var error_mark = '';
 var arrFiles = []
+var arrFilesProfilePhoto = []
 var arrForDeleteIDProfile = []
 
 // ------ Global Functions ----------
@@ -167,45 +170,50 @@ function cancelEditFieldsCarer() {
 
 // -- Send request to server with AJAX data ----------
 function ajaxForm(form, that) {
-    var token = $(form).find('input[name=_token]').val();
-    $.ajax({
-        url: $(form).attr('action'),
-        headers: {'X-CSRF-TOKEN': token},
-        data: $(form).serialize(),
-        type: 'POST',
-        dataType: "application/json",
-        success: function (response) {
-            if (response.status != 200) {
-                $(form).find('.error-block strong').html(response.toString());
+    if(!has_error_profile_form) {
+        var token = $(form).find('input[name=_token]').val();
+        $.ajax({
+            url: $(form).attr('action'),
+            headers: {'X-CSRF-TOKEN': token},
+            data: $(form).serialize(),
+            type: 'POST',
+            dataType: "application/json",
+            success: function (response) {
+                if (response.status != 200) {
+                    $(form).find('.error-block strong').html(response.toString());
+                }
+                that.button('reset');
+                var idForm = $(form).attr('id');
+                if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
+                    var geocoder = new google.maps.Geocoder();
+                    geocodeAddress(geocoder, map);
+                }
+                // -- processing effects ----------
+                setTimeout(function () {
+                    $(that).addClass('hidden');
+                    setNoEditableFields();
+                    $(that).parent().find('a.btn-edit').show();
+                }, 500);
+            },
+            error: function (response) {
+                that.button('reset');
+                var idForm = $(form).attr('id');
+                if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
+                    var geocoder = new google.maps.Geocoder();
+                    geocodeAddress(geocoder, map);
+                }
+                // -- processing effects -----------
+                setTimeout(function () {
+                    $(that).addClass('hidden');
+                    setNoEditableFields();
+                    $(that).parent().find('a.btn-edit').show();
+                }, 500);
             }
-            that.button('reset');
-            var idForm = $(form).attr('id');
-            if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
-                var geocoder = new google.maps.Geocoder();
-                geocodeAddress(geocoder, map);
-            }
-            // -- processing effects ----------
-            setTimeout(function () {
-                $(that).addClass('hidden');
-                setNoEditableFields();
-                $(that).parent().find('a.btn-edit').show();
-            }, 500);
-        },
-        error: function (response) {
-            that.button('reset');
-            var idForm = $(form).attr('id');
-            if (idForm == 'carerPrivateGeneral' || idForm == "PrivateGeneral") {
-                var geocoder = new google.maps.Geocoder();
-                geocodeAddress(geocoder, map);
-            }
-            // -- processing effects -----------
-            setTimeout(function () {
-                $(that).addClass('hidden');
-                setNoEditableFields();
-                $(that).parent().find('a.btn-edit').show();
-            }, 500);
-        }
-    });
+        });
+    }else{
+        that.button('reset');
+        $(document).scrollTop($(error_mark).offset().top-100)
+    }
     return false;
 }
 
@@ -342,29 +350,94 @@ $(document).ready(function () {
             $('.hiddenSort').addClass('hiddenSort--visible');
         }
     });
-    if($("#depend-if").val() == 'It Depends') {$(".depend_hiding").show( )}
+
+    if($("#depend-if").val() == 'It Depends') {$(".depend_hiding").show()}
 
     $("#depend-if").on('change',function(){
         if($(this).val() !="0")
         {
-            if($(this).val() == 'Yes') {$(".depend_hiding").hide( )}
-            if($(this).val() == 'No') {$(".depend_hiding").hide( )}
-            if($(this).val() == 'It Depends') {$(".depend_hiding").show( )}
+            if($(this).val() == 'Yes') {
+                $(".depend_hiding").hide();
+            }
+            if($(this).val() == 'No') {
+                $(".depend_hiding").hide();
+            }
+            if($(this).val() == 'It Depends') {
+                $(".depend_hiding").show();
+            }
+        }
+    });
+
+    if($("#depend-if-work").val() == 'Yes') {$(".depend_hiding-work").show();}else{$(".depend_hiding-work").hide();}
+
+    $("#depend-if-work").on('change',function(){
+        if($(this).val() !="0")
+        {
+            if($(this).val() == 'Yes') {
+                $(".depend_hiding-work").hide();
+            }
+            if($(this).val() == 'No') {
+                $(".depend_hiding-work").hide();
+            }
         }
     });
 
     if($("#type_car_work").val() == 'Yes') {
         $(".car-block").show();
+        $('#profile_use_car').parent().show();
     }else{
         $(".car-block").hide();
+        $('#profile_use_car').parent().hide();
     }
+
     $("#type_car_work").on('change',function(){
         if($("#type_car_work").val() == 'Yes') {
             $(".car-block").show();
+            $('#profile_use_car').parent().show();
         }else{
             $(".car-block").hide();
+            $('#profile_use_car').parent().hide();
         }
     });
+
+    if($('#driving_license').length>0) {
+        if($('#driving_license').val() == "Yes") {$('.hiding_profile').show();}else{$('.hiding_profile').hide();}
+    }
+
+    if($('#register_have_car').length>0) {
+        if ($('#register_have_car').val() == "Yes") {
+            $('#register_use_car').parent().parent().show();
+        } else {
+            var uc = $('#register_use_car').parent().parent();
+            $(uc).hide();
+        }
+    }
+
+    $("#post_code_profile").on("change",function(e){
+       var validator = /^([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})|([Ss][Kk][0-9]{1,2}) [0-9][A-Za-z]{1,2}$/;
+       var text  = $(this).val();
+       var $this = $(this);
+       var errorText = '<span class="help-block error-post-code">\n' +
+           '             <strong>Wrong post code. Please retry enter</strong>\n' +
+           '          </span>';
+       $('.error-post-code').remove();
+        has_error_profile_form=false;
+        error_mark='';
+       if(!validator.test(text)){
+           $($this).after(errorText);
+           has_error_profile_form=true;
+           error_mark='#post_code_profile';
+       }
+    });
+    $(document).on('change','#register_have_car',function () {
+        if ($('#register_have_car').val() == "Yes") {
+            $('#register_use_car').parent().parent().show();
+        } else {
+            var uc = $('#register_use_car').parent().parent();
+            $(uc).hide();
+        }
+    });
+
     if($("#criminal_detail").val() == 'Old') {
         $(".criminal_detail").show();
     }else{
@@ -415,6 +488,82 @@ $(document).ready(function () {
             }
         });
     }
+
+    /*-------------- Home page slider (popular carers) ------------*/
+    if ($('div').is('.HomePageBanner')) {
+        $('.HomePageBanner').owlCarousel({
+            items: 1,
+            loop: true,
+            dots: true,
+            nav: true,
+            navText: [
+              `<a href="#theCarousel" data-slide="prev" class="sliderControl sliderControl--left centeredLink">
+                <i class="fa fa-angle-left"></i>
+              </a>`,
+              `<a href="#theCarousel" data-slide="next" class="sliderControl sliderControl--right centeredLink">
+                <i class="fa fa-angle-right"></i>
+              </a>`
+            ],
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplayHoverPause: true,
+            responsive:{
+               0    : { items:1 },
+               600  : { items:2 },
+               992  : { items:3 },
+               1200 : { items:4 }
+           }
+        });
+    }
+
+    $('.sliderControl').on('click', function (e) {
+      e.preventDefault()
+    })
+
+    /*-------------- Home page slider (popular carers) ------------*/
+    if ($('div').is('.appointmentSlider')) {
+        $('.appointmentSlider').owlCarousel({
+            items: 3,
+            loop: true,
+            dots: true,
+            nav: true,
+            navText: [
+              `<a href="#theCarousel" data-slide="prev" class="sliderControl sliderControl--left centeredLink">
+                <i class="fa fa-angle-left"></i>
+              </a>`,
+              `<a href="#theCarousel" data-slide="next" class="sliderControl sliderControl--right centeredLink">
+                <i class="fa fa-angle-right"></i>
+              </a>`
+            ],
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplayHoverPause: true,
+            responsive:{
+               0    : { items:1 },
+               600  : { items:1 },
+               992  : { items:2 },
+               1200  : { items:3 }
+           }
+        });
+    }
+
+    $('.sliderControl').on('click', function (e) {
+      e.preventDefault()
+    })
+
+    /*-------------- Home/welcome-carer page slider (recalls) ------------*/
+    // Carousel
+    $('.multi-item-carousel').carousel({
+        interval: 5000
+    });
+
+    // change quote
+    $('.peopleBox').on('click', function (e) {
+        e.preventDefault();
+        var quote = $(this).find('.people_quote').text().trim();
+        $('#testimonialSlider__item p').text(quote)
+    });
+
 
     $(".toggler").click(function (e) {
         e.preventDefault();
@@ -472,9 +621,12 @@ $(document).ready(function () {
         $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
 
         $(idLoadFiles).find('.pickfiles').attr("disabled", false);
-        // $(idLoadFiles).find('.pickfiles-delete').attr('style', 'display: block');
-
-        console.log( $(idLoadFiles).find('.pickfiles-delete') )
+        $(idLoadFiles).find('.pickfiles-change').attr("disabled", false);
+        $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", false);
+        $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", false);
+        // $(idLoadFiles).find('.addInfo__input').attr("disabled", false);
+        // $(idLoadFiles).find('.addInfo__input').attr("readonly", false);
+        $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: block');
 
         $(that).hide();
         $(that).parent().find('button.hidden').removeClass('hidden');
@@ -490,10 +642,29 @@ $(document).ready(function () {
         var that = $(this);
         var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
         var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');
-        $(idLoadFiles).find('.pickfiles').attr("disabled", true);
 
-        $(idLoadFiles).find('.pickfiles-delete').attr('style', 'display: none')
+        $(idLoadFiles).find('.pickfiles').attr("disabled", true);
+        $(idLoadFiles).find('.pickfiles-change').attr("disabled", true);
+        $(idLoadFiles).find('.pickfiles-delete').attr("style", 'display: none');
+        $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", true);
+        $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", true);
+        $(idLoadFiles).find('.addInfo__input').attr("disabled", true);
+        $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: none');
+
         that.button('loading');
+
+        if(arrFilesProfilePhoto.length > 0){
+          var url = '/profile-photo'
+          if(arrFilesProfilePhoto[0].service_user_id){
+            url = '/service-user-profile-photo'
+          }
+          axios.post(
+            url,
+            arrFilesProfilePhoto[0],
+          ).then(function (response) {
+            console.log(response)
+          })
+        }
 
         if(arrFiles.length > 0){
           var fileChunk = 0
@@ -526,7 +697,7 @@ $(document).ready(function () {
             formdata.append('chunk', chunk)
             formdata.append('chunks', chunks)
             formdata.append('title', file.title)
-            formdata.append('type', file.type_value)
+            formdata.append('type', file.type_value.split('-')[0])
             formdata.append('file', fileSend)
             chunk += 1
             axios.post(
@@ -569,7 +740,8 @@ $(document).ready(function () {
         }
 
         return false;
-    });
+    })
+
     $('.passStrength__bar').css('width','5%');
     $('.passStrength__bar').css('background','red');
     $('.passStrength__bar').css('color','red');
@@ -587,31 +759,14 @@ $(document).ready(function () {
         confirmPass(this);
     });
     // -- Registration Carer Step 8
-    $('select[name="have_car"]').parent().parent().hide();
-    if ($('select[name="have_car"]').val() == 'Yes') {
-        {
-            $('select[name="have_car"]').parent().parent().show()
-        }
-    } else {
-        $('select[name="have_car"]').val('');
-        $('select[name="have_car"]').parent().parent().hide()
-    }
-    $('select[name="driving_licence"]').on('change', function (e) {
-        if ($(this).val() == 'Yes') {
-            {
-                $('select[name="have_car"]').parent().parent().show()
-            }
-        } else {
-            $('select[name="have_car"]').val('');
-            $('select[name="have_car"]').parent().parent().hide()
-        }
-    });
+
 
     // -- upload files. Registration sections -------
     var arrLocalStorage = []
     var arrForDeleteID = []
     var file
-    var getlocalStorageData = JSON.parse(localStorage.getItem('files_id'))
+    var file_profile_photo = {}
+    var getlocalStorageData = localStorage.getItem('files_id')
 
     var fileTypes = [
         'image/jpeg','image/gif','image/png',
@@ -622,44 +777,64 @@ $(document).ready(function () {
     ]
     var pdfFileType = ['application/pdf', 'pdf']
 
-    if(getlocalStorageData){
-      getlocalStorageData.map((index) => {
-        if(document.getElementById("upload_files")){
-          axios.get(
-            '/api/document/'+index.id.id+'/',
-          ).then(function (response) {
+    if(!$carer_profile.length){
+      if(getlocalStorageData){
+        JSON.parse(getlocalStorageData).map((index) => {
+          if(document.getElementById("upload_files")){
+            axios.get(
+              '/api/document/'+index.id.id+'/',
+            ).then(function (response) {
+              var res = response.data.data.document
 
-            var res = response.data.data.document
+              if(wordFileType.indexOf(res.file_name.split('.')[1]) !== -1){
+                $('#'+index.type_value+'').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
+              }else if(pdfFileType.indexOf(res.file_name.split('.')[1]) !== -1){
+                $('#'+index.type_value+'').attr('style', 'background-image: url(/img/PDF_logo.png)')
+              }else{
+                $('#'+index.type_value+'').attr('style', 'background-image: url(/api/document/'+index.id.id+'/preview)')
+              }
 
-            if(wordFileType.indexOf(res.file_name.split('.')[1]) !== -1){
-              $('#'+index.type_value+'').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
-            }else if(pdfFileType.indexOf(res.file_name.split('.')[1]) !== -1){
-              $('#'+index.type_value+'').attr('style', 'background-image: url(/img/PDF_logo.png)')
-            }else{
-              $('#'+index.type_value+'').attr('style', 'background-image: url(/api/document/'+index.id.id+'/preview)')
-            }
-
-            $('#'+index.type_value+'').parent().children('.add').find('.add__comment--smaller').html('<div class="file-name">'+res.file_name+'</div>')
-            $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
-            $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('style', 'display: block')
-            $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id.id)
-            $('#'+index.type_value+'').parent().parent().find('.addInfo__input').prop( "disabled", false )
-            if(response.data.data.document.title !== 'undefined'){
-              $('#'+index.type_value+'').parent().parent().find('.addInfo__input').val(res.title)
-            }
-          })
-        }
-      })
+              $('#'+index.type_value+'').parent().children('.add').find('.add__comment--smaller').html('<div class="file-name">'+res.file_name+'</div>')
+              $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
+              $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('style', 'display: block')
+              $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id.id)
+              $('#'+index.type_value+'').parent().parent().find('.addInfo__input').prop( "disabled", false )
+              if(response.data.data.document.title !== 'undefined'){
+                $('#'+index.type_value+'').parent().parent().find('.addInfo__input').val(res.title)
+              }
+            })
+          }
+        })
+      }
+    }else{
+      localStorage.setItem('files_id', JSON.stringify([]))
     }
 
-    $('.addInfo__input').change(function () {
+    if($('#profile_photo').attr('style')){
+      $('#profile_photo').parent().find('.pickfiles-delete_profile_photo').attr('style', 'display: block')
+      // $('#profile_photo').parent().find('.add--moreHeight').html('')
+    }
+
+      var url =  $('#profile_photo').attr('name')
+      $('<img/>').attr('src', url).on('load', function() {
+        $('#profile_photo').parent().find('.add').attr('style', 'opacity: 0')
+      });
+
+      $(document).on('change', '.addInfo__input', function(e) {
+      var id = $(this).parent().parent().find('.pickfiles_img').attr('id')
       var input_name = $(this).attr('name')
-      var input_val = $("input[name="+input_name+"]").val()
+      var input_val = $(this).val()
+
+      console.log(input_name, input_val)
+
       arrFiles.map((index) => {
-        if(index.type_value === input_name){
+        if(index.unique_type === id){
+          console.log(index.unique_type, id, input_val)
           index.title = input_val
         }
       })
+
+      console.log(arrFiles);
     })
 
     function pickfilesDelete(_this){
@@ -698,20 +873,28 @@ $(document).ready(function () {
         })
       }else{
         pickfilesDelete(_this)
-        console.log(arrFiles, input_name)
         arrFiles = arrFiles.filter((index) => {
-          if(index.inique_type !== input_name){
+          if(index.unique_type !== input_name){
             return index
           }
         })
-        console.log(arrFiles)
       }
     })
 
-    $('.pickfiles').on('change', function() {
+    $('.pickfiles-delete_profile_photo').on('click', function() {
+      arrFiles = []
+    })
+
+    var c = 0
+
+    $(document).on('change', '.pickfiles, .pickfiles-change', function(e) {
       var input_val = $(this).parent().parent().find('.addInfo__input').val('')
 
+      var p = $(this).parent().parent().parent().find('.profileField_h')
+      var div2 = $(this).parent().parent().addClass('profileField_h')
+
       $(this).parent().parent().find('.addInfo__input').prop( "disabled", false)
+      $(this).parent().parent().find('.addInfo__input').attr( "readonly", false )
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
       var pickfiles_img_id = $(this).parent().find('.pickfiles_img').attr('id')
       var deleteID = $(this).parent().find('.pickfiles-delete').attr('id')
@@ -722,6 +905,7 @@ $(document).ready(function () {
       reader.addEventListener("load", () => {
         $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
         $(this).parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
+        file = reader.result
       }, false)
 
       if (fileTypes.indexOf(file.type) !== -1) {
@@ -735,7 +919,7 @@ $(document).ready(function () {
         }
       }
 
-      var getls = JSON.parse(localStorage.getItem('files_id'))
+      var getls = localStorage.getItem('files_id') ? JSON.parse(localStorage.getItem('files_id')) : []
       if(getls){
         getls.map((index) => {
           if(index.id.id === parseInt(deleteID)){
@@ -749,18 +933,49 @@ $(document).ready(function () {
       }
 
       file.type_value = input_name
-      file.inique_type = pickfiles_img_id
+      if($carer_profile.length){
+        file.unique_type = pickfiles_img_id
+      }else{
+        file.unique_type = input_name
+      }
 
-      arrFiles = arrFiles.filter((index) => {
-        if(index.inique_type !== pickfiles_img_id){
-          return index
-        }
-      })
+      var q = '.profileRow-'+input_name.split('-')[0]
+      c += 1
+
+      if(p.length >= 2){
+        $(q).append(`
+          <div class="profileField profileField_q profileField_h">
+            <div class="addContainer">
+              <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+              <div id="${input_name.split('-')[0]}-${c}u" class="pickfiles_img"></div>
+                <a class="add add--moreHeight">
+                    <i class="fa fa-plus-circle"></i>
+                    <div class="add__comment add__comment--smaller"></div>
+                </a>
+            </div>
+            <div class="addInfo">
+                <input type="text" name="${input_name.split('-')[0]}-${c}u" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">
+            </div>
+          </div>
+        `)
+      }
+
+      if($carer_profile.length){
+        arrFiles = arrFiles.filter((index) => {
+          if(index.unique_type !== pickfiles_img_id){
+            return index
+          }
+        })
+      }else{
+        arrFiles = arrFiles.filter((index) => {
+          if(index.unique_type !== input_name){
+            return index
+          }
+        })
+      }
 
       arrFiles.push(file)
-
       console.log(arrFiles)
-      console.log(arrForDeleteIDProfile)
 
       $(this).parent().find('.add__comment--smaller').html('')
       $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
@@ -836,17 +1051,10 @@ $(document).ready(function () {
                 end = sliceSize
                 loop()
               }else{
-                // $('.add__comment--smaller').html('<p>Choose a File or Drag Here</p><span>Size limit: 10 MB</span>')
-                // $('.pickfiles-delete').attr('style', 'display: none')
-                // $('.fa-plus-circle').attr('style', '')
-                // $('.pickfiles_img').attr('style', '')
-                // $('.addInfo__input').prop( "disabled", true )
-                // $('.addInfo__input').val('')
                 $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
                 $('.pickfiles').val('')
                 arrFiles = []
 
-                console.log(arrForDeleteID)
                 if(arrForDeleteID.length > 0){
                   var getls = JSON.parse(localStorage.getItem('files_id'))
                   axios.delete(
@@ -876,7 +1084,108 @@ $(document).ready(function () {
       }else{
         document.getElementById('step').submit()
       }
-    });
+    })
+
+    $('.pickfiles_profile_photo').on('change', function () {
+
+      arrFilesProfilePhoto = []
+
+      var input_val = $(this).parent().parent().find('.addInfo__input').val('')
+      var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
+      var this_name = $(this).attr('name')
+      $('#profile_photo').remove()
+
+      var file = $(this)[0].files[0]
+
+      var reader  = new FileReader()
+      reader.addEventListener("load", () => {
+
+        if (fileTypes.indexOf(file.type) !== -1) {
+          $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
+        }else{
+          if(wordFileType.indexOf(file.type) !== -1){
+            $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
+          }
+          if(pdfFileType.indexOf(file.type) !== -1){
+            $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/PDF_logo.png)')
+          }
+        }
+
+        $(this).parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
+
+        file_profile_photo.image = reader.result
+        if(this_name){
+          file_profile_photo.service_user_id = parseInt(this_name)
+        }
+
+        arrFilesProfilePhoto.push(file_profile_photo)
+        console.log(arrFilesProfilePhoto)
+      }, false)
+
+      reader.readAsDataURL(file)
+      $(this).parent().find('.add__comment--smaller').html('')
+      $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
+    })
+
+    $('.upload_files_profile_photo').on('click', function (e) {
+      e.preventDefault()
+      if(arrFilesProfilePhoto.length > 0){
+        axios.post(
+          '/profile-photo',
+          arrFilesProfilePhoto[0],
+        ).then(function (response) {
+          console.log(response)
+          document.getElementById('step').submit()
+        })
+      }else{
+        document.getElementById('step').submit()
+      }
+    })
+
+    $('.upload_files_profile_photo_su').on('click', function (e) {
+      e.preventDefault()
+      if(arrFilesProfilePhoto.length > 0){
+        console.log(arrFilesProfilePhoto);
+        axios.post(
+          '/service-user-profile-photo',
+          arrFilesProfilePhoto[0],
+        ).then(function (response) {
+          console.log(response)
+          document.getElementById('step').submit()
+        })
+      }else{
+        document.getElementById('step').submit()
+      }
+    })
+
+    $('.pickfiles_profile_photo--change').on('change', function () {
+
+      arrFilesProfilePhoto = []
+      var file = $(this)[0].files[0]
+
+      var reader  = new FileReader()
+      reader.addEventListener("load", () => {
+
+        if (fileTypes.indexOf(file.type) !== -1) {
+          $('#profile_photo').attr('src', reader.result)
+          $('.set_preview_profile_photo').attr('src', reader.result)
+        }else{
+          if(wordFileType.indexOf(file.type) !== -1){
+            $('#profile_photo').attr('src', '/img/Word-icon_thumb.png')
+            $('.set_preview_profile_photo').attr('src', '/img/Word-icon_thumb.png')
+          }
+          if(pdfFileType.indexOf(file.type) !== -1){
+            $('#profile_photo').attr('src', '/img/PDF_logo.png')
+            $('.set_preview_profile_photo').attr('src', '/img/PDF_logo.png')
+          }
+        }
+
+        file_profile_photo.image = reader.result
+        arrFilesProfilePhoto.push(file_profile_photo)
+        console.log(arrFilesProfilePhoto)
+      }, false)
+      reader.readAsDataURL(file)
+    })
 
     $('.searchContainer__input').on('change',function (e) {
         insertParam('search',$(this).val());
@@ -888,6 +1197,7 @@ $(document).ready(function () {
 
     // -- upload files. Profile sections -------
     var arrTypeAndID = []
+    var profileRow = 'profileRow-'
 
     if($carer_profile.length){
       axios.get(
@@ -895,32 +1205,114 @@ $(document).ready(function () {
       ).then( (response) => {
         var newDoc = Object.entries(response.data.data.documents)
 
-        newDoc.map((index) => {
-          var c = 0
-          index[1].map((index) => {
-            var data = {
-              type_value: c > 0 ? (index.type.toLowerCase() + c) : index.type.toLowerCase(),
-              id: index.id,
-              type_file_name: index.file_name.split('.')[1]
-            }
-            c += 1
-            arrTypeAndID.push(data)
-          })
-        })
+        console.log(newDoc)
 
-        console.log(arrTypeAndID)
-
-        arrTypeAndID.map((index) => {
-          if(wordFileType.indexOf(index.type_file_name) !== -1){
-            $('#'+index.type_value+'').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
-          }else if(pdfFileType.indexOf(index.type_file_name) !== -1){
-            $('#'+index.type_value+'').attr('style', 'background-image: url(/img/PDF_logo.png)')
+        function func(index, index2, i) {
+          if(wordFileType.indexOf(index2.file_name.split('.')[1]) !== -1){
+            return `<div id="${index[0].toLowerCase()}${i}" class="pickfiles_img" style='background-image: url(/img/Word-icon_thumb.png)'></div>`
+          }else if(pdfFileType.indexOf(index2.file_name.split('.')[1]) !== -1){
+            return `<div id="${index[0].toLowerCase()}${i}" class="pickfiles_img" style='background-image: url(/img/PDF_logo.png)''></div>`
           }else{
-          $('#'+index.type_value+'').attr('style', 'background-image: url(/api/document/'+index.id+'/preview)')
+            return `<div id="${index[0].toLowerCase()}${i}" class="pickfiles_img" style='background-image: url(/api/document/${index2.id}/preview)'></div>`
           }
-          $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
-          $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id)
-          $('#'+index.type_value+'').parent().parent().find('.addInfo__input').prop( "disabled", false )
+        }
+
+        newDoc.map((index, i) => {
+          var p = '.' + profileRow+index[0].toLowerCase()
+          var count = 3 - index[1].length
+
+          // if(index[1].length >= 3){
+            $(p).html('')
+            index[1].map((index2, i2) => {
+              $(p).append(`
+                <div class="profileField profileField_q profileField_h">
+                  ${
+                    i2 === 0 ?
+                    `<h2 class="profileField__title ordinaryTitle">
+                      <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
+                       ${index[0].toLowerCase().split('_').join(' ')}s
+                      </span>
+                    </h2>` : ''
+                  }
+                  <div class="addContainer">
+                    ${func(index[0], index2, i)}
+                    <a class="add add--moreHeight"></a>
+                  </div>
+                  <div class="addInfo">
+                      <input disabled value="${index2.title !== 'undefined' ? index2.title : ""}"
+                      type="text" name="${index[0].toLowerCase()}-${i}" class="addInfo__input profileField__input--greyBg" placeholder="Name">
+                  </div>
+                </div>
+              `)
+            })
+            if(count >= 0){
+              count === 0 ? count += 1 : ''
+              for (var i = 0; i < count; i++) {
+                $(p).append(`
+                  <div class="profileField profileField_q">
+                    <div class="addContainer">
+                      <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                      <div id="${index[0].toLowerCase()}${i+1}u" class="pickfiles_img"></div>
+                        <a class="add add--moreHeight">
+                            <i class="fa fa-plus-circle"></i>
+                            <div class="add__comment add__comment--smaller"></div>
+                        </a>
+                    </div>
+                    <div class="addInfo">
+                        <input disabled type="text" name="${index[0].toLowerCase()}-${i+1}" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">
+                    </div>
+                  </div>
+                `)
+              }
+            }else{
+              $(p).append(`
+                <div class="profileField profileField_q">
+                  <div class="addContainer">
+                    <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                    <div id="${index[0].toLowerCase()}${i+1}u" class="pickfiles_img"></div>
+                      <a class="add add--moreHeight">
+                          <i class="fa fa-plus-circle"></i>
+                          <div class="add__comment add__comment--smaller"></div>
+                      </a>
+                  </div>
+                  <div class="addInfo">
+                      <input disabled type="text" name="${index[0].toLowerCase()}-${i+1}" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">
+                  </div>
+                </div>
+              `)
+            }
+
+
+            newDoc.map((index) => {
+              var c = 0
+              index[1].map((index) => {
+                var data = {
+                  type_value: c > 0 ? (index.type.toLowerCase() + c) : index.type.toLowerCase(),
+                  title: index.title !== 'undefined' ? index.title : '',
+                  id: index.id,
+                  type_file_name: index.file_name.split('.')[1]
+                }
+                c += 1
+                arrTypeAndID.push(data)
+              })
+            })
+
+            arrTypeAndID.map((index) => {
+              if(wordFileType.indexOf(index.type_file_name) !== -1){
+                $('#'+index.type_value+'').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
+              }else if(pdfFileType.indexOf(index.type_file_name) !== -1){
+                $('#'+index.type_value+'').attr('style', 'background-image: url(/img/PDF_logo.png)')
+              }else{
+              $('#'+index.type_value+'').attr('style', 'background-image: url(/api/document/'+index.id+'/preview)')
+              }
+              $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
+              $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id)
+              $('#'+index.type_value+'').parent().find('.pickfiles-change').remove()
+              $('#'+index.type_value+'').parent().parent().find('.addInfo__input').attr( "disabled", false )
+              $('#'+index.type_value+'').parent().parent().find('.addInfo__input').attr( "readonly", false )
+              $('#'+index.type_value+'').parent().parent().find('.addInfo__input').val(index.title)
+            })
+
         })
       })
     }
@@ -940,6 +1332,21 @@ $(document).ready(function () {
       $('.bookPayment__form-header').attr('style', 'display: none')
       $('.bookPayment__form-switch').removeClass('paySwitch__item--active')
       $('.bonusPay-header').attr('style', 'display: block')
+    })
+
+
+    // -- PROFILE RATING -------
+
+    $('.profileRating__item').on('click', function() {
+      var raiting = $(this).parent().children()
+      var id = $(this).attr('id').split('_')[1]
+
+      raiting.removeClass('active')
+      $.each(raiting, function(i, elem) {
+        if(i < id){
+          $(this).addClass('active')
+        }
+      })
     })
 
 });
