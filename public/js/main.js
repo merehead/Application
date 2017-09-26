@@ -845,149 +845,112 @@ $(document).ready(function () {
     });
 
     // -- Save Carer Profile -------
-    $carer_profile.find('button.btn-success').on('click', function (e) {
-        e.preventDefault();
-        is_data_changed = false;
-        var that = $(this);
-        var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
-        var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');
+        $carer_profile.find('button.btn-success').on('click', function (e) {
+            e.preventDefault();
+            is_data_changed = false;
+            var that = $(this);
+            var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
+            var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');
 
-        $(idLoadFiles).find('.pickfiles').attr("disabled", true);
-        $(idLoadFiles).find('.pickfiles-change').attr("disabled", true);
-        $(idLoadFiles).find('.pickfiles-delete').attr("style", 'display: none');
-        $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", true);
-        $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", true);
-        $(idLoadFiles).find('.addInfo__input').attr("disabled", true);
-        $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: none');
+            $(idLoadFiles).find('.pickfiles').attr("disabled", true);
+            $(idLoadFiles).find('.pickfiles-change').attr("disabled", true);
+            $(idLoadFiles).find('.pickfiles-delete').attr("style", 'display: none');
+            $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", true);
+            $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", true);
+            $(idLoadFiles).find('.addInfo__input').attr("disabled", true);
+            $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: none');
 
-        that.button('loading');
+            that.button('loading');
 
-/*<<<<<<< HEAD
-        if(arrFilesProfilePhoto.length > 0){
-          var url = '/profile-photo'
-          if(arrFilesProfilePhoto[0].service_user_id){
-            url = '/service-user-profile-photo'
-          }
-          axios.post(
-            url,
-            arrFilesProfilePhoto[0]
-          ).then(function (response) {
-            console.log(response)
-          })
-        }
-
-        if(arrFiles.length > 0){
-          var fileChunk = 0
-          file = arrFiles[fileChunk]
-          var sliceSize = 524288 // 512 kib
-          var chunks = Math.ceil(file.size / sliceSize)
-          var chunk = 0
-          var start = 0
-          var end = sliceSize
-
-          function loop() {
-            var blob = file.slice(start, end)
-            if(blob.size !== 0){
-              if(blob.size === sliceSize){
-                send(blob)
-                start += sliceSize
-                end += blob.size
-              }else{
-                send(blob)
-                start += sliceSize
-                end += blob.size
-              }
-=======
-        if (arrFilesProfilePhoto.length > 0) {
-            var url = '/profile-photo'
-            if (arrFilesProfilePhoto[0].service_user_id) {
-                url = '/service-user-profile-photo'
->>>>>>> origin2/Anton*/
+            if (arrFilesProfilePhoto.length > 0) {
+                var url = '/profile-photo'
+                if (arrFilesProfilePhoto[0].service_user_id) {
+                    url = '/service-user-profile-photo'
+                }
+                axios.post(
+                    url,
+                    arrFilesProfilePhoto[0]
+                ).then(function (response) {
+                    console.log(response)
+                })
             }
-            axios.post(
-                url,
-                arrFilesProfilePhoto[0],
-            ).then(function (response) {
-                console.log(response)
-            })
-        }
 
-        if (arrFiles.length > 0) {
-            var fileChunk = 0
-            file = arrFiles[fileChunk]
-            var sliceSize = 524288 // 512 kib
-            var chunks = Math.ceil(file.size / sliceSize)
-            var chunk = 0
-            var start = 0
-            var end = sliceSize
+            if (arrFiles.length > 0) {
+                var fileChunk = 0;
+                file = arrFiles[fileChunk];
+                var sliceSize = 524288 ;// 512 kib
+                var chunks = Math.ceil(file.size / sliceSize);
+                var chunk = 0;
+                var start = 0;
+                var end = sliceSize;
 
-            function loop() {
-                var blob = file.slice(start, end)
-                if (blob.size !== 0) {
-                    if (blob.size === sliceSize) {
-                        send(blob)
-                        start += sliceSize
-                        end += blob.size
-                    } else {
-                        send(blob)
-                        start += sliceSize
-                        end += blob.size
+                function loop() {
+                    var blob = file.slice(start, end);
+                    if (blob.size !== 0) {
+                        if (blob.size === sliceSize) {
+                            send(blob);
+                            start += sliceSize;
+                            end += blob.size
+                        } else {
+                            send(blob);
+                            start += sliceSize;
+                            end += blob.size
+                        }
                     }
                 }
-            }
 
-            loop()
-
-            function send(fileSend) {
-                var formdata = new FormData()
-                formdata.append('name', file.name)
-                formdata.append('chunk', chunk)
-                formdata.append('chunks', chunks)
-                formdata.append('title', file.title)
-                formdata.append('type', file.type_value.split('-')[0])
-                formdata.append('file', fileSend)
-                chunk += 1
-                axios.post(
-                    '/document/upload',
-                    formdata,
-                ).then(function (response) {
-                    if (chunk === chunks) {
-                        if (arrFiles[fileChunk + 1]) {
-                            fileChunk += 1
-                            file = arrFiles[fileChunk]
-                            chunks = Math.ceil(file.size / sliceSize)
-                            chunk = 0
-                            start = 0
-                            end = sliceSize
-                            loop()
-                        } else {
-                            $('.pickfiles').val('')
-                            arrFiles = []
-                            if (arrForDeleteIDProfile.length > 0) {
-                                axios.delete(
-                                    '/api/document/' + arrForDeleteIDProfile + '/',
-                                ).then((response) => {
-                                    console.log(response)
-                            })
-                                ajaxForm($(idForm), that);
+                function send(fileSend) {
+                    var formdata = new FormData();
+                    formdata.append('name', file.name);
+                    formdata.append('chunk', chunk);
+                    formdata.append('chunks', chunks);
+                    formdata.append('title', file.title);
+                    formdata.append('type', file.type_value.split('-')[0]);
+                    formdata.append('file', fileSend);
+                    chunk += 1;
+                    axios.post(
+                        '/document/upload',
+                        formdata
+                    ).then(function (response) {
+                        if (chunk === chunks) {
+                            if (arrFiles[fileChunk + 1]) {
+                                fileChunk += 1;
+                                file = arrFiles[fileChunk];
+                                chunks = Math.ceil(file.size / sliceSize);
+                                chunk = 0;
+                                start = 0;
+                                end = sliceSize;
+                                loop()
                             } else {
-                                ajaxForm($(idForm), that);
+                                $('.pickfiles').val('');
+                                arrFiles = [];
+                                if (arrForDeleteIDProfile.length > 0) {
+                                    axios.delete(
+                                        '/api/document/' + arrForDeleteIDProfile + '/'
+                                    ).then((response) = > {
+                                        console.log(response)
+                                })
+                                    ajaxForm($(idForm), that);
+                                } else {
+                                    ajaxForm($(idForm), that);
+                                }
                             }
+                        } else {
+                            loop()
                         }
-                    } else {
-                        loop()
-                    }
-                })
-                    .catch(function (error) {
-                        console.log(error)
                     })
-            }
-        } else {
-            ajaxForm($(idForm), that);
-        }
+                        .catch(function (error) {
+                            console.log(error)
+                        })
+                }
 
-        return false;
-    });
+                loop();
+            } else {
+                ajaxForm($(idForm), that);
+            }
+
+            return false;
+        });
 
 //------------Google Address search -----------------------
     if ($.isFunction($.fn.autocomplete)) {
