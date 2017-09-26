@@ -1,10 +1,10 @@
 <div class="justifyContainer justifyContainer--smColumn">
     <div class="breadcrumbs">
-        <a href="index.html" class="breadcrumbs__item">
+        <a href="/" class="breadcrumbs__item">
             Home
         </a>
         <span class="breadcrumbs__arrow">&gt;</span>
-        <a href="SearchPage.html" class="breadcrumbs__item">
+        <a href="/search" class="breadcrumbs__item">
             Carers
         </a>
         <span class="breadcrumbs__arrow">&gt;</span>
