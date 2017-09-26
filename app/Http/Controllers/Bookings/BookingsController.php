@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Bookings;
 
+use App\Appointment;
 use App\Booking;
 use App\BookingOverview;
 use App\BookingsMessage;
@@ -17,7 +18,8 @@ use Auth;
 class BookingsController extends FrontController implements Constants
 {
     public function create(Request $request){
-        $purchaser = User::find(2);
+//        $purchaser = User::find(2);
+        $purchaser = Auth::user();
         $carer = User::find($request->carer_id);
 
 
@@ -36,7 +38,24 @@ class BookingsController extends FrontController implements Constants
                 'status_id' => 2
             ]);
 
+
+
+            foreach ($booking_item['appointments'] as $appointment_item){
+                $booking->appointments()->create([
+                    'date_start' => $appointment_item['date_start'],
+                    'date_end' => $appointment_item['date_end'],
+                    'time_from' => $appointment_item['time_from'],
+                    'time_to' => $appointment_item['time_to'],
+                    'periodicity' => $appointment_item['periodicity'],
+                    'status_id' => 1,
+                    'carer_status_id' => 1,
+                    'purchaser_status_id' => 1,
+                ]);
+            }
+
             $booking->assistance_types()->attach($booking_item['assistance_types']);
+
+            return response(['status' => 'success']);
         }
     }
 
