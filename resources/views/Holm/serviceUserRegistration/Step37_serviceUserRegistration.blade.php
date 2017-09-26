@@ -16,7 +16,13 @@
                     Does {{$userNameForSite}} have any food / drink allergies? <span>*</span>
                 </h2>
                 <div class="inputWrap">
-                    {!! Form::select('food_allergies',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    <?php
+                    if (isset($atrr)) unset($atrr);
+                    $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                    if (is_null($serviceUserProfile->food_allergies))
+                        $atrr['placeholder'] = 'Please select';
+                    ?>
+                    {!! Form::select('food_allergies',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                     @if ($errors->has('food_allergies'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('food_allergies') }}</strong>

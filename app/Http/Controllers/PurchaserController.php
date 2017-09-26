@@ -33,8 +33,7 @@ class PurchaserController extends FrontController implements Constants
         $this->vars = array_add($this->vars,'footer',$footer);
         $this->vars = array_add($this->vars,'modals',$modals);
 
-        $newBookings = Booking::whereIn('status_id', [self::NEW, self::AWAITING_CONFIRMATION])->where('purchaser_id', $this->user->id)->get();
-        $this->vars = array_add($this->vars, 'newBookings', $newBookings);
+
 
 
         //dd();
@@ -43,6 +42,9 @@ class PurchaserController extends FrontController implements Constants
             return redirect('/');
             //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
         } else {
+
+            $newBookings = Booking::whereIn('status_id', [self::NEW, self::AWAITING_CONFIRMATION])->where('purchaser_id', $this->user->id)->get();
+            $this->vars = array_add($this->vars, 'newBookings', $newBookings);
 
             $purchaserProfile = PurchasersProfile::findOrFail($this->user->id);
             $serviceUsers = $purchaserProfile->serviceUsers;

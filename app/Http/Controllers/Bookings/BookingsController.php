@@ -55,6 +55,9 @@ class BookingsController extends FrontController implements Constants
 
             $booking->assistance_types()->attach($booking_item['assistance_types']);
 
+            //отправить почту
+            //todo
+
             return response(['status' => 'success']);
         }
     }

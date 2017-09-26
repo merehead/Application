@@ -16,7 +16,13 @@
                         Does {{$userNameForSite}} need the assistance of more than one person at a time to achieve any particular task? - eg bathing, dressing etc. <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('multiple_carers',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->multiple_carers))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('multiple_carers',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('multiple_carers'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('multiple_carers') }}</strong>

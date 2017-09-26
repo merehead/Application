@@ -14,11 +14,15 @@
                     <h2 class="formLabel questionForm__label">
                         Does {{$userNameForSite}} need help with speech? <span>*</span>         </h2>
                     <div class="inputWrap">
-                        {!! Form::select('speech',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->speech))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('speech',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('speech'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('speech') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('speech') }}</strong></span>
                         @endif
                     </div>
                 </div>

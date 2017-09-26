@@ -16,11 +16,15 @@
                         Does {{$userNameForSite}} have any other special dietary requirements? - eg fluid control, thickened foods, fortified diet, weight monitored, at risk of choking? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('special_dietary_requirements',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->special_dietary_requirements))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('special_dietary_requirements',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('special_dietary_requirements'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('special_dietary_requirements') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('special_dietary_requirements') }}</strong></span>
                         @endif
                     </div>
                 </div>

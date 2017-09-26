@@ -16,11 +16,15 @@
                         Does {{$userNameForSite}} have any other medical conditions we should be aware of? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('other_medical_conditions',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->other_medical_conditions))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('other_medical_conditions',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                         @if ($errors->has('other_medical_conditions'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('other_medical_conditions') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('other_medical_conditions') }}</strong></span>
                         @endif
                     </div>
                 </div>

@@ -20,9 +20,9 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Please write a couple of sentences about yourself and your experience. This will be used as part of your profile which clients will see. No more than 150 words. <span>*</span>
+                        Please write a couple of sentences about yourself and your experience. This will be used as part of your profile which clients will see. No more than 600 symbols. <span>*</span>
                     </h2>
-                    {!! Form::textarea('description_yourself',null,['class'=>'formArea','placeholder'=>'Your text','maxlength'=>'1000']) !!}
+                    {!! Form::textarea('description_yourself',null,['class'=>'formArea','placeholder'=>'Your text','maxlength'=>'600']) !!}
                     @if ($errors->has('description_yourself'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('description_yourself') }}</strong>

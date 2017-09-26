@@ -16,11 +16,15 @@
                         Does {{$userNameForSite}} have any preferences of food? eg. Are there any do's and don'ts? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('preferences_of_food',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->preferences_of_food))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('preferences_of_food',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                         @if ($errors->has('preferences_of_food'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('preferences_of_food') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('preferences_of_food') }}</strong></span>
                         @endif
                     </div>
                 </div>

@@ -16,7 +16,13 @@
                         Does {{$userNameForSite}} have regular social interaction with friends / family?
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('social_interaction',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->social_interaction))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('social_interaction',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                         @if ($errors->has('social_interaction'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('social_interaction') }}</strong>
@@ -29,7 +35,13 @@
                         Would {{$userNameForSite}} like someone to visit regularly for companionship?
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('visit_for_companionship',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->visit_for_companionship))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('visit_for_companionship',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                         @if ($errors->has('visit_for_companionship'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('visit_for_companionship') }}</strong>
