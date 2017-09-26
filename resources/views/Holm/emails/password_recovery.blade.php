@@ -63,16 +63,16 @@
                     <td style="padding: 30px 40px;font-family: 'Roboto', sans-serif; line-height: 1.5; background: #f9f9f9; "  valign="top" class="">
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
 
-                            @if($user->isCarer())
-                                Hello  {{$user->userCarerProfile->first_name}}!
+                            @if(session('user')->isCarer())
+                                Hello  {{session('user')->userCarerProfile->first_name}}!
                             @endif
-                            @if($user->isPurchaser())
-                                Hello  {{$user->userPurchaserProfile->first_name}}!
+                            @if(session('user')->isPurchaser())
+                                Hello  {{session('user')->userPurchaserProfile->first_name}}!
                             @endif
                         </h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0; ">
-                            We received a request to reset your password for your account {{$user->email}}. We are here to help!<br>
-                            Simply click on the [link] to set a new password.
+                            We received a request to reset your password for your account {{session('user')->email}}. We are here to help!<br>
+                            Simply click on the {{$actionUrl}} to set a new password.
                             <br>
 
 

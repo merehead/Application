@@ -695,11 +695,26 @@ $(document).ready(function () {
         }
     });
 
+    $('.timepicker_message').timepicker({
+        timeFormat: 'h:mm p',
+        interval: 30,
+        //minTime: '10',
+        //maxTime: '6:00pm',
+        //defaultTime: '18',
+        startTime: '18:00',
+        dynamic: true,
+        dropdown: true,
+        scrollbar: true
+    });
+
     $('a.additionalTime').on('click', function (e) {
         e.preventDefault();
-        $('.datetime').last().after($('.datetime').last().clone().removeClass('nhide'));
+        var dlast = $('.datetime').last();
+        var dclone = $(dlast).clone().removeClass('nhide');
+        $(dclone).find('input.datepicker_message').removeClass('hasDatepicker');
+        $(dlast).after(dclone);
         $('.checktime').last().after($('.checktime').last().clone());
-        $(".datepicker_message,datepicker").datepicker({
+        $(".datepicker_message").datepicker({
             changeMonth: true,
             changeYear: true,
             dateFormat: "dd/mm/yy",
@@ -708,8 +723,18 @@ $(document).ready(function () {
             maxDate: "+50Y",
             yearRange: "0:+50"
         });
+        $('.timepicker_message').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            //minTime: '10',
+            //maxTime: '6:00pm',
+            //defaultTime: '18',
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
         return false;
-        ;
     });
 
     if ($("#checkL12").is(':checked')) {
@@ -778,7 +803,7 @@ $(document).ready(function () {
     $(".faq__link").click(function (e) {
         e.preventDefault();
 
-        var that = $(this).find('i.toggler');
+        var that = $(this).parent().find('i.toggler');
         $(this).parent().find('.faq__content').slideToggle("slow", function () {
             if ($(that).hasClass('fa')) {
                 if ($(that).hasClass('fa-minus')) {

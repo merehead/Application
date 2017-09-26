@@ -102,11 +102,10 @@ class CarerController extends FrontController implements Constants
 
         $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
         $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
-        $modals = view(config('settings.frontTheme') . '.includes.modals')->render();
+
 
         $this->vars = array_add($this->vars, 'header', $header);
         $this->vars = array_add($this->vars, 'footer', $footer);
-        $this->vars = array_add($this->vars, 'modals', $modals);
 
 
         $carerProfile = CarersProfile::findOrFail($user_id);
@@ -117,10 +116,15 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars, 'postcodes', $postcodes);
         $typeCare = $carerProfile->AssistantsTypes()->get();
         $this->vars = array_add($this->vars, 'typeCare', $typeCare);
+        $typeCareAll = AssistanceType::all();
+        $this->vars = array_add($this->vars, 'typeCareAll', $typeCareAll);
         $workingTimes = $carerProfile->WorkingTimes()->get();
         $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
         $languages = $carerProfile->Languages()->get();
         $this->vars = array_add($this->vars, 'languages', $languages);
+
+        $modals = view(config('settings.frontTheme') . '.includes.modals')->with($this->vars)->render();
+        $this->vars = array_add($this->vars, 'modals', $modals);
 
         $times = array(2=>array(5,8,11,14,17,20,23),
             3=>array(6,9,12,15,18,21,24),
