@@ -63,6 +63,8 @@ class PurchaserRegistration
     public function setNextStep($request)
     {
 
+       // dd($request->all());
+
         $array=$request->all();
 
         $user = Auth::user();
@@ -115,6 +117,9 @@ class PurchaserRegistration
             &&  preg_match('/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',$purchaserProfile->postcode)!=1
         ) { // недоступный регион
             $purchaserProfile->registration_progress = '4_3';
+        }
+        if ($request->input('step')=='4_1' &&  $purchaserProfile->purchasing_care_for == 'Myself') {
+            $purchaserProfile->registration_progress = '4_1_2_1';
         }
 
             $purchaserProfile->update();
@@ -368,30 +373,16 @@ class PurchaserRegistration
                 )
         ]);
 
-
-
-/*        $this->validate($request,[
-            'title' => 'required|numeric:1',
-            'first_name' => 'required|string|max:128',
-            'family_name' => 'required|string|max:128',
-            'like_name' => 'required|string|max:128',
-            'gender' => 'required|string|max:14',
-            'mobile_number' => 'required',
-            'address_line1'=>'required|string|max:256',
-            'address_line2' => 'nullable|string|max:256',
-            'town' => 'required|string|max:128',
-            'postcode' => 'required|string|max:32',
-            'DoB'=>'required',
-        ]);*/
-
-        //dd($request->all());
-
         $purchaserProfile = $this->model->findOrFail($request->input('purchasersProfileID'));
 
         $serviceUsersProfile = $purchaserProfile->serviceUsers->first();
 
+        if ($purchaserProfile->purchasing_care_for == 'Myself'){
+            $patchToPurchaserAvatar = getcwd().'/img/profile_photos/'.$purchaserProfile->id.'.png';
+            $patchToSrvUserAvatar = getcwd().'/img/service_user_profile_photos/'.$serviceUsersProfile->id.'.png';
+            if(file_exists($patchToPurchaserAvatar)) copy($patchToPurchaserAvatar, $patchToSrvUserAvatar);
+        }
 
-        //dd($purchaserProfile);
 
         if ($serviceUsersProfile) {
             $serviceUsersProfile->title = $request->input('title');
