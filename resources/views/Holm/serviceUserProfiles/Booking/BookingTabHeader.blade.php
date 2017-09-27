@@ -20,11 +20,8 @@
            <img src="./dist/img/print.png" alt="">
          </a> -->
         <div class="roundedBtn">
-<<<<<<< HEAD
+
             <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUsersProfile->id])}}" class="roundedBtn__item roundedBtn__item--preview">
-=======
-            <a href="/serviceUser/profile/{{$serviceUser->id}}" class="roundedBtn__item roundedBtn__item--preview">
->>>>>>> origin2/Anton
                 Preview public profile
             </a>
         </div>

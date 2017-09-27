@@ -33,13 +33,7 @@
 £ {{random_int(8,15)}}</span><span class="hourPrice__timing">/hour</span>
     </p>
     <div class="bookBtn">
-
-{{--
-        <a href="Message.html" class="bookBtn__item  centeredLink" data-toggle="modal" data-target="#message-carer">
---}}
-
         <a href="#" class="bookBtn__item  centeredLink" data-toggle="modal" data-target="#message-carer">
-
             book carer
         </a>
     </div>
