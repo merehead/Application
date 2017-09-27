@@ -56,6 +56,8 @@ class Appointment extends Model
 
         switch($this->periodicity){
             case 'daily':
+            case 'weekly':
+            case 'single':
                 $dateStart = Carbon::createFromFormat('d/m/Y', $this->date_start);
                 $dateEnd = Carbon::createFromFormat('d/m/Y', $this->date_end);
                 $days = $dateEnd->diffInDays($dateStart);

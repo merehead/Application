@@ -613,7 +613,7 @@ $(document).ready(function () {
 
     });
 
-    $(function () {
+
         $("#datepicker_when_start").datepicker({
             //changeMonth: true,
             //changeYear: true,
@@ -623,6 +623,30 @@ $(document).ready(function () {
             maxDate: "+20Y",
             yearRange: "0:+10"
         });
+
+
+    $('#timepicker1').timepicker({
+        timeFormat: 'h:mm p',
+        interval: 30,
+        //minTime: '10',
+        //maxTime: '6:00pm',
+        //defaultTime: '18',
+        startTime: '18:00',
+        dynamic: true,
+        dropdown: true,
+        scrollbar: true
+    });
+
+    $('#timepicker2').timepicker({
+        timeFormat: 'h:mm p',
+        interval: 30,
+        //minTime: '10',
+        //maxTime: '6:00pm',
+        //defaultTime: '18',
+        startTime: '18:00',
+        dynamic: true,
+        dropdown: true,
+        scrollbar: true
     });
 
     $(".allTime").click(function () {
