@@ -1044,7 +1044,7 @@ $(document).ready(function () {
 //------------Google Address search -----------------------
     if ($.isFunction($.fn.autocomplete)) {
 
-        $('input[name="postcode"]').autocomplete({
+        $('input[name="postcode"],input[name="address_line1"]').autocomplete({
             serviceUrl: '/address/',
             params: {query: $('input[name="postcode"]').val()},
             minChars: 1,
