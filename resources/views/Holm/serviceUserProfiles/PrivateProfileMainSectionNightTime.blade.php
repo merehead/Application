@@ -50,7 +50,7 @@
                 @if(empty($serviceUsersProfile->time_to_bed))
                     <input name="time_to_bed" id="timepicker1" class="profileField__input" placeholder="Time" type="text">
                 @else
-                    {!! Form::text('time_to_bed',null,['id'=>'timepicker1','class'=>'profileField__input','maxlength'=>"500"]) !!}
+                    {!! Form::text('time_to_bed',null,['id'=>'timepicker1','class'=>'profileField__input','maxlength'=>"50"]) !!}
                 @endif
                 <span class="profileField__input-ico centeredLink">
                 <i class="fa fa-clock-o" aria-hidden="true"></i>
