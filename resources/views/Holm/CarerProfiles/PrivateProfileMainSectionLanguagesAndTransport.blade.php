@@ -98,11 +98,7 @@
                 null,['class'=>'profileField__select profileField__select--greyBg','disabled','data-edit'=>'false',
                 'id'=>'driving_license'])
                  !!}
-{{--                <select class="profileField__select profileField__select--greyBg">
-                    <option value="Flat">Have UK/EEA Driving Licence</option>
-                    <option value="Flat">Do not have a driving licence</option>
-                    <option value="Flat">Please select</option>
-                </select>--}}
+
             </div>
             <div class="profileField hiding_profile profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
@@ -111,13 +107,9 @@
                 </span>
                 </h2>
                 {!! Form::select('have_car',['Yes'=>'Car for work','No'=>'Do not have a car'],
-null,['class'=>'profileField__select','id'=>'type_car_work','placeholder'=>'Please select']) !!}
+null,['class'=>'profileField__select','id'=>'type_car_work']) !!}
 
-                {{--                <select class="profileField__select ">
-                                    <option value="Flat">Car for work</option>
-                                    <option value="Flat">Do not have a car</option>
-                                    <option value="Flat">Please select</option>
-                                </select>--}}
+
             </div>
             <div class="profileField hiding_profile profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
@@ -126,14 +118,10 @@ null,['class'=>'profileField__select','id'=>'type_car_work','placeholder'=>'Plea
                 </span>
                 </h2>
                 {!! Form::select('use_car',['Yes'=>'Transport clients','No'=>'Can not transport clients'],
-null,['class'=>'profileField__select','noPlaceholder'=>'Please select','id'=>'profile_use_car']) !!}
+null,['class'=>'profileField__select','id'=>'profile_use_car']) !!}
 
 
-                {{--                <select class="profileField__select ">
-                                    <option value="Flat">Transport clients</option>
-                                    <option value="Flat">Can not transport clients</option>
-                                    <option value="Flat">Please select</option>
-                                </select>--}}
+
 
             </div>
         </div>

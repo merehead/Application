@@ -29,7 +29,7 @@
                 </span>
                 </h2>
 
-                {!! Form::select('DBS',['Yes'=>'Have up to date DBS certificate','No'=>'Have not a DBS'],null,['id'=>'main-if','class'=>'profileField__select profileField__select--greyBg','placeholder'=>'Please select','readonly','data-edit'=>'false']) !!}
+                {!! Form::select('DBS',['Yes'=>'Have up to date DBS certificate','No'=>'Have not a DBS'],null,['id'=>'main-if','class'=>'profileField__select profileField__select--greyBg','readonly','data-edit'=>'false']) !!}
 
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Have an up to date DBS</option>
@@ -44,7 +44,7 @@
 
                 {!! Form::select('criminal_conviction',['Some'=>'Yes, but they are very old, and for a minor offence.',
                 'Yes'=>'Yes','No'=>'Do not have criminal convictions'],
-null,['class'=>'profileField__select','noPlaceholder'=>'Please select','readonly','id'=>'criminal_detail','data-edit'=>'false']) !!}
+null,['class'=>'profileField__select','readonly','id'=>'criminal_detail','data-edit'=>'false']) !!}
 
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Do not have criminal convictions</option>
@@ -73,7 +73,7 @@ null,['class'=>'profileField__select','noPlaceholder'=>'Please select','readonly
                 {!! Form::select('DBS_use',['Yes'=>'Use the new DBS update service','No'=>'Do not use the new DBS update service'],null,['class'=>'profileField__select profileField__select--greyBg','noPlaceholder'=>'Please select']) !!}
 --}}
 
-                {!! Form::select('DBS_use',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select profileField__select--greyBg','placeholder'=>'Please select']) !!}
+                {!! Form::select('DBS_use',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select profileField__select--greyBg']) !!}
 
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Use the new DBS update service</option>

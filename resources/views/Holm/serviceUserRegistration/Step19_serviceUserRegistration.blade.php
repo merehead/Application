@@ -17,11 +17,15 @@
 
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('help_with_mobility',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class'=>'formSelect'];
+                        if (is_null($serviceUserProfile->help_with_mobility))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('help_with_mobility',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('help_with_mobility'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('help_with_mobility') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('help_with_mobility') }}</strong></span>
                         @endif
                     </div>
                 </div>

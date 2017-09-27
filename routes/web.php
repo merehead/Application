@@ -39,11 +39,18 @@ Route::get('/terms', 'TermsController@index')->name('TermsPage');
 
 Route::get('/welcome-carer', 'CarerController@welcome')->name('welcomeCarer');
 Route::get('/carer-settings', 'CarerController@index')->name('carerSettings'); //synonym for ImCarerPage
+
 Route::get('/carer/profile/{user_id}', 'CarerController@profile')->name('carerPublicProfile'); //synonym for
 Route::get('/address/', 'CarerController@getAddress')->name('carerGetAddress'); //synonym for
 Route::get('/carer/review/{user_id}', 'CarerController@review')->name('carerReview'); //synonym for
 Route::get('/carer/appointment/{user_id}', 'CarerController@appointment')->name('carerAppointment'); //synonym for
 // ImCarerPage
+Route::get('/carer-settings/booking', 'CarerController@booking')->name('carerBooking'); //synonym for ImCarerPage
+Route::get('/carer-settings/booking/{status}', 'CarerController@bookingFilter')->name('carerBookingStatus'); //synonym for ImCarerPage
+
+Route::get('/carer-settings/profile', 'CarerController@profile')->name('carerPublicProfile'); //synonym for ImCarerPage
+Route::get('/carer-settings/booking/{status?}', 'CarerController@bookingFilter')->name('carerBooking'); //synonym for ImCarerPage
+
 Route::get('/carer-settings/booking/{status?}', 'CarerController@bookingFilter')->name('carerBooking'); //synonym for ImCarerPage
 
 Route::get('/im-carer', 'CarerController@index')->name('ImCarerPage');
@@ -75,6 +82,7 @@ Route::post('/serviceUser-settings/{serviceUserProfile}','ServiceUserPrivateProf
 //Route::get('/serviceUser-settings/booking/{serviceUserProfile}', 'ServiceUserPrivateProfileController@booking')->name('ServiceUserBooking'); //synonym for ImCarerPage
 Route::get('/serviceUser-settings/booking/{serviceUserProfile}/{status?}', 'ServiceUserPrivateProfileController@bookingFilter')->name('ServiceUserBookingStatus'); //synonym for ImCarerPage
 
+Route::post('/bookings','Bookings\BookingsController@create');
 Route::get('/bookings/{booking}/details', 'Bookings\BookingsController@view_details');
 Route::get('/bookings/{booking}/purchase', 'Bookings\PaymentsController@payment_form');
 Route::post('/bookings/{booking}/message','Bookings\BookingsController@create_message');

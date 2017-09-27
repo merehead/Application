@@ -1,17 +1,17 @@
-<section class="testimonialsSection testimonialsSection-padding">
+<section class="testimonialsSection">
     <div class="container">
         <div class="testimonialsSection__title">
             <span class="testimonialsIco">
           <i class="fa fa-quote-left" aria-hidden="true"></i>
         </span>
         </div>
-        <div class="sliderContainer ">
-            <a href="#theCarousel1" data-slide="prev" class="sliderControl sliderControl--left centeredLink">
+        <div class="sliderContainer">
+            <!-- <a href="#theCarousel1" data-slide="prev" class="sliderControl sliderControl--left centeredLink">
                 <i class="fa fa-angle-left"></i>
             </a>
             <a href="#theCarousel1" data-slide="next" class="sliderControl sliderControl--right centeredLink">
                 <i class="fa fa-angle-right"></i>
-            </a>
+            </a> -->
             <div class="testimonialSlider carousel slide multi-item-carousel" id="theCarousel1">
                 <div class="carousel-inner carousel-inner1 special-slide">
                     <div class="testimonialSlider__item item active" id="testimonialSlider__item1">

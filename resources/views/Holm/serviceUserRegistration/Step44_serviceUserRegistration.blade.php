@@ -17,7 +17,13 @@
                         Does {{$userNameForSite}} need assistance in choosing appropriate clothes? - eg choosing warm clothes in the winter. <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('appropriate_clothes',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->appropriate_clothes))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('appropriate_clothes',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('appropriate_clothes'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('appropriate_clothes') }}</strong>

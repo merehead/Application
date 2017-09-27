@@ -16,7 +16,13 @@
                         Does {{$userNameForSite}} need help going shopping, or to other local facilities / events? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('mobility_shopping',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->mobility_shopping))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('mobility_shopping',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('mobility_shopping'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('mobility_shopping') }}</strong>

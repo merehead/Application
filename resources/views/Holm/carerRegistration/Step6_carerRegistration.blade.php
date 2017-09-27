@@ -23,8 +23,13 @@
                     Do you have an up to date DBS? <span>*</span>
                 </h2>
                 <div class="inputWrap">
-
-                    {!! Form::select('DBS',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if2','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class'=>'formSelect','id'=>'main-if2'];
+                        if (is_null($carersProfile->DBS))
+                            $atrr['placeholder'] = 'Please select';
+                    ?>
+                    {!! Form::select('DBS',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                 </div>
                 @if ($errors->has('DBS'))
                     <span class="help-block">
@@ -85,8 +90,13 @@
                                              class="underline">DBS update service</a>? <span>*</span>
                 </h2>
                 <div class="inputWrap">
-
-                    {!! Form::select('DBS_use',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    <?php
+                        if (isset($atrr)) unset($atrr);  
+                    $atrr = ['class'=>'formSelect','id'=>'main-if'];
+                    if (is_null($carersProfile->DBS_use))
+                        $atrr['placeholder'] = 'Please select';
+                    ?>
+                    {!! Form::select('DBS_use',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                 </div>
                 @if ($errors->has('DBS_use'))
                     <span class="help-block">

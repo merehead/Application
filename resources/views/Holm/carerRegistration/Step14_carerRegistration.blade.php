@@ -20,14 +20,17 @@
                     Are you able to work legally in the UK?<span>*</span>
                 </h2>
                 <div class="inputWrap">
-
-                    {!! Form::select('work_UK',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if2','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    <?php
+                    if (isset($atrr)) unset($atrr);
+                    $atrr = ['class'=>'formSelect','id'=>'main-if2'];
+                    if (is_null($carersProfile->work_UK))
+                        $atrr['placeholder'] = 'Please select';
+                    ?>
+                    {!! Form::select('work_UK',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                 </div>
 
                 @if ($errors->has('work_UK'))
-                    <span class="help-block">
-                                        <strong>{{ $errors->first('work_UK') }}</strong>
-                                    </span>
+                    <span class="help-block"><strong>{{ $errors->first('work_UK') }}</strong></span>
                 @endif
             </div>
 
@@ -36,7 +39,13 @@
                     Are there any restrictions on you working in the UK?<span>*</span>
                 </h2>
                 <div class="inputWrap">
-                    {!! Form::select('work_UK_restriction',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select','maxlength'=>"250"]) !!}
+                    <?php
+                    if (isset($atrr)) unset($atrr);
+                    $atrr = ['class'=>'formSelect','id'=>'main-if'];
+                    if (is_null($carersProfile->work_UK_restriction))
+                        $atrr['placeholder'] = 'Please select';
+                    ?>
+                    {!! Form::select('work_UK_restriction',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                 </div>
                 @if ($errors->has('work_UK_restriction'))
                     <span class="help-block">

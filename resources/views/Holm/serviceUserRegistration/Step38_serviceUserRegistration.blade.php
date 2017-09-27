@@ -16,7 +16,13 @@
                         Does {{$userNameForSite}} have any special nutritional or belief based dietary requirements? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('dietary_requirements',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->dietary_requirements))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('dietary_requirements',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                         @if ($errors->has('dietary_requirements'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('dietary_requirements') }}</strong>

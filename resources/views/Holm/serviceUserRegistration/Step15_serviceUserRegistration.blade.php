@@ -16,11 +16,15 @@
                         Is there anything else the Carer should be aware of when entering the home? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('entering_aware',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id'=>'sometimes-if','class'=>'formSelect'];
+                        if (is_null($serviceUserProfile->entering_aware))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('entering_aware',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                         @if ($errors->has('entering_aware'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('entering_aware') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('entering_aware') }}</strong></span>
                         @endif
                     </div>
                 </div>

@@ -17,11 +17,15 @@
                         Does {{$userNameForSite}} need any assistance managing their toilet needs? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('managing_toilet_needs',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->managing_toilet_needs))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('managing_toilet_needs',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('managing_toilet_needs'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('managing_toilet_needs') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('managing_toilet_needs') }}</strong></span>
                         @endif
                     </div>
                 </div>
@@ -30,7 +34,13 @@
                         Does {{$userNameForSite}} need help mobilising themselves to the toilet? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('mobilising_to_toilet',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->mobilising_to_toilet))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('mobilising_to_toilet',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('mobilising_to_toilet'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('mobilising_to_toilet') }}</strong>
@@ -43,7 +53,13 @@
                         Does {{$userNameForSite}} need help cleaning themselves when using the toilet? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('cleaning_themselves',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->cleaning_themselves))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('cleaning_themselves',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('cleaning_themselves'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('cleaning_themselves') }}</strong>

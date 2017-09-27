@@ -137,45 +137,6 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
         return $this->renderOutput();
     }
 
-//    public function booking($serviceUserProfile)
-//    {
-//        $user = Auth::user();
-//
-//        $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
-//        $this->title = 'Holm Care';
-//
-//        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
-//        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
-//        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
-//
-//        $this->vars = array_add($this->vars,'header',$header);
-//        $this->vars = array_add($this->vars,'footer',$footer);
-//        $this->vars = array_add($this->vars,'modals',$modals);
-//
-//        $serviceUsersProfile = ServiceUsersProfile::findOrFail($serviceUserProfile);
-//
-//
-//        $this->vars = array_add($this->vars, 'user', $this->user);
-//
-//        $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
-//
-//        $typeCare = AssistanceType::all();
-//        $this->vars = array_add($this->vars, 'typeCare', $typeCare);
-//        $workingTimes = WorkingTime::all();
-//        $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
-//        $languages = Language::all();
-//        $this->vars = array_add($this->vars, 'languages', $languages);
-//
-//        $newBookings = Booking::where('status_id', 2)->where('purchaser_id', $user->id)->get();
-//        $this->vars = array_add($this->vars, 'newBookings', $newBookings);
-//
-//        $this->content = view(config('settings.frontTheme') . '.serviceUserProfiles.Booking.BookingTaball')->with($this->vars)
-//            ->render();
-//
-//
-//        return $this->renderOutput();
-//    }
-
     public function delete($serviceUserProfileId) {
 
         $activeUser = Auth::user();

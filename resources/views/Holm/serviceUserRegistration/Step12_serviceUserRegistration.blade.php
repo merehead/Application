@@ -16,7 +16,13 @@
                         Does {{$serviceUserProfile->like_name}} own any pets? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('own_pets',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id'=>'sometimes-if','class'=>'formSelect'];
+                        if (is_null($serviceUserProfile->own_pets))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('own_pets',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
 
                     @if ($errors->has('own_pets'))
                         <span class="help-block">
@@ -45,7 +51,13 @@
                         Are the pets friendly with strangers?  <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('pet_friendly',['Yes'=>'Yes','No'=>'No','Normally'=>'Normally'],null,['class'=>'formSelect ','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class'=>'formSelect'];
+                        if (is_null($serviceUserProfile->pet_friendly))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('pet_friendly',['Yes'=>'Yes','No'=>'No','Normally'=>'Normally'],null,$atrr) !!}
                         @if ($errors->has('pet_friendly'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('pet_friendly') }}</strong>

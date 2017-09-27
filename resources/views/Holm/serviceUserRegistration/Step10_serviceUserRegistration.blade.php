@@ -19,11 +19,15 @@
                         Can {{$serviceUserProfile->like_name}} move around home safely by themselves? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('move_available',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-noif','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id'=>'sometimes-noif','class'=>'formSelect'];
+                        if (is_null($serviceUserProfile->move_available))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('move_available',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('move_available'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('assistance_keeping') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('assistance_keeping') }}</strong></span>
                         @endif
                     </div>
 
@@ -34,11 +38,15 @@
                         Does {{$serviceUserProfile->like_name}}  require assistance moving around home?
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('assistance_moving',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class'=>'formSelect'];
+                        if (is_null($serviceUserProfile->assistance_moving))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('assistance_moving',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('assistance_moving'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('assistance_moving') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('assistance_moving') }}</strong></span>
                         @endif
                     </div>
                 </div>

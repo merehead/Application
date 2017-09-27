@@ -15,8 +15,13 @@
                     Are your Purchasing Care for yourself or someone else? <span>*</span>
                 </h2>
                 <div class="inputWrap">
-                    {!! Form::select('purchasing_care_for',['Someone else'=>'Someone else','Myself'=>'Myself'],
-null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    <?php
+                    if (isset($atrr)) unset($atrr);
+                    $atrr = ['class'=>'formSelect'];
+                    if (is_null($purchasersProfile->purchasing_care_for))
+                        $atrr['placeholder'] = 'Please select';
+                    ?>
+                    {!! Form::select('purchasing_care_for',['Someone else'=>'Someone else','Myself'=>'Myself'],null,$atrr) !!}
                 </div>
                 @if ($errors->has('purchasing_care_for'))
                     <span class="help-block">

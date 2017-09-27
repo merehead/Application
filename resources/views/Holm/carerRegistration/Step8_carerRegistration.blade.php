@@ -22,8 +22,13 @@
                         Do you have a full UK/EEA Driving Licence?<span>*</span>
                     </h2>
                     <div class="inputWrap">
-
-                        {!! Form::select('driving_licence',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if2','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class'=>'formSelect','id'=>'main-if2'];
+                        if (is_null($carersProfile->driving_licence))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('driving_licence',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                     </div>
 
                     @if ($errors->has('driving_licence'))
@@ -91,10 +96,13 @@
                         Do you own a car which you intend to use for work?
                     </h2>
                     <div class="inputWrap">
-
-                        {!! Form::select('have_car',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if',
-                        'class'=>'formSelect',
-                        'placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class'=>'formSelect','id'=>'main-if'];
+                        if (is_null($carersProfile->have_car))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('have_car',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                     </div>
                     @if ($errors->has('have_car'))
                         <span class="help-block"><strong>{{ $errors->first('have_car') }}</strong></span>
@@ -164,10 +172,14 @@
                         Would you be interested in using your car to transport clients to the shops or for short trips?<span>*</span>
                     </h2>
                     <div class="inputWrap">
-
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class'=>'formSelect','id'=>'register_use_car'];
+                        if (is_null($carersProfile->use_car))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
                         {!! Form::select('use_car',['Yes'=>'Yes','No'=>'No'],null,
-                        ['id'=>'register_use_car','class'=>'formSelect',
-                        'placeholder'=>'Please select']) !!}
+                        $atrr) !!}
                     </div>
 
                     @if ($errors->has('use_car'))

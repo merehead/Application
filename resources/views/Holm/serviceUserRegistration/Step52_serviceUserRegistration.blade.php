@@ -16,7 +16,13 @@
                         Does {{$userNameForSite}} have problems getting dressed for bed? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('getting_dressed_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->getting_dressed_for_bed))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('getting_dressed_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('getting_dressed_for_bed'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('getting_dressed_for_bed') }}</strong>
@@ -32,7 +38,13 @@
                         Would {{$userNameForSite}} like help getting ready for bed?
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('getting_ready_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->getting_ready_for_bed))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('getting_ready_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('getting_ready_for_bed'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('getting_ready_for_bed') }}</strong>

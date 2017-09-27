@@ -12,7 +12,7 @@
             </h2>
             <div class="inputWrap">
                 <input type="email" name="email" class="formInput registrationForm__input"
-                       placeholder="yourname@email.com">
+                       placeholder="yourname@email.com" value="{{old('email')}}">
                 <span class="inputIco registrationForm__ico">
                   <i class="fa fa-envelope"></i>
                 </span>

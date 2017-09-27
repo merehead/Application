@@ -17,11 +17,15 @@
 
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('home_safe',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-noif','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id'=>'sometimes-noif','class'=>'formSelect'];
+                        if (is_null($serviceUserProfile->home_safe))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('home_safe',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('home_safe'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('home_safe') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('home_safe') }}</strong></span>
                         @endif
                     </div>
 
@@ -32,11 +36,15 @@
                         Does {{$serviceUserProfile->like_name}} require assistance keeping the home safe and clean?
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('assistance_keeping',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class'=>'formSelect'];
+                        if (is_null($serviceUserProfile->assistance_keeping))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('assistance_keeping',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('assistance_keeping'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('assistance_keeping') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('assistance_keeping') }}</strong></span>
                         @endif
                     </div>
 

@@ -59,6 +59,9 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars,'footer',$footer);
         $this->vars = array_add($this->vars,'modals',$modals);
 
+        $newBookings = Booking::whereIn('status_id', [self::NEW, self::AWAITING_CONFIRMATION])->where('purchaser_id', $this->user->id)->get();
+        $this->vars = array_add($this->vars, 'newBookings', $newBookings);
+
         if (!$this->user) {
             return \redirect('welcome-carer');
             //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
@@ -102,7 +105,7 @@ class CarerController extends FrontController implements Constants
 
         $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
         $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
-
+        $modals = view(config('settings.frontTheme') . '.includes.modals')->render();
 
         $this->vars = array_add($this->vars, 'header', $header);
         $this->vars = array_add($this->vars, 'footer', $footer);
@@ -173,7 +176,6 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars,'footer',$footer);
         $this->vars = array_add($this->vars,'modals',$modals);
 
-
         $this->vars = array_add($this->vars, 'status', $status);
 
         $newBookings = Booking::whereIn('status_id', [self::NEW, self::AWAITING_CONFIRMATION])->where('carer_id', $user->id)->get();
@@ -196,8 +198,7 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars, 'completedBookings', $completedBookings);
         $this->vars = array_add($this->vars, 'completedAmount', $completedAmount);
 
-        $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarerall')->with($this->vars)
-            ->render();
+        $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarerall')->with($this->vars)->render();
 
 
         return $this->renderOutput();
@@ -399,15 +400,13 @@ class CarerController extends FrontController implements Constants
             //DB::query('delete from carer_profile_language where carer_profile_id=:?',[$input['id']]);
             if (isset($input['languages'])) {
 
-            $languages = $request->input('languages');
-                $carerProfiles->Languages()->sync(array_map('intval',array_keys($languages)));
-                }if (isset($input['language_additional'])) {$carerProfiles->language_additional = $input['language_additional'];}
+                if (isset($input['languages']))
+                    $carerProfiles->Languages()->sync(array_keys($input['languages']));
+                if (isset($input['language_additional'])) $carerProfiles->language_additional = $input['language_additional'];
                 $carerProfiles->save();
 
-/*            $serviceUsersProfile->Languages()->sync(array_map('intval', array_keys($languages)));
-            */
-
-            unset($carerProfiles);
+                unset($carerProfiles);
+            }
         }
 
         if ($input['stage'] == 'carerPrivateTransport') {

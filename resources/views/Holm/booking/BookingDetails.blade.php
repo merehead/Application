@@ -220,29 +220,26 @@
                 <span class="ordinaryTitle__text ordinaryTitle__text--smaller">Appointments:</span>
             </h2>
             <div class="sliderContainer ">
-                <a href="" class="sliderArrow sliderArrow--left centeredLink">
+                <!-- <a href="" class="sliderArrow sliderArrow--left centeredLink">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 <a href="" class="sliderArrow sliderArrow--right centeredLink">
                     <i class="fa fa-angle-right"></i>
-                </a>
+                </a> -->
                 <div class="appointmentSliderBox">
-                    <div class="appointmentSlider">
+                    <div class="appointmentSlider owl-carousel">
                         <div class="singleAppointment singleAppointment--progress">
                             <div class="singleAppointment__header">
-                  <span>
-                    #1
-                  </span>
+                              <span>
+                       #3
+                              </span>
                                 <h2>
                                     in progress
                                 </h2>
-                                <a href="#">
-                                    <i class="fa fa-angle-up"></i>
-                                </a>
                             </div>
                             <div class="singleAppointment__body">
                                 <p>
-                                    <span>Date: </span> 15 june 2017
+                                    <span>Date: </span> 16 june 2017
                                 </p>
                                 <p>
                                     <span>Time: </span>  13:00 PM - 18:00 PM
@@ -256,115 +253,7 @@
                                     </a>
                                 </div>
                             </div>
-
                         </div>
-                        <div class="singleAppointment  ">
-                            <div class="singleAppointment__header">
-                  <span>
-                    #1
-                  </span>
-                                <h2>
-                                    in progress
-                                </h2>
-                                <a href="#">
-                                    <i class="fa fa-angle-up"></i>
-                                </a>
-                            </div>
-                            <div class="singleAppointment__body">
-                                <p>
-                                    <span>Date: </span> 15 june 2017
-                                </p>
-                                <p>
-                                    <span>Time: </span>  13:00 PM - 18:00 PM
-                                </p>
-                                <div class="appointmentBtn">
-                                    <a href="#" class="appointmentBtn__item appointmentBtn__item--compl">
-                                        Completed
-                                    </a>
-                                    <a href="#" class="appointmentBtn__item appointmentBtn__item--rej">
-                                        Rejected
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="singleAppointment  ">
-                            <div class="singleAppointment__header">
-                  <span>
-                    #1
-                  </span>
-                                <h2>
-                                    in progress
-                                </h2>
-                                <a href="#">
-                                    <i class="fa fa-angle-up"></i>
-                                </a>
-                            </div>
-                            <div class="singleAppointment__body">
-                                <p>
-                                    <span>Date: </span> 15 june 2017
-                                </p>
-                                <p>
-                                    <span>Time: </span>  13:00 PM - 18:00 PM
-                                </p>
-                                <div class="appointmentBtn">
-                                    <a href="#" class="appointmentBtn__item appointmentBtn__item--compl">
-                                        Completed
-                                    </a>
-                                    <a href="#" class="appointmentBtn__item appointmentBtn__item--rej">
-                                        Rejected
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="singleAppointment  ">
-                            <div class="singleAppointment__header">
-                  <span>
-                    #1
-                  </span>
-                                <h2>
-                                    in progress
-                                </h2>
-                                <a href="#">
-                                    <i class="fa fa-angle-up"></i>
-                                </a>
-                            </div>
-
-
-                        </div>
-                        <div class="singleAppointment  ">
-                            <div class="singleAppointment__header">
-                  <span>
-                    #1
-                  </span>
-                                <h2>
-                                    in progress
-                                </h2>
-                                <a href="#">
-                                    <i class="fa fa-angle-up"></i>
-                                </a>
-                            </div>
-
-
-                        </div>
-                        <div class="singleAppointment  ">
-                            <div class="singleAppointment__header">
-                  <span>
-                    #1
-                  </span>
-                                <h2>
-                                    in progress
-                                </h2>
-                                <a href="#">
-                                    <i class="fa fa-angle-up"></i>
-                                </a>
-                            </div>
-
-
-                        </div>
-
-
                     </div>
                 </div>
             </div>

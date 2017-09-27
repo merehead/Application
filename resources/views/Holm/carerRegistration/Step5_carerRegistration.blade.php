@@ -26,14 +26,12 @@
 
 
                     <div class="inputWrap">
-{{--                        <select class="formSelect">
-                            <option value="select">Please select</option>
-                            <option value="yes1">Yes, but they are very old, and for a minor offence.</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>--}}
-                        {!! Form::select('criminal_conviction',['Some'=>'Yes, but they are very old, and for a minor offence.','Yes'=>'Yes','No'=>'No'],
-null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        $atrr = ['class'=>'formSelect'];
+                        if (is_null($carersProfile->criminal_conviction))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('criminal_conviction',['Some'=>'Yes, but they are very old, and for a minor offence.','Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                     </div>
 
                     @if ($errors->has('criminal_conviction'))

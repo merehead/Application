@@ -16,7 +16,13 @@
                         Does {{$userNameForSite}} have any particular likes or dislikes? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('particular_likes',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->particular_likes))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('particular_likes',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('particular_likes'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('particular_likes') }}</strong>

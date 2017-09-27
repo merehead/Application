@@ -12,11 +12,14 @@ namespace App\Http\Controllers\Repo;
 use App\CarerReference;
 use App\CarersProfile;
 use App\Http\Requests\CarerRegistrationRequest;
+use App\MailError;
 use App\ServiceUsersProfile;
 use App\User;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use SebastianBergmann\CodeCoverage\Exception;
+use Swift_TransportException;
 
 class CarerRegistration
 {
@@ -211,13 +214,20 @@ class CarerRegistration
             Auth::login($user, true);
 
 
+            try {
+                Mail::send(config('settings.frontTheme').'.emails.continue_sign_up_carer',
+                    ['user' => $user, 'password' => $request['password'], 'regTime'=>$user->created_at->addWeek()->format('d/m/Y h:i A')],
+                    function ($m) use ($request) {$m->to($request['email'])->subject('Registration on HOLM');});
+            }
+            catch (Swift_TransportException $STe){
 
-
-            Mail::send(config('settings.frontTheme').'.emails.continue_sign_up_carer',
-                ['user' => $user, 'password' => $request['password'], 'regTime'=>$user->created_at->addWeek()->format('d/m/Y h:i A')],
-                function ($m) use ($request) {$m->to($request['email'])->subject('Registration on HOLM');});
-
-
+                $error = MailError::create([
+                    'error_message'=>$STe->getMessage(),
+                    'function'=>__METHOD__,
+                    'action'=>'Try to sent continue_sign_up_carer',
+                    'user_id'=>$user->id
+                ]);
+            }
 
         }
 
@@ -227,7 +237,7 @@ class CarerRegistration
     private function saveStep4($request) {
 
 
-
+//dd($request->all());
 
 
         $this->validate($request, [

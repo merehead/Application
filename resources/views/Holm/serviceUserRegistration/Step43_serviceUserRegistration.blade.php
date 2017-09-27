@@ -16,7 +16,13 @@
                         Does {{$userNameForSite}} require any assistance in getting dressed / bathing or toileting? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                         {!! Form::select('assistance_with_personal_hygiene',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->assistance_with_personal_hygiene))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                         {!! Form::select('assistance_with_personal_hygiene',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                             @if ($errors->has('assistance_with_personal_hygiene'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('assistance_with_personal_hygiene') }}</strong>

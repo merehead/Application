@@ -15,7 +15,13 @@
                     <h2 class="formLabel questionForm__label">
                         Does {{$userNameForSite}} have serious impediments hearing? <span>*</span>         </h2>
                     <div class="inputWrap">
-                        {!! Form::select('hearing',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->hearing))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('hearing',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('hearing'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('hearing') }}</strong>
