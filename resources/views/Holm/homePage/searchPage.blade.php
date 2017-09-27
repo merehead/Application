@@ -208,11 +208,13 @@
                         </div>
                     </div>
                     @endforeach
+                @if(count($carerResult)>5)
                 <div class="moreBtn moreBtn--book ">
                     <a href="" class="moreBtn__item moreBtn__item--book centeredLink">
                         Load More
                     </a>
                 </div>
+                    @endif
             </div>
 
         </div>

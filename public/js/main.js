@@ -346,6 +346,24 @@ $(document).ready(function () {
         }
     });
 
+    $('input[name="like_name"]').on('change',function(){
+        var text = $(this).val();
+        $('.line_about').html('ONE LINE ABOUT '+text);
+    });
+    // $('input[name="mobile_number"]').on('keyup', function () {
+    //     var val=$(this).val();
+    //     var that = this;
+    //     $('.error-onlyNumber1').remove();
+    //
+    //     var errorText = '<span class="help-block error-onlyNumber1">\n' +
+    //         '             <strong>Wrong input. Format: 07999999999</strong>\n' +
+    //         '          </span>';
+    //     if (val.match(/^07[0-9]{9}$/)) {
+    //         $(that).before(errorText);
+    //         that.value = that.value.replace(/^07[0-9]$/, '07');
+    //     }
+    // });
+
     // Иван функция уменшает автоматом шрифт у имени пользователя в шапке
     if ($('.profileName').lenght > 0)
         scale($('.profileName').parent()[0]);
@@ -1040,7 +1058,6 @@ $(document).ready(function () {
 
             return false;
         });
-
 //------------Google Address search -----------------------
     if ($.isFunction($.fn.autocomplete)) {
 

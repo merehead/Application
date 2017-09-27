@@ -162,7 +162,7 @@
 
 <div id="serviceGeneralone" class="borderContainer">
     <div class="profileCategory">
-        <h2 class="profileCategory__title">one line about {{$userNameForSite}}</h2>
+        <h2 class="profileCategory__title line_about">one line about {{$userNameForSite}}</h2>
         <a href="#" class="btn btn-info btn-edit"><span class="fa fa-pencil" data-id="oneLineAbove"></span> EDIT</a>
         <button type="button" class="btn btn-success hidden" id="load" data-loading-text="<i class='fa fa-spinner
         fa-spin '></i> Processing"><i class="fa fa-floppy-o"></i>  Save</button>
