@@ -771,12 +771,12 @@ $(document).ready(function () {
             dots: true,
             nav: true,
             navText: [
-              `<a href="#theCarousel" data-slide="prev" class="sliderControl sliderControl--left centeredLink">
-                <i class="fa fa-angle-left"></i>
-              </a>`,
-              `<a href="#theCarousel" data-slide="next" class="sliderControl sliderControl--right centeredLink">
-                <i class="fa fa-angle-right"></i>
-              </a>`
+              '<a href="#theCarousel" data-slide="prev" class="sliderControl sliderControl--left centeredLink">'+
+              '<i class="fa fa-angle-left"></i>'+
+              '</a>',
+              '<a href="#theCarousel" data-slide="next" class="sliderControl sliderControl--right centeredLink">'+
+              '<i class="fa fa-angle-right"></i>'+
+              '</a>'
             ],
             autoplay: true,
             autoplayTimeout: 5000,
@@ -798,16 +798,16 @@ $(document).ready(function () {
     if ($('div').is('.appointmentSlider')) {
         $('.appointmentSlider').owlCarousel({
             items: 3,
-            loop: true,
+            loop: false,
             dots: true,
             nav: true,
             navText: [
-              `<a href="#theCarousel" data-slide="prev" class="sliderControl sliderControl--left centeredLink">
-                <i class="fa fa-angle-left"></i>
-              </a>`,
-              `<a href="#theCarousel" data-slide="next" class="sliderControl sliderControl--right centeredLink">
-                <i class="fa fa-angle-right"></i>
-              </a>`
+              '<a href="#theCarousel" data-slide="prev" class="sliderControl sliderControl--left centeredLink">'+
+                '<i class="fa fa-angle-left"></i>'+
+              '</a>',
+              '<a href="#theCarousel" data-slide="next" class="sliderControl sliderControl--right centeredLink">'+
+                '<i class="fa fa-angle-right"></i>'+
+              '</a>'
             ],
             autoplay: false,
             autoplayTimeout: 5000,
@@ -910,6 +910,7 @@ $(document).ready(function () {
     });
 
     // -- Save Carer Profile -------
+//<<<<<<< HEAD
         $carer_profile.find('button.btn-success').on('click', function (e) {
             e.preventDefault();
             is_data_changed = false;
@@ -1003,6 +1004,93 @@ $(document).ready(function () {
                         } else {
                             loop()
                         }
+/*=======
+    $carer_profile.find('button.btn-success').on('click', function (e) {
+        e.preventDefault();
+        is_data_changed=false;
+        var that = $(this);
+        var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
+        var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');
+
+        $(idLoadFiles).find('.pickfiles').attr("disabled", true);
+        $(idLoadFiles).find('.pickfiles-change').attr("disabled", true);
+        $(idLoadFiles).find('.pickfiles-delete').attr("style", 'display: none');
+        $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", true);
+        $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", true);
+        $(idLoadFiles).find('.addInfo__input').attr("disabled", true);
+        $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: none');
+
+        that.button('loading');
+
+        if(arrFilesProfilePhoto.length > 0){
+          var url = '/profile-photo'
+          if(arrFilesProfilePhoto[0].service_user_id){
+            url = '/service-user-profile-photo'
+          }
+          axios.post(
+            url,
+            arrFilesProfilePhoto[0]
+          ).then(function (response) {
+            console.log(response)
+          })
+        }
+
+        if(arrFiles.length > 0){
+          var fileChunk = 0
+          file = arrFiles[fileChunk]
+          var sliceSize = 524288 // 512 kib
+          var chunks = Math.ceil(file.size / sliceSize)
+          var chunk = 0
+          var start = 0
+          var end = sliceSize
+
+          function loop() {
+            var blob = file.slice(start, end)
+            if(blob.size !== 0){
+              if(blob.size === sliceSize){
+                send(blob)
+                start += sliceSize
+                end += blob.size
+              }else{
+                send(blob)
+                start += sliceSize
+                end += blob.size
+              }
+            }
+          }
+          loop()
+
+          function send(fileSend) {
+            var formdata = new FormData()
+            formdata.append('name', file.name)
+            formdata.append('chunk', chunk)
+            formdata.append('chunks', chunks)
+            formdata.append('title', file.title)
+            formdata.append('type', file.type_value.split('-')[0])
+            formdata.append('file', fileSend)
+            chunk += 1
+            axios.post(
+              '/document/upload',
+              formdata
+            ).then(function (response) {
+              if(chunk === chunks){
+                if(arrFiles[fileChunk + 1]){
+                  fileChunk += 1
+                  file = arrFiles[fileChunk]
+                  chunks = Math.ceil(file.size / sliceSize)
+                  chunk = 0
+                  start = 0
+                  end = sliceSize
+                  loop()
+                }else{
+                  $('.pickfiles').val('')
+                  arrFiles = []
+                  if(arrForDeleteIDProfile.length > 0){
+                    axios.delete(
+                      '/api/document/'+arrForDeleteIDProfile+'/'
+                    ).then( function(response)  {
+                      console.log(response)
+>>>>>>> origin2/Yarchick*/
                     })
                         .catch(function (error) {
                             console.log(error)
@@ -1075,10 +1163,10 @@ $(document).ready(function () {
 
     if(!$carer_profile.length){
       if(getlocalStorageData){
-        JSON.parse(getlocalStorageData).map((index) => {
+        JSON.parse(getlocalStorageData).map(function(index) {
           if(document.getElementById("upload_files")){
             axios.get(
-              '/api/document/'+index.id.id+'/',
+              '/api/document/'+index.id.id+'/'
             ).then(function (response) {
               var res = response.data.data.document
 
@@ -1123,7 +1211,7 @@ $(document).ready(function () {
 
       console.log(input_name, input_val)
 
-      arrFiles.map((index) => {
+      arrFiles.map(function(index) {
         if(index.unique_type === id){
           console.log(index.unique_type, id, input_val)
           index.title = input_val
@@ -1154,12 +1242,12 @@ $(document).ready(function () {
       if($(this).attr('id')){
         arrForDeleteIDProfile.push(parseInt(deleteID))
         axios.delete(
-          '/api/document/'+deleteID+'/',
-        ).then( (response) => {
+          '/api/document/'+deleteID+'/'
+        ).then( function(response) {
           pickfilesDelete(_this)
           var getls = JSON.parse(localStorage.getItem('files_id'))
           if(getls){
-            var newGetls = getls.filter((index) => {
+            var newGetls = getls.filter(function(index) {
               if(index.id.id !== parseInt(deleteID)){
                 return index
               }
@@ -1169,7 +1257,7 @@ $(document).ready(function () {
         })
       }else{
         pickfilesDelete(_this)
-        arrFiles = arrFiles.filter((index) => {
+        arrFiles = arrFiles.filter(function(index) {
           if(index.unique_type !== input_name){
             return index
           }
@@ -1184,13 +1272,15 @@ $(document).ready(function () {
     var c = 0
 
     $(document).on('change', '.pickfiles, .pickfiles-change', function(e) {
-      var input_val = $(this).parent().parent().find('.addInfo__input').val('')
+      var _this = $(this)
 
+      var input_val = $(this).parent().parent().find('.addInfo__input').val('')
       var p = $(this).parent().parent().parent().find('.profileField_h')
       var div2 = $(this).parent().parent().addClass('profileField_h')
 
       $(this).parent().parent().find('.addInfo__input').prop( "disabled", false)
       $(this).parent().parent().find('.addInfo__input').attr( "readonly", false )
+      $(this).parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
       var pickfiles_img_id = $(this).parent().find('.pickfiles_img').attr('id')
       var deleteID = $(this).parent().find('.pickfiles-delete').attr('id')
@@ -1198,11 +1288,10 @@ $(document).ready(function () {
       file = $(this)[0].files[0]
 
       var reader  = new FileReader()
-      reader.addEventListener("load", () => {
-        $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
-        $(this).parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
+      reader.addEventListener("load", function() {
         file = reader.result
-      }, false)
+        _this.parent().find('.pickfiles_img').attr('style', 'background-image: url('+file+')')
+      })
 
       if (fileTypes.indexOf(file.type) !== -1) {
         reader.readAsDataURL(file)
@@ -1217,7 +1306,7 @@ $(document).ready(function () {
 
       var getls = localStorage.getItem('files_id') ? JSON.parse(localStorage.getItem('files_id')) : []
       if(getls){
-        getls.map((index) => {
+        getls.map(function(index) {
           if(index.id.id === parseInt(deleteID)){
             arrForDeleteID.push(parseInt(deleteID))
           }
@@ -1239,31 +1328,31 @@ $(document).ready(function () {
       c += 1
 
       if(p.length >= 2){
-        $(q).append(`
-          <div class="profileField profileField_q profileField_h">
-            <div class="addContainer">
-              <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-              <div id="${input_name.split('-')[0]}-${c}u" class="pickfiles_img"></div>
-                <a class="add add--moreHeight">
-                    <i class="fa fa-plus-circle"></i>
-                    <div class="add__comment add__comment--smaller"></div>
-                </a>
-            </div>
-            <div class="addInfo">
-                <input type="text" name="${input_name.split('-')[0]}-${c}u" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">
-            </div>
-          </div>
-        `)
+        $(q).append(
+          '<div class="profileField profileField_q profileField_h">'+
+            '<div class="addContainer">'+
+              '<input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
+              '<div id="'+input_name.split('-')[0]+c+'u" class="pickfiles_img"></div>'+
+                '<a class="add add--moreHeight">'+
+                    '<i class="fa fa-plus-circle"></i>'+
+                    '<div class="add__comment add__comment--smaller"></div>'+
+                '</a>'+
+            '</div>'+
+            '<div class="addInfo">'+
+                '<input type="text" name="'+input_name.split('-')[0]+c+'u" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">'+
+            '</div>'+
+          '</div>'
+        )
       }
 
       if($carer_profile.length){
-        arrFiles = arrFiles.filter((index) => {
+        arrFiles = arrFiles.filter(function(index) {
           if(index.unique_type !== pickfiles_img_id){
             return index
           }
         })
       }else{
-        arrFiles = arrFiles.filter((index) => {
+        arrFiles = arrFiles.filter(function(index) {
           if(index.unique_type !== input_name){
             return index
           }
@@ -1271,7 +1360,6 @@ $(document).ready(function () {
       }
 
       arrFiles.push(file)
-      console.log(arrFiles)
 
       $(this).parent().find('.add__comment--smaller').html('')
       $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
@@ -1318,7 +1406,7 @@ $(document).ready(function () {
           chunk += 1
           axios.post(
             '/document/upload',
-            formdata,
+            formdata
           ).then(function (response) {
 
             if(response.data.result){
@@ -1354,9 +1442,9 @@ $(document).ready(function () {
                 if(arrForDeleteID.length > 0){
                   var getls = JSON.parse(localStorage.getItem('files_id'))
                   axios.delete(
-                    '/api/document/'+arrForDeleteID+'/',
-                  ).then( (response) => {
-                    arrFiles = getls.filter((index) => {
+                    '/api/document/'+arrForDeleteID+'/'
+                  ).then( function(response) {
+                    arrFiles = getls.filter(function(index) {
                       if(arrForDeleteID.indexOf(index.id.id) === -1){
                         return index
                       }
@@ -1394,7 +1482,7 @@ $(document).ready(function () {
       var file = $(this)[0].files[0]
 
       var reader  = new FileReader()
-      reader.addEventListener("load", () => {
+      reader.addEventListener("load", function() {
 
         if (fileTypes.indexOf(file.type) !== -1) {
           $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
@@ -1428,7 +1516,7 @@ $(document).ready(function () {
       if(arrFilesProfilePhoto.length > 0){
         axios.post(
           '/profile-photo',
-          arrFilesProfilePhoto[0],
+          arrFilesProfilePhoto[0]
         ).then(function (response) {
           console.log(response)
           document.getElementById('step').submit()
@@ -1441,10 +1529,9 @@ $(document).ready(function () {
     $('.upload_files_profile_photo_su').on('click', function (e) {
       e.preventDefault()
       if(arrFilesProfilePhoto.length > 0){
-        console.log(arrFilesProfilePhoto);
         axios.post(
           '/service-user-profile-photo',
-          arrFilesProfilePhoto[0],
+          arrFilesProfilePhoto[0]
         ).then(function (response) {
           console.log(response)
           document.getElementById('step').submit()
@@ -1460,7 +1547,7 @@ $(document).ready(function () {
       var file = $(this)[0].files[0]
 
       var reader  = new FileReader()
-      reader.addEventListener("load", () => {
+      reader.addEventListener("load", function() {
 
         if (fileTypes.indexOf(file.type) !== -1) {
           $('#profile_photo').attr('src', reader.result)
@@ -1478,7 +1565,7 @@ $(document).ready(function () {
 
         file_profile_photo.image = reader.result
         arrFilesProfilePhoto.push(file_profile_photo)
-        console.log(arrFilesProfilePhoto)
+
       }, false)
       reader.readAsDataURL(file)
     })
@@ -1497,91 +1584,122 @@ $(document).ready(function () {
 
     if($carer_profile.length){
       axios.get(
-        'documents',
-      ).then( (response) => {
+        'documents'
+      ).then( function(response) {
         var newDoc = Object.entries(response.data.data.documents)
-
-        console.log(newDoc)
 
         function func(index, index2, i) {
           if(wordFileType.indexOf(index2.file_name.split('.')[1]) !== -1){
-            return `<div id="${index[0].toLowerCase()}${i}" class="pickfiles_img" style='background-image: url(/img/Word-icon_thumb.png)'></div>`
+            return "<div id="+index[0].toLowerCase()+i+" class='pickfiles_img' style='background-image: url(/img/Word-icon_thumb.png)'></div>"
           }else if(pdfFileType.indexOf(index2.file_name.split('.')[1]) !== -1){
-            return `<div id="${index[0].toLowerCase()}${i}" class="pickfiles_img" style='background-image: url(/img/PDF_logo.png)''></div>`
+            return "<div id="+index[0].toLowerCase()+i+" class='pickfiles_img' style='background-image: url(/img/PDF_logo.png)'></div>"
           }else{
-            return `<div id="${index[0].toLowerCase()}${i}" class="pickfiles_img" style='background-image: url(/api/document/${index2.id}/preview)'></div>`
+            return "<div id="+index[0].toLowerCase()+i+" class='pickfiles_img' style='background-image: url(/api/document/"+index2.id+"/preview)'></div>"
           }
         }
 
-        newDoc.map((index, i) => {
+        newDoc.map(function(index, i) {
           var p = '.' + profileRow+index[0].toLowerCase()
           var count = 3 - index[1].length
 
           // if(index[1].length >= 3){
             $(p).html('')
-            index[1].map((index2, i2) => {
-              $(p).append(`
-                <div class="profileField profileField_q profileField_h">
-                  ${
-                    i2 === 0 ?
-                    `<h2 class="profileField__title ordinaryTitle">
-                      <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                       ${index[0].toLowerCase().split('_').join(' ')}s
-                      </span>
-                    </h2>` : ''
-                  }
-                  <div class="addContainer">
-                    ${func(index[0], index2, i)}
-                    <a class="add add--moreHeight"></a>
-                  </div>
-                  <div class="addInfo">
-                      <input disabled value="${index2.title !== 'undefined' ? index2.title : ""}"
-                      type="text" name="${index[0].toLowerCase()}-${i}" class="addInfo__input profileField__input--greyBg" placeholder="Name">
-                  </div>
-                </div>
-              `)
+            index[1].map(function(index2, i2) {
+              $(p).append(
+                '<div class="profileField profileField_q profileField_h">'+
+                  '<h2 class="profileField__title ordinaryTitle">'+
+                    '<span class="ordinaryTitle__text ordinaryTitle__text--smaller">'+
+                      ( i2 === 0 ? index[0].toLowerCase().split('_').join(' ') + 's' : '') +
+                    '</span>'+
+                  '</h2>'+
+                  '<div class="addContainer">'+
+                    func(index[0], index2, i)+
+                    '<a class="add add--moreHeight"></a>'+
+                  '</div>'+
+                  '<div class="addInfo">'+
+                      '<input disabled" type="text"'+
+                      'value="'+(index2.title !== 'undefined' ? index2.title : "")+'"'+
+                      'name="'+index[0].toLowerCase()+'-'+i+'" class="addInfo__input profileField__input--greyBg">'+
+                  '</div>'+
+                '</div>'
+                // `<div class="profileField profileField_q profileField_h">
+                //   ${
+                //     i2 === 0 ?
+                //     `<h2 class="profileField__title ordinaryTitle">
+                //       <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
+                //        ${index[0].toLowerCase().split('_').join(' ')}s
+                //       </span>
+                //     </h2>` : ''
+                //   }
+                  // <div class="addContainer">
+                  //   ${func(index[0], index2, i)}
+                  //   <a class="add add--moreHeight"></a>
+                  // </div>
+                //   <div class="addInfo">
+                      // <input disabled value="${index2.title !== 'undefined' ? index2.title : ""}"
+                      // type="text" name="${index[0].toLowerCase()}-${i}" class="addInfo__input profileField__input--greyBg" placeholder="Name">
+                //   </div>
+                // </div>`
+              )
             })
             if(count >= 0){
               count === 0 ? count += 1 : ''
               for (var i = 0; i < count; i++) {
-                $(p).append(`
-                  <div class="profileField profileField_q">
-                    <div class="addContainer">
-                      <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-                      <div id="${index[0].toLowerCase()}${i+1}u" class="pickfiles_img"></div>
-                        <a class="add add--moreHeight">
-                            <i class="fa fa-plus-circle"></i>
-                            <div class="add__comment add__comment--smaller"></div>
-                        </a>
-                    </div>
-                    <div class="addInfo">
-                        <input disabled type="text" name="${index[0].toLowerCase()}-${i+1}" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">
-                    </div>
-                  </div>
-                `)
+                $(p).append(
+                  // '<div class="profileField profileField_q profileField_h">'+
+                  //   '<h2 class="profileField__title ordinaryTitle">'+
+                  //     '<span class="ordinaryTitle__text ordinaryTitle__text--smaller">'+
+                  //       ( i2 === 0 ? index[0].toLowerCase().split('_').join(' ') + 's' : '') +
+                  //     '</span>'+
+                  //   '</h2>'+
+                  //   '<div class="addContainer">'+
+                  //     func(index[0], index2, i)+
+                  //     '<a class="add add--moreHeight"></a>'+
+                  //   '</div>'+
+                  //   '<div class="addInfo">'+
+                  //       '<input disabled" type="text"'+
+                  //       'value="'+(index2.title !== 'undefined' ? index2.title : "")+'"'+
+                  //       'name="'+index[0].toLowerCase()+'-'+i+'" class="addInfo__input profileField__input--greyBg">'+
+                  //   '</div>'+
+                  // '</div>'
+                  // `
+                  '<div class="profileField profileField_q">'+
+                    '<div class="addContainer">'+
+                      '<input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
+                      '<div id="'+index[0].toLowerCase()+i+1+'u'+'" class="pickfiles_img"></div>'+
+                        '<a class="add add--moreHeight">'+
+                            '<i class="fa fa-plus-circle"></i>'+
+                            '<div class="add__comment add__comment--smaller"></div>'+
+                        '</a>'+
+                    '</div>'+
+                    '<div class="addInfo">'+
+                        '<input disabled type="text" name="'+index[0].toLowerCase()+'-'+i+1+'" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">'+
+                    '</div>'+
+                  '</div>'
+                )
               }
             }else{
-              $(p).append(`
-                <div class="profileField profileField_q">
-                  <div class="addContainer">
-                    <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
-                    <div id="${index[0].toLowerCase()}${i+1}u" class="pickfiles_img"></div>
-                      <a class="add add--moreHeight">
-                          <i class="fa fa-plus-circle"></i>
-                          <div class="add__comment add__comment--smaller"></div>
-                      </a>
-                  </div>
-                  <div class="addInfo">
-                      <input disabled type="text" name="${index[0].toLowerCase()}-${i+1}" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">
-                  </div>
-                </div>
-              `)
+              $(p).append(
+                '<div class="profileField profileField_q">'+
+                  '<div class="addContainer">'+
+                    '<input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
+                    '<div id="'+index[0].toLowerCase()+i+1+'u'+'" class="pickfiles_img"></div>'+
+                      '<a class="add add--moreHeight">'+
+                          '<i class="fa fa-plus-circle"></i>'+
+                          '<div class="add__comment add__comment--smaller"></div>'+
+                      '</a>'+
+                  '</div>'+
+                  '<div class="addInfo">'+
+                      '<input disabled type="text" name="'+index[0].toLowerCase()+'-'+i+1+'" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">'+
+                  '</div>'+
+                '</div>'
+              )
             }
 
 
-            newDoc.map((index) => {
+            newDoc.map(function(index) {
               var c = 0
-              index[1].map((index) => {
+              index[1].map(function(index) {
                 var data = {
                   type_value: c > 0 ? (index.type.toLowerCase() + c) : index.type.toLowerCase(),
                   title: index.title !== 'undefined' ? index.title : '',
@@ -1593,7 +1711,7 @@ $(document).ready(function () {
               })
             })
 
-            arrTypeAndID.map((index) => {
+            arrTypeAndID.map(function(index) {
               if(wordFileType.indexOf(index.type_file_name) !== -1){
                 $('#'+index.type_value+'').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
               }else if(pdfFileType.indexOf(index.type_file_name) !== -1){
