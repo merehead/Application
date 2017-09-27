@@ -46,7 +46,6 @@ Route::get('/carer/review/{user_id}', 'CarerController@review')->name('carerRevi
 Route::get('/carer/appointment/{user_id}', 'CarerController@appointment')->name('carerAppointment'); //synonym for
 // ImCarerPage
 
-Route::get('/carer-settings/booking', 'CarerController@booking')->name('carerBooking'); //synonym for ImCarerPage
 //Route::get('/carer-settings/booking/{status}', 'CarerController@bookingFilter')->name('carerBookingStatus'); //synonym for ImCarerPage
 
 Route::get('/carer-settings/profile/{user_id}', 'CarerController@profile')->name('carerPublicProfile2'); //synonym for ImCarerPage

@@ -1,4 +1,6 @@
 @include(config('settings.frontTheme').'.purchaserProfiles.Booking.BookingTabHeader')
+<section class="mainSection">
+    <div class="container">
         <div class="justifyContainer justifyContainer--smColumn">
             <div class="bookingNav">
                 <a href="/purchaser-settings/booking/all" class="bookingNav__link centeredLink">
