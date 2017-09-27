@@ -91,4 +91,12 @@ class Booking extends Model
         return $this->hours * $this->purchaser_rate;
     }
 
+    public function getDateFromAttribute(){
+        return $this->appointments()->orderBy('date_start')->get()->first()->date_start;
+    }
+
+    public function getDateToAttribute(){
+
+    }
+
 }
