@@ -37,7 +37,9 @@ class BookingsController extends FrontController implements Constants
                 'purchaser_id' => $purchaser->id,
                 'service_user_id' => $serviceUser->id,
                 'carer_id' => $carer->id,
-                'status_id' => 2
+                'status_id' => 2,
+                'carer_status_id' => 2,
+                'purchaser_status_id' => 1,
             ]);
 
 

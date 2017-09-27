@@ -81,19 +81,19 @@
                             <span>FRIENDLINESS</span>s
                         </p>
                         <div class="profileRating ">
-                <span class="profileRating__item active" id="friendlinesss_1">
+                <span class="profileRating__item active" id="friendliness_1">
                   <i class="fa fa-heart"></i>
                 </span>
-                <span class="profileRating__item" id="friendlinesss_2">
+                <span class="profileRating__item" id="friendliness_2">
                   <i class="fa fa-heart"></i>
                 </span>
-                <span class="profileRating__item" id="friendlinesss_3">
+                <span class="profileRating__item" id="friendliness_3">
                 <i class="fa fa-heart"></i>
                 </span>
-                <span class="profileRating__item" id="friendlinesss_4">
+                <span class="profileRating__item" id="friendliness_4">
                   <i class="fa fa-heart"></i>
                 </span>
-                <span class="profileRating__item" id="friendlinesss_5">
+                <span class="profileRating__item" id="friendliness_5">
                   <i class="fa fa-heart"></i>
                 </span>
                         </div>
