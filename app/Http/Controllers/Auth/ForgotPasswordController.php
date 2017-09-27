@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Auth\Request;
 use App\Http\Controllers\FrontController;
-//use App\Http\Controllers\Controller;
+use App\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends FrontController
@@ -31,6 +33,25 @@ class ForgotPasswordController extends FrontController
         $this->middleware('guest');
         $this->title ='Holm - Reset Password';
         $this->template = config('settings.frontTheme').'.templates.homePage';
+    }
+
+    public function sendResetLinkEmail(Request $request)
+    {
+        $this->validateEmail($request);
+
+        // We will send the password reset link to this user. Once we have attempted
+        // to send the link, we will examine the response then see the message we
+        // need to show to the user. Finally, we'll send out a proper response.
+        $response = $this->broker()->sendResetLink(
+            $request->only('email')
+        );
+        $request->session()->put('email', $request->get('email'));
+//        $user = User::all()->where('email','=',$request->get('email'));
+//        $request->session()->put('user',$user);
+
+        return $response == Password::RESET_LINK_SENT
+            ? $this->sendResetLinkResponse($response)
+            : $this->sendResetLinkFailedResponse($request, $response);
     }
 
     public function showLinkRequestForm()

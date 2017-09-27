@@ -33,7 +33,13 @@
 £ {{random_int(8,15)}}</span><span class="hourPrice__timing">/hour</span>
     </p>
     <div class="bookBtn">
+
+{{--
         <a href="Message.html" class="bookBtn__item  centeredLink" data-toggle="modal" data-target="#message-carer">
+--}}
+
+        <a href="#" class="bookBtn__item  centeredLink" data-toggle="modal" data-target="#message-carer">
+
             book carer
         </a>
     </div>
@@ -42,7 +48,13 @@
             <img src="/img/pay1.png" alt="">
         </a>
         <a href="" class="payment__item">
+            <img src="/img/pay2.png" alt="">
+        </a>
+        <a href="" class="payment__item">
             <img src="/img/pay3.png" alt="">
+        </a>
+        <a href="" class="payment__item">
+            <img src="/img/pay4.png" alt="">
         </a>
     </div>
 </div>
@@ -51,7 +63,6 @@
         Availability
     </h2>
 </div>
-
 <div class="availability">
     @foreach ($workingTimes as $item)
         <p class="availability__item availability__item--full" id="{{$item->id}}">

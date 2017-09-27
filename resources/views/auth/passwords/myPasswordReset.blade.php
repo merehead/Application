@@ -44,7 +44,7 @@
             </div>
         </div>
         @else
-            {{session('status')}}
+
         <div class="forgottenBox">
             <div class="forgotPass forgotPass--success">
 
@@ -55,7 +55,7 @@
             Successful
           </span>
                 <p class="forgot-p forgot-p--center">
-                    We have sent an email to <span class="successMail">{{$email}}.</span> Please click the link in that email to reset your password.
+                    We have sent an email to <span class="successMail">{{session('email', '')}}.</span> Please click the link in that email to reset your password.
                 </p>
             </div>
         </div>

@@ -1,6 +1,1 @@
-@include(config('settings.frontTheme').'.layouts.homePage')
-
-
-@section('content')
-    орорророороророр
-@endsection
+@include(config('settings.frontTheme').'.emails.password_recovery')

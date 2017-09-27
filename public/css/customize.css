@@ -380,7 +380,7 @@ a.blogFilter__item.active {
 
 #ui-datepicker-div, #datepicker_insurance, #datepicker_driver_licence
 {
-    z-index : 99!important; ;
+    /*z-index : 99!important; ;*/
 }
 
 
@@ -415,6 +415,7 @@ span.charsLeft{
 .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
 .autocomplete-group { padding: 2px 5px; }
 .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+
 .HomePageBanner-carerBanner__box,
 .HomePageBanner .owl-item{
   display: flex;
@@ -477,3 +478,10 @@ button:disabled:hover { background: #d7d7d7; color: #f8f4f4;}
 .profileRating__item{
   cursor: pointer;
 }
+
+
+
+.map{margin-top: 0px;
+    height:200px;}
+ui-timepicker-container, ui-timepicker-standard{z-index: 99999;!important;}
+
