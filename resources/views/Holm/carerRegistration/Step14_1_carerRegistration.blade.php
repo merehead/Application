@@ -25,9 +25,8 @@
 
 
                     <div class="inputWrap addContainer">
-                      <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                      <input class="pickfiles"  type="file" />
                       <span class="pickfiles-delete">X</span>
-                      <div class="pickfiles_img"></div>
 
                       <div id="passport" class="pickfiles_img"></div>
                         <a href="#" class="add add--moreHeight">
@@ -50,9 +49,8 @@
                         Please upload your CV.
                     </h2>
                     <div class="inputWrap addContainer">
-                      <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                      <input class="pickfiles"  type="file" />
                       <span class="pickfiles-delete">X</span>
-                      <div class="pickfiles_img"></div>
 
                       <div id="additional_documents_cv" class="pickfiles_img"></div>
                         <a href="#" class="add add--moreHeight">

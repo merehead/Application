@@ -1194,10 +1194,12 @@ $(document).ready(function () {
       }else{
         pickfilesDelete(_this)
         arrFiles = arrFiles.filter(function(index) {
+          console.log(index.unique_type, input_name)
           if(index.unique_type !== input_name){
             return index
           }
         })
+        console.log(arrFiles)
       }
     })
 
@@ -1408,6 +1410,8 @@ $(document).ready(function () {
 
     $('.pickfiles_profile_photo').on('change', function () {
 
+      var _this = $(this)
+
       arrFilesProfilePhoto = []
 
       var input_val = $(this).parent().parent().find('.addInfo__input').val('')
@@ -1421,17 +1425,17 @@ $(document).ready(function () {
       reader.addEventListener("load", function() {
 
         if (fileTypes.indexOf(file.type) !== -1) {
-          $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
+          _this.parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
         }else{
           if(wordFileType.indexOf(file.type) !== -1){
-            $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
+            _this.parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
           }
           if(pdfFileType.indexOf(file.type) !== -1){
-            $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/PDF_logo.png)')
+            _this.parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/PDF_logo.png)')
           }
         }
 
-        $(this).parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
+        _this.parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
 
         file_profile_photo.image = reader.result
         if(this_name){
@@ -1538,7 +1542,6 @@ $(document).ready(function () {
           var p = '.' + profileRow+index[0].toLowerCase()
           var count = 3 - index[1].length
 
-          // if(index[1].length >= 3){
             $(p).html('')
             index[1].map(function(index2, i2) {
               $(p).append(
@@ -1553,52 +1556,17 @@ $(document).ready(function () {
                     '<a class="add add--moreHeight"></a>'+
                   '</div>'+
                   '<div class="addInfo">'+
-                      '<input disabled" type="text"'+
+                      '<input disabled type="text" placeholder="Name"'+
                       'value="'+(index2.title !== 'undefined' ? index2.title : "")+'"'+
                       'name="'+index[0].toLowerCase()+'-'+i+'" class="addInfo__input profileField__input--greyBg">'+
                   '</div>'+
                 '</div>'
-                // `<div class="profileField profileField_q profileField_h">
-                //   ${
-                //     i2 === 0 ?
-                //     `<h2 class="profileField__title ordinaryTitle">
-                //       <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                //        ${index[0].toLowerCase().split('_').join(' ')}s
-                //       </span>
-                //     </h2>` : ''
-                //   }
-                  // <div class="addContainer">
-                  //   ${func(index[0], index2, i)}
-                  //   <a class="add add--moreHeight"></a>
-                  // </div>
-                //   <div class="addInfo">
-                      // <input disabled value="${index2.title !== 'undefined' ? index2.title : ""}"
-                      // type="text" name="${index[0].toLowerCase()}-${i}" class="addInfo__input profileField__input--greyBg" placeholder="Name">
-                //   </div>
-                // </div>`
               )
             })
             if(count >= 0){
               count === 0 ? count += 1 : ''
               for (var i = 0; i < count; i++) {
                 $(p).append(
-                  // '<div class="profileField profileField_q profileField_h">'+
-                  //   '<h2 class="profileField__title ordinaryTitle">'+
-                  //     '<span class="ordinaryTitle__text ordinaryTitle__text--smaller">'+
-                  //       ( i2 === 0 ? index[0].toLowerCase().split('_').join(' ') + 's' : '') +
-                  //     '</span>'+
-                  //   '</h2>'+
-                  //   '<div class="addContainer">'+
-                  //     func(index[0], index2, i)+
-                  //     '<a class="add add--moreHeight"></a>'+
-                  //   '</div>'+
-                  //   '<div class="addInfo">'+
-                  //       '<input disabled" type="text"'+
-                  //       'value="'+(index2.title !== 'undefined' ? index2.title : "")+'"'+
-                  //       'name="'+index[0].toLowerCase()+'-'+i+'" class="addInfo__input profileField__input--greyBg">'+
-                  //   '</div>'+
-                  // '</div>'
-                  // `
                   '<div class="profileField profileField_q">'+
                     '<div class="addContainer">'+
                       '<input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
