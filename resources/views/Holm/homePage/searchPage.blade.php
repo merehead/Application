@@ -1,16 +1,16 @@
 <script>
     $(document).ready(function(){
-        $(function () {
-            $(".datepicker").datepicker({
-                changeMonth: true,
-                changeYear: true,
-                dateFormat: "dd/mm/yy",
-                showAnim: "slideDown",
 
-                maxDate: "+20Y",
-                yearRange: "0:+10"
-            });
+        $(".datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            showAnim: "slideDown",
+
+            maxDate: "+20Y",
+            yearRange: "0:+10"
         });
+
     });
 </script>
 <section class="searchSection">

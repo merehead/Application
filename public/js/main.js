@@ -642,30 +642,32 @@ $(document).ready(function () {
             yearRange: "0:+10"
         });
 
-
-    $('#timepicker1').timepicker({
-        timeFormat: 'h:mm p',
-        interval: 30,
-        //minTime: '10',
-        //maxTime: '6:00pm',
-        //defaultTime: '18',
-        startTime: '18:00',
-        dynamic: true,
-        dropdown: true,
-        scrollbar: true
-    });
-
-    $('#timepicker2').timepicker({
-        timeFormat: 'h:mm p',
-        interval: 30,
-        //minTime: '10',
-        //maxTime: '6:00pm',
-        //defaultTime: '18',
-        startTime: '18:00',
-        dynamic: true,
-        dropdown: true,
-        scrollbar: true
-    });
+    if($.isFunction('timepicker')){
+        $('#timepicker1').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            //minTime: '10',
+            //maxTime: '6:00pm',
+            //defaultTime: '18',
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+    }
+    if($.isFunction('timepicker')) {
+        $('#timepicker2').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            //minTime: '10',
+            //maxTime: '6:00pm',
+            //defaultTime: '18',
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+    }
 
     $(".allTime").click(function () {
         $('input.checkboxTimerGroup:checkbox').not(this).prop('checked', this.checked);
@@ -743,18 +745,19 @@ $(document).ready(function () {
             $(".criminal_detail").hide();
         }
     });
-
-    $('.timepicker_message').timepicker({
-        timeFormat: 'h:mm p',
-        interval: 30,
-        //minTime: '10',
-        //maxTime: '6:00pm',
-        //defaultTime: '18',
-        startTime: '18:00',
-        dynamic: true,
-        dropdown: true,
-        scrollbar: true
-    });
+    if($.isFunction('timepicker')) {
+        $('.timepicker_message').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            //minTime: '10',
+            //maxTime: '6:00pm',
+            //defaultTime: '18',
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+    }
 
     $('.moreBtn__item').on('click',function(){
 

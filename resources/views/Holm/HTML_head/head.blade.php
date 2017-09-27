@@ -23,9 +23,15 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">
+    <script src="/js/jquery-ui-timepicker-addon.js"></script>
     <script src="{{asset('js/owl.carousel.min.js')}}" defer ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">
+    <script src="/js/jquery-ui.min.js"></script>
+    <script src="/js/jquery-ui-timepicker-addon.js"></script>
+
     <script src="{{asset('js/main.js')}}"></script>
     <script src="{{asset('js/jquery.autocomplete.js')}}"></script>
 {{--
