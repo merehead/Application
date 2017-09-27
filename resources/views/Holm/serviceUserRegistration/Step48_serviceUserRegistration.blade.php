@@ -24,9 +24,7 @@
                         ?>
                         {!! Form::select('have_incontinence',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('have_incontinence'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('have_incontinence') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('have_incontinence') }}</strong></span>
                         @endif
                     </div>
                 </div>
@@ -57,9 +55,7 @@
                         ?>
                         {!! Form::select('incontinence_wear',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('incontinence_wear'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('incontinence_wear') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('incontinence_wear') }}</strong></span>
                         @endif
                     </div>
                 </div>
