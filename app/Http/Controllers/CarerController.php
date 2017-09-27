@@ -176,13 +176,6 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars,'footer',$footer);
         $this->vars = array_add($this->vars,'modals',$modals);
 
-<<<<<<< HEAD
-        $this->vars = array_add($this->vars, 'header', $header);
-        $this->vars = array_add($this->vars, 'footer', $footer);
-        $this->vars = array_add($this->vars, 'modals', $modals);
-
-=======
->>>>>>> origin2/Anton
 
         $this->vars = array_add($this->vars, 'status', $status);
 
@@ -206,12 +199,8 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars, 'completedBookings', $completedBookings);
         $this->vars = array_add($this->vars, 'completedAmount', $completedAmount);
 
-<<<<<<< HEAD
-        $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarerall')->with($this->vars)->render();
-=======
         $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarerall')->with($this->vars)
             ->render();
->>>>>>> origin2/Anton
 
 
         return $this->renderOutput();
@@ -413,15 +402,6 @@ class CarerController extends FrontController implements Constants
             //DB::query('delete from carer_profile_language where carer_profile_id=:?',[$input['id']]);
             if (isset($input['languages'])) {
 
-<<<<<<< HEAD
-                if (isset($input['languages']))
-                    $carerProfiles->Languages()->sync(array_keys($input['languages']));
-                if (isset($input['language_additional'])) $carerProfiles->language_additional = $input['language_additional'];
-                $carerProfiles->save();
-
-                unset($carerProfiles);
-            }
-=======
             $languages = $request->input('languages');
                 $carerProfiles->Languages()->sync(array_map('intval',array_keys($languages)));
                 }if (isset($input['language_additional'])) {$carerProfiles->language_additional = $input['language_additional'];}
@@ -431,7 +411,6 @@ class CarerController extends FrontController implements Constants
             */
 
             unset($carerProfiles);
->>>>>>> origin2/Anton
         }
 
         if ($input['stage'] == 'carerPrivateTransport') {
@@ -566,9 +545,5 @@ class CarerController extends FrontController implements Constants
 
         return $this->renderOutput();
     }
+}
 
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> origin2/Anton
