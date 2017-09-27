@@ -1,3 +1,4 @@
+@include(config('settings.frontTheme').'.CarerProfiles.Booking.Message')
 <div class="justifyContainer justifyContainer--smColumn">
     <div class="breadcrumbs">
         <a href="/" class="breadcrumbs__item">
