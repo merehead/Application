@@ -376,6 +376,7 @@ a.blogFilter__item.active {
 .profilePhoto2 img {
     width:110px;
     height: 110px;
+    border-radius: 50%;
 }
 
 #ui-datepicker-div, #datepicker_insurance, #datepicker_driver_licence
