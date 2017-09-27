@@ -732,14 +732,18 @@ $(document).ready(function () {
         scrollbar: true
     });
 
-    $('a.additionalTime').on('click', function (e) {
-        e.preventDefault();
-        var dlast = $('.datetime').last();
-        var dclone = $(dlast).clone().removeClass('nhide');
-        $(dclone).find('input.datepicker_message').removeClass('hasDatepicker');
-        $(dlast).after(dclone);
-        $('.checktime').last().after($('.checktime').last().clone());
+    $('.moreBtn__item').on('click',function(){
+
+
+        var dlast = $('.bookings-more').last().clone();
+        $('.moreBtn__item').before(dlast);
+        $('.bookings-more').last().find('.datepicker_message').removeClass("hasDatepicker").removeAttr('id');
+        $('.bookings-more').last().find('.timepicker_message ').removeClass("hasDatepicker").removeAttr('id');
+
         $(".datepicker_message").datepicker({
+            beforeShow: function(input, inst) {
+                inst.dpDiv.css({"z-index":2000});
+            },
             changeMonth: true,
             changeYear: true,
             dateFormat: "dd/mm/yy",
@@ -749,7 +753,55 @@ $(document).ready(function () {
             yearRange: "0:+50"
         });
         $('.timepicker_message').timepicker({
-            timeFormat: 'h:mm p',
+            beforeShow: function(input, inst) {
+                inst.dpDiv.css({"z-index":2000});
+            },
+            timeFormat: 'hh:mm tt',
+            interval: 30,
+            //minTime: '10',
+            //maxTime: '6:00pm',
+            //defaultTime: '18',
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+        return false;
+    });
+
+
+    $(document).on('click','a.additionalTime', function (e) {
+        e.preventDefault();
+        var $that =$(this);
+        var dlast = $('.cdate').last().clone();
+        var clast = $('.ctime').last().clone();
+
+
+        $($that).before(dlast);
+        $($that).before(clast);
+        $('.rtext').last().remove();
+
+        $('.datepicker_message').removeClass("hasDatepicker").removeAttr('id');
+        $('.timepicker_message').removeClass("hasDatepicker").removeAttr('id');
+
+
+        $(".datepicker_message").datepicker({
+            beforeShow: function(input, inst) {
+                inst.dpDiv.css({"z-index":2000});
+            },
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            showAnim: "slideDown",
+            minDate: "+0D",
+            maxDate: "+50Y",
+            yearRange: "0:+50"
+        });
+        $('.timepicker_message').timepicker({
+            beforeShow: function(input, inst) {
+                inst.dpDiv.css({"z-index":2000});
+            },
+            timeFormat: 'hh:mm tt',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',

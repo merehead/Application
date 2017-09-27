@@ -1,6 +1,6 @@
 @if(!empty($carerProfile) && Auth::check())
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">
+<script src="/js/jquery-ui-timepicker-addon.js"></script>
 <script>
     $(document).ready(function () {
         map = new google.maps.Map(document.getElementById('map_canvas'), {
@@ -10,6 +10,7 @@
         var geocoder = new google.maps.Geocoder();
         geocodeAddress(geocoder, map);
         $carer_profile.find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
+        $carer_profile.find('input[type="text"]').attr("readonly", false).removeClass('profileField__input--greyBg');
     });
 </script>
 
@@ -63,117 +64,90 @@
                             </div>
                         </div>
                     </div>
-                    <div class="messageGroup">
+                    <div class="bookings-more">
+                        <div class="messageGroup">
 
-                        <h2 class="ordinaryTitle">
-                            <span class="ordinaryTitle__text">Type of care</span>
-                        </h2>
-                        <div class="messageCheckbox">
-                            @foreach($typeCareAll as $care)
-                                <div class="checkBox_item">
+                            <h2 class="ordinaryTitle">
+                                <span class="ordinaryTitle__text">Type of care</span>
+                            </h2>
+                            <div class="messageCheckbox">
+                                @foreach($typeCareAll as $care)
+                                    <div class="checkBox_item">
 
-                                    {!! Form::checkbox('assistance_types[]', $care->id, null,
-                                                array('class' => 'customCheckbox ','id'=>'assistance_types'.$care->id)) !!}
-                                    <label for="assistance_types{{$care->id}}">{{$care->name}}</label>
-                                </div>
-                            @endforeach
+                                        {!! Form::checkbox('assistance_types[]', $care->id, null,
+                                                    array('class' => 'customCheckbox ','id'=>'assistance_types'.$care->id)) !!}
+                                        <label for="assistance_types{{$care->id}}">{{$care->name}}</label>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                    <div class="messageGroup ">
-                        <h2 class="ordinaryTitle">
-                              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
+                        <div class="messageGroup cdate">
+                            <h2 class="ordinaryTitle">
+                              <span class="ordinaryTitle__text ordinaryTitle__text--smaller rtext">
                                 select date and time
                              </span>
-                        </h2>
-                        <div class="messageInputs datetime nhide">
-                            <div class="messageInputs__field messageDate">
-                                <input type="text" name="appointments[]['date_start']" class="messageInput datepicker"
-                                       placeholder="06.06.2017 ">
+                            </h2>
+                            <div class="messageInputs datetime">
+                                <div class="messageInputs__field messageDate">
+                                    <input type="text" name="appointments[]['date_start']"
+                                           class="messageInput datepicker datepicker_message" placeholder="06.06.2017 ">
 
-                                <a href="#" class="messageIco centeredLink">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                            <div class="messageInputs__field messageDate">
-                                <input type="text" class="messageInput datepicker" name="appointments[]['date_end']"
-                                       placeholder=" 08.08.2017">
-                                <a href="#" class="messageIco centeredLink">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                            <div class="messageInputs__field messageTime ">
-                                <input type="text" class="messageInput timepicker_message"
-                                       name="appointments[]['time_end']" placeholder="12:00 AM - 5:00 PM">
-                                <a href="#" class="messageIco centeredLink">
-                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                            <div class="messageInputs__field messageTime ">
-                                <input type="text" class="messageInput timepicker_message"
-                                       name="appointments[]['time_end']" placeholder="12:00 AM - 5:00 PM">
-                                <a href="#" class="messageIco centeredLink">
-                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                </a>
+                                    <a href="#" class="messageIco centeredLink">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <div class="messageInputs__field messageDate">
+                                    <input type="text" class="messageInput datepicker datepicker_message"
+                                           name="appointments[]['date_end']" placeholder=" 08.08.2017">
+                                    <a href="#" class="messageIco centeredLink">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <div class="messageInputs__field messageTime ">
+                                    <input type="text" class="messageInput timepicker_message"
+                                           name="appointments[]['time_end']" placeholder="12:00 AM">
+                                    <a href="#" class="messageIco centeredLink">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <div class="messageInputs__field messageTime ">
+                                    <input type="text" class="messageInput timepicker_message"
+                                           name="appointments[]['time_end']" placeholder="5:00 PM">
+                                    <a href="#" class="messageIco centeredLink">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div class="messageInputs datetime ">
-                            <div class="messageInputs__field messageDate">
-                                <input type="text" name="appointments[]['date_start']"
-                                       class="messageInput datepicker datepicker_message" placeholder="06.06.2017 ">
 
-                                <a href="#" class="messageIco centeredLink">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                            <div class="messageInputs__field messageDate">
-                                <input type="text" class="messageInput datepicker datepicker_message"
-                                       name="appointments[]['date_end']" placeholder=" 08.08.2017">
-                                <a href="#" class="messageIco centeredLink">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                            <div class="messageInputs__field messageTime ">
-                                <input type="text" class="messageInput timepicker_message"
-                                       name="appointments[]['time_end']" placeholder="12:00 AM - 5:00 PM">
-                                <a href="#" class="messageIco centeredLink">
-                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                            <div class="messageInputs__field messageTime ">
-                                <input type="text" class="messageInput timepicker_message"
-                                       name="appointments[]['time_end']" placeholder="12:00 AM - 5:00 PM">
-                                <a href="#" class="messageIco centeredLink">
-                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                </a>
+                        <div class="messageGroup ctime">
+                            <h2 class="ordinaryTitle">
+                                <span class="ordinaryTitl__text">How often</span>
+                            </h2>
+                            <div class="messageCheckbox checktime">
+                                <div class="checkBox_item">
+                                    <input type="checkbox" name="periodicity[]" value="Daily" class="customCheckbox"
+                                           id="boxD1">
+                                    <label for="boxD1">Daily</label>
+                                </div>
+                                <div class="checkBox_item">
+                                    <input type="checkbox" name="periodicity[]" value="Weekly" class="customCheckbox"
+                                           id="boxD2">
+                                    <label for="boxD2">weekly</label>
+                                </div>
+                                <div class="checkBox_item">
+                                    <input type="checkbox" name="periodicity[]" value="Single" class="customCheckbox"
+                                           id="box3">
+                                    <label for="box3">Single</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="messageGroup ">
-                        <h2 class="ordinaryTitle">
-                            <span class="ordinaryTitl__text">How often</span>
-                        </h2>
-                        <div class="messageCheckbox checktime">
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="periodicity[]" value="Daily" class="customCheckbox"
-                                       id="boxD1">
-                                <label for="boxD1">Daily</label>
-                            </div>
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="periodicity[]" value="Weekly" class="customCheckbox"
-                                       id="boxD2">
-                                <label for="boxD2">weekly</label>
-                            </div>
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="periodicity[]" value="Single" class="customCheckbox"
-                                       id="box3">
-                                <label for="box3">Single</label>
-                            </div>                        </div>
-                    </div>
-                    <a href="#" class="additionalTime">
-                        <i class="fa fa-clock-o" aria-hidden="true"></i>
-                        add additional time
-                    </a>
+                        <a href="#" class="additionalTime">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            add additional time
+                        </a>
 
+                    </div>
                     <div class="moreBtn">
                         <a href="#" class="moreBtn__item moreBtn__item--withIco centeredLink ">
                             <span>+</span> add more bookings
