@@ -153,6 +153,11 @@
                 $(".sometimes_hiding").show()
             }
         }
+        if ($("#sometimes-if2").val() != 'No' && $("#sometimes-if").val() != 'No') {
+            {
+                $(".sometimes_hiding2").show()
+            }
+        }
 
         if ($("#sometimes-noif").val() == 'Sometimes') {
             {
@@ -250,9 +255,11 @@
             if ($(this).val() != "0") {
                 if ($(this).val() == 'Yes') {
                     $(".sometimes_hiding").show()
+
                 }
                 if ($(this).val() == 'No') {
-                    $(".sometimes_hiding").hide()
+                    $(".sometimes_hiding").hide();
+                    $(".sometimes_hiding2").hide()
                 }
                 if ($(this).val() == 'Sometimes') {
                     $(".sometimes_hiding").show()
