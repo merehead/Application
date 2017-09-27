@@ -45,13 +45,14 @@ Route::get('/address/', 'CarerController@getAddress')->name('carerGetAddress'); 
 Route::get('/carer/review/{user_id}', 'CarerController@review')->name('carerReview'); //synonym for
 Route::get('/carer/appointment/{user_id}', 'CarerController@appointment')->name('carerAppointment'); //synonym for
 // ImCarerPage
+
 Route::get('/carer-settings/booking', 'CarerController@booking')->name('carerBooking'); //synonym for ImCarerPage
-Route::get('/carer-settings/booking/{status}', 'CarerController@bookingFilter')->name('carerBookingStatus'); //synonym for ImCarerPage
+//Route::get('/carer-settings/booking/{status}', 'CarerController@bookingFilter')->name('carerBookingStatus'); //synonym for ImCarerPage
 
 Route::get('/carer-settings/profile', 'CarerController@profile')->name('carerPublicProfile'); //synonym for ImCarerPage
 Route::get('/carer-settings/booking/{status?}', 'CarerController@bookingFilter')->name('carerBooking'); //synonym for ImCarerPage
 
-Route::get('/carer-settings/booking/{status?}', 'CarerController@bookingFilter')->name('carerBooking'); //synonym for ImCarerPage
+
 
 Route::get('/im-carer', 'CarerController@index')->name('ImCarerPage');
 Route::post('/im-carer', 'CarerController@update')->name('ImCarerPrivatePage');

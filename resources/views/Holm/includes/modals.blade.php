@@ -93,5 +93,7 @@
     </div>
 </div>
 
+{{--
 @include(config('settings.frontTheme').'.CarerProfiles.Booking.Message')
+--}}
 

@@ -20,6 +20,7 @@
            <img src="./dist/img/print.png" alt="">
          </a> -->
         <div class="roundedBtn">
+
             <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUsersProfile->id])}}" class="roundedBtn__item roundedBtn__item--preview">
                 Preview public profile
             </a>
