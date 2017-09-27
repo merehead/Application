@@ -13,7 +13,7 @@
             </h2>
             <div class="inputWrap">
                 <input type="email" name="email" class="formInput registrationForm__input"
-                       placeholder="yourname@email.com">
+                       placeholder="yourname@email.com" value="{{old('email')}}">
                 <span class="inputIco registrationForm__ico">
                   <i class="fa fa-envelope"></i>
                 </span>
@@ -82,12 +82,12 @@
 
             </h2>
             <div class="inputWrap">
-                <input type="text" name="referal_code" class="formInput registrationForm__input" placeholder="">
+                <input type="text" name="referral_code" class="formInput registrationForm__input" placeholder="">
 
             </div>
-            @if ($errors->has('referal_code'))
+            @if ($errors->has('referral_code'))
                 <span class="help-block">
-                                        <strong>{{ $errors->first('referal_code') }}</strong>
+                                        <strong>{{ $errors->first('referral_code') }}</strong>
                                     </span>
             @endif
         </div>

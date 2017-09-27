@@ -49,7 +49,12 @@ class CarerRegistrationController extends FrontController
         else {
 
             //dd($this->user, $this->carersProfile->getID(),$this->carersProfile->getNextStep());
-            $carersProfile = CarersProfile::findOrFail($user->id);
+            $carersProfile = CarersProfile::find($user->id);
+
+            if(!$carersProfile) {
+                return redirect('/');
+            }
+
 
             //dd($carersProfile->registration_progress);
 
@@ -103,9 +108,9 @@ class CarerRegistrationController extends FrontController
 
     public function update(Request $request) {
 
+//dd($request->all());
 
         if ($request->has('stepback')) {
-            //dd($request->all());
 
             $stepback = $request->stepback;
 

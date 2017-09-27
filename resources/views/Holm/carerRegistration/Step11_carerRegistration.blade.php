@@ -39,7 +39,9 @@
 
 
                                 <?php $id = 'boxf'.$workingTime->id ?>
-                                {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carersProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),array('placeholder'=>'1','class' => 'customCheckbox '.$workingTime->css_name,'id'=>$id)) !!}
+                                {!! Form::checkbox('workingTime['.$workingTime->id.']', null,
+                                ($carersProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
+                                array('placeholder'=>'1','class' => 'customCheckbox '.$workingTime->css_name,'id'=>$id)) !!}
                                 <label for="boxf{{$workingTime->id}}">{{$workingTime->name}}</label>
 
                             </div>
@@ -63,13 +65,13 @@
                     </h2>
                     <div class="inputWrap">
 
-
-                        {!! Form::select('work_at_holiday',['Yes'=>'Yes','No'=>'No'],
-null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
-
-{{--                        {!! Form::select('criminal_conviction',['1'=>'Yes, but they are very old, and for a minor offence.','2'=>'Yes','3'=>'No'],
-null,['class'=>'formInput personalForm__input','placeholder'=>'Please select']) !!}--}}
-
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class'=>'formSelect'];
+                        if (is_null($carersProfile->work_at_holiday))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('work_at_holiday',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
 
                     </div>
 

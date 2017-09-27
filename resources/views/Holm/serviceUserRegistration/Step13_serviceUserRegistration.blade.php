@@ -22,7 +22,13 @@
                         Does anyone else live with {{$serviceUserProfile->like_name}}?  <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('anyone_else_live',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id'=>'sometimes-if','class'=>'formSelect'];
+                        if (is_null($serviceUserProfile->anyone_else_live))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('anyone_else_live',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
 
                         @if ($errors->has('anyone_else_live'))
                             <span class="help-block">
@@ -51,7 +57,13 @@
                         Is the other person likely to be home during care visits? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('anyone_friendly',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class'=>'formSelect'];
+                        if (is_null($serviceUserProfile->anyone_friendly))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('anyone_friendly',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                     @if ($errors->has('anyone_friendly'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('anyone_friendly') }}</strong>

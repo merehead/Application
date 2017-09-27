@@ -1,7 +1,9 @@
 <div class="carer">
     <div class="profileInfo">
-        <a href="#" class="profilePhoto  ">
-            <img src="/img/no_photo.png" alt="">
+
+        <a href="#" class="profilePhoto profilePhoto2 invite__photo ">
+            <img id="profile_photo" src="/img/profile_photos/{{$carerProfile->id}}.png" onerror="this
+            .src='/img/no_photo.png'" alt="avatar">
         </a>
         <div class="profileInfo__item">
             <h2 class="profileName profileName--big">
@@ -11,11 +13,11 @@
             <div class="userRating">
                 <div class="avarageRate">
                     <div class="profileRating ">
-                        <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
-                        <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
-                        <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
-                        <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
-                        <span class="profileRating__item active"><i class="fa fa-heart"></i></span>
+                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
                     </div>
                 </div>
             </div>
@@ -56,22 +58,11 @@
             <p class="userRating__name">
                 <span>Punctuality</span>
             </p>
-            <div class="profileRating ">
-<span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
+            <div class="profileRating "><span class="profileRating__item "><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
             </div>
         </div>
         <div class="userRating__item">
@@ -80,21 +71,11 @@
                 <span>Friendliness</span>s
             </p>
             <div class="profileRating ">
-<span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
             </div>
         </div>
         <div class="userRating__item">
@@ -103,21 +84,11 @@
                 <span>Communication</span>
             </p>
             <div class="profileRating ">
-<span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item">
-<i class="fa fa-heart"></i>
-</span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
             </div>
         </div>
         <div class="userRating__item">
@@ -126,21 +97,11 @@
                 <span>Performance</span>
             </p>
             <div class="profileRating ">
-<span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item active">
-<i class="fa fa-heart"></i>
-</span>
-                <span class="profileRating__item">
-<i class="fa fa-heart"></i>
-</span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
             </div>
         </div>
     </div>
@@ -155,75 +116,42 @@
         {{$carerProfile->description_yourself}}
     </p>
 </div>
-<div class="profileExtraInfo">
+
+@if($documents['nvq']->count()>0||
+$documents['care_certificate']->count()>0||
+$documents['health_and_social']->count()>0||
+$documents['training_certificate']->count()>0||
+$documents['additional_training_course']->count()>0 ||
+$documents['other_relevant_qualification']->count()>0)
+    <div class="profileExtraInfo">
     <h2 class="profileTitle">
         QUALIFICATIONS
     </h2>
+
     <div class="profileAdvantages">
-        <div class="profileAdvantages__row">
-            <div class="advantageColumn">
-                <h2>
-                    NVQs
-                </h2>
+        @foreach($documents_type as $dt)
+            @if(isset($documents[$dt])&&!empty($documents[$dt]->count()))
+            <div class="profileAdvantages__row">
+                <div class="advantageColumn">
+                    <h2>
+                        {{$documents_name[$dt]}}
+                    </h2>
+                </div>
+                <div class="advantageColumn">
+                    @foreach($documents[$dt] as $item)
+                        <p  class="advantageColumn">
+                            {{$item->title}}
+                        </p>
+                    @endforeach
+                </div>
             </div>
-            <div class="advantageColumn">
-                <p>
-                    NVQ level 4
-                </p>
-                <!--
-                <p>
-                Title of Qualifications
-                </p>
-                <p>
-                Title of Qualifications
-                </p>
-                </div>
-                <div class="advantageColumn">
-                <p>
-                Title of Qualifications
-                </p>
-                <p>
-                Title of Qualifications
-                </p>
-                <p>
-                Title of Qualifications
-                </p>
-                </div>
-                </div>
-                <div class="profileAdvantages__row">
-                <div class="advantageColumn">
-                <h2>
-                Care Certificates
-                </h2>
-                </div>
-                <div class="advantageColumn">
-                <p>
-                Title of Qualifications
-                </p>
-                <p>
-                Title of Qualifications
-                </p>
-                <p>
-                Title of Qualifications
-                </p>
-                </div>
-                <div class="advantageColumn">
-                <p>
-                Title of Qualifications
-                </p>
-                <p>
-                Title of Qualifications
-                </p>
-                <p>
-                Title of Qualifications
-                </p>
-                -->
-            </div>
-        </div>
+            @endif
+        @endforeach
 
     </div>
 </div>
-
+    @endif
+@if($typeCare->count()!=0)
 <div class="profileExtraInfo">
     <h2 class="profileTitle">
         TYPE OF CARE
@@ -235,40 +163,16 @@
                 <p>
                     {{$item->name}}
                 </p>
+                @if($loop->iteration%3==0)
+                    </div> <div class="advantageColumn">
+                @endif
                 @endforeach
-
-                <!--
-                <p>
-                Respite care
-                </p>
-                </div>
-                <div class="advantageColumn">
-                <p>
-                Personal Care
-                </p>
-                <p>
-                Housekeeping
-                </p>
-                <p>
-                Food preparation
-                </p>
-                </div>
-                <div class="advantageColumn">
-                <p>
-                Medication and Wound
-                </p>
-                <p>
-                Companionship
-                </p>
-                <p>
-                Travel / Visits
-                </p>
-                -->
             </div>
         </div>
     </div>
 </div>
-
+@endif
+@if($carerProfile->work_with_pets=='Yes')
 <div class="profileExtraInfo">
     <h2 class="profileTitle">
         ADDITIONAL
@@ -278,21 +182,16 @@
             <div class="advantageColumn">
 
                 <p class="advantage_label">
-                    <i class="fa @if($carerProfile->work_with_pets=='Yes')fa-check @else  fa-ban @endif"></i>
+                    <i class="fa fa-check"></i>
                     Works with pets
                 </p>
-            </div>
-            <div class="advantageColumn">
-
-            </div>
-            <div class="advantageColumn">
-
             </div>
         </div>
     </div>
 </div>
+@endif
 
-
+@if($languages->count()!=0 || !empty($carerProfile->language_additional))
 <div class="profileExtraInfo">
     <h2 class="profileTitle">
         Languages
@@ -308,66 +207,50 @@
                             {{$carerProfile->language_additional}}
                         @endif
                     </h2>
+                    @if($loop->iteration%3==0)
+            </div> <div class="advantageColumn">
+                @endif
                 @endforeach
 
-                <!-- <h2>
-                Spanish
-                </h2>
-                <h2>
-                German
-                </h2>
-                </div>
-                <div class="advantageColumn centerText">
-                <h2>
-                English
-                </h2>
-                <h2>
-                Spanish
-                </h2>
-                <h2>
-                German
-                </h2>
-                </div>
-                <div class="advantageColumn rightText">
-                <h2>
-                English
-                </h2>
-                <h2>
-                Spanish
-                </h2>
-                <h2>
-                German
-                </h2>-->
+
             </div>
 
         </div>
     </div>
 </div>
-
+@endif
+@if($carerProfile->have_car=='Yes'||$carerProfile->use_car=='Yes'||$carerProfile->driving_licence=='Yes')
 <div class="profileExtraInfo">
     <h2 class="profileTitle">
         Transport
     </h2>
     <div class="profileAdvantages">
         <div class="profileAdvantages__row">
+            @if($carerProfile->use_car=='Yes')
             <div class="advantageColumn advantageColumn--transport">
 
                 <p class="advantage_label">
-                    <i class="fa @if($carerProfile->use_car=='Yes')fa-check @else  fa-ban @endif"></i>
+                    <i class="fa fa-check "></i>
                     Transport clients to the shop or for short trips
                 </p>
             </div>
+            @endif
             <div class="advantageColumn wider">
+                @if($carerProfile->have_car=='Yes')
                 <p class="advantage_label">
-                    <i class="fa @if($carerProfile->have_car=='Yes')fa-check @else  fa-ban @endif"></i>
+                    <i class="fa fa-check "></i>
                     have a car for work
                 </p>
+                @endif
+                    @if($carerProfile->driving_licence=='Yes')
                 <p class="advantage_label">
-                    <i class="fa @if($carerProfile->driving_licence=='Yes')fa-check @else  fa-ban @endif"></i>
+                    <i class="fa fa-check "></i>
                     have UK/EEA Driving Licence
                 </p>
+                    @endif
             </div>
 
         </div>
     </div>
 </div>
+@endif

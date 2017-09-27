@@ -121,7 +121,7 @@
                 Post code <span class="requireIco">*</span>
               </span>
             </h2>
-            {!! Form::text('postcode',null,['class'=>'profileField__input']) !!}
+            {!! Form::text('postcode',null,['class'=>'profileField__input','id'=>'post_code_profile']) !!}
         </div>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
@@ -144,8 +144,8 @@
         </div>
     </div>
 
-    <div class="profileMap" style="width:100%;height:450px">
+{{--    <div class="profileMap" style="width:100%;height:450px">
         <div id="map_canvas" style="clear:both; height:450px;"></div>
-    </div>
+    </div>--}}
 </div>
 {!! Form::close()!!}

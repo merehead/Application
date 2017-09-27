@@ -16,7 +16,13 @@
                         Does {{$userNameForSite}} like socialising with other people / groups? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('socialising_with_other',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'main-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->socialising_with_other))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('socialising_with_other',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('socialising_with_other'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('socialising_with_other') }}</strong>

@@ -8,14 +8,30 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="/css/main.min.css">
-    <link rel="stylesheet" href="/css/cupertino/jquery-ui.min.css">
-    <link rel="stylesheet" href="/css/customize.css">
+    <link rel="stylesheet" href="{{asset('css/main.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/customize.css')}}">
+    <link rel="stylesheet" href="{{asset('css/cupertino/jquery-ui.min.css')}}">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+
     <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
     <script src="https://unpkg.com/axios@0.16.2/dist/axios.min.js"></script>
+
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+
+
+    <script src="{{asset('js/jquery.autocomplete.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
+
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+
+
+
 </head>
 <body>
 
@@ -25,8 +41,38 @@
 @yield('footer')
 @yield('modals')
 
-<script>
-</script>
 
+
+<script>
+/*    jQuery.noConflict();
+
+    jQuery(document).ready(function () {
+
+        alert('sdsdsd');
+
+        jQuery('#timepicker1').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            //minTime: '10',
+            //maxTime: '6:00pm',
+            //defaultTime: '18',
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+        jQuery('#timepicker2').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+//minTime: '10',
+//maxTime: '6:00pm',
+//defaultTime: '18',
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+    });*/
+</script>
 </body>
 </html>

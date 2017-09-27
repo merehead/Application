@@ -17,7 +17,13 @@
                     Does {{$userNameForSite}} have any interests or hobbies which they enjoy? <span>*</span>
                 </h2>
                 <div class="inputWrap">
-                    {!! Form::select('interests_hobbies',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                    <?php
+                    if (isset($atrr)) unset($atrr);
+                    $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                    if (is_null($serviceUserProfile->interests_hobbies))
+                        $atrr['placeholder'] = 'Please select';
+                    ?>
+                    {!! Form::select('interests_hobbies',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                     @if ($errors->has('interests_hobbies'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('interests_hobbies') }}</strong>
@@ -31,7 +37,7 @@
                     Please give further details. <span>*</span>
                 </h2>
                 <div class="inputWrap">
-                {!! Form::textarea('interests_hobbies_details',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                {!! Form::textarea('interests_hobbies_details',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                 @if ($errors->has('interests_hobbies_details'))
                     <span class="help-block">
                                         <strong>{{ $errors->first('interests_hobbies_details') }}</strong>

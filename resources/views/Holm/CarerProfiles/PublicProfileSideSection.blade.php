@@ -1,10 +1,45 @@
+<script>
+    var times = [];
+    times[2] = [5, 8, 11, 14, 17, 20, 23];
+    times[3] = [6, 9, 12, 15, 18, 21, 24];
+    times[4] = [7, 10, 13, 16, 19, 22, 25];
+    $(document).ready(function () {
+        if ($('p#1').length > 0) {
+            $('p#2').hide();
+            $('p#3').hide();
+            $('p#4').hide();
+        }
+        if ($('p#2').length > 0) {
+            $.each(times[2], function (index, value) {
+                $('p#' + value).hide();
+            });
+        }
+        if ($('p#3').length > 0) {
+            $.each(times[3], function (index, value) {
+                $('p#' + value).hide();
+            });
+        }
+        if ($('p#4').length > 0) {
+            $.each(times[4], function (index, value) {
+                $('p#' + value).hide();
+            });
+        }
+    });
+</script>
+
 <div class="profilePricing">
     <p class="hourPrice hourPrice">
 <span class="hourPrice__price hourPrice__price--big">
-£ 12</span><span class="hourPrice__timing">/hour</span>
+£ {{random_int(8,15)}}</span><span class="hourPrice__timing">/hour</span>
     </p>
     <div class="bookBtn">
+
+{{--
         <a href="Message.html" class="bookBtn__item  centeredLink" data-toggle="modal" data-target="#message-carer">
+--}}
+
+        <a href="#" class="bookBtn__item  centeredLink" data-toggle="modal" data-target="#message-carer">
+
             book carer
         </a>
     </div>
@@ -13,7 +48,13 @@
             <img src="/img/pay1.png" alt="">
         </a>
         <a href="" class="payment__item">
+            <img src="/img/pay2.png" alt="">
+        </a>
+        <a href="" class="payment__item">
             <img src="/img/pay3.png" alt="">
+        </a>
+        <a href="" class="payment__item">
+            <img src="/img/pay4.png" alt="">
         </a>
     </div>
 </div>
@@ -24,59 +65,11 @@
 </div>
 <div class="availability">
     @foreach ($workingTimes as $item)
-        <p class="availability__item @if (strlen($item->name)>14) availability__item--full @endif ">
+        <p class="availability__item availability__item--full" id="{{$item->id}}">
             <i class="fa fa-check"></i>
             {{$item->name}}
         </p>
     @endforeach
-
-    <!--
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Monday afternoon
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Monday night
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Tuesday night
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Wednesday morning
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Thursday morning
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Thursday afternoon
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Every night
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Tuesday morning
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Wednesday afternoon
-    </p>
-    <p class="availability__item">
-    <i class="fa fa-check"></i>
-    Wednesday afternoon
-    </p>
-    <p class="availability__item availability__item--full">
-        <i class="fa fa-check"></i>
-        Availability on bank holidays
-    </p>
-    -->
-
 </div>
 <div class="profileSide__title">
     <h2 class="profileTitle">

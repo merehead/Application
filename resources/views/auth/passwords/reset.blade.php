@@ -1,4 +1,4 @@
-@extends(config('settings.theme').'.layouts.login')
+@include('main.main')
 
 @section('content')
     @if (session('status'))

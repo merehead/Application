@@ -11,7 +11,7 @@
 {!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'languages']) !!}
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('stage','languages') !!}
-{{Form::submit('Click Me!')}}
+
 
 <div class="borderContainer">
 
@@ -24,7 +24,7 @@
 
                         <?php $language->id<10? $tmp = '0'.$language->id  : $tmp = $language->id; ?>
 
-                        {!! Form::checkbox('languages['.$tmp.']', null,
+                        {!! Form::checkbox('languages['.(($language->id<10) ? '0'.$language->id:$language->id).']', null,
 
                         ($serviceUsersProfile->Languages->containsStrict('carer_language', $language->carer_language) ? 1 : null),
 
@@ -39,24 +39,7 @@
 
 
 
-
-{{--            <div class="profileRow">
-                @foreach($languages as $language)
-
-                    <div class="profileField profileField--fourth">
-                        <div class="checbox_wrap">
-
-                            <input type="checkbox" id="coding" name="interest" value="coding" checked>
-                            <label for="coding">Coding</label>
-                        </div>
-                    </div>
-                @endforeach
-            </div>--}}
-
-
-
-    @if(strlen($serviceUsersProfile->other_languages))
-        <div class="profileRow">
+        <div class="profileRow otherLanguages"{!!  $serviceUsersProfile->Languages->containsStrict('carer_language', "OTHER") ? '' : ' style="display:none"'!!}>
 
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
@@ -69,7 +52,7 @@
                 @endif
             </div>
         </div>
-    @endif
+
 </div>
 {{ Form::close() }}
 

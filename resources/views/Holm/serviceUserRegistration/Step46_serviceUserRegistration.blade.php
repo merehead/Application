@@ -16,11 +16,16 @@
                         Does {{$userNameForSite}} need assistance with bathing / showering? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('assistance_with_bathing',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->assistance_with_bathing))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('assistance_with_bathing',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('assistance_with_bathing'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('assistance_with_bathing') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('assistance_with_bathing') }}</strong></span>
                         @endif
                     </div>
 
@@ -32,10 +37,16 @@
                     </h2>
 
                     <div class="inputWrap">
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'main-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->bathing_times_per_week))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
                         {!! Form::select('bathing_times_per_week',
                         ['1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10','11'=>'11',
                         '12'=>'12','13'=>'13','14'=>'14','15'=>'15','16'=>'16','17'=>'17','18'=>'18','19'=>'19','20'=>'20'],
-                        null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        null,$atrr) !!}
                         @if ($errors->has('bathing_times_per_week'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('bathing_times_per_week') }}</strong>

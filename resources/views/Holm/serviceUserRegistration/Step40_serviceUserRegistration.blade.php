@@ -16,7 +16,13 @@
                         Can {{$userNameForSite}} prepare food for themselves? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('prepare_food',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-noif', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->prepare_food))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('prepare_food',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('prepare_food'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('prepare_food') }}</strong>
@@ -25,12 +31,18 @@
                     </div>
                 </div>
 
-            <div class="formField sometimes_hiding" style="display: none">
+            <div class="formField sometimesNo_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Would {{$userNameForSite}} like assistance with preparing meals? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('assistance_with_preparing_food',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'main-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->assistance_with_preparing_food))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('assistance_with_preparing_food',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('assistance_with_preparing_food'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('assistance_with_preparing_food') }}</strong>

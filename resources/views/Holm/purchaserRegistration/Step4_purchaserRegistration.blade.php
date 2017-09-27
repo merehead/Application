@@ -37,7 +37,7 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                                 first Name <span>*</span>
                             </h2>
                             <div class="inputWrap">
-                                {!! Form::text('first_name',null,['class'=>'formInput personalForm__input','placeholder'=>'Your name','maxlength'=>"120"]) !!}
+                                {!! Form::text('first_name',null,['class'=>'formInput personalForm__input','placeholder'=>'Your name','maxlength'=>"60"]) !!}
                             </div>
                             @if ($errors->has('first_name'))
                                 <span class="help-block">
@@ -51,7 +51,7 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                                 Last name <span>*</span>
                             </h2>
                             <div class="inputWrap">
-                                {!! Form::text('family_name',null,['class'=>'formInput personalForm__input','placeholder'=>'Last name','maxlength'=>"120"]) !!}
+                                {!! Form::text('family_name',null,['class'=>'formInput personalForm__input','placeholder'=>'Last name','maxlength'=>"60"]) !!}
                             </div>
                             @if ($errors->has('family_name'))
                                 <span class="help-block">
@@ -64,7 +64,7 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                                 How do you like to be referred to / called? <span>*</span>
                             </h2>
                             <div class="inputWrap">
-                                {!! Form::text('like_name',null,['class'=>'formInput personalForm__input','placeholder'=>'Name','maxlength'=>"120"]) !!}
+                                {!! Form::text('like_name',null,['class'=>'formInput personalForm__input','placeholder'=>'Name','maxlength'=>"60"]) !!}
                             </div>
                             @if ($errors->has('like_name'))
                                 <span class="help-block">
@@ -122,7 +122,19 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
 
                             </div>
                         </div>
-
+                    <div class="formField personalActive">
+                        <h2 class="formLabel personalForm__label">
+                            Postcode <span>*</span>
+                        </h2>
+                        <div class="inputWrap">
+                            {!! Form::text('postcode',null,['class'=>'formInput personalForm__input','placeholder'=>'Your postcode','maxlength'=>"12"]) !!}
+                        </div>
+                        @if ($errors->has('postcode'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('postcode') }}</strong>
+                                    </span>
+                        @endif
+                    </div>
                         <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
                                 Address <span>*</span>
@@ -168,23 +180,7 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                                     </span>
                             @endif
                         </div>
-                        <div class="formField personalActive">
-                            <h2 class="formLabel personalForm__label">
-                                Postcode <span>*</span>
-                            </h2>
-                            <div class="inputWrap">
-{{--
-                                {!! Form::select('postcode_id',$postcodes,null,['class'=>'formInput personalForm__input','placeholder'=>'Please select','style'=>'width:30%']) !!}
---}}
-                                {!! Form::text('postcode',null,['class'=>'formInput personalForm__input','placeholder'=>'Your postcode','maxlength'=>"12"]) !!}
 
-                            </div>
-                            @if ($errors->has('postcode'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('postcode') }}</strong>
-                                    </span>
-                            @endif
-                        </div>
                         <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
                                 Date of birth <span>*</span>

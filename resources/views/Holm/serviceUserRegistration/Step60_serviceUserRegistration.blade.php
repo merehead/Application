@@ -17,11 +17,15 @@
                         Are there any other medical conditions, disabilities, or other pieces of information not already covered which you feel may be of use? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('we_missed',['Yes'=>'Yes','No'=>'No'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->we_missed))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('we_missed',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                         @if ($errors->has('we_missed'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('we_missed') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('we_missed') }}</strong></span>
                         @endif
                     </div>
                 </div>
@@ -31,7 +35,7 @@
                         Please give further details. <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::textarea('we_missed_details',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('we_missed_details',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('we_missed_details'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('we_missed_details') }}</strong>

@@ -41,7 +41,7 @@ class ServiceUserRegistration
             case '4_1' : $step = 'Step4_1_2_purchaserRegistration';break;
 
 
-            //case '4_1_2_1' : $step = 'Step4_1_2_1_Thank__you_Sign_up';break;
+            case '4_3' : $step = 'Step4_3_StopRegistration';break;
 
 
 
@@ -233,6 +233,8 @@ class ServiceUserRegistration
             case '4_1' : $nextStep = '4_1';break;
             case '4_1_2' : $nextStep = '4_1_2_1';break;
 
+            case '4_3' : $nextStep = '4_3';break;
+
             case '4_1_2_1' : $nextStep = '4_1_2_1';break;
             case '4_1_2_3' : $nextStep = '4_1_2_3';break;
             case '4_1_2_4' : $nextStep = '4_1_2_4';break;
@@ -307,19 +309,12 @@ class ServiceUserRegistration
 
         $serviceUserProfile->registration_progress = $nextStep;
 
-/*        if ($request->input('step')==5 && $request->input('criminal_conviction')=="No") { // no a criminal backend
-            $purchaserProfile->registration_progress = '5_2';
+        if ($request->input('step')=='4_1' &&
+            preg_match('/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',$serviceUserProfile->postcode)!=1
+        )
+        { // недоступный регион
+            $serviceUserProfile->registration_progress = '4_3';
         }
-
-        if (($request->input('step')=='5' && $request->input('criminal_conviction')=="Yes") // has the criminal backend
-        ||($request->input('step')=='14' && $request->input('work_UK')=="No")) {            // restricted in UK
-            $purchaserProfile->registration_progress = '5_1';
-            //return redirect()->action('HomePageController@index');
-        }
-
-        if ($request->input('step')=='5_1' && $purchaserProfile->criminal_conviction=='Some') { // has some criminal backend
-            $purchaserProfile->registration_progress = '5_2';
-        }*/
 
 
         $serviceUserProfile->update();
@@ -337,6 +332,7 @@ class ServiceUserRegistration
 
         switch ($step) {
             case '4_1'    : $this->saveStep4_1($request);break;
+
 
             case '5'    : $this->saveStep5($request);break;
             case '5_1'    : $this->saveStep5_1($request);break;
@@ -464,36 +460,13 @@ class ServiceUserRegistration
             'postcode' =>
                 array(
                     'required',
-                    'regex:/^([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})|([Ss][Kk][0-9]{1,2}) [0-9][A-Za-z]{1,2}$/'
-//                    'regex:#^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))
-//[0-9][A-Za-z]{2})$#',
+                    'regex:#^([A-Za-z]{1,2}[0-9]{1,2}) [0-9][A-Za-z]{1,2}$#',
+                    //'regex:/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',
                 )
         ]);
 
-
-
-        /*        $this->validate($request,[
-                    'title' => 'required|numeric:1',
-                    'first_name' => 'required|string|max:128',
-                    'family_name' => 'required|string|max:128',
-                    'like_name' => 'required|string|max:128',
-                    'gender' => 'required|string|max:14',
-                    'mobile_number' => 'required',
-                    'address_line1'=>'required|string|max:256',
-                    'address_line2' => 'nullable|string|max:256',
-                    'town' => 'required|string|max:128',
-                    'postcode' => 'required|string|max:32',
-                    'DoB'=>'required',
-                ]);*/
-
-        //dd($request->all());
-
         $serviceUsersProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
 
-        //$serviceUsersProfile = $purchaserProfile->serviceUsers->first();
-
-
-        //dd($purchaserProfile);
 
         if ($serviceUsersProfile) {
             $serviceUsersProfile->title = $request->input('title');
@@ -680,7 +653,7 @@ class ServiceUserRegistration
     private function saveStep14($request) {
 
         $this->validate($request,[
-            'carer_enter' => 'nullable|string|max:500',
+            'carer_enter' => 'nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -696,7 +669,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'entering_aware' => 'required|in:"Yes","No","Sometimes"',
-            'other_detail' => 'required_if:entering_aware,"Yes","Sometimes"|nullable|string|max:500',
+            'other_detail' => 'required_if:entering_aware,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -712,7 +685,7 @@ class ServiceUserRegistration
     private function saveStep17($request) {
 
         $this->validate($request,[
-            'conditions_detail' => 'nullable|string|max:500',
+            'conditions_detail' => 'nullable|string|max:510',
             'workingTime' => 'nullable|array',
         ]);
 
@@ -734,7 +707,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'have_dementia' => 'required|in:"Yes","No","Sometimes"',
-            'dementia_detail' => 'required_if:have_dementia,"Yes","Sometimes"|nullable|string|max:500',
+            'dementia_detail' => 'required_if:have_dementia,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -766,7 +739,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'history_of_falls' => 'required|in:"Yes","No","Sometimes"',
-            'falls_detail' => 'required_if:history_of_falls,"Yes","Sometimes"|nullable|string|max:500',
+            'falls_detail' => 'required_if:history_of_falls,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -783,7 +756,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'mobility_bed' => 'required|in:"Yes","No","Sometimes"',
-            'mobility_bed_detail' => 'required_if:mobility_bed,"Yes","Sometimes"|nullable|string|max:500',
+            'mobility_bed_detail' => 'required_if:mobility_bed,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -799,7 +772,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'mobility_home' => 'required|in:"Yes","No","Sometimes"',
-            'mobility_home_detail' => 'required_if:mobility_home,"Yes","Sometimes"|nullable|string|max:500',
+            'mobility_home_detail' => 'required_if:mobility_home,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -816,7 +789,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'mobility_shopping' => 'required|in:"Yes","No","Sometimes"',
-            'mobility_shopping_detail' => 'required_if:mobility_shopping,"Yes","Sometimes"|nullable|string|max:500',
+            'mobility_shopping_detail' => 'required_if:mobility_shopping,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -849,7 +822,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'vision' => 'required|in:"Yes","No","Sometimes"',
-            'vision_detail' => 'required_if:vision,"Yes","Sometimes"|nullable|string|max:500',
+            'vision_detail' => 'required_if:vision,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -866,7 +839,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'hearing' => 'required|in:"Yes","No","Sometimes"',
-            'hearing_detail' => 'required_if:hearing,"Yes","Sometimes"|nullable|string|max:500',
+            'hearing_detail' => 'required_if:hearing,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -883,7 +856,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'speech' => 'required|in:"Yes","No","Sometimes"',
-            'speech_detail' => 'required_if:speech,"Yes","Sometimes"|nullable|string|max:500',
+            'speech_detail' => 'required_if:speech,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -900,7 +873,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'comprehension' => 'required|in:"Yes","No","Sometimes"',
-            'comprehension_detail' => 'required_if:comprehension,"Yes","Sometimes"|nullable|string|max:500',
+            'comprehension_detail' => 'required_if:comprehension,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -917,7 +890,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'languages' => 'required|array',
-            'other_languages' => 'nullable|string|max:200',
+            'other_languages' => 'nullable|string|max:205',
         ]);
 
 
@@ -954,9 +927,9 @@ class ServiceUserRegistration
     private function saveStep32($request) {
 
         $this->validate($request,[
-            'long_term_conditions' => 'nullable|string|max:500',
+            'long_term_conditions' => 'nullable|string|max:510',
             'have_any_allergies' => 'required|in:"Yes","No","Sometimes"',
-            'allergies_detail' => 'required_if:have_any_allergies,"Yes","Sometimes"|nullable|string|max:500',
+            'allergies_detail' => 'required_if:have_any_allergies,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -974,7 +947,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'assistance_in_medication' => 'required|in:"Yes","No","Sometimes"',
-            'in_medication_detail' => 'required_if:assistance_in_medication,"Yes","Sometimes"|nullable|string|max:500',
+            'in_medication_detail' => 'required_if:assistance_in_medication,"Yes","Sometimes"|nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -991,7 +964,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'skin_scores' => 'required|in:"Yes","No","Sometimes"',
-            'skin_scores_detail' => 'required_if:skin_scores,"Yes","Sometimes"|nullable|string|max:250',
+            'skin_scores_detail' => 'required_if:skin_scores,"Yes","Sometimes"|nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1008,7 +981,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'assistance_with_dressings' => 'required|in:"Yes","No","Sometimes"',
-            'dressings_detail' => 'required_if:assistance_with_dressings,"Yes","Sometimes"|nullable|string|max:250',
+            'dressings_detail' => 'required_if:assistance_with_dressings,"Yes","Sometimes"|nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1025,7 +998,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'other_medical_conditions' => 'required|in:"Yes","No","Sometimes"',
-            'other_medical_detail' => 'required_if:other_medical_conditions,"Yes","Sometimes"|nullable|string|max:250',
+            'other_medical_detail' => 'required_if:other_medical_conditions,"Yes","Sometimes"|nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1041,7 +1014,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'food_allergies' => 'required|in:"Yes","No","Sometimes"',
-            'food_allergies_detail' => 'required_if:food_allergies,"Yes","Sometimes"|nullable|string|max:250',
+            'food_allergies_detail' => 'required_if:food_allergies,"Yes","Sometimes"|nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1057,7 +1030,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'dietary_requirements' => 'required|in:"Yes","No","Sometimes"',
-            'dietary_requirements_interaction' => 'required_if:dietary_requirements,"Yes","Sometimes"|nullable|string|max:250',
+            'dietary_requirements_interaction' => 'required_if:dietary_requirements,"Yes","Sometimes"|nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1073,7 +1046,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'special_dietary_requirements' => 'required|in:"Yes","No","Sometimes"',
-            'special_dietary_requirements_detail' => 'required_if:special_dietary_requirements,"Yes","Sometimes"|nullable|string|max:250',
+            'special_dietary_requirements_detail' => 'required_if:special_dietary_requirements,"Yes","Sometimes"|nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1090,7 +1063,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'prepare_food' => 'required|in:"Yes","No","Sometimes"',
-            'assistance_with_preparing_food' => 'required_if:prepare_food,"Yes","Sometimes"|nullable||in:"Yes","No","Sometimes"',
+            'assistance_with_preparing_food' => 'required_if:prepare_food,"No","Sometimes"|nullable||in:"Yes","No","Sometimes"',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1106,7 +1079,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'preferences_of_food' => 'required|in:"Yes","No","Sometimes"',
-            'preferences_of_food_requirements' => 'required_if:preferences_of_food,"Yes","Sometimes"|nullable|string|max:250',
+            'preferences_of_food_requirements' => 'required_if:preferences_of_food,"Yes","Sometimes"|nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1123,7 +1096,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'assistance_with_eating' => 'required|in:"Yes","No","Sometimes"',
-            'assistance_with_eating_detail' => 'required_if:assistance_with_eating,"Yes","Sometimes"|nullable|string|max:250',
+            'assistance_with_eating_detail' => 'required_if:assistance_with_eating,"Yes","Sometimes"|nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1168,7 +1141,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'assistance_getting_dressed' => 'required|in:"Yes","No","Sometimes"',
-            'assistance_getting_dressed_detail' => 'required_if:assistance_getting_dressed,"Yes","Sometimes"|nullable|string|max:250',
+            'assistance_getting_dressed_detail' => 'required_if:assistance_getting_dressed,"Yes","Sometimes"|nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1220,9 +1193,9 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'have_incontinence' => 'required|in:"Yes","No","Sometimes"',
-            'kind_of_incontinence' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|string|max:250',
+            'kind_of_incontinence' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|string|max:255',
             'incontinence_wear' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|in:"Yes","No","Sometimes"',
-            'incontinence_products_stored' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|string|max:250',
+            'incontinence_products_stored' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|string|max:255',
             'choosing_incontinence_products' => 'nullable|in:"Yes","No","Sometimes"',
         ]);
 
@@ -1243,7 +1216,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'behaviour' => 'required|array',
-            'other_behaviour' => 'nullable|string|max:200',
+            'other_behaviour' => 'nullable|string|max:205',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1260,7 +1233,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'consent' => 'required|in:"Yes","No","Sometimes"',
-            'consent_details' => 'required_if:consent,"Yes","Sometimes"|nullable|string|max:250',
+            'consent_details' => 'required_if:consent,"Yes","Sometimes"|nullable|string|max:255',
 
         ]);
 
@@ -1298,7 +1271,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'keeping_safe_at_night' => 'required|in:"Yes","No","Sometimes"',
-            'keeping_safe_at_night_details' => 'required_if:keeping_safe_at_night,"Yes","Sometimes"|nullable|string|max:250',
+            'keeping_safe_at_night_details' => 'required_if:keeping_safe_at_night,"Yes","Sometimes"|nullable|string|max:255',
             'time_to_night_helping' => 'nullable|string|max:16',
 
         ]);
@@ -1336,7 +1309,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'religious_beliefs' => 'required|in:"Yes","No","Sometimes"',
-            'religious_beliefs_details' => 'required_if:religious_beliefs,"Yes","Sometimes"|nullable|string|max:250',
+            'religious_beliefs_details' => 'required_if:religious_beliefs,"Yes","Sometimes"|nullable|string|max:255',
          ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1352,7 +1325,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'particular_likes' => 'required|in:"Yes","No","Sometimes"',
-            'particular_likes_details' => 'required_if:particular_likes,"Yes","Sometimes"|nullable|string|max:250',
+            'particular_likes_details' => 'required_if:particular_likes,"Yes","Sometimes"|nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1384,7 +1357,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'interests_hobbies' => 'required|in:"Yes","No","Sometimes"',
-            'interests_hobbies_details' => 'required_if:interests_hobbies,"Yes","Sometimes"|nullable|string|max:250',
+            'interests_hobbies_details' => 'required_if:interests_hobbies,"Yes","Sometimes"|nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1401,7 +1374,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'we_missed' => 'required|in:"Yes","No","Sometimes"',
-            'we_missed_details' => 'required_if:we_missed,"Yes","Sometimes"|nullable|string|max:250',
+            'we_missed_details' => 'required_if:we_missed,"Yes","Sometimes"|nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1418,7 +1391,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'multiple_carers' => 'required|in:"Yes","No","Sometimes"',
-            'multiple_carers_details' => 'required_if:multiple_carers,"Yes","Sometimes"|nullable|string|max:250',
+            'multiple_carers_details' => 'required_if:multiple_carers,"Yes","Sometimes"|nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1459,6 +1432,8 @@ class ServiceUserRegistration
 
         $step = $this->model->find($id)->registration_progress;
 
+
+        //dd($id,$this->model->find($id)->registration_progress);
         //dd($this->model->find($id)->registration_progress);
 
         if ($step == 3)
@@ -1467,7 +1442,7 @@ class ServiceUserRegistration
             $activeSubStep=2;
         if ($step == '4_2'||$step == '4_1')
             $activeSubStep=3;
-        if ($step == '4_1_2_1'||$step == '5')
+        if ($step == '4_1_2_1'||$step == '5'||$step == '4_1_2_3'||$step == '4_1_2_4')
             $activeSubStep=4;
         if ($step >=6||$step == '5_1')
             $activeSubStep=5;

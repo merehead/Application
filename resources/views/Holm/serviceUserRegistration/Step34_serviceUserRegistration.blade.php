@@ -16,7 +16,13 @@
                         Does {{$userNameForSite}} have a risk of developing sores on the skin? - Please answer yes if there is a history of sores or if there is a high risk of developing them, if not looked after correctly. <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('skin_scores',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->skin_scores))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('skin_scores',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('skin_scores'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('skin_scores') }}</strong>
@@ -31,7 +37,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('skin_scores_detail',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('skin_scores_detail',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('skin_scores_detail'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('skin_scores_detail') }}</strong>

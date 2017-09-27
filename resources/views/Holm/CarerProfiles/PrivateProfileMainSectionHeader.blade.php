@@ -15,7 +15,8 @@
         -->
     </div>
     <div class="roundedBtn">
-        <a href="{{route('carerPublicProfile')}}" class="roundedBtn__item roundedBtn__item--preview">
+        <a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}" class="roundedBtn__item
+        roundedBtn__item--preview">
             Preview public profile
         </a>
     </div>
@@ -25,7 +26,8 @@
 
 <div class="invite">
     <div class="profilePhoto invite__photo">
-        <img class="set_preview_profile_photo" src="img/profile_photos/{{$carerProfile->id}}.png" onerror="this.src='/img/no_photo.png'" alt="">
+        <img class="set_preview_profile_photo" src="/img/profile_photos/{{$carerProfile->id}}.png" onerror="this
+        .src='/img/no_photo.png'" alt="">
     </div>
     <h2 class="invite__title">
         Invite other users and both get £100 after 20 hours of usage

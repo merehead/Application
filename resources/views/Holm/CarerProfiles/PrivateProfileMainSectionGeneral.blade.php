@@ -26,7 +26,7 @@
                 Address Line 1 <span class="requireIco">*</span>
               </span>
             </h2>
-            {!! Form::text('address_line1',null,['class'=>'profileField__input']) !!}
+            {!! Form::text('address_line1',null,['class'=>'profileField__input','maxlength'=>'120']) !!}
 
         </div>
 
@@ -36,7 +36,7 @@
                 Address Line 2
               </span>
             </h2>
-            {!! Form::text('address_line2',null,['class'=>'profileField__input']) !!}
+            {!! Form::text('address_line2',null,['class'=>'profileField__input','maxlength'=>'120']) !!}
 
         </div>
 
@@ -48,7 +48,7 @@
             </h2>
             <div class="profileField__input-wrap">
 
-                {!! Form::text('town',null,['class'=>'profileField__input']) !!}
+                {!! Form::text('town',null,['class'=>'profileField__input','maxlength'=>'60']) !!}
                 {{--                <span class="profileField__input-ico centeredLink">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                               </span>--}}
@@ -66,7 +66,7 @@
                 Post code <span class="requireIco">*</span>
               </span>
             </h2>
-            {!! Form::text('postcode',null,['class'=>'profileField__input','id'=>'post_code_profile']) !!}
+            {!! Form::text('postcode',null,['class'=>'profileField__input','id'=>'post_code_profile','maxlength'=>'10']) !!}
         </div>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
@@ -74,7 +74,7 @@
                 Mobile Number <span class="requireIco">*</span>
               </span>
             </h2>
-            {!! Form::text('mobile_number',null,['class'=>'profileField__input']) !!}
+            {!! Form::text('mobile_number',null,['class'=>'profileField__input','maxlength'=>'16']) !!}
 
         </div>
 
@@ -84,7 +84,7 @@
                 Email ADDRESS <span class="requireIco">*</span>
               </span>
             </h2>
-            {!! Form::text('user_email',$user->email,['class'=>'profileField__input']) !!}
+            {!! Form::text('user_email',$user->email,['class'=>'profileField__input','data-edit'=>'false']) !!}
 
         </div>
     </div>
@@ -136,7 +136,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 National Insurance Number </span>
             </h2>
-        {!! Form::text('national_insurance_number',null,['class'=>'profileField__input']) !!}
+        {!! Form::text('national_insurance_number',null,['class'=>'profileField__input','maxlength'=>'20']) !!}
 
         </div>
 
@@ -150,7 +150,13 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
     <div class="profileRow">
 
         <div class="profileField profileField--full-width">
-            {!! Form::text('sentence_yourself',null,['class'=>'profileField__input','maxlength'=>"50"]) !!}
+
+            {!! Form::text('sentence_yourself',null,['class'=>'profileField__input','maxlength'=>"100"]) !!}
+
+{{--
+            {!! Form::text('sentence_yourself',null,['class'=>'profileField__input','maxlength'=>512]) !!}
+--}}
+
             {{--
                         <input type="text" class="profileField__input" placeholder="{{$carerProfile->sentence_yourself}}">
             --}}
@@ -170,7 +176,13 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
                  <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                    How should the carer enter the Service User’s home?    </span>
                </h2>-->
-            {!! Form::textarea('description_yourself',null,['class'=>'formArea','placeholder'=>'Your text']) !!}
+
+            {!! Form::textarea('description_yourself',null,['class'=>'formArea','placeholder'=>'Your text','maxlength'=>"1000"]) !!}
+
+{{--
+            {!! Form::textarea('description_yourself',null,['class'=>'formArea','maxlength'=>1024,'placeholder'=>'Your text']) !!}
+--}}
+
 
             {{--
                         <textarea class="profileField__area" placeholder="{{$carerProfile->description_yourself}}"></textarea>
@@ -199,7 +211,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
                 </span>
                     </h2>
 
-                    {!! Form::text('Persons['.$number.'][name]',$carerReference->name,['class'=>'profileField__input']) !!}
+                    {!! Form::text('Persons['.$number.'][name]',$carerReference->name,['class'=>'profileField__input','maxlength'=>'60']) !!}
                 </div>
                 <div class="profileField profileField--full-width">
                     <h2 class="profileField__title ordinaryTitle">
@@ -208,7 +220,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
                 </span>
                     </h2>
 
-                    {!! Form::text('Persons['.$number.'][job_title]',$carerReference->job_title,['class'=>'profileField__input']) !!}
+                    {!! Form::text('Persons['.$number.'][job_title]',$carerReference->job_title,['class'=>'profileField__input','maxlength'=>'60']) !!}
                 </div>
                 <div class="profileField profileField--full-width">
                     <h2 class="profileField__title ordinaryTitle">
@@ -217,7 +229,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
                 </span>
                     </h2>
 
-                    {!! Form::text('Persons['.$number.'][relationship]',$carerReference->relationship,['class'=>'profileField__input']) !!}
+                    {!! Form::text('Persons['.$number.'][relationship]',$carerReference->relationship,['class'=>'profileField__input','maxlength'=>'60']) !!}
                 </div>
                 <div class="profileField profileField--full-width">
                     <h2 class="profileField__title ordinaryTitle">
@@ -226,7 +238,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
                 </span>
                     </h2>
 
-                    {!! Form::text('Persons['.$number.'][phone]',$carerReference->phone,['class'=>'profileField__input']) !!}
+                    {!! Form::text('Persons['.$number.'][phone]',$carerReference->phone,['class'=>'profileField__input','maxlength'=>'16']) !!}
                 </div>
                 <div class="profileField profileField--full-width">
                     <h2 class="profileField__title ordinaryTitle">
@@ -235,7 +247,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
                 </span>
                     </h2>
 
-                    {!! Form::text('Persons['.$number.'][email]',$carerReference->email,['class'=>'profileField__input']) !!}
+                    {!! Form::text('Persons['.$number.'][email]',$carerReference->email,['class'=>'profileField__input','maxlength'=>'60']) !!}
                 </div>
             </div>
         @endforeach

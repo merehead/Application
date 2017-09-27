@@ -14,7 +14,7 @@
                 </a>
                 <div class="headerNav_container">
                     <div class="headerNav">
-                        <a href="" class="headerNav__link">
+                        <a href="{{route('searchPage')}}" class="headerNav__link">
                             find a carer
                         </a>
                         <a href="{{route('AboutPage')}}" class="headerNav__link">

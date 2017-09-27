@@ -14,7 +14,13 @@
                     <h2 class="formLabel questionForm__label">
                         Does {{$userNameForSite}} have any difficulties understanding or communicating with others? - eg serious hearing, seeing, speaking, comprehension or language impediments. <span>*</span>             </h2>
                     <div class="inputWrap">
-                        {!! Form::select('communication',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'main-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->communication))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('communication',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('communication'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('communication') }}</strong>

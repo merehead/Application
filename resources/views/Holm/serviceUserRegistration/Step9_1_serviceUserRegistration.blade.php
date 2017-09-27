@@ -17,11 +17,15 @@
                         Is there a lift to the flat? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('lift_available',['Yes'=>'Yes','No'=>'No'],null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class'=>'formSelect'];
+                        if (is_null($serviceUserProfile->lift_available))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('lift_available',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                         @if ($errors->has('lift_available'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('lift_available') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('lift_available') }}</strong></span>
                         @endif
                     </div>
                 </div>
@@ -33,7 +37,13 @@
                             What floor is the flat on? <span>*</span>
                         </h2>
                         <div class="inputWrap">
-                           {!! Form::select('floor_id',$floors,null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+                            <?php
+                            if (isset($atrr)) unset($atrr);
+                            $atrr = ['class'=>'formSelect'];
+                            if (is_null($serviceUserProfile->floor_id))
+                                $atrr['placeholder'] = 'Please select';
+                            ?>
+                           {!! Form::select('floor_id',$floors,null,$atrr) !!}
                         </div>
                         @if ($errors->has('floor_id'))
                             <span class="help-block">

@@ -21,7 +21,7 @@
 
             </h2>
             {!! Form::text('sort_code',$carerProfile->sort_code,['class'=>'profileField__input','placeholder'=>'Sort code',
-            'maxlength'=>16]) !!}
+            'maxlength'=>14]) !!}
         </div>
         <div class="profileField ">
             <h2 class="profileField__title ordinaryTitle">
@@ -30,8 +30,8 @@
               </span>
 
             </h2>
-            {!! Form::text('account_number',$carerProfile->account_number,['class'=>'profileField__input',
-            'placeholder'=>'Account number','maxlength'=>32]) !!}
+            {!! Form::text('account_number',$carerProfile->account_number,['class'=>'profileField__input onlyNumber',
+            'placeholder'=>'Account number','type'=>'number','maxlength'=>30]) !!}
             @if ($errors->has('account_number'))
                 <span class="help-block">
                                         <strong>{{ $errors->first('account_number') }}</strong>

@@ -14,44 +14,61 @@
 
 <div class="borderContainer">
 
+    @foreach(array_chunk($languages->all(),4) as $languageCareRow)
+        <div class="profileRow">
+            @foreach($languageCareRow as $language)
+
+                <div class="profileField profileField--fourth">
+                    <div class="checbox_wrap">
+
+                        <?php $language->id<10? $tmp = '0'.$language->id  : $tmp = $language->id; ?>
+
+                        {!! Form::checkbox('languages['.(($language->id<10) ? '0'.$language->id:$language->id).']', null,
+
+                        ($carerProfile->Languages->containsStrict('carer_language', $language->carer_language) ? 1 : null),
+
+
+                        array('class' => 'checkboxNew','id'=>'checkL'.$language->carer_language)) !!}
+                        <label for="checkL{{$language->carer_language}}"> <span>{{$language->carer_language}}</span></label>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endforeach
+
+
+
+    {{--
         @foreach(array_chunk($languages->all(),4) as $languageCareRow)
             <div class="profileRow">
                 @foreach($languageCareRow as $language)
                     <div class="profileField profileField--fourth">
                         <div class="checbox_wrap">
-                            {!! Form::checkbox('languages['.$language->id.']', null,($carerProfile->Languages->contains('id', $language->id)? 1 : null),array('class' => 'checkboxNew','id'=>'checkL'.$language->id)) !!}
+                            {!! Form::checkbox('languages['.$language->id.']', null,
+                            ($carerProfile->Languages->contains('id', $language->id)? 1 : null),
+                            array('class' => 'checkboxNew','id'=>'checkL'.$language->id)) !!}
                             <label for="checkL{{$language->id}}"> <span>{{$language->carer_language}}</span></label>
                         </div>
                     </div>
                 @endforeach
             </div>
         @endforeach
+--}}
 
-            <div class="profileRow language_additional nhide"  >
+
+            <div class="profileRow language_additional "  >
 
                 <div class="profileField profileField--full-width">
                     <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Other languages   </span>
                     </h2>
-                    {!! Form::text('language_additional',null,['class'=>'profileField__input','placeholder'=>'Details']) !!}
-                    {{--      <input type="text" class="profileField__input" placeholder="Details">--}}
+                    {!! Form::text('language_additional',null,['class'=>'profileField__input','placeholder'=>'Details','maxlength'=>'250']) !!}
+                    {{--      <input type="text" class="profileField__input" noPlaceholder="Details">--}}
                 </div>
             </div>
 
-{{--        @else
-                <div class="profileRow" style="display:none">
 
-                    <div class="profileField profileField--two-thirds">
-                        <h2 class="profileField__title ordinaryTitle">
-              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                Other languages   </span>
-                        </h2>
-                        {!! Form::text('language_additional',null,['class'=>'profileField__input','placeholder'=>'Details']) !!}
-                        --}}{{--      <input type="text" class="profileField__input" placeholder="Details">--}}{{--
-                    </div>
-                </div>
-        @endif--}}
 
 </div>
 {{ Form::close() }}
@@ -81,11 +98,7 @@
                 null,['class'=>'profileField__select profileField__select--greyBg','disabled','data-edit'=>'false',
                 'id'=>'driving_license'])
                  !!}
-{{--                <select class="profileField__select profileField__select--greyBg">
-                    <option value="Flat">Have UK/EEA Driving Licence</option>
-                    <option value="Flat">Do not have a driving licence</option>
-                    <option value="Flat">Please select</option>
-                </select>--}}
+
             </div>
             <div class="profileField hiding_profile profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
@@ -96,11 +109,7 @@
                 {!! Form::select('have_car',['Yes'=>'Car for work','No'=>'Do not have a car'],
 null,['class'=>'profileField__select','id'=>'type_car_work']) !!}
 
-                {{--                <select class="profileField__select ">
-                                    <option value="Flat">Car for work</option>
-                                    <option value="Flat">Do not have a car</option>
-                                    <option value="Flat">Please select</option>
-                                </select>--}}
+
             </div>
             <div class="profileField hiding_profile profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
@@ -109,14 +118,10 @@ null,['class'=>'profileField__select','id'=>'type_car_work']) !!}
                 </span>
                 </h2>
                 {!! Form::select('use_car',['Yes'=>'Transport clients','No'=>'Can not transport clients'],
-null,['class'=>'profileField__select','placeholder'=>'Please select','id'=>'profile_use_car']) !!}
+null,['class'=>'profileField__select','id'=>'profile_use_car']) !!}
 
 
-                {{--                <select class="profileField__select ">
-                                    <option value="Flat">Transport clients</option>
-                                    <option value="Flat">Can not transport clients</option>
-                                    <option value="Flat">Please select</option>
-                                </select>--}}
+
 
             </div>
         </div>
@@ -153,7 +158,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','id'=>'prof
                 </span>
                 </h2>
                 {!! Form::text('DBS_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Driving licence number','readonly','data-edit'=>'false']) !!}
-                {{--<input type="text" class="profileField__input profileField__input--greyBg" placeholder="UK\EEA Driving licence Number">--}}
+                {{--<input type="text" class="profileField__input profileField__input--greyBg" noPlaceholder="UK\EEA Driving licence Number">--}}
             </div>
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
@@ -163,7 +168,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','id'=>'prof
                 </h2>
 
                 @if($carerProfile->driver_licence_valid_until === "01/01/1970")
-                    <input name="driver_licence_valid_until" id="datepicker_driver_licence" class="profileField__input" placeholder="Valid until date" type="text">
+                    <input name="driver_licence_valid_until" id="datepicker_driver_licence" class="profileField__input" noPlaceholder="Valid until date" type="text">
                 @else
                     {!! Form::text('driver_licence_valid_until',null,['id'=>'datepicker_driver_licence','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
                 @endif
@@ -199,7 +204,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','id'=>'prof
                 </span>
                 </h2>
                 {!! Form::text('car_insurance_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Car insurance number','readonly','data-edit'=>'false']) !!}
-               {{-- <input type="text" class="profileField__input profileField__input--greyBg" placeholder="Car insurance number">--}}
+               {{-- <input type="text" class="profileField__input profileField__input--greyBg" noPlaceholder="Car insurance number">--}}
             </div>
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">

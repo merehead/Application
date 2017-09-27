@@ -13,34 +13,38 @@
 
 
             <div class="formField">
-                    <h2 class="formLabel questionForm__label">
-                        Does {{$userNameForSite}} have serious impediments seeing? <span>*</span>          </h2>
-                    <div class="inputWrap">
-                        {!! Form::select('vision',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
-                        @if ($errors->has('vision'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('vision') }}</strong>
-                                    </span>
-                        @endif
-                    </div>
+                <h2 class="formLabel questionForm__label">
+                    Does {{$userNameForSite}} have serious impediments seeing? <span>*</span></h2>
+                <div class="inputWrap">
+                    <?php
+                    if (isset($atrr)) unset($atrr);
+                    $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                    if (is_null($serviceUserProfile->vision))
+                        $atrr['placeholder'] = 'Please select';
+                    ?>
+                    {!! Form::select('vision',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
+                    @if ($errors->has('vision'))
+                        <span class="help-block"><strong>{{ $errors->first('vision') }}</strong></span>
+                    @endif
                 </div>
+            </div>
 
             <div class="formField sometimes_hiding" style="display: none">
-                    <h2 class="formLabel questionForm__label">
-                        Please give further details of what kind of help is needed. <span>*</span>
-                    </h2>
+                <h2 class="formLabel questionForm__label">
+                    Please give further details of what kind of help is needed. <span>*</span>
+                </h2>
 
-                    <div class="inputWrap">
-                        {!! Form::textarea('vision_detail',null,['class'=>'formArea ','placeholder'=>'Details','maxlength'=>"500"]) !!}
-                        @if ($errors->has('vision_detail'))
-                            <span class="help-block">
+                <div class="inputWrap">
+                    {!! Form::textarea('vision_detail',null,['class'=>'formArea ','placeholder'=>'Details','maxlength'=>"500"]) !!}
+                    @if ($errors->has('vision_detail'))
+                        <span class="help-block">
                                         <strong>{{ $errors->first('vision_detail') }}</strong>
                                     </span>
-                        @endif
-                    </div>
+                    @endif
                 </div>
-                <input type="hidden" name="step" value='25'>
-                <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
+            </div>
+            <input type="hidden" name="step" value='25'>
+            <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
             {!! Form::close()!!}
         </div>
 
@@ -51,7 +55,7 @@
     {{ csrf_field() }}
     <input type="hidden" name="step" value='25'>
     <input type="hidden" name="stepback" value='23'>
-    <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
+    <input type="hidden" name="serviceUserProfileID" value= {{$serviceUserProfileID}}>
 </form>
 
 <div class="registrationBtns">

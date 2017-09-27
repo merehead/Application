@@ -16,11 +16,15 @@
                         Does {{$userNameForSite}} need assistance with changing wound dressings?  <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('assistance_with_dressings',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->assistance_with_dressings))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('assistance_with_dressings',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('assistance_with_dressings'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('assistance_with_dressings') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('assistance_with_dressings') }}</strong></span>
                         @endif
                     </div>
                 </div>
@@ -30,7 +34,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('dressings_detail',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('dressings_detail',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('dressings_detail'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('dressings_detail') }}</strong>

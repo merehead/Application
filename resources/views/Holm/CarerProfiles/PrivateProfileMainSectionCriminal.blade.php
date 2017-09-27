@@ -28,7 +28,9 @@
                   Have up to date DBS certificate
                 </span>
                 </h2>
-                {!! Form::select('DBS',['Yes'=>'Have an up to date DBS','No'=>'Have not a DBS'],null,['id'=>'main-if','class'=>'profileField__select profileField__select--greyBg','placeholder'=>'Please select','readonly','data-edit'=>'false']) !!}
+
+                {!! Form::select('DBS',['Yes'=>'Have up to date DBS certificate','No'=>'Have not a DBS'],null,['id'=>'main-if','class'=>'profileField__select profileField__select--greyBg','readonly','data-edit'=>'false']) !!}
+
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Have an up to date DBS</option>
                 </select>--}}
@@ -40,8 +42,9 @@
                 </span>
                 </h2>
 
-                {!! Form::select('criminal_conviction',['Old'=>'Yes, but they are very old, and for a minor offence.','Yes'=>'Yes','No'=>'Do not have criminal convictions'],
-null,['class'=>'profileField__select','placeholder'=>'Please select','readonly','id'=>'criminal_detail','data-edit'=>'false']) !!}
+                {!! Form::select('criminal_conviction',['Some'=>'Yes, but they are very old, and for a minor offence.',
+                'Yes'=>'Yes','No'=>'Do not have criminal convictions'],
+null,['class'=>'profileField__select','readonly','id'=>'criminal_detail','data-edit'=>'false']) !!}
 
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Do not have criminal convictions</option>
@@ -51,11 +54,11 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','readonly',
             <div class="profileField profileField--full-width criminal_detail nhide">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
-                Details
+                CRIMINAL CONVICTIONS Details
                      </span></h2>
                 <div class="inputWrap criminal_detail">
 
-                    {!! Form::textarea('criminal_detail',null,['class'=>'formArea','placeholder'=>' Detailed response']) !!}
+                    {!! Form::textarea('criminal_detail',null,['class'=>'formArea','noPlaceholder'=>' Detailed response']) !!}
 
                 </div>
             </div>
@@ -65,7 +68,13 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','readonly',
                 Using the new DBS update service
                 </span>
                 </h2>
-                {!! Form::select('DBS_use',['Yes'=>'Use the new DBS update service','No'=>'Do not use the new DBS update service'],null,['class'=>'profileField__select profileField__select--greyBg','placeholder'=>'Please select']) !!}
+
+{{--
+                {!! Form::select('DBS_use',['Yes'=>'Use the new DBS update service','No'=>'Do not use the new DBS update service'],null,['class'=>'profileField__select profileField__select--greyBg','noPlaceholder'=>'Please select']) !!}
+--}}
+
+                {!! Form::select('DBS_use',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select profileField__select--greyBg']) !!}
+
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Use the new DBS update service</option>
                 </select>--}}
@@ -94,7 +103,7 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','readonly',
                     </a>
                 </div>
                 <div style="display: none" class="addInfo">
-                    <input disabled type="text" name="dbs_certificate_photo" class="addInfo__input" placeholder="Name" >
+                    <input disabled type="text" name="dbs_certificate_photo" class="addInfo__input" noPlaceholder="Name" >
                 </div>
 
             </div>
@@ -106,22 +115,22 @@ null,['class'=>'profileField__select','placeholder'=>'Please select','readonly',
                 </span>
 
                 </h2>
-                {!! Form::text('DBS_identifier',null,['class'=>'profileField__input','placeholder'=>'DBS certificate number']) !!}
-                {{--<input type="text" class="profileField__input " placeholder="DBS certificate number">--}}
+                {!! Form::text('DBS_identifier',null,['class'=>'profileField__input','placeholder'=>'DBS certificate number','maxlength'=>'20']) !!}
+                {{--<input type="text" class="profileField__input " noPlaceholder="DBS certificate number">--}}
             </div>
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
-                 DBS date certificate
+                 DBS date certificate {{($carerProfile->date_certificate)}}
                 </span>
 
                 </h2>
 
-                @if($carerProfile->date_sertificate == "01/01/1970")
-                    <input name="date_certificate" id="datepicker_date_sertificate" class="profileField__input"
+                @if($carerProfile->date_sertificate === false)
+                    <input name="dbs_date" id="datepicker_date_sertificate" class="profileField__input"
                            placeholder="Valid until date" type="text">
                 @else
-                    {!! Form::text('date_certificate',null,['id'=>'datepicker_date_sertificate',
+                    {!! Form::text('dbs_date',null,['id'=>'datepicker_date_sertificate',
                     'class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
                 @endif
             </div>

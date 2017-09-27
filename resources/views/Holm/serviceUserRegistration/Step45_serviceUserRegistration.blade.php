@@ -16,11 +16,15 @@
                         Does {{$userNameForSite}} need assistance getting dressed / undressed? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('assistance_getting_dressed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->assistance_getting_dressed))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('assistance_getting_dressed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('assistance_getting_dressed'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('assistance_getting_dressed') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('assistance_getting_dressed') }}</strong></span>
                         @endif
                     </div>
                 </div>
@@ -30,7 +34,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('assistance_getting_dressed_detail',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('assistance_getting_dressed_detail',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('assistance_getting_dressed_detail'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('assistance_getting_dressed_detail') }}</strong>

@@ -80,7 +80,7 @@
                 <h2 class="formLabel questionForm__label">
                     Phone <span>*</span>
                 </h2>
-                {!! Form::text('phone',null,['class'=>'formInput','placeholder'=>'Phone','maxlength'=>"50"]) !!}
+                {!! Form::text('phone',null,['class'=>'formInput','placeholder'=>'Phone','maxlength'=>"15"]) !!}
                 @if ($errors->has('phone'))
                     <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>
@@ -92,7 +92,7 @@
                     Email <span>*</span>
                 </h2>
 
-                {!! Form::text('email',null,['class'=>'formInput','placeholder'=>'Email','maxlength'=>"110"]) !!}
+                {!! Form::text('email',null,['class'=>'formInput','placeholder'=>'Email','maxlength'=>"60"]) !!}
                 @if ($errors->has('email'))
                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>

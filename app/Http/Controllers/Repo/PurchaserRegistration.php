@@ -11,11 +11,13 @@ namespace App\Http\Controllers\Repo;
 
 use App\CarerReference;
 use App\CarersProfile;
+use App\MailError;
 use App\PurchasersProfile;
 use App\User;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Swift_TransportException;
 
 class PurchaserRegistration
 {
@@ -42,14 +44,9 @@ class PurchaserRegistration
             case '3' : $step = 'Step4_purchaserRegistration';break;
             case '4' : $step = 'Step4_2_purchaserRegistration';break;
             case '4_2' : $step = 'Step4_1_purchaserRegistration';break;
-/*            case '4_2' :
-            {
-                if($this->model->find($user->id)->purchasing_care_for == 'Myself')
-                    $step = 'Step4_1_2_1_Thank__you_Sign_up';
-                else
-                    $step = 'Step4_1_purchaserRegistration';
-                break;
-            }*/
+
+            case '4_3' : $step = 'Step4_3_StopRegistration';break;
+
             case '4_1' : $step = 'Step4_1_2_purchaserRegistration';break;
             case '4_1_2_1' : $step = 'Step4_1_2_1_Thank__you_Sign_up';break;
 
@@ -80,6 +77,7 @@ class PurchaserRegistration
             case '2' : $nextStep = '2';break;
             case '3' : $nextStep = '3';break;
             case '4' : $nextStep = '4';break;
+            case '4_3' : $nextStep = '4_3';break;
             case '4_2' : $nextStep = '4_2';break;
             case '4_1' : $nextStep = '4_1';break;
             case '4_1_2' : $nextStep = '4_1_2_1';break;
@@ -104,7 +102,22 @@ class PurchaserRegistration
         }
 
 
-        $purchaserProfile->update();
+        if ($request->input('step')=='4' && $purchaserProfile->purchasing_care_for=='Myself' &&
+            preg_match('/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',$purchaserProfile->postcode)!=1
+        )
+        { // недоступный регион
+            $purchaserProfile->registration_progress = '4_3';
+        }
+
+        //dd($request->input('step'));
+
+        if ($request->input('step')=='4_1'
+            &&  preg_match('/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',$purchaserProfile->postcode)!=1
+        ) { // недоступный регион
+            $purchaserProfile->registration_progress = '4_3';
+        }
+
+            $purchaserProfile->update();
 
         return;
     }
@@ -135,7 +148,9 @@ class PurchaserRegistration
             'referral_code'=>'string|nullable|max:128',
         ]);
 
-        (isset($request['referral_code']))? $referal_code = $request['referral_code'] : $referral_code = 0;
+        $referral_code = 0;
+
+        (isset($request['referral_code'])) ? $referral_code = $request['referral_code'] : $referral_code = 0;
 
         $user = User::create([
             'email' => $request['email'],
@@ -157,8 +172,23 @@ class PurchaserRegistration
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']],TRUE)) {
             Auth::login($user, true);
 
-            Mail::send('errors.404', ['userName' => $user->email, 'password' => $request['password']],
-                function ($m) use ($request) {$m->to($request['email'])->subject('Registration');});
+            try {
+
+                Mail::send(config('settings.frontTheme') . '.emails.continue_sign_up_service_user',
+                    ['user' => $user, 'password' => $request['password']],
+                    function ($m) use ($request) {
+                        $m->to($request['email'])->subject('Registration on HOLM');
+                    });
+            }
+            catch (Swift_TransportException $STe){
+
+                    $error = MailError::create([
+                        'error_message'=>$STe->getMessage(),
+                        'function'=>__METHOD__,
+                        'action'=>'Try to sent continue_sign_up_service_user',
+                        'user_id'=>$user->id
+                    ]);
+                }
 
         }
 
@@ -216,6 +246,7 @@ class PurchaserRegistration
             'mobile_number' =>
                 array(
                     'required',
+                    'regex:/^07[0-9]{9}$/',
                 ),
             'address_line1' =>
                 array(
@@ -242,29 +273,12 @@ class PurchaserRegistration
             'postcode' =>
                 array(
                     'required',
-                    'regex:/^([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})|([Ss][Kk][0-9]{1,2}) [0-9][A-Za-z]{1,2}$/'
-//                    'regex:#^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))
-//[0-9][A-Za-z]{2})$#',
+                    'regex:#^([A-Za-z]{1,2}[0-9]{1,2}) [0-9][A-Za-z]{1,2}$#',
+                    //'regex:/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',
                 )
         ]);
 
 
-/*        $this->validate($request,[
-            'title' => 'required|numeric:1',
-            'first_name' => 'required|string|max:128',
-            'family_name' => 'required|string|max:128',
-            'like_name' => 'required|string|max:128',
-            'gender' => 'required|string|max:14',
-            'mobile_number' => 'required',
-            'address_line1'=>'required|string|max:256',
-            'address_line2' => 'nullable|string|max:256',
-            'town' => 'required|string|max:128',
-            'postcode' => 'required|string|max:32|regex:#^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))
-[0-9][A-Za-z]{2})$#',
-            'DoB'=>'required',
-        ]);*/
-
-        //dd($request->all());
 
         $purchaserProfile = $this->model->findOrFail($request->input('purchasersProfileID'));
         //dd($purchaserProfile);
@@ -322,6 +336,7 @@ class PurchaserRegistration
             'mobile_number' =>
                 array(
                     'required',
+                    'regex:/^07[0-9]{9}$/',
                 ),
             'address_line1' =>
                 array(
@@ -348,9 +363,8 @@ class PurchaserRegistration
             'postcode' =>
                 array(
                     'required',
-                    'regex:#^([BMOSWbmosw][LKANlkan0-9][0-9]{1,2})|([BMOSWbmosw][LKANlkan0-9]) [0-9][A-Za-z]{1,2}$#'
-//                    'regex:#^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))
-//[0-9][A-Za-z]{2})$#',
+                    'regex:#^([A-Za-z]{1,2}[0-9]{1,2}) [0-9][A-Za-z]{1,2}$#',
+                    //'regex:/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',
                 )
         ]);
 
@@ -420,6 +434,9 @@ class PurchaserRegistration
     public function getActiveSubStep($id){
 
         $activeSubStep=0;
+
+
+
 
         $step = $this->model->find($id)->registration_progress;
 

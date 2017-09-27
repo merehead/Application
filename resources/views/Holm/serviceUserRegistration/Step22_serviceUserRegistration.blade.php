@@ -18,7 +18,13 @@
                 </h2>
                 <div class="inputWrap">
                     <div class="inputWrap">
-                        {!! Form::select('mobility_home',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->mobility_home))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('mobility_home',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('mobility_home'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('mobility_home') }}</strong>

@@ -9,14 +9,14 @@
         </a>
         <span class="breadcrumbs__arrow">></span>
         <a href="" class="breadcrumbs__item">
-            {{$serviceUsersProfile->full_name}}
+            {!! $serviceUsersProfile->first_name.'&nbsp'.mb_substr($serviceUsersProfile->family_name,0,1).'.' !!}
         </a>
 
     </div>
     <div class="bookingGroup">
 
         <div class="roundedBtn">
-            <a href="" class="roundedBtn__item roundedBtn__item--preview">
+            <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUsersProfile->id])}}" class="roundedBtn__item roundedBtn__item--preview">
                 Preview public profile
             </a>
         </div>

@@ -18,7 +18,7 @@ class User extends Authenticatable
         'email',
         'password',
         'user_type_id',
-        'referal_code',
+        'referral_code',
     ];
 
     /**
@@ -98,6 +98,15 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function isPurchaser()
+    {
+        if ($this->user_type_id == 1) {
+            return true;
+        }
+        return false;
+    }
+
     public function isAdmin()
     {
         if ($this->user_type_id == 4) {

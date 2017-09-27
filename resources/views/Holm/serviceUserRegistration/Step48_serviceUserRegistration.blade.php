@@ -16,7 +16,13 @@
                         Does {{$userNameForSite}} have incontinence? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('have_incontinence',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->have_incontinence))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('have_incontinence',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('have_incontinence'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('have_incontinence') }}</strong>
@@ -30,7 +36,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('kind_of_incontinence',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('kind_of_incontinence',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('kind_of_incontinence'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('kind_of_incontinence') }}</strong>
@@ -43,7 +49,13 @@
                         Does {{$userNameForSite}} have their own supply of incontinence wear? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('incontinence_wear',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if2', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->incontinence_wear))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('incontinence_wear',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('incontinence_wear'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('incontinence_wear') }}</strong>
@@ -51,13 +63,13 @@
                         @endif
                     </div>
                 </div>
-            <div class="formField sometimes_hiding" style="display: none">
+            <div class="formField sometimes_hiding2" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Where are the incontinence products stored? <span>*</span>
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('incontinence_products_stored',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('incontinence_products_stored',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('incontinence_products_stored'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('incontinence_products_stored') }}</strong>
@@ -65,12 +77,18 @@
                         @endif
                     </div>
                 </div>
-            <div class="formField sometimes_hiding" style="display: none">
+            <div class="formField sometimes_hiding2" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Would {{$userNameForSite}} like help in choosing incontinence products?
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('choosing_incontinence_products',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->choosing_incontinence_products))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('choosing_incontinence_products',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('choosing_incontinence_products'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('choosing_incontinence_products') }}</strong>

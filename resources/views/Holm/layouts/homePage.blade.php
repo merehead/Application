@@ -11,7 +11,13 @@
     <link rel="stylesheet" href="/css/main.min.css">
     <link rel="stylesheet" href="/css/owl.carousel.css">
     <link rel="stylesheet" href="/css/carousel/carousel.css">
+    <link rel="stylesheet" href="/css/cupertino/jquery-ui.min.css">
     <link rel="stylesheet" href="/css/customize.css">
+    <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <script src="{{asset('js/main.js')}}"></script>
 </head>
 <body>
 @yield('header')

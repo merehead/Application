@@ -60,20 +60,24 @@
 
                     @foreach(Auth::user()->userPurchaserProfile->serviceUsers as $serviceUser)
 
-                        @if(strlen($serviceUser->first_name)>0)
+                        @if(!$serviceUser->isDeleted())
 
-                            <a href="{{ $serviceUser->registration_progress!='61'
-                                ? route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUser->id])
-                                : route('ServiceUserSetting',['id'=>$serviceUser->id])}}"
-                               class="dropdownUser__item">
-                                <div class="profilePhoto dropdownUser__img">
-                                    <img src="/img/service_user_profile_photos/{{$serviceUser->id}}.png" onerror="this.src='/img/no_photo.png'" alt="">
-                                </div>
-                                <h2 class="profileName">
-                                    {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
-                                </h2>
-                                <span class="dropdownUser__ico"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
-                            </a>
+                            @if(strlen($serviceUser->first_name)>0)
+
+                                <a href="{{ $serviceUser->registration_progress!='61'
+                                    ? route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUser->id])
+                                    : route('ServiceUserSetting',['id'=>$serviceUser->id])}}"
+                                   class="dropdownUser__item">
+                                    <div class="profilePhoto dropdownUser__img">
+                                        <img src="/img/service_user_profile_photos/{{$serviceUser->id}}.png" onerror="this.src='/img/no_photo.png'" alt="">
+                                    </div>
+                                    <h2 class="profileName">
+                                        {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
+                                    </h2>
+                                    <span class="dropdownUser__ico"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+                                </a>
+
+                            @endif
 
                         @endif
 

@@ -22,8 +22,13 @@
                         Do you have a full UK/EEA Driving Licence?<span>*</span>
                     </h2>
                     <div class="inputWrap">
-
-                        {!! Form::select('driving_licence',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if2','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class'=>'formSelect','id'=>'main-if2'];
+                        if (is_null($carersProfile->driving_licence))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('driving_licence',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                     </div>
 
                     @if ($errors->has('driving_licence'))
@@ -38,7 +43,7 @@
                     </h2>
                     <div class="inputWrap">
 
-                        {!! Form::text('DBS_number',null,['class'=>'formInput','placeholder'=>'Driving licence number']) !!}
+                        {!! Form::text('DBS_number',null,['class'=>'formInput','placeholder'=>'Driving licence number','maxlength'=>'20']) !!}
                     </div>
 
                     @if ($errors->has('DBS_number'))
@@ -91,10 +96,13 @@
                         Do you own a car which you intend to use for work?
                     </h2>
                     <div class="inputWrap">
-
-                        {!! Form::select('have_car',['Yes'=>'Yes','No'=>'No'],null,['id'=>'main-if',
-                        'class'=>'formSelect',
-                        'placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class'=>'formSelect','id'=>'main-if'];
+                        if (is_null($carersProfile->have_car))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('have_car',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                     </div>
                     @if ($errors->has('have_car'))
                         <span class="help-block"><strong>{{ $errors->first('have_car') }}</strong></span>
@@ -105,7 +113,7 @@
 
 
 
-            <div class="formField hiding2" style="display: none">
+            <div class="formField hiding" style="display: none">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
                   Car insurance Photo
@@ -128,13 +136,13 @@
                 </div>
             </div>
 
-            <div class="formField hiding2" style="display: none">
+            <div class="formField hiding" style="display: none">
                 <h2 class="formLabel questionForm__label">
 
-                 Car insurance Number
+                    Car Insurance Policy Number
 
                 </h2>
-                {!! Form::text('car_insurance_number',null,['class'=>'formInput','placeholder'=>'Car insurance number']) !!}
+                {!! Form::text('car_insurance_number',null,['class'=>'formInput','placeholder'=>'Car insurance number','maxlength'=>'20']) !!}
                 @if ($errors->has('car_insurance_number'))
                     <span class="help-block">
                                         <strong>{{ $errors->first('car_insurance_number') }}</strong>
@@ -142,20 +150,36 @@
                 @endif
             </div>
 
+            <div class="formField hiding" style="display: none">
+                <h2 class="formLabel questionForm__label">
+                 Valid until
+
+                </h2>
+
+                @if($carersProfile->car_insurance_valid_until === "01/01/1970")
+                    <input name="car_insurance_valid_until" id="datepicker_insurance" class="profileField__input" placeholder="Valid until date" type="text">
+                @else
+                    {!! Form::text('car_insurance_valid_until',null,['id'=>'datepicker_insurance','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
+                @endif
+
+            </div>
 
 
 
 
-
-                <div class="formField hiding2" style="display: none">
+                <div class="formField hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Would you be interested in using your car to transport clients to the shops or for short trips?<span>*</span>
                     </h2>
                     <div class="inputWrap">
-
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['class'=>'formSelect','id'=>'register_use_car'];
+                        if (is_null($carersProfile->use_car))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
                         {!! Form::select('use_car',['Yes'=>'Yes','No'=>'No'],null,
-                        ['id'=>'register_use_car','class'=>'formSelect',
-                        'placeholder'=>'Please select']) !!}
+                        $atrr) !!}
                     </div>
 
                     @if ($errors->has('use_car'))

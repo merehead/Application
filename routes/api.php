@@ -21,4 +21,3 @@ Route::put('/document/{document}','DocumentsController@update')->name('UpdateDoc
 Route::delete('/document/{document}','DocumentsController@destroy')->name('DeleteDocument');
 Route::get('/document/{document}','DocumentsController@getDocument')->name('GetDocument');
 Route::get('/document/{document}/preview','DocumentsController@getPreview')->name('GetDocument');
-Route::post('/booking','Bookings\BookingsController@create');

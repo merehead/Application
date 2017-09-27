@@ -16,7 +16,13 @@
                         Does {{$userNameForSite}} require any assistance in taking medication / treatments? <span>*</span>
                     </h2>
                     <div class="inputWrap">
-                        {!! Form::select('assistance_in_medication',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['id'=>'sometimes-if','class'=>'formSelect','placeholder'=>'Please select']) !!}
+                        <?php
+                        if (isset($atrr)) unset($atrr);
+                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        if (is_null($serviceUserProfile->assistance_in_medication))
+                            $atrr['placeholder'] = 'Please select';
+                        ?>
+                        {!! Form::select('assistance_in_medication',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('assistance_in_medication'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('assistance_in_medication') }}</strong>
@@ -30,7 +36,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('in_medication_detail',null,['class'=>'formArea ','placeholder'=>'Detail']) !!}
+                        {!! Form::textarea('in_medication_detail',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
                         @if ($errors->has('in_medication_detail'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('in_medication_detail') }}</strong>

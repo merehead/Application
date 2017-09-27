@@ -1,3 +1,4 @@
+
 <section class="mainSection">
     <div class="container">
         <div class="breadcrumbs">
@@ -5,12 +6,12 @@
                 Home
             </a>
             <span class="breadcrumbs__arrow">&gt;</span>
-            <a href="{{route('ServiceUserSetting',['serviceUserProfile'=>$serviceUsersProfile])}}" class="breadcrumbs__item">
+            <a href="{{route('ServiceUserSetting',['serviceUserProfile'=>$serviceUsers])}}" class="breadcrumbs__item">
                 My profile
             </a>
             <span class="breadcrumbs__arrow">&gt;</span>
-            <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUsersProfile])}}" class="breadcrumbs__item">
-                {{$carerProfile->family_name}} {{$carerProfile->first_name}}
+            <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUsers->id])}}" class="breadcrumbs__item">
+                {{$serviceUsers->family_name}} {{$serviceUsers->first_name}}
             </a>
         </div>
 
@@ -27,17 +28,18 @@
                     <div class="profileMain">
                         <div class="carer">
                             <div class="profileInfo">
-                                <div class="profilePhoto  ">
-                                    <img src="./dist/img/profile8.jpg" alt="">
+                                <div class="profilePhoto profilePhoto2 ">
+                                    <img id="profile_photo" src="/img/service_user_profile_photos/{{$serviceUsers->id}}.png"
+                                         onerror="this.src='/img/no_photo.png'" alt="avatar">
+
                                 </div>
                                 <div class="profileInfo__item">
                                     <h2 class="profileName profileName--big">
-                                        bob m.
+                                        {{$serviceUsers->family_name}} {{$serviceUsers->first_name}}
                                     </h2>
 
                                     <p>
-                                        Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran ende salutandi no
-                                        per. Est eu pertinaciaen delacrue
+                                        {{$serviceUsers->one_line_about}}
                                     </p>
                                 </div>
                             </div>
@@ -51,11 +53,11 @@
                                 <div class="locationBox">
                                     <p class="location">
                                         <span class="location__title">town/city</span>
-                                        <span class="location__value">MANCHESTER</span>
+                                        <span class="location__value">{{$serviceUsers->town}}</span>
                                     </p>
                                     <p class="location">
                                         <span class="location__title">post code</span>
-                                        <span class="location__value">WA14 5GR</span>
+                                        <span class="location__value">{{$serviceUsers->postcode}}</span>
                                     </p>
                                 </div>
                             </div>
@@ -80,10 +82,7 @@
             </div>
             <div class="extraRow">
                 <div class="userAbout">
-                    <p>Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran ende salutandi no per. Est eu
-                        pertinaciaen delacrue instructiol vel eu natum vedi idqran ende salutandi no per. Lorem ipsum
-                        dolor sit amet, ea sit cetero assusamus, a idqran... ende salutandi no per. Est eu pertinaciaen
-                        delacrue instructiol vel eu natum vedi idqran ende salutandi no per.</p>
+                    <p></p>
                 </div>
 
                 <div class="userBox">
@@ -93,40 +92,17 @@
                     <div class="userContainer">
                         <div class="serviceRow">
                             <div class="serviceColumn serviceColumn--typeCare">
+                                @foreach($typeCare as $type)
                                 <p class="userOption userOption--less-padding">
-                                    Single/ Regular visits
+                                    {{$type->name}}
                                 </p>
-                                <p class="userOption userOption--less-padding">
-                                    Live in care
-                                </p>
-                                <p class="userOption userOption--less-padding">
-                                    Respite care
-                                </p>
+                                    @if($loop->iteration%3==0)
                             </div>
                             <div class="serviceColumn serviceColumn--typeCare">
-                                <p class="userOption userOption--less-padding">
-                                    Personal Care
-                                </p>
-                                <p class="userOption userOption--less-padding">
-                                    Housekeeping
-                                </p>
-                                <p class="userOption userOption--less-padding">
-                                    Food preparation
-                                </p>
-                            </div>
-                            <div class="serviceColumn serviceColumn--typeCare">
-                                <p class="userOption userOption--less-padding">
-                                    Dressings and Wound
-                                </p>
-                                <p class="userOption ">
-                                    Management
-                                </p>
-                                <p class="userOption userOption--less-padding">
-                                    Companionship Travel / Visits / Excursions
-                                </p>
+                                @endif
+                                @endforeach
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="userBox">
@@ -141,105 +117,24 @@
                       Conditions
                     </span>
                                 </h2>
-                                <div class="serviceRow">
-                                    <div class="serviceColumn serviceColumn--midSize">
-                                        <p class="userOption">
-                                            Mental / Psychological conditions:
-                                        </p>
-                                    </div>
-                                    <div class="serviceColumn">
+                                @foreach($serviceUserConditions as $serviceRow)
+                                    <div class="serviceRow">
+                                        <div class="serviceColumn serviceColumn--midSize">
+
+                                            <p class="userOption">
+                                                {{$serviceRow->name}}
+                                            </p>
+                                        </div>
+                                        <div class="serviceColumn">
                         <span class="serviceValue ">
                          yes
                        </span>
-                                        <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
+                                            <span class="serviceValue serviceValue--comment ">
+                         {{$serviceUsers->other_behaviour}}
                        </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="serviceRow">
-                                    <div class="serviceColumn serviceColumn--midSize">
-                                        <p class="userOption">
-                                            Deafness / Serious hearing impairment:
-                                        </p>
-                                    </div>
-                                    <div class="serviceColumn ">
-                           <span class="serviceValue ">
-                         yes
-                       </span>
-                                        <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
-                                    </div>
-                                </div>
-                                <div class="serviceRow">
-                                    <div class="serviceColumn serviceColumn--midSize">
-                                        <p class="userOption">
-                                            Physical disabilities which require mobility aids:
-                                        </p>
-                                    </div>
-                                    <div class="serviceColumn">
-                           <span class="serviceValue ">
-                         yes
-                       </span>
-                                        <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
-                                    </div>
-                                </div>
-                                <div class="serviceRow">
-                                    <div class="serviceColumn serviceColumn--midSize">
-                                        <p class="userOption">
-                                            Blindness / Serious visual impairment:
-                                        </p>
-                                    </div>
-                                    <div class="serviceColumn">
-                           <span class="serviceValue ">
-                         yes
-                       </span>
-                                        <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
-                                    </div>
-                                </div>
-                                <div class="serviceRow">
-                                    <div class="serviceColumn serviceColumn--midSize">
-                                        <p class="userOption">
-                                            Has problems understanding other people:
-                                        </p>
-                                    </div>
-                                    <div class="serviceColumn">
-                       <span class="serviceValue">
-                         yes
-                       </span>
-                                        <span class="serviceValue serviceValue--comment">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
-                                    </div>
-                                </div>
-                                <div class="serviceRow">
-                                    <div class="serviceColumn serviceColumn--midSize">
-                                        <p class="userOption">
-                                            Long Term Medical Conditions:
-                                        </p>
-                                    </div>
-                                    <div class="serviceColumn">
-                       <span class="serviceValue">
-                         yes
-                       </span>
-                                    </div>
-                                </div>
-                                <div class="serviceRow">
-                                    <div class="serviceColumn serviceColumn--midSize">
-                                        <p class="userOption">
-                                            What long term health conditions does the Service User have?
-                                        </p>
-                                    </div>
-                                    <div class="serviceColumn">
-                        <span class="serviceValue serviceValue--comment">
-                       13 years
-                       </span>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
 
                             <div class="userContainer">
@@ -256,10 +151,10 @@
                                     </div>
                                     <div class="serviceColumn">
                            <span class="serviceValue ">
-                         yes
+                         {{$serviceUsers->assistance_with_personal_hygiene}}
                        </span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
+                                                  {{$serviceUsers->assistance_with_personal_hygiene_detail}}
                        </span>
                                     </div>
                                 </div>
@@ -271,10 +166,10 @@
                                     </div>
                                     <div class="serviceColumn ">
                           <span class="serviceValue ">
-                         yes
+                              {{$serviceUsers->appropriate_clothes}}
                        </span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
+                         {{$serviceUsers->appropriate_clothes_assistance_detail}}
                        </span>
                                     </div>
                                 </div>
@@ -286,10 +181,10 @@
                                     </div>
                                     <div class="serviceColumn">
                           <span class="serviceValue ">
-                         yes
+                         {{$serviceUsers->appropriate_clothes}}
                        </span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
+                        {{$serviceUsers->appropriate_clothes_assistance_detail}}
                        </span>
                                     </div>
                                 </div>
@@ -301,10 +196,10 @@
                                     </div>
                                     <div class="serviceColumn">
                              <span class="serviceValue ">
-                         yes
+                         {{$serviceUsers->assistance_getting_dressed}}
                        </span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
+                         {{$serviceUsers->assistance_getting_dressed_detail}}
                        </span>
                                     </div>
                                 </div>
@@ -316,10 +211,10 @@
                                     </div>
                                     <div class="serviceColumn">
                            <span class="serviceValue ">
-                         yes
+                         {{$serviceUsers->assistance_with_bathing}}
                        </span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
+                         {{$serviceUsers->assistance_with_bathing}}
                        </span>
 
                                     </div>
@@ -332,10 +227,10 @@
                                     </div>
                                     <div class="serviceColumn">
                            <span class="serviceValue ">
-                         yes
+                         {{$serviceUsers->managing_toilet_needs}}
                        </span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
+                         {{$serviceUsers->managing_toilet_needs_detail}}
                        </span>
                                     </div>
                                 </div>
@@ -347,10 +242,10 @@
                                     </div>
                                     <div class="serviceColumn">
                            <span class="serviceValue ">
-                         yes
+                         {{$serviceUsers->mobilising_to_toilet}}
                        </span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
+                         {{$serviceUsers->mobilising_to_toilet_detail}}
                        </span>
                                     </div>
                                 </div>
@@ -362,10 +257,10 @@
                                     </div>
                                     <div class="serviceColumn">
                           <span class="serviceValue ">
-                         yes
+                         {{$serviceUsers->cleaning_themselves}}
                        </span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
+                          {{$serviceUsers->cleaning_themselves_detail}}
                        </span>
                                     </div>
                                 </div>

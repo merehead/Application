@@ -160,6 +160,8 @@
                 I like to be called <span class="requireIco">*</span>
               </span>
         </h2>
-        <?php echo Form::text('like_name',null,['class'=>'profileField__input','placeholder'=>'I like to be called']); ?>
+
+        <?php echo Form::text('like_name',null,['class'=>'profileField__input','placeholder'=>'I like to be called','maxlength'=>'20']); ?>
+
     </div>
 </div>

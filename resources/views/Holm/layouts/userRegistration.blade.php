@@ -17,21 +17,26 @@
     <link rel="stylesheet" href="{{asset('css/main.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/customize.css')}}">
     <link rel="stylesheet" href="{{asset('css/cupertino/jquery-ui.min.css')}}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 </head>
 <body>
 @yield('header')
 @yield('content')
 @yield('footer')
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 <!-- <script src="{{asset('js/plupload.full.min.js')}}"></script> -->
+<script src="{{asset('js/jquery.autocomplete.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
 @yield('modals')
 
-<script src="{{asset('js/jquery-ui.min.js')}}"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+
 <script>
 
     $('.footerSocial a, .headerSocial a').click(function (e) {
@@ -59,9 +64,9 @@
             changeYear: true,
             dateFormat: "dd/mm/yy",
             showAnim: "slideDown",
-            minDate: "-70Y",
+            minDate: "-120Y",
             maxDate: "-18Y",
-            yearRange: "-70:+0"
+            yearRange: "-120:+0"
         });
     });
 
@@ -72,9 +77,9 @@
             changeYear: true,
             dateFormat: "dd/mm/yy",
             showAnim: "slideDown",
-            minDate: "-4Y",
-            maxDate: "+0D",
-            yearRange: "-2:0"
+            minDate: "-2Y",
+            maxDate: "-1D",
+            yearRange: "-2:+2"
         });
     });
 
@@ -92,6 +97,17 @@
 
     $( function() {
         $( "#datepicker_driver_licence" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"dd/mm/yy",
+            showAnim:"slideDown",
+            minDate: "+0D",
+            maxDate: "+50Y",
+            yearRange: "0:+50"
+        });
+    } );
+    $( function() {
+        $( "#datepicker_insurance" ).datepicker({
             changeMonth: true,
             changeYear: true,
             dateFormat:"dd/mm/yy",
@@ -244,7 +260,21 @@
             }
         });
     });
-
+    $(function () {
+        $("#sometimes-if2").change(function () {
+            if ($(this).val() != "0") {
+                if ($(this).val() == 'Yes') {
+                    $(".sometimes_hiding2").show()
+                }
+                if ($(this).val() == 'No') {
+                    $(".sometimes_hiding2").hide()
+                }
+                if ($(this).val() == 'Sometimes') {
+                    $(".sometimes_hiding2").show()
+                }
+            }
+        });
+    });
     $(function () {
         $("#sometimes-noif").change(function () {
             if ($(this).val() != "0") {
