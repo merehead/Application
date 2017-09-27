@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+@if(!empty($carerProfile) && Auth::check())
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -11,6 +12,7 @@
         $carer_profile.find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
     });
 </script>
+
 <div id="message-carer" class="modalWrapper modal fade">
     <div class="customModal">
         <div class="message">
@@ -203,3 +205,4 @@
     </div>
 
 </div>
+    @endif
