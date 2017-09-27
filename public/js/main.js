@@ -631,7 +631,7 @@ $(document).ready(function () {
 
     });
 
-    $(function () {
+
         $("#datepicker_when_start").datepicker({
             //changeMonth: true,
             //changeYear: true,
@@ -641,6 +641,30 @@ $(document).ready(function () {
             maxDate: "+20Y",
             yearRange: "0:+10"
         });
+
+
+    $('#timepicker1').timepicker({
+        timeFormat: 'h:mm p',
+        interval: 30,
+        //minTime: '10',
+        //maxTime: '6:00pm',
+        //defaultTime: '18',
+        startTime: '18:00',
+        dynamic: true,
+        dropdown: true,
+        scrollbar: true
+    });
+
+    $('#timepicker2').timepicker({
+        timeFormat: 'h:mm p',
+        interval: 30,
+        //minTime: '10',
+        //maxTime: '6:00pm',
+        //defaultTime: '18',
+        startTime: '18:00',
+        dynamic: true,
+        dropdown: true,
+        scrollbar: true
     });
 
     $(".allTime").click(function () {
@@ -1725,8 +1749,13 @@ $(document).ready(function () {
     // -- PROFILE RATING -------
 
     $('.profileRating__item').on('click', function() {
+      var reviewForm = $('form.reviewForm')
       var raiting = $(this).parent().children()
+
+      var value = $(this).attr('id').split('_')[0]
       var id = $(this).attr('id').split('_')[1]
+
+      reviewForm.find("input[name='"+value+"']").val(id)
 
       raiting.removeClass('active')
       $.each(raiting, function(i, elem) {

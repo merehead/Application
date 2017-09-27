@@ -39,8 +39,9 @@
                         <div class="needCareContainer">
                             <div class="needCare btn-group" data-toggle="buttons"
                                  data-html="Service_user_Public_profile_page">
+                                @php($i = 0)
                                 @foreach(Auth::user()->userPurchaserProfile->serviceUsers as $serviceUser)
-
+                                    @php(++$i)
                                     @if(!$serviceUser->isDeleted())
 
                                         @if(strlen($serviceUser->first_name)>0)
@@ -51,7 +52,7 @@
                                                class="needCare__item centeredLink btn btn-default">
                                                 {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
                                                 <input type="radio" id="q{{$serviceUser->id}}" name="service_user_id"
-                                                       value="{{$serviceUser->id}}"/>
+                                                       value="{{$serviceUser->id}}" {{$i == 1 ? 'checked' : ''}}/>
                                             </a>
                                         @endif
                                     @endif
@@ -74,7 +75,7 @@
                                 @foreach($typeCareAll as $care)
                                     <div class="checkBox_item">
 
-                                        {!! Form::checkbox('assistance_types[]', $care->id, null,
+                                        {!! Form::checkbox('bookings[0][assistance_types][]', $care->id, null,
                                                     array('class' => 'customCheckbox ','id'=>'assistance_types'.$care->id)) !!}
                                         <label for="assistance_types{{$care->id}}">{{$care->name}}</label>
                                     </div>
@@ -86,68 +87,96 @@
                               <span class="ordinaryTitle__text ordinaryTitle__text--smaller rtext">
                                 select date and time
                              </span>
-                            </h2>
-                            <div class="messageInputs datetime">
-                                <div class="messageInputs__field messageDate">
-                                    <input type="text" name="appointments[]['date_start']"
-                                           class="messageInput datepicker datepicker_message" placeholder="06.06.2017 ">
+                        </h2>
+                        {{--<div class="messageInputs datetime nhide">--}}
+                            {{--<div class="messageInputs__field messageDate">--}}
+                                {{--<input type="text" name="bookings[0][appointments][0]['date_start']" class="messageInput datepicker"--}}
+                                       {{--placeholder="06.06.2017 ">--}}
 
-                                    <a href="#" class="messageIco centeredLink">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="messageInputs__field messageDate">
-                                    <input type="text" class="messageInput datepicker datepicker_message"
-                                           name="appointments[]['date_end']" placeholder=" 08.08.2017">
-                                    <a href="#" class="messageIco centeredLink">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="messageInputs__field messageTime ">
-                                    <input type="text" class="messageInput timepicker_message"
-                                           name="appointments[]['time_end']" placeholder="12:00 AM">
-                                    <a href="#" class="messageIco centeredLink">
-                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="messageInputs__field messageTime ">
-                                    <input type="text" class="messageInput timepicker_message"
-                                           name="appointments[]['time_end']" placeholder="5:00 PM">
-                                    <a href="#" class="messageIco centeredLink">
-                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                    </a>
-                                </div>
+                                {{--<a href="#" class="messageIco centeredLink">--}}
+                                    {{--<i class="fa fa-calendar" aria-hidden="true"></i>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                            {{--<div class="messageInputs__field messageDate">--}}
+                                {{--<input type="text" class="messageInput datepicker" name="bookings[0][appointments][0]['date_end']"--}}
+                                       {{--placeholder=" 08.08.2017">--}}
+                                {{--<a href="#" class="messageIco centeredLink">--}}
+                                    {{--<i class="fa fa-calendar" aria-hidden="true"></i>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                            {{--<div class="messageInputs__field messageTime ">--}}
+                                {{--<input type="text" class="messageInput timepicker_message"--}}
+                                       {{--name="bookings[0][appointments][0]['time_end']" placeholder="12:00 AM - 5:00 PM">--}}
+                                {{--<a href="#" class="messageIco centeredLink">--}}
+                                    {{--<i class="fa fa-clock-o" aria-hidden="true"></i>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                            {{--<div class="messageInputs__field messageTime ">--}}
+                                {{--<input type="text" class="messageInput timepicker_message"--}}
+                                       {{--name="bookings[0][appointments][0]['time_end']" placeholder="12:00 AM - 5:00 PM">--}}
+                                {{--<a href="#" class="messageIco centeredLink">--}}
+                                    {{--<i class="fa fa-clock-o" aria-hidden="true"></i>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        <div class="messageInputs datetime ">
+                            <div class="messageInputs__field messageDate">
+                                <input type="text" name="bookings[0][appointments][0][date_start]"
+                                       class="messageInput datepicker datepicker_message" placeholder="06.06.2017 ">
+
+                                <a href="#" class="messageIco centeredLink">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="messageInputs__field messageDate">
+                                <input type="text" class="messageInput datepicker datepicker_message"
+                                       name="bookings[0][appointments][0][date_end]" placeholder=" 08.08.2017">
+                                <a href="#" class="messageIco centeredLink">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="messageInputs__field messageTime ">
+                                <input type="text" class="messageInput timepicker_message"
+                                       name="bookings[0][appointments][0][time_from]" placeholder="12:00 AM - 5:00 PM" value="14.30">
+                                <a href="#" class="messageIco centeredLink">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="messageInputs__field messageTime ">
+                                <input type="text" class="messageInput timepicker_message"
+                                       name="bookings[0][appointments][0][time_to]" placeholder="12:00 AM - 5:00 PM"  value="20.30">
+                                <a href="#" class="messageIco centeredLink">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </div>
-
-                        <div class="messageGroup ctime">
-                            <h2 class="ordinaryTitle">
-                                <span class="ordinaryTitl__text">How often</span>
-                            </h2>
-                            <div class="messageCheckbox checktime">
-                                <div class="checkBox_item">
-                                    <input type="checkbox" name="periodicity[]" value="Daily" class="customCheckbox"
-                                           id="boxD1">
-                                    <label for="boxD1">Daily</label>
-                                </div>
-                                <div class="checkBox_item">
-                                    <input type="checkbox" name="periodicity[]" value="Weekly" class="customCheckbox"
-                                           id="boxD2">
-                                    <label for="boxD2">weekly</label>
-                                </div>
-                                <div class="checkBox_item">
-                                    <input type="checkbox" name="periodicity[]" value="Single" class="customCheckbox"
-                                           id="box3">
-                                    <label for="box3">Single</label>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#" class="additionalTime">
-                            <i class="fa fa-clock-o" aria-hidden="true"></i>
-                            add additional time
-                        </a>
-
                     </div>
+                    <div class="messageGroup ">
+                        <h2 class="ordinaryTitle">
+                            <span class="ordinaryTitl__text">How often</span>
+                        </h2>
+                        <div class="messageCheckbox checktime">
+                            <div class="checkBox_item">
+                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Daily" class="customCheckbox"
+                                       id="boxD1">
+                                <label for="boxD1">Daily</label>
+                            </div>
+                            <div class="checkBox_item">
+                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Weekly" class="customCheckbox"
+                                       id="boxD2">
+                                <label for="boxD2">weekly</label>
+                            </div>
+                            <div class="checkBox_item">
+                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single" class="customCheckbox"
+                                       id="box3">
+                                <label for="box3">Single</label>
+                            </div>                        </div>
+                    </div>
+                    <a href="#" class="additionalTime">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        add additional time
+                    </a>
+
                     <div class="moreBtn">
                         <a href="#" class="moreBtn__item moreBtn__item--withIco centeredLink ">
                             <span>+</span> add more bookings

@@ -28,22 +28,26 @@ class BookingsController extends FrontController implements Constants
         else
             $bookings = $request->bookings;
 
+//        dd($bookings);
+
 
         foreach ($bookings as $booking_item){
-            $serviceUser = User::find($booking_item['service_user_id']);
+            $serviceUser = User::find($request->service_user_id);
             $booking = Booking::create([
                 'purchaser_id' => $purchaser->id,
                 'service_user_id' => $serviceUser->id,
                 'carer_id' => $carer->id,
-                'status_id' => 2
+                'status_id' => 2,
+                'carer_status_id' => 2,
+                'purchaser_status_id' => 1,
             ]);
 
 
 
             foreach ($booking_item['appointments'] as $appointment_item){
                 $booking->appointments()->create([
-                    'date_start' => $appointment_item['date_start'],
-                    'date_end' => $appointment_item['date_end'],
+                    'date_start' => date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d"),
+                    'date_end' => date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d"),
                     'time_from' => $appointment_item['time_from'],
                     'time_to' => $appointment_item['time_to'],
                     'periodicity' => $appointment_item['periodicity'],
