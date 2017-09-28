@@ -41,15 +41,11 @@ From £ {{random_int(8,15)}}</span><span class="hourPrice__timing">/hour</span>
         <a href="" class="payment__item">
             <img src="/img/pay1.png" alt="">
         </a>
-        <a href="" class="payment__item">
-            <img src="/img/pay2.png" alt="">
-        </a>
+
         <a href="" class="payment__item">
             <img src="/img/pay3.png" alt="">
         </a>
-        <a href="" class="payment__item">
-            <img src="/img/pay4.png" alt="">
-        </a>
+
     </div>
 </div>
 <div class="profileSide__title">

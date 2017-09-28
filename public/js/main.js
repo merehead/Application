@@ -1147,7 +1147,7 @@ $(document).ready(function () {
 //------------Google Address search -----------------------
     if ($.isFunction($.fn.autocomplete)) {
 
-        $('input[name="postcode"],input[name="address_line1"]').autocomplete({
+        $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').autocomplete({
             serviceUrl: '/address/',
             params: {query: $('input[name="postcode"]').val()},
             minChars: 1,
@@ -1156,10 +1156,12 @@ $(document).ready(function () {
                     $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
                     $('input[name="town"]').val(suggestion.data.terms[1].value);
                     $('input[name="postcode"]').val(suggestion.data.terms[2].value);
+                    $('input[name="postCode"]').val(suggestion.data.terms[2].value);
                 }else{
                     $('input[name="address_line1"]').val('');
                     $('input[name="town"]').val(suggestion.data.terms[0].value);
                     $('input[name="postcode"]').val(suggestion.data.terms[1].value);
+                    $('input[name="postCode"]').val(suggestion.data.terms[1].value);
                 }
             }
         });
