@@ -57,11 +57,11 @@
                 @foreach($newBookings as $booking)
                     <div class="bookingCard__body bookInfo">
                         <div class="bookInfo__profile">
-                            <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
-                                <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
+                            <a href="{{$booking->bookingServiceUser()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
+                                <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" alt="">
                             </a>
                             <div class="bookInfo__text">
-                                <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->full_name}}</a></p>
+                                <p><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->full_name}}</a> booked you</p>
                                 <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                             </div>
 
@@ -108,11 +108,11 @@
                 @foreach($inProgressBookings as $booking)
                     <div class="bookingCard__body bookInfo">
                         <div class="bookInfo__profile">
-                            <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
-                                <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
+                            <a href="{{$booking->bookingServiceUser()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
+                                <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" alt="">
                             </a>
                             <div class="bookInfo__text">
-                                <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->full_name}}</a></p>
+                                <p><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->full_name}}</a> booked you</p>
                                 <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                             </div>
 
@@ -164,11 +164,11 @@
                 @foreach($completedBookings as $booking)
                     <div class="bookingCard__body bookInfo">
                         <div class="bookInfo__profile">
-                            <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
-                                <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
+                            <a href="{{$booking->bookingServiceUser()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
+                                <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" alt="">
                             </a>
                             <div class="bookInfo__text">
-                                <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->full_name}}</a></p>
+                                <p><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->full_name}}</a> booked you</p>
                                 <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                             </div>
 
