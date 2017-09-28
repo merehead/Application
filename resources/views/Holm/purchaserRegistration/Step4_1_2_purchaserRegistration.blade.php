@@ -38,9 +38,9 @@
                         <div class="addContainer">
 
                           @if(empty($purchasersProfileID))
-                            <input name="{{$serviceUserProfile->id}}" class="pickfiles_profile_photo" accept="jpg,.jpeg,.png" type="file" />
+                            <input name="{{$serviceUserProfile->id}}" class="pickfiles_profile_photo" accept=".jpg,.jpeg,.png" type="file" />
                           @else
-                            <input name="{{$purchasersProfile->serviceUsers->first()->id}}" class="pickfiles_profile_photo" accept="jpg,.jpeg,.png" type="file" />
+                            <input name="{{$purchasersProfile->serviceUsers->first()->id}}" class="pickfiles_profile_photo" accept=".jpg,.jpeg,.png" type="file" />
                           @endif
 
                           <div class="pickfiles_img"></div>

@@ -22,7 +22,7 @@
                         </h2>
 
                         <div class="addContainer">
-                          <input class="pickfiles_profile_photo" accept="jpg,.jpeg,.png" type="file" />
+                          <input class="pickfiles_profile_photo" accept=".jpg,.jpeg,.png" type="file" />
                           <div class="pickfiles_img"></div>
 
                           <div id="profile_photo" class="pickfiles_img" name='img/profile_photos/{{$purchasersProfile->id}}.png'
