@@ -4,6 +4,7 @@ var has_error_profile_form=false;
 var error_mark = '';
 var arrFiles = [];
 var arrFilesProfilePhoto = [];
+var ProfilePhotoSeviceUser = [];
 var arrForDeleteIDProfile = [];
 //-------------GoogleMaps ----------------------
 var geocoder;
@@ -346,6 +347,24 @@ $(document).ready(function () {
         }
     });
 
+    $('input[name="like_name"]').on('change',function(){
+        var text = $(this).val();
+        $('.line_about').html('ONE LINE ABOUT '+text);
+    });
+    // $('input[name="mobile_number"]').on('keyup', function () {
+    //     var val=$(this).val();
+    //     var that = this;
+    //     $('.error-onlyNumber1').remove();
+    //
+    //     var errorText = '<span class="help-block error-onlyNumber1">\n' +
+    //         '             <strong>Wrong input. Format: 07999999999</strong>\n' +
+    //         '          </span>';
+    //     if (val.match(/^07[0-9]{9}$/)) {
+    //         $(that).before(errorText);
+    //         that.value = that.value.replace(/^07[0-9]$/, '07');
+    //     }
+    // });
+
     // Иван функция уменшает автоматом шрифт у имени пользователя в шапке
     if ($('.profileName').lenght > 0)
         scale($('.profileName').parent()[0]);
@@ -613,7 +632,7 @@ $(document).ready(function () {
 
     });
 
-    $(function () {
+
         $("#datepicker_when_start").datepicker({
             //changeMonth: true,
             //changeYear: true,
@@ -623,7 +642,33 @@ $(document).ready(function () {
             maxDate: "+20Y",
             yearRange: "0:+10"
         });
-    });
+
+    if($.isFunction('timepicker')){
+        $('#timepicker1').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            //minTime: '10',
+            //maxTime: '6:00pm',
+            //defaultTime: '18',
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+    }
+    if($.isFunction('timepicker')) {
+        $('#timepicker2').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            //minTime: '10',
+            //maxTime: '6:00pm',
+            //defaultTime: '18',
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+    }
 
     $(".allTime").click(function () {
         $('input.checkboxTimerGroup:checkbox').not(this).prop('checked', this.checked);
@@ -701,27 +746,32 @@ $(document).ready(function () {
             $(".criminal_detail").hide();
         }
     });
+    if($.isFunction('timepicker')) {
+        $('.timepicker_message').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            //minTime: '10',
+            //maxTime: '6:00pm',
+            //defaultTime: '18',
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+    }
 
-    $('.timepicker_message').timepicker({
-        timeFormat: 'h:mm p',
-        interval: 30,
-        //minTime: '10',
-        //maxTime: '6:00pm',
-        //defaultTime: '18',
-        startTime: '18:00',
-        dynamic: true,
-        dropdown: true,
-        scrollbar: true
-    });
+    $('.moreBtn__item').on('click',function(){
 
-    $('a.additionalTime').on('click', function (e) {
-        e.preventDefault();
-        var dlast = $('.datetime').last();
-        var dclone = $(dlast).clone().removeClass('nhide');
-        $(dclone).find('input.datepicker_message').removeClass('hasDatepicker');
-        $(dlast).after(dclone);
-        $('.checktime').last().after($('.checktime').last().clone());
+
+        var dlast = $('.bookings-more').last().clone();
+        $('.moreBtn__item').before(dlast);
+        $('.bookings-more').last().find('.datepicker_message').removeClass("hasDatepicker").removeAttr('id');
+        $('.bookings-more').last().find('.timepicker_message ').removeClass("hasDatepicker").removeAttr('id');
+
         $(".datepicker_message").datepicker({
+            beforeShow: function(input, inst) {
+                inst.dpDiv.css({"z-index":2000});
+            },
             changeMonth: true,
             changeYear: true,
             dateFormat: "dd/mm/yy",
@@ -731,7 +781,55 @@ $(document).ready(function () {
             yearRange: "0:+50"
         });
         $('.timepicker_message').timepicker({
-            timeFormat: 'h:mm p',
+            beforeShow: function(input, inst) {
+                inst.dpDiv.css({"z-index":2000});
+            },
+            timeFormat: 'hh:mm tt',
+            interval: 30,
+            //minTime: '10',
+            //maxTime: '6:00pm',
+            //defaultTime: '18',
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+        return false;
+    });
+
+
+    $(document).on('click','a.additionalTime', function (e) {
+        e.preventDefault();
+        var $that =$(this);
+        var dlast = $('.cdate').last().clone();
+        var clast = $('.ctime').last().clone();
+
+
+        $($that).before(dlast);
+        $($that).before(clast);
+        $('.rtext').last().remove();
+
+        $('.datepicker_message').removeClass("hasDatepicker").removeAttr('id');
+        $('.timepicker_message').removeClass("hasDatepicker").removeAttr('id');
+
+
+        $(".datepicker_message").datepicker({
+            beforeShow: function(input, inst) {
+                inst.dpDiv.css({"z-index":2000});
+            },
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            showAnim: "slideDown",
+            minDate: "+0D",
+            maxDate: "+50Y",
+            yearRange: "0:+50"
+        });
+        $('.timepicker_message').timepicker({
+            beforeShow: function(input, inst) {
+                inst.dpDiv.css({"z-index":2000});
+            },
+            timeFormat: 'hh:mm tt',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',
@@ -955,14 +1053,20 @@ $(document).ready(function () {
 
             if (arrFilesProfilePhoto.length > 0) {
                 var url = '/profile-photo'
-                if (arrFilesProfilePhoto[0].service_user_id) {
-                    url = '/service-user-profile-photo'
-                }
                 axios.post(
                     url,
                     arrFilesProfilePhoto[0]
                 ).then(function (response) {
-                    console.log(response)
+                    // console.log(response)
+                })
+            }
+            if (ProfilePhotoSeviceUser.length > 0) {
+                    url = '/service-user-profile-photo'
+                axios.post(
+                    url,
+                    ProfilePhotoSeviceUser[0]
+                ).then(function (response) {
+                    // console.log(response)
                 })
             }
 
@@ -1040,11 +1144,10 @@ $(document).ready(function () {
 
             return false;
         });
-
 //------------Google Address search -----------------------
     if ($.isFunction($.fn.autocomplete)) {
 
-        $('input[name="postcode"]').autocomplete({
+        $('input[name="postcode"],input[name="address_line1"]').autocomplete({
             serviceUrl: '/address/',
             params: {query: $('input[name="postcode"]').val()},
             minChars: 1,
@@ -1194,10 +1297,12 @@ $(document).ready(function () {
       }else{
         pickfilesDelete(_this)
         arrFiles = arrFiles.filter(function(index) {
+          console.log(index.unique_type, input_name)
           if(index.unique_type !== input_name){
             return index
           }
         })
+        console.log(arrFiles)
       }
     })
 
@@ -1408,6 +1513,8 @@ $(document).ready(function () {
 
     $('.pickfiles_profile_photo').on('change', function () {
 
+      var _this = $(this)
+
       arrFilesProfilePhoto = []
 
       var input_val = $(this).parent().parent().find('.addInfo__input').val('')
@@ -1421,17 +1528,17 @@ $(document).ready(function () {
       reader.addEventListener("load", function() {
 
         if (fileTypes.indexOf(file.type) !== -1) {
-          $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
+          _this.parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
         }else{
           if(wordFileType.indexOf(file.type) !== -1){
-            $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
+            _this.parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
           }
           if(pdfFileType.indexOf(file.type) !== -1){
-            $(this).parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/PDF_logo.png)')
+            _this.parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/PDF_logo.png)')
           }
         }
 
-        $(this).parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
+        _this.parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
 
         file_profile_photo.image = reader.result
         if(this_name){
@@ -1485,22 +1592,29 @@ $(document).ready(function () {
       var reader  = new FileReader()
       reader.addEventListener("load", function() {
 
-        if (fileTypes.indexOf(file.type) !== -1) {
-          $('#profile_photo').attr('src', reader.result)
-          $('.set_preview_profile_photo').attr('src', reader.result)
-        }else{
-          if(wordFileType.indexOf(file.type) !== -1){
-            $('#profile_photo').attr('src', '/img/Word-icon_thumb.png')
-            $('.set_preview_profile_photo').attr('src', '/img/Word-icon_thumb.png')
-          }
-          if(pdfFileType.indexOf(file.type) !== -1){
-            $('#profile_photo').attr('src', '/img/PDF_logo.png')
-            $('.set_preview_profile_photo').attr('src', '/img/PDF_logo.png')
-          }
-        }
+
+      $('#profile_photo').attr('src', reader.result)
+      $('.set_preview_profile_photo').attr('src', reader.result)
 
         file_profile_photo.image = reader.result
         arrFilesProfilePhoto.push(file_profile_photo)
+
+      }, false)
+      reader.readAsDataURL(file)
+    })
+    $('.pickfiles_profile_photo_service_user--change').on('change', function () {
+      var _this = $(this)
+
+      ProfilePhotoSeviceUser = []
+      var file = $(this)[0].files[0]
+
+      var reader  = new FileReader()
+      reader.addEventListener("load", function() {
+
+      $('.profile_photo_service_user').attr('src', reader.result)
+
+      file_profile_photo.image = reader.result
+      ProfilePhotoSeviceUser.push(file_profile_photo)
 
       }, false)
       reader.readAsDataURL(file)
@@ -1538,7 +1652,6 @@ $(document).ready(function () {
           var p = '.' + profileRow+index[0].toLowerCase()
           var count = 3 - index[1].length
 
-          // if(index[1].length >= 3){
             $(p).html('')
             index[1].map(function(index2, i2) {
               $(p).append(
@@ -1553,52 +1666,17 @@ $(document).ready(function () {
                     '<a class="add add--moreHeight"></a>'+
                   '</div>'+
                   '<div class="addInfo">'+
-                      '<input disabled" type="text"'+
+                      '<input disabled type="text" placeholder="Name"'+
                       'value="'+(index2.title !== 'undefined' ? index2.title : "")+'"'+
                       'name="'+index[0].toLowerCase()+'-'+i+'" class="addInfo__input profileField__input--greyBg">'+
                   '</div>'+
                 '</div>'
-                // `<div class="profileField profileField_q profileField_h">
-                //   ${
-                //     i2 === 0 ?
-                //     `<h2 class="profileField__title ordinaryTitle">
-                //       <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                //        ${index[0].toLowerCase().split('_').join(' ')}s
-                //       </span>
-                //     </h2>` : ''
-                //   }
-                  // <div class="addContainer">
-                  //   ${func(index[0], index2, i)}
-                  //   <a class="add add--moreHeight"></a>
-                  // </div>
-                //   <div class="addInfo">
-                      // <input disabled value="${index2.title !== 'undefined' ? index2.title : ""}"
-                      // type="text" name="${index[0].toLowerCase()}-${i}" class="addInfo__input profileField__input--greyBg" placeholder="Name">
-                //   </div>
-                // </div>`
               )
             })
             if(count >= 0){
               count === 0 ? count += 1 : ''
               for (var i = 0; i < count; i++) {
                 $(p).append(
-                  // '<div class="profileField profileField_q profileField_h">'+
-                  //   '<h2 class="profileField__title ordinaryTitle">'+
-                  //     '<span class="ordinaryTitle__text ordinaryTitle__text--smaller">'+
-                  //       ( i2 === 0 ? index[0].toLowerCase().split('_').join(' ') + 's' : '') +
-                  //     '</span>'+
-                  //   '</h2>'+
-                  //   '<div class="addContainer">'+
-                  //     func(index[0], index2, i)+
-                  //     '<a class="add add--moreHeight"></a>'+
-                  //   '</div>'+
-                  //   '<div class="addInfo">'+
-                  //       '<input disabled" type="text"'+
-                  //       'value="'+(index2.title !== 'undefined' ? index2.title : "")+'"'+
-                  //       'name="'+index[0].toLowerCase()+'-'+i+'" class="addInfo__input profileField__input--greyBg">'+
-                  //   '</div>'+
-                  // '</div>'
-                  // `
                   '<div class="profileField profileField_q">'+
                     '<div class="addContainer">'+
                       '<input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
@@ -1688,8 +1766,13 @@ $(document).ready(function () {
     // -- PROFILE RATING -------
 
     $('.profileRating__item').on('click', function() {
+      var reviewForm = $('form.reviewForm')
       var raiting = $(this).parent().children()
+
+      var value = $(this).attr('id').split('_')[0]
       var id = $(this).attr('id').split('_')[1]
+
+      reviewForm.find("input[name='"+value+"']").val(id)
 
       raiting.removeClass('active')
       $.each(raiting, function(i, elem) {

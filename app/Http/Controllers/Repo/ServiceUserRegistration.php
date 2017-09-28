@@ -1195,7 +1195,7 @@ class ServiceUserRegistration
             'have_incontinence' => 'required|in:"Yes","No","Sometimes"',
             'kind_of_incontinence' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|string|max:255',
             'incontinence_wear' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|in:"Yes","No","Sometimes"',
-            'incontinence_products_stored' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|string|max:255',
+            'incontinence_products_stored' => 'required_if:incontinence_wear,"Yes","Sometimes"|nullable|string|max:255',
             'choosing_incontinence_products' => 'nullable|in:"Yes","No","Sometimes"',
         ]);
 
@@ -1203,9 +1203,15 @@ class ServiceUserRegistration
 
         $serviceUserProfile->have_incontinence  = $request->input('have_incontinence');
         $serviceUserProfile->kind_of_incontinence  = $request->input('kind_of_incontinence');
-        $serviceUserProfile->incontinence_wear  = $request->input('incontinence_wear');
-        $serviceUserProfile->incontinence_products_stored  = $request->input('incontinence_products_stored');
-        $serviceUserProfile->choosing_incontinence_products  = $request->input('choosing_incontinence_products');
+        if(!isset($serviceUserProfile->have_incontinence) || $serviceUserProfile->have_incontinence == 'No'){
+            $serviceUserProfile->incontinence_wear  = null;
+            $serviceUserProfile->incontinence_products_stored  = null;
+            $serviceUserProfile->choosing_incontinence_products  = null;
+        } else {
+            $serviceUserProfile->incontinence_wear  = $request->input('incontinence_wear');
+            $serviceUserProfile->incontinence_products_stored  = $request->input('incontinence_products_stored');
+            $serviceUserProfile->choosing_incontinence_products  = $request->input('choosing_incontinence_products');
+        }
 
         $serviceUserProfile->update();
 

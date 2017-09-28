@@ -1,4 +1,6 @@
 @include(config('settings.frontTheme').'.purchaserProfiles.Booking.BookingTabHeader')
+<section class="mainSection">
+    <div class="container">
         <div class="justifyContainer justifyContainer--smColumn">
             <div class="bookingNav">
                 <a href="/purchaser-settings/booking/all" class="bookingNav__link centeredLink">
@@ -57,11 +59,11 @@
                     @foreach($newBookings as $booking)
                         <div class="bookingCard__body bookInfo">
                             <div class="bookInfo__profile">
-                                <a href="Service_user_Public_profile_page.html" class="profilePhoto bookInfo__photo">
+                                <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
                                     <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
                                 </a>
                                 <div class="bookInfo__text">
-                                    <p>You booked <a href="Service_user_Public_profile_page.html">{{$booking->bookingCarer()->first()->full_name}}</a></p>
+                                    <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->full_name}}</a></p>
                                     <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                                 </div>
 
@@ -108,11 +110,11 @@
                     @foreach($inProgressBookings as $booking)
                         <div class="bookingCard__body bookInfo">
                             <div class="bookInfo__profile">
-                                <a href="Service_user_Public_profile_page.html" class="profilePhoto bookInfo__photo">
+                                <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
                                     <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
                                 </a>
                                 <div class="bookInfo__text">
-                                    <p>You booked <a href="Service_user_Public_profile_page.html">{{$booking->bookingCarer()->first()->full_name}}</a></p>
+                                    <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->full_name}}</a></p>
                                     <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                                 </div>
 
@@ -164,11 +166,11 @@
                     @foreach($completedBookings as $booking)
                         <div class="bookingCard__body bookInfo">
                             <div class="bookInfo__profile">
-                                <a href="Service_user_Public_profile_page.html" class="profilePhoto bookInfo__photo">
+                                <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
                                     <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
                                 </a>
                                 <div class="bookInfo__text">
-                                    <p>You booked <a href="Service_user_Public_profile_page.html">{{$booking->bookingCarer()->first()->full_name}}</a></p>
+                                    <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->full_name}}</a></p>
                                     <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                                 </div>
 

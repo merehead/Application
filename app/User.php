@@ -152,4 +152,13 @@ class User extends Authenticatable
         return 2000;
     }
 
+    public function getProfileLinkAttribute(){
+        switch ($this->user_type_id){
+            case 1:
+                break;
+            case 3:
+                return '/carer/profile/'.$this->id;
+                break;
+        }
+    }
 }

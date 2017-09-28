@@ -93,7 +93,7 @@ null,['class'=>'profileField__select','readonly','id'=>'criminal_detail','data-e
                 </h2>
 
                 <div class="addContainer">
-                  <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                  <input disabled class="pickfiles" type="file" />
                   <span class="pickfiles-delete">X</span>
 
                   <div id="dbs_certificate_photo" class="pickfiles_img"></div>

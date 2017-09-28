@@ -46,10 +46,9 @@ Route::get('/carer/review/{user_id}', 'CarerController@review')->name('carerRevi
 Route::get('/carer/appointment/{user_id}', 'CarerController@appointment')->name('carerAppointment'); //synonym for
 // ImCarerPage
 
-Route::get('/carer-settings/booking', 'CarerController@booking')->name('carerBooking'); //synonym for ImCarerPage
 //Route::get('/carer-settings/booking/{status}', 'CarerController@bookingFilter')->name('carerBookingStatus'); //synonym for ImCarerPage
 
-Route::get('/carer-settings/profile', 'CarerController@profile')->name('carerPublicProfile'); //synonym for ImCarerPage
+Route::get('/carer-settings/profile/{user_id}', 'CarerController@profile')->name('carerPublicProfile2'); //synonym for ImCarerPage
 Route::get('/carer-settings/booking/{status?}', 'CarerController@bookingFilter')->name('carerBooking'); //synonym for ImCarerPage
 
 
@@ -93,6 +92,7 @@ Route::post('/bookings/{booking}/reject', 'Bookings\BookingsController@reject');
 Route::post('/bookings/{booking}/cancel', 'Bookings\BookingsController@cancel');
 Route::post('/bookings/{booking}/completed', 'Bookings\BookingsController@completed');
 Route::get('/bookings/{booking}/leave_review', 'Bookings\BookingsController@leaveReviewPage');
+Route::post('/bookings/{booking}/review', 'Bookings\BookingsController@createReview');
 
 Route::post('/document/upload','DocumentsController@upload')->name('UploadDocument');
 Route::get('/documents','DocumentsController@GetDocuments')->name('GetDocuments');

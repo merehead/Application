@@ -42,9 +42,8 @@
                     Upload copy of DBS certificate.
                 </h2>
                 <div class="inputWrap addContainer">
-                  <input class="pickfiles" accept=".gif,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                  <input class="pickfiles" type="file" />
                   <span class="pickfiles-delete">X</span>
-                  <div class="pickfiles_img"></div>
 
                   <div id="dbs_certificate_photo" class="pickfiles_img"></div>
                     <a href="#" class="add add--moreHeight">
@@ -58,7 +57,7 @@
                 <div style="display: none" class="addInfo">
                     <input disabled type="text" name="dbs_certificate_photo" class="addInfo__input" placeholder="Name" >
                 </div>
-                
+
 
             </div>
             <div class="formField hiding2" style="display: none">
@@ -91,7 +90,7 @@
                 </h2>
                 <div class="inputWrap">
                     <?php
-                        if (isset($atrr)) unset($atrr);  
+                        if (isset($atrr)) unset($atrr);
                     $atrr = ['class'=>'formSelect','id'=>'main-if'];
                     if (is_null($carersProfile->DBS_use))
                         $atrr['placeholder'] = 'Please select';

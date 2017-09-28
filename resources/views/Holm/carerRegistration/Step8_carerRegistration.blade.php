@@ -75,7 +75,7 @@
                         Please upload photographic proof of your driving licence.
                     </h2>
                     <div class="inputWrap addContainer">
-                      <input class="pickfiles" accept=".jpg,.jpeg,.png,.doc,.docx" type="file" />
+                      <input class="pickfiles" type="file" />
                       <span class="pickfiles-delete">X</span>
                       <div id="driving_licence_photo" class="pickfiles_img"></div>
                         <a href="#" class="add add--moreHeight">
@@ -120,7 +120,7 @@
                 </span>
                 </h2>
                 <div class="inputWrap addContainer">
-                  <input class="pickfiles" accept="jpg,.jpeg,.png" type="file" />
+                  <input class="pickfiles" type="file" />
                   <span class="pickfiles-delete">X</span>
                   <div id="car_insurance_photo" class="pickfiles_img"></div>
                     <a href="#" class="add add--moreHeight">

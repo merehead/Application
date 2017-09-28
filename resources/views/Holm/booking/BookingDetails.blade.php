@@ -25,15 +25,15 @@
         <div class="container">
             <div class="orderInfo">
                 @if($user->user_type_id == 1)
-                    <a href="Service_user_Public_profile_page.html" class="profilePhoto orderInfo__photo">
+                    <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="profilePhoto orderInfo__photo">
                         <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
                     </a>
                     <div class="orderInfo__item orderInfo__item--rightPadding">
                         <h2 class="ordinaryTitle">
-                            <span class="ordinaryTitle__text ordinaryTitle__text--bigger"><a href="Service_user_Public_profile_page.html">{{$booking->bookingCarer()->first()->full_name}}</a></span>
+                            <span class="ordinaryTitle__text ordinaryTitle__text--bigger"><a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->full_name}}</a></span>
                         </h2>
                         <div class="viewProfile">
-                            <a href="Service_user_Public_profile_page.html" class="viewProfile__item centeredLink">
+                            <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="viewProfile__item centeredLink">
                                 view profile
                             </a>
                         </div>
@@ -44,25 +44,25 @@
                             <h2 class="ordinaryTitle">
                                 <span class="ordinaryTitle__text ordinaryTitle__text--bigger">DATE</span>
                             </h2>
-                            <span class="orderOptions__value">15 May 2017</span>
+                            <span class="orderOptions__value">{{\Carbon\Carbon::parse($booking->created_at)->toFormattedDateString()}}</span>
                         </div>
                         <div class="orderOptions">
                             <h2 class="ordinaryTitle">
                                 <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Time</span>
                             </h2>
-                            <span class="orderOptions__value">12:00 PM - 5:00 PM</span>
+                            <span class="orderOptions__value">{{\Carbon\Carbon::parse($booking->created_at)->format("h:i A")}}</span>
                         </div>
                         <div class="orderOptions">
                             <h2 class="ordinaryTitle">
                                 <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Distance</span>
                             </h2>
-                            <span class="orderOptions__value">12 (miles)</span>
+                            <span id="distance" class="orderOptions__value">12 (miles)</span>
                         </div>
                         <div class="orderOptions">
                             <h2 class="ordinaryTitle">
                                 <span class="ordinaryTitle__text ordinaryTitle__text--bigger">By car</span>
                             </h2>
-                            <span class="orderOptions__value">30 (min)</span>
+                            <span id="duration" class="orderOptions__value">30 (min)</span>
                         </div>
                     </div>
                     <div class="orderInfo__map">
@@ -101,13 +101,13 @@
                         <h2 class="ordinaryTitle">
                             <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Distance</span>
                         </h2>
-                        <span class="orderOptions__value">12 (miles)</span>
+                        <span id="distance" class="orderOptions__value">12 (miles)</span>
                     </div>
                     <div class="orderOptions">
                         <h2 class="ordinaryTitle">
                             <span class="ordinaryTitle__text ordinaryTitle__text--bigger">By car</span>
                         </h2>
-                        <span class="orderOptions__value">30 (min)</span>
+                        <span id="duration" class="orderOptions__value">30 (min)</span>
                     </div>
                 </div>
                 <div class="orderInfo__map">
@@ -228,32 +228,38 @@
                 </a> -->
                 <div class="appointmentSliderBox">
                     <div class="appointmentSlider owl-carousel">
-                        <div class="singleAppointment singleAppointment--progress">
-                            <div class="singleAppointment__header">
-                              <span>
-                       #3
-                              </span>
-                                <h2>
-                                    in progress
-                                </h2>
-                            </div>
-                            <div class="singleAppointment__body">
-                                <p>
-                                    <span>Date: </span> 16 june 2017
-                                </p>
-                                <p>
-                                    <span>Time: </span>  13:00 PM - 18:00 PM
-                                </p>
-                                <div class="appointmentBtn">
-                                    <a href="#" class="appointmentBtn__item appointmentBtn__item--compl">
-                                        Completed
-                                    </a>
-                                    <a href="#" class="appointmentBtn__item appointmentBtn__item--rej">
-                                        Rejected
-                                    </a>
+                        @php($i = 1)
+                        @foreach($booking->appointments()->get() as $appointment)
+                            <div class="singleAppointment singleAppointment--{{$appointment->status_id == 2 ? 'progress' : 'done'}}">
+                                <div class="singleAppointment__header">
+                                  <span>
+                                    #{{$i}}
+                                  </span>
+                                    <h2>
+                                        {{$appointment->status_id == 1 ? 'new' : ''}}
+                                        {{$appointment->status_id == 4 ? 'completed' : ''}}
+                                        {{$appointment->status_id == 2 ? 'in progress' : ''}}
+                                    </h2>
+                                </div>
+                                <div class="singleAppointment__body">
+                                    <p>
+                                        <span>Date: </span> {{$appointment->date_start}} - {{$appointment->date_end}}
+                                    </p>
+                                    <p>
+                                        <span>Time: </span>  {{$appointment->time_from}} - {{$appointment->time_to}}
+                                    </p>
+                                    <div class="appointmentBtn">
+                                        <a href="#" class="appointmentBtn__item appointmentBtn__item--compl">
+                                            Completed
+                                        </a>
+                                        <a href="#" class="appointmentBtn__item appointmentBtn__item--rej">
+                                            Rejected
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            @php(++$i)
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -337,6 +343,7 @@
     </div>
 </section>
 
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJaLv-6bVXViUGJ_e_-nR5RZlt9GUuC4M"></script>
 <script>
     $('.changeBookingStatus').click(function () {
         var booking_id = $(this).attr('data-booking_id');
@@ -345,4 +352,25 @@
         });
     });
 
+    function DistanceMatrixService() {
+      var origin1 = '{{$carerProfile->address_line1}}';
+      var destinationA = '{{$serviceUserProfile->address_line1}}';
+
+      var service = new google.maps.DistanceMatrixService();
+      service.getDistanceMatrix(
+        {
+          origins: [origin1],
+          destinations: [destinationA],
+          travelMode: 'DRIVING',
+        }, callback);
+
+      function callback(response, status) {
+        $('#distance').html(response.rows[0].elements[0].distance.text)
+        $('#duration').html(response.rows[0].elements[0].duration.text)
+      }
+    }
+
+    $(document).ready(function(){
+        DistanceMatrixService();
+    });
 </script>

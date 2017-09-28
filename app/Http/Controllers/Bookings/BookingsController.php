@@ -28,22 +28,26 @@ class BookingsController extends FrontController implements Constants
         else
             $bookings = $request->bookings;
 
+//        dd($bookings);
+
 
         foreach ($bookings as $booking_item){
-            $serviceUser = User::find($booking_item['service_user_id']);
+            $serviceUser = User::find($request->service_user_id);
             $booking = Booking::create([
                 'purchaser_id' => $purchaser->id,
                 'service_user_id' => $serviceUser->id,
                 'carer_id' => $carer->id,
-                'status_id' => 2
+                'status_id' => 2,
+                'carer_status_id' => 2,
+                'purchaser_status_id' => 1,
             ]);
 
 
 
             foreach ($booking_item['appointments'] as $appointment_item){
                 $booking->appointments()->create([
-                    'date_start' => $appointment_item['date_start'],
-                    'date_end' => $appointment_item['date_end'],
+                    'date_start' => date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d"),
+                    'date_end' => date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d"),
                     'time_from' => $appointment_item['time_from'],
                     'time_to' => $appointment_item['time_to'],
                     'periodicity' => $appointment_item['periodicity'],
@@ -58,7 +62,7 @@ class BookingsController extends FrontController implements Constants
             //отправить почту
             //todo
 
-            return response(['status' => 'success']);
+            return redirect('bookings/'.$booking->id.'/purchase');
         }
     }
 
@@ -219,6 +223,17 @@ class BookingsController extends FrontController implements Constants
     }
 
     public function createReview(Booking $booking, Request $request){
+        $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
+        $this->title = 'Holm Care';
+
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
         BookingOverview::create([
             'booking_id' => $booking->id,
             'punctuality' => $request->punctuality,
@@ -228,6 +243,9 @@ class BookingsController extends FrontController implements Constants
             'comment' => $request->comment,
         ]);
 
-        return response(['status' => 'success']);
+        $this->content = view(config('settings.frontTheme') . '.booking.leave_review_thx')->with($this->vars)
+            ->render();
+
+        return $this->renderOutput();
     }
 }

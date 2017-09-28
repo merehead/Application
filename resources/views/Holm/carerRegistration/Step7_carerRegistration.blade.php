@@ -28,7 +28,7 @@
                                 <span class="addContainer_load-header-inner">NVQ</span>
                               </div>
 
-                              <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              <input class="pickfiles"  type="file" />
                               <span class="pickfiles-delete">X</span>
 
                               <div id="nvq" class="pickfiles_img"></div>
@@ -53,7 +53,7 @@
                                 <span class="addContainer_load-header-inner">CARE CERTIFICATE</span>
                               </div>
 
-                              <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              <input class="pickfiles"  type="file" />
                               <span class="pickfiles-delete">X</span>
 
                               <div id="care_certificate" class="pickfiles_img"></div>
@@ -81,7 +81,7 @@
                                 <span class="addContainer_load-header-inner">HEALTH AND SOCIAL</span>
                               </div>
 
-                                <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                                <input class="pickfiles"  type="file" />
                                 <span class="pickfiles-delete">X</span>
 
                                 <div id="health_and_social" class="pickfiles_img"></div>
@@ -106,7 +106,7 @@
                                 <span class="addContainer_load-header-inner">TRAINING CERTIFICATE</span>
                               </div>
 
-                              <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              <input class="pickfiles"  type="file" />
                               <span class="pickfiles-delete">X</span>
 
                               <div id="training_certificate" class="pickfiles_img"></div>
@@ -135,7 +135,7 @@
                                 <span class="addContainer_load-header-inner">ADDITIONAL TRAINING COURSE</span>
                               </div>
 
-                              <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              <input class="pickfiles"  type="file" />
                               <span class="pickfiles-delete">X</span>
 
                               <div id="additional_training_course" class="pickfiles_img"></div>
@@ -160,7 +160,7 @@
                                 <span class="addContainer_load-header-inner">OTHER RELEVANT QUALIFICATIONS</span>
                               </div>
 
-                              <input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                              <input class="pickfiles"  type="file" />
                               <span class="pickfiles-delete">X</span>
 
                               <div id="other_relevant_qualification" class="pickfiles_img"></div>

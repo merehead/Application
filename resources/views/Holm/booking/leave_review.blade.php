@@ -24,12 +24,12 @@
                 </h2>
                 <div class="generalInfo">
                     <div class="profilePhoto profilePhoto--review">
-                        <img src="./dist/img/profile4.png" alt="">
+                        <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
 
                     </div>
                     <div class="generalInfo__text">
-                        <a href="Carer_Public_profile_page.html" class="generalInfo__elem">
-                            <span>  <a href="Carer_Public_profile_page.html"> Rosie P.</a></span>
+                        <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="generalInfo__elem">
+                            <span><a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->full_name}}</a></span>
                         </a>
                         <div class="generalInfo__elem">
                             <p>MANCHESTER</p>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="reviewText">
-                    <p><a href="Carer_Public_profile_page.html"> Rosie P.</a> has completed their appointment on 8 MAY 2017 12.00 PM-5.00 PM with <a href="Service_user_Public_profile_page.html">   Bob M.</a> </p>
+                    <p><a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->full_name}}</a> has completed their appointment on {{$booking->date_from}} - {{$booking->date_end}} with <a href="/serviceUser-settings/{{$booking->bookingServiceUser()->first()->id}}">{{$booking->bookingServiceUser()->first()->full_name}}</a> </p>
                     <p>Please leave your ratings and any additional comments. </p>
                     <p>Thank you!</p>
 
@@ -47,7 +47,7 @@
             </div>
             <div class="review__item">
                 <h2 class="review__title">
-                    Booking Overview - 8 MAY 2017 12.00 PM-5.00 PM
+                    Booking Overview - {{$booking->date_from}} - {{$booking->date_end}}
                 </h2>
                 <div class="userRating">
                     <div class="userRating__item">
@@ -81,19 +81,19 @@
                             <span>FRIENDLINESS</span>s
                         </p>
                         <div class="profileRating ">
-                <span class="profileRating__item active" id="friendlinesss_1">
+                <span class="profileRating__item active" id="friendliness_1">
                   <i class="fa fa-heart"></i>
                 </span>
-                <span class="profileRating__item" id="friendlinesss_2">
+                <span class="profileRating__item" id="friendliness_2">
                   <i class="fa fa-heart"></i>
                 </span>
-                <span class="profileRating__item" id="friendlinesss_3">
+                <span class="profileRating__item" id="friendliness_3">
                 <i class="fa fa-heart"></i>
                 </span>
-                <span class="profileRating__item" id="friendlinesss_4">
+                <span class="profileRating__item" id="friendliness_4">
                   <i class="fa fa-heart"></i>
                 </span>
-                <span class="profileRating__item" id="friendlinesss_5">
+                <span class="profileRating__item" id="friendliness_5">
                   <i class="fa fa-heart"></i>
                 </span>
                         </div>
@@ -146,13 +146,17 @@
                     </div>
                 </div>
 
-                <form class="reviewForm">
+                <form class="reviewForm" method="post" action="/bookings/{{$booking->id}}/review">
+                    <input type="hidden" name="punctuality" value="5">
+                    <input type="hidden" name="friendliness" value="4">
+                    <input type="hidden" name="communication" value="3">
+                    <input type="hidden" name="performance" value="2">
                     <div class="formField">
-                        <textarea class="formArea formArea--review " placeholder="Type your comment"></textarea>
+                        <textarea class="formArea formArea--review " placeholder="Type your comment" name="comment"></textarea>
 
                     </div>
                     <div class="formField">
-                        <button class="reviewForm__btn">
+                        <button type="submit" class="reviewForm__btn">
                             submit
                         </button>
                     </div>

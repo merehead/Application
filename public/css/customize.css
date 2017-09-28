@@ -70,7 +70,8 @@ select#workingTimes {
 .pickfiles,
 .pickfiles-change,
 .pickfiles_profile_photo,
-.pickfiles_profile_photo--change{
+.pickfiles_profile_photo--change,
+.pickfiles_profile_photo_service_user--change{
   position: absolute;
   left: 0;
   top: 0;
@@ -376,6 +377,7 @@ a.blogFilter__item.active {
 .profilePhoto2 img {
     width:110px;
     height: 110px;
+    border-radius: 50%;
 }
 
 #ui-datepicker-div, #datepicker_insurance, #datepicker_driver_licence
@@ -483,5 +485,5 @@ button:disabled:hover { background: #d7d7d7; color: #f8f4f4;}
 
 .map{margin-top: 0px;
     height:200px;}
-ui-timepicker-container, ui-timepicker-standard{z-index: 99999;!important;}
-
+div.ui-timepicker-container{z-index: 2000;!important;}
+.bookings-more{margin-bottom: 28px;}

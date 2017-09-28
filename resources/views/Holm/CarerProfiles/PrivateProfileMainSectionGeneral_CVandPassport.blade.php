@@ -6,7 +6,7 @@
               </span>
         </h2>
         <div class="addContainer">
-          <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+          <input disabled class="pickfiles"  type="file" />
           <span class="pickfiles-delete">X</span>
           <div id="additional_documents_cv" class="pickfiles_img"></div>
             <a class="add add--moreHeight">
@@ -25,7 +25,7 @@
               </span>
         </h2>
         <div class="addContainer">
-          <input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+          <input disabled class="pickfiles" accept=".jpg,.jpeg,.png" type="file" />
           <span class="pickfiles-delete">X</span>
           <div id="passport" class="pickfiles_img"></div>
             <a class="add add--moreHeight">
