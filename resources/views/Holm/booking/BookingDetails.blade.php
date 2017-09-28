@@ -228,32 +228,38 @@
                 </a> -->
                 <div class="appointmentSliderBox">
                     <div class="appointmentSlider owl-carousel">
-                        <div class="singleAppointment singleAppointment--progress">
-                            <div class="singleAppointment__header">
-                              <span>
-                       #3
-                              </span>
-                                <h2>
-                                    in progress
-                                </h2>
-                            </div>
-                            <div class="singleAppointment__body">
-                                <p>
-                                    <span>Date: </span> 16 june 2017
-                                </p>
-                                <p>
-                                    <span>Time: </span>  13:00 PM - 18:00 PM
-                                </p>
-                                <div class="appointmentBtn">
-                                    <a href="#" class="appointmentBtn__item appointmentBtn__item--compl">
-                                        Completed
-                                    </a>
-                                    <a href="#" class="appointmentBtn__item appointmentBtn__item--rej">
-                                        Rejected
-                                    </a>
+                        @php($i = 1)
+                        @foreach($booking->appointments()->get() as $appointment)
+                            <div class="singleAppointment singleAppointment--{{$appointment->status_id == 2 ? 'progress' : 'done'}}">
+                                <div class="singleAppointment__header">
+                                  <span>
+                                    #{{$i}}
+                                  </span>
+                                    <h2>
+                                        {{$appointment->status_id == 1 ? 'new' : ''}}
+                                        {{$appointment->status_id == 4 ? 'completed' : ''}}
+                                        {{$appointment->status_id == 2 ? 'in progress' : ''}}
+                                    </h2>
+                                </div>
+                                <div class="singleAppointment__body">
+                                    <p>
+                                        <span>Date: </span> {{$appointment->date_start}} - {{$appointment->date_end}}
+                                    </p>
+                                    <p>
+                                        <span>Time: </span>  {{$appointment->time_from}} - {{$appointment->time_to}}
+                                    </p>
+                                    <div class="appointmentBtn">
+                                        <a href="#" class="appointmentBtn__item appointmentBtn__item--compl">
+                                            Completed
+                                        </a>
+                                        <a href="#" class="appointmentBtn__item appointmentBtn__item--rej">
+                                            Rejected
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            @php(++$i)
+                        @endforeach
                     </div>
                 </div>
             </div>
