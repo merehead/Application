@@ -150,7 +150,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
 
         <div class="profileField profileField--full-width">
 
-            {!! Form::text('sentence_yourself',null,['class'=>'profileField__input','maxlength'=>"100"]) !!}
+            {!! Form::text('sentence_yourself',null,['class'=>'profileField__input','maxlength'=>"80"]) !!}
 
 {{--
             {!! Form::text('sentence_yourself',null,['class'=>'profileField__input','maxlength'=>512]) !!}

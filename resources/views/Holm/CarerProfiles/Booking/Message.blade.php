@@ -1,5 +1,5 @@
-@if(!empty($carerProfile) && Auth::check())
-    <link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">
+
+<link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">
 <script src="/js/jquery-ui-timepicker-addon.js"></script>
 <script>
     $(document).ready(function () {
@@ -40,6 +40,7 @@
                             <div class="needCare btn-group" data-toggle="buttons"
                                  data-html="Service_user_Public_profile_page">
                                 @php($i = 0)
+                                    @if(!empty($carerProfile) && Auth::check()&&isset(Auth::user()->userPurchaserProfile->serviceUsers))
                                 @foreach(Auth::user()->userPurchaserProfile->serviceUsers as $serviceUser)
                                     @php(++$i)
                                     @if(!$serviceUser->isDeleted())
@@ -57,6 +58,7 @@
                                         @endif
                                     @endif
                                 @endforeach
+                                        @endif
                             </div>
                             <div class="messageMap map">
                                 <div class="profileMap map" style="width:100%;height:200px">
@@ -76,7 +78,7 @@
                                     <div class="checkBox_item">
 
                                         {!! Form::checkbox('bookings[0][assistance_types][]', $care->id, null,
-                                                    array('class' => 'customCheckbox ','id'=>'assistance_types'.$care->id)) !!}
+                                                    array('class' => 'customCheckbox assistance_types','id'=>'assistance_types'.$care->id)) !!}
                                         <label for="assistance_types{{$care->id}}">{{$care->name}}</label>
                                     </div>
                                 @endforeach
@@ -88,37 +90,6 @@
                                 select date and time
                              </span>
                         </h2>
-                        {{--<div class="messageInputs datetime nhide">--}}
-                            {{--<div class="messageInputs__field messageDate">--}}
-                                {{--<input type="text" name="bookings[0][appointments][0]['date_start']" class="messageInput datepicker"--}}
-                                       {{--placeholder="06.06.2017 ">--}}
-
-                                {{--<a href="#" class="messageIco centeredLink">--}}
-                                    {{--<i class="fa fa-calendar" aria-hidden="true"></i>--}}
-                                {{--</a>--}}
-                            {{--</div>--}}
-                            {{--<div class="messageInputs__field messageDate">--}}
-                                {{--<input type="text" class="messageInput datepicker" name="bookings[0][appointments][0]['date_end']"--}}
-                                       {{--placeholder=" 08.08.2017">--}}
-                                {{--<a href="#" class="messageIco centeredLink">--}}
-                                    {{--<i class="fa fa-calendar" aria-hidden="true"></i>--}}
-                                {{--</a>--}}
-                            {{--</div>--}}
-                            {{--<div class="messageInputs__field messageTime ">--}}
-                                {{--<input type="text" class="messageInput timepicker_message"--}}
-                                       {{--name="bookings[0][appointments][0]['time_end']" placeholder="12:00 AM - 5:00 PM">--}}
-                                {{--<a href="#" class="messageIco centeredLink">--}}
-                                    {{--<i class="fa fa-clock-o" aria-hidden="true"></i>--}}
-                                {{--</a>--}}
-                            {{--</div>--}}
-                            {{--<div class="messageInputs__field messageTime ">--}}
-                                {{--<input type="text" class="messageInput timepicker_message"--}}
-                                       {{--name="bookings[0][appointments][0]['time_end']" placeholder="12:00 AM - 5:00 PM">--}}
-                                {{--<a href="#" class="messageIco centeredLink">--}}
-                                    {{--<i class="fa fa-clock-o" aria-hidden="true"></i>--}}
-                                {{--</a>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
                         <div class="messageInputs datetime ">
                             <div class="messageInputs__field messageDate">
                                 <input type="text" name="bookings[0][appointments][0][date_start]"
@@ -157,19 +128,19 @@
                         </h2>
                         <div class="messageCheckbox checktime">
                             <div class="checkBox_item">
-                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Daily" class="customCheckbox"
+                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Daily" class="customCheckbox periodicity"
                                        id="boxD1">
                                 <label for="boxD1">Daily</label>
                             </div>
                             <div class="checkBox_item">
-                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Weekly" class="customCheckbox"
+                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Weekly" class="customCheckbox periodicity"
                                        id="boxD2">
                                 <label for="boxD2">weekly</label>
                             </div>
                             <div class="checkBox_item">
-                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single" class="customCheckbox"
-                                       id="box3">
-                                <label for="box3">Single</label>
+                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single" class="customCheckbox periodicity"
+                                       id="boxD3">
+                                <label for="boxD3">Single</label>
                             </div>                        </div>
                     </div>
                     <a href="#" class="additionalTime">
@@ -177,7 +148,8 @@
                         add additional time
                     </a>
 
-                    <div class="moreBtn">
+
+                </div> <div class="moreBtn">
                         <a href="#" class="moreBtn__item moreBtn__item--withIco centeredLink ">
                             <span>+</span> add more bookings
                         </a>
@@ -208,4 +180,3 @@
     </div>
 
 </div>
-    @endif
