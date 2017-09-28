@@ -833,6 +833,19 @@ $(document).ready(function () {
         var $that =$(this);
         var dlast = $('.cdate').last().clone();
         var clast = $('.checktime').last().clone();
+        $(dlast).find('.datepicker').each(function () {
+            var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
+            var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
+            $(this).attr('name', input_name + '[' + bookings_pos + input_name_p);
+        });
+        $(dlast).find('.timepicker_message').each(function () {
+            var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
+            var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
+            $(this).attr('name', input_name + '[' +bookings_pos+ input_name_p);
+            var input_name1 = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
+            var input_name_p1 = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
+            $(this).attr('name', input_name1 + '[' + bookings_pos + input_name_p1);
+        });
 
         $(clast).find('.periodicity').each(function () {
             var input_name3 = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
