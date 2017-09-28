@@ -24,7 +24,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
     <link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">
-    <script src="/js/jquery-ui-timepicker-addon.js"></script>
+    {{--<script src="/js/jquery-ui-timepicker-addon.js"></script>--}}
     <script src="{{asset('js/owl.carousel.min.js')}}" defer ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
