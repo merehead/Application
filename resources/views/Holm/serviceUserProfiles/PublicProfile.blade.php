@@ -1,4 +1,3 @@
-
 <section class="mainSection">
     <div class="container">
         <div class="breadcrumbs">
@@ -10,7 +9,8 @@
                 My profile
             </a>
             <span class="breadcrumbs__arrow">&gt;</span>
-            <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUsers->id])}}" class="breadcrumbs__item">
+            <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUsers->id])}}"
+               class="breadcrumbs__item">
                 {{$serviceUsers->family_name}} {{$serviceUsers->first_name}}
             </a>
         </div>
@@ -29,7 +29,8 @@
                         <div class="carer">
                             <div class="profileInfo">
                                 <div class="profilePhoto profilePhoto2 ">
-                                    <img id="profile_photo" src="/img/service_user_profile_photos/{{$serviceUsers->id}}.png"
+                                    <img id="profile_photo"
+                                         src="/img/service_user_profile_photos/{{$serviceUsers->id}}.png"
                                          onerror="this.src='/img/no_photo.png'" alt="avatar">
 
                                 </div>
@@ -69,7 +70,9 @@
                         <div class="profilePricing profilePricing--user">
 
                             <div class="roundedBtn">
-                                <a href="NewAnAppointment.html" class="roundedBtn__item roundedBtn__item--message"  data-toggle="modal" data-target="#message-carer">
+                                <a href="{{route('carerAppointment',['user_id'=>$serviceUsers->id])}}}"
+                                   class="roundedBtn__item roundedBtn__item--message" data-toggle="modal"
+                                   data-target="#message-carer">
                                     send a message
                                 </a>
                             </div>
@@ -77,8 +80,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
             <div class="extraRow">
                 <div class="userAbout">
@@ -93,9 +94,9 @@
                         <div class="serviceRow">
                             <div class="serviceColumn serviceColumn--typeCare">
                                 @foreach($typeCare as $type)
-                                <p class="userOption userOption--less-padding">
-                                    {{$type->name}}
-                                </p>
+                                    <p class="userOption userOption--less-padding">
+                                        {{$type->name}}
+                                    </p>
                                     @if($loop->iteration%3==0)
                             </div>
                             <div class="serviceColumn serviceColumn--typeCare">
@@ -120,18 +121,17 @@
                                 @foreach($serviceUserConditions as $serviceRow)
                                     <div class="serviceRow">
                                         <div class="serviceColumn serviceColumn--midSize">
-
                                             <p class="userOption">
                                                 {{$serviceRow->name}}
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                        <span class="serviceValue ">
-                         yes
-                       </span>
+                                            <span class="serviceValue ">
+                                                yes
+                                            </span>
                                             <span class="serviceValue serviceValue--comment ">
-                         {{$serviceUsers->other_behaviour}}
-                       </span>
+                                                {{$serviceUsers->other_behaviour}}
+                                            </span>
                                         </div>
                                     </div>
                                 @endforeach
@@ -272,10 +272,10 @@
                                     </div>
                                     <div class="serviceColumn">
                         <span class="serviceValue ">
-                         yes
+                          {{$serviceUsers->mobilising_to_toilet}}
                        </span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
+                           {{$serviceUsers->mobilising_to_toilet_detail}}
                        </span>
                                     </div>
                                 </div>
@@ -287,10 +287,10 @@
                                     </div>
                                     <div class="serviceColumn">
                              <span class="serviceValue ">
-                         yes
+                          {{$serviceUsers->have_incontinence}}
                        </span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
+                          {{$serviceUsers->kind_of_incontinence}}
                        </span>
                                     </div>
                                 </div>
@@ -302,11 +302,11 @@
                                     </div>
                                     <div class="serviceColumn">
                            <span class="serviceValue ">
-                         yes
-                       </span>
+                            {{$serviceUsers->choosing_incontinence_products}}
+                            </span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->choosing_incontinence_products_detail}}
+</span>
                                     </div>
                                 </div>
                                 <div class="serviceRow">
@@ -316,12 +316,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                          <span class="serviceValue ">
-                         yes
-                       </span>
+ <span class="serviceValue ">
+{{$serviceUsers->incontinence_wear}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->incontinence_detail}}
+</span>
                                     </div>
                                 </div>
 
@@ -332,10 +332,10 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                        <span class="serviceValue serviceValue--comment">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
+<span class="serviceValue serviceValue--comment">
+{{$serviceUsers->incontinence_products_stored}}
 
-                        </span>
+</span>
                                     </div>
                                 </div>
 
@@ -346,9 +346,9 @@
                         <div class="col-sm-6">
                             <div class="userContainer">
                                 <h2 class="ordinaryTitle">
-                    <span class="ordinaryTitle__text">
-                      Medication
-                    </span>
+<span class="ordinaryTitle__text">
+Medication
+</span>
                                 </h2>
                                 <div class="serviceRow">
                                     <div class="serviceColumn serviceColumn--midSize">
@@ -357,12 +357,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                           <span class="serviceValue ">
-                         yes
-                       </span>
+  <span class="serviceValue ">
+{{$serviceUsers->assistance_in_medication}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->in_medication_detail}}
+</span>
                                     </div>
                                 </div>
 
@@ -370,9 +370,9 @@
 
                             <div class="userContainer">
                                 <h2 class="ordinaryTitle">
-                    <span class="ordinaryTitle__text">
-                      Communication
-                    </span>
+<span class="ordinaryTitle__text">
+Communication
+</span>
                                 </h2>
                                 <div class="serviceRow">
                                     <div class="serviceColumn serviceColumn--midSize">
@@ -381,12 +381,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                          <span class="serviceValue ">
-                         yes
-                       </span>
+ <span class="serviceValue ">
+{{$serviceUsers->comprehension}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->comprehension_detail}}
+</span>
                                     </div>
                                 </div>
                                 <div class="serviceRow">
@@ -396,12 +396,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                          <span class="serviceValue ">
-                         yes
-                       </span>
+ <span class="serviceValue ">
+{{$serviceUsers->communication}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->common_communication_details}}
+</span>
                                     </div>
                                 </div>
                                 <div class="serviceRow">
@@ -411,12 +411,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                           <span class="serviceValue ">
-                         yes
-                       </span>
+  <span class="serviceValue ">
+{{$serviceUsers->speech}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->speech_detail}}
+</span>
                                     </div>
                                 </div>
                                 <div class="serviceRow">
@@ -426,12 +426,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                          <span class="serviceValue ">
-                         yes
-                       </span>
+ <span class="serviceValue ">
+{{$serviceUsers->vision}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->vision_detail}}
+</span>
                                     </div>
                                 </div>
 
@@ -442,12 +442,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                        <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->hearing}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->hearing_detail}}
+</span>
                                     </div>
                                 </div>
 
@@ -455,9 +455,9 @@
 
                             <div class="userContainer">
                                 <h2 class="ordinaryTitle">
-                    <span class="ordinaryTitle__text">
-                      Allergies
-                    </span>
+<span class="ordinaryTitle__text">
+Allergies
+</span>
                                 </h2>
                                 <div class="serviceRow">
                                     <div class="serviceColumn serviceColumn--midSize">
@@ -466,27 +466,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                           <span class="serviceValue ">
-                         yes
-                       </span>
+  <span class="serviceValue ">
+{{$serviceUsers->have_any_allergies}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
-                                    </div>
-                                </div>
-                                <div class="serviceRow">
-                                    <div class="serviceColumn serviceColumn--midSize">
-                                        <p class="userOption">
-                                            Has nutrition allegies:
-                                        </p>
-                                    </div>
-                                    <div class="serviceColumn">
-                          <span class="serviceValue ">
-                         yes
-                       </span>
-                                        <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->allergies_detail}}
+</span>
                                     </div>
                                 </div>
 
@@ -494,9 +479,9 @@
 
                             <div class="userContainer">
                                 <h2 class="ordinaryTitle">
-                    <span class="ordinaryTitle__text">
-                      Skin
-                    </span>
+<span class="ordinaryTitle__text">
+Skin
+</span>
                                 </h2>
                                 <div class="serviceRow">
                                     <div class="serviceColumn serviceColumn--midSize">
@@ -505,12 +490,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                           <span class="serviceValue ">
-                         yes
-                       </span>
+  <span class="serviceValue ">
+{{$serviceUsers->skin_scores}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->skin_scores_detail}}
+</span>
                                     </div>
                                 </div>
                                 <div class="serviceRow">
@@ -520,12 +505,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                          <span class="serviceValue ">
-                         yes
-                       </span>
+ <span class="serviceValue ">
+{{$serviceUsers->assistance_with_dressings}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->dressings_detail}}
+</span>
                                     </div>
                                 </div>
 
@@ -534,9 +519,9 @@
 
                             <div class="userContainer">
                                 <h2 class="ordinaryTitle">
-                    <span class="ordinaryTitle__text">
-                      MOBILITY
-                    </span>
+<span class="ordinaryTitle__text">
+MOBILITY
+</span>
                                 </h2>
                                 <div class="serviceRow">
                                     <div class="serviceColumn serviceColumn--midSize">
@@ -545,12 +530,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                         <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->help_with_mobility}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->common_mobility_details}}
+</span>
                                     </div>
                                 </div>
                                 <div class="serviceRow">
@@ -560,12 +545,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                         <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->mobility_home}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->mobility_home_detail}}
+</span>
                                     </div>
                                 </div>
 
@@ -576,12 +561,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                         <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->mobility_bed}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->mobility_bed_detail}}
+</span>
                                     </div>
                                 </div>
 
@@ -592,12 +577,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                          <span class="serviceValue ">
-                         yes
-                       </span>
+ <span class="serviceValue ">
+{{$serviceUsers->history_of_falls}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->falls_detail}}
+</span>
                                     </div>
                                 </div>
 
@@ -608,12 +593,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                            <span class="serviceValue ">
-                         yes
-                       </span>
+   <span class="serviceValue ">
+{{$serviceUsers->mobility_shopping}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->mobility_shopping_detail}}
+</span>
                                     </div>
                                 </div>
 
@@ -621,9 +606,9 @@
 
                             <div class="userContainer">
                                 <h2 class="ordinaryTitle">
-                    <span class="ordinaryTitle__text">
-                      Nutrition
-                    </span>
+<span class="ordinaryTitle__text">
+Nutrition
+</span>
                                 </h2>
                                 <div class="serviceRow">
                                     <div class="serviceColumn serviceColumn--midSize">
@@ -632,12 +617,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                          <span class="serviceValue ">
-                         yes
-                       </span>
+ <span class="serviceValue ">
+{{$serviceUsers->assistance_with_eating}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->assistance_with_eating_detail}}
+</span>
                                     </div>
                                 </div>
                                 <div class="serviceRow">
@@ -647,12 +632,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                         <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->prepare_food}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->prepare_food_details}}
+</span>
                                     </div>
                                 </div>
 
@@ -663,12 +648,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                         <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->dietary_requirements}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->dietary_requirements_interaction}}
+</span>
                                     </div>
                                 </div>
 
@@ -679,12 +664,12 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                         <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->special_dietary_requirements}}
+</span>
                                         <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->special_dietary_requirements_detail}}
+</span>
                                     </div>
                                 </div>
 
@@ -702,39 +687,13 @@
                     <div class="userContainer">
                         <div class="serviceRow">
                             <div class="serviceColumn serviceColumn--language">
+                                languages
+                                @foreach($languages as $language)
                                 <p class="userOption userOption--language">
-                                    English
+                                    {{$language->carer_language}}
                                 </p>
+                                    @endforeach
                             </div>
-                            <!--  <div class="serviceColumn serviceColumn--language">
-                                <p class="userOption userOption--language">
-                                  Spanish
-                                </p>
-                              </div>
-                              <div class="serviceColumn serviceColumn--language">
-                                <p class="userOption userOption--language">
-                                  English
-                                </p>
-                              </div>
-                            </div>
-                            <div class="serviceRow">
-                              <div class="serviceColumn serviceColumn--language">
-                                <p class="userOption userOption--language">
-                                  English
-                                </p>
-                              </div>
-                              <div class="serviceColumn serviceColumn--language">
-                                <p class="userOption userOption--language">
-                                  Spanish
-                                </p>
-                              </div>
-                              <div class="serviceColumn serviceColumn--language">
-                                <p class="userOption userOption--language">
-                                  English
-                                </p>
-                              </div>
-                            </div>
-              -->
                         </div>
 
                     </div>
@@ -753,9 +712,9 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                       <span class="serviceValue">
-                         flat
-                       </span>
+<span class="serviceValue">
+{{$serviceUsers->kind_of_building}}
+</span>
                                         </div>
                                     </div>
 
@@ -766,9 +725,9 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                       <span class="serviceValue serviceValue--comment">
-                         15
-                       </span>
+<span class="serviceValue serviceValue--comment">
+{{$serviceUsers->floor_id}}
+</span>
                                         </div>
                                     </div>
 
@@ -780,9 +739,9 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                       <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->lift_available}}
+</span>
 
                                         </div>
 
@@ -797,12 +756,12 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                       <span class="serviceValue  ">
-                         yes
-                       </span>
+<span class="serviceValue  ">
+{{$serviceUsers->assistance_moving}}
+</span>
                                             <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->assistance_moving}}
+</span>
                                         </div>
                                     </div>
 
@@ -813,12 +772,12 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                       <span class="serviceValue  ">
-                         yes
-                       </span>
+<span class="serviceValue  ">
+{{$serviceUsers->assistance_keeping}}
+</span>
                                             <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+
+</span>
                                         </div>
                                     </div>
 
@@ -826,9 +785,9 @@
 
                                 <div class="userContainer">
                                     <h2 class="ordinaryTitle">
-                    <span class="ordinaryTitle__text">
-                     Other inhabitants
-                    </span>
+<span class="ordinaryTitle__text">
+Other inhabitants
+</span>
                                     </h2>
                                     <div class="serviceRow">
                                         <div class="serviceColumn serviceColumn--midSize">
@@ -837,12 +796,12 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                       <span class="serviceValue">
-                         yes
-                       </span>
+<span class="serviceValue">
+{{$serviceUsers->anyone_else_live}}
+</span>
                                             <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->anyone_detail}}
+</span>
                                         </div>
                                     </div>
 
@@ -853,12 +812,12 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                       <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->anyone_friendly}}
+</span>
                                             <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+
+</span>
                                         </div>
                                     </div>
 
@@ -867,9 +826,9 @@
 
                                 <div class="userContainer">
                                     <h2 class="ordinaryTitle">
-                    <span class="ordinaryTitle__text">
-                     Companionship
-                    </span>
+<span class="ordinaryTitle__text">
+Companionship
+</span>
                                     </h2>
                                     <div class="serviceRow">
                                         <div class="serviceColumn serviceColumn--midSize">
@@ -878,12 +837,12 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                       <span class="serviceValue">
-                         yes
-                       </span>
+<span class="serviceValue">
+{{$serviceUsers->social_interaction}}
+</span>
                                             <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->companionship_interaction_details}}
+</span>
                                         </div>
                                     </div>
 
@@ -894,12 +853,12 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                       <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->visit_for_companionship}}
+</span>
                                             <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->companionship_visit_details}}
+</span>
                                         </div>
                                     </div>
 
@@ -910,9 +869,9 @@
                             <div class="col-sm-6">
                                 <div class="userContainer">
                                     <h2 class="ordinaryTitle">
-                    <span class="ordinaryTitle__text">
-                      Entry
-                    </span>
+<span class="ordinaryTitle__text">
+Entry
+</span>
                                     </h2>
                                     <div class="serviceRow">
                                         <div class="serviceColumn serviceColumn--midSize">
@@ -921,9 +880,9 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                       <span class="serviceValue serviceValue--comment">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran ende salutandi no per. Est eu pertinaciaen delacrue instructiol ve
-                       </span>
+<span class="serviceValue serviceValue--comment">
+{{$serviceUsers->carer_enter}}
+</span>
                                         </div>
                                     </div>
 
@@ -931,9 +890,9 @@
 
                                 <div class="userContainer">
                                     <h2 class="ordinaryTitle">
-                    <span class="ordinaryTitle__text">
-                      Other home information
-                    </span>
+<span class="ordinaryTitle__text">
+Other home information
+</span>
                                     </h2>
                                     <div class="serviceRow">
                                         <div class="serviceColumn serviceColumn--midSize">
@@ -943,21 +902,21 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-     <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->entering_aware}}
+</span>
                                             <span class="serviceValue serviceValue--comment">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran ende salutandi no per. Est eu pertinaciaen delacrue instructiol ve
-                       </span>
+{{$serviceUsers->other_detail}}
+</span>
                                         </div>
                                     </div>
 
                                 </div>
                                 <div class="userContainer">
                                     <h2 class="ordinaryTitle">
-                    <span class="ordinaryTitle__text">
-                      Pets
-                    </span>
+<span class="ordinaryTitle__text">
+Pets
+</span>
                                     </h2>
                                     <div class="serviceRow">
                                         <div class="serviceColumn serviceColumn--midSize">
@@ -966,12 +925,12 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                       <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->own_pets}}
+</span>
                                             <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->pet_detail}}
+</span>
                                         </div>
                                     </div>
 
@@ -982,9 +941,9 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                      <span class="serviceValue ">
-                        normaly
-                      </span>
+<span class="serviceValue ">
+{{$serviceUsers->pet_friendly}}
+</span>
 
                                         </div>
                                     </div>
@@ -1003,51 +962,14 @@
                         </h2>
                         <div class="userContainer">
                             <div class="serviceRow serviceRow--forLabel">
+                                @foreach($behaviour as $beh)
                                 <div class="serviceColumn">
                                     <p class="advantage_label">
                                         <i class="fa fa-check"></i>
-                                        Agression
+                                        {{$beh->name}}
                                     </p>
                                 </div>
-                                <div class="serviceColumn">
-                                    <p class="advantage_label">
-                                        <i class="fa fa-check"></i>
-                                        Anxiety
-                                    </p>
-                                </div>
-                                <div class="serviceColumn">
-                                    <p class="advantage_label">
-                                        <i class="fa fa-check"></i>
-                                        Violence
-                                    </p>
-                                </div>
-
-
-                                <div class="serviceColumn">
-                                    <p class="advantage_label">
-                                        <i class="fa fa-check"></i>
-                                        Confusion
-                                    </p>
-                                </div>
-                                <div class="serviceColumn">
-                                    <p class="advantage_label">
-                                        <i class="fa fa-check"></i>
-                                        Agitation
-                                    </p>
-                                </div>
-                                <div class="serviceColumn">
-                                    <p class="advantage_label">
-                                        <i class="fa fa-check"></i>
-                                        Inappropriate sexual behaviour
-                                    </p>
-                                </div>
-                                <div class="serviceColumn">
-                                    <p class="advantage_label">
-                                        <i class="fa fa-check"></i>
-                                        Antisocial behaviour
-                                    </p>
-                                </div>
-
+                                @endforeach
                             </div>
                         </div>
 
@@ -1068,12 +990,12 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                         <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->keeping_safe_at_night}}
+</span>
                                             <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->keeping_safe_at_night_details}}
+</span>
                                         </div>
                                     </div>
                                     <div class="serviceRow">
@@ -1083,9 +1005,9 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                      <span class="serviceValue ">
-                        <i class="fa fa-clock-o"></i>   12:00 Am - 5:00 Pm
-                      </span>
+<span class="serviceValue ">
+<i class="fa fa-clock-o"></i>   {{$serviceUsersProfile->time_to_bed}}
+</span>
                                         </div>
                                     </div>
                                     <div class="serviceRow">
@@ -1095,12 +1017,12 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                          <span class="serviceValue ">
-                         yes
-                       </span>
+ <span class="serviceValue ">
+{{$serviceUsers->getting_dressed_for_bed}}
+</span>
                                             <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->dressed_for_bed_details}}
+</span>
                                         </div>
                                     </div>
                                     <div class="serviceRow">
@@ -1110,12 +1032,12 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                         <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->toilet_at_night}}
+</span>
                                             <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->toiled_help_details}}
+</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1134,12 +1056,12 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                         <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->religious_beliefs}}
+</span>
                                             <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->religious_beliefs_details}}
+</span>
                                         </div>
                                     </div>
                                     <div class="serviceRow">
@@ -1149,12 +1071,12 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                         <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->particular_likes}}
+</span>
                                             <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->particular_likes_details}}
+</span>
                                         </div>
                                     </div>
                                     <div class="serviceRow">
@@ -1164,12 +1086,12 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                         <span class="serviceValue ">
-                         yes
-                       </span>
+<span class="serviceValue ">
+{{$serviceUsers->socialising_with_other}}
+</span>
                                             <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->socialising_with_other_details}}
+</span>
                                         </div>
                                     </div>
                                     <div class="serviceRow">
@@ -1179,12 +1101,12 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                          <span class="serviceValue ">
-                         yes
-                       </span>
+ <span class="serviceValue ">
+{{$serviceUsers->interests_hobbies}}
+</span>
                                             <span class="serviceValue serviceValue--comment ">
-                         Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran
-                       </span>
+{{$serviceUsers->interests_hobbies_details}}
+</span>
                                         </div>
                                     </div>
 

@@ -346,6 +346,24 @@ $(document).ready(function () {
         }
     });
 
+    $('input[name="like_name"]').on('change',function(){
+        var text = $(this).val();
+        $('.line_about').html('ONE LINE ABOUT '+text);
+    });
+    // $('input[name="mobile_number"]').on('keyup', function () {
+    //     var val=$(this).val();
+    //     var that = this;
+    //     $('.error-onlyNumber1').remove();
+    //
+    //     var errorText = '<span class="help-block error-onlyNumber1">\n' +
+    //         '             <strong>Wrong input. Format: 07999999999</strong>\n' +
+    //         '          </span>';
+    //     if (val.match(/^07[0-9]{9}$/)) {
+    //         $(that).before(errorText);
+    //         that.value = that.value.replace(/^07[0-9]$/, '07');
+    //     }
+    // });
+
     // Иван функция уменшает автоматом шрифт у имени пользователя в шапке
     if ($('.profileName').lenght > 0)
         scale($('.profileName').parent()[0]);
@@ -624,30 +642,32 @@ $(document).ready(function () {
             yearRange: "0:+10"
         });
 
-
-    $('#timepicker1').timepicker({
-        timeFormat: 'h:mm p',
-        interval: 30,
-        //minTime: '10',
-        //maxTime: '6:00pm',
-        //defaultTime: '18',
-        startTime: '18:00',
-        dynamic: true,
-        dropdown: true,
-        scrollbar: true
-    });
-
-    $('#timepicker2').timepicker({
-        timeFormat: 'h:mm p',
-        interval: 30,
-        //minTime: '10',
-        //maxTime: '6:00pm',
-        //defaultTime: '18',
-        startTime: '18:00',
-        dynamic: true,
-        dropdown: true,
-        scrollbar: true
-    });
+    if($.isFunction('timepicker')){
+        $('#timepicker1').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            //minTime: '10',
+            //maxTime: '6:00pm',
+            //defaultTime: '18',
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+    }
+    if($.isFunction('timepicker')) {
+        $('#timepicker2').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            //minTime: '10',
+            //maxTime: '6:00pm',
+            //defaultTime: '18',
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+    }
 
     $(".allTime").click(function () {
         $('input.checkboxTimerGroup:checkbox').not(this).prop('checked', this.checked);
@@ -725,27 +745,32 @@ $(document).ready(function () {
             $(".criminal_detail").hide();
         }
     });
+    if($.isFunction('timepicker')) {
+        $('.timepicker_message').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            //minTime: '10',
+            //maxTime: '6:00pm',
+            //defaultTime: '18',
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+    }
 
-    $('.timepicker_message').timepicker({
-        timeFormat: 'h:mm p',
-        interval: 30,
-        //minTime: '10',
-        //maxTime: '6:00pm',
-        //defaultTime: '18',
-        startTime: '18:00',
-        dynamic: true,
-        dropdown: true,
-        scrollbar: true
-    });
+    $('.moreBtn__item').on('click',function(){
 
-    $('a.additionalTime').on('click', function (e) {
-        e.preventDefault();
-        var dlast = $('.datetime').last();
-        var dclone = $(dlast).clone().removeClass('nhide');
-        $(dclone).find('input.datepicker_message').removeClass('hasDatepicker');
-        $(dlast).after(dclone);
-        $('.checktime').last().after($('.checktime').last().clone());
+
+        var dlast = $('.bookings-more').last().clone();
+        $('.moreBtn__item').before(dlast);
+        $('.bookings-more').last().find('.datepicker_message').removeClass("hasDatepicker").removeAttr('id');
+        $('.bookings-more').last().find('.timepicker_message ').removeClass("hasDatepicker").removeAttr('id');
+
         $(".datepicker_message").datepicker({
+            beforeShow: function(input, inst) {
+                inst.dpDiv.css({"z-index":2000});
+            },
             changeMonth: true,
             changeYear: true,
             dateFormat: "dd/mm/yy",
@@ -755,7 +780,55 @@ $(document).ready(function () {
             yearRange: "0:+50"
         });
         $('.timepicker_message').timepicker({
-            timeFormat: 'h:mm p',
+            beforeShow: function(input, inst) {
+                inst.dpDiv.css({"z-index":2000});
+            },
+            timeFormat: 'hh:mm tt',
+            interval: 30,
+            //minTime: '10',
+            //maxTime: '6:00pm',
+            //defaultTime: '18',
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+        return false;
+    });
+
+
+    $(document).on('click','a.additionalTime', function (e) {
+        e.preventDefault();
+        var $that =$(this);
+        var dlast = $('.cdate').last().clone();
+        var clast = $('.ctime').last().clone();
+
+
+        $($that).before(dlast);
+        $($that).before(clast);
+        $('.rtext').last().remove();
+
+        $('.datepicker_message').removeClass("hasDatepicker").removeAttr('id');
+        $('.timepicker_message').removeClass("hasDatepicker").removeAttr('id');
+
+
+        $(".datepicker_message").datepicker({
+            beforeShow: function(input, inst) {
+                inst.dpDiv.css({"z-index":2000});
+            },
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            showAnim: "slideDown",
+            minDate: "+0D",
+            maxDate: "+50Y",
+            yearRange: "0:+50"
+        });
+        $('.timepicker_message').timepicker({
+            beforeShow: function(input, inst) {
+                inst.dpDiv.css({"z-index":2000});
+            },
+            timeFormat: 'hh:mm tt',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',
@@ -1064,7 +1137,6 @@ $(document).ready(function () {
 
             return false;
         });
-
 //------------Google Address search -----------------------
     if ($.isFunction($.fn.autocomplete)) {
 

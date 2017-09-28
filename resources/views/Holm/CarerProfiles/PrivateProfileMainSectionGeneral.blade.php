@@ -74,8 +74,7 @@
                 Mobile Number <span class="requireIco">*</span>
               </span>
             </h2>
-            {!! Form::text('mobile_number',null,['class'=>'profileField__input','maxlength'=>'16']) !!}
-
+            {!! Form::text('mobile_number',null,['class'=>'profileField__input','maxlength'=>'11']) !!}
         </div>
 
         <div class="profileField">

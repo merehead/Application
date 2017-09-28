@@ -1,16 +1,16 @@
 <script>
     $(document).ready(function(){
-        $(function () {
-            $(".datepicker").datepicker({
-                changeMonth: true,
-                changeYear: true,
-                dateFormat: "dd/mm/yy",
-                showAnim: "slideDown",
 
-                maxDate: "+20Y",
-                yearRange: "0:+10"
-            });
+        $(".datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            showAnim: "slideDown",
+
+            maxDate: "+20Y",
+            yearRange: "0:+10"
         });
+
     });
 </script>
 <section class="searchSection">
@@ -208,11 +208,13 @@
                         </div>
                     </div>
                     @endforeach
+                @if(count($carerResult)>5)
                 <div class="moreBtn moreBtn--book ">
                     <a href="" class="moreBtn__item moreBtn__item--book centeredLink">
                         Load More
                     </a>
                 </div>
+                    @endif
             </div>
 
         </div>
