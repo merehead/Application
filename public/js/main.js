@@ -762,8 +762,13 @@ $(document).ready(function () {
 
     $('.moreBtn__item').on('click',function(){
 
-
+        var i=1;
         var dlast = $('.bookings-more').last().clone();
+        $(dlast).find('.datepicker').each(function () {
+            var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('['));
+            var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('[')+2, $(this).attr('name').length);
+            $(this).attr('name', input_name + '[' + i + input_name_p);
+        });
         $('.moreBtn__item').before(dlast);
         $('.bookings-more').last().find('.datepicker_message').removeClass("hasDatepicker").removeAttr('id');
         $('.bookings-more').last().find('.timepicker_message ').removeClass("hasDatepicker").removeAttr('id');
@@ -794,6 +799,7 @@ $(document).ready(function () {
             dropdown: true,
             scrollbar: true
         });
+        i++;
         return false;
     });
 
@@ -1147,7 +1153,7 @@ $(document).ready(function () {
 //------------Google Address search -----------------------
     if ($.isFunction($.fn.autocomplete)) {
 
-        $('input[name="postcode"],input[name="address_line1"]').autocomplete({
+        $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').autocomplete({
             serviceUrl: '/address/',
             params: {query: $('input[name="postcode"]').val()},
             minChars: 1,
@@ -1156,10 +1162,12 @@ $(document).ready(function () {
                     $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
                     $('input[name="town"]').val(suggestion.data.terms[1].value);
                     $('input[name="postcode"]').val(suggestion.data.terms[2].value);
+                    $('input[name="postCode"]').val(suggestion.data.terms[2].value);
                 }else{
                     $('input[name="address_line1"]').val('');
                     $('input[name="town"]').val(suggestion.data.terms[0].value);
                     $('input[name="postcode"]').val(suggestion.data.terms[1].value);
+                    $('input[name="postCode"]').val(suggestion.data.terms[1].value);
                 }
             }
         });

@@ -79,7 +79,7 @@ class SearchController extends FrontController
         if ($request->get('postCode'))
             $where .= " and cp.postcode='".$request->get('postCode')."'";
 
-        $sql = 'select cp.id,first_name,family_name,sentence_yourself,town from carers_profiles cp '.$where;
+        $sql = 'select cp.id,first_name,family_name,sentence_yourself,town from carers_profiles cp '.$where. ' group by cp.id,first_name,family_name,sentence_yourself,town';
         $carerResult = DB::select($sql);
 
 
