@@ -99,7 +99,7 @@ class CarerController extends FrontController implements Constants
     public function profile($user_id)
     {
 
-        if(Auth::user()->user_type_id == 3) {
+        if(Auth::user() && Auth::user()->user_type_id == 3) {
             return \redirect('welcome-carer');
         }
 
