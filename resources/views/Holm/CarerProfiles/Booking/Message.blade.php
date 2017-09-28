@@ -139,8 +139,8 @@
                             </div>
                             <div class="checkBox_item">
                                 <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single" class="customCheckbox periodicity"
-                                       id="box3">
-                                <label for="box3">Single</label>
+                                       id="boxD3">
+                                <label for="boxD3">Single</label>
                             </div>                        </div>
                     </div>
                     <a href="#" class="additionalTime">
