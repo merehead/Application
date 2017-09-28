@@ -148,12 +148,12 @@
                         add additional time
                     </a>
 
-                    <div class="moreBtn">
+
+                </div> <div class="moreBtn">
                         <a href="#" class="moreBtn__item moreBtn__item--withIco centeredLink ">
                             <span>+</span> add more bookings
                         </a>
                     </div>
-                </div>
                 </div>
                 <div class="message__footer">
                     <div class="messageTotal">

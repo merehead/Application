@@ -761,8 +761,13 @@ $(document).ready(function () {
 
     $('.moreBtn__item').on('click',function(){
 
-
+        var i=1;
         var dlast = $('.bookings-more').last().clone();
+        $(dlast).find('.datepicker').each(function () {
+            var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('['));
+            var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('[')+2, $(this).attr('name').length);
+            $(this).attr('name', input_name + '[' + i + input_name_p);
+        });
         $('.moreBtn__item').before(dlast);
         $('.bookings-more').last().find('.datepicker_message').removeClass("hasDatepicker").removeAttr('id');
         $('.bookings-more').last().find('.timepicker_message ').removeClass("hasDatepicker").removeAttr('id');
@@ -793,6 +798,7 @@ $(document).ready(function () {
             dropdown: true,
             scrollbar: true
         });
+        i++;
         return false;
     });
 
