@@ -48,9 +48,9 @@
             <div class="profileField__input-wrap">
 
                 @if(empty($serviceUsersProfile->time_to_bed))
-                    <input name="time_to_bed" id="timepicker1" class="profileField__input" placeholder="Time" type="text">
+                    <input name="time_to_bed" id="time_to_bed" class="profileField__input" placeholder="Time" type="text">
                 @else
-                    {!! Form::text('time_to_bed',null,['id'=>'timepicker1','class'=>'profileField__input','maxlength'=>"50"]) !!}
+                    {!! Form::text('time_to_bed',null,['id'=>'time_to_bed','class'=>'profileField__input','maxlength'=>"50"]) !!}
                 @endif
                 <span class="profileField__input-ico centeredLink">
                 <i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -94,9 +94,9 @@
             <div class="profileField__input-wrap">
                 @if(empty($serviceUsersProfile->time_to_night_helping))
 
-                    <input name="time_to_night_helping" id="timepicker2" class="profileField__input" placeholder="Time" type="text">
+                    <input name="time_to_night_helping" id="time_to_night_helping" class="profileField__input" placeholder="Time" type="text">
                 @else
-                    {!! Form::text('time_to_night_helping',null,['id'=>'timepicker2','class'=>'profileField__input','maxlength'=>"250"]) !!}
+                    {!! Form::text('time_to_night_helping',null,['id'=>'time_to_night_helping','class'=>'profileField__input','maxlength'=>"250"]) !!}
                 @endif
                 <span class="profileField__input-ico centeredLink">
                 <i class="fa fa-clock-o" aria-hidden="true"></i>

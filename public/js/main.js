@@ -643,8 +643,8 @@ $(document).ready(function () {
             yearRange: "0:+10"
         });
 
-    if($.isFunction('timepicker')){
-        $('#timepicker1').timepicker({
+    //if($.isFunction('timepicker')){
+        $('#time_to_bed').timepicker({
             timeFormat: 'h:mm p',
             interval: 30,
             //minTime: '10',
@@ -655,9 +655,9 @@ $(document).ready(function () {
             dropdown: true,
             scrollbar: true
         });
-    }
-    if($.isFunction('timepicker')) {
-        $('#timepicker2').timepicker({
+    //}
+    //if($.isFunction('timepicker')) {
+        $('#time_to_night_helping').timepicker({
             timeFormat: 'h:mm p',
             interval: 30,
             //minTime: '10',
@@ -668,7 +668,7 @@ $(document).ready(function () {
             dropdown: true,
             scrollbar: true
         });
-    }
+    //}
 
     $(".allTime").click(function () {
         $('input.checkboxTimerGroup:checkbox').not(this).prop('checked', this.checked);

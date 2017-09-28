@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
--<head>
+{{--<head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -22,9 +22,10 @@
         <script src="/js/jquery-ui-timepicker-addon.js"></script>
         <script src="{{asset('js/main.js')}}"></script>
 
-    {{--
-     <script  src="js/main.js" defer ></script>--}}
-    </head>
+    --}}{{--
+     <script  src="js/main.js" defer ></script>--}}{{--
+    </head>--}}
+@include(config('settings.frontTheme').'.HTML_head.head')
 <body>
 
 @yield('header')

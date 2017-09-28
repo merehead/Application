@@ -61,9 +61,9 @@
 
                     <div class="inputWrap">
                         @if(empty($serviceUserProfile->time_to_bed))
-                            <input name="time_to_bed" id="timepicker" class="profileField__input" placeholder="Time" type="text">
+                            <input name="time_to_bed" id="time_to_bed" class="profileField__input" placeholder="Time" type="text">
                         @else
-                            {!! Form::text('time_to_bed',null,['id'=>'timepicker','class'=>'profileField__input']) !!}
+                            {!! Form::text('time_to_bed',null,['id'=>'time_to_bed','class'=>'profileField__input']) !!}
                         @endif
                         {{--<input type="text" disabled="" class="formInput personalForm__input" placeholder="Time">--}}
                         <span class="inputIco personalForm__ico centeredLink">
