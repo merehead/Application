@@ -249,12 +249,12 @@
                                         <span>Time: </span>  {{$appointment->time_from}} - {{$appointment->time_to}}
                                     </p>
                                     <div class="appointmentBtn">
-                                        <a href="#" class="appointmentBtn__item appointmentBtn__item--compl">
+                                        <button  data-appointment_id = "{{$appointment->id}}" data-status = "completed"  class="changeAppointmentStatus appointmentBtn__item appointmentBtn__item--compl">
                                             Completed
-                                        </a>
-                                        <a href="#" class="appointmentBtn__item appointmentBtn__item--rej">
-                                            Rejected
-                                        </a>
+                                        </button>
+                                        <button data-appointment_id = "{{$appointment->id}}" data-status = "reject"  class="changeAppointmentStatus appointmentBtn__item appointmentBtn__item--rej">
+                                            Reject
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -349,6 +349,17 @@
         var booking_id = $(this).attr('data-booking_id');
         var status = $(this).attr('data-status');
         $.post('/bookings/'+booking_id+'/'+status, function (data) {
+        });
+    });
+
+    $('.changeAppointmentStatus').click(function () {
+        var appointment_id = $(this).attr('data-appointment_id');
+        var status = $(this).attr('data-status');
+        alert(status); return;
+        $.post('/appointments/'+appointment_id+'/'+status, function (data) {
+            if(data.status == 'success'){
+                location.reload();
+            }
         });
     });
 
