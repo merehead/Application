@@ -827,14 +827,25 @@ $(document).ready(function () {
         return false;
     });
 
-
+    var periodicity = 4;
+    var appointments=1;
     $(document).on('click','a.additionalTime', function (e) {
         e.preventDefault();
         var $that =$(this);
         var dlast = $('.cdate').last().clone();
-        var clast = $('.ctime').last().clone();
+        var clast = $('.checktime').last().clone();
 
-
+        $(clast).find('.periodicity').each(function () {
+            var input_name3 = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
+            var input_name_p3 = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
+            $(this).attr('name', input_name3 + '[' + appointments + input_name_p3);
+            var input_name2 = $(this).attr('id').substring(0, $(this).attr('id').indexOf('D')+1);
+            $(this).attr('id', input_name2 +periodicity);
+            var input_name2 = $(this).parent().find('label').attr('for').substring(0, $(this).parent().find('label').attr('for').indexOf('D')+1);
+            $(this).parent().find('label').attr('for', input_name2 +periodicity);
+            periodicity++;
+        });
+        appointments++;
         $($that).before(dlast);
         $($that).before(clast);
         $('.rtext').last().remove();
