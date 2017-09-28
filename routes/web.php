@@ -94,6 +94,9 @@ Route::post('/bookings/{booking}/completed', 'Bookings\BookingsController@comple
 Route::get('/bookings/{booking}/leave_review', 'Bookings\BookingsController@leaveReviewPage');
 Route::post('/bookings/{booking}/review', 'Bookings\BookingsController@createReview');
 
+Route::post('/appointments/{appointment}/reject', 'Bookings\AppointmentsController@reject');
+Route::post('/appointments/{appointment}/completed', 'Bookings\AppointmentsController@completed');
+
 Route::post('/document/upload','DocumentsController@upload')->name('UploadDocument');
 Route::get('/documents','DocumentsController@GetDocuments')->name('GetDocuments');
 Route::post('/profile-photo','ProfilePhotosController@uploadUserProfilePhoto');
