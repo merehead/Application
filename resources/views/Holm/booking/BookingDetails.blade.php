@@ -25,7 +25,7 @@
         <div class="container">
             <div class="orderInfo">
                 @if($user->user_type_id == 1)
-                    <a href="Service_user_Public_profile_page.html" class="profilePhoto orderInfo__photo">
+                    <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="profilePhoto orderInfo__photo">
                         <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
                     </a>
                     <div class="orderInfo__item orderInfo__item--rightPadding">
@@ -44,25 +44,25 @@
                             <h2 class="ordinaryTitle">
                                 <span class="ordinaryTitle__text ordinaryTitle__text--bigger">DATE</span>
                             </h2>
-                            <span class="orderOptions__value">15 May 2017</span>
+                            <span class="orderOptions__value">{{\Carbon\Carbon::parse($booking->created_at)->toFormattedDateString()}}</span>
                         </div>
                         <div class="orderOptions">
                             <h2 class="ordinaryTitle">
                                 <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Time</span>
                             </h2>
-                            <span class="orderOptions__value">12:00 PM - 5:00 PM</span>
+                            <span class="orderOptions__value">{{\Carbon\Carbon::parse($booking->created_at)->format("h:i A")}}</span>
                         </div>
                         <div class="orderOptions">
                             <h2 class="ordinaryTitle">
                                 <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Distance</span>
                             </h2>
-                            <span class="orderOptions__value">12 (miles)</span>
+                            <span id="distance" class="orderOptions__value">12 (miles)</span>
                         </div>
                         <div class="orderOptions">
                             <h2 class="ordinaryTitle">
                                 <span class="ordinaryTitle__text ordinaryTitle__text--bigger">By car</span>
                             </h2>
-                            <span class="orderOptions__value">30 (min)</span>
+                            <span id="duration" class="orderOptions__value">30 (min)</span>
                         </div>
                     </div>
                     <div class="orderInfo__map">
