@@ -5,14 +5,14 @@
 @yield('header')
 @yield('content')
 @yield('footer')
-<script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+{{--<script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script  src="js/owl.carousel.min.js" defer ></script>
 <link rel="stylesheet" href="/css/cupertino/jquery-ui.min.css">
 <link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">
 <script src="/js/jquery-ui-timepicker-addon.js"></script>
 <script src="<?php echo e(asset('js/jquery-ui.min.js')); ?>"></script>
-<script src="{{asset('js/main.js')}}"></script>
+<script src="{{asset('js/main.js')}}"></script>--}}
 @yield('modals')
 <script>
 
