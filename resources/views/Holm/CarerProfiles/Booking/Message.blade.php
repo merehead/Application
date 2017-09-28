@@ -138,17 +138,17 @@
                         </h2>
                         <div class="messageCheckbox checktime">
                             <div class="checkBox_item">
-                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Daily" class="customCheckbox periodicity"
+                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Daily" class="customCheckbox periodicity Daily"
                                        id="boxD1">
                                 <label for="boxD1">Daily</label>
                             </div>
                             <div class="checkBox_item">
-                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Weekly" class="customCheckbox periodicity"
+                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Weekly" class="customCheckbox periodicity weekly"
                                        id="boxD2">
                                 <label for="boxD2">weekly</label>
                             </div>
                             <div class="checkBox_item">
-                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single" class="customCheckbox periodicity"
+                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single" class="customCheckbox periodicity Single"
                                        id="boxD3">
                                 <label for="boxD3">Single</label>
                             </div>                        </div>
@@ -159,7 +159,7 @@
                     </a>
 
 
-                </div> <div class="moreBtn">
+                </div> <div class="moreBtn nhide">
                         <a href="#" class="moreBtn__item moreBtn__item--withIco centeredLink ">
                             <span>+</span> add more bookings
                         </a>

@@ -829,11 +829,43 @@ $(document).ready(function () {
 
     var periodicity = 4;
     var appointments=1;
+    $(document).on('change','.datepicker_message',function(){
+        var datepickerBegin = $(this).parent().parent().find('.datepicker_message[name*="start"]').datepicker("getDate");
+        var datepickerEnd = $(this).parent().parent().find('.datepicker_message[name*="end"]').datepicker("getDate");
+
+        var form = $(this).parent().parent().parent().parent().parent();
+        $(form).find('.weekly').attr('disabled',false);
+        $(form).find('.Daily').attr('disabled',false);
+        if (datepickerEnd-datepickerBegin==0) {
+            $(form).find('.weekly').attr('disabled',true);
+            $(form).find('.Daily').attr('disabled',true);
+            $(form).find('.Single').attr('checked',true);
+        }else if (datepickerEnd-datepickerBegin < 7 * 86400 * 1000) {
+            $(form).find('.weekly').attr('disabled',true);
+        }else{
+            $(form).find('.weekly').attr('disabled',false);
+            $(form).find('.Daily').attr('disabled',false);
+        }
+    });
+
     $(document).on('click','a.additionalTime', function (e) {
         e.preventDefault();
         var $that =$(this);
         var dlast = $('.cdate').last().clone();
         var clast = $('.checktime').last().clone();
+        $(dlast).find('.datepicker').each(function () {
+            var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
+            var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
+            $(this).attr('name', input_name + '[' + bookings_pos + input_name_p);
+        });
+        $(dlast).find('.timepicker_message').each(function () {
+            var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
+            var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
+            $(this).attr('name', input_name + '[' +bookings_pos+ input_name_p);
+            var input_name1 = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
+            var input_name_p1 = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
+            $(this).attr('name', input_name1 + '[' + bookings_pos + input_name_p1);
+        });
 
         $(clast).find('.periodicity').each(function () {
             var input_name3 = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
