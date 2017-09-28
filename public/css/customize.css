@@ -70,7 +70,8 @@ select#workingTimes {
 .pickfiles,
 .pickfiles-change,
 .pickfiles_profile_photo,
-.pickfiles_profile_photo--change{
+.pickfiles_profile_photo--change,
+.pickfiles_profile_photo_service_user--change{
   position: absolute;
   left: 0;
   top: 0;

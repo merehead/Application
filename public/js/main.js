@@ -4,6 +4,7 @@ var has_error_profile_form=false;
 var error_mark = '';
 var arrFiles = [];
 var arrFilesProfilePhoto = [];
+var ProfilePhotoSeviceUser = [];
 var arrForDeleteIDProfile = [];
 //-------------GoogleMaps ----------------------
 var geocoder;
@@ -1052,14 +1053,20 @@ $(document).ready(function () {
 
             if (arrFilesProfilePhoto.length > 0) {
                 var url = '/profile-photo'
-                if (arrFilesProfilePhoto[0].service_user_id) {
-                    url = '/service-user-profile-photo'
-                }
                 axios.post(
                     url,
                     arrFilesProfilePhoto[0]
                 ).then(function (response) {
-                    console.log(response)
+                    // console.log(response)
+                })
+            }
+            if (ProfilePhotoSeviceUser.length > 0) {
+                    url = '/service-user-profile-photo'
+                axios.post(
+                    url,
+                    ProfilePhotoSeviceUser[0]
+                ).then(function (response) {
+                    // console.log(response)
                 })
             }
 
@@ -1585,22 +1592,29 @@ $(document).ready(function () {
       var reader  = new FileReader()
       reader.addEventListener("load", function() {
 
-        if (fileTypes.indexOf(file.type) !== -1) {
-          $('#profile_photo').attr('src', reader.result)
-          $('.set_preview_profile_photo').attr('src', reader.result)
-        }else{
-          if(wordFileType.indexOf(file.type) !== -1){
-            $('#profile_photo').attr('src', '/img/Word-icon_thumb.png')
-            $('.set_preview_profile_photo').attr('src', '/img/Word-icon_thumb.png')
-          }
-          if(pdfFileType.indexOf(file.type) !== -1){
-            $('#profile_photo').attr('src', '/img/PDF_logo.png')
-            $('.set_preview_profile_photo').attr('src', '/img/PDF_logo.png')
-          }
-        }
+
+      $('#profile_photo').attr('src', reader.result)
+      $('.set_preview_profile_photo').attr('src', reader.result)
 
         file_profile_photo.image = reader.result
         arrFilesProfilePhoto.push(file_profile_photo)
+
+      }, false)
+      reader.readAsDataURL(file)
+    })
+    $('.pickfiles_profile_photo_service_user--change').on('change', function () {
+      var _this = $(this)
+
+      ProfilePhotoSeviceUser = []
+      var file = $(this)[0].files[0]
+
+      var reader  = new FileReader()
+      reader.addEventListener("load", function() {
+
+      $('.profile_photo_service_user').attr('src', reader.result)
+
+      file_profile_photo.image = reader.result
+      ProfilePhotoSeviceUser.push(file_profile_photo)
 
       }, false)
       reader.readAsDataURL(file)
