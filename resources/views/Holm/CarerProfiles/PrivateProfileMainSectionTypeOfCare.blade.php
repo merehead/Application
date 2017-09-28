@@ -5,6 +5,8 @@
         <button type="button" class="btn btn-success hidden" id="load" data-loading-text="<i class='fa fa-spinner
         fa-spin '></i> Processing"><i class="fa fa-floppy-o"></i>  Save</button>
     </div>
+    <span>Please <a target="_blank" href="{{route('ContactPage')}}">contact us</a> if you would like to add Dementia Care, Wounds or Medicine management. Only qualified care workers can do so.</span>
+
 </div>
 {!! Form::model($typeCare, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateTypeCare']) !!}
 {!! Form::hidden('id',$carerProfile->id) !!}

@@ -99,8 +99,10 @@ class CarerController extends FrontController implements Constants
     public function profile($user_id)
     {
 
-        if(Auth::user()->user_type_id == 3) {
-            return \redirect('welcome-carer');
+        if(Auth::check()) {
+            if (Auth::user()->user_type_id == 3) {
+                return \redirect('welcome-carer');
+            }
         }
 
         $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
@@ -158,7 +160,8 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars, 'documents', $documents);
         $this->vars = array_add($this->vars, 'documents_name', $documents_name);
         $this->vars = array_add($this->vars, 'documents_type', $documents_type);
-//            dd($documents);
+//        $Message = view(config('settings.frontTheme').'.CarerProfiles.Booking.Message')->with($this->vars)->render();
+//        $this->vars = array_add($this->vars, 'Message', $Message);
         $this->content = view(config('settings.frontTheme') . '.CarerProfiles.PublicProfile')->with($this->vars)->render();
 
         return $this->renderOutput();
