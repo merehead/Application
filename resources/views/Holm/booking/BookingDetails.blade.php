@@ -143,38 +143,64 @@
         <div class="innerContainer">
             <div class="orderConfirm">
                 <div class="orderConfirm__btns">
-                    @if($user->user_type_id == 1)
-                        @if($booking->status_id == 1)
+                    @if($user->user_type_id == 3)
+                        @if($booking->status_id == 2)
                             <div class="roundedBtn">
-                                <a href="#" class="roundedBtn__item roundedBtn__item--smaller roundedBtn__item--accept">
+                                <button   {{!in_array($booking->carer_status_id, [2]) ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "accept"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smaller roundedBtn__item--accept">
                                     accept
-                                </a>
+                                </button>
                             </div>
                             <div class="roundedBtn">
-                                <a href="#" class="roundedBtn__item roundedBtn__item--smaller roundedBtn__item--reject">
+                                <button {{!in_array($booking->carer_status_id, [2]) ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "accept"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smaller roundedBtn__item--reject">
                                     reject
-                                </a>
+                                </button>
                             </div>
                             <div class="roundedBtn">
-                                <a href="Message.html" class="roundedBtn__item   roundedBtn__item--alternative">
+                                <button  class="roundedBtn__item   roundedBtn__item--alternative">
                                     OFFER ALTERNATIVE TIME
-                                </a>
+                                </button>
                             </div>
                         @elseif($booking->status_id == 5)
                             <div class="roundedBtn">
-                                <button data-booking_id = "{{$booking->id}}" data-status = "cancel"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--cancel">
+                                <button {{!in_array($booking->carer_status_id, [5]) ? 'disabled' : ''}} data-booking_id = "{{$booking->id}}" data-status = "cancel"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--cancel">
                                     cancel
                                 </button>
                             </div>
                             <div class="roundedBtn">
-                                <button  data-booking_id = "{{$booking->id}}" data-status = "completed"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
+                                <button {{!in_array($booking->carer_status_id, [5]) ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "completed"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
                                     completed
                                 </button>
                             </div>
-                        @elseif($booking->status_id == 7)
                         @endif
-
                     @else
+                        @if($booking->status_id == 2)
+                            <div class="roundedBtn">
+                                <button  {{!in_array($booking->purchaser_status_id, [2]) ? 'disabled' : ''}} data-booking_id = "{{$booking->id}}" data-status = "accept"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smaller roundedBtn__item--accept">
+                                    accept
+                                </button>
+                            </div>
+                            <div class="roundedBtn">
+                                <button {{!in_array($booking->purchaser_status_id, [1, 2]) ? 'disabled' : ''}} data-booking_id = "{{$booking->id}}" data-status = "cancel" class="changeBookingStatus roundedBtn__item roundedBtn__item--smaller roundedBtn__item--reject">
+                                    cancel
+                                </button>
+                            </div>
+                            <div class="roundedBtn">
+                                <button  class="roundedBtn__item   roundedBtn__item--alternative">
+                                    OFFER ALTERNATIVE TIME
+                                </button>
+                            </div>
+                        @elseif($booking->status_id == 5)
+                            <div class="roundedBtn">
+                                <button {{!in_array($booking->carer_status_id, [5]) ? 'disabled' : ''}} data-booking_id = "{{$booking->id}}" data-status = "cancel"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--cancel">
+                                    cancel
+                                </button>
+                            </div>
+                            <div class="roundedBtn">
+                                <button {{!in_array($booking->carer_status_id, [5]) ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "completed"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
+                                    completed
+                                </button>
+                            </div>
+                        @endif
                     @endif
                 </div>
                 <div class="total">
@@ -234,7 +260,7 @@
                                 <div class="singleAppointment__header">
                                   <span>
                                     #{{$i}}
-                                  </span>
+                                  </span>git
                                     <h2>
                                         {{in_array($appointment->status_id, [1]) ? 'new' : ''}}
                                         {{in_array($appointment->status_id, [4]) ? 'completed' : ''}}
@@ -243,7 +269,7 @@
                                 </div>
                                 <div class="singleAppointment__body">
                                     <p>
-                                        <span>Date: </span> {{$appointment->date_start}} - {{$appointment->date_end}}
+                                        <span>Date: </span> {{$appointment->date_start}}
                                     </p>
                                     <p>
                                         <span>Time: </span>  {{$appointment->time_from}} - {{$appointment->time_to}}
@@ -385,5 +411,15 @@
 
     $(document).ready(function(){
         DistanceMatrixService();
+    });
+
+    $('.changeBookingStatus').click(function () {
+        var booking_id = $(this).attr('data-booking_id');
+        var status = $(this).attr('data-status');
+        $.post('/bookings/'+booking_id+'/'+status, function (data) {
+            if(data.status == 'success'){
+                location.reload();
+            }
+        });
     });
 </script>

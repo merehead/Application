@@ -46,17 +46,18 @@ class BookingsController extends FrontController implements Constants
 
             foreach ($booking_item['appointments'] as $appointment_item){
                 $days = $this->generateDateRange(Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")), Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d")));
-                dd($days);
-                $booking->appointments()->create([
-                    'date_start' => date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d"),
-                    'date_end' => date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d"),
-                    'time_from' => $appointment_item['time_from'],
-                    'time_to' => $appointment_item['time_to'],
-                    'periodicity' => $appointment_item['periodicity'],
-                    'status_id' => 1,
-                    'carer_status_id' => 1,
-                    'purchaser_status_id' => 1,
-                ]);
+                foreach ($days as $day){
+                    $booking->appointments()->create([
+                        'date_start' => $day,
+                        'date_end' => $day,
+                        'time_from' => $appointment_item['time_from'],
+                        'time_to' => $appointment_item['time_to'],
+                        'periodicity' => $appointment_item['periodicity'],
+                        'status_id' => 1,
+                        'carer_status_id' => 1,
+                        'purchaser_status_id' => 1,
+                    ]);
+                }
             }
 
             $booking->assistance_types()->attach($booking_item['assistance_types']);
@@ -101,7 +102,6 @@ class BookingsController extends FrontController implements Constants
             $this->vars = array_add($this->vars, 'carerProfile', $carerProfile);
 
             $this->content = view(config('settings.frontTheme') . '.booking.BookingDetails')->with($this->vars)->render();
-
         }
 
 

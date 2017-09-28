@@ -82,8 +82,8 @@
                                     </button>
                                 </div>
                                 <div class="roundedBtn">
-                                    <button {{!in_array($booking->purchaser_status_id, [2]) ? 'disabled' : ''}} data-booking_id = "{{$booking->id}}" data-status = "reject" class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--reject">
-                                        reject
+                                    <button {{!in_array($booking->purchaser_status_id, [2]) ? 'disabled' : ''}} data-booking_id = "{{$booking->id}}" data-status = "cancel" class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--reject">
+                                        cancel
                                     </button>
                                 </div>
                                 <div class="roundedBtn">
@@ -130,7 +130,7 @@
                                 <div class="roundedBtn">
                                     <button  {{!in_array($booking->purchaser_status_id, [3, 5]) ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "cancel"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--cancel">
                                         cancel
-                                    </a>
+                                    </button>
                                 </div>
                                 <div class="roundedBtn">
                                     <button  {{!in_array($booking->purchaser_status_id, [3, 5]) ? 'disabled' : ''}}   data-booking_id = "{{$booking->id}}"  data-status = "completed"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">

@@ -58,15 +58,14 @@ class Appointment extends Model
             case 'daily':
             case 'weekly':
             case 'single':
-                $dateStart = Carbon::createFromFormat('d/m/Y', $this->date_start);
-                $dateEnd = Carbon::createFromFormat('d/m/Y', $this->date_end);
-                $days = $dateEnd->diffInDays($dateStart);
+//                $dateStart = Carbon::createFromFormat('d/m/Y', $this->date_start);
+//                $dateEnd = Carbon::createFromFormat('d/m/Y', $this->date_end);
+//                $days = $dateEnd->diffInDays($dateStart);
                 if($timeTo > $timeFrom){
                     $hours = $timeTo - $timeFrom;
                 } else {
                     $hours = 24 - $timeFrom + $timeTo;
                 }
-                $hours *= $days;
                 break;
         }
 
