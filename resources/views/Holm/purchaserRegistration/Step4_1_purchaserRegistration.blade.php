@@ -227,7 +227,7 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
 
                 @if(!empty($purchasersProfileID))
 
-                <a href="Signup_C_3.html" class="registrationBtns__item registrationBtns__item--back"
+                <a href="#" class="registrationBtns__item registrationBtns__item--back"
                    onclick="event.preventDefault();document.getElementById('stepback').submit();">
                     <i class="fa fa-arrow-left "></i>back
                 </a>

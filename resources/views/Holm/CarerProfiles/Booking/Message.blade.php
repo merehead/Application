@@ -1,6 +1,6 @@
 @if(!empty($carerProfile) && Auth::check())
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">
+<script src="/js/jquery-ui-timepicker-addon.js"></script>
 <script>
     $(document).ready(function () {
         map = new google.maps.Map(document.getElementById('map_canvas'), {
@@ -10,6 +10,7 @@
         var geocoder = new google.maps.Geocoder();
         geocodeAddress(geocoder, map);
         $carer_profile.find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
+        $carer_profile.find('input[type="text"]').attr("readonly", false).removeClass('profileField__input--greyBg');
     });
 </script>
 
@@ -64,25 +65,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="messageGroup">
+                    <div class="bookings-more">
+                        <div class="messageGroup">
 
-                        <h2 class="ordinaryTitle">
-                            <span class="ordinaryTitle__text">Type of care</span>
-                        </h2>
-                        <div class="messageCheckbox">
-                            @foreach($typeCareAll as $care)
-                                <div class="checkBox_item">
+                            <h2 class="ordinaryTitle">
+                                <span class="ordinaryTitle__text">Type of care</span>
+                            </h2>
+                            <div class="messageCheckbox">
+                                @foreach($typeCareAll as $care)
+                                    <div class="checkBox_item">
 
-                                    {!! Form::checkbox('bookings[0][assistance_types][]', $care->id, null,
-                                                array('class' => 'customCheckbox ','id'=>'assistance_types'.$care->id)) !!}
-                                    <label for="assistance_types{{$care->id}}">{{$care->name}}</label>
-                                </div>
-                            @endforeach
+                                        {!! Form::checkbox('bookings[0][assistance_types][]', $care->id, null,
+                                                    array('class' => 'customCheckbox ','id'=>'assistance_types'.$care->id)) !!}
+                                        <label for="assistance_types{{$care->id}}">{{$care->name}}</label>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                    <div class="messageGroup ">
-                        <h2 class="ordinaryTitle">
-                              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
+                        <div class="messageGroup cdate">
+                            <h2 class="ordinaryTitle">
+                              <span class="ordinaryTitle__text ordinaryTitle__text--smaller rtext">
                                 select date and time
                              </span>
                         </h2>

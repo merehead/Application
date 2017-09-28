@@ -243,7 +243,7 @@
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-               Has  risk of developing pressure sores on their skin
+               Has risk of developing pressure sores on their skin
               </span>
             </h2>
             {!! Form::select('skin_scores',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}

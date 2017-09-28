@@ -101,13 +101,13 @@
                         <h2 class="ordinaryTitle">
                             <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Distance</span>
                         </h2>
-                        <span class="orderOptions__value">12 (miles)</span>
+                        <span id="distance" class="orderOptions__value">12 (miles)</span>
                     </div>
                     <div class="orderOptions">
                         <h2 class="ordinaryTitle">
                             <span class="ordinaryTitle__text ordinaryTitle__text--bigger">By car</span>
                         </h2>
-                        <span class="orderOptions__value">30 (min)</span>
+                        <span id="duration" class="orderOptions__value">30 (min)</span>
                     </div>
                 </div>
                 <div class="orderInfo__map">
@@ -343,6 +343,7 @@
     </div>
 </section>
 
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJaLv-6bVXViUGJ_e_-nR5RZlt9GUuC4M"></script>
 <script>
     $('.changeBookingStatus').click(function () {
         var booking_id = $(this).attr('data-booking_id');
@@ -351,4 +352,25 @@
         });
     });
 
+    function DistanceMatrixService() {
+      var origin1 = '{{$carerProfile->address_line1}}';
+      var destinationA = '{{$serviceUserProfile->address_line1}}';
+
+      var service = new google.maps.DistanceMatrixService();
+      service.getDistanceMatrix(
+        {
+          origins: [origin1],
+          destinations: [destinationA],
+          travelMode: 'DRIVING',
+        }, callback);
+
+      function callback(response, status) {
+        $('#distance').html(response.rows[0].elements[0].distance.text)
+        $('#duration').html(response.rows[0].elements[0].duration.text)
+      }
+    }
+
+    $(document).ready(function(){
+        DistanceMatrixService();
+    });
 </script>

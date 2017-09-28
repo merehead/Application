@@ -30,7 +30,7 @@
 <div class="profilePricing">
     <p class="hourPrice hourPrice">
 <span class="hourPrice__price hourPrice__price--big">
-£ {{random_int(8,15)}}</span><span class="hourPrice__timing">/hour</span>
+From £ {{random_int(8,15)}}</span><span class="hourPrice__timing">/hour</span>
     </p>
     <div class="bookBtn">
         <a href="#" class="bookBtn__item  centeredLink" data-toggle="modal" data-target="#message-carer">

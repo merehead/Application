@@ -1195,7 +1195,7 @@ class ServiceUserRegistration
             'have_incontinence' => 'required|in:"Yes","No","Sometimes"',
             'kind_of_incontinence' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|string|max:255',
             'incontinence_wear' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|in:"Yes","No","Sometimes"',
-            'incontinence_products_stored' => 'required_if:have_incontinence,"Yes","Sometimes"|nullable|string|max:255',
+            'incontinence_products_stored' => 'required_if:incontinence_wear,"Yes","Sometimes"|nullable|string|max:255',
             'choosing_incontinence_products' => 'nullable|in:"Yes","No","Sometimes"',
         ]);
 

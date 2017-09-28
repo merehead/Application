@@ -70,6 +70,7 @@ class PurchaserRegistrationController extends FrontController
             }
             if ($this->purchaserProfile->getNextStep() == 'Step4_2_purchaserRegistration') {
 
+
                 if (count($purchasersProfile->serviceUsers)){
 
                     $serviceUsersProfile = $purchasersProfile->serviceUsers->first();
@@ -92,6 +93,7 @@ class PurchaserRegistrationController extends FrontController
                         $serviceUsersProfile->DoB = $purchasersProfile->DoB;
                     }
                     $serviceUsersProfile->save();
+
                 }
 
                 //dd($serviceUsersProfile);
@@ -122,10 +124,15 @@ class PurchaserRegistrationController extends FrontController
             //dd($request->all());
 
             $stepback = $request->stepback;
-
             $purchaserProfiles = PurchasersProfile::findOrFail($request->input('purchasersProfileID'));
 
-            $purchaserProfiles->registration_progress = $request->input('stepback');
+            if ($stepback=='4_1' && $purchaserProfiles->purchasing_care_for == 'Myself'){
+
+                $purchaserProfiles->registration_progress = '4_2';
+
+            } else {
+                $purchaserProfiles->registration_progress = $request->input('stepback');
+            }
 
             $purchaserProfiles->save();
 
