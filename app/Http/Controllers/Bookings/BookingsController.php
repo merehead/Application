@@ -19,7 +19,7 @@ class BookingsController extends FrontController implements Constants
 {
     public function create(Request $request){
 
-        dd($request->all());
+        //dd($request->all());
 //        $purchaser = User::find(2);
         $purchaser = Auth::user();
         $carer = User::find($request->carer_id);

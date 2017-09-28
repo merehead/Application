@@ -115,12 +115,12 @@
                             </div>
 
 
-                            <div class="messageInputs__field messageTime ">
+{{--                            <div class="messageInputs__field messageTime ">
                                 <input name="time_to_bed" id="time_to_bed" class="messageInput" placeholder="555" type="text">
                                 <a href="#" class="messageIco centeredLink">
                                     <i class="fa fa-clock-o" aria-hidden="true"></i>
                                 </a>
-                            </div>
+                            </div>--}}
 
 
                             <div class="messageInputs__field messageTime ">
