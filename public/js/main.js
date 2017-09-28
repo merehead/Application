@@ -828,6 +828,25 @@ $(document).ready(function () {
 
     var periodicity = 4;
     var appointments=1;
+    $(document).on('change','.datepicker_message',function(){
+        var datepickerBegin = $(this).parent().parent().find('.datepicker_message[name*="start"]').datepicker("getDate");
+        var datepickerEnd = $(this).parent().parent().find('.datepicker_message[name*="end"]').datepicker("getDate");
+
+        var form = $(this).parent().parent().parent().parent().parent();
+        $(form).find('.weekly').attr('disabled',false);
+        $(form).find('.Daily').attr('disabled',false);
+        if (datepickerEnd-datepickerBegin==0) {
+            $(form).find('.weekly').attr('disabled',true);
+            $(form).find('.Daily').attr('disabled',true);
+            $(form).find('.Single').attr('checked',true);
+        }else if (datepickerEnd-datepickerBegin < 7 * 86400 * 1000) {
+            $(form).find('.weekly').attr('disabled',true);
+        }else{
+            $(form).find('.weekly').attr('disabled',false);
+            $(form).find('.Daily').attr('disabled',false);
+        }
+    });
+
     $(document).on('click','a.additionalTime', function (e) {
         e.preventDefault();
         var $that =$(this);
