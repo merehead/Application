@@ -32,8 +32,8 @@
     <script src="/js/jquery-ui.min.js"></script>
     <script src="/js/jquery-ui-timepicker-addon.js"></script>
 
-    <script src="{{asset('js/main.js')}}"></script>
     <script src="{{asset('js/jquery.autocomplete.js')}}"></script>
+    <script src="{{asset('js/main.js')}}"></script>
 {{--
     <script src="{{asset('js/plupload.full.min.js')}}"></script>
 --}}
