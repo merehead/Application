@@ -14,6 +14,7 @@ use App\User;
 use Illuminate\Http\Request;
 use SebastianBergmann\Comparator\Book;
 use Auth;
+use Carbon\Carbon;
 
 class BookingsController extends FrontController implements Constants
 {
@@ -28,7 +29,6 @@ class BookingsController extends FrontController implements Constants
         else
             $bookings = $request->bookings;
 
-        dd($bookings);
 
 
         foreach ($bookings as $booking_item){
@@ -45,6 +45,8 @@ class BookingsController extends FrontController implements Constants
 
 
             foreach ($booking_item['appointments'] as $appointment_item){
+                $days = $this->generateDateRange(Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")), Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d")));
+                dd($days);
                 $booking->appointments()->create([
                     'date_start' => date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d"),
                     'date_end' => date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d"),
@@ -247,5 +249,16 @@ class BookingsController extends FrontController implements Constants
             ->render();
 
         return $this->renderOutput();
+    }
+
+    private function generateDateRange(Carbon $start_date, Carbon $end_date)
+    {
+        $dates = [];
+
+        for($date = $start_date; $date->lte($end_date); $date->addDay()) {
+            $dates[] = $date->format('Y-m-d');
+        }
+
+        return $dates;
     }
 }
