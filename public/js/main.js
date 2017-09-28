@@ -759,15 +759,39 @@ $(document).ready(function () {
             scrollbar: true
         });
     }
-
+    var bookings_pos=1;
     $('.moreBtn__item').on('click',function(){
 
-        var i=1;
+
         var dlast = $('.bookings-more').last().clone();
         $(dlast).find('.datepicker').each(function () {
             var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('['));
             var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('[')+2, $(this).attr('name').length);
-            $(this).attr('name', input_name + '[' + i + input_name_p);
+            $(this).attr('name', input_name + '[' + bookings_pos + input_name_p);
+        });
+        $(dlast).find('.timepicker_message').each(function () {
+            var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('['));
+            var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('[')+2, $(this).attr('name').length);
+            $(this).attr('name', input_name + '[' +bookings_pos+ input_name_p);
+            var input_name1 = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
+            var input_name_p1 = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
+            $(this).attr('name', input_name1 + '[' + bookings_pos + input_name_p1);
+        });
+        $(dlast).find('.periodicity').each(function () {
+            var input_name2 = $(this).attr('name').substring(0, $(this).attr('name').indexOf('['));
+            var input_name_p2 = $(this).attr('name').substring($(this).attr('name').indexOf('[')+2, $(this).attr('name').length);
+            $(this).attr('name', input_name2 + '[' +bookings_pos+ input_name_p2);
+            var input_name3 = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
+            var input_name_p3 = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
+            $(this).attr('name', input_name3 + '[' + bookings_pos + input_name_p3);
+        });
+        $(dlast).find('.assistance_types').each(function () {
+            var input_name2 = $(this).attr('name').substring(0, $(this).attr('name').indexOf('['));
+            var input_name_p2 = $(this).attr('name').substring($(this).attr('name').indexOf('[')+2, $(this).attr('name').length);
+            $(this).attr('name', input_name2 + '[' +bookings_pos+ input_name_p2);
+            // var input_name3 = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
+            // var input_name_p3 = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
+            // $(this).attr('name', input_name3 + '[' + bookings_pos + input_name_p3);
         });
         $('.moreBtn__item').before(dlast);
         $('.bookings-more').last().find('.datepicker_message').removeClass("hasDatepicker").removeAttr('id');
@@ -799,18 +823,29 @@ $(document).ready(function () {
             dropdown: true,
             scrollbar: true
         });
-        i++;
+        bookings_pos++;
         return false;
     });
 
-
+    var periodicity = 4;
+    var appointments=1;
     $(document).on('click','a.additionalTime', function (e) {
         e.preventDefault();
         var $that =$(this);
         var dlast = $('.cdate').last().clone();
-        var clast = $('.ctime').last().clone();
+        var clast = $('.checktime').last().clone();
 
-
+        $(clast).find('.periodicity').each(function () {
+            var input_name3 = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
+            var input_name_p3 = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
+            $(this).attr('name', input_name3 + '[' + appointments + input_name_p3);
+            var input_name2 = $(this).attr('id').substring(0, $(this).attr('id').indexOf('D')+1);
+            $(this).attr('id', input_name2 +periodicity);
+            var input_name2 = $(this).parent().find('label').attr('for').substring(0, $(this).parent().find('label').attr('for').indexOf('D')+1);
+            $(this).parent().find('label').attr('for', input_name2 +periodicity);
+            periodicity++;
+        });
+        appointments++;
         $($that).before(dlast);
         $($that).before(clast);
         $('.rtext').last().remove();

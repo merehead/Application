@@ -78,7 +78,7 @@
                                     <div class="checkBox_item">
 
                                         {!! Form::checkbox('bookings[0][assistance_types][]', $care->id, null,
-                                                    array('class' => 'customCheckbox ','id'=>'assistance_types'.$care->id)) !!}
+                                                    array('class' => 'customCheckbox assistance_types','id'=>'assistance_types'.$care->id)) !!}
                                         <label for="assistance_types{{$care->id}}">{{$care->name}}</label>
                                     </div>
                                 @endforeach
@@ -138,19 +138,19 @@
                         </h2>
                         <div class="messageCheckbox checktime">
                             <div class="checkBox_item">
-                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Daily" class="customCheckbox"
+                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Daily" class="customCheckbox periodicity"
                                        id="boxD1">
                                 <label for="boxD1">Daily</label>
                             </div>
                             <div class="checkBox_item">
-                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Weekly" class="customCheckbox"
+                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Weekly" class="customCheckbox periodicity"
                                        id="boxD2">
                                 <label for="boxD2">weekly</label>
                             </div>
                             <div class="checkBox_item">
-                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single" class="customCheckbox"
-                                       id="box3">
-                                <label for="box3">Single</label>
+                                <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single" class="customCheckbox periodicity"
+                                       id="boxD3">
+                                <label for="boxD3">Single</label>
                             </div>                        </div>
                     </div>
                     <a href="#" class="additionalTime">
