@@ -230,15 +230,15 @@
                     <div class="appointmentSlider owl-carousel">
                         @php($i = 1)
                         @foreach($booking->appointments()->get() as $appointment)
-                            <div class="singleAppointment singleAppointment--{{$appointment->status_id == 2 ? 'progress' : 'done'}}">
+                            <div class="singleAppointment singleAppointment--{{in_array($appointment->status_id, [2, 3]) ? 'progress' : 'done'}}">
                                 <div class="singleAppointment__header">
                                   <span>
                                     #{{$i}}
                                   </span>
                                     <h2>
-                                        {{$appointment->status_id == 1 ? 'new' : ''}}
-                                        {{$appointment->status_id == 4 ? 'completed' : ''}}
-                                        {{$appointment->status_id == 2 ? 'in progress' : ''}}
+                                        {{in_array($appointment->status_id, [1]) ? 'new' : ''}}
+                                        {{in_array($appointment->status_id, [4]) ? 'completed' : ''}}
+                                        {{in_array($appointment->status_id, [2, 3]) ? 'in progress' : ''}}
                                     </h2>
                                 </div>
                                 <div class="singleAppointment__body">
@@ -249,10 +249,11 @@
                                         <span>Time: </span>  {{$appointment->time_from}} - {{$appointment->time_to}}
                                     </p>
                                     <div class="appointmentBtn">
-                                        <button  data-appointment_id = "{{$appointment->id}}" data-status = "completed"  class="changeAppointmentStatus appointmentBtn__item appointmentBtn__item--compl">
+                                        @php($field = $user->user_type_id == 1 ? 'purchaser_status_id' : 'carer_status_id')
+                                        <button {{!in_array($booking->{$field}, [2]) ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "completed"  class="changeAppointmentStatus appointmentBtn__item appointmentBtn__item--compl">
                                             Completed
                                         </button>
-                                        <button data-appointment_id = "{{$appointment->id}}" data-status = "reject"  class="changeAppointmentStatus appointmentBtn__item appointmentBtn__item--rej">
+                                        <button {{!in_array($booking->{$field}, [2]) ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "reject"  class="changeAppointmentStatus appointmentBtn__item appointmentBtn__item--rej">
                                             Reject
                                         </button>
                                     </div>
@@ -299,13 +300,15 @@
                             <div class="comment__info">
                                 <div class="commentHeader">
                                     <h2 class="profileName">
-                                        <a href="Service_user_Public_profile_page.html">
-                                            @if($message->sender == 'carer')
+                                        @if($message->sender == 'carer')
+                                            <a href="{{$booking->bookingCarer()->first()->profile_link}}">
                                                 {{$booking->bookingCarer()->first()->full_name}}
-                                            @elseif($message->sender == 'service_user')
+                                            </a>
+                                        @elseif($message->sender == 'service_user')
+                                            <a href="Service_user_Public_profile_page.html">
                                                 {{$booking->bookingServiceUser()->first()->full_name}}
-                                            @endif
-                                        </a>
+                                            </a>
+                                        @endif
                                     </h2>
                                     <p class="commentHeader__date">
                                         <span>{{Carbon\Carbon::parse($message->created_at)->format('g:i A')}}</span>
@@ -355,7 +358,6 @@
     $('.changeAppointmentStatus').click(function () {
         var appointment_id = $(this).attr('data-appointment_id');
         var status = $(this).attr('data-status');
-        alert(status); return;
         $.post('/appointments/'+appointment_id+'/'+status, function (data) {
             if(data.status == 'success'){
                 location.reload();

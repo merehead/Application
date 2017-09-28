@@ -22,6 +22,7 @@ class VerifyCsrfToken extends BaseVerifier
 
         'bookings',
         'bookings/*',
+        'appointments/*',
 
     ];
 }

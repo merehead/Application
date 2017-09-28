@@ -28,7 +28,7 @@ class BookingsController extends FrontController implements Constants
         else
             $bookings = $request->bookings;
 
-//        dd($bookings);
+        dd($bookings);
 
 
         foreach ($bookings as $booking_item){
