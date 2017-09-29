@@ -100,7 +100,7 @@
                  !!}
 
             </div>
-            <div class="profileField hiding_profile profileField--full-width">
+            <div class="profileField hiding_profile profileField--full-width" {!!  ($carerProfile->driving_licence == 'No' || is_null($carerProfile->driving_licence) )? 'style="display:none"' : ''!!}>
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
                  Car for Work
@@ -111,7 +111,10 @@ null,['class'=>'profileField__select','id'=>'type_car_work']) !!}
 
 
             </div>
-            <div class="profileField hiding_profile profileField--full-width">
+
+@if(($carerProfile->driving_licence == 'No' || is_null($carerProfile->driving_licence)))
+    @else
+            <div class="profileField hiding_profile profileField--full-width" {!!  ($carerProfile->driving_licence == 'No' || is_null($carerProfile->driving_licence) )? 'style="display:none"' : ''!!}>
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
                 Transport clients
@@ -120,17 +123,15 @@ null,['class'=>'profileField__select','id'=>'type_car_work']) !!}
                 {!! Form::select('use_car',['Yes'=>'Transport clients','No'=>'Can not transport clients'],
 null,['class'=>'profileField__select','id'=>'profile_use_car']) !!}
 
-
-
-
             </div>
+@endif
+
         </div>
         {{--<div class="profileField profileField-mr">--}}
         {{--</div>--}}
         {{--<div class="profileField profileField-mr">--}}
         {{--</div>--}}
-
-        <div class="profileField hiding_profile profileField-mr">
+        <div class="profileField hiding_profile profileField-mr" {!!  ($carerProfile->driving_licence == 'No' || is_null($carerProfile->driving_licence) )? 'style="display:none"' : ''!!}>
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
@@ -177,7 +178,7 @@ null,['class'=>'profileField__select','id'=>'profile_use_car']) !!}
             </div>
         </div>
 
-        <div class="profileField hiding_profile profileField-mr car-block">
+        <div class="profileField hiding_profile profileField-mr " {!!  ($carerProfile->driving_licence == 'No' || is_null($carerProfile->driving_licence) )? 'style="display:none"' : ''!!}>
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
