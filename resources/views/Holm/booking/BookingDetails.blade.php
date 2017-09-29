@@ -222,8 +222,10 @@
         <span>
             @if($booking->status_id == 2)
                 BOOKING AWAITING CONFIRMATION
+            @elseif($booking->status_id == 4)
+                BOOKING CANCELLED
             @elseif($booking->status_id == 5)
-                BOOKING CONFIRMED
+                BOOKING IN DISPUTE
             @elseif($booking->status_id == 7)
                 BOOKING COMPLETED
             @endif
