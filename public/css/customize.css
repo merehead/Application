@@ -590,6 +590,10 @@ label.correct2 {
     margin: 20px;
 }
 
+ .col-sm-6 {
+   min-height: 0; 
+ }
+
 /*
 .messageInputs__field {
     z-index: 999;
