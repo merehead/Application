@@ -189,6 +189,8 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars,'header',$header);
         $this->vars = array_add($this->vars,'footer',$footer);
         $this->vars = array_add($this->vars,'modals',$modals);
+        $carerProfile = CarersProfile::findOrFail($user->id);
+        $this->vars = array_add($this->vars,'carerProfile',$carerProfile);
 
 
 
@@ -214,7 +216,7 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars, 'completedBookings', $completedBookings);
         $this->vars = array_add($this->vars, 'completedAmount', $completedAmount);
 
-$this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarerall')->with($this->vars)->render();
+        $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarerall')->with($this->vars)->render();
 
 
         return $this->renderOutput();

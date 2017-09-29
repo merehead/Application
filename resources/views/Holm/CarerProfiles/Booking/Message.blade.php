@@ -99,13 +99,8 @@
                                     <i class="fa fa-calendar" aria-hidden="true"></i>
                                 </a>
                             </div>
-                            <div class="messageInputs__field messageDate">
-                                <input type="text" class="messageInput datepicker datepicker_message"
-                                       name="bookings[0][appointments][0][date_end]" placeholder=" 08.08.2017">
-                                <a href="#" class="messageIco centeredLink">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                </a>
-                            </div>
+                            <label class="checkBox_item correct2" for="date_end">Start</label>
+
                             <div class="messageInputs__field messageTime ">
                                 <input type="text" class="messageInput timepicker_message"
                                        name="bookings[0][appointments][0][time_from]" placeholder="14.30 PM" value="14.30">
@@ -122,7 +117,7 @@
                                 </a>
                             </div>--}}
 
-
+                            <label class="checkBox_item correct2" for="date_end">End</label>
                             <div class="messageInputs__field messageTime ">
                                 <input type="text" class="messageInput timepicker_message" id="time_to_bed"
                                        name="bookings[0][appointments][0][time_to]" placeholder="20.30 PM"  value="20.30">
@@ -147,7 +142,15 @@
                                        id="boxD2">
                                 <label for="boxD2">weekly</label>
                             </div>
-                            <div class="checkBox_item">
+                            <label class="checkBox_item correct nhide" for="date_end">Continue until</label>
+                            <div class="messageInputs__field messageDate nhide">
+                                <input type="text" class="messageInput datepicker datepicker_message" id="date_end"
+                                       name="bookings[0][appointments][0][date_end]" placeholder=" 08.08.2017">
+                                <a href="#" class="messageIco centeredLink">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="checkBox_item nhide">
                                 <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single" class="customCheckbox periodicity Single"
                                        id="boxD3">
                                 <label for="boxD3">Single</label>

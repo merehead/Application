@@ -483,12 +483,17 @@ button:disabled:hover { background: #d7d7d7; color: #f8f4f4;}
 
 
 
-.map{margin-top: 0px;
+.map{
+    margin-top: 0px;
     height:200px;}
-div.ui-timepicker-container{z-index: 2000;!important;}
+div.ui-timepicker-container{
+    z-index: 2000!important;
+}
 .bookings-more{margin-bottom: 28px;}
 
-
+label.correct{    margin-right: 22px!important;
+    width: auto!important;}
+label.correct2{ margin: 20px;}
 /*
 .messageInputs__field {
     z-index: 999;
