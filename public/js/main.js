@@ -6,6 +6,11 @@ var arrFiles = [];
 var arrFilesProfilePhoto = [];
 var ProfilePhotoSeviceUser = [];
 var arrForDeleteIDProfile = [];
+//----------------------------------
+var bookings_pos=1;
+var periodicity = 4;
+var appointments=1;
+var like_name;
 //-------------GoogleMaps ----------------------
 var geocoder;
 var map;
@@ -347,10 +352,19 @@ $(document).ready(function () {
         }
     });
 
+    like_name=$('input[name="like_name"]').val();
     $('input[name="like_name"]').on('change',function(){
         var text = $(this).val();
         $('.line_about').html('ONE LINE ABOUT '+text);
+
+        $('span').each(function(){
+            var t = $(this).text();
+            console.log();
+            t=t.replace(like_name, text);
+            $(this).text(t);
+        });
     });
+
     // $('input[name="mobile_number"]').on('keyup', function () {
     //     var val=$(this).val();
     //     var that = this;
@@ -785,7 +799,7 @@ $(document).ready(function () {
             scrollbar: true
         });
     }
-    var bookings_pos=1;
+
     $('.moreBtn__item').on('click',function(){
 
 
@@ -853,8 +867,6 @@ $(document).ready(function () {
         return false;
     });
 
-    var periodicity = 4;
-    var appointments=1;
     $(document).on('change','.datepicker_message',function(){
         var datepickerBegin = $(this).parent().parent().find('.datepicker_message[name*="start"]').datepicker("getDate");
         var datepickerEnd = $(this).parent().parent().find('.datepicker_message[name*="end"]').datepicker("getDate");
@@ -895,6 +907,17 @@ $(document).ready(function () {
             yearRange: "0:+2"
         });
     });
+
+    $(document).on('click','.delete',function(){
+        var that = $(this);
+        var cur = $(that).attr('data-id');
+        $(that).parent().parent().remove();
+
+        $('div[data-id="'+cur+'"]').remove();
+        appointments=appointments-1;
+        if(appointments<=1)$('.delete').hide();
+    });
+
     $(document).on('click','.Daily',function(){
         var that = $(this);
         var datetime = $(that).parent().parent().find('.datepicker_message');
@@ -924,15 +947,17 @@ $(document).ready(function () {
         $(dlast).find('.datepicker').each(function () {
             var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
             var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
-            $(this).attr('name', input_name + '[' + bookings_pos + input_name_p);
+            $(this).attr('name', input_name + '[' + appointments + input_name_p);
+            $(this).parent().parent().find('.delete').attr('data-id','d'+appointments);
+            $(this).parent().parent().find('.delete').show();
         });
         $(dlast).find('.timepicker_message').each(function () {
             var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
             var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
-            $(this).attr('name', input_name + '[' +bookings_pos+ input_name_p);
+            $(this).attr('name', input_name + '[' +appointments+ input_name_p);
             var input_name1 = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
             var input_name_p1 = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
-            $(this).attr('name', input_name1 + '[' + bookings_pos + input_name_p1);
+            $(this).attr('name', input_name1 + '[' + appointments + input_name_p1);
         });
 
         $(clast).find('.periodicity').each(function () {
@@ -943,9 +968,17 @@ $(document).ready(function () {
             $(this).attr('id', input_name2 +periodicity);
             var input_name2 = $(this).parent().find('label').attr('for').substring(0, $(this).parent().find('label').attr('for').indexOf('D')+1);
             $(this).parent().find('label').attr('for', input_name2 +periodicity);
+            $(this).parent().parent().attr('data-id','d'+appointments);
+            $(this).parent().parent().find('.delete').attr('data-id','d'+appointments);
             periodicity++;
         });
-        appointments++;
+        $(clast).find('.datepicker').each(function () {
+            var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
+            var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
+            $(this).attr('name', input_name + '[' + appointments + input_name_p);
+            $(this).parent().parent().find('.delete').attr('data-id','d'+appointments);
+        });
+        appointments=appointments+1;
         $($that).before(dlast);
         $($that).before(clast);
         $('.rtext').last().remove();

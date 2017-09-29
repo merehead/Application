@@ -134,12 +134,6 @@
                         SEARCH BY &nbsp; <a href="#" class="sortLink__item"> <span> </span> rating
                         </a>
                         <p> &nbsp; - &nbsp; </p>
-                        @for ($pages = 1; $pages <= ceil($carerResultCount/$perPage); $pages++)
-                            <a class="sortLink__item {{($pages==$page)?'active':''}} " href="/search/page/{{ $pages }}">
-                                {{ $pages }}
-                            </a>
-                            <span class="sortLink__separate"></span>
-                        @endfor
                         <!--<span class="sortLink__separate">
 
                         </span>
@@ -150,7 +144,7 @@
                     </div>
                 </div>
                 <div class="resultHeader error-text nhide">
-                    <p>No results found.</p>
+                    <p>No carers found.</p>
                     <p>
                         Recommendations:
                     </p>
@@ -172,7 +166,7 @@
                             <div class="justifyContainer">
                                 <h2 class="profileName profileName--biger"><a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}"> {{$carerProfile->first_name}} {{$carerProfile->family_name}}</a></h2>
                                 <p class="hourPrice hourPrice">
-                                    <span class="hourPrice__price"> £ 12</span>
+                                    <span class="hourPrice__price">From £ 12</span>
                                     <span class="hourPrice__timing">/hour</span>
                                 </p>
                             </div>
@@ -208,6 +202,12 @@
                         </div>
                     </div>
                     @endforeach
+                {{--@for ($pages = 1; $pages <= ceil($carerResultCount/$perPage); $pages++)--}}
+                    {{--<a class="sortLink__item {{($pages==$page)?'active':''}} " href="/search/page/{{ $pages }}">--}}
+                        {{--{{ $pages }}--}}
+                    {{--</a>--}}
+                    {{--<span class="sortLink__separate"></span>--}}
+                {{--@endfor--}}
                 @if(count($carerResult)>5)
                 <div class="moreBtn moreBtn--book ">
                     <a href="" class="moreBtn__item moreBtn__item--book centeredLink">
