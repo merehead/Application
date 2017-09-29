@@ -314,6 +314,9 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
 
 
         if ($input['stage'] == 'home') {
+
+
+
             $this->validate($request, [
                 'kind_of_building' => 'required|string|max:25',
                 'lift_available' => 'nullable|in:"Yes","No"',
@@ -336,6 +339,8 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
                 'companionship_interaction_details' => 'nullable|string|max:255',
                 'companionship_visit_details' => 'nullable|string|max:255',
             ]);
+
+
 
             $depart = "#home";
 
@@ -360,7 +365,7 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
             if (isset($input['companionship_interaction_details'])) $serviceUsersProfile->companionship_interaction_details = $input['companionship_interaction_details'];
             if (isset($input['companionship_visit_details'])) $serviceUsersProfile->companionship_visit_details = $input['companionship_visit_details'];
 
-            $serviceUsersProfile->save();
+            $serviceUsersProfile->update();
             unset($serviceUsersProfile);
 
 
@@ -501,7 +506,7 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
         if ($input['stage'] == 'health') {
 
             $this->validate($request,[
-                'serviceUserCondition'                      => 'required|array',
+                'serviceUserCondition'                      => 'nullable|array',
                 'particular_likes'                          => 'nullable|in:"Yes","No","Sometimes"',
                 'comprehension'                             => 'nullable|in:"Yes","No","Sometimes"',
                 'communication'                             => 'nullable|in:"Yes","No","Sometimes"',
@@ -632,8 +637,12 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
             if (isset($input[ 'incontinence_products_stored'            ])) $serviceUsersProfile-> incontinence_products_stored            = $input[ 'incontinence_products_stored'            ];
             if (isset($input[ 'incontinence_wear_detail'                ])) $serviceUsersProfile-> incontinence_wear_detail                = $input[ 'incontinence_wear_detail'                ];
 
+//dd($input);
 
-            $serviceUsersProfile->ServiceUserConditions()->sync(array_keys($input['serviceUserCondition']));
+            if(isset($input['serviceUserCondition']))
+                $serviceUsersProfile->ServiceUserConditions()->sync(array_keys($input['serviceUserCondition']));
+            else
+                $serviceUsersProfile->ServiceUserConditions()->detach();
 
             $serviceUsersProfile->save();
 

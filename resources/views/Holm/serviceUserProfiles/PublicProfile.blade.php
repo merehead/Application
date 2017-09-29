@@ -111,11 +111,11 @@
                     </h2>
                     <div class="row">
                         <div class="col-sm-6">
+
+                            @if(count($serviceUserConditions))
                             <div class="userContainer">
                                 <h2 class="ordinaryTitle">
-                    <span class="ordinaryTitle__text">
-                      Conditions
-                    </span>
+                                    <span class="ordinaryTitle__text">Conditions</span>
                                 </h2>
                                 @foreach($serviceUserConditions as $serviceRow)
                                     <div class="serviceRow">
@@ -135,12 +135,19 @@
                                     </div>
                                 @endforeach
                             </div>
-
-                            <div class="userContainer">
+                            @endif
+                            <div class="userContainer" {!! (($serviceUsersProfile->assistance_with_personal_hygiene == 'No' || is_null($serviceUsersProfile->assistance_with_personal_hygiene))
+                                                    && ($serviceUsersProfile->appropriate_clothes == 'No' || is_null($serviceUsersProfile->appropriate_clothes))
+                                                    && ($serviceUsersProfile->assistance_getting_dressed == 'No' || is_null($serviceUsersProfile->assistance_getting_dressed))
+                                                    && ($serviceUsersProfile->assistance_with_bathing == 'No' || is_null($serviceUsersProfile->assistance_with_bathing))
+                                                    && ($serviceUsersProfile->managing_toilet_needs == 'No' || is_null($serviceUsersProfile->managing_toilet_needs))
+                                                    && ($serviceUsersProfile->mobilising_to_toilet == 'No' || is_null($serviceUsersProfile->mobilising_to_toilet))
+                                                    && ($serviceUsersProfile->cleaning_themselves == 'No' || is_null($serviceUsersProfile->cleaning_themselves))
+                                                    && ($serviceUsersProfile->mobilising_to_toilet == 'No' || is_null($serviceUsersProfile->mobilising_to_toilet))
+                                                    && ($serviceUsersProfile->have_incontinence == 'No' || is_null($serviceUsersProfile->have_incontinence))
+                                                    && ($serviceUsersProfile->incontinence_wear == 'No' || is_null($serviceUsersProfile->incontinence_wear))) ? ' style="display:none"' : ''!!}>
                                 <h2 class="ordinaryTitle">
-                    <span class="ordinaryTitle__text">
-                      Personal Hygiene
-                    </span>
+                                    <span class="ordinaryTitle__text">Personal Hygiene</span>
                                 </h2>
                                 <div class="serviceRow" {!!  ($serviceUsersProfile->assistance_with_personal_hygiene == 'No' || is_null($serviceUsersProfile->assistance_with_personal_hygiene) )? ' style="display:none"' : ''!!}>
                                     <div class="serviceColumn serviceColumn--midSize">
@@ -302,7 +309,14 @@
 
                             </div>
 
-                            <div class="userContainer">
+                            <div class="userContainer" {!! (($serviceUsersProfile->skin_scores == 'No' || is_null($serviceUsersProfile->skin_scores))
+                                                    && ($serviceUsersProfile->assistance_with_dressings == 'No' || is_null($serviceUsersProfile->assistance_with_dressings))
+                                                    && ($serviceUsersProfile->have_any_allergies == 'No' || is_null($serviceUsersProfile->have_any_allergies))
+                                                    && ($serviceUsersProfile->hearing == 'No' || is_null($serviceUsersProfile->hearing))
+                                                    && ($serviceUsersProfile->vision == 'No' || is_null($serviceUsersProfile->vision))
+                                                    && ($serviceUsersProfile->speech == 'No' || is_null($serviceUsersProfile->speech))
+                                                    && ($serviceUsersProfile->communication == 'No' || is_null($serviceUsersProfile->communication))
+                                                    && ($serviceUsersProfile->comprehension == 'No' || is_null($serviceUsersProfile->comprehension))) ? ' style="display:none"' : ''!!}>
                                 <h2 class="ordinaryTitle">
                                     <span class="ordinaryTitle__text">Communication</span>
                                 </h2>
@@ -410,7 +424,10 @@
                             </div>
 
 
-                            <div class="userContainer">
+                            <div class="userContainer" {!! (($serviceUsersProfile->help_with_mobility == 'No' || is_null($serviceUsersProfile->help_with_mobility))
+                                                    && ($serviceUsersProfile->mobility_home == 'No' || is_null($serviceUsersProfile->mobility_home))
+                                                    && ($serviceUsersProfile->mobility_bed == 'No' || is_null($serviceUsersProfile->mobility_bed))
+                                                    && ($serviceUsersProfile->history_of_falls == 'No' || is_null($serviceUsersProfile->history_of_falls))) ? ' style="display:none"' : ''!!}>
                                 <h2 class="ordinaryTitle">
                                     <span class="ordinaryTitle__text">MOBILITY</span>
                                 </h2>
@@ -474,7 +491,10 @@
                                 </div>
                             </div>
 
-                            <div class="userContainer">
+                            <div class="userContainer" {!! (($serviceUsersProfile->assistance_with_eating == 'No' || is_null($serviceUsersProfile->assistance_with_eating))
+                                                    && ($serviceUsersProfile->prepare_food == 'No' || is_null($serviceUsersProfile->prepare_food))
+                                                    && ($serviceUsersProfile->assistance_with_preparing_food == 'No' || is_null($serviceUsersProfile->assistance_with_preparing_food))
+                                                    && ($serviceUsersProfile->dietary_requirements == 'No' || is_null($serviceUsersProfile->dietary_requirements))) ? ' style="display:none"' : ''!!}>
                                 <h2 class="ordinaryTitle">
                                     <span class="ordinaryTitle__text">Nutrition</span>
                                 </h2>

@@ -59,6 +59,8 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars,'footer',$footer);
         $this->vars = array_add($this->vars,'modals',$modals);
 
+
+
         if (!Auth::check()) {
             return \redirect('welcome-carer');
             //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
@@ -67,7 +69,6 @@ class CarerController extends FrontController implements Constants
             $this->vars = array_add($this->vars, 'newBookings', $newBookings);
 
             $carerProfile = CarersProfile::findOrFail($this->user->id);
-
             if ($carerProfile->registration_progress != '20') {
                 return redirect()->action('CarerRegistrationController@index');
             }
@@ -99,12 +100,18 @@ class CarerController extends FrontController implements Constants
     public function profile($user_id)
     {
 
-        if(Auth::check()) {
+
+        // Это вывод ПУБЛИЧНОГО профиля
+
+        //dd($user_id);
+
+/*        if(Auth::check()) {
             //TODO карер может смотреть свой профиль и никого другого
+            //todo Нет, не так!!! Публичный профиль могут смотреь все без каких либо ограничений
             if (Auth::user()->user_type_id == 3&&Auth::user()->id!=$user_id) {
                 return \redirect('welcome-carer');
             }
-        }
+        }*/
 
         $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
         $this->title = 'Holm Care';

@@ -10,6 +10,8 @@
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('stage','health') !!}
 
+
+
 <div class="borderContainer">
     <h2 class="fieldCategory">
         Conditions
