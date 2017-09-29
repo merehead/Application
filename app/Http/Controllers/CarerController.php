@@ -487,21 +487,35 @@ class CarerController extends FrontController implements Constants
 
     public function getAddress(Request $request){
         $query = $request->get('query');
-        $url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyDJaLv-6bVXViUGJ_e_-nR5RZlt9GUuC4M&input=".urlencode($query);
+//        $url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyDJaLv-6bVXViUGJ_e_-nR5RZlt9GUuC4M&input=".urlencode($query);
+        $url = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDJaLv-6bVXViUGJ_e_-nR5RZlt9GUuC4M&address=".urlencode($query);
 
         $data= file_get_contents($url);
         $items=json_decode($data,true);
         $response=array();
         $response['query']=$query;
-        foreach ($items['predictions'] as $item){
+
+        foreach ($items['results'] as $item){
             $response['suggestions'][]=array(
-                "value"=>$item['description'],
-                "data"=>$item
+                "value"=>$item['formatted_address'],
+                "data"=>$this->getAddressComponents($item['address_components'])
             );
         }
 
         return response(json_encode($response),200);
 
+    }
+    private function getAddressComponents($address){
+
+        $arr = [];
+        foreach ($address as $item){
+            $arr[$item['types'][0]]=array(
+                'long_name'=>$item['long_name'],
+                'short_name'=>$item['short_name'],
+                'types'=>$item['types'][0]
+            );
+        }
+        return $arr;
     }
 
     public function review($bookings_id){
