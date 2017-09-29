@@ -267,7 +267,7 @@ class BookingsController extends FrontController implements Constants
             'text' => $request->message,
         ]);
 
-        return redirect()->back();
+        return redirect(url('/bookings/'.$booking->id.'/details#comments'));
     }
 
     public function leaveReviewPage(Booking $booking){

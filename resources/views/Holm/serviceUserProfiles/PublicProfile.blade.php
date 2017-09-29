@@ -76,6 +76,11 @@
                                     </a>
                                 </div>
                             @else
+                                <div class="roundedBtn">
+                                    <button disabled class="roundedBtn__item roundedBtn__item--message">
+                                        send a message
+                                    </button>
+                                </div>
                             @endif
                         </div>
                     </div>
