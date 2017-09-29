@@ -10,6 +10,7 @@ var arrForDeleteIDProfile = [];
 var bookings_pos=1;
 var periodicity = 4;
 var appointments=1;
+var like_name;
 //-------------GoogleMaps ----------------------
 var geocoder;
 var map;
@@ -351,10 +352,19 @@ $(document).ready(function () {
         }
     });
 
+    like_name=$('input[name="like_name"]').val();
     $('input[name="like_name"]').on('change',function(){
         var text = $(this).val();
         $('.line_about').html('ONE LINE ABOUT '+text);
+
+        $('span').each(function(){
+            var t = $(this).text();
+            console.log();
+            t=t.replace(like_name, text);
+            $(this).text(t);
+        });
     });
+
     // $('input[name="mobile_number"]').on('keyup', function () {
     //     var val=$(this).val();
     //     var that = this;
