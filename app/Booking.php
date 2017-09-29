@@ -92,7 +92,8 @@ class Booking extends Model
     }
 
     public function getDateFromAttribute(){
-        return $this->appointments()->orderBy('date_start')->get()->first()->date_start;
+        if($this->appointments()->get()->count())
+            return $this->appointments()->orderBy('date_start')->get()->first()->date_start;
     }
 
     public function getDateToAttribute(){

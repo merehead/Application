@@ -164,8 +164,12 @@
                                     <span class="bookDate">{{$booking->appointments()->get()->count()}} Appointment{{$booking->appointments()->get()->count() > 1 ? 's':''}}</span>
                                     <p class="hourPrice">
                                         {{$booking->hours}}h / <span>£{{$booking->hour_price * $booking->hours}}</span>
-
                                     </p>
+                                    <div class="roundedBtn">
+                                        <a href="/bookings/{{$booking->id}}/leave_review" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--forReview">
+                                            leave review
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
