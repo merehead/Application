@@ -191,12 +191,12 @@
                             </div>
                         @elseif($booking->status_id == 5)
                             <div class="roundedBtn">
-                                <button {{!in_array($booking->carer_status_id, [5]) ? 'disabled' : ''}} data-booking_id = "{{$booking->id}}" data-status = "cancel"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--cancel">
+                                <button {{!in_array($booking->purchaser_status_id, [5]) ? 'disabled' : ''}} data-booking_id = "{{$booking->id}}" data-status = "cancel"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--cancel">
                                     cancel
                                 </button>
                             </div>
                             <div class="roundedBtn">
-                                <button {{!in_array($booking->carer_status_id, [5]) ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "completed"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
+                                <button {{!in_array($booking->purchaser_status_id, [5]) ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "completed"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
                                     completed
                                 </button>
                             </div>
@@ -260,7 +260,7 @@
                                 <div class="singleAppointment__header">
                                   <span>
                                     #{{$i}}
-                                  </span>git
+                                  </span>
                                     <h2>
                                         {{in_array($appointment->status_id, [1]) ? 'new' : ''}}
                                         {{in_array($appointment->status_id, [4]) ? 'completed' : ''}}
@@ -374,13 +374,6 @@
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJaLv-6bVXViUGJ_e_-nR5RZlt9GUuC4M"></script>
 <script>
-    $('.changeBookingStatus').click(function () {
-        var booking_id = $(this).attr('data-booking_id');
-        var status = $(this).attr('data-status');
-        $.post('/bookings/'+booking_id+'/'+status, function (data) {
-        });
-    });
-
     $('.changeAppointmentStatus').click(function () {
         var appointment_id = $(this).attr('data-appointment_id');
         var status = $(this).attr('data-status');

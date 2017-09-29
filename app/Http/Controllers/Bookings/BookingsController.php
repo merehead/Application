@@ -44,7 +44,11 @@ class BookingsController extends FrontController implements Constants
                 'purchaser_status_id' => 1,
             ]);
 
-
+            BookingsMessage::create([
+                'booking_id' => $booking->id,
+                'type' => 'status_change',
+                'new_status' => 'pending',
+            ]);
 
             foreach ($booking_item['appointments'] as $appointment_item){
                 $days = $this->generateDateRange(Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")), Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d")));
@@ -139,6 +143,11 @@ class BookingsController extends FrontController implements Constants
         else{
 
         }
+        BookingsMessage::create([
+            'booking_id' => $booking->id,
+            'type' => 'status_change',
+            'new_status' => 'in_progress',
+        ]);
         $booking->status_id = $booking->carer_status_id = $booking->purchaser_status_id = self::IN_PROGRESS;
         $booking->save();
 //        }
@@ -178,13 +187,24 @@ class BookingsController extends FrontController implements Constants
         if($user->user_type_id == 3){
             //Carer
             $booking->carer_status_id = self::COMPLETED;
-            if($booking->purchaser_status_id == self::COMPLETED)
+            if($booking->purchaser_status_id == self::COMPLETED){
+                BookingsMessage::create([
+                    'booking_id' => $booking->id,
+                    'type' => 'status_change',
+                    'new_status' => 'completed',
+                ]);
                 $booking->status_id = self::COMPLETED;
-
+            }
+            
         } else {
             //Purchaser
             $booking->purchaser_status_id = self::COMPLETED;
             $booking->status_id = self::COMPLETED;
+            BookingsMessage::create([
+                'booking_id' => $booking->id,
+                'type' => 'status_change',
+                'new_status' => 'completed',
+            ]);
         }
 
         $booking->save();
