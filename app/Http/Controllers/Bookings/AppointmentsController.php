@@ -35,16 +35,15 @@ class AppointmentsController extends Controller
         $user = Auth::user();
 
         if($user->user_type_id == 3){
-            if($appointment->purchaser_status_id == 4){
-                $appointment->status_id = 4;
-                $appointment->purchaser_status_id = 4;
+            if($appointment->purchaser_status_id == 2){
+                $appointment->status_id = 2;
+                $appointment->purchaser_status_id = 2;
             } else {
-                $appointment->status_id = 3;
-                $appointment->purchaser_status_id = 4;
+                $appointment->purchaser_status_id = 2;
             }
         } else {
-            $appointment->status_id = 4;
-            $appointment->carer_status_id = 4;
+            $appointment->status_id = 2;
+            $appointment->carer_status_id = 2;
         }
 
         $appointment->save();

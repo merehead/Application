@@ -256,7 +256,7 @@
                     <div class="appointmentSlider owl-carousel">
                         @php($i = 1)
                         @foreach($booking->appointments()->get() as $appointment)
-                            <div class="singleAppointment singleAppointment--{{in_array($appointment->status_id, [2, 3]) ? 'progress' : 'done'}}">
+                            <div class="singleAppointment singleAppointment--{{(in_array($appointment->status_id, [1, 2, 3]) && \Carbon\Carbon::parse($appointment->date_start)->isToday()) ? 'progress' : 'done'}}">
                                 <div class="singleAppointment__header">
                                   <span>
                                     #{{$i}}
@@ -269,19 +269,20 @@
                                 </div>
                                 <div class="singleAppointment__body">
                                     <p>
-                                        <span>Date: </span> {{$appointment->date_start}}
+                                        <span>Date: </span> {{$appointment->formatted_date_start}}
                                     </p>
                                     <p>
                                         <span>Time: </span>  {{$appointment->time_from}} - {{$appointment->time_to}}
                                     </p>
                                     <div class="appointmentBtn">
                                         @php($field = $user->user_type_id == 1 ? 'purchaser_status_id' : 'carer_status_id')
-                                        <button {{!in_array($booking->{$field}, [2]) ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "completed"  class="changeAppointmentStatus appointmentBtn__item appointmentBtn__item--compl">
+                                        <button {{!in_array($appointment->{$field}, [1]) ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "completed"  class="changeAppointmentStatus appointmentBtn__item appointmentBtn__item--compl">
                                             Completed
                                         </button>
-                                        <button {{!in_array($booking->{$field}, [2]) ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "reject"  class="changeAppointmentStatus appointmentBtn__item appointmentBtn__item--rej">
+                                        <button {{!in_array($appointment->{$field}, [1]) ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "reject"  class="changeAppointmentStatus appointmentBtn__item appointmentBtn__item--rej">
                                             Reject
                                         </button>
+                                        {{--{{$field .' '. $appointment->{$field} }}--}}
                                     </div>
                                 </div>
                             </div>
