@@ -109,7 +109,7 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
         $this->vars = array_add($this->vars, 'footer', $footer);
         $this->vars = array_add($this->vars, 'modals', $modals);
 
-        $this->vars = array_add($this->vars, 'user', $this->user);
+        $this->vars = array_add($this->vars, 'user', $activeUser);
 
         $this->vars = array_add($this->vars, 'serviceUsers', $serviceUsersProfile);
         //todo с как-го Х надо использовать две одинаковые переменные?????

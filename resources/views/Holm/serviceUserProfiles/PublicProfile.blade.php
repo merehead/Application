@@ -68,14 +68,15 @@
                 <div class="col-md-4">
                     <div class="profileSide">
                         <div class="profilePricing profilePricing--user">
-
-                            <div class="roundedBtn">
-                                <a href="{{route('carerAppointment',['user_id'=>$serviceUsers->id])}}"
-                                   class="roundedBtn__item roundedBtn__item--message">
-                                    send a message
-                                </a>
-                            </div>
-
+                            @if($user->user_type_id == 3)
+                                <div class="roundedBtn">
+                                    <a href="{{url('/bookings/'.$serviceUsers->Bookings()->where('carer_id', $user->id)->get()->last()->id.'/details#comments')}}"
+                                       class="roundedBtn__item roundedBtn__item--message">
+                                        send a message
+                                    </a>
+                                </div>
+                            @else
+                            @endif
                         </div>
                     </div>
                 </div>

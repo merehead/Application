@@ -298,6 +298,7 @@
                 <form method="post" action="{{url('bookings/'.$booking->id.'/message')}}">
                     <div class="messageBox">
                         <h2 class="formLabel">
+                            <a name="comments"></a>
                             Your Message
                         </h2>
                         <textarea name="message" class="messageBox__item"  placeholder="Type your message"></textarea>
