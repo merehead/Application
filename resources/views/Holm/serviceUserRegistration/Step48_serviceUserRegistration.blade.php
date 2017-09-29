@@ -18,7 +18,7 @@
                     <div class="inputWrap">
                         <?php
                         if (isset($atrr)) unset($atrr);
-                        $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
+                        $atrr = ['id' => 'step48sometimes-if', 'class' => 'formSelect'];
                         if (is_null($serviceUserProfile->have_incontinence))
                             $atrr['placeholder'] = 'Please select';
                         ?>
@@ -28,7 +28,7 @@
                         @endif
                     </div>
                 </div>
-            <div class="formField sometimes_hiding" style="display: none">
+            <div class="formField sometimes_hiding_step48" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Please briefly describe what kind of incontinence. <span>*</span>
                     </h2>
@@ -42,14 +42,14 @@
                         @endif
                     </div>
                 </div>
-            <div class="formField sometimes_hiding" style="display: none">
+            <div class="formField sometimes_hiding_step48" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Does {{$userNameForSite}} have their own supply of incontinence wear? <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php
                         if (isset($atrr)) unset($atrr);
-                        $atrr = ['id' => 'sometimes-if2', 'class' => 'formSelect'];
+                        $atrr = ['id' => 'step48sometimes-if2', 'class' => 'formSelect'];
                         if (is_null($serviceUserProfile->incontinence_wear))
                             $atrr['placeholder'] = 'Please select';
                         ?>
@@ -59,7 +59,7 @@
                         @endif
                     </div>
                 </div>
-            <div class="formField sometimes_hiding2" style="display: none">
+            <div class="formField sometimes_hiding2_step48" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Where are the incontinence products stored? <span>*</span>
                     </h2>
@@ -73,7 +73,7 @@
                         @endif
                     </div>
                 </div>
-            <div class="formField sometimes_hiding2" style="display: none">
+            <div class="formField sometimes_hiding2_step48" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Would {{$userNameForSite}} like help in choosing incontinence products?
                     </h2>
