@@ -1252,15 +1252,23 @@ $(document).ready(function () {
             minChars: 1,
             onSelect: function (suggestion) {
                 if(suggestion.data.terms.length>3) {
-                    $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
-                    $('input[name="town"]').val(suggestion.data.terms[1].value);
-                    $('input[name="postcode"]').val(suggestion.data.terms[2].value);
-                    $('input[name="postCode"]').val(suggestion.data.terms[2].value);
+                    if($(this).attr('name')=='address_line1'){
+                        $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
+                    }else {
+                        $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
+                        $('input[name="town"]').val(suggestion.data.terms[1].value);
+                        $('input[name="postcode"]').val(suggestion.data.terms[2].value);
+                        $('input[name="postCode"]').val(suggestion.data.terms[2].value);
+                    }
                 }else{
-                    $('input[name="address_line1"]').val('');
-                    $('input[name="town"]').val(suggestion.data.terms[0].value);
-                    $('input[name="postcode"]').val(suggestion.data.terms[1].value);
-                    $('input[name="postCode"]').val(suggestion.data.terms[1].value);
+                    if($(this).attr('name')=='address_line1'){
+                        $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
+                    }else {
+                        $('input[name="address_line1"]').val('');
+                        $('input[name="town"]').val(suggestion.data.terms[0].value);
+                        $('input[name="postcode"]').val(suggestion.data.terms[1].value);
+                        $('input[name="postCode"]').val(suggestion.data.terms[1].value);
+                    }
                 }
             }
         });
