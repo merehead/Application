@@ -22,8 +22,8 @@
             </span>
                 </a>
             </div>
-            <a href="#" class="printIco">
-                <img src="/img/print.png" alt="">
+            <a href="javascript: window.print();" class="printIco">
+                <img src="/img/print.png"  alt="">
             </a>
             @if($status == 'progress')
                 <div class="total">
