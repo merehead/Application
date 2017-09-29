@@ -32,16 +32,16 @@
 <span class="hourPrice__price hourPrice__price--big">
 From £ {{random_int(8,15)}}</span><span class="hourPrice__timing">/hour</span>
     </p>
-    @if(Auth::check())
-{{--todo карер не может себе создавать букинг --}}
-    @if (!Auth::user()->user_type_id == 3)
-    <div class="bookBtn">
-        <a href="#" class="bookBtn__item  centeredLink" data-toggle="modal" data-target="#message-carer">
-            book carer
-        </a>
-    </div>
-    @endif
-    @endif
+    {{--@if(Auth::check())--}}
+{{--todo карер не может себе создавать букинг, ТУТ ЧТО-ТО НЕ ТО --}}
+        {{--@if (!Auth::user()->user_type_id == 3)--}}
+        <div class="bookBtn">
+            <a href="#" class="bookBtn__item  centeredLink" data-toggle="modal" data-target="#message-carer">
+                book carer
+            </a>
+        </div>
+        {{--@endif--}}
+    {{--@endif--}}
 
 
     <div class="payment">
