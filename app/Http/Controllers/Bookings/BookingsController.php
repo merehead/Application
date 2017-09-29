@@ -10,6 +10,7 @@ use App\Interfaces\Constants;
 use App\PaymentServices\StripeService;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FrontController;
+use App\ServiceUsersProfile;
 use App\User;
 use Illuminate\Http\Request;
 use SebastianBergmann\Comparator\Book;
@@ -34,7 +35,7 @@ class BookingsController extends FrontController implements Constants
 
 
         foreach ($bookings as $booking_item){
-            $serviceUser = User::find($request->service_user_id);
+            $serviceUser = ServiceUsersProfile::find($request->service_user_id);
             $booking = Booking::create([
                 'purchaser_id' => $purchaser->id,
                 'service_user_id' => $serviceUser->id,
