@@ -731,6 +731,8 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
         $completedBookings = Booking::where('status_id', 7)->where('purchaser_id', $user->id)->where('service_user_id', $serviceUserProfile->id)->get();
         $this->vars = array_add($this->vars, 'completedBookings', $completedBookings);
 
+        $canceledBookings = Booking::where('status_id', 4)->where('purchaser_id', $user->id)->get();
+        $this->vars = array_add($this->vars, 'canceledBookings', $canceledBookings);
 
         $this->content = view(config('settings.frontTheme') . '.serviceUserProfiles.Booking.BookingTaball')->with($this->vars)
             ->render();

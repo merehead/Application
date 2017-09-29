@@ -216,6 +216,9 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars, 'completedBookings', $completedBookings);
         $this->vars = array_add($this->vars, 'completedAmount', $completedAmount);
 
+        $canceledBookings = Booking::where('status_id', 4)->where('carer_id', $user->id)->get();
+        $this->vars = array_add($this->vars, 'canceledBookings', $canceledBookings);
+
         $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarerall')->with($this->vars)->render();
 
 
