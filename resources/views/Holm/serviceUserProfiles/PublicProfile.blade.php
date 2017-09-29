@@ -807,7 +807,10 @@
                     <div class="userBox">
 
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" {!! (($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night))
+                                                    && ($serviceUsersProfile->getting_dressed_for_bed == 'No' || is_null($serviceUsersProfile->getting_dressed_for_bed))
+
+                                                    && ($serviceUsersProfile->toilet_at_night == 'No' || is_null($serviceUsersProfile->toilet_at_night))) ? ' style="display:none"' : ''!!}>
                                 <h2 class="profileTitle">
                                     Night-time
                                 </h2>
