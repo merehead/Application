@@ -648,7 +648,7 @@ $(document).ready(function () {
             timeFormat: 'h:mm p',
             interval: 30,
             //minTime: '10',
-            //maxTime: '6:00pm',
+            //maxTime: '6:00pm',_step48
             //defaultTime: '18',
             startTime: '18:00',
             dynamic: true,
@@ -734,6 +734,32 @@ $(document).ready(function () {
     });
 
 //^^^^^^^Иван 20170922 для регистрации профиля пользователя
+    if ($("#step48sometimes-if").val() == 'Yes') {
+        {
+            $(".sometimes_hiding_step48").show()
+        }
+    }
+    if ($("#step48sometimes-if2").val() == 'Yes' && $("#step48sometimes-if").val() == 'Yes') {
+        {
+            $(".sometimes_hiding2_step48").show()
+        }
+    }
+    $("#step48sometimes-if").on('change', function () {
+        if ($("#step48sometimes-if").val() != 'No') {
+            $(".sometimes_hiding_step48").show();
+        } else {
+            $(".sometimes_hiding_step48").hide();
+            $(".sometimes_hiding2_step48").hide();
+        }
+    });
+    $("#step48sometimes-if2").on('change', function () {
+        if ($("#step48sometimes-if2").val() != 'No') {
+            $(".sometimes_hiding2_step48").show();
+        } else {
+            $(".sometimes_hiding2_step48").hide();
+        }
+    });
+//^^^^^^^Иван 20170929 для регистрации профиля пользователя
     if ($("#criminal_detail").val() == 'Some') {
         $(".criminal_detail").show();
     } else {
