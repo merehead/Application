@@ -161,4 +161,14 @@ class User extends Authenticatable
                 break;
         }
     }
+
+    /*
+     * Helpers methods
+     */
+    public function hasBookingsWith(ServiceUsersProfile $profile){
+        return Booking::where('carer_id', $this->id)
+            ->where('service_user_id', $profile->id)
+            ->get()
+            ->count();
+    }
 }
