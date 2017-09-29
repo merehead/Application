@@ -222,6 +222,9 @@ class PurchaserController extends FrontController implements Constants
             $this->vars = array_add($this->vars, 'completedBookings', $completedBookings);
             $this->vars = array_add($this->vars, 'completedAmount', $completedAmount);
 
+            $canceledBookings = Booking::where('status_id', 4)->where('purchaser_id', $user->id)->get();
+            $this->vars = array_add($this->vars, 'canceledBookings', $canceledBookings);
+
             $this->content = view(config('settings.frontTheme') . '.purchaserProfiles.Booking.BookingTaball')->with($this->vars)->render();
 
         }

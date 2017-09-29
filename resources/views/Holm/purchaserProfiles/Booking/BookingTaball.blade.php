@@ -23,6 +23,11 @@
               completed
             </span>
                 </a>
+                <a href="/purchaser-settings/booking/canceled" class="bookingNav__link centeredLink">
+            <span class="bookingNav__text">
+              canceled
+            </span>
+                </a>
             </div>
             <a href="javascript: window.print();" class="printIco">
                 <img src="/img/print.png"  alt="">
@@ -158,47 +163,91 @@
 
 
             @if($status == 'all' || $status == 'completed')
-            <div class="bookingCard bookingCard--complete">
-                <div class="bookingCard__header bookingCard__header">
-                    <h2>completed</h2>
-                </div>
-                @if($completedBookings->count() > 0)
-                    @foreach($completedBookings as $booking)
-                        <div class="bookingCard__body bookInfo">
-                            <div class="bookInfo__profile">
-                                <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
-                                    <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
-                                </a>
-                                <div class="bookInfo__text">
-                                    <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->full_name}}</a></p>
-                                    <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
-                                </div>
-
-                            </div>
-                            <div class="bookInfo__date">
-                                <span class="bookDate">{{$booking->appointments()->get()->count()}} Appointment{{$booking->appointments()->get()->count() > 1 ? 's':''}}</span>
-                                <p class="hourPrice">
-                                    {{$booking->hours}}h / <span>£{{$booking->hour_price * $booking->hours}}</span>
-                                </p>
-                                <div class="roundedBtn">
-                                    <a href="/bookings/{{$booking->bookingCarer()->first()->id}}/leave_review" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--forReview">
-                                        leave review
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @else
-                    <p align="center" class="bookDate">You do not have bookings yet</p>
-                @endif
-                @if($completedBookings->count() > 3)
-                    <div class="moreBtn moreBtn--book ">
-                        <a href="" class="moreBtn__item moreBtn__item--book centeredLink">
-                            Load More
-                        </a>
+                <div class="bookingCard bookingCard--complete">
+                    <div class="bookingCard__header bookingCard__header">
+                        <h2>completed</h2>
                     </div>
-                @endif
-            </div>
+                    @if($completedBookings->count() > 0)
+                        @foreach($completedBookings as $booking)
+                            <div class="bookingCard__body bookInfo">
+                                <div class="bookInfo__profile">
+                                    <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
+                                        <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
+                                    </a>
+                                    <div class="bookInfo__text">
+                                        <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->full_name}}</a></p>
+                                        <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
+                                    </div>
+
+                                </div>
+                                <div class="bookInfo__date">
+                                    <span class="bookDate">{{$booking->appointments()->get()->count()}} Appointment{{$booking->appointments()->get()->count() > 1 ? 's':''}}</span>
+                                    <p class="hourPrice">
+                                        {{$booking->hours}}h / <span>£{{$booking->hour_price * $booking->hours}}</span>
+                                    </p>
+                                    <div class="roundedBtn">
+                                        <a href="/bookings/{{$booking->bookingCarer()->first()->id}}/leave_review" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--forReview">
+                                            leave review
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        <p align="center" class="bookDate">You do not have bookings yet</p>
+                    @endif
+                    @if($completedBookings->count() > 3)
+                        <div class="moreBtn moreBtn--book ">
+                            <a href="" class="moreBtn__item moreBtn__item--book centeredLink">
+                                Load More
+                            </a>
+                        </div>
+                    @endif
+                </div>
+            @endif
+
+            @if($status == 'all' || $status == 'canceled')
+                <div class="bookingCard bookingCard--complete">
+                    <div class="bookingCard__header bookingCard__header">
+                        <h2>completed</h2>
+                    </div>
+                    @if($canceledBookings->count() > 0)
+                        @foreach($canceledBookings as $booking)
+                            <div class="bookingCard__body bookInfo">
+                                <div class="bookInfo__profile">
+                                    <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
+                                        <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
+                                    </a>
+                                    <div class="bookInfo__text">
+                                        <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->full_name}}</a></p>
+                                        <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
+                                    </div>
+
+                                </div>
+                                <div class="bookInfo__date">
+                                    <span class="bookDate">{{$booking->appointments()->get()->count()}} Appointment{{$booking->appointments()->get()->count() > 1 ? 's':''}}</span>
+                                    <p class="hourPrice">
+                                        {{$booking->hours}}h / <span>£{{$booking->hour_price * $booking->hours}}</span>
+                                    </p>
+                                    <div class="roundedBtn">
+                                        <a href="/bookings/{{$booking->bookingCarer()->first()->id}}/leave_review" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--forReview">
+                                            leave review
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        <p align="center" class="bookDate">You do not have bookings yet</p>
+                    @endif
+                    @if($completedBookings->count() > 3)
+                        <div class="moreBtn moreBtn--book ">
+                            <a href="" class="moreBtn__item moreBtn__item--book centeredLink">
+                                Load More
+                            </a>
+                        </div>
+                    @endif
+                </div>
             @endif
         </div>
 
