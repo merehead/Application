@@ -24,8 +24,8 @@
                     </span>
                 </a>
             </div>
-            <a href="#" class="printIco">
-                <img src="/img/print.png" alt="">
+            <a href="javascript: window.print();" class="printIco">
+                <img src="/img/print.png"  alt="">
             </a>
         </div>
 
@@ -75,7 +75,7 @@
                             </div>
                         @endforeach
                     @else
-                        -
+                        <p align="center" class="bookDate">You do not have bookings yet</p>
                     @endif
                 </div>
             @endif
@@ -123,7 +123,7 @@
                             </div>
                         @endforeach
                     @else
-                        -
+                        <p align="center" class="bookDate">You do not have bookings yet</p>
                     @endif
                     @if($inProgressBookings->count() > 3)
                         <div class="moreBtn moreBtn--book ">
@@ -165,7 +165,7 @@
                             </div>
                         @endforeach
                     @else
-                        -
+                        <p align="center" class="bookDate">You do not have bookings yet</p>
                     @endif
                     @if($completedBookings->count() > 3)
                         <div class="moreBtn moreBtn--book ">
