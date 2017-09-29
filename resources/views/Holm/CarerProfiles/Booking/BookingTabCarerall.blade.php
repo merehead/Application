@@ -93,7 +93,7 @@
                     </div>
                 @endforeach
             @else
-                -
+                <p align="center" class="bookDate">You do not have bookings yet</p>
             @endif
         </div>
     @endif
@@ -141,7 +141,7 @@
                     </div>
                 @endforeach
             @else
-                -
+                <p align="center" class="bookDate">You do not have bookings yet</p>
             @endif
             @if($inProgressBookings->count() > 3)
                 <div class="moreBtn moreBtn--book ">
@@ -183,7 +183,7 @@
                     </div>
                 @endforeach
             @else
-                -
+                <p align="center" class="bookDate">You do not have bookings yet</p>
             @endif
             @if($completedBookings->count() > 3)
                 <div class="moreBtn moreBtn--book ">
