@@ -825,7 +825,7 @@ $(document).ready(function () {
 
         $(".datepicker_message").datepicker({
             beforeShow: function(input, inst) {
-                inst.dpDiv.css({"z-index":2000});
+                inst.dpDiv.css({"z-index":"2000!important;"});
             },
             changeMonth: true,
             changeYear: true,
@@ -837,7 +837,7 @@ $(document).ready(function () {
         });
         $('.timepicker_message').timepicker({
             beforeShow: function(input, inst) {
-                inst.dpDiv.css({"z-index":2000});
+                inst.dpDiv.css({"z-index":"2000!important;"});
             },
             timeFormat: 'hh:mm tt',
             interval: 30,
@@ -872,6 +872,48 @@ $(document).ready(function () {
             $(form).find('.weekly').attr('disabled',false);
             $(form).find('.Daily').attr('disabled',false);
         }
+    });
+
+    $(document).on('click','.weekly',function(){
+        var that = $(this);
+        var datetime = $(that).parent().parent().find('.datepicker_message');
+        var label = $(that).parent().parent().find('.correct');
+        $(datetime).parent().show();
+        $(label).show();
+        $(datetime).removeClass("hasDatepicker").removeAttr('id');
+        $(datetime).datepicker({
+            beforeShow: function(input, inst) {
+                inst.dpDiv.css({"z-index":"2000!important;"});
+            },
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            showAnim: "slideDown",
+
+            minDate: "+7D",
+            maxDate: "+90D",
+            yearRange: "0:+2"
+        });
+    });
+    $(document).on('click','.Daily',function(){
+        var that = $(this);
+        var datetime = $(that).parent().parent().find('.datepicker_message');
+        var label = $(that).parent().parent().find('.correct');
+        $(datetime).parent().show();
+        $(label).show();
+        $(datetime).removeClass("hasDatepicker").removeAttr('id');
+        $(datetime).datepicker({
+            beforeShow: function(input, inst) {
+                inst.dpDiv.css({"z-index":"2000!important;"});
+            },
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            showAnim: "slideDown",
+            minDate: "+0D",
+            maxDate: "+90D",
+            yearRange: "0:+2"
+        });
     });
 
     $(document).on('click','a.additionalTime', function (e) {
