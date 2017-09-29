@@ -70,15 +70,15 @@
                     </div>
                 </div>
             @else
-                <a href="Service_user_Public_profile_page.html" class="profilePhoto orderInfo__photo">
+                <a href="{{$booking->bookingServiceUser()->first()->profile_link}}" class="profilePhoto orderInfo__photo">
                     <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" alt="">
                 </a>
                 <div class="orderInfo__item orderInfo__item--rightPadding">
                     <h2 class="ordinaryTitle">
-                        <span class="ordinaryTitle__text ordinaryTitle__text--bigger"><a href="Service_user_Public_profile_page.html">{{$booking->bookingServiceUser()->first()->full_name}}</a></span>
+                        <span class="ordinaryTitle__text ordinaryTitle__text--bigger"><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->full_name}}</a></span>
                     </h2>
                     <div class="viewProfile">
-                        <a href="Service_user_Public_profile_page.html" class="viewProfile__item centeredLink">
+                        <a href="{{$booking->bookingServiceUser()->first()->profile_link}}" class="viewProfile__item centeredLink">
                             view profile
                         </a>
                     </div>
