@@ -75,6 +75,50 @@ class BookingsController extends FrontController implements Constants
         }
     }
 
+    public function update(Booking $booking, Request $request){
+        //Встречное предложение
+
+        $purchaser = Auth::user();
+        $carer = User::find($request->carer_id);
+
+
+        if(isset($request->bookings['service_user_id']))
+            $bookings[0] = $request->bookings;
+        else
+            $bookings = $request->bookings;
+
+
+
+        foreach ($bookings as $booking_item){
+            $serviceUser = User::find($request->service_user_id);
+
+            $booking->appintments()->delete();
+
+            foreach ($booking_item['appointments'] as $appointment_item){
+                $days = $this->generateDateRange(Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")), Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d")));
+                foreach ($days as $day){
+                    $booking->appointments()->create([
+                        'date_start' => $day,
+                        'date_end' => $day,
+                        'time_from' => $appointment_item['time_from'],
+                        'time_to' => $appointment_item['time_to'],
+                        'periodicity' => $appointment_item['periodicity'],
+                        'status_id' => 1,
+                        'carer_status_id' => 1,
+                        'purchaser_status_id' => 1,
+                    ]);
+                }
+            }
+
+            $booking->assistance_types()->attach($booking_item['assistance_types']);
+
+            //отправить почту
+            //todo
+
+            return redirect('bookings/'.$booking->id.'/purchase');
+        }
+    }
+
     public function view_details(Booking $booking){
 
 //        if(!in_array($booking->status_id, [2, 5, 7]))

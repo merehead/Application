@@ -688,7 +688,7 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
     public function bookingFilter(ServiceUsersProfile $serviceUserProfile, $status = 'all')
     {
         $user = Auth::user();
-
+    
         if (!$user)
             return redirect('/');
 
