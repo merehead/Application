@@ -21,7 +21,7 @@
            <img src="./dist/img/print.png" alt="">
          </a> -->
         <div class="roundedBtn">
-            <a href="/serviceUser/profile/" class="roundedBtn__item roundedBtn__item--preview">
+            <a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}" class="roundedBtn__item roundedBtn__item--preview">
                 Preview public profile
             </a>
         </div>
