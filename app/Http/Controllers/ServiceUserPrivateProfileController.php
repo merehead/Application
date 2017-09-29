@@ -358,6 +358,8 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
             if (isset($input['companionship_interaction_details'])) $serviceUsersProfile->companionship_interaction_details = $input['companionship_interaction_details'];
             if (isset($input['companionship_visit_details'])) $serviceUsersProfile->companionship_visit_details = $input['companionship_visit_details'];
 
+            $serviceUsersProfile->carer_enter = $input['carer_enter'];
+
             $serviceUsersProfile->update();
             unset($serviceUsersProfile);
 

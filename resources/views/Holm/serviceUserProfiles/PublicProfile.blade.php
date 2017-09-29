@@ -574,13 +574,17 @@
                     </h2>
                     <div class="userContainer">
                         <div class="serviceRow">
-                            <div class="serviceColumn serviceColumn--language">
-                                languages
+                            <div class="serviceColumn serviceColumn--language ">
                                 @foreach($languages as $language)
                                     <p class="userOption userOption--language">
-                                        {{$language->carer_language}}
+                                        @if($language->carer_language != 'OTHER')
+                                            {{$language->carer_language}}
+                                            @else
+                                            {{$serviceUsers->other_languages}}
+                                        @endif
                                     </p>
                                 @endforeach
+
                             </div>
                         </div>
 
@@ -808,7 +812,10 @@
                     <div class="userBox">
 
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" {!! (($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night))
+                                                    && ($serviceUsersProfile->getting_dressed_for_bed == 'No' || is_null($serviceUsersProfile->getting_dressed_for_bed))
+
+                                                    && ($serviceUsersProfile->toilet_at_night == 'No' || is_null($serviceUsersProfile->toilet_at_night))) ? ' style="display:none"' : ''!!}>
                                 <h2 class="profileTitle">
                                     Night-time
                                 </h2>
