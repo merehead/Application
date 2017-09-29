@@ -73,6 +73,10 @@ class ServiceUsersProfile extends Model
         return $this->first_name.' '.$this->family_name;
     }
 
+    public function getProfileLinkAttribute(){
+        return '/serviceUser/profile/'.$this->id;
+    }
+
 
     public function isDeleted()
     {
