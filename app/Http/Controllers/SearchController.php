@@ -68,7 +68,7 @@ class SearchController extends FrontController
 
         $where .=' where registration_progress=20';
         if ($request->get('gender'))
-            $where .= " and cp.gender='" . array_keys($request->get('gender'))[0] . "'";
+            $where .= " and cp.gender in ('" . implode("','",array_keys($request->get('gender'))) . "')";
 
         if ($request->get('have_car'))
             $where .= " and cp.have_car='Yes'";
