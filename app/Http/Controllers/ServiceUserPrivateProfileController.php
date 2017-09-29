@@ -93,7 +93,9 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
     {
 
         //dd($serviceUserProfile);
-
+        $activeUser = Auth::user();
+        if(!$activeUser) return redirect('/');
+        if(!$activeUser->isPurchaser()) return redirect('/');
         $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
         $this->title = 'Holm Care';
 

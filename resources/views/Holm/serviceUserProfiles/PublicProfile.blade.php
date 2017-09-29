@@ -70,9 +70,8 @@
                         <div class="profilePricing profilePricing--user">
 
                             <div class="roundedBtn">
-                                <a href="{{route('carerAppointment',['user_id'=>$serviceUsers->id])}}}"
-                                   class="roundedBtn__item roundedBtn__item--message" data-toggle="modal"
-                                   data-target="#message-carer">
+                                <a href="{{route('carerAppointment',['user_id'=>$serviceUsers->id])}}"
+                                   class="roundedBtn__item roundedBtn__item--message">
                                     send a message
                                 </a>
                             </div>
