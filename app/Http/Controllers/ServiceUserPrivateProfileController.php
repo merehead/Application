@@ -89,13 +89,15 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
         return $this->renderOutput();
     }
 
-    public function profile($serviceUserProfile)
+    public function profile(ServiceUsersProfile $serviceUsersProfile)
     {
-
-        //dd($serviceUserProfile);
         $activeUser = Auth::user();
         if(!$activeUser) return redirect('/');
-        if(!$activeUser->isPurchaser()) return redirect('/');
+
+        if (!$activeUser->can('see', $serviceUsersProfile)){
+            return redirect('/');
+        }
+
         $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
         $this->title = 'Holm Care';
 
@@ -107,42 +109,33 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
         $this->vars = array_add($this->vars, 'footer', $footer);
         $this->vars = array_add($this->vars, 'modals', $modals);
 
-/*        if (!$this->user) {
-            abort(404);
+        $this->vars = array_add($this->vars, 'user', $activeUser);
 
-        } else {*/
-
-            $serviceUsersProfile = ServiceUsersProfile::findOrFail($serviceUserProfile);
-
-            $this->vars = array_add($this->vars, 'user', $this->user);
-
-            $this->vars = array_add($this->vars, 'serviceUsers', $serviceUsersProfile);
-            //todo с как-го Х надо использовать две одинаковые переменные?????
+        $this->vars = array_add($this->vars, 'serviceUsers', $serviceUsersProfile);
+        //todo с как-го Х надо использовать две одинаковые переменные?????
+        //todo - Та это я затупил в свое время..
         $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
 
-            $this->vars = array_add($this->vars, 'userNameForSite', $serviceUsersProfile->like_name);
+        $this->vars = array_add($this->vars, 'userNameForSite', $serviceUsersProfile->like_name);
 
-            $typeCare = $serviceUsersProfile->AssistantsTypes()->get()->sortBy('id');
-            $this->vars = array_add($this->vars, 'typeCare', $typeCare);
+        $typeCare = $serviceUsersProfile->AssistantsTypes()->get()->sortBy('id');
+        $this->vars = array_add($this->vars, 'typeCare', $typeCare);
 
-            $typeService = $serviceUsersProfile->ServicesTypes()->get()->sortBy('id');
-            $this->vars = array_add($this->vars, 'typeService', $typeService);
+        $typeService = $serviceUsersProfile->ServicesTypes()->get()->sortBy('id');
+        $this->vars = array_add($this->vars, 'typeService', $typeService);
 
-            $behaviour = $serviceUsersProfile->Behaviours()->get();
-            $this->vars = array_add($this->vars, 'behaviour', $behaviour);
+        $behaviour = $serviceUsersProfile->Behaviours()->get();
+        $this->vars = array_add($this->vars, 'behaviour', $behaviour);
 
-            $workingTimes = $serviceUsersProfile->WorkingTimes()->get();
-            $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
+        $workingTimes = $serviceUsersProfile->WorkingTimes()->get();
+        $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
 
-            $languages =  $serviceUsersProfile->Languages()->get();
-            $this->vars = array_add($this->vars, 'languages', $languages);
+        $languages =  $serviceUsersProfile->Languages()->get();
+        $this->vars = array_add($this->vars, 'languages', $languages);
 
-            $serviceUserConditions = $serviceUsersProfile->ServiceUserConditions()->get();
-            $this->vars = array_add($this->vars, 'serviceUserConditions', $serviceUserConditions);
-//dd($serviceUserConditions);
-            $this->content = view(config('settings.frontTheme') . '.serviceUserProfiles.PublicProfile')->with($this->vars)->render();
-
-        //}
+        $serviceUserConditions = $serviceUsersProfile->ServiceUserConditions()->get();
+        $this->vars = array_add($this->vars, 'serviceUserConditions', $serviceUserConditions);
+        $this->content = view(config('settings.frontTheme') . '.serviceUserProfiles.PublicProfile')->with($this->vars)->render();
 
         return $this->renderOutput();
     }

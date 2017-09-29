@@ -75,7 +75,7 @@ Route::post('/service-registration/{serviceUserProfile}','ServiceUserRegistratio
 Route::get('/addServiceUser/','AddServiceUserController@create')->name('ServiceUserCreate');
 
 Route::get('/serviceUser-settings/{serviceUserProfile}','ServiceUserPrivateProfileController@index')->name('ServiceUserSetting');
-Route::get('/serviceUser/profile/{serviceUserProfile}','ServiceUserPrivateProfileController@profile')->name('ServiceUserProfilePublic');
+Route::get('/serviceUser/profile/{serviceUsersProfile}','ServiceUserPrivateProfileController@profile')->name('ServiceUserProfilePublic');
 Route::get('/serviceUser/delete/{serviceUserProfile}','ServiceUserPrivateProfileController@delete')->name('ServiceUserProfileDelete');
 
 Route::post('/serviceUser-settings/{serviceUserProfile}','ServiceUserPrivateProfileController@update')->name('ServiceUserSettingPost');

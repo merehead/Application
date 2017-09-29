@@ -42,6 +42,11 @@ class ServiceUsersProfile extends Model
         return $this->belongsToMany('App\Behaviour', 'service_user_profile_behaviour', 'services_user_profile_id', 'behaviour_id');
     }
 
+    public function Bookings()
+    {
+        return $this->hasMany('App\Booking', 'service_user_id');
+    }
+
     public function setDoBAttribute($value)
     {
         $date = DateTime::createFromFormat('d/m/Y', $value);
@@ -71,6 +76,10 @@ class ServiceUsersProfile extends Model
 
     public function getFullNameAttribute(){
         return $this->first_name.' '.$this->family_name;
+    }
+
+    public function getProfileLinkAttribute(){
+        return '/serviceUser/profile/'.$this->id;
     }
 
 
