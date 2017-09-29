@@ -27,7 +27,7 @@
         </div>
         {!! Form::model($carerResult, ['method'=>'POST','route'=>'searchPagePost','id'=>'carerSearchForm']) !!}
         {!! Form::hidden('stage','carerSearch') !!}
-        {{--{{csrf_field()}}--}}
+        {{csrf_field()}}
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <div class="filterHead filterBox">
@@ -161,7 +161,7 @@
                         <li>Try reducing the number of words in the query.</li>
                     </ul>
                 </div>
-                <div class="loader" style="display: none"></div>
+                <div class="loader" id="loader-search" style="display: none"></div>
                 @foreach($carerResult as $carerProfile)
                     <div class="result">
                         <a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}" class="profilePhoto  profilePhoto2">

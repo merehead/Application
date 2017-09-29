@@ -21,7 +21,7 @@ function carerSearchAjax(){
     //$(form).submit();
     var token = $(form).find('input[name=_token]').val();
     $('.result').remove();
-    $('.loader').show();
+    $('#loader-search').show();
     $('.error-text').hide();
     $('.moreBtn__item').hide();
 
@@ -34,9 +34,9 @@ function carerSearchAjax(){
         success: function (response) {
             console.log(response);
             $('.result').remove();
-            $('.loader').hide();
+            $('#loader-search').hide();
             if (response.success == true) {
-                $('.loader').after(response.html);
+                $('#loader-search').after(response.html);
                 $('.Paginator').html(response.htmlHeader);
                 $('.moreBtn__item').show();
             }
@@ -46,7 +46,7 @@ function carerSearchAjax(){
             console.log(textStatus);
             console.log(errorThrown);
             $('.result').remove();
-            $('.loader').hide();
+            $('#loader-search').hide();
             $('.error-text').show();
         }
     });
