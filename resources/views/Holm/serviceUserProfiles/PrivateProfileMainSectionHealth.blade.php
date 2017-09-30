@@ -582,13 +582,13 @@
                 <span class="help-block"><strong>{{ $errors->first('incontinence_wear') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->incontinence_wear == 'No' || is_null($serviceUsersProfile->incontinence_wear) )? ' style="display:none"' : ''!!}>
+{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->incontinence_wear == 'No' || is_null($serviceUsersProfile->incontinence_wear) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
             {!! Form::text('incontinence_wear_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('incontinence_wear_detail'))
                 <span class="help-block"><strong>{{ $errors->first('incontinence_wear_detail') }}</strong></span>
             @endif
-        </div>
+        </div>--}}
     </div>
 </div>
 {{Form::close()}}

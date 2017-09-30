@@ -107,7 +107,7 @@
                 <span class="help-block"><strong>{{ $errors->first('socialising_with_other') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->socialising_with_other == 'No' || is_null($serviceUsersProfile->socialising_with_other) )? ' style="display:none"' : ''!!}>
+{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->socialising_with_other == 'No' || is_null($serviceUsersProfile->socialising_with_other) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
@@ -116,7 +116,7 @@
             @if ($errors->has('socialising_with_other_details'))
                 <span class="help-block"><strong>{{ $errors->first('socialising_with_other_details') }}</strong></span>
             @endif
-        </div>
+        </div>--}}
 
     </div>
     <div class="profileRow">

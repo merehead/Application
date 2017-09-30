@@ -21,13 +21,13 @@
                 <span class="help-block"><strong>{{ $errors->first('getting_dressed_for_bed') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->getting_dressed_for_bed == 'No' || is_null($serviceUsersProfile->getting_dressed_for_bed) )? 'style="display:none"' : ''!!}>
+{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->getting_dressed_for_bed == 'No' || is_null($serviceUsersProfile->getting_dressed_for_bed) )? 'style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
             {!! Form::text('dressed_for_bed_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('dressed_for_bed_details'))
                 <span class="help-block"><strong>{{ $errors->first('dressed_for_bed_details') }}</strong></span>
             @endif
-        </div>
+        </div>--}}
     </div>
 
     <div class="profileRow">
@@ -90,13 +90,13 @@
                 <span class="help-block"><strong>{{ $errors->first('toilet_at_night') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->toilet_at_night == 'No' || is_null($serviceUsersProfile->toilet_at_night) )? 'style="display:none"' : ''!!}>
+{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->toilet_at_night == 'No' || is_null($serviceUsersProfile->toilet_at_night) )? 'style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
             {!! Form::text('toiled_help_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('toiled_help_details'))
                 <span class="help-block"><strong>{{ $errors->first('toiled_help_details') }}</strong></span>
             @endif
-        </div>
+        </div>--}}
     </div>
 
 </div>
