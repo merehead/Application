@@ -221,13 +221,7 @@
                 <span class="help-block"><strong>{{ $errors->first('help_with_mobility') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->help_with_mobility == 'No' || is_null($serviceUsersProfile->help_with_mobility) )? ' style="display:none"' : ''!!}>
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('common_mobility_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
-            @if ($errors->has('common_mobility_details'))
-                <span class="help-block"><strong>{{ $errors->first('common_mobility_details') }}</strong></span>
-            @endif
-        </div>
+
     </div>
     <div class="profileRow">
         <div class="profileField">
@@ -333,13 +327,13 @@
                 <span class="help-block"><strong>{{ $errors->first('prepare_food') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->prepare_food == 'No' || is_null($serviceUsersProfile->prepare_food) )? ' style="display:none"' : ''!!}>
+{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->prepare_food == 'No' || is_null($serviceUsersProfile->prepare_food) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
             {!! Form::text('prepare_food_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('prepare_food_details'))
                 <span class="help-block"><strong>{{ $errors->first('prepare_food_details') }}</strong></span>
             @endif
-        </div>
+        </div>--}}
     </div>
     <div class="profileRow">
         <div class="profileField">
@@ -351,13 +345,13 @@
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_preparing_food') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_with_preparing_food == 'No' || is_null($serviceUsersProfile->assistance_with_preparing_food) )? ' style="display:none"' : ''!!}>
+{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_with_preparing_food == 'No' || is_null($serviceUsersProfile->assistance_with_preparing_food) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
             {!! Form::text('assistance_prepare_food_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('assistance_prepare_food_details'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_prepare_food_details') }}</strong></span>
             @endif
-        </div>
+        </div>--}}
     </div>
     <div class="profileRow">
         <div class="profileField">
@@ -417,13 +411,13 @@
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_personal_hygiene') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_with_personal_hygiene == 'No' || is_null($serviceUsersProfile->assistance_with_personal_hygiene) )? ' style="display:none"' : ''!!}>
+{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_with_personal_hygiene == 'No' || is_null($serviceUsersProfile->assistance_with_personal_hygiene) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
             {!! Form::text('assistance_with_personal_hygiene_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('assistance_with_personal_hygiene_detail'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_personal_hygiene_detail') }}</strong></span>
             @endif
-        </div>
+        </div>--}}
     </div>
     <div class="profileRow">
         <div class="profileField">
@@ -435,13 +429,13 @@
                 <span class="help-block"><strong>{{ $errors->first('appropriate_clothes') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->appropriate_clothes == 'No' || is_null($serviceUsersProfile->appropriate_clothes) )? ' style="display:none"' : ''!!}>
+{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->appropriate_clothes == 'No' || is_null($serviceUsersProfile->appropriate_clothes) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
             {!! Form::text('appropriate_clothes_assistance_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('appropriate_clothes_assistance_detail'))
                 <span class="help-block"><strong>{{ $errors->first('appropriate_clothes_assistance_detail') }}</strong></span>
             @endif
-        </div>
+        </div>--}}
     </div>
     <div class="profileRow">
         <div class="profileField">
@@ -471,13 +465,13 @@
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_bathing') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_with_bathing == 'No' || is_null($serviceUsersProfile->assistance_with_bathing) )? ' style="display:none"' : ''!!}>
+{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_with_bathing == 'No' || is_null($serviceUsersProfile->assistance_with_bathing) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
             {!! Form::text('assistance_with_bathing_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('assistance_with_bathing_detail'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_bathing_detail') }}</strong></span>
             @endif
-        </div>
+        </div>--}}
     </div>
     <div class="profileRow">
         <div class="profileField">
@@ -489,13 +483,13 @@
                 <span class="help-block"><strong>{{ $errors->first('managing_toilet_needs') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->managing_toilet_needs == 'No' || is_null($serviceUsersProfile->managing_toilet_needs) )? ' style="display:none"' : ''!!}>
+{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->managing_toilet_needs == 'No' || is_null($serviceUsersProfile->managing_toilet_needs) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
             {!! Form::text('managing_toilet_needs_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('managing_toilet_needs_detail'))
                 <span class="help-block"><strong>{{ $errors->first('managing_toilet_needs_detail') }}</strong></span>
             @endif
-        </div>
+        </div>--}}
     </div>
     <div class="profileRow">
         <div class="profileField">
@@ -507,13 +501,13 @@
                 <span class="help-block"><strong>{{ $errors->first('mobilising_to_toilet') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->mobilising_to_toilet == 'No' || is_null($serviceUsersProfile->mobilising_to_toilet) ) ? ' style="display:none"' : ''!!}>
+{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->mobilising_to_toilet == 'No' || is_null($serviceUsersProfile->mobilising_to_toilet) ) ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
             {!! Form::text('mobilising_to_toilet_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('mobilising_to_toilet_detail'))
                 <span class="help-block"><strong>{{ $errors->first('mobilising_to_toilet_detail') }}</strong></span>
             @endif
-        </div>
+        </div>--}}
     </div>
     <div class="profileRow">
         <div class="profileField">
@@ -525,13 +519,13 @@
                 <span class="help-block"><strong>{{ $errors->first('cleaning_themselves') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->cleaning_themselves == 'No' || is_null($serviceUsersProfile->cleaning_themselves) )? ' style="display:none"' : ''!!}>
+{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->cleaning_themselves == 'No' || is_null($serviceUsersProfile->cleaning_themselves) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
             {!! Form::text('cleaning_themselves_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('cleaning_themselves_detail'))
                 <span class="help-block"><strong>{{ $errors->first('cleaning_themselves_detail') }}</strong></span>
             @endif
-        </div>
+        </div>--}}
     </div>
     <div class="profileRow">
         <div class="profileField">
@@ -561,13 +555,13 @@
                 <span class="help-block"><strong>{{ $errors->first('choosing_incontinence_products') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->choosing_incontinence_products == 'No' || is_null($serviceUsersProfile->choosing_incontinence_products) )? ' style="display:none"' : ''!!}>
+{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->choosing_incontinence_products == 'No' || is_null($serviceUsersProfile->choosing_incontinence_products) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
             {!! Form::text('choosing_incontinence_products_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('choosing_incontinence_products_detail'))
                 <span class="help-block"><strong>{{ $errors->first('choosing_incontinence_products_detail') }}</strong></span>
             @endif
-        </div>
+        </div>--}}
     </div>
     <div class="profileRow">
         <div class="profileField profileField--full-width">

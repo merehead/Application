@@ -91,14 +91,14 @@
                 <span class="help-block"><strong>{{ $errors->first('assistance_moving') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_moving == 'No' || is_null($serviceUsersProfile->assistance_moving) )? ' style="display:none"' : ''!!}>
+{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_moving == 'No' || is_null($serviceUsersProfile->assistance_moving) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span
                         class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
             {!! Form::text('assistance_moving_details',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('assistance_moving_details'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_moving_details') }}</strong></span>
             @endif
-        </div>
+        </div>--}}
     </div>
 </div>
 <div class="borderContainer">
@@ -182,7 +182,7 @@
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Pets friendly with strangers</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select'];
-            if (is_null($serviceUsersProfile->anyone_else_live)) $atrr['placeholder'] = 'Please select';?>
+            if (is_null($serviceUsersProfile->pet_friendly)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('pet_friendly',['Yes'=>'Yes','No'=>'No','Normally'=>'Normally'],null,$atrr) !!}
             @if ($errors->has('pet_friendly'))
                 <span class="help-block"><strong>{{ $errors->first('pet_friendly') }}</strong></span>
@@ -203,13 +203,13 @@
                 <span class="help-block"><strong>{{ $errors->first('social_interaction') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->social_interaction == 'No'  || is_null($serviceUsersProfile->social_interaction) )? ' style="display:none"' : ''!!}>
+{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->social_interaction == 'No'  || is_null($serviceUsersProfile->social_interaction) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
             {!! Form::text('companionship_interaction_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"200"]) !!}
             @if ($errors->has('companionship_interaction_details'))
                 <span class="help-block"><strong>{{ $errors->first('companionship_interaction_details') }}</strong></span>
             @endif
-        </div>
+        </div>--}}
     </div>
     <div class="profileRow">
         <div class="profileField">
@@ -221,13 +221,13 @@
                 <span class="help-block"><strong>{{ $errors->first('visit_for_companionship') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds" {!!  ($serviceUsersProfile->visit_for_companionship == 'No' || is_null($serviceUsersProfile->visit_for_companionship) )? ' style="display:none"' : ''!!}>
+{{--        <div class="profileField profileField--two-thirds" {!!  ($serviceUsersProfile->visit_for_companionship == 'No' || is_null($serviceUsersProfile->visit_for_companionship) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
             {!! Form::text('companionship_visit_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"200"]) !!}
             @if ($errors->has('companionship_visit_details'))
                 <span class="help-block"><strong>{{ $errors->first('companionship_visit_details') }}</strong></span>
             @endif
-        </div>
+        </div>--}}
     </div>
 
 </div>
