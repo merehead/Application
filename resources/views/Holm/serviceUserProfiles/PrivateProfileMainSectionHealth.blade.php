@@ -66,9 +66,9 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->communication == 'No' || is_null($serviceUsersProfile->communication) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('common_communication_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::text('comprehension_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('comprehension_detail'))
-                <span class="help-block"><strong>{{ $errors->first('common_communication_details') }}</strong></span>
+                <span class="help-block"><strong>{{ $errors->first('comprehension_detail') }}</strong></span>
             @endif
         </div>
     </div>
