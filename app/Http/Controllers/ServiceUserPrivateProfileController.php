@@ -281,7 +281,7 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
 
             $depart = "#serviceGeneralone";
 
-            if (isset($input['one_line_about'])) $serviceUsersProfile->one_line_about = $input['one_line_about'];
+            if (isset($input['one_line_about'])) $serviceUsersProfile->one_line_about = $input['one_line_about'];else $serviceUsersProfile->one_line_about =null;
 
             $serviceUsersProfile->save();
             unset($serviceUsersProfile);

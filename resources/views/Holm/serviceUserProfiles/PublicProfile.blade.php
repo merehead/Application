@@ -87,8 +87,8 @@
                 </div>
             </div>
             <div class="extraRow">
-                <div class="userAbout">
-                    <p></p>
+                <div class="userAbout" {!!  (is_null($serviceUsersProfile->one_line_about) )? ' style="display:none"' : ''!!}>
+                    <p>{{$serviceUsers->one_line_about}}</p>
                 </div>
 
                 <div class="userBox">
@@ -119,6 +119,7 @@
                         <div class="col-sm-6">
 
                             @if(count($serviceUserConditions))
+
                             <div class="userContainer">
                                 <h2 class="ordinaryTitle">
                                     <span class="ordinaryTitle__text">Conditions</span>
@@ -789,13 +790,15 @@
                         </div>
                     </div>
 
-
+@if(count($behaviour))
+    @if(count($behaviour) == 1 && $behaviour[0]->name != 'None' )
                     <div class="userBox">
                         <h2 class="profileTitle">
                             Behaviour
                         </h2>
                         <div class="userContainer">
                             <div class="serviceRow serviceRow--forLabel">
+
                                 @foreach($behaviour as $beh)
                                     <div class="serviceColumn">
                                         <p class="advantage_label">
@@ -806,9 +809,9 @@
                                 @endforeach
                             </div>
                         </div>
-
                     </div>
-
+        @endif
+@endif
                     <div class="userBox">
 
                         <div class="row">
