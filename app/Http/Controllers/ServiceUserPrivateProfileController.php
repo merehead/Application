@@ -378,20 +378,22 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
                 'toiled_help_details' => 'nullable|string|max:255',
             ]);
 
-            //dd($input);
 
             $depart = "#nightTime-div";
 
             if (isset($input['getting_dressed_for_bed'])) $serviceUsersProfile->getting_dressed_for_bed = $input['getting_dressed_for_bed'];
-            if (isset($input['dressed_for_bed_details'])) $serviceUsersProfile->dressed_for_bed_details = $input['dressed_for_bed_details'];
+            if (isset($input['dressed_for_bed_details'])) $serviceUsersProfile->dressed_for_bed_details = $input['dressed_for_bed_details'];else $serviceUsersProfile->dressed_for_bed_details =null;
             if (isset($input['time_to_bed'])) $serviceUsersProfile->time_to_bed = $input['time_to_bed'];
             if (isset($input['keeping_safe_at_night'])) $serviceUsersProfile->keeping_safe_at_night = $input['keeping_safe_at_night'];
-            if (isset($input['keeping_safe_at_night_details'])) $serviceUsersProfile->keeping_safe_at_night_details = $input['keeping_safe_at_night_details'];
+            if (isset($input['keeping_safe_at_night_details'])) $serviceUsersProfile->keeping_safe_at_night_details = $input['keeping_safe_at_night_details'];else $serviceUsersProfile->keeping_safe_at_night_details =null;
             if (isset($input['time_to_night_helping'])) $serviceUsersProfile->time_to_night_helping = $input['time_to_night_helping'];
             if (isset($input['toilet_at_night'])) $serviceUsersProfile->toilet_at_night = $input['toilet_at_night'];
-            if (isset($input['toiled_help_details'])) $serviceUsersProfile->toiled_help_details = $input['toiled_help_details'];
+            if (isset($input['toiled_help_details'])) $serviceUsersProfile->toiled_help_details = $input['toiled_help_details'];else $serviceUsersProfile->toiled_help_details =null;
 
-            $serviceUsersProfile->save();
+            //dd($input);
+
+
+            $serviceUsersProfile->update();
             unset($serviceUsersProfile);
 
         }

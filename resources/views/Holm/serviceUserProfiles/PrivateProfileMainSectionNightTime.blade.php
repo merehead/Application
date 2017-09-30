@@ -1,5 +1,4 @@
 <div class="borderContainer">
-
     <div id="nightTime-div" class="borderContainer">
         <div class="profileCategory">
             <h2 class="profileCategory__title">Night-time</h2>
@@ -12,11 +11,12 @@
     {!! Form::hidden('id',null) !!}
     {!! Form::hidden('stage','nightTime') !!}
 
-
     <div class="profileRow">
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Has problems getting dressed for bed</span></h2>
-            {!! Form::select('getting_dressed_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
+            if (is_null($serviceUsersProfile->getting_dressed_for_bed)) $atrr['placeholder'] = 'Please select';?>
+            {!! Form::select('getting_dressed_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
             @if ($errors->has('getting_dressed_for_bed'))
                 <span class="help-block"><strong>{{ $errors->first('getting_dressed_for_bed') }}</strong></span>
             @endif
@@ -48,7 +48,9 @@
     <div class="profileRow">
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Needs assistance keeping safe at night</span></h2>
-            {!! Form::select('keeping_safe_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
+            if (is_null($serviceUsersProfile->keeping_safe_at_night)) $atrr['placeholder'] = 'Please select';?>
+            {!! Form::select('keeping_safe_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
             @if ($errors->has('keeping_safe_at_night'))
                 <span class="help-block"><strong>{{ $errors->first('keeping_safe_at_night') }}</strong></span>
             @endif
@@ -81,7 +83,9 @@
     <div class="profileRow">
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Needs help going to the toilet at night</span></h2>
-            {!! Form::select('toilet_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
+            if (is_null($serviceUsersProfile->toilet_at_night)) $atrr['placeholder'] = 'Please select';?>
+            {!! Form::select('toilet_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
             @if ($errors->has('toilet_at_night'))
                 <span class="help-block"><strong>{{ $errors->first('toilet_at_night') }}</strong></span>
             @endif
