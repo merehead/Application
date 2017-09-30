@@ -344,21 +344,19 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
             if (isset($input['assistance_keeping'])) $serviceUsersProfile->assistance_keeping = $input['assistance_keeping'];
             if (isset($input['move_available'])) $serviceUsersProfile->move_available = $input['move_available'];
             if (isset($input['assistance_moving'])) $serviceUsersProfile->assistance_moving = $input['assistance_moving'];
-            if (isset($input['assistance_moving_details'])) $serviceUsersProfile->assistance_moving_details = $input['assistance_moving_details'];
-            if (isset($input['carer_enter'])) $serviceUsersProfile->carer_enter = $input['carer_enter'];
-            if (isset($input['other_detail'])) $serviceUsersProfile->other_detail = $input['other_detail'];
+            if (isset($input['assistance_moving_details'])) $serviceUsersProfile->assistance_moving_details = $input['assistance_moving_details']; else $serviceUsersProfile->assistance_moving_details =null;
+            if (isset($input['carer_enter'])) $serviceUsersProfile->carer_enter = $input['carer_enter']; else $serviceUsersProfile->carer_enter =null;
+            if (isset($input['other_detail'])) $serviceUsersProfile->other_detail = $input['other_detail']; else $serviceUsersProfile->other_detail =null;
             if (isset($input['anyone_else_live'])) $serviceUsersProfile->anyone_else_live = $input['anyone_else_live'];
-            if (isset($input['anyone_detail'])) $serviceUsersProfile->anyone_detail = $input['anyone_detail'];
+            if (isset($input['anyone_detail'])) $serviceUsersProfile->anyone_detail = $input['anyone_detail']; else $serviceUsersProfile->anyone_detail =null;
             if (isset($input['anyone_friendly'])) $serviceUsersProfile->anyone_friendly = $input['anyone_friendly'];
             if (isset($input['own_pets'])) $serviceUsersProfile->own_pets = $input['own_pets'];
-            if (isset($input['pet_detail'])) $serviceUsersProfile->pet_detail = $input['pet_detail'];
+            if (isset($input['pet_detail'])) $serviceUsersProfile->pet_detail = $input['pet_detail']; else $serviceUsersProfile->pet_detail =null;
             if (isset($input['pet_friendly'])) $serviceUsersProfile->pet_friendly = $input['pet_friendly'];
             if (isset($input['social_interaction'])) $serviceUsersProfile->social_interaction = $input['social_interaction'];
             if (isset($input['visit_for_companionship'])) $serviceUsersProfile->visit_for_companionship = $input['visit_for_companionship'];
-            if (isset($input['companionship_interaction_details'])) $serviceUsersProfile->companionship_interaction_details = $input['companionship_interaction_details'];
-            if (isset($input['companionship_visit_details'])) $serviceUsersProfile->companionship_visit_details = $input['companionship_visit_details'];
-
-            $serviceUsersProfile->carer_enter = $input['carer_enter'];
+            if (isset($input['companionship_interaction_details'])) $serviceUsersProfile->companionship_interaction_details = $input['companionship_interaction_details'];  else $serviceUsersProfile->companionship_interaction_details =null;
+            if (isset($input['companionship_visit_details'])) $serviceUsersProfile->companionship_visit_details = $input['companionship_visit_details'];  else $serviceUsersProfile->companionship_visit_details =null;
 
             $serviceUsersProfile->update();
             unset($serviceUsersProfile);
@@ -417,18 +415,18 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
 
             $depart = "#nightTime";
 
-            if (isset($input['religious_beliefs'])) $serviceUsersProfile->religious_beliefs = $input['religious_beliefs'];
-            if (isset($input['religious_beliefs_details'])) $serviceUsersProfile->religious_beliefs_details = $input['religious_beliefs_details'];
-            if (isset($input['particular_likes'])) $serviceUsersProfile->particular_likes = $input['particular_likes'];
-            if (isset($input['particular_likes_details'])) $serviceUsersProfile->particular_likes_details = $input['particular_likes_details'];
-            if (isset($input['multiple_carers'])) $serviceUsersProfile->multiple_carers = $input['multiple_carers'];
-            if (isset($input['multiple_carers_details'])) $serviceUsersProfile->multiple_carers_details = $input['multiple_carers_details'];
-            if (isset($input['socialising_with_other'])) $serviceUsersProfile->socialising_with_other = $input['socialising_with_other'];
-            if (isset($input['socialising_with_other_details'])) $serviceUsersProfile->socialising_with_other_details = $input['socialising_with_other_details'];
-            if (isset($input['interests_hobbies'])) $serviceUsersProfile->interests_hobbies = $input['interests_hobbies'];
-            if (isset($input['interests_hobbies_details'])) $serviceUsersProfile->interests_hobbies_details = $input['interests_hobbies_details'];
-            if (isset($input['we_missed'])) $serviceUsersProfile->we_missed = $input['we_missed'];
-            if (isset($input['we_missed_details'])) $serviceUsersProfile->we_missed_details = $input['we_missed_details'];
+            if (isset($input['religious_beliefs']))             $serviceUsersProfile->religious_beliefs = $input['religious_beliefs'                            ];
+            if (isset($input['religious_beliefs_details']))     $serviceUsersProfile->religious_beliefs_details = $input['religious_beliefs_details'            ];else $serviceUsersProfile->religious_beliefs_details =null;
+            if (isset($input['particular_likes']))              $serviceUsersProfile->particular_likes = $input['particular_likes'                              ];
+            if (isset($input['particular_likes_details']))      $serviceUsersProfile->particular_likes_details = $input['particular_likes_details'              ];else $serviceUsersProfile->particular_likes_details =null;
+            if (isset($input['multiple_carers']))               $serviceUsersProfile->multiple_carers = $input['multiple_carers'                                ];
+            if (isset($input['multiple_carers_details']))       $serviceUsersProfile->multiple_carers_details = $input['multiple_carers_details'                ];else $serviceUsersProfile->multiple_carers_details =null;
+            if (isset($input['socialising_with_other']))        $serviceUsersProfile->socialising_with_other = $input['socialising_with_other'                  ];
+            if (isset($input['socialising_with_other_details'])) $serviceUsersProfile->socialising_with_other_details = $input['socialising_with_other_details' ];else $serviceUsersProfile->socialising_with_other_details =null;
+            if (isset($input['interests_hobbies']))             $serviceUsersProfile->interests_hobbies = $input['interests_hobbies'                            ];
+            if (isset($input['interests_hobbies_details']))     $serviceUsersProfile->interests_hobbies_details = $input['interests_hobbies_details'            ];else $serviceUsersProfile->interests_hobbies_details =null;
+            if (isset($input['we_missed']))                     $serviceUsersProfile->we_missed = $input['we_missed'                                            ];
+            if (isset($input['we_missed_details']))             $serviceUsersProfile->we_missed_details = $input['we_missed_details'                            ];else $serviceUsersProfile->we_missed_details =null;
 
             $serviceUsersProfile->save();
             unset($serviceUsersProfile);
@@ -601,36 +599,36 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
 
 
             if (isset($input[ 'other_behaviour'                         ])) $serviceUsersProfile-> other_behaviour                         = $input[ 'other_behaviour'                         ];
-            if (isset($input[ 'comprehension_detail'                    ])) $serviceUsersProfile-> comprehension_detail                    = $input[ 'comprehension_detail'                    ];
-            if (isset($input[ 'common_communication_details'            ])) $serviceUsersProfile-> common_communication_details            = $input[ 'common_communication_details'            ];
-            if (isset($input[ 'speech_detail'                           ])) $serviceUsersProfile-> speech_detail                           = $input[ 'speech_detail'                           ];
-            if (isset($input[ 'vision_detail'                           ])) $serviceUsersProfile-> vision_detail                           = $input[ 'vision_detail'                           ];
-            if (isset($input[ 'hearing_detail'                          ])) $serviceUsersProfile-> hearing_detail                          = $input[ 'hearing_detail'                          ];
-            if (isset($input[ 'in_medication_detail'                    ])) $serviceUsersProfile-> in_medication_detail                    = $input[ 'in_medication_detail'                    ];
-            if (isset($input[ 'allergies_detail'                        ])) $serviceUsersProfile-> allergies_detail                        = $input[ 'allergies_detail'                        ];
-            if (isset($input[ 'skin_scores_detail'                      ])) $serviceUsersProfile-> skin_scores_detail                      = $input[ 'skin_scores_detail'                      ];
-            if (isset($input[ 'dressings_detail'                        ])) $serviceUsersProfile-> dressings_detail                        = $input[ 'dressings_detail'                        ];
-            if (isset($input[ 'common_mobility_details'                 ])) $serviceUsersProfile-> common_mobility_details                 = $input[ 'common_mobility_details'                 ];
-            if (isset($input[ 'mobility_home_detail'                    ])) $serviceUsersProfile-> mobility_home_detail                    = $input[ 'mobility_home_detail'                    ];
-            if (isset($input[ 'mobility_bed_detail'                     ])) $serviceUsersProfile-> mobility_bed_detail                     = $input[ 'mobility_bed_detail'                     ];
-            if (isset($input[ 'falls_detail'                            ])) $serviceUsersProfile-> falls_detail                            = $input[ 'falls_detail'                            ];
-            if (isset($input[ 'mobility_shopping_detail'                ])) $serviceUsersProfile-> mobility_shopping_detail                = $input[ 'mobility_shopping_detail'                ];
-            if (isset($input[ 'assistance_with_eating_detail'           ])) $serviceUsersProfile-> assistance_with_eating_detail           = $input[ 'assistance_with_eating_detail'           ];
-            if (isset($input[ 'prepare_food_details'                    ])) $serviceUsersProfile-> prepare_food_details                    = $input[ 'prepare_food_details'                    ];
-            if (isset($input[ 'assistance_prepare_food_details'         ])) $serviceUsersProfile-> assistance_prepare_food_details         = $input[ 'assistance_prepare_food_details'         ];
-            if (isset($input[ 'dietary_requirements_interaction'        ])) $serviceUsersProfile-> dietary_requirements_interaction        = $input[ 'dietary_requirements_interaction'        ];
-            if (isset($input[ 'special_dietary_requirements_detail'     ])) $serviceUsersProfile-> special_dietary_requirements_detail     = $input[ 'special_dietary_requirements_detail'     ];
-            if (isset($input[ 'assistance_with_personal_hygiene_detail' ])) $serviceUsersProfile-> assistance_with_personal_hygiene_detail = $input[ 'assistance_with_personal_hygiene_detail' ];
-            if (isset($input[ 'appropriate_clothes_assistance_detail'   ])) $serviceUsersProfile-> appropriate_clothes_assistance_detail   = $input[ 'appropriate_clothes_assistance_detail'   ];
-            if (isset($input[ 'assistance_getting_dressed_detail'       ])) $serviceUsersProfile-> assistance_getting_dressed_detail       = $input[ 'assistance_getting_dressed_detail'       ];
-            if (isset($input[ 'assistance_with_bathing_detail'          ])) $serviceUsersProfile-> assistance_with_bathing_detail          = $input[ 'assistance_with_bathing_detail'          ];
-            if (isset($input[ 'managing_toilet_needs_detail'            ])) $serviceUsersProfile-> managing_toilet_needs_detail            = $input[ 'managing_toilet_needs_detail'            ];
-            if (isset($input[ 'mobilising_to_toilet_detail'             ])) $serviceUsersProfile-> mobilising_to_toilet_detail             = $input[ 'mobilising_to_toilet_detail'             ];
-            if (isset($input[ 'cleaning_themselves_detail'              ])) $serviceUsersProfile-> cleaning_themselves_detail              = $input[ 'cleaning_themselves_detail'              ];
-            if (isset($input[ 'kind_of_incontinence'                    ])) $serviceUsersProfile-> kind_of_incontinence                    = $input[ 'kind_of_incontinence'                    ];
-            if (isset($input[ 'choosing_incontinence_products_detail'   ])) $serviceUsersProfile-> choosing_incontinence_products_detail   = $input[ 'choosing_incontinence_products_detail'   ];
-            if (isset($input[ 'incontinence_products_stored'            ])) $serviceUsersProfile-> incontinence_products_stored            = $input[ 'incontinence_products_stored'            ];
-            if (isset($input[ 'incontinence_wear_detail'                ])) $serviceUsersProfile-> incontinence_wear_detail                = $input[ 'incontinence_wear_detail'                ];
+            if (isset($input[ 'comprehension_detail'                    ])) $serviceUsersProfile-> comprehension_detail                    = $input[ 'comprehension_detail'                    ];else $serviceUsersProfile->comprehension_detail =null;
+            if (isset($input[ 'common_communication_details'            ])) $serviceUsersProfile-> common_communication_details            = $input[ 'common_communication_details'            ];else $serviceUsersProfile->common_communication_details =null;
+            if (isset($input[ 'speech_detail'                           ])) $serviceUsersProfile-> speech_detail                           = $input[ 'speech_detail'                           ];else $serviceUsersProfile->speech_detail =null;
+            if (isset($input[ 'vision_detail'                           ])) $serviceUsersProfile-> vision_detail                           = $input[ 'vision_detail'                           ];else $serviceUsersProfile->vision_detail =null;
+            if (isset($input[ 'hearing_detail'                          ])) $serviceUsersProfile-> hearing_detail                          = $input[ 'hearing_detail'                          ];else $serviceUsersProfile->hearing_detail =null;
+            if (isset($input[ 'in_medication_detail'                    ])) $serviceUsersProfile-> in_medication_detail                    = $input[ 'in_medication_detail'                    ];else $serviceUsersProfile->in_medication_detail =null;
+            if (isset($input[ 'allergies_detail'                        ])) $serviceUsersProfile-> allergies_detail                        = $input[ 'allergies_detail'                        ];else $serviceUsersProfile->allergies_detail =null;
+            if (isset($input[ 'skin_scores_detail'                      ])) $serviceUsersProfile-> skin_scores_detail                      = $input[ 'skin_scores_detail'                      ];else $serviceUsersProfile->skin_scores_detail =null;
+            if (isset($input[ 'dressings_detail'                        ])) $serviceUsersProfile-> dressings_detail                        = $input[ 'dressings_detail'                        ];else $serviceUsersProfile->dressings_detail =null;
+            if (isset($input[ 'common_mobility_details'                 ])) $serviceUsersProfile-> common_mobility_details                 = $input[ 'common_mobility_details'                 ];else $serviceUsersProfile->common_mobility_details =null;
+            if (isset($input[ 'mobility_home_detail'                    ])) $serviceUsersProfile-> mobility_home_detail                    = $input[ 'mobility_home_detail'                    ];else $serviceUsersProfile->mobility_home_detail =null;
+            if (isset($input[ 'mobility_bed_detail'                     ])) $serviceUsersProfile-> mobility_bed_detail                     = $input[ 'mobility_bed_detail'                     ];else $serviceUsersProfile->mobility_bed_detail =null;
+            if (isset($input[ 'falls_detail'                            ])) $serviceUsersProfile-> falls_detail                            = $input[ 'falls_detail'                            ];else $serviceUsersProfile->falls_detail =null;
+            if (isset($input[ 'mobility_shopping_detail'                ])) $serviceUsersProfile-> mobility_shopping_detail                = $input[ 'mobility_shopping_detail'                ];else $serviceUsersProfile->mobility_shopping_detail =null;
+            if (isset($input[ 'assistance_with_eating_detail'           ])) $serviceUsersProfile-> assistance_with_eating_detail           = $input[ 'assistance_with_eating_detail'           ];else $serviceUsersProfile->assistance_with_eating_detail =null;
+            if (isset($input[ 'prepare_food_details'                    ])) $serviceUsersProfile-> prepare_food_details                    = $input[ 'prepare_food_details'                    ];else $serviceUsersProfile->prepare_food_details =null;
+            if (isset($input[ 'assistance_prepare_food_details'         ])) $serviceUsersProfile-> assistance_prepare_food_details         = $input[ 'assistance_prepare_food_details'         ];else $serviceUsersProfile->assistance_prepare_food_details =null;
+            if (isset($input[ 'dietary_requirements_interaction'        ])) $serviceUsersProfile-> dietary_requirements_interaction        = $input[ 'dietary_requirements_interaction'        ];else $serviceUsersProfile->dietary_requirements_interaction =null;
+            if (isset($input[ 'special_dietary_requirements_detail'     ])) $serviceUsersProfile-> special_dietary_requirements_detail     = $input[ 'special_dietary_requirements_detail'     ];else $serviceUsersProfile->special_dietary_requirements_detail =null;
+            if (isset($input[ 'assistance_with_personal_hygiene_detail' ])) $serviceUsersProfile-> assistance_with_personal_hygiene_detail = $input[ 'assistance_with_personal_hygiene_detail' ];else $serviceUsersProfile->assistance_with_personal_hygiene_detail =null;
+            if (isset($input[ 'appropriate_clothes_assistance_detail'   ])) $serviceUsersProfile-> appropriate_clothes_assistance_detail   = $input[ 'appropriate_clothes_assistance_detail'   ];else $serviceUsersProfile->appropriate_clothes_assistance_detail =null;
+            if (isset($input[ 'assistance_getting_dressed_detail'       ])) $serviceUsersProfile-> assistance_getting_dressed_detail       = $input[ 'assistance_getting_dressed_detail'       ];else $serviceUsersProfile->assistance_getting_dressed_detail =null;
+            if (isset($input[ 'assistance_with_bathing_detail'          ])) $serviceUsersProfile-> assistance_with_bathing_detail          = $input[ 'assistance_with_bathing_detail'          ];else $serviceUsersProfile->assistance_with_bathing_detail =null;
+            if (isset($input[ 'managing_toilet_needs_detail'            ])) $serviceUsersProfile-> managing_toilet_needs_detail            = $input[ 'managing_toilet_needs_detail'            ];else $serviceUsersProfile->managing_toilet_needs_detail =null;
+            if (isset($input[ 'mobilising_to_toilet_detail'             ])) $serviceUsersProfile-> mobilising_to_toilet_detail             = $input[ 'mobilising_to_toilet_detail'             ];else $serviceUsersProfile->mobilising_to_toilet_detail =null;
+            if (isset($input[ 'cleaning_themselves_detail'              ])) $serviceUsersProfile-> cleaning_themselves_detail              = $input[ 'cleaning_themselves_detail'              ];else $serviceUsersProfile->cleaning_themselves_detail =null;
+            if (isset($input[ 'kind_of_incontinence'                    ])) $serviceUsersProfile-> kind_of_incontinence                    = $input[ 'kind_of_incontinence'                    ];else $serviceUsersProfile->kind_of_incontinence =null;
+            if (isset($input[ 'choosing_incontinence_products_detail'   ])) $serviceUsersProfile-> choosing_incontinence_products_detail   = $input[ 'choosing_incontinence_products_detail'   ];else $serviceUsersProfile->choosing_incontinence_products_detail =null;
+            if (isset($input[ 'incontinence_products_stored'            ])) $serviceUsersProfile-> incontinence_products_stored            = $input[ 'incontinence_products_stored'            ];else $serviceUsersProfile->incontinence_products_stored =null;
+            if (isset($input[ 'incontinence_wear_detail'                ])) $serviceUsersProfile-> incontinence_wear_detail                = $input[ 'incontinence_wear_detail'                ];else $serviceUsersProfile->incontinence_wear_detail =null;
 
 //dd($input);
 
