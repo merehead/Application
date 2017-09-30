@@ -1,6 +1,6 @@
-{{--
+
 <section class="mainSection">
-    <script>
+ {{--   <script>
         var geocoder;
         var map;
         var marker;
