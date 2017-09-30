@@ -10,8 +10,6 @@
     {!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'other']) !!}
     {!! Form::hidden('id',null) !!}
     {!! Form::hidden('stage','other') !!}
-
-
     <div class="profileRow">
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
@@ -19,8 +17,9 @@
               Has  political, religious or other beliefs 
               </span>
             </h2>
-
-            {!! Form::select('religious_beliefs',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
+            if (is_null($serviceUsersProfile->religious_beliefs)) $atrr['placeholder'] = 'Please select';?>
+            {!! Form::select('religious_beliefs',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
             @if ($errors->has('religious_beliefs'))
                 <span class="help-block"><strong>{{ $errors->first('religious_beliefs') }}</strong></span>
             @endif
@@ -48,8 +47,9 @@
               Has particular likes or dislikes 
               </span>
             </h2>
-
-            {!! Form::select('particular_likes',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
+            if (is_null($serviceUsersProfile->particular_likes)) $atrr['placeholder'] = 'Please select';?>
+            {!! Form::select('particular_likes',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
             @if ($errors->has('particular_likes'))
                 <span class="help-block"><strong>{{ $errors->first('particular_likes') }}</strong></span>
             @endif
@@ -73,7 +73,9 @@
               Needs the assistance of more than one person at a time to achieve any particular task
               </span>
             </h2>
-            {!! Form::select('multiple_carers',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
+            if (is_null($serviceUsersProfile->multiple_carers)) $atrr['placeholder'] = 'Please select';?>
+            {!! Form::select('multiple_carers',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
             @if ($errors->has('multiple_carers'))
                 <span class="help-block"><strong>{{ $errors->first('multiple_carers') }}</strong></span>
             @endif
@@ -98,7 +100,9 @@
               Likes socialising with other people / groups
               </span>
             </h2>
-            {!! Form::select('socialising_with_other',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
+            if (is_null($serviceUsersProfile->socialising_with_other)) $atrr['placeholder'] = 'Please select';?>
+            {!! Form::select('socialising_with_other',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
             @if ($errors->has('socialising_with_other'))
                 <span class="help-block"><strong>{{ $errors->first('socialising_with_other') }}</strong></span>
             @endif
@@ -122,7 +126,9 @@
               Has interests or hobbies which {{$userNameForSite}} enjoy
               </span>
             </h2>
-            {!! Form::select('interests_hobbies',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
+            if (is_null($serviceUsersProfile->interests_hobbies)) $atrr['placeholder'] = 'Please select';?>
+            {!! Form::select('interests_hobbies',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
             @if ($errors->has('interests_hobbies'))
                 <span class="help-block"><strong>{{ $errors->first('interests_hobbies') }}</strong></span>
             @endif
@@ -146,7 +152,9 @@
               Are there any other medical conditions, disabilities, or other pieces of information not already covered which you feel may be of use?
               </span>
             </h2>
-            {!! Form::select('we_missed',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select serviceUserProfile','noplaceholder'=>'Please select']) !!}
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
+            if (is_null($serviceUsersProfile->we_missed)) $atrr['placeholder'] = 'Please select';?>
+            {!! Form::select('we_missed',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
             @if ($errors->has('we_missed'))
                 <span class="help-block"><strong>{{ $errors->first('we_missed') }}</strong></span>
             @endif

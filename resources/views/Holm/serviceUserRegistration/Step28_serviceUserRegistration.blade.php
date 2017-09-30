@@ -15,12 +15,9 @@
                     <h2 class="formLabel questionForm__label">
                         Does {{$userNameForSite}} sometimes have problems understanding other people? <span>*</span>       </h2>
                     <div class="inputWrap">
-                        <?php
-                        if (isset($atrr)) unset($atrr);
+                        <?php if (isset($atrr)) unset($atrr);
                         $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];
-                        if (is_null($serviceUserProfile->comprehension))
-                            $atrr['placeholder'] = 'Please select';
-                        ?>
+                        if (is_null($serviceUserProfile->comprehension)) $atrr['placeholder'] = 'Please select';?>
                         {!! Form::select('comprehension',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
                         @if ($errors->has('comprehension'))
                             <span class="help-block">
