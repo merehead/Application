@@ -69,7 +69,7 @@ array('class' => 'checkboxNew','id'=>'behaviour'.$behaviour[3]->id)) !!}
 
     </div>
 
-    <div class="profileRow">
+{{--    <div class="profileRow">
         <div class="profileField profileField--full-width">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
@@ -81,7 +81,7 @@ array('class' => 'checkboxNew','id'=>'behaviour'.$behaviour[3]->id)) !!}
                 <span class="help-block"><strong>{{ $errors->first('other_behaviour') }}</strong></span>
             @endif
         </div>
-    </div>
+    </div>--}}
 
 
     <div class="profileRow">
