@@ -15,13 +15,6 @@
             </a>
         </div>
 
-        <!-- <div class="backBtn">
-           <a href="#" class="backBtn__item ">
-             <i class="fa fa-arrow-left"></i>
-             BACK TO SEARCH RESULTS
-           </a>
-         </div>
-   -->
         <div class="profileWrap">
             <div class="row">
                 <div class="col-md-8">
@@ -60,6 +53,16 @@
                                         <span class="location__title">post code</span>
                                         <span class="location__value">{{$serviceUsers->postcode}}</span>
                                     </p>
+                                    @if(!$restrictedAccess)
+                                        <p class="location">
+                                            <span class="location__title">Address Line 1</span>
+                                            <span class="location__value">{{$serviceUsers->address_line1}}</span>
+                                        </p>
+                                        <p class="location">
+                                            <span class="location__title">I like to be called</span>
+                                            <span class="location__value">{{$serviceUsers->like_name}}</span>
+                                        </p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -87,12 +90,14 @@
                 </div>
             </div>
             <div class="extraRow">
-                <div class="userAbout" {!!  (is_null($serviceUsersProfile->one_line_about) )? ' style="display:none"' : ''!!}>
+
+
+                <div class="userAbout" {!!  (is_null($serviceUsers->one_line_about) )? ' style="display:none"' : ''!!}>
                     <p>{{$serviceUsers->one_line_about}}</p>
                 </div>
 
                 <div class="userBox">
-                    <h2 class="profileTitle">
+                    <h2  class="profileTitle">
                         TYPE OF CARE NEEDED
                     </h2>
                     <div class="userContainer">
@@ -120,28 +125,28 @@
 
                             @if(count($serviceUserConditions))
 
-                            <div class="userContainer">
-                                <h2 class="ordinaryTitle">
-                                    <span class="ordinaryTitle__text">Conditions</span>
-                                </h2>
-                                @foreach($serviceUserConditions as $serviceRow)
-                                    <div class="serviceRow">
-                                        <div class="serviceColumn serviceColumn--midSize">
-                                            <p class="userOption">
-                                                {{$serviceRow->name}}
-                                            </p>
-                                        </div>
-                                        <div class="serviceColumn">
+                                <div class="userContainer">
+                                    <h2 class="ordinaryTitle">
+                                        <span class="ordinaryTitle__text">Conditions</span>
+                                    </h2>
+                                    @foreach($serviceUserConditions as $serviceRow)
+                                        <div class="serviceRow">
+                                            <div class="serviceColumn serviceColumn--midSize">
+                                                <p class="userOption">
+                                                    {{$serviceRow->name}}
+                                                </p>
+                                            </div>
+                                            <div class="serviceColumn">
                                             <span class="serviceValue ">
                                                 yes
                                             </span>
-                                            <span class="serviceValue serviceValue--comment ">
+                                                <span class="serviceValue serviceValue--comment ">
                                                 {{$serviceUsers->other_behaviour}}
                                             </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                @endforeach
-                            </div>
+                                    @endforeach
+                                </div>
                             @endif
                             <div class="userContainer" {!! (($serviceUsersProfile->assistance_with_personal_hygiene == 'No' || is_null($serviceUsersProfile->assistance_with_personal_hygiene))
                                                     && ($serviceUsersProfile->appropriate_clothes == 'No' || is_null($serviceUsersProfile->appropriate_clothes))
@@ -178,24 +183,27 @@
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->appropriate_clothes_assistance_detail}}</span>
                                     </div>
                                 </div>
-{{--                                <div class="serviceRow" {!!  ($serviceUsersProfile->appropriate_clothes == 'No' || is_null($serviceUsersProfile->appropriate_clothes) )? ' style="display:none"' : ''!!}>
-                                    <div class="serviceColumn serviceColumn--midSize">
-                                        <p class="userOption">
-                                            Needs assistance in choosing appropriate clothes:
-                                        </p>
-                                    </div>
-                                    <div class="serviceColumn"><span class="serviceValue ">{{$serviceUsers->appropriate_clothes}}</span>
-                                        <span class="serviceValue serviceValue--comment ">{{$serviceUsers->appropriate_clothes_assistance_detail}}</span>
-                                    </div>
-                                </div>--}}
+                                {{--                                <div class="serviceRow" {!!  ($serviceUsersProfile->appropriate_clothes == 'No' || is_null($serviceUsersProfile->appropriate_clothes) )? ' style="display:none"' : ''!!}>
+                                                                    <div class="serviceColumn serviceColumn--midSize">
+                                                                        <p class="userOption">
+                                                                            Needs assistance in choosing appropriate clothes:
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="serviceColumn"><span class="serviceValue ">{{$serviceUsers->appropriate_clothes}}</span>
+                                                                        <span class="serviceValue serviceValue--comment ">{{$serviceUsers->appropriate_clothes_assistance_detail}}</span>
+                                                                    </div>
+                                                                </div>--}}
                                 <div class="serviceRow" {!!  ($serviceUsersProfile->assistance_getting_dressed == 'No' || is_null($serviceUsersProfile->assistance_getting_dressed) )? ' style="display:none"' : ''!!}>
                                     <div class="serviceColumn serviceColumn--midSize">
                                         <p class="userOption">
                                             Needs assistance getting dressed / undressed:
                                         </p>
                                     </div>
-                                    <div class="serviceColumn"><span class="serviceValue ">{{$serviceUsers->assistance_getting_dressed}}</span>
+                                    <div class="serviceColumn"><span
+                                                class="serviceValue ">{{$serviceUsers->assistance_getting_dressed}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->assistance_getting_dressed_detail}}</span>
+                                            @endif
                                     </div>
                                 </div>
                                 <div class="serviceRow" {!!  ($serviceUsersProfile->assistance_with_bathing == 'No' || is_null($serviceUsersProfile->assistance_with_bathing) )? ' style="display:none"' : ''!!}>
@@ -206,7 +214,7 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->assistance_with_bathing}}</span>
-                                        <span class="serviceValue serviceValue--comment ">{{$serviceUsers->assistance_with_bathing}}</span>
+                                        {{--<span class="serviceValue serviceValue--comment ">{{$serviceUsers->assistance_with_bathing}}</span>--}}
                                     </div>
                                 </div>
                                 <div class="serviceRow" {!!  ($serviceUsersProfile->managing_toilet_needs == 'No' || is_null($serviceUsersProfile->managing_toilet_needs) )? ' style="display:none"' : ''!!}>
@@ -215,7 +223,8 @@
                                             Needs assistance managing their toilet needs:
                                         </p>
                                     </div>
-                                    <div class="serviceColumn"><span class="serviceValue ">{{$serviceUsers->managing_toilet_needs}}</span>
+                                    <div class="serviceColumn"><span
+                                                class="serviceValue ">{{$serviceUsers->managing_toilet_needs}}</span>
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->managing_toilet_needs_detail}}</span>
                                     </div>
                                 </div>
@@ -236,7 +245,8 @@
                                             Needs help cleaning themselves when using the toilet:
                                         </p>
                                     </div>
-                                    <div class="serviceColumn"><span class="serviceValue ">{{$serviceUsers->cleaning_themselves}}</span>
+                                    <div class="serviceColumn"><span
+                                                class="serviceValue ">{{$serviceUsers->cleaning_themselves}}</span>
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->cleaning_themselves_detail}}</span>
                                     </div>
                                 </div>
@@ -246,7 +256,8 @@
                                             Needs help mobilising themselves to the toilet:
                                         </p>
                                     </div>
-                                    <div class="serviceColumn"><span class="serviceValue ">{{$serviceUsers->mobilising_to_toilet}}</span>
+                                    <div class="serviceColumn"><span
+                                                class="serviceValue ">{{$serviceUsers->mobilising_to_toilet}}</span>
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->mobilising_to_toilet_detail}}</span>
                                     </div>
                                 </div>
@@ -258,10 +269,12 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->have_incontinence}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->kind_of_incontinence}}</span>
+                                            @endif
                                     </div>
                                 </div>
-                                <div class="serviceRow"  {!!  ($serviceUsersProfile->choosing_incontinence_products == 'No' || is_null($serviceUsersProfile->choosing_incontinence_products) )? ' style="display:none"' : ''!!}>
+                                <div class="serviceRow" {!!  ($serviceUsersProfile->choosing_incontinence_products == 'No' || is_null($serviceUsersProfile->choosing_incontinence_products) )? ' style="display:none"' : ''!!}>
                                     <div class="serviceColumn serviceColumn--midSize">
                                         <p class="userOption">
                                             Needs help in choosing incontinence products:
@@ -283,7 +296,7 @@
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->incontinence_detail}}</span>
                                     </div>
                                 </div>
-
+                                @if(!$restrictedAccess)
                                 <div class="serviceRow" {!!  (strlen($serviceUsers->incontinence_products_stored)==0 || $serviceUsersProfile->incontinence_wear == 'No' || is_null($serviceUsersProfile->incontinence_wear ) )? ' style="display:none"' : ''!!}>
                                     <div class="serviceColumn serviceColumn--midSize">
                                         <p class="userOption">
@@ -294,6 +307,7 @@
                                         <span class="serviceValue serviceValue--comment">{{$serviceUsers->incontinence_products_stored}}</span>
                                     </div>
                                 </div>
+                                    @endif
                             </div>
                         </div>
 
@@ -309,8 +323,11 @@
                                             Requires assistance in taking medication / treatments:
                                         </p>
                                     </div>
-                                    <div class="serviceColumn"><span class="serviceValue ">{{$serviceUsers->assistance_in_medication}}</span>
+                                    <div class="serviceColumn"><span
+                                                class="serviceValue ">{{$serviceUsers->assistance_in_medication}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->in_medication_detail}}</span>
+                                            @endif
                                     </div>
                                 </div>
 
@@ -335,7 +352,9 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->comprehension}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->comprehension_detail}}</span>
+                                            @endif
                                     </div>
                                 </div>
                                 <div class="serviceRow" {!!  ($serviceUsersProfile->communication == 'No' || is_null($serviceUsersProfile->communication) )? ' style="display:none"' : ''!!}>
@@ -346,7 +365,9 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->communication}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->common_communication_details}}</span>
+                                    @endif
                                     </div>
                                 </div>
                                 <div class="serviceRow" {!!  ($serviceUsersProfile->speech == 'No' || is_null($serviceUsersProfile->speech) )? ' style="display:none"' : ''!!}>
@@ -357,7 +378,9 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->speech}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->speech_detail}}</span>
+                                    @endif
                                     </div>
                                 </div>
                                 <div class="serviceRow" {!!  ($serviceUsersProfile->vision == 'No' || is_null($serviceUsersProfile->vision) )? ' style="display:none"' : ''!!}>
@@ -368,7 +391,9 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->vision}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->vision_detail}}</span>
+                                    @endif
                                     </div>
                                 </div>
 
@@ -380,12 +405,15 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->hearing}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->hearing_detail}}</span>
+                                            @endif
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="userContainer" {!! ($serviceUsersProfile->have_any_allergies == 'No' || is_null($serviceUsersProfile->have_any_allergies) )? ' style="display:none"' : ''!!}>
+                            <div
+                                 class="userContainer" {!! ($serviceUsersProfile->have_any_allergies == 'No' || is_null($serviceUsersProfile->have_any_allergies) )? ' style="display:none"' : ''!!}>
                                 <h2 class="ordinaryTitle">
                                     <span class="ordinaryTitle__text">Allergies</span>
                                 </h2>
@@ -397,12 +425,15 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->have_any_allergies}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->allergies_detail}}</span>
+                                            @endif
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="userContainer" {!! (($serviceUsersProfile->skin_scores == 'No' || is_null($serviceUsersProfile->skin_scores)) && ($serviceUsersProfile->assistance_with_dressings == 'No' || is_null($serviceUsersProfile->assistance_with_dressings))) ? ' style="display:none"' : ''!!}>
+                            <div
+                                 class="userContainer" {!! (($serviceUsersProfile->skin_scores == 'No' || is_null($serviceUsersProfile->skin_scores)) && ($serviceUsersProfile->assistance_with_dressings == 'No' || is_null($serviceUsersProfile->assistance_with_dressings))) ? ' style="display:none"' : ''!!}>
                                 <h2 class="ordinaryTitle">
                                     <span class="ordinaryTitle__text">Skin</span>
                                 </h2>
@@ -414,7 +445,9 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->skin_scores}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->skin_scores_detail}}</span>
+                                            @endif
                                     </div>
                                 </div>
                                 <div class="serviceRow" {!! ($serviceUsersProfile->assistance_with_dressings == 'No' || is_null($serviceUsersProfile->assistance_with_dressings) )? ' style="display:none"' : ''!!}>
@@ -425,7 +458,9 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->assistance_with_dressings}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->dressings_detail}}</span>
+                                            @endif
                                     </div>
                                 </div>
                             </div>
@@ -446,7 +481,9 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->help_with_mobility}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->common_mobility_details}}</span>
+                                            @endif
                                     </div>
                                 </div>
                                 <div class="serviceRow" {!! ($serviceUsersProfile->mobility_home == 'No' || is_null($serviceUsersProfile->mobility_home) )? ' style="display:none"' : ''!!}>
@@ -457,7 +494,9 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->mobility_home}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->mobility_home_detail}}</span>
+                                            @endif
                                     </div>
                                 </div>
 
@@ -469,7 +508,9 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->mobility_bed}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->mobility_bed_detail}}</span>
+                                            @endif
                                     </div>
                                 </div>
 
@@ -481,7 +522,9 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->history_of_falls}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->falls_detail}}</span>
+                                            @endif
                                     </div>
                                 </div>
 
@@ -493,7 +536,9 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->mobility_shopping}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->mobility_shopping_detail}}</span>
+                                            @endif
                                     </div>
                                 </div>
                             </div>
@@ -513,7 +558,9 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->assistance_with_eating}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->assistance_with_eating_detail}}</span>
+                                            @endif
                                     </div>
                                 </div>
                                 <div class="serviceRow" {!! ($serviceUsersProfile->prepare_food == 'No' || is_null($serviceUsersProfile->prepare_food) )? ' style="display:none"' : ''!!}>
@@ -524,19 +571,23 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->prepare_food}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->prepare_food_details}}</span>
+                                            @endif
                                     </div>
                                 </div>
 
                                 <div class="serviceRow" {!! ($serviceUsersProfile->assistance_with_preparing_food == 'No' || is_null($serviceUsersProfile->assistance_with_preparing_food) )? ' style="display:none"' : ''!!}>
                                     <div class="serviceColumn serviceColumn--midSize">
                                         <p class="userOption">
-                                            Would  like assistance with preparing meals:
+                                            Would like assistance with preparing meals:
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->assistance_with_preparing_food}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->assistance_prepare_food_details}}</span>
+                                            @endif
                                     </div>
                                 </div>
 
@@ -548,7 +599,9 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->dietary_requirements}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->dietary_requirements_interaction}}</span>
+                                            @endif
                                     </div>
                                 </div>
 
@@ -560,7 +613,9 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->special_dietary_requirements}}</span>
+                                        @if(!$restrictedAccess)
                                         <span class="serviceValue serviceValue--comment ">{{$serviceUsers->special_dietary_requirements_detail}}</span>
+                                            @endif
                                     </div>
                                 </div>
                             </div>
@@ -580,7 +635,7 @@
                                     <p class="userOption userOption--language">
                                         @if($language->carer_language != 'OTHER')
                                             {{$language->carer_language}}
-                                            @else
+                                        @else
                                             {{$serviceUsers->other_languages}}
                                         @endif
                                     </p>
@@ -639,10 +694,26 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue  ">{{$serviceUsers->assistance_moving}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->assistance_moving}}</span>
+                                            {{-- <span class="serviceValue serviceValue--comment ">{{$serviceUsers->assistance_moving}}</span>--}}
                                         </div>
                                     </div>
 
+
+                                    @if(!$restrictedAccess)
+                                        <div class="serviceRow" {!! ($serviceUsersProfile->home_safe == 'No' || is_null($serviceUsersProfile->home_safe) )? ' style="display:none"' : ''!!}>
+                                            <div class="serviceColumn serviceColumn--midSize">
+                                                <p class="userOption">
+                                                    Can keep the home safe and clean by themself:
+                                                </p>
+                                            </div>
+                                            <div class="serviceColumn">
+                                                <span class="serviceValue  ">{{$serviceUsers->home_safe}}</span>
+                                                <span class="serviceValue serviceValue--comment "></span>
+                                            </div>
+                                        </div>
+
+
+                                    @endif
                                     <div class="serviceRow" {!! ($serviceUsersProfile->assistance_keeping == 'No' || is_null($serviceUsersProfile->assistance_keeping) )? ' style="display:none"' : ''!!}>
                                         <div class="serviceColumn serviceColumn--midSize">
                                             <p class="userOption">
@@ -657,56 +728,62 @@
 
                                 </div>
 
-                                <div class="userContainer"{!! (($serviceUsersProfile->anyone_else_live == 'No' || is_null($serviceUsersProfile->anyone_else_live))
+                                    <div class="userContainer"{!! (($serviceUsersProfile->anyone_else_live == 'No' || is_null($serviceUsersProfile->anyone_else_live))
                                                     && ($serviceUsersProfile->anyone_friendly == 'No' || is_null($serviceUsersProfile->anyone_friendly))) ? ' style="display:none"' : ''!!}>
-                                    <h2 class="ordinaryTitle">
-                                        <span class="ordinaryTitle__text">Other inhabitants</span>
-                                    </h2>
-                                    <div class="serviceRow" {!! ($serviceUsersProfile->anyone_else_live == 'No' || is_null($serviceUsersProfile->anyone_else_live) )? ' style="display:none"' : ''!!}>
-                                        <div class="serviceColumn serviceColumn--midSize">
-                                            <p class="userOption">
-                                                Somebody lives with the Service User:
-                                            </p>
+                                        <h2 class="ordinaryTitle">
+                                            <span class="ordinaryTitle__text">Other inhabitants</span>
+                                        </h2>
+                                        <div class="serviceRow" {!! ($serviceUsersProfile->anyone_else_live == 'No' || is_null($serviceUsersProfile->anyone_else_live) )? ' style="display:none"' : ''!!}>
+                                            <div class="serviceColumn serviceColumn--midSize">
+                                                <p class="userOption">
+                                                    Somebody lives with the Service User:
+                                                </p>
+                                            </div>
+                                            <div class="serviceColumn">
+                                                <span class="serviceValue">{{$serviceUsers->anyone_else_live}}</span>
+                                                @if(!$restrictedAccess)
+                                                <span class="serviceValue serviceValue--comment ">{{$serviceUsers->anyone_detail}}</span>
+                                                    @endif
+                                            </div>
                                         </div>
-                                        <div class="serviceColumn">
-                                            <span class="serviceValue">{{$serviceUsers->anyone_else_live}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->anyone_detail}}</span>
+
+                                        <div class="serviceRow" {!! ($serviceUsersProfile->anyone_friendly == 'No' || is_null($serviceUsersProfile->anyone_friendly) )? ' style="display:none"' : ''!!}>
+                                            <div class="serviceColumn serviceColumn--midSize">
+                                                <p class="userOption">
+                                                    Is the other person likely to be home during care visits:
+                                                </p>
+                                            </div>
+                                            @if(!$restrictedAccess)
+                                            <div class="serviceColumn">
+                                                <span class="serviceValue ">{{$serviceUsers->anyone_friendly}}</span>
+                                                <span class="serviceValue serviceValue--comment "></span>
+                                            </div>
+                                            @endif
                                         </div>
+
                                     </div>
-
-                                    <div class="serviceRow" {!! ($serviceUsersProfile->anyone_friendly == 'No' || is_null($serviceUsersProfile->anyone_friendly) )? ' style="display:none"' : ''!!}>
-                                        <div class="serviceColumn serviceColumn--midSize">
-                                            <p class="userOption">
-                                                Is the other person likely to be home during care visits:
-                                            </p>
-                                        </div>
-                                        <div class="serviceColumn">
-                                            <span class="serviceValue ">{{$serviceUsers->anyone_friendly}}</span>
-                                            <span class="serviceValue serviceValue--comment "></span>
-                                        </div>
-                                    </div>
-
-                                </div>
-
 
                                 <div class="userContainer" {!! (($serviceUsersProfile->social_interaction == 'No' || is_null($serviceUsersProfile->social_interaction))
                                                     && ($serviceUsersProfile->visit_for_companionship == 'No' || is_null($serviceUsersProfile->visit_for_companionship))) ? ' style="display:none"' : ''!!}>
                                     <h2 class="ordinaryTitle">
                                         <span class="ordinaryTitle__text">Companionship</span>
                                     </h2>
-                                    <div class="serviceRow"  {!! ($serviceUsersProfile->social_interaction == 'No' || is_null($serviceUsersProfile->social_interaction) )? ' style="display:none"' : ''!!}>
-                                        <div class="serviceColumn serviceColumn--midSize">
-                                            <p class="userOption">
-                                                Has regular social interaction with friends / family:
-                                            </p>
-                                        </div>
-                                        <div class="serviceColumn">
-                                            <span class="serviceValue">{{$serviceUsers->social_interaction}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->companionship_interaction_details}}</span>
-                                        </div>
-                                    </div>
 
-                                    <div class="serviceRow"  {!! ($serviceUsersProfile->visit_for_companionship == 'No' || is_null($serviceUsersProfile->visit_for_companionship) )? ' style="display:none"' : ''!!}>
+                                    @if(!$restrictedAccess)
+                                        <div class="serviceRow" {!! ($serviceUsersProfile->social_interaction == 'No' || is_null($serviceUsersProfile->social_interaction) )? ' style="display:none"' : ''!!}>
+                                            <div class="serviceColumn serviceColumn--midSize">
+                                                <p class="userOption">
+                                                    Has regular social interaction with friends / family:
+                                                </p>
+                                            </div>
+                                            <div class="serviceColumn">
+                                                <span class="serviceValue">{{$serviceUsers->social_interaction}}</span>
+                                                <span class="serviceValue serviceValue--comment ">{{$serviceUsers->companionship_interaction_details}}</span>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    <div class="serviceRow" {!! ($serviceUsersProfile->visit_for_companionship == 'No' || is_null($serviceUsersProfile->visit_for_companionship) )? ' style="display:none"' : ''!!}>
                                         <div class="serviceColumn serviceColumn--midSize">
                                             <p class="userOption">
                                                 Would the service user like someone to visit regularly for companionship
@@ -721,41 +798,48 @@
                             </div>
 
                             <div class="col-sm-6">
-                                <div class="userContainer" {!! (strlen($serviceUsers->carer_enter)==0)? ' style="display:none"' : ''!!}>
-                                    <h2 class="ordinaryTitle">
-                                        <span class="ordinaryTitle__text">Entry</span>
-                                    </h2>
-                                    <div class="serviceRow">
-                                        <div class="serviceColumn serviceColumn--midSize">
-                                            <p class="userOption">
-                                                How should the carer enter the Service User’s home?
-                                            </p>
+
+                                @if(!$restrictedAccess)
+                                    <div class="userContainer" {!! (strlen($serviceUsers->carer_enter)==0)? ' style="display:none"' : ''!!}>
+                                        <h2 class="ordinaryTitle">
+                                            <span class="ordinaryTitle__text">Entry</span>
+                                        </h2>
+                                        <div class="serviceRow">
+                                            <div class="serviceColumn serviceColumn--midSize">
+                                                <p class="userOption">
+                                                    How should the carer enter the Service User’s home?
+                                                </p>
+                                            </div>
+                                            <div class="serviceColumn">
+                                                <span class="serviceValue serviceValue--comment">{{$serviceUsers->carer_enter}}</span>
+                                            </div>
                                         </div>
-                                        <div class="serviceColumn">
-                                            <span class="serviceValue serviceValue--comment">{{$serviceUsers->carer_enter}}</span>
+
+                                    </div>
+                                @endif
+
+                                    <div class="userContainer" {!! (strlen($serviceUsers->other_detail)==0 || ($serviceUsersProfile->entering_aware == 'No' || is_null($serviceUsersProfile->entering_aware))  )? ' style="display:none"' : ''!!}>
+                                        <h2 class="ordinaryTitle">
+                                            <span class="ordinaryTitle__text">Other home information</span>
+                                        </h2>
+                                        <div class="serviceRow">
+                                            <div class="serviceColumn serviceColumn--midSize">
+                                                <p class="userOption">
+                                                    Is there anything else the Carer should be aware of when entering
+                                                    the
+                                                    home?
+                                                </p>
+                                            </div>
+                                            <div class="serviceColumn">
+                                                <span class="serviceValue ">{{$serviceUsers->entering_aware}}</span>
+                                                @if(!$restrictedAccess)
+                                                <span class="serviceValue serviceValue--comment">{{$serviceUsers->other_detail}}</span>
+                                                    @endif
+                                            </div>
                                         </div>
+
                                     </div>
 
-                                </div>
-
-                                <div class="userContainer" {!! (strlen($serviceUsers->other_detail)==0 || ($serviceUsersProfile->entering_aware == 'No' || is_null($serviceUsersProfile->entering_aware))  )? ' style="display:none"' : ''!!}>
-                                    <h2 class="ordinaryTitle">
-                                        <span class="ordinaryTitle__text">Other home information</span>
-                                    </h2>
-                                    <div class="serviceRow">
-                                        <div class="serviceColumn serviceColumn--midSize">
-                                            <p class="userOption">
-                                                Is there anything else the Carer should be aware of when entering the
-                                                home?
-                                            </p>
-                                        </div>
-                                        <div class="serviceColumn">
-                                            <span class="serviceValue ">{{$serviceUsers->entering_aware}}</span>
-                                            <span class="serviceValue serviceValue--comment">{{$serviceUsers->other_detail}}</span>
-                                        </div>
-                                    </div>
-
-                                </div>
                                 <div class="userContainer" {!! (($serviceUsersProfile->own_pets == 'No' || is_null($serviceUsersProfile->own_pets))  )? ' style="display:none"' : ''!!}>
                                     <h2 class="ordinaryTitle">
                                         <span class="ordinaryTitle__text">Pets</span>
@@ -790,141 +874,183 @@
                         </div>
                     </div>
 
-@if(count($behaviour))
-    @if(count($behaviour) == 1 && $behaviour[0]->name != 'None' )
-                    <div class="userBox">
-                        <h2 class="profileTitle">
-                            Behaviour
-                        </h2>
-                        <div class="userContainer">
-                            <div class="serviceRow serviceRow--forLabel">
+                    @if(count($behaviour))
+                        @if(count($behaviour) == 1 && $behaviour[0]->name != 'None' )
+                            <div class="userBox">
+                                <h2 class="profileTitle">
+                                    Behaviour
+                                </h2>
+                                <div class="userContainer">
+                                    <div class="serviceRow serviceRow--forLabel">
 
-                                @foreach($behaviour as $beh)
-                                    <div class="serviceColumn">
-                                        <p class="advantage_label">
-                                            <i class="fa fa-check"></i>
-                                            {{$beh->name}}
+                                        @foreach($behaviour as $beh)
+                                            <div class="serviceColumn">
+                                                <p class="advantage_label">
+                                                    <i class="fa fa-check"></i>
+                                                    {{$beh->name}}
+                                                </p>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                @if(!$restrictedAccess)
+                                    <div>
+                                        <h2 class="ordinaryTitle">
+                                            <span class="ordinaryTitle__text">Has a doctor's note or court order saying that they are not able to give consent</span>
+                                        </h2>
+                                        <p>
+                                            {{$serviceUsers->consent_details}}
                                         </p>
                                     </div>
-                                @endforeach
+                                @endif
                             </div>
-                        </div>
-                    </div>
-        @endif
-@endif
+                        @endif
+                    @endif
                     <div class="userBox">
 
                         <div class="row">
-                            <div class="col-sm-6" {!! (($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night))
+
+
+                                <div class="col-sm-6" {!! (($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night))
                                                     && ($serviceUsersProfile->getting_dressed_for_bed == 'No' || is_null($serviceUsersProfile->getting_dressed_for_bed))
 
                                                     && ($serviceUsersProfile->toilet_at_night == 'No' || is_null($serviceUsersProfile->toilet_at_night))) ? ' style="display:none"' : ''!!}>
-                                <h2 class="profileTitle">
-                                    Night-time
-                                </h2>
-                                <div class="userContainer">
-                                    <div class="serviceRow" {!! ($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night) )? ' style="display:none"' : ''!!}>
-                                        <div class="serviceColumn serviceColumn--midSize">
-                                            <p class="userOption">
-                                                Needs assistance keeping safe at night:
-                                            </p>
+                                    <h2 class="profileTitle">
+                                        Night-time
+                                    </h2>
+                                    <div class="userContainer">
+                                        <div class="serviceRow" {!! ($serviceUsersProfile->getting_dressed_for_bed == 'No' || is_null($serviceUsersProfile->getting_dressed_for_bed) )? ' style="display:none"' : ''!!}>
+                                            <div class="serviceColumn serviceColumn--midSize">
+                                                <p class="userOption">Has problems getting dressed for bed:</p>
+                                            </div>
+                                            <div class="serviceColumn">
+                                                <span class="serviceValue ">{{$serviceUsers->getting_dressed_for_bed}}</span>
+
+                                            </div>
                                         </div>
-                                        <div class="serviceColumn">
-                                            <span class="serviceValue ">{{$serviceUsers->keeping_safe_at_night}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->keeping_safe_at_night_details}}</span>
+                                        @if(!$restrictedAccess)
+                                        <div class="serviceRow" {!! ($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night) )? ' style="display:none"' : ''!!}>
+                                            <div class="serviceColumn serviceColumn--midSize">
+                                                <p class="userOption">
+                                                    What time would they like someone to come and help?
+                                                </p>
+                                            </div>
+                                            <div class="serviceColumn">
+                                                <span class="serviceValue "><i
+                                                            class="fa fa-clock-o"></i> {{$serviceUsersProfile->time_to_bed}}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="serviceRow" {!! ($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night) )? ' style="display:none"' : ''!!}>
-                                        <div class="serviceColumn serviceColumn--midSize">
-                                            <p class="userOption">
-                                                What time would they like someone to come and help?
-                                            </p>
+                                        @endif
+                                        <div class="serviceRow" {!! ($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night) )? ' style="display:none"' : ''!!}>
+                                            <div class="serviceColumn serviceColumn--midSize">
+                                                <p class="userOption">
+                                                    Needs assistance keeping safe at night:
+                                                </p>
+                                            </div>
+                                            <div class="serviceColumn">
+                                                <span class="serviceValue ">{{$serviceUsers->keeping_safe_at_night}}</span>
+                                                @if(!$restrictedAccess)
+                                                <span class="serviceValue serviceValue--comment ">{{$serviceUsers->keeping_safe_at_night_details}}</span>
+                                                    @endif
+                                            </div>
                                         </div>
-                                        <div class="serviceColumn">
-                                            <span class="serviceValue "><i class="fa fa-clock-o"></i> {{$serviceUsersProfile->time_to_bed}}</span>
+                                        @if(!$restrictedAccess)
+                                        <div class="serviceRow" {!! ($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night) )? ' style="display:none"' : ''!!}>
+                                            <div class="serviceColumn serviceColumn--midSize">
+                                                <p class="userOption">
+                                                    What time would they like someone to come to help?
+                                                </p>
+                                            </div>
+                                            <div class="serviceColumn">
+                                                <span class="serviceValue "><i
+                                                            class="fa fa-clock-o"></i> {{$serviceUsersProfile->time_to_night_helping}}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="serviceRow" {!! ($serviceUsersProfile->getting_dressed_for_bed == 'No' || is_null($serviceUsersProfile->getting_dressed_for_bed) )? ' style="display:none"' : ''!!}>
-                                        <div class="serviceColumn serviceColumn--midSize">
-                                            <p class="userOption">
-                                                Has problems getting dressed for bed:
-                                            </p>
-                                        </div>
-                                        <div class="serviceColumn">
-                                            <span class="serviceValue ">{{$serviceUsers->getting_dressed_for_bed}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->dressed_for_bed_details}}</span>
-                                        </div>
-                                    </div>
-                                    <div class="serviceRow" {!! ($serviceUsersProfile->toilet_at_night == 'No' || is_null($serviceUsersProfile->toilet_at_night) )? ' style="display:none"' : ''!!}>
-                                        <div class="serviceColumn serviceColumn--midSize">
-                                            <p class="userOption">
-                                                Needs help going to the toilet at night:
-                                            </p>
-                                        </div>
-                                        <div class="serviceColumn">
-                                            <span class="serviceValue ">{{$serviceUsers->toilet_at_night}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->toiled_help_details}}</span>
+                                        @endif
+
+                                        <div class="serviceRow" {!! ($serviceUsersProfile->toilet_at_night == 'No' || is_null($serviceUsersProfile->toilet_at_night) )? ' style="display:none"' : ''!!}>
+                                            <div class="serviceColumn serviceColumn--midSize">
+                                                <p class="userOption">
+                                                    Needs help going to the toilet at night:
+                                                </p>
+                                            </div>
+                                            <div class="serviceColumn">
+                                                <span class="serviceValue ">{{$serviceUsers->toilet_at_night}}</span>
+                                                @if(!$restrictedAccess)
+                                                <span class="serviceValue serviceValue--comment ">{{$serviceUsers->toiled_help_details}}</span>
+                                                    @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
 
-                            <div class="col-sm-6" {!! (($serviceUsersProfile->religious_beliefs == 'No' || is_null($serviceUsersProfile->religious_beliefs))
+
+
+                                <div class="col-sm-6" {!! (($serviceUsersProfile->religious_beliefs == 'No' || is_null($serviceUsersProfile->religious_beliefs))
                                                     && ($serviceUsersProfile->particular_likes == 'No' || is_null($serviceUsersProfile->particular_likes))
                                                     && ($serviceUsersProfile->socialising_with_other == 'No' || is_null($serviceUsersProfile->socialising_with_other))
                                                     && ($serviceUsersProfile->interests_hobbies == 'No' || is_null($serviceUsersProfile->interests_hobbies))) ? ' style="display:none"' : ''!!}>
-                                <h2 class="profileTitle">
-                                    OTHER
-                                </h2>
-                                <div class="userContainer">
-                                    <div class="serviceRow" {!! ($serviceUsersProfile->religious_beliefs == 'No' || is_null($serviceUsersProfile->religious_beliefs) )? ' style="display:none"' : ''!!}>
-                                        <div class="serviceColumn serviceColumn--midSize">
-                                            <p class="userOption">
-                                                Has political, religious or other beliefs
-                                            </p>
+                                    <h2 class="profileTitle">
+                                        OTHER
+                                    </h2>
+                                    <div class="userContainer">
+                                        <div class="serviceRow" {!! ($serviceUsersProfile->religious_beliefs == 'No' || is_null($serviceUsersProfile->religious_beliefs) )? ' style="display:none"' : ''!!}>
+                                            <div class="serviceColumn serviceColumn--midSize">
+                                                <p class="userOption">
+                                                    Has political, religious or other beliefs
+                                                </p>
+                                            </div>
+                                            <div class="serviceColumn">
+                                                <span class="serviceValue ">{{$serviceUsers->religious_beliefs}}</span>
+                                                @if(!$restrictedAccess)
+                                                <span class="serviceValue serviceValue--comment ">{{$serviceUsers->religious_beliefs_details}}</span>
+                                                    @endif
+                                            </div>
                                         </div>
-                                        <div class="serviceColumn">
-                                            <span class="serviceValue ">{{$serviceUsers->religious_beliefs}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->religious_beliefs_details}}</span>
+                                        <div class="serviceRow" {!! ($serviceUsersProfile->particular_likes == 'No' || is_null($serviceUsersProfile->particular_likes) )? ' style="display:none"' : ''!!}>
+                                            <div class="serviceColumn serviceColumn--midSize">
+                                                <p class="userOption">
+                                                    Has particular likes or dislikes:
+                                                </p>
+                                            </div>
+                                            <div class="serviceColumn"><span
+                                                        class="serviceValue ">{{$serviceUsers->particular_likes}}</span>
+                                                @if(!$restrictedAccess)
+                                                <span class="serviceValue serviceValue--comment ">{{$serviceUsers->particular_likes_details}}</span>
+                                                    @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="serviceRow" {!! ($serviceUsersProfile->particular_likes == 'No' || is_null($serviceUsersProfile->particular_likes) )? ' style="display:none"' : ''!!}>
-                                        <div class="serviceColumn serviceColumn--midSize">
-                                            <p class="userOption">
-                                                Has particular likes or dislikes:
-                                            </p>
+                                        @if(!$restrictedAccess)
+                                        <div class="serviceRow" {!! ($serviceUsersProfile->socialising_with_other == 'No' || is_null($serviceUsersProfile->socialising_with_other) )? ' style="display:none"' : ''!!}>
+                                            <div class="serviceColumn serviceColumn--midSize">
+                                                <p class="userOption">
+                                                    Likes socialising with other people / groups:
+                                                </p>
+                                            </div>
+                                            <div class="serviceColumn">
+                                                <span class="serviceValue ">{{$serviceUsers->socialising_with_other}}</span>
+                                                {{--<span class="serviceValue serviceValue--comment ">{{$serviceUsers->socialising_with_other_details}}</span>--}}
+                                            </div>
                                         </div>
-                                        <div class="serviceColumn"><span class="serviceValue ">{{$serviceUsers->particular_likes}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->particular_likes_details}}</span>
-                                        </div>
-                                    </div>
-                                    <div class="serviceRow" {!! ($serviceUsersProfile->socialising_with_other == 'No' || is_null($serviceUsersProfile->socialising_with_other) )? ' style="display:none"' : ''!!}>
-                                        <div class="serviceColumn serviceColumn--midSize">
-                                            <p class="userOption">
-                                                Likes socialising with other people / groups:
-                                            </p>
-                                        </div>
-                                        <div class="serviceColumn">
-                                            <span class="serviceValue ">{{$serviceUsers->socialising_with_other}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->socialising_with_other_details}}</span>
-                                        </div>
-                                    </div>
-                                    <div class="serviceRow"{!! ($serviceUsersProfile->interests_hobbies == 'No' || is_null($serviceUsersProfile->interests_hobbies) )? ' style="display:none"' : ''!!}>
-                                        <div class="serviceColumn serviceColumn--midSize">
-                                            <p class="userOption">
-                                                Has interests or hobbies which they enjoy:
-                                            </p>
-                                        </div>
-                                        <div class="serviceColumn">
-                                            <span class="serviceValue ">{{$serviceUsers->interests_hobbies}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->interests_hobbies_details}}</span>
-                                        </div>
-                                    </div>
+                                        @endif
+                                        @if(!$restrictedAccess)
+                                        <div class="serviceRow"{!! ($serviceUsersProfile->interests_hobbies == 'No' || is_null($serviceUsersProfile->interests_hobbies) )? ' style="display:none"' : ''!!}>
+                                            <div class="serviceColumn serviceColumn--midSize">
+                                                <p class="userOption">
+                                                    Has interests or hobbies which they enjoy:
+                                                </p>
+                                            </div>
+                                            <div class="serviceColumn">
+                                                <span class="serviceValue ">{{$serviceUsers->interests_hobbies}}</span>
 
+                                                <span class="serviceValue serviceValue--comment ">{{$serviceUsers->interests_hobbies_details}}</span>
+                                            </div>
+                                        </div>
+                                        @endif
+
+                                    </div>
                                 </div>
-
-                            </div>
 
                         </div>
                     </div>

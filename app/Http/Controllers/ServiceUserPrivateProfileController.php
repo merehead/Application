@@ -98,6 +98,9 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
             return redirect('/');
         }
 
+//dd($this->restrictedAccess($serviceUsersProfile));
+        $this->vars = array_add($this->vars, 'restrictedAccess', $this->restrictedAccess($serviceUsersProfile));
+
         $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
         $this->title = 'Holm Care';
 
@@ -138,6 +141,20 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
         $this->content = view(config('settings.frontTheme') . '.serviceUserProfiles.PublicProfile')->with($this->vars)->render();
 
         return $this->renderOutput();
+    }
+
+    protected function restrictedAccess($serviceUsersProfile){
+
+        $activeUser = Auth::user();
+//dd($activeUser->id ,$serviceUsersProfile->purchaser_id);
+        //может смотреть сам себя
+        if ($activeUser->id == $serviceUsersProfile->purchaser_id) return false;
+
+        //может смотреть карер у которого есть букинг в сосотянии Прогресс с этим карером
+        $booking = Booking::where('carer_id',$activeUser->id)->where('service_user_id',$serviceUsersProfile->id)->where('status_id','3')->get();
+        if (count($booking)) return false;
+
+        return true; //доступ ограничен
     }
 
 
