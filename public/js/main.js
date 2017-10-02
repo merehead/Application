@@ -1238,106 +1238,117 @@ $(document).ready(function () {
             var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
             var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');
 
-            $(idLoadFiles).find('.pickfiles').attr("disabled", true);
-            $(idLoadFiles).find('.pickfiles-change').attr("disabled", true);
-            $(idLoadFiles).find('.pickfiles-delete').attr("style", 'display: none');
-            $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", true);
-            $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", true);
-            $(idLoadFiles).find('.addInfo__input').attr("disabled", true);
-            $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: none');
-            $('input[name="postcode"],input[name="address_line1"]').autocomplete('disable');
-
-            that.button('loading');
-
-            if (arrFilesProfilePhoto.length > 0) {
-                var url = '/profile-photo'
-                axios.post(
-                    url,
-                    arrFilesProfilePhoto[0]
-                ).then(function (response) {
-                    // console.log(response)
-                })
-            }
-            if (ProfilePhotoSeviceUser.length > 0) {
-                    url = '/service-user-profile-photo'
-                axios.post(
-                    url,
-                    ProfilePhotoSeviceUser[0]
-                ).then(function (response) {
-                    // console.log(response)
-                })
+            if(idLoadFiles === '#carerPrivateAvailability'){
+              $.each($('.addInfo__input-required'), function (input, index) {
+                if($(this).val().length <= 0){
+                  $(this).addClass('addInfo__input-required_error')
+                }else{
+                  $(this).removeClass('addInfo__input-required_error')
+                }
+              })
             }
 
-            if (arrFiles.length > 0) {
-                var fileChunk = 0;
-                file = arrFiles[fileChunk];
-                var sliceSize = 524288 ;// 512 kib
-                var chunks = Math.ceil(file.size / sliceSize);
-                var chunk = 0;
-                var start = 0;
-                var end = sliceSize;
+            if($('.addInfo__input-required_error').length === 0){
+              that.button('loading');
+              $(idLoadFiles).find('.pickfiles').attr("disabled", true);
+              $(idLoadFiles).find('.pickfiles-change').attr("disabled", true);
+              $(idLoadFiles).find('.pickfiles-delete').attr("style", 'display: none');
+              $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", true);
+              $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", true);
+              $(idLoadFiles).find('.addInfo__input').attr("disabled", true);
+              $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: none');
+              $('input[name="postcode"],input[name="address_line1"]').autocomplete('disable');
 
-                function loop() {
-                    var blob = file.slice(start, end);
-                    if (blob.size !== 0) {
-                        if (blob.size === sliceSize) {
-                            send(blob);
-                            start += sliceSize;
-                            end += blob.size
-                        } else {
-                            send(blob);
-                            start += sliceSize;
-                            end += blob.size
-                        }
-                    }
-                }
+              if (arrFilesProfilePhoto.length > 0) {
+                  var url = '/profile-photo'
+                  axios.post(
+                      url,
+                      arrFilesProfilePhoto[0]
+                  ).then(function (response) {
+                      // console.log(response)
+                  })
+              }
+              if (ProfilePhotoSeviceUser.length > 0) {
+                      url = '/service-user-profile-photo'
+                  axios.post(
+                      url,
+                      ProfilePhotoSeviceUser[0]
+                  ).then(function (response) {
+                      // console.log(response)
+                  })
+              }
 
-                function send(fileSend) {
-                    var formdata = new FormData();
-                    formdata.append('name', file.name);
-                    formdata.append('chunk', chunk);
-                    formdata.append('chunks', chunks);
-                    formdata.append('title', file.title);
-                    formdata.append('type', file.type_value.split('-')[0]);
-                    formdata.append('file', fileSend);
-                    chunk += 1;
-                    axios.post(
-                        '/document/upload',
-                        formdata
-                    ).then(function (response) {
-                        if (chunk === chunks) {
-                            if (arrFiles[fileChunk + 1]) {
-                                fileChunk += 1;
-                                file = arrFiles[fileChunk];
-                                chunks = Math.ceil(file.size / sliceSize);
-                                chunk = 0;
-                                start = 0;
-                                end = sliceSize;
-                                loop()
-                            } else {
-                                $('.pickfiles').val('');
-                                arrFiles = [];
-                                if (arrForDeleteIDProfile.length > 0) {
-                                    axios.delete(
-                                        '/api/document/' + arrForDeleteIDProfile + '/'
-                                    ).then(function(response) {
-                                        console.log(response)
-                                })
-                                    ajaxForm($(idForm), that);
-                                } else {
-                                    ajaxForm($(idForm), that);
-                                }
-                            }
-                        } else {
-                            loop()
-                        }
-                    }).catch(function (error) {
-                        console.log(error)
-                      })
-                }
-                loop();
-            } else {
-                ajaxForm($(idForm), that);
+              if (arrFiles.length > 0) {
+                  var fileChunk = 0;
+                  file = arrFiles[fileChunk];
+                  var sliceSize = 524288 ;// 512 kib
+                  var chunks = Math.ceil(file.size / sliceSize);
+                  var chunk = 0;
+                  var start = 0;
+                  var end = sliceSize;
+
+                  function loop() {
+                      var blob = file.slice(start, end);
+                      if (blob.size !== 0) {
+                          if (blob.size === sliceSize) {
+                              send(blob);
+                              start += sliceSize;
+                              end += blob.size
+                          } else {
+                              send(blob);
+                              start += sliceSize;
+                              end += blob.size
+                          }
+                      }
+                  }
+
+                  function send(fileSend) {
+                      var formdata = new FormData();
+                      formdata.append('name', file.name);
+                      formdata.append('chunk', chunk);
+                      formdata.append('chunks', chunks);
+                      formdata.append('title', file.title);
+                      formdata.append('type', file.type_value.split('-')[0]);
+                      formdata.append('file', fileSend);
+                      chunk += 1;
+                      axios.post(
+                          '/document/upload',
+                          formdata
+                      ).then(function (response) {
+                          if (chunk === chunks) {
+                              if (arrFiles[fileChunk + 1]) {
+                                  fileChunk += 1;
+                                  file = arrFiles[fileChunk];
+                                  chunks = Math.ceil(file.size / sliceSize);
+                                  chunk = 0;
+                                  start = 0;
+                                  end = sliceSize;
+                                  loop()
+                              } else {
+                                  $('.pickfiles').val('');
+                                  arrFiles = [];
+                                  if (arrForDeleteIDProfile.length > 0) {
+                                      axios.delete(
+                                          '/api/document/' + arrForDeleteIDProfile + '/'
+                                      ).then(function(response) {
+                                          console.log(response)
+                                  })
+                                      ajaxForm($(idForm), that);
+                                  } else {
+                                      ajaxForm($(idForm), that);
+                                  }
+                              }
+                          } else {
+                              loop()
+                          }
+                      }).catch(function (error) {
+                          console.log(error)
+                        })
+                  }
+                  loop();
+              } else {
+                  ajaxForm($(idForm), that);
+              }
             }
 
             return false;
@@ -1491,7 +1502,7 @@ $(document).ready(function () {
       var input_value = $(this).parent().parent().find('.addInfo__input')
       var deleteID = $(this).attr('id')
       var _this = $(this)
-      
+
       input_value.removeClass('addInfo__input-required addInfo__input-required_error')
 
       if($(this).attr('id')){
@@ -1590,14 +1601,14 @@ $(document).ready(function () {
           '<div class="profileField profileField_q profileField_h">'+
             '<div class="addContainer">'+
               '<input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
-              '<div id="'+input_name.split('-')[0]+c+'u" class="pickfiles_img"></div>'+
+              '<div id="'+input_name.split('-')[0]+'-'+c+'u" class="pickfiles_img"></div>'+
                 '<a class="add add--moreHeight">'+
                     '<i class="fa fa-plus-circle"></i>'+
                     '<div class="add__comment add__comment--smaller"></div>'+
                 '</a>'+
             '</div>'+
             '<div class="addInfo">'+
-                '<input type="text" name="'+input_name.split('-')[0]+c+'u" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">'+
+                '<input type="text" name="'+input_name.split('-')[0]+'-'+c+'u" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">'+
             '</div>'+
           '</div>'
         )
