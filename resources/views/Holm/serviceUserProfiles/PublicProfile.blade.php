@@ -631,6 +631,7 @@
                     <div class="userContainer">
                         <div class="serviceRow">
                             <div class="serviceColumn serviceColumn--language ">
+                                <?php $other = false;?>
                                 @foreach($languages as $language)
 
                                         @if($language->carer_language != 'OTHER')
