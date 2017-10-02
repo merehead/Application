@@ -137,6 +137,11 @@ class BookingsController extends FrontController implements Constants
         $this->vars = array_add($this->vars,'footer',$footer);
         $this->vars = array_add($this->vars,'modals',$modals);
 
+        //todo костыль на логаут
+        if (!Auth::check()) {
+            return \redirect('/');
+            //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
+        }
         if (!$this->user) {
             return;
         } else {

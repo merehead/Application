@@ -177,6 +177,13 @@ class CarerController extends FrontController implements Constants
 
     public function bookingFilter($status = 'all')
     {
+
+        //todo костыль на логаут
+        if (!Auth::check()) {
+            return \redirect('/');
+            //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
+        }
+
         $user = Auth::user();
 
         $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';

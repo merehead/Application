@@ -632,15 +632,20 @@
                         <div class="serviceRow">
                             <div class="serviceColumn serviceColumn--language ">
                                 @foreach($languages as $language)
-                                    <p class="userOption userOption--language">
+
                                         @if($language->carer_language != 'OTHER')
-                                            {{$language->carer_language}}
-                                        @else
-                                            {{$serviceUsers->other_languages}}
+                                        <p class="userOption userOption--language">    {{$language->carer_language}}</p>
+                                        @else<?php $other = true;?>
                                         @endif
-                                    </p>
+
                                 @endforeach
 
+                                @if($other)
+                                        <p class="userOption userOption--language">
+
+                                            {{$serviceUsers->other_languages}}
+                                        </p>
+                                    @endif
                             </div>
                         </div>
 
