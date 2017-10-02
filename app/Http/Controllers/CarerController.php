@@ -83,6 +83,8 @@ class CarerController extends FrontController implements Constants
             $languages = Language::all();
             $this->vars = array_add($this->vars, 'languages', $languages);
             //dd($this->user,$carerProfile);
+            $newBookings = Booking::whereIn('status_id', [self::NEW, self::AWAITING_CONFIRMATION])->where('carer_id', Auth::user()->id)->get();
+            $this->vars['newBookings'] = $newBookings;
             $this->content = view(config('settings.frontTheme') . '.CarerProfiles.PrivateProfile')->with($this->vars)->render();
 
         }
