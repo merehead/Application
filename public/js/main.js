@@ -229,6 +229,8 @@ function setNoEditableFields() {
     $carer_profile.find('input[type="checkbox"]').attr("disabled", true).addClass('profileField__select--greyBg');
     $carer_profile.find('input').attr("readonly", true).addClass('profileField__input--greyBg');
     $carer_profile.find('textarea').attr("readonly", true).addClass('profileField__input--greyBg');
+    $('#datepicker_when_start').attr('readonly',true)
+        .datepicker("destroy");
     return true;
 }
 
@@ -1186,6 +1188,14 @@ $(document).ready(function () {
         e.preventDefault();
         is_data_changed = true;
         $('input[name="is_data_changed"]').val(1);
+        if (is_data_changed) {
+            $('#datepicker_when_start').attr('readonly',false)
+                .datepicker({ dateFormat: "dd/mm/yy",
+                showAnim: "slideDown",
+                minDate: "+3D",
+                maxDate: "+20Y",
+                yearRange: "0:+10" });
+        }
         var that = $(this);
         var idForm = 'form#' + $(that).find('span').attr('data-id');
         var idLoadFiles = '#' + $(that).find('span').attr('data-id');
@@ -1217,6 +1227,13 @@ $(document).ready(function () {
             e.preventDefault();
             is_data_changed = false;
             $('input[name="is_data_changed"]').val(0);
+            if (is_data_changed) {
+                $('#datepicker_when_start').attr('readonly',false)
+                    .datepicker();
+            } else {
+                $('#datepicker_when_start').attr('readonly',true)
+                    .datepicker("destroy");
+            }
             var that = $(this);
             var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
             var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');
