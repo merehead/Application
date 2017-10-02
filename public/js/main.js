@@ -673,6 +673,17 @@ $(document).ready(function () {
             dropdown: true,
             scrollbar: true
         });
+        $('#time_to_from').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            //minTime: '10',
+            //maxTime: '6:00pm',_step48
+            //defaultTime: '18',
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
     //}
     //if($.isFunction('timepicker')) {
         $('#time_to_night_helping').timepicker({
