@@ -58,7 +58,7 @@
                             {!! Form::text('time_to_night_helping',null,['id'=>'time_to_night_helping','class'=>'profileField__input']) !!}
                         @endif
                         <span class="inputIco personalForm__ico centeredLink">
-                  <i class="fa fa-calendar"></i>
+                  <i class="fa fa-clock-o"></i>
                 </span>
                             @if ($errors->has('time_to_night_helping'))
                                 <span class="help-block">

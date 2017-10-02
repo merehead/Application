@@ -14,4 +14,12 @@ class BookingOverview extends Model
         'performance',
         'comment',
     ];
+
+
+    public function booking()
+    {
+        return $this->belongsTo('App\Booking');
+    }
+
+
 }

@@ -9,13 +9,13 @@ class Booking extends Model
 {
     protected $fillable = ['purchaser_id','service_user_id','carer_id','date_start','date_end','frequency_id','amount_for_purchaser','amount_for_carer','status_id', 'carer_status_id', 'purchaser_status_id', 'payment_method'];
 
-    public function getDateStartAttribute($value)
+    public function getDateStartAttribute()
     {
-        return date('d/m/Y',strtotime($value));
+        return date('d/m/Y', strtotime($this->appointments()->orderBy('date_start')->get()->first()->date_start));
     }
-    public function getDateEndAttribute($value)
+    public function getDateEndAttribute()
     {
-        return date('d/m/Y',strtotime($value));
+        return date('d/m/Y', strtotime($this->appointments()->orderByDesc('date_start')->get()->first()->date_start));
     }
 
 
@@ -61,6 +61,15 @@ class Booking extends Model
         return $this->belongsToMany('App\AssistanceType', 'bookings_assistance_types');
     }
 
+    public function overviews(){
+        return $this->hasMany(BookingOverview::class, 'booking_id');
+    }
+
+    public function bookingReview()
+    {
+        return $this->hasMany('App\BookingOverview');
+    }
+
     //Accessors
     public function getCarerRateAttribute(){
         return 10;
@@ -95,9 +104,8 @@ class Booking extends Model
         if($this->appointments()->get()->count())
             return $this->appointments()->orderBy('date_start')->get()->first()->date_start;
     }
-
-    public function getDateToAttribute(){
-
+    
+    public function getHasActiveAppointmentsAttribute(){
+        return $this->appointments()->whereIn('status_id', [1, 2, 3])->get()->count() > 0;
     }
-
 }

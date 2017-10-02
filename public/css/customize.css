@@ -424,7 +424,11 @@ a.blogFilter__item.active {
 }
 
 #ui-datepicker-div, #datepicker_insurance, #datepicker_driver_licence {
-    /*z-index : 99!important; ;*/
+
+    /*
+    если убрать этот индекс, до датапикеры в регистрации открываются под дивами для загрузки изображений
+    */
+    z-index : 99!important;
 }
 
 .serviceUserTimeNeed {
@@ -530,7 +534,7 @@ span.charsLeft {
 }
 
 button:disabled {
-    background: #d7d7d7;
+    background: #d7d7d7 !important;
     color: #f8f4f4;
 }
 
@@ -591,8 +595,16 @@ label.correct2 {
 }
 
  .col-sm-6 {
-   min-height: 0; 
+   min-height: 0;
  }
+
+.addInfo__input-required_error{
+  border: 1px solid #F44336;
+}
+
+.advantage_label i{
+  color: #80cb2d;
+}
 
 /*
 .messageInputs__field {

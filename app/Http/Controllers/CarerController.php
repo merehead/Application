@@ -83,6 +83,8 @@ class CarerController extends FrontController implements Constants
             $languages = Language::all();
             $this->vars = array_add($this->vars, 'languages', $languages);
             //dd($this->user,$carerProfile);
+            $newBookings = Booking::whereIn('status_id', [self::NEW, self::AWAITING_CONFIRMATION])->where('carer_id', Auth::user()->id)->get();
+            $this->vars['newBookings'] = $newBookings;
             $this->content = view(config('settings.frontTheme') . '.CarerProfiles.PrivateProfile')->with($this->vars)->render();
 
         }
@@ -103,7 +105,7 @@ class CarerController extends FrontController implements Constants
 
         // Это вывод ПУБЛИЧНОГО профиля
 
-        //dd($user_id);
+
 
 /*        if(Auth::check()) {
             //TODO карер может смотреть свой профиль и никого другого
@@ -125,6 +127,7 @@ class CarerController extends FrontController implements Constants
 
 
         $carerProfile = CarersProfile::findOrFail($user_id);
+
 
         $this->vars = array_add($this->vars, 'user', $this->user);
         $this->vars = array_add($this->vars, 'carerProfile', $carerProfile);
@@ -177,6 +180,13 @@ class CarerController extends FrontController implements Constants
 
     public function bookingFilter($status = 'all')
     {
+
+        //todo костыль на логаут
+        if (!Auth::check()) {
+            return \redirect('/');
+            //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
+        }
+
         $user = Auth::user();
 
         $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';

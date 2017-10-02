@@ -898,7 +898,13 @@ class ServiceUserRegistration
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
 
-        $serviceUserProfile->Languages()->sync(array_keys($languages));
+
+        $languages = $request->input('languages');
+
+        $serviceUserProfile->Languages()->sync(array_map('intval', array_keys($languages)));
+
+
+        //$serviceUserProfile->Languages()->sync(array_keys($languages));
 
         $serviceUserProfile->other_languages  = $request->input('other_languages');
 

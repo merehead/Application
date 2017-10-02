@@ -129,9 +129,12 @@ $documents['other_relevant_qualification']->count()>0)
     </h2>
 
     <div class="profileAdvantages">
+
         @foreach($documents_type as $dt)
-            @if(isset($documents[$dt])&&!empty($documents[$dt]->count()))
-            <div class="profileAdvantages__row">
+
+            @if(isset($documents[$dt]) && !empty($documents[$dt]->count()))
+
+                <div class="profileAdvantages__row">
                 <div class="advantageColumn">
                     <h2>
                         {{$documents_name[$dt]}}
@@ -172,7 +175,7 @@ $documents['other_relevant_qualification']->count()>0)
     </div>
 </div>
 @endif
-@if($carerProfile->work_with_pets=='Yes')
+{{--@if($carerProfile->work_with_pets=='Yes')--}}
 <div class="profileExtraInfo">
     <h2 class="profileTitle">
         ADDITIONAL
@@ -180,16 +183,31 @@ $documents['other_relevant_qualification']->count()>0)
     <div class="profileAdvantages">
         <div class="profileAdvantages__row">
             <div class="advantageColumn">
-
-                <p class="advantage_label">
-                    <i class="fa fa-check"></i>
-                    Works with pets
-                </p>
+                @if($carerProfile->work_with_pets=='Yes')
+                    <p class="advantage_label">
+                        <i class="fa fa-check"></i>
+                        Works with pets
+                    </p>
+                @endif
+                @if($carerProfile->work_with_pets=='No')
+                    <p class="advantage_label">
+                        <i class="fa fa-check"></i>
+                        Don't works with pets
+                    </p>
+                @endif
+                @if($carerProfile->work_with_pets=='It Depends')
+                    <p class="advantage_label">
+                        <i class="fa fa-check"></i>
+                        It Depends: {{$carerProfile->pets_description}}
+                    </p>
+                @endif
             </div>
         </div>
     </div>
 </div>
+{{--
 @endif
+--}}
 
 @if($languages->count()!=0 || !empty($carerProfile->language_additional))
 <div class="profileExtraInfo">

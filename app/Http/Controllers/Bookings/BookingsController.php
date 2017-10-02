@@ -6,6 +6,7 @@ use App\Appointment;
 use App\Booking;
 use App\BookingOverview;
 use App\BookingsMessage;
+use App\Http\Requests\BookingCreateRequest;
 use App\Interfaces\Constants;
 use App\PaymentServices\StripeService;
 use App\Http\Controllers\Controller;
@@ -19,22 +20,13 @@ use Carbon\Carbon;
 
 class BookingsController extends FrontController implements Constants
 {
-    public function create(Request $request){
+    public function create(BookingCreateRequest $request){
 
-        //dd($request->all());
-//        $purchaser = User::find(2);
         $purchaser = Auth::user();
         $carer = User::find($request->carer_id);
 
-
-        if(isset($request->bookings['service_user_id']))
-            $bookings[0] = $request->bookings;
-        else
-            $bookings = $request->bookings;
-
-
-
-        foreach ($bookings as $booking_item){
+        foreach ($request->bookings as $booking_item){
+            //Creating booking
             $serviceUser = ServiceUsersProfile::find($request->service_user_id);
             $booking = Booking::create([
                 'purchaser_id' => $purchaser->id,
@@ -45,20 +37,38 @@ class BookingsController extends FrontController implements Constants
                 'purchaser_status_id' => 1,
             ]);
 
+            //Attaching booking`s assistance_types
+            if(isset($booking_item['assistance_types']))
+                $booking->assistance_types()->attach($booking_item['assistance_types']);
+
+            //Booking status for workroom
             BookingsMessage::create([
                 'booking_id' => $booking->id,
                 'type' => 'status_change',
                 'new_status' => 'pending',
             ]);
 
+            //Generating appointments
             foreach ($booking_item['appointments'] as $appointment_item){
-                $days = $this->generateDateRange(Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")), Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d")));
-                foreach ($days as $day){
+                isset($appointment_item['periodicity']) ? false : $appointment_item['periodicity'] = 'single';
+                $days = [];
+                switch (strtolower($appointment_item['periodicity'])){
+                    case 'daily':
+                        $days = $this->generateDateRange(Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")), Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d")));
+                        break;
+                    case 'weekly':
+                        $days = $this->generateDateRange(Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")), Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d")), 7);
+                        break;
+                    case 'single':
+                        $days = $this->generateDateRange(Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")), Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")));
+                        break;
+                }
+                foreach ($days as $day) {
                     $booking->appointments()->create([
                         'date_start' => $day,
                         'date_end' => $day,
-                        'time_from' => $appointment_item['time_from'],
-                        'time_to' => $appointment_item['time_to'],
+                        'time_from' => date("H.i", strtotime($appointment_item['time_from'])),
+                        'time_to' => date("H.i", strtotime($appointment_item['time_to'])),
                         'periodicity' => $appointment_item['periodicity'],
                         'status_id' => 1,
                         'carer_status_id' => 1,
@@ -67,10 +77,7 @@ class BookingsController extends FrontController implements Constants
                 }
             }
 
-            $booking->assistance_types()->attach($booking_item['assistance_types']);
-
-            //отправить почту
-            //todo
+            //todo отправить почту (в queue)
 
             return redirect('bookings/'.$booking->id.'/purchase');
         }
@@ -137,6 +144,11 @@ class BookingsController extends FrontController implements Constants
         $this->vars = array_add($this->vars,'footer',$footer);
         $this->vars = array_add($this->vars,'modals',$modals);
 
+        //todo костыль на логаут
+        if (!Auth::check()) {
+            return \redirect('/');
+            //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
+        }
         if (!$this->user) {
             return;
         } else {
@@ -229,6 +241,10 @@ class BookingsController extends FrontController implements Constants
 
     public function completed(Booking $booking){
         $user = Auth::user();
+
+        if($booking->has_active_appointments)
+            return response(['status' => 'error']);
+
         if($user->user_type_id == 3){
             //Carer
             $booking->carer_status_id = self::COMPLETED;
@@ -292,16 +308,6 @@ class BookingsController extends FrontController implements Constants
     }
 
     public function createReview(Booking $booking, Request $request){
-        $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
-        $this->title = 'Holm Care';
-
-        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
-        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
-        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
-
-        $this->vars = array_add($this->vars,'header',$header);
-        $this->vars = array_add($this->vars,'footer',$footer);
-        $this->vars = array_add($this->vars,'modals',$modals);
 
         BookingOverview::create([
             'booking_id' => $booking->id,
@@ -312,17 +318,21 @@ class BookingsController extends FrontController implements Constants
             'comment' => $request->comment,
         ]);
 
-        $this->content = view(config('settings.frontTheme') . '.booking.leave_review_thx')->with($this->vars)
-            ->render();
-
-        return $this->renderOutput();
+        return redirect()->back();
     }
 
-    private function generateDateRange(Carbon $start_date, Carbon $end_date)
+    /**
+     * @param Carbon $start_date
+     * @param Carbon $end_date
+     * @param int $step
+     * @return array
+     */
+    private function generateDateRange(Carbon $start_date, Carbon $end_date, int $step = 1)
     {
         $dates = [];
 
-        for($date = $start_date; $date->lte($end_date); $date->addDay()) {
+
+        for($date = $start_date; $date->lte($end_date); $date->addDays($step)) {
             $dates[] = $date->format('Y-m-d');
         }
 
