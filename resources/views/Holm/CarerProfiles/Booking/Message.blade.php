@@ -102,9 +102,9 @@
                                 <label class="checkBox_item correct2" for="date_end">Start</label>
 
                                 <div class="messageInputs__field messageTime ">
-                                    <input type="text" class="messageInput timepicker_message" id="time_to_bed"
-                                           name="bookings[0][appointments][0][time_from]" placeholder="14.30 PM"
-                                           value="14.30">
+                                    <input type="text" class="messageInput timepicker_message"
+                                           name="bookings[0][appointments][0][time_from]" placeholder="14:30:00"
+                                           value="14:30:00">
                                     <a href="#" class="messageIco centeredLink">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </a>
@@ -120,9 +120,9 @@
 
                                 <label class="checkBox_item correct2" for="date_end">End</label>
                                 <div class="messageInputs__field messageTime ">
-                                    <input type="text" class="messageInput timepicker_message" id="time_to_night_helping"
-                                           name="bookings[0][appointments][0][time_to]" placeholder="20.30 PM"
-                                           value="20.30">
+                                    <input type="text" class="messageInput timepicker_message" id="time_to_bed"
+                                           name="bookings[0][appointments][0][time_to]" placeholder="20:30:00"
+                                           value="20:30:00">
                                     <a href="#" class="messageIco centeredLink">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </a>

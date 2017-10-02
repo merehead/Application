@@ -229,6 +229,8 @@ function setNoEditableFields() {
     $carer_profile.find('input[type="checkbox"]').attr("disabled", true).addClass('profileField__select--greyBg');
     $carer_profile.find('input').attr("readonly", true).addClass('profileField__input--greyBg');
     $carer_profile.find('textarea').attr("readonly", true).addClass('profileField__input--greyBg');
+    $('#datepicker_when_start').attr('readonly',true)
+        .datepicker("destroy");
     return true;
 }
 
@@ -661,7 +663,7 @@ $(document).ready(function () {
 
     //if($.isFunction('timepicker')){
         $('#time_to_bed').timepicker({
-            timeFormat: 'h:mm p',
+            timeFormat: 'HH:mm:ss ',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',_step48
@@ -674,7 +676,7 @@ $(document).ready(function () {
     //}
     //if($.isFunction('timepicker')) {
         $('#time_to_night_helping').timepicker({
-            timeFormat: 'h:mm p',
+            timeFormat: 'HH:mm:ss',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',
@@ -790,7 +792,7 @@ $(document).ready(function () {
     });
     if($.isFunction('timepicker')) {
         $('.timepicker_message').timepicker({
-            timeFormat: 'h:mm p',
+            timeFormat: 'HH:mm:ss',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',
@@ -855,7 +857,7 @@ $(document).ready(function () {
             beforeShow: function(input, inst) {
                 inst.dpDiv.css({"z-index":"2000!important;"});
             },
-            timeFormat: 'hh:mm tt',
+            timeFormat: 'HH:mm:ss',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',
@@ -1005,7 +1007,7 @@ $(document).ready(function () {
             beforeShow: function(input, inst) {
                 inst.dpDiv.css({"z-index":2000});
             },
-            timeFormat: 'hh:mm tt',
+            timeFormat: 'HH:mm:ss',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',
@@ -1185,6 +1187,15 @@ $(document).ready(function () {
     $carer_profile.find('a.btn-edit').on('click', function (e) {
         e.preventDefault();
         is_data_changed = true;
+        $('input[name="is_data_changed"]').val(1);
+        if (is_data_changed) {
+            $('#datepicker_when_start').attr('readonly',false)
+                .datepicker({ dateFormat: "dd/mm/yy",
+                showAnim: "slideDown",
+                minDate: "+3D",
+                maxDate: "+20Y",
+                yearRange: "0:+10" });
+        }
         var that = $(this);
         var idForm = 'form#' + $(that).find('span').attr('data-id');
         var idLoadFiles = '#' + $(that).find('span').attr('data-id');
@@ -1195,6 +1206,7 @@ $(document).ready(function () {
         $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').attr('autocomplete', 'on');
 
         $(idLoadFiles).find('.pickfiles').attr("disabled", false);
+        $('input[name="postcode"],input[name="address_line1"]').autocomplete('enable');
         $(idLoadFiles).find('.pickfiles-change').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", false);
         $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", false);
@@ -1214,6 +1226,14 @@ $(document).ready(function () {
         $carer_profile.find('button.btn-success').on('click', function (e) {
             e.preventDefault();
             is_data_changed = false;
+            $('input[name="is_data_changed"]').val(0);
+            if (is_data_changed) {
+                $('#datepicker_when_start').attr('readonly',false)
+                    .datepicker();
+            } else {
+                $('#datepicker_when_start').attr('readonly',true)
+                    .datepicker("destroy");
+            }
             var that = $(this);
             var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
             var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');
@@ -1225,7 +1245,7 @@ $(document).ready(function () {
             $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", true);
             $(idLoadFiles).find('.addInfo__input').attr("disabled", true);
             $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: none');
-            $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').attr('autocomplete', 'off');
+            $('input[name="postcode"],input[name="address_line1"]').autocomplete('disable');
 
             that.button('loading');
 
@@ -1325,7 +1345,7 @@ $(document).ready(function () {
 //------------Google Address search -----------------------
     if ($.isFunction($.fn.autocomplete)) {
 
-        $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').autocomplete({
+       var postcode_autocomplit = $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').autocomplete({
             serviceUrl: '/address/',
             params: {query: $('input[name="postcode"]').val()},
             minChars: 1,
