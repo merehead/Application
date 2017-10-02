@@ -70,7 +70,7 @@
                 </a>
             </div>
             <div class="addInfo">
-                <input disabled type="text" name="nvq" class="addInfo__input" placeholder="Name">
+                <input disabled type="text" name="nvq" class="addInfo__input" placeholder="Name" maxlength="25">
             </div>
         </div>
 
@@ -86,7 +86,7 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="nvq-1" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="nvq-1" class="addInfo__input" placeholder="Name" maxlength="25">
           </div>
         </div>
 
@@ -102,7 +102,7 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="nvq-2" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="nvq-2" class="addInfo__input" placeholder="Name" maxlength="25">
           </div>
         </div>
     </div>
@@ -124,7 +124,7 @@
                 </a>
             </div>
             <div class="addInfo">
-                <input disabled type="text" name="care_certificate" class="addInfo__input" placeholder="Name">
+                <input disabled type="text" name="care_certificate" class="addInfo__input" placeholder="Name" maxlength="25">
             </div>
 
         </div>
@@ -139,7 +139,7 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="care_certificate-1" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="care_certificate-1" class="addInfo__input" placeholder="Name" maxlength="25">
           </div>
         </div>
 
@@ -154,7 +154,7 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="care_certificate-2" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="care_certificate-2" class="addInfo__input" placeholder="Name" maxlength="25">
           </div>
         </div>
     </div>
@@ -176,7 +176,7 @@
                 </a>
             </div>
             <div class="addInfo">
-                <input disabled type="text" name="health_and_social" class="addInfo__input" placeholder="Name">
+                <input disabled type="text" name="health_and_social" class="addInfo__input" placeholder="Name" maxlength="25">
             </div>
 
         </div>
@@ -191,7 +191,7 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="health_and_social-1" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="health_and_social-1" class="addInfo__input" placeholder="Name" maxlength="25">
           </div>
         </div>
 
@@ -206,7 +206,7 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="health_and_social-2" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="health_and_social-2" class="addInfo__input" placeholder="Name" maxlength="25">
           </div>
         </div>
     </div>
@@ -229,7 +229,7 @@
                 </a>
             </div>
             <div class="addInfo">
-                <input disabled type="text" name="training_certificate" class="addInfo__input" placeholder="Name">
+                <input disabled type="text" name="training_certificate" class="addInfo__input" placeholder="Name" maxlength="25">
             </div>
 
         </div>
@@ -244,7 +244,7 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="training_certificate-1" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="training_certificate-1" class="addInfo__input" placeholder="Name" maxlength="25">
           </div>
         </div>
 
@@ -259,7 +259,7 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="training_certificate-2" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="training_certificate-2" class="addInfo__input" placeholder="Name" maxlength="25">
           </div>
         </div>
     </div>
@@ -281,7 +281,7 @@
                 </a>
             </div>
             <div class="addInfo">
-                <input disabled type="text" name="additional_training_course" class="addInfo__input" placeholder="Name">
+                <input disabled type="text" name="additional_training_course" class="addInfo__input" placeholder="Name" maxlength="25">
             </div>
 
         </div>
@@ -296,7 +296,7 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="additional_training_course-1" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="additional_training_course-1" class="addInfo__input" placeholder="Name" maxlength="25">
           </div>
         </div>
 
@@ -311,7 +311,7 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="additional_training_course-2" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="additional_training_course-2" class="addInfo__input" placeholder="Name" maxlength="25">
           </div>
         </div>
     </div>
@@ -334,7 +334,7 @@
                 </a>
             </div>
             <div class="addInfo">
-                <input disabled type="text" name="other_relevant_qualification" class="addInfo__input" placeholder="Name">
+                <input disabled type="text" name="other_relevant_qualification" class="addInfo__input" placeholder="Name" maxlength="25">
             </div>
 
         </div>
@@ -349,7 +349,7 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="other_relevant_qualification-1" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="other_relevant_qualification-1" class="addInfo__input" placeholder="Name" maxlength="25">
           </div>
         </div>
 
@@ -364,7 +364,7 @@
               </a>
           </div>
           <div class="addInfo">
-              <input disabled type="text" name="other_relevant_qualification-2" class="addInfo__input" placeholder="Name">
+              <input disabled type="text" name="other_relevant_qualification-2" class="addInfo__input" placeholder="Name" maxlength="25">
           </div>
         </div>
     </div>

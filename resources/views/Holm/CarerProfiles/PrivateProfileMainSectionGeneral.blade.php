@@ -8,6 +8,7 @@
 </div>
 {!! Form::model($carerProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateGeneral']) !!}
 {!! Form::hidden('id',null) !!}
+{!! Form::hidden('is_data_changed',0) !!}
 {!! Form::hidden('stage','general') !!}
 <div class="borderContainer" id='carerPrivateGeneral'>
     @include(config('settings.frontTheme').'.CarerProfiles/PrivateProfileMainSectionGeneral_profileInfoContainer')
