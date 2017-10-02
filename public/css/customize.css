@@ -424,7 +424,11 @@ a.blogFilter__item.active {
 }
 
 #ui-datepicker-div, #datepicker_insurance, #datepicker_driver_licence {
-    /*z-index : 99!important; ;*/
+
+    /*
+    если убрать этот индекс, до датапикеры в регистрации открываются под дивами для загрузки изображений
+    */
+    z-index : 99!important;
 }
 
 .serviceUserTimeNeed {

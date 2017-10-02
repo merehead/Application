@@ -20,7 +20,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Please write a couple of sentences about yourself and your experience. This will be used as part of your profile which clients will see. No more than 600 symbols. <span>*</span>
+                        Please write a couple of sentences about yourself and your experience. This will be used as part of your profile which clients will see.<span>*</span>
                     </h2>
                     {!! Form::textarea('description_yourself',null,['class'=>'formArea','placeholder'=>'Your text','maxlength'=>'600']) !!}
                     @if ($errors->has('description_yourself'))
@@ -36,7 +36,7 @@
                     <h2 class="formLabel questionForm__label">
                         Please write a short sentence about yourself which sums you up. This will be the first thing clients see. <span>*</span>
                     </h2>
-                    {!! Form::text('sentence_yourself',null,['class'=>'formInput','placeholder'=>'Details','maxlength'=>"80"]) !!}
+                    {!! Form::text('sentence_yourself',null,['class'=>'formInput countable','placeholder'=>'Details','maxlength'=>"80"]) !!}
                     @if ($errors->has('sentence_yourself'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('sentence_yourself') }}</strong>
