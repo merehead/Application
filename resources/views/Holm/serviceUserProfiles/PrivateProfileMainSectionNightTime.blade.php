@@ -30,7 +30,7 @@
         </div>--}}
     </div>
 
-    <div class="profileRow">
+    <div class="profileRow" {!!  ($serviceUsersProfile->getting_dressed_for_bed != 'Yes' || is_null($serviceUsersProfile->getting_dressed_for_bed) )? ' style="display:none"' : ''!!}>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">What time would they like someone to come and help?<span class="requireIco">*</span></span></h2>
             <div class="profileField__input-wrap">
@@ -45,7 +45,7 @@
             </div>
         </div>
     </div>
-    <div class="profileRow">
+    <div class="profileRow" >
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Needs assistance keeping safe at night</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
@@ -64,7 +64,7 @@
         </div>
     </div>
 
-    <div class="profileRow">
+    <div class="profileRow" {!!  ($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night) )? 'style="display:none"' : ''!!}>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">What time would they like someone to help?<span class="requireIco">*</span></span></h2>
             <div class="profileField__input-wrap">

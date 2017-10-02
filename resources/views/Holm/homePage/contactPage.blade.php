@@ -63,7 +63,7 @@
                     <div class="contactForm__column">
                         <h2 class="fieldTitle">Message</h2>
                         <div class="contactForm__field contactForm__field--area ">
-                            <textarea type="text" name="message" class="contactForm__item contactForm__item--area"></textarea>
+                            <textarea type="text" name="message" class="contactForm__item contactForm__item--area" maxlength="500"></textarea>
                             <span class="contactForm__ico"><i class="fa fa-pencil"></i></span>
                         </div>
                     </div>
