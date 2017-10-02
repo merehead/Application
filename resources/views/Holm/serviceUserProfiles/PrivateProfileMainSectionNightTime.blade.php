@@ -13,8 +13,8 @@
 
     <div class="profileRow">
         <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Has problems getting dressed for bed</span></h2>
-            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
+            <h2 class="profileField__title ordinaryTitle "><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Has problems getting dressed for bed</span></h2>
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile getting_dressed_for_bed_selector'];
             if (is_null($serviceUsersProfile->getting_dressed_for_bed)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('getting_dressed_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
             @if ($errors->has('getting_dressed_for_bed'))
@@ -30,7 +30,7 @@
         </div>--}}
     </div>
 
-    <div class="profileRow" {!!  ($serviceUsersProfile->getting_dressed_for_bed != 'Yes' || is_null($serviceUsersProfile->getting_dressed_for_bed) )? ' style="display:none"' : ''!!}>
+    <div class="profileRow getting_dressed_for_bed_depend" {!!  ($serviceUsersProfile->getting_dressed_for_bed != 'Yes' || is_null($serviceUsersProfile->getting_dressed_for_bed) )? ' style="display:none"' : ''!!}>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">What time would they like someone to come and help?<span class="requireIco">*</span></span></h2>
             <div class="profileField__input-wrap">
@@ -48,14 +48,14 @@
     <div class="profileRow" >
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Needs assistance keeping safe at night</span></h2>
-            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile keeping_safe_at_night_selector'];
             if (is_null($serviceUsersProfile->keeping_safe_at_night)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('keeping_safe_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
             @if ($errors->has('keeping_safe_at_night'))
                 <span class="help-block"><strong>{{ $errors->first('keeping_safe_at_night') }}</strong></span>
             @endif
         </div>
-        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night) )? 'style="display:none"' : ''!!}>
+        <div class="profileField  profileField--two-thirds"{!!  ($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night) )? 'style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
             {!! Form::text('keeping_safe_at_night_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('keeping_safe_at_night_details'))
@@ -64,7 +64,7 @@
         </div>
     </div>
 
-    <div class="profileRow" {!!  ($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night) )? 'style="display:none"' : ''!!}>
+    <div class="profileRow keeping_safe_at_night_depend" {!!  ($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night) )? 'style="display:none"' : ''!!}>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">What time would they like someone to help?<span class="requireIco">*</span></span></h2>
             <div class="profileField__input-wrap">

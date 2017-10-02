@@ -555,6 +555,27 @@ $(document).ready(function () {
         }
     });
 
+    $(".getting_dressed_for_bed_selector").on('change', function () {
+        if ($(".getting_dressed_for_bed_selector").val() != 'No') {
+            $(".getting_dressed_for_bed_depend").slideDown();
+
+        } else {
+            $(".getting_dressed_for_bed_depend").slideUp();
+        }
+    });
+
+
+    $(".keeping_safe_at_night_selector").on('change', function () {
+        if ($(".keeping_safe_at_night_selector").val() != 'No') {
+            $(".keeping_safe_at_night_depend").slideDown();
+
+        } else {
+            $(".keeping_safe_at_night_depend").slideUp();
+        }
+    });
+
+
+
     if ($('#driving_license').length > 0) {
         if ($('#driving_license').val() == "Yes") {
             $('.hiding_profile').show();
