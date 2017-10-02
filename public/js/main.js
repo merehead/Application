@@ -1446,16 +1446,11 @@ $(document).ready(function () {
       var input_name = $(this).attr('name')
       var input_val = $(this).val()
 
-      console.log(input_name, input_val)
-
       arrFiles.map(function(index) {
         if(index.unique_type === id){
-          console.log(index.unique_type, id, input_val)
           index.title = input_val
         }
       })
-
-      console.log(arrFiles);
     })
 
     function pickfilesDelete(_this){
@@ -1473,8 +1468,11 @@ $(document).ready(function () {
 
     $('.pickfiles-delete').on('click', function () {
       var input_name = $(this).parent().find('.pickfiles_img').attr('id')
+      var input_value = $(this).parent().parent().find('.addInfo__input')
       var deleteID = $(this).attr('id')
       var _this = $(this)
+      
+      input_value.removeClass('addInfo__input-required addInfo__input-required_error')
 
       if($(this).attr('id')){
         arrForDeleteIDProfile.push(parseInt(deleteID))
@@ -1520,6 +1518,7 @@ $(document).ready(function () {
       $(this).parent().parent().find('.addInfo__input').prop( "disabled", false)
       $(this).parent().parent().find('.addInfo__input').attr( "readonly", false )
       $(this).parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
+      $(this).parent().parent().find('.addInfo__input').addClass('addInfo__input-required')
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
       var pickfiles_img_id = $(this).parent().find('.pickfiles_img').attr('id')
       var deleteID = $(this).parent().find('.pickfiles-delete').attr('id')
@@ -1607,107 +1606,120 @@ $(document).ready(function () {
     $('.upload_files').on('click', function (e) {
       e.preventDefault()
 
-      if(!checkUploading){
-        checkUploading = true
-        if(arrFiles.length > 0){
-          $(this).html('uploading..')
-          var fileChunk = 0
-          file = arrFiles[fileChunk]
-          var sliceSize = 524288 // 512 kib
-          var chunks = Math.ceil(file.size / sliceSize)
-          var chunk = 0
-          var start = 0
-          var end = sliceSize
+      if($('#qualifications-page').length){
+        $.each($('.addInfo__input-required'), function (input, index) {
+          if($(this).val().length <= 0){
+            $(this).addClass('addInfo__input-required_error')
+          }else{
+            $(this).removeClass('addInfo__input-required_error')
+          }
+        })
+      }
 
-          function loop() {
-            var blob = file.slice(start, end)
-            if(blob.size !== 0){
-              if(blob.size === sliceSize){
-                send(blob)
-                start += sliceSize
-                end += blob.size
-              }else{
-                send(blob)
-                start += sliceSize
-                end += blob.size
+      if($('.addInfo__input-required_error').length === 0){
+
+        if(!checkUploading){
+          checkUploading = true
+          if(arrFiles.length > 0){
+            $(this).html('uploading..')
+            var fileChunk = 0
+            file = arrFiles[fileChunk]
+            var sliceSize = 524288 // 512 kib
+            var chunks = Math.ceil(file.size / sliceSize)
+            var chunk = 0
+            var start = 0
+            var end = sliceSize
+
+            function loop() {
+              var blob = file.slice(start, end)
+              if(blob.size !== 0){
+                if(blob.size === sliceSize){
+                  send(blob)
+                  start += sliceSize
+                  end += blob.size
+                }else{
+                  send(blob)
+                  start += sliceSize
+                  end += blob.size
+                }
               }
             }
-          }
-          loop()
+            loop()
 
-          function send(fileSend) {
+            function send(fileSend) {
 
-            var formdata = new FormData()
-            formdata.append('name', file.name)
-            formdata.append('chunk', chunk)
-            formdata.append('chunks', chunks)
-            formdata.append('title', file.title)
-            formdata.append('type', file.type_value)
-            formdata.append('file', fileSend)
-            chunk += 1
-            axios.post(
-              '/document/upload',
-              formdata
-            ).then(function (response) {
+              var formdata = new FormData()
+              formdata.append('name', file.name)
+              formdata.append('chunk', chunk)
+              formdata.append('chunks', chunks)
+              formdata.append('title', file.title)
+              formdata.append('type', file.type_value)
+              formdata.append('file', fileSend)
+              chunk += 1
+              axios.post(
+                '/document/upload',
+                formdata
+              ).then(function (response) {
 
-              if(response.data.result){
-                var data = {
-                  id: response.data.result,
-                  type_value: arrFiles[fileChunk].type_value
-                }
+                if(response.data.result){
+                  var data = {
+                    id: response.data.result,
+                    type_value: arrFiles[fileChunk].type_value
+                  }
 
-                var getls = JSON.parse(localStorage.getItem('files_id'))
-                if(getls){
-                  getls.push(data)
-                  localStorage.setItem('files_id', JSON.stringify(getls))
-                }else{
-                  arrLocalStorage.push(data)
-                  localStorage.setItem('files_id', JSON.stringify(arrLocalStorage))
-                }
-              }
-
-              if(chunk === chunks){
-                if(arrFiles[fileChunk + 1]){
-                  fileChunk += 1
-                  file = arrFiles[fileChunk]
-                  chunks = Math.ceil(file.size / sliceSize)
-                  chunk = 0
-                  start = 0
-                  end = sliceSize
-                  loop()
-                }else{
-                  $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
-                  $('.pickfiles').val('')
-                  arrFiles = []
-
-                  if(arrForDeleteID.length > 0){
-                    var getls = JSON.parse(localStorage.getItem('files_id'))
-                    axios.delete(
-                      '/api/document/'+arrForDeleteID+'/'
-                    ).then( function(response) {
-                      arrFiles = getls.filter(function(index) {
-                        if(arrForDeleteID.indexOf(index.id.id) === -1){
-                          return index
-                        }
-                      })
-                      localStorage.setItem('files_id', JSON.stringify(arrFiles))
-                      document.getElementById('step').submit()
-                    })
+                  var getls = JSON.parse(localStorage.getItem('files_id'))
+                  if(getls){
+                    getls.push(data)
+                    localStorage.setItem('files_id', JSON.stringify(getls))
                   }else{
-                    document.getElementById('step').submit()
+                    arrLocalStorage.push(data)
+                    localStorage.setItem('files_id', JSON.stringify(arrLocalStorage))
                   }
                 }
-              }else{
-                loop()
-              }
-            })
-            .catch(function (error) {
-              $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
-              console.log(error)
-            })
+
+                if(chunk === chunks){
+                  if(arrFiles[fileChunk + 1]){
+                    fileChunk += 1
+                    file = arrFiles[fileChunk]
+                    chunks = Math.ceil(file.size / sliceSize)
+                    chunk = 0
+                    start = 0
+                    end = sliceSize
+                    loop()
+                  }else{
+                    $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
+                    $('.pickfiles').val('')
+                    arrFiles = []
+
+                    if(arrForDeleteID.length > 0){
+                      var getls = JSON.parse(localStorage.getItem('files_id'))
+                      axios.delete(
+                        '/api/document/'+arrForDeleteID+'/'
+                      ).then( function(response) {
+                        arrFiles = getls.filter(function(index) {
+                          if(arrForDeleteID.indexOf(index.id.id) === -1){
+                            return index
+                          }
+                        })
+                        localStorage.setItem('files_id', JSON.stringify(arrFiles))
+                        document.getElementById('step').submit()
+                      })
+                    }else{
+                      document.getElementById('step').submit()
+                    }
+                  }
+                }else{
+                  loop()
+                }
+              })
+              .catch(function (error) {
+                $('.upload_files').html('next step <i class="fa fa-arrow-right"></i>')
+                console.log(error)
+              })
+            }
+          }else{
+            document.getElementById('step').submit()
           }
-        }else{
-          document.getElementById('step').submit()
         }
       }
     })

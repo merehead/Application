@@ -303,16 +303,6 @@ class BookingsController extends FrontController implements Constants
     }
 
     public function createReview(Booking $booking, Request $request){
-        $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
-        $this->title = 'Holm Care';
-
-        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
-        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
-        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
-
-        $this->vars = array_add($this->vars,'header',$header);
-        $this->vars = array_add($this->vars,'footer',$footer);
-        $this->vars = array_add($this->vars,'modals',$modals);
 
         BookingOverview::create([
             'booking_id' => $booking->id,
@@ -323,10 +313,7 @@ class BookingsController extends FrontController implements Constants
             'comment' => $request->comment,
         ]);
 
-        $this->content = view(config('settings.frontTheme') . '.booking.leave_review_thx')->with($this->vars)
-            ->render();
-
-        return $this->renderOutput();
+        return redirect()->back();
     }
 
     /**

@@ -1,4 +1,4 @@
-<div class="registration">
+<div class="registration" id="qualifications-page">
     <div class="registration__column registration__column--with-padding">
         <div class="questionsBox">
             <h2>QUALIFICATIONS</h2>
