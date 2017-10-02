@@ -91,7 +91,7 @@ From £ {{random_int(8,15)}}</span><span class="hourPrice__timing">/hour</span>
     </h2>
 </div>
 
-<div class="review hidden">
+<div class="review {{--hidden--}}">
     <div class="review__item singleReview">
         <div class="reviewHead">
             <div class="reviewer">
