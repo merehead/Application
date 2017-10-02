@@ -240,6 +240,10 @@ class BookingsController extends FrontController implements Constants
 
     public function completed(Booking $booking){
         $user = Auth::user();
+
+        if($booking->has_active_appointments)
+            return response(['status' => 'error']);
+
         if($user->user_type_id == 3){
             //Carer
             $booking->carer_status_id = self::COMPLETED;

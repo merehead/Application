@@ -65,6 +65,11 @@ class Booking extends Model
         return $this->hasMany(BookingOverview::class, 'booking_id');
     }
 
+    public function bookingReview()
+    {
+        return $this->hasMany('App\BookingOverview');
+    }
+
     //Accessors
     public function getCarerRateAttribute(){
         return 10;
@@ -99,14 +104,8 @@ class Booking extends Model
         if($this->appointments()->get()->count())
             return $this->appointments()->orderBy('date_start')->get()->first()->date_start;
     }
-
-    public function getDateToAttribute(){
-
+    
+    public function getHasActiveAppointmentsAttribute(){
+        return $this->appointments()->whereIn('status_id', [1, 2, 3])->get()->count() > 0;
     }
-
-    public function bookingReview()
-    {
-        return $this->hasMany('App\BookingOverview');
-    }
-
 }
