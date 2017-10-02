@@ -67,7 +67,7 @@
                         @endif
                         {{--<input type="text" disabled="" class="formInput personalForm__input" placeholder="Time">--}}
                         <span class="inputIco personalForm__ico centeredLink">
-                  <i class="fa fa-calendar"></i>
+                  <i class="fa fa-clock-o"></i>
                 </span>
 
                     </div>
