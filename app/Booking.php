@@ -61,6 +61,10 @@ class Booking extends Model
         return $this->belongsToMany('App\AssistanceType', 'bookings_assistance_types');
     }
 
+    public function overviews(){
+        return $this->hasMany(BookingOverview::class, 'booking_id');
+    }
+
     //Accessors
     public function getCarerRateAttribute(){
         return 10;
