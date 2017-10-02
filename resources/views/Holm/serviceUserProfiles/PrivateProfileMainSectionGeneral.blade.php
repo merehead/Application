@@ -16,7 +16,7 @@
         <div class="generalInfo">
             <div class="profilePhoto profilePhoto--change">
 
-              <input name="{{$serviceUsersProfile->id}}" class="pickfiles_profile_photo_service_user--change" accept=".jpg,.jpeg,.png" type="file" />
+              <input disabled name="{{$serviceUsersProfile->id}}" class="pickfiles_profile_photo_service_user--change" accept=".jpg,.jpeg,.png" type="file" />
               <img class="profile_photo_service_user" id="profile_photo" src="/img/service_user_profile_photos/{{$serviceUsersProfile->id}}.png" onerror="this.src='/img/no_photo.png'" alt="avatar">
 
                 <a href="#" class="profilePhoto__ico">

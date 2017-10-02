@@ -1209,6 +1209,7 @@ $(document).ready(function () {
         $('input[name="postcode"],input[name="address_line1"]').autocomplete('enable');
         $(idLoadFiles).find('.pickfiles-change').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", false);
+        $(idLoadFiles).find('.pickfiles_profile_photo_service_user--change').attr("disabled", false);
         $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", false);
         // $(idLoadFiles).find('.addInfo__input').attr("disabled", false);
         // $(idLoadFiles).find('.addInfo__input').attr("readonly", false);
@@ -1254,6 +1255,7 @@ $(document).ready(function () {
               $(idLoadFiles).find('.pickfiles-change').attr("disabled", true);
               $(idLoadFiles).find('.pickfiles-delete').attr("style", 'display: none');
               $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", true);
+              $(idLoadFiles).find('.pickfiles_profile_photo_service_user--change').attr("disabled", true);
               $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", true);
               $(idLoadFiles).find('.addInfo__input').attr("disabled", true);
               $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: none');
