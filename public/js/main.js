@@ -663,7 +663,7 @@ $(document).ready(function () {
 
     //if($.isFunction('timepicker')){
         $('#time_to_bed').timepicker({
-            timeFormat: 'HH:mm:ss ',
+            timeFormat: 'h:mm p',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',_step48
@@ -676,7 +676,7 @@ $(document).ready(function () {
     //}
     //if($.isFunction('timepicker')) {
         $('#time_to_night_helping').timepicker({
-            timeFormat: 'HH:mm:ss',
+            timeFormat: 'h:mm p',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',
@@ -792,7 +792,7 @@ $(document).ready(function () {
     });
     if($.isFunction('timepicker')) {
         $('.timepicker_message').timepicker({
-            timeFormat: 'HH:mm:ss',
+            timeFormat: 'h:mm p',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',
@@ -1342,46 +1342,6 @@ $(document).ready(function () {
 
             return false;
         });
-//------------Google Address search -----------------------
-    if ($.isFunction($.fn.autocomplete)) {
-
-       var postcode_autocomplit = $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').autocomplete({
-            serviceUrl: '/address/',
-            params: {query: $('input[name="postcode"]').val()},
-            minChars: 1,
-            dataType:'json',
-            onSelect: function (suggestion) {
-                // var town = (typeof suggestion.data.postal_town==undefined)?suggestion.data.administrative_area_level_1.short_name:suggestion.data.postal_town.short_name;
-                // var street_number = (suggestion.data.street_number==undefined)?'':suggestion.data.street_number.short_name;
-                // var street = (suggestion.data.route.short_name==undefined)?'':suggestion.data.route.short_name;
-                // $('input[name="address_line1"]').val(street);
-                // $('input[name="town"]').val(town);
-                // $('input[name="postcode"]').val(suggestion.data.postal_code.short_name);
-                // $('input[name="postCode"]').val(suggestion.data.postal_code.short_name);
-
-
-                if(suggestion.data.terms.length>3) {
-                    if($(this).attr('name')=='address_line1'){
-                        $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
-                    }else {
-                        $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
-                        $('input[name="town"]').val(suggestion.data.terms[1].value);
-                        $('input[name="postcode"]').val(suggestion.data.terms[2].value);
-                        $('input[name="postCode"]').val(suggestion.data.terms[2].value);
-                    }
-                }else{
-                    if($(this).attr('name')=='address_line1'){
-                        $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
-                    }else {
-                        //$('input[name="address_line1"]').val('');
-                        $('input[name="town"]').val(suggestion.data.terms[0].value);
-                        $('input[name="postcode"]').val(suggestion.data.terms[1].value);
-                        $('input[name="postCode"]').val(suggestion.data.terms[1].value);
-                    }
-                }
-            }
-        });
-    }
 
     $('.passStrength__bar').css('width','5%');
     $('.passStrength__bar').css('background','red');
