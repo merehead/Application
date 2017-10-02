@@ -595,8 +595,12 @@ label.correct2 {
 }
 
  .col-sm-6 {
-   min-height: 0; 
+   min-height: 0;
  }
+
+.addInfo__input-required_error{
+  border: 1px solid #F44336;
+}
 
 /*
 .messageInputs__field {
