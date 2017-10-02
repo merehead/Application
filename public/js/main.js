@@ -661,7 +661,7 @@ $(document).ready(function () {
 
     //if($.isFunction('timepicker')){
         $('#time_to_bed').timepicker({
-            timeFormat: 'h:mm p',
+            timeFormat: 'HH:mm:ss ',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',_step48
@@ -674,7 +674,7 @@ $(document).ready(function () {
     //}
     //if($.isFunction('timepicker')) {
         $('#time_to_night_helping').timepicker({
-            timeFormat: 'h:mm p',
+            timeFormat: 'HH:mm:ss',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',
@@ -790,7 +790,7 @@ $(document).ready(function () {
     });
     if($.isFunction('timepicker')) {
         $('.timepicker_message').timepicker({
-            timeFormat: 'h:mm p',
+            timeFormat: 'HH:mm:ss',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',
@@ -855,7 +855,7 @@ $(document).ready(function () {
             beforeShow: function(input, inst) {
                 inst.dpDiv.css({"z-index":"2000!important;"});
             },
-            timeFormat: 'hh:mm tt',
+            timeFormat: 'HH:mm:ss',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',
@@ -1005,7 +1005,7 @@ $(document).ready(function () {
             beforeShow: function(input, inst) {
                 inst.dpDiv.css({"z-index":2000});
             },
-            timeFormat: 'hh:mm tt',
+            timeFormat: 'HH:mm:ss',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',
