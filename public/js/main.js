@@ -22,6 +22,15 @@ var is_data_changed=false;
 //     return (is_data_changed ? "Измененные данные не сохранены. Закрыть страницу?" : null);
 // }
 
+function isHTML(str) {
+    var a = document.createElement('div');
+    a.innerHTML = str;
+    for (var c = a.childNodes, i = c.length; i--; ) {
+        if (c[i].nodeType == 1) return true;
+    }
+    return false;
+}
+
 function carerSearchAjax(){
     var form = $('#carerSearchForm');
     //$(form).submit();
@@ -889,7 +898,7 @@ $(document).ready(function () {
             beforeShow: function(input, inst) {
                 inst.dpDiv.css({"z-index":"2000!important;"});
             },
-            timeFormat: 'HH:mm:ss',
+            timeFormat: 'h:mm p',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',
@@ -980,6 +989,8 @@ $(document).ready(function () {
         var $that =$(this);
         var dlast = $('.cdate').last().clone();
         var clast = $('.checktime').last().clone();
+        $(dlast).find('.error-booking').remove();
+        $(clast).find('.error-booking').remove();
         $(dlast).find('.datepicker').each(function () {
             var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
             var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
@@ -1025,7 +1036,7 @@ $(document).ready(function () {
 
         $(".datepicker_message").datepicker({
             beforeShow: function(input, inst) {
-                inst.dpDiv.css({"z-index":2000});
+                inst.dpDiv.css({"z-index":"9999!important"});
             },
             changeMonth: true,
             changeYear: true,
@@ -1039,7 +1050,7 @@ $(document).ready(function () {
             beforeShow: function(input, inst) {
                 inst.dpDiv.css({"z-index":2000});
             },
-            timeFormat: 'HH:mm:ss',
+            timeFormat: 'h:mm p',
             interval: 30,
             //minTime: '10',
             //maxTime: '6:00pm',
@@ -1250,8 +1261,77 @@ $(document).ready(function () {
         $(that).hide();
         $(that).parent().find('button.hidden').removeClass('hidden');
         $('.alert').remove();
+
         cancelEditFieldsCarer();
         return false;
+    });
+    //------------Google Address search -----------------------
+    if ($.isFunction($.fn.autocomplete)) {
+
+        $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').autocomplete({
+            serviceUrl: '/address/',
+            params: {query: $(this).val(),enable: $('input[name="is_data_changed"]')},
+            minChars: 1,
+            dataType:'json',
+            onSelect: function (suggestion) {
+                if(suggestion.data.terms.length>3) {
+                    if($(this).attr('name')=='address_line1'){
+                        $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
+                    }else {
+                        $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
+                        $('input[name="town"]').val(suggestion.data.terms[1].value);
+                        $('input[name="postcode"]').val(suggestion.data.terms[2].value);
+                        $('input[name="postCode"]').val(suggestion.data.terms[2].value);
+                    }
+                }else{
+                    if($(this).attr('name')=='address_line1'){
+                        $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
+                    }else {
+                        //$('input[name="address_line1"]').val('');
+                        $('input[name="town"]').val(suggestion.data.terms[0].value);
+                        $('input[name="postcode"]').val(suggestion.data.terms[1].value);
+                        $('input[name="postCode"]').val(suggestion.data.terms[1].value);
+                    }
+                }
+            }
+        });
+    }
+
+    // --  Add booking Carer -------
+    $(document).on('click', 'button.bookBtn__item', function (e) {
+        e.preventDefault();
+        var form = $('#bookings__form');
+        var token = $(form).find('input[name="_token"]').val();
+        $('.error-booking').remove();
+        var errorText = '<span class="help-block error-booking">\n' +
+            '             <strong>The field(s) can not be empty. \n' +
+            'Enter a value or select an option</strong>\n' +
+            '          </span>';
+        console.log(form.serialize());
+        $.ajax({
+            url: $(form).attr('action'),
+            headers: {'X-CSRF-TOKEN': token},
+            data: $(form).serialize(),
+            type: 'POST',
+            dataType: "application/json",
+            success: function (response) {
+            },
+            error: function (response) {
+                if( response.responseText.indexOf('purchase')>0){
+                    window.location.href='/'+response.responseText;
+                }
+                else {
+                    var data = JSON.parse(response.responseText);
+                    var arr = $.map(data, function (key, el) {
+                        return el.replace('.', '][').replace('.', '][').replace('.', '][').replace('.', '][').replace('bookings]', 'bookings') + ']'
+                    });
+                    $.each(arr, function (key, val) {
+                        console.log(val);
+                        $('input[name*="' + val + '"').last().parent().parent().after(errorText);
+                    });
+                }
+            }
+        });
     });
 
     // -- Save Carer Profile -------

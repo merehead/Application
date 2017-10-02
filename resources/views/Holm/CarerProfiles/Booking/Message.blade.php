@@ -28,6 +28,8 @@
                 <input type="hidden" name="carer_id" value="{{$carerProfile->id}}">
                 <input type="hidden" name="town" value="{{$carerProfile->town}}">
                 <input type="hidden" name="address_line1" value="{{$carerProfile->address_line1}}">
+                {{csrf_field()}}
+
                 <div class="message__body">
                     <div class="messageGroup">
                         <h2 class="ordinaryTitle ordinaryTitle--smaller">
