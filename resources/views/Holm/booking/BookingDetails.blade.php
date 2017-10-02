@@ -167,7 +167,7 @@
                                 </button>
                             </div>
                             <div class="roundedBtn">
-                                <button {{!in_array($booking->carer_status_id, [5]) ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "completed"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
+                                <button {{!in_array($booking->carer_status_id, [5]) || $booking->has_active_appointments ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "completed"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
                                     completed
                                 </button>
                             </div>
@@ -196,7 +196,7 @@
                                 </button>
                             </div>
                             <div class="roundedBtn">
-                                <button {{!in_array($booking->purchaser_status_id, [5]) ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "completed"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
+                                <button {{!in_array($booking->purchaser_status_id, [5]) || $booking->has_active_appointments ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "completed"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--accept">
                                     completed
                                 </button>
                             </div>

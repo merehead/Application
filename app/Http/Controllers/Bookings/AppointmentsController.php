@@ -8,7 +8,7 @@ use Auth;
 
 use Illuminate\Http\Request;
 
-class AppointmentsController extends Controller
+class AppointmentsController extends Controller implements Constants
 {
     public function reject(Appointment $appointment){
         $user = Auth::user();
@@ -35,15 +35,13 @@ class AppointmentsController extends Controller
         $user = Auth::user();
 
         if($user->user_type_id == 3){
-            if($appointment->purchaser_status_id == 2){
-                $appointment->status_id = 2;
-                $appointment->purchaser_status_id = 2;
-            } else {
-                $appointment->purchaser_status_id = 2;
+            if($appointment->purchaser_status_id == self::APPOINTMENT_USER_STATUS_COMPLETED){
+                $appointment->status_id = self::APPOINTMENT_STATUS_COMPLETED;
             }
+            $appointment->carer_status_id = self::APPOINTMENT_USER_STATUS_COMPLETED;
         } else {
-            $appointment->status_id = 2;
-            $appointment->carer_status_id = 2;
+            $appointment->status_id = self::APPOINTMENT_STATUS_COMPLETED;
+            $appointment->purchaser_status_id = self::APPOINTMENT_USER_STATUS_COMPLETED;
         }
 
         $appointment->save();

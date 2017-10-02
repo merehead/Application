@@ -534,7 +534,7 @@ span.charsLeft {
 }
 
 button:disabled {
-    background: #d7d7d7;
+    background: #d7d7d7 !important;
     color: #f8f4f4;
 }
 
