@@ -216,6 +216,13 @@ class BookingsController extends FrontController implements Constants
         $booking->status_id = self::CANCELLED;
         $booking->carer_status_id = self::CANCELLED;
         $booking->purchaser_status_id = self::CANCELLED;
+        $booking->appointments()
+            ->where('status_id', '!=', self::APPOINTMENT_STATUS_COMPLETED)
+            ->update([
+            'status_id' => self::APPOINTMENT_STATUS_CANCELLED,
+            'carer_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
+            'purchaser_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
+            ]);
         $booking->save();
 
         return response(['status' => 'success']);
@@ -227,6 +234,13 @@ class BookingsController extends FrontController implements Constants
             //Carer
             $booking->status_id = self::CANCELLED;
             $booking->carer_status_id = self::CANCELLED;
+            $booking->appointments()
+                ->where('status_id', '!=', self::APPOINTMENT_STATUS_COMPLETED)
+                ->update([
+                    'status_id' => self::APPOINTMENT_STATUS_CANCELLED,
+                    'carer_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
+                    'purchaser_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
+                ]);
         } else {
             if($booking->carer_status_id == self::COMPLETED){
                 $booking->status_id = self::DISPUTE;
