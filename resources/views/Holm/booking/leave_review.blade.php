@@ -152,7 +152,7 @@
                     <input type="hidden" name="communication" value="3">
                     <input type="hidden" name="performance" value="2">
                     <div class="formField">
-                        <textarea class="formArea formArea--review " placeholder="Type your comment" name="comment"></textarea>
+                        <textarea class="formArea formArea--review " placeholder="Type your comment" name="comment" maxlength="150"></textarea>
 
                     </div>
                     <div class="formField">
