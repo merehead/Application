@@ -248,7 +248,8 @@ function cancelEditFieldsCarer() {
                 });
                 break;
         }
-    })
+    });
+    $('input[name="postcode"],input[name="address_line1"]').autocomplete.disable();
 }
 
 // -- Send request to server with AJAX data ----------
@@ -358,12 +359,12 @@ $(document).ready(function () {
         var text = $(this).val();
         $('.line_about').html('ONE LINE ABOUT '+text);
 
-        $('span').each(function(){
-            var t = $(this).text();
-            console.log();
-            t=t.replace(like_name, text);
-            $(this).text(t);
-        });
+        // $('span').each(function(){
+        //     var t = $(this).text();
+        //     console.log();
+        //     t=t.replace(like_name, text);
+        //     $(this).text(t);
+        // });
     });
 
     // $('input[name="mobile_number"]').on('keyup', function () {
@@ -1191,6 +1192,7 @@ $(document).ready(function () {
         $(idForm).find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
         $(idForm).find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
         $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
+        $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').attr('autocomplete', 'on');
 
         $(idLoadFiles).find('.pickfiles').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles-change').attr("disabled", false);
@@ -1223,6 +1225,7 @@ $(document).ready(function () {
             $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", true);
             $(idLoadFiles).find('.addInfo__input').attr("disabled", true);
             $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: none');
+            $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').attr('autocomplete', 'off');
 
             that.button('loading');
 
@@ -1326,6 +1329,7 @@ $(document).ready(function () {
             serviceUrl: '/address/',
             params: {query: $('input[name="postcode"]').val()},
             minChars: 1,
+            dataType:'json',
             onSelect: function (suggestion) {
                 var town = (typeof suggestion.data.postal_town==undefined)?suggestion.data.administrative_area_level_1.short_name:suggestion.data.postal_town.short_name;
                 var street_number = (suggestion.data.street_number==undefined)?'':suggestion.data.street_number.short_name;
