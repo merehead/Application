@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="reviewText">
-                    <p><a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->full_name}}</a> has completed their appointment on {{$booking->date_from}} - {{$booking->date_end}} with <a href="/serviceUser-settings/{{$booking->bookingServiceUser()->first()->id}}">{{$booking->bookingServiceUser()->first()->full_name}}</a> </p>
+                    <p><a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->full_name}}</a> has completed their appointment on {{$booking->date_start}} - {{$booking->date_end}} with <a href="/serviceUser-settings/{{$booking->bookingServiceUser()->first()->id}}">{{$booking->bookingServiceUser()->first()->full_name}}</a> </p>
                     <p>Please leave your ratings and any additional comments. </p>
                     <p>Thank you!</p>
 
@@ -47,7 +47,7 @@
             </div>
             <div class="review__item">
                 <h2 class="review__title">
-                    Booking Overview - {{$booking->date_from}} - {{$booking->date_end}}
+                    Booking Overview - {{$booking->date_start}} - {{$booking->date_end}}
                 </h2>
                 <div class="userRating">
                     <div class="userRating__item">

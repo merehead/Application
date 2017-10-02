@@ -9,13 +9,13 @@ class Booking extends Model
 {
     protected $fillable = ['purchaser_id','service_user_id','carer_id','date_start','date_end','frequency_id','amount_for_purchaser','amount_for_carer','status_id', 'carer_status_id', 'purchaser_status_id', 'payment_method'];
 
-    public function getDateStartAttribute($value)
+    public function getDateStartAttribute()
     {
-        return date('d/m/Y',strtotime($value));
+        return date('d/m/Y', strtotime($this->appointments()->orderBy('date_start')->get()->first()->date_start));
     }
-    public function getDateEndAttribute($value)
+    public function getDateEndAttribute()
     {
-        return date('d/m/Y',strtotime($value));
+        return date('d/m/Y', strtotime($this->appointments()->orderByDesc('date_start')->get()->first()->date_start));
     }
 
 
