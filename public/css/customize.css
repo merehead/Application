@@ -602,6 +602,10 @@ label.correct2 {
   border: 1px solid #F44336;
 }
 
+.advantage_label i{
+  color: #80cb2d;
+}
+
 /*
 .messageInputs__field {
     z-index: 999;

@@ -38,7 +38,8 @@ class BookingsController extends FrontController implements Constants
             ]);
 
             //Attaching booking`s assistance_types
-            $booking->assistance_types()->attach($booking_item['assistance_types']);
+            if(isset($booking_item['assistance_types']))
+                $booking->assistance_types()->attach($booking_item['assistance_types']);
 
             //Booking status for workroom
             BookingsMessage::create([
