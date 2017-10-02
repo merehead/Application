@@ -70,6 +70,7 @@ class CarersProfile extends Model
 
     }
 
+
     /**
      * @param $value
      * @return bool|false|string
@@ -107,5 +108,22 @@ class CarersProfile extends Model
     {
         return date('d/m/Y',strtotime($value));
     }
+
+    public function bookings()
+    {
+        return $this->hasMany('App\Booking','carer_id','id');
+    }
+
+/*    public function getCarerReview()
+    {
+
+        SELECT * FROM `booking_overviews`, `bookings` WHERE `booking_id`= `bookings`.`id` and `carer_id` = 201
+
+    SELECT `carer_id`, `comment`, `punctuality`+`friendliness`+`communication`+`performance` FROM `booking_overviews`, `bookings` WHERE `booking_id`= `bookings`.`id` and `carer_id` = 201
+
+    SELECT `carer_id`, `comment`, (`punctuality`+`friendliness`+`communication`+`performance`)/4 FROM `booking_overviews`, `bookings` WHERE `booking_id`= `bookings`.`id` and `carer_id` = 201
+
+        return;
+    }*/
 
 }

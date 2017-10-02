@@ -24,15 +24,40 @@
                         <div class="registrationCheckboxes">
 
                             @foreach($languages as $language)
+
                                 <div class="checkBox_item">
 
-                                    {!! Form::checkbox('languages['.$language->id.']', null,($serviceUserProfile->Languages->contains('id', $language->id)? 1 : null),
+                                        <?php $language->id<10? $tmp = '0'.$language->id  : $tmp = $language->id; ?>
+
+                                        {!! Form::checkbox('languages['.(($language->id<10) ? '0'.$language->id:$language->id).']', null,
+
+                                        ($serviceUserProfile->Languages->containsStrict('carer_language', $language->carer_language) ? 1 : null),
+
+                                        array('class' => 'customCheckbox','id'=>'boxf'.$language->carer_language)) !!}
+
+                                        <label for="boxf{{$language->carer_language}}"> {{$language->carer_language}}</label>
+
+                                </div>
+
+                            @endforeach
+
+
+
+
+              {{--              @foreach($languages as $language)
+                                <div class="checkBox_item">
+
+                                    {!! Form::checkbox('languages['.$language->id.']',
+
+                                    null,($serviceUserProfile->Languages->contains('id', $language->id)? 1 : null),
                                     array('class' => 'customCheckbox','id'=>'boxf'.$language->id)) !!}
                                     <label for="boxf{{$language->id}}">{{$language->carer_language}}</label>
 
                                 </div>
 
-                            @endforeach
+                            @endforeach--}}
+
+
                                 @if ($errors->has('languages'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('languages') }}</strong>

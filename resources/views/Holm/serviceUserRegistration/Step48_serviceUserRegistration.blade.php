@@ -53,7 +53,7 @@
                         if (is_null($serviceUserProfile->incontinence_wear))
                             $atrr['placeholder'] = 'Please select';
                         ?>
-                        {!! Form::select('incontinence_wear',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
+                        {!! Form::select('incontinence_wear',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                         @if ($errors->has('incontinence_wear'))
                             <span class="help-block"><strong>{{ $errors->first('incontinence_wear') }}</strong></span>
                         @endif

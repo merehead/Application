@@ -100,4 +100,9 @@ class Booking extends Model
 
     }
 
+    public function bookingReview()
+    {
+        return $this->hasMany('App\BookingOverview');
+    }
+
 }

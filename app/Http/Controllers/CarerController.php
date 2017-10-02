@@ -103,7 +103,7 @@ class CarerController extends FrontController implements Constants
 
         // Это вывод ПУБЛИЧНОГО профиля
 
-        //dd($user_id);
+
 
 /*        if(Auth::check()) {
             //TODO карер может смотреть свой профиль и никого другого
@@ -125,6 +125,7 @@ class CarerController extends FrontController implements Constants
 
 
         $carerProfile = CarersProfile::findOrFail($user_id);
+
 
         $this->vars = array_add($this->vars, 'user', $this->user);
         $this->vars = array_add($this->vars, 'carerProfile', $carerProfile);

@@ -11,7 +11,7 @@
             <span class="breadcrumbs__arrow">&gt;</span>
             <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUsers->id])}}"
                class="breadcrumbs__item">
-                {{$serviceUsers->family_name}} {{$serviceUsers->first_name}}
+                 {{$serviceUsers->first_name}} {{$serviceUsers->family_name}}
             </a>
         </div>
 
@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="profileInfo__item">
                                     <h2 class="profileName profileName--big">
-                                        {{$serviceUsers->family_name}} {{$serviceUsers->first_name}}
+                                        {{$serviceUsers->first_name}} {{$serviceUsers->family_name}}
                                     </h2>
 
                                     <p>
@@ -881,7 +881,9 @@
                     </div>
 
                     @if(count($behaviour))
-                        @if(count($behaviour) == 1 && $behaviour[0]->name != 'None' )
+                        @if(!(count($behaviour) == 1 && $behaviour[0]->name == 'None') )
+
+
                             <div class="userBox">
                                 <h2 class="profileTitle">
                                     Behaviour
@@ -910,7 +912,7 @@
                                     </div>
                                 @endif
                             </div>
-                        @endif
+                       @endif
                     @endif
                     <div class="userBox">
 
