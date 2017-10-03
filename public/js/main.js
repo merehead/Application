@@ -1850,6 +1850,7 @@ $(document).ready(function () {
     })
     $('.pickfiles_profile_photo_service_user--change').on('change', function () {
       var _this = $(this)
+      var serviceUserId = $(this).attr('name')
 
       ProfilePhotoSeviceUser = []
       var file = $(this)[0].files[0]
@@ -1859,8 +1860,14 @@ $(document).ready(function () {
 
       $('.profile_photo_service_user').attr('src', reader.result)
 
-      file_profile_photo.image = reader.result
-      ProfilePhotoSeviceUser.push(file_profile_photo)
+      var data = {
+        image: reader.result,
+        service_user_id: parseInt(serviceUserId)
+      }
+
+      ProfilePhotoSeviceUser.push(data)
+
+      console.log(ProfilePhotoSeviceUser)
 
       }, false)
       reader.readAsDataURL(file)
