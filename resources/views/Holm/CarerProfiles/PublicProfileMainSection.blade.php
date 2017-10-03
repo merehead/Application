@@ -182,7 +182,7 @@ $documents['other_relevant_qualification']->count()>0)
     </h2>
     <div class="profileAdvantages">
         <div class="profileAdvantages__row">
-            <div class="advantageColumn">
+            <div class="advantageColumn advantageColumn--full-row">
                 @if($carerProfile->work_with_pets=='Yes')
                     <p class="advantage_label">
                         <i class="fa fa-check"></i>
@@ -192,13 +192,13 @@ $documents['other_relevant_qualification']->count()>0)
                 @if($carerProfile->work_with_pets=='No')
                     <p class="advantage_label">
                         <i class="fa fa-check"></i>
-                        Don't works with pets
+                        Doesn't work with pets
                     </p>
                 @endif
                 @if($carerProfile->work_with_pets=='It Depends')
                     <p class="advantage_label">
                         <i class="fa fa-check"></i>
-                        It Depends: {{$carerProfile->pets_description}}
+                        Work with pets, depends on: {{$carerProfile->pets_description}}
                     </p>
                 @endif
             </div>
