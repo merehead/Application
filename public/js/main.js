@@ -1246,10 +1246,10 @@ $(document).ready(function () {
         $(idForm).find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
         $(idForm).find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
         $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
-        $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').attr('autocomplete', 'on');
+        // $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').attr('autocomplete', 'on');
 
         $(idLoadFiles).find('.pickfiles').attr("disabled", false);
-        $('input[name="postcode"],input[name="address_line1"]').autocomplete('enable');
+        // $('input[name="postcode"],input[name="address_line1"]').autocomplete('enable');
         $(idLoadFiles).find('.pickfiles-change').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo_service_user--change').attr("disabled", false);
@@ -1270,7 +1270,7 @@ $(document).ready(function () {
 
         $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').autocomplete({
             serviceUrl: '/address/',
-            params: {query: $(this).val(),enable: $('input[name="is_data_changed"]')},
+            params: {query: $('input[name="town"]').val()+' '+$(this).val()},
             minChars: 1,
             dataType:'json',
             onSelect: function (suggestion) {
@@ -1371,7 +1371,7 @@ $(document).ready(function () {
               $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", true);
               $(idLoadFiles).find('.addInfo__input').attr("disabled", true);
               $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: none');
-              $('input[name="postcode"],input[name="address_line1"]').autocomplete('disable');
+              // $('input[name="postcode"],input[name="address_line1"]').autocomplete('disable');
 
               if (arrFilesProfilePhoto.length > 0) {
                   var url = '/profile-photo'
