@@ -123,6 +123,8 @@
                     <div class="row">
                         <div class="col-sm-6">
 
+
+
                             @if(count($serviceUserConditions))
 
                                 <div class="userContainer">
@@ -880,6 +882,10 @@
                         </div>
                     </div>
 
+
+
+
+                    @if(!$behaviour->contains('id','1'))
                     @if(count($behaviour))
                         @if(!(count($behaviour) == 1 && $behaviour[0]->name == 'None') )
 
@@ -913,6 +919,7 @@
                                 @endif
                             </div>
                        @endif
+                    @endif
                     @endif
                     <div class="userBox">
 

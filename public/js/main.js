@@ -538,7 +538,7 @@ $(document).ready(function () {
     });
 
     if ($("#type_car_work").val() == 'Yes') {
-        $(".car-block").show();
+        //$(".car-block").show();
         $('#profile_use_car').parent().show();
     } else {
         $(".car-block").hide();
@@ -583,10 +583,10 @@ $(document).ready(function () {
             $('.hiding_profile').hide();
         }
         if ($("#type_car_work").val() == 'Yes') {
-            $(".car-block").show();
+            //$(".car-block").show();
             $('#profile_use_car').parent().show();
         } else {
-            $(".car-block").hide();
+            //$(".car-block").hide();
             $('#profile_use_car').parent().hide();
         }
     }

@@ -128,6 +128,7 @@ class CarerController extends FrontController implements Constants
 
         $carerProfile = CarersProfile::findOrFail($user_id);
 
+        $this->vars = array_add($this->vars, 'reviews', $carerProfile->carerReviews());
 
         $this->vars = array_add($this->vars, 'user', $this->user);
         $this->vars = array_add($this->vars, 'carerProfile', $carerProfile);
