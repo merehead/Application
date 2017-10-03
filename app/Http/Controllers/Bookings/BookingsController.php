@@ -38,7 +38,8 @@ class BookingsController extends FrontController implements Constants
             ]);
 
             //Attaching booking`s assistance_types
-            $booking->assistance_types()->attach($booking_item['assistance_types']);
+            if(isset($booking_item['assistance_types']))
+                $booking->assistance_types()->attach($booking_item['assistance_types']);
 
             //Booking status for workroom
             BookingsMessage::create([
@@ -77,7 +78,10 @@ class BookingsController extends FrontController implements Constants
             }
 
             //todo отправить почту (в queue)
-
+            if($request->ajax()) // This is what i am needing.
+            {
+                return 'bookings/'.$booking->id.'/purchase';
+            }
             return redirect('bookings/'.$booking->id.'/purchase');
         }
     }
@@ -215,6 +219,13 @@ class BookingsController extends FrontController implements Constants
         $booking->status_id = self::CANCELLED;
         $booking->carer_status_id = self::CANCELLED;
         $booking->purchaser_status_id = self::CANCELLED;
+        $booking->appointments()
+            ->where('status_id', '!=', self::APPOINTMENT_STATUS_COMPLETED)
+            ->update([
+            'status_id' => self::APPOINTMENT_STATUS_CANCELLED,
+            'carer_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
+            'purchaser_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
+            ]);
         $booking->save();
 
         return response(['status' => 'success']);
@@ -226,6 +237,13 @@ class BookingsController extends FrontController implements Constants
             //Carer
             $booking->status_id = self::CANCELLED;
             $booking->carer_status_id = self::CANCELLED;
+            $booking->appointments()
+                ->where('status_id', '!=', self::APPOINTMENT_STATUS_COMPLETED)
+                ->update([
+                    'status_id' => self::APPOINTMENT_STATUS_CANCELLED,
+                    'carer_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
+                    'purchaser_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
+                ]);
         } else {
             if($booking->carer_status_id == self::COMPLETED){
                 $booking->status_id = self::DISPUTE;

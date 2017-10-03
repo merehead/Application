@@ -4,6 +4,7 @@ namespace App;
 
 use DateTime;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class CarersProfile extends Model
 {
@@ -114,16 +115,20 @@ class CarersProfile extends Model
         return $this->hasMany('App\Booking','carer_id','id');
     }
 
-/*    public function getCarerReview()
+    public function carerReviews()
     {
+        return  DB::select("SELECT `carer_id`, `first_name`,`family_name`,`town`, `comment`, 
+`service_users_profiles`.`id` as serviceUser_id,
+(`punctuality`+`friendliness`+`booking_overviews`.`communication`+`performance`)/4 as raiting
+FROM `booking_overviews`, `bookings`,`service_users_profiles` 
+WHERE `booking_id`= `bookings`.`id` AND `bookings`.`service_user_id`= `service_users_profiles`.`id` AND `carer_id` = ".$this->id." LIMIT 0,4");
 
-        SELECT * FROM `booking_overviews`, `bookings` WHERE `booking_id`= `bookings`.`id` and `carer_id` = 201
+    }
+
+}
+
+/*SELECT * FROM `booking_overviews`, `bookings` WHERE `booking_id`= `bookings`.`id` and `carer_id` = 201
 
     SELECT `carer_id`, `comment`, `punctuality`+`friendliness`+`communication`+`performance` FROM `booking_overviews`, `bookings` WHERE `booking_id`= `bookings`.`id` and `carer_id` = 201
 
-    SELECT `carer_id`, `comment`, (`punctuality`+`friendliness`+`communication`+`performance`)/4 FROM `booking_overviews`, `bookings` WHERE `booking_id`= `bookings`.`id` and `carer_id` = 201
-
-        return;
-    }*/
-
-}
+    SELECT `carer_id`, `comment`, (`punctuality`+`friendliness`+`communication`+`performance`)/4 FROM `booking_overviews`, `bookings` WHERE `booking_id`= `bookings`.`id` and `carer_id` = 201*/
