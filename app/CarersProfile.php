@@ -118,7 +118,7 @@ class CarersProfile extends Model
     public function carerReviews()
     {
         return  DB::select("SELECT sup.`id`, sup.`first_name`, sup.`family_name`, sup.`town`,`comment`, 
-(`punctuality`+`friendliness`+`booking_overviews`.`communication`+`performance`)/4 as raiting
+(`punctuality`+`friendliness`+`booking_overviews`.`communication`+`performance`)/4 as raiting,DATE_FORMAT(`bookings`.`created_at`, '%d/%m/%Y') as created_at
 FROM `bookings`
 INNER JOIN `booking_overviews` ON `booking_id`= `bookings`.`id`
 INNER JOIN `service_users_profiles` as sup ON `bookings`.`service_user_id`= sup.`id`
@@ -129,7 +129,8 @@ WHERE `carer_id` = ".$this->id." LIMIT 0,4");
 }
 
 /*
-SELECT sup.`id`, sup.`first_name`, sup.`family_name`, sup.`town`,`comment`, (`punctuality`+`friendliness`+`booking_overviews`.`communication`+`performance`)/4 as raiting
+SELECT sup.`id`, sup.`first_name`, sup.`family_name`, sup.`town`,`comment`,
+(`punctuality`+`friendliness`+`booking_overviews`.`communication`+`performance`)/4 as raiting,DATE_FORMAT(`bookings`.`created_at`, "%d/%m/%Y") as created_at
 FROM `bookings`
 INNER JOIN `booking_overviews` ON `booking_id`= `bookings`.`id`
 INNER JOIN `service_users_profiles` as sup ON `bookings`.`service_user_id`= sup.`id`

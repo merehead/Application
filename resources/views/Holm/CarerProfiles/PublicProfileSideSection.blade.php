@@ -92,7 +92,7 @@ From £ {{random_int(8,15)}}</span><span class="hourPrice__timing">/hour</span>
 </div>
 
 
-
+{{--{{dd($reviews)}}--}}
 
 @if(count($reviews))
     @foreach($reviews as $review)
@@ -102,7 +102,9 @@ From £ {{random_int(8,15)}}</span><span class="hourPrice__timing">/hour</span>
         <div class="reviewHead">
             <div class="reviewer">
                 <a href="{{route('ServiceUserProfilePublic',[$review->id])}}" class="profilePhoto   singleReview__photo">
-                    <img src="/img/profile8.jpg" alt="">
+                    {{--<img src="/img/profile8.jpg" alt="">--}}
+                    <img  src="/img/service_user_profile_photos/{{$review->id}}.png" onerror="this.src='/img/no_photo.png'" alt="avatar">
+
                 </a>
 
                 <div class="reviewer__info">
@@ -134,7 +136,7 @@ From £ {{random_int(8,15)}}</span><span class="hourPrice__timing">/hour</span>
                 {{$review->comment}}
             </p>
         </div>
-        <span class="singleReview__date">10/07/2017</span>
+        <span class="singleReview__date">{{$review->created_at}} </span>
     </div>
         </div>
 
