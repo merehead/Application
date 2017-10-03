@@ -5,27 +5,28 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Auth;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class BookingCreateRequest extends FormRequest
 {
 
     /**
-     * Handle a failed validation attempt.
+     * Get the proper failed validation response for the request.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
+     * @param  array  $errors
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    protected function failedValidation(Validator $validator)
+    public function response(array $errors)
     {
-        echo "<b>Validation failed</b><br>";
-        echo "<hr>";
-        print_r(json_encode($validator->errors()));
-        echo "<hr>";
-        die;
-    }
+        if ($this->expectsJson()) {
+            return new JsonResponse($errors, 200);
+        }
 
+        return $this->redirector->to($this->getRedirectUrl())
+            ->withInput($this->except($this->dontFlash))
+            ->withErrors($errors, $this->errorBag);
+    }
     /**
      * Determine if the user is authorized to make this request.
      *

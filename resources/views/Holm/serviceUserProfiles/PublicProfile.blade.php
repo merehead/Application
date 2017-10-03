@@ -1,3 +1,14 @@
+
+<script>
+    $(document).ready(function () {
+        var geocoder = new google.maps.Geocoder();
+        map = new google.maps.Map(document.getElementById('map_canvas'), {
+            zoom: 17,
+            center: {lat: -34.397, lng: 150.644}
+        });
+        geocodeAddress(geocoder, map);
+    });
+</script>
 <section class="mainSection">
     <div class="container">
         <div class="breadcrumbs">
@@ -14,7 +25,8 @@
                  {{$serviceUsers->first_name}} {{$serviceUsers->family_name}}
             </a>
         </div>
-
+        {!! Form::hidden('address_line1',$serviceUsers->address_line1) !!}
+        {!! Form::hidden('town',$serviceUsers->town) !!}
         <div class="profileWrap">
             <div class="row">
                 <div class="col-md-8">
@@ -89,8 +101,13 @@
                     </div>
                 </div>
             </div>
-            <div class="extraRow">
 
+            <div class="extraRow">
+                <div class="userBox">
+                        <div class="profileMap map" style="width:100%;height:400px">
+                            <div id="map_canvas" style="clear:both; height:400px;"></div>
+                        </div>
+                </div>
 
                 <div class="userAbout" {!!  (is_null($serviceUsers->one_line_about) )? ' style="display:none"' : ''!!}>
                     <p>{{$serviceUsers->one_line_about}}</p>

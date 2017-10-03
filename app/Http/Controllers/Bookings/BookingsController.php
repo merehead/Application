@@ -78,7 +78,10 @@ class BookingsController extends FrontController implements Constants
             }
 
             //todo отправить почту (в queue)
-
+            if($request->ajax()) // This is what i am needing.
+            {
+                return 'bookings/'.$booking->id.'/purchase';
+            }
             return redirect('bookings/'.$booking->id.'/purchase');
         }
     }
