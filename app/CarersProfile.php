@@ -110,6 +110,22 @@ class CarersProfile extends Model
         return date('d/m/Y',strtotime($value));
     }
 
+    public function getRateAttribute()
+    {
+        $res = DB::SELECT("SELECT
+                      CEILING(AVG(o.punctuality)) as avg_punctuality,
+                      CEILING(AVG(o.friendliness)) as avg_friendliness,
+                      CEILING(AVG(o.communication)) as avg_communication,
+                      CEILING(AVG(o.performance)) as avg_performance,
+                      CEILING(((AVG(o.punctuality) + AVG(o.friendliness) + AVG(o.communication) + AVG(o.performance)) /4)) as avg_total
+                    FROM booking_overviews o
+                    LEFT JOIN bookings b  ON o.booking_id = b.id
+                    LEFT JOIN users c ON b.carer_id = c.id
+                    WHERE c.id = 1;");
+        $data = $res[0];
+        return $data;
+    }
+
     public function bookings()
     {
         return $this->hasMany('App\Booking','carer_id','id');

@@ -13,11 +13,9 @@
             <div class="userRating">
                 <div class="avarageRate">
                     <div class="profileRating ">
-                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                        @for($i = 1; $i <= 5; $i++)
+                            <span class="profileRating__item {{$carerProfile->rate->avg_total >= $i ? 'active' : ''}}"><i class="fa fa-heart"></i></span>
+                        @endfor
                     </div>
                 </div>
             </div>
@@ -53,16 +51,15 @@
 <div class="userRating">
 
     <div class="otherRate">
+        {{--{{dd($carerProfile->rate)}}--}}
         <div class="userRating__item">
-
             <p class="userRating__name">
                 <span>Punctuality</span>
             </p>
-            <div class="profileRating "><span class="profileRating__item "><i class="fa fa-heart"></i></span>
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+            <div class="profileRating ">
+                @for($i = 1; $i <= 5; $i++)
+                    <span class="profileRating__item {{$carerProfile->rate->avg_punctuality >= $i ? 'active' : ''}}"><i class="fa fa-heart"></i></span>
+                @endfor
             </div>
         </div>
         <div class="userRating__item">
@@ -71,11 +68,9 @@
                 <span>Friendliness</span>s
             </p>
             <div class="profileRating ">
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                @for($i = 1; $i <= 5; $i++)
+                    <span class="profileRating__item {{$carerProfile->rate->avg_friendliness >= $i ? 'active' : ''}}"><i class="fa fa-heart"></i></span>
+                @endfor
             </div>
         </div>
         <div class="userRating__item">
@@ -84,11 +79,9 @@
                 <span>Communication</span>
             </p>
             <div class="profileRating ">
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                @for($i = 1; $i <= 5; $i++)
+                    <span class="profileRating__item {{$carerProfile->rate->avg_communication >= $i ? 'active' : ''}}"><i class="fa fa-heart"></i></span>
+                @endfor
             </div>
         </div>
         <div class="userRating__item">
@@ -97,11 +90,9 @@
                 <span>Performance</span>
             </p>
             <div class="profileRating ">
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                @for($i = 1; $i <= 5; $i++)
+                    <span class="profileRating__item {{$carerProfile->rate->avg_performance >= $i ? 'active' : ''}}"><i class="fa fa-heart"></i></span>
+                @endfor
             </div>
         </div>
     </div>
