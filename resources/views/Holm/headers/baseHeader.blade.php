@@ -1,4 +1,5 @@
 <header class="header">
+
     <div class="container">
         <div class="headerContainer">
             <a href="\" class="themeLogo"></a>
@@ -22,9 +23,9 @@
 {{--
                         <div class="top-right links">
 --}}
-                        <div class="loginBox">
+                       {{-- <div class="loginBox">--}}
                             @include(config('settings.frontTheme').'.includes.loginLogoutOnPages')
-                        </div>
+                       {{-- </div>--}}
                     @endif
                 </div>
             </div>
