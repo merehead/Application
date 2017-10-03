@@ -117,18 +117,21 @@ class CarersProfile extends Model
 
     public function carerReviews()
     {
-        return  DB::select("SELECT `carer_id`, `first_name`,`family_name`,`town`, `comment`, 
-`service_users_profiles`.`id` as serviceUser_id,
+        return  DB::select("SELECT sup.`id`, sup.`first_name`, sup.`family_name`, sup.`town`,`comment`, 
 (`punctuality`+`friendliness`+`booking_overviews`.`communication`+`performance`)/4 as raiting
-FROM `booking_overviews`, `bookings`,`service_users_profiles` 
-WHERE `booking_id`= `bookings`.`id` AND `bookings`.`service_user_id`= `service_users_profiles`.`id` AND `carer_id` = ".$this->id." LIMIT 0,4");
+FROM `bookings`
+INNER JOIN `booking_overviews` ON `booking_id`= `bookings`.`id`
+INNER JOIN `service_users_profiles` as sup ON `bookings`.`service_user_id`= sup.`id`
+WHERE `carer_id` = ".$this->id." LIMIT 0,4");
 
     }
 
 }
 
-/*SELECT * FROM `booking_overviews`, `bookings` WHERE `booking_id`= `bookings`.`id` and `carer_id` = 201
-
-    SELECT `carer_id`, `comment`, `punctuality`+`friendliness`+`communication`+`performance` FROM `booking_overviews`, `bookings` WHERE `booking_id`= `bookings`.`id` and `carer_id` = 201
-
-    SELECT `carer_id`, `comment`, (`punctuality`+`friendliness`+`communication`+`performance`)/4 FROM `booking_overviews`, `bookings` WHERE `booking_id`= `bookings`.`id` and `carer_id` = 201*/
+/*
+SELECT sup.`id`, sup.`first_name`, sup.`family_name`, sup.`town`,`comment`, (`punctuality`+`friendliness`+`booking_overviews`.`communication`+`performance`)/4 as raiting
+FROM `bookings`
+INNER JOIN `booking_overviews` ON `booking_id`= `bookings`.`id`
+INNER JOIN `service_users_profiles` as sup ON `bookings`.`service_user_id`= sup.`id`
+WHERE `carer_id` = 204
+*/
