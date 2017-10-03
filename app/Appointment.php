@@ -65,14 +65,14 @@ class Appointment extends Model implements Constants
 //                $dateEnd = Carbon::createFromFormat('d/m/Y', $this->date_end);
 //                $days = $dateEnd->diffInDays($dateStart);
                 if($timeTo > $timeFrom){
-                    $hours = $timeTo - $timeFrom;
+                    $hours = round($timeTo) - round($timeFrom);
                 } else {
-                    $hours = 24 - $timeFrom + $timeTo;
+                    $hours = 24 - round($timeFrom) + round($timeTo);
                 }
                 break;
         }
 
-        return ceil($hours);
+        return $hours;
     }
 
     public function getPriceAttribute(){
@@ -80,7 +80,7 @@ class Appointment extends Model implements Constants
         $timeFrom = round($this->time_from);
         $timeTo = round($this->time_to);
         if($timeTo > $timeFrom){
-            for($i = $timeFrom; $i <= $timeTo; $i++){
+            for($i = $timeFrom; $i < $timeTo; $i++){
                 $price += $this->getHourPrice($i, $this->date_start);
             }
         } else {
@@ -109,7 +109,7 @@ class Appointment extends Model implements Constants
     private function isHourNight(int $hour){
         $nightHours = ['from' => 20, 'to' => 8];
         return $hour >= $nightHours['from'] || $hour <= $nightHours['to'];
-    }
+    } 
 
     private function isDayHoliday($date){
         return false;
