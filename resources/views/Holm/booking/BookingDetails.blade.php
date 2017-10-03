@@ -56,17 +56,17 @@
                             <h2 class="ordinaryTitle">
                                 <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Distance</span>
                             </h2>
-                            <span id="distance" class="orderOptions__value">12 (miles)</span>
+                            <span id="distance" class="orderOptions__value">loading..</span>
                         </div>
                         <div class="orderOptions">
                             <h2 class="ordinaryTitle">
                                 <span class="ordinaryTitle__text ordinaryTitle__text--bigger">By car</span>
                             </h2>
-                            <span id="duration" class="orderOptions__value">30 (min)</span>
+                            <span id="duration" class="orderOptions__value">loading..</span>
                         </div>
                     </div>
                     <div class="orderInfo__map">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d317715.71192633547!2d-0.3818036193070037!3d51.52873519756609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2z0JvQvtC90LTQvtC9LCDQktC10LvQuNC60L7QsdGA0LjRgtCw0L3QuNGP!5e0!3m2!1sru!2sru!4v1497972116028"   frameborder="0" style="border:0" allowfullscreen></iframe>
+                        <div id="map" style="width: 100%;height: 100%;"></div>
                     </div>
                 </div>
             @else
@@ -101,13 +101,13 @@
                         <h2 class="ordinaryTitle">
                             <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Distance</span>
                         </h2>
-                        <span id="distance" class="orderOptions__value">12 (miles)</span>
+                        <span class="orderOptions__value">12 (miles)</span>
                     </div>
                     <div class="orderOptions">
                         <h2 class="ordinaryTitle">
                             <span class="ordinaryTitle__text ordinaryTitle__text--bigger">By car</span>
                         </h2>
-                        <span id="duration" class="orderOptions__value">30 (min)</span>
+                        <span class="orderOptions__value">30 (min)</span>
                     </div>
                 </div>
                 <div class="orderInfo__map">
@@ -392,6 +392,8 @@
       var origin1 = '{{$carerProfile->address_line1}}';
       var destinationA = '{{$serviceUserProfile->address_line1}}';
 
+      console.log(origin1, destinationA)
+
       var service = new google.maps.DistanceMatrixService();
       service.getDistanceMatrix(
         {
@@ -401,13 +403,44 @@
         }, callback);
 
       function callback(response, status) {
-        $('#distance').html(response.rows[0].elements[0].distance.text)
-        $('#duration').html(response.rows[0].elements[0].duration.text)
+        console.log(response)
+        // convert km to miles
+        var convert = parseInt(response.rows[0].elements[0].distance.text)*0.62137;
+
+        $('#distance').html(convert.toFixed(3) + ' (miles)');
+        $('#duration').html(response.rows[0].elements[0].duration.text);
       }
+    }
+
+    var geocoder;
+    var map;
+    function initialize() {
+      geocoder = new google.maps.Geocoder();
+      var mapOptions = {
+        zoom: 14
+      }
+      map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    }
+
+    function codeAddress() {
+      var address = '{{$carerProfile->address_line2}}';
+      geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == 'OK') {
+          map.setCenter(results[0].geometry.location);
+          var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+          });
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
     }
 
     $(document).ready(function(){
         DistanceMatrixService();
+        initialize();
+        codeAddress();
     });
 
     $('.changeBookingStatus').click(function () {

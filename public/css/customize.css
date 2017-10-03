@@ -605,7 +605,10 @@ label.correct2 {
 .advantage_label i{
   color: #80cb2d;
 }
-
+.grid .userContainer{
+  width: 48%;
+  margin: 10px;
+}
 /*
 .messageInputs__field {
     z-index: 999;
