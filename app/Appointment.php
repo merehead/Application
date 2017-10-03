@@ -2,10 +2,12 @@
 
 namespace App;
 
+use App\Interfaces\Constants;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Auth;
 
-class Appointment extends Model
+class Appointment extends Model implements Constants
 {
     protected $fillable = ['booking_id','date_start','date_end','amount_for_purchaser','amount_for_carer','status_id','carer_status_id','carer_status_date','purchaser_status_id','purchaser_status_date', 'time_from', 'time_to', 'periodicity'];
 
@@ -71,5 +73,45 @@ class Appointment extends Model
         }
 
         return ceil($hours);
+    }
+
+    public function getPriceAttribute(){
+        $price = 0;
+        $timeFrom = round($this->time_from);
+        $timeTo = round($this->time_to);
+        if($timeTo > $timeFrom){
+            for($i = $timeFrom; $i <= $timeTo; $i++){
+                $price += $this->getHourPrice($i, $this->date_start);
+            }
+        } else {
+            for($i = $timeFrom; $i < 24; $i++){
+                $price += $this->getHourPrice($i, $this->date_start);
+            }
+            for($i = 0; $i < $timeTo; $i++){
+                $price += $this->getHourPrice($i, $this->date_start);
+            }
+        }
+        return $price;
+    }
+
+    private function getHourPrice(int $hour, $date) : float {
+        $user = Auth::user();
+        $userType = ($user && $user->user_type_id == 3 ? 'CARER' : 'PURCHASER');
+        if ($this->isDayHoliday($date)) {
+            return constant('self::'.$userType.'_RATE_HOLIDAYS');
+        } elseif($this->isHourNight($hour)){
+            return constant('self::'.$userType.'_RATE_DAY');
+        } else {
+            return constant('self::'.$userType.'_RATE_DAY');
+        }
+    }
+
+    private function isHourNight(int $hour){
+        $nightHours = ['from' => 20, 'to' => 8];
+        return $hour >= $nightHours['from'] || $hour <= $nightHours['to'];
+    }
+
+    private function isDayHoliday($date){
+        return false;
     }
 }

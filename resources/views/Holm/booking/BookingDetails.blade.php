@@ -209,7 +209,7 @@
                             <p>Total </p>
                             <span>{{$booking->hours}} hours</span>
                         </div>
-                        <p class="totalPrice">£{{$booking->hour_price * $booking->hours}}</p>
+                        <p class="totalPrice">£{{$booking->price}}</p>
                     </div>
                 </div>
 
@@ -258,6 +258,7 @@
                     <div class="appointmentSlider owl-carousel">
                         @php($i = 1)
                         @foreach($booking->appointments()->get() as $appointment)
+                            {{$appointment->price}}
                             <div class="singleAppointment singleAppointment--{{(in_array($appointment->status_id, [1, 2, 3]) && \Carbon\Carbon::parse($appointment->date_start)->isToday()) ? 'progress' : 'done'}}">
                                 <div class="singleAppointment__header">
                                   <span>
