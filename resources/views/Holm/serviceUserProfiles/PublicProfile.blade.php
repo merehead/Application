@@ -1,4 +1,3 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.0/masonry.pkgd.min.js"></script>
 <script>
     $(document).ready(function () {
         var geocoder = new google.maps.Geocoder();
