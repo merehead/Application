@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\CarersProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class HomePageController extends FrontController
 {
@@ -26,10 +28,18 @@ class HomePageController extends FrontController
         $this->vars = array_add($this->vars,'footer',$footer);
         $this->vars = array_add($this->vars,'modals',$modals);
 
-        $this->content = view(config('settings.frontTheme').'.homePage.homePage')->render();
+        $topCarers = collect();
 
+        foreach ($this->getTopCarers() as $carer){
 
+            $topCarers->push(CarersProfile::find($carer->id));
+        }
 
+        //dd($topCarers);
+
+        $this->vars = array_add($this->vars,'topCarers',$topCarers);
+
+        $this->content = view(config('settings.frontTheme').'.homePage.homePage')->with($this->vars)->render();
 
         return $this->renderOutput();
     }
@@ -41,6 +51,5 @@ FROM `carers_profiles` as cp
 WHERE 1 LIMIT 0,12");
 
     }
-
 
 }

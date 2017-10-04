@@ -9,9 +9,53 @@
       </p>
     </div>
 
+
+
     <section>
       <div class="carerContainer">
         <div class="HomePageBanner owl-carousel">
+
+{{--
+          @foreach($topCarers as $topCarer)
+            <div class="carerBanner__box HomePageBanner-carerBanner__box">
+              <div class="popularSlider__item popularCard">
+                <div class="profilePhoto">
+                  <img src="/img/profile.png" alt="">
+                </div>
+                <div class="profileRating popularCard__rating">
+                <span class="profileRating__item active">
+                  <i class="fa fa-heart"></i>
+                </span>
+                  <span class="profileRating__item active">
+                  <i class="fa fa-heart"></i>
+                </span>
+                  <span class="profileRating__item active">
+                  <i class="fa fa-heart"></i>
+                </span>
+                  <span class="profileRating__item active">
+                  <i class="fa fa-heart"></i>
+                </span>
+                  <span class="profileRating__item active">
+                  <i class="fa fa-heart"></i>
+                </span>
+                </div>
+                <h2 class="profileName">
+                  JOHN A.
+                </h2>
+                <p class="popularCard__info">
+                  [one line summary]
+                </p>
+                <p class="hourPrice">
+                <span class="hourPrice__price">
+                £ 11</span><span class="hourPrice__timing">/hour</span>
+                </p>
+              </div>
+            </div>
+            @endforeach
+
+--}}
+
+
           <div class="carerBanner__box HomePageBanner-carerBanner__box">
             <div class="popularSlider__item popularCard">
               <div class="profilePhoto">
@@ -46,6 +90,8 @@
               </p>
             </div>
           </div>
+
+
           <div class="carerBanner__box HomePageBanner-carerBanner__box">
             <div class="popularSlider__item popularCard">
               <div class="profilePhoto">
