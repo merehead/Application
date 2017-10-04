@@ -76,21 +76,26 @@ class SearchController extends FrontController
         if ($request->get('work_with_pets'))
             $where .= " and cp.work_with_pets='Yes'";
 
-        if ($request->get('postCode'))
+        if ($request->get('postCode')&&!empty($request->get('postCode')))
             $where .= " and cp.postcode='".$request->get('postCode')."'";
 
-        $sql = 'select cp.id,first_name,family_name,sentence_yourself,town from carers_profiles cp '.$where. ' group by cp.id,first_name,family_name,sentence_yourself,town';
+        if ($request->get('load-more',0)==1)
+            $where .= " and cp.id > " . $request->get('id');
+
+        $sql = 'select cp.id,first_name,family_name,sentence_yourself,town from carers_profiles cp '.$where. ' group by cp.id,first_name,family_name,sentence_yourself,town order by cp.id';
         $carerResult = DB::select($sql);
 
 
         $start = (($page*$perPage)-$perPage==0)?'1':($page*$perPage)-$perPage;
         if(count($carerResult)==1)$start=0;
-        $this->vars = array_add($this->vars, 'carerResult', array_slice($carerResult,$start,$perPage));
+        $carerResultPage = array_slice($carerResult,$start,$perPage);
+        $this->vars = array_add($this->vars, 'carerResult', $carerResultPage);
         $this->vars = array_add($this->vars, 'perPage', $perPage);
         $this->vars = array_add($this->vars, 'carerResultCount', count($carerResult));
         $this->vars = array_add($this->vars, 'page', $page);
         $this->vars = array_add($this->vars, 'requestSearch', $request->all());
 
+        $load_more = $request->get('load_more');
         $this->content = view(config('settings.frontTheme') . '.homePage.searchPage', $this->vars)->render();
         if (!$request->get('carerSearchAjax'))
             return $this->renderOutput();
@@ -98,7 +103,14 @@ class SearchController extends FrontController
             $html = view(config('settings.frontTheme') . '.homePage.searchPageAjax', $this->vars)->render();
             $htmlHeader = view(config('settings.frontTheme') . '.homePage.searchPageHeaderAjax', $this->vars)->render();
             $options = app('request')->header('accept-charset') == 'utf-8' ? JSON_UNESCAPED_UNICODE : null;
-            return response()->json(array('success' => true, 'html' => $html,'sql'=>$sql, 'count' => count($carerResult), 'htmlHeader' => $htmlHeader), 200, [$options]);
+            return response()->json(array(
+                'success' => true,
+                'load-more' => isset($load_more) && !empty($load_more)?1:0,
+                'html' => $html,
+                'sql' => $sql,
+                'id'=>(count($carerResultPage)-1>0)?$carerResultPage[count($carerResultPage)-1]->id:0,
+                'count' => count($carerResult),
+                'htmlHeader' => $htmlHeader), 200, [$options]);
             exit;
         }
     }

@@ -587,7 +587,11 @@ div.ui-timepicker-container {
 
 label.correct {
     margin-right: 22px !important;
-    width: auto !important;
+    width: 35% !important;
+}
+
+div.correct3{
+    margin-left: -170px;
 }
 
 label.correct2 {
@@ -636,3 +640,7 @@ label.correct2 {
 .singleAppointment--progress .singleAppointment__header h2{background:#dfb815}
 .singleAppointment--new .singleAppointment__header h2{background:#80cb2d}
 
+.advantageColumn {
+    width: 50%;
+    text-transform: uppercase;
+}

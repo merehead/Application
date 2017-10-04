@@ -4,12 +4,12 @@
         SEARCH BY &nbsp; <a href="#" class="sortLink__item"> <span> </span> rating
         </a>
         <p> &nbsp; - &nbsp; </p>
-        @for ($pages = 1; $pages <= ceil($carerResultCount/$perPage); $pages++)
-            <a class="sortLink__item {{($pages==$page)?'active':''}} " href="/search/page/{{ $pages }}">
-                {{ $pages }}
-            </a>
-            <span class="sortLink__separate"></span>
-    @endfor
+        {{--@for ($pages = 1; $pages <= ceil($carerResultCount/$perPage); $pages++)--}}
+            {{--<a class="sortLink__item {{($pages==$page)?'active':''}} " href="/search/page/{{ $pages }}">--}}
+                {{--{{ $pages }}--}}
+            {{--</a>--}}
+            {{--<span class="sortLink__separate"></span>--}}
+    {{--@endfor--}}
     <!--<span class="sortLink__separate">
 
                         </span>

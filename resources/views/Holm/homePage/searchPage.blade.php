@@ -155,7 +155,8 @@
                         <li>Try reducing the number of words in the query.</li>
                     </ul>
                 </div>
-                <div class="loader" id="loader-search" style="display: none"></div>
+
+                <div class="carer-result">
                 @foreach($carerResult as $carerProfile)
                     <div class="result">
                         <a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}" class="profilePhoto  profilePhoto2">
@@ -202,15 +203,19 @@
                         </div>
                     </div>
                     @endforeach
+                </div>
+                <div class="loader" id="loader-search" style="display: none"></div>
                 {{--@for ($pages = 1; $pages <= ceil($carerResultCount/$perPage); $pages++)--}}
                     {{--<a class="sortLink__item {{($pages==$page)?'active':''}} " href="/search/page/{{ $pages }}">--}}
                         {{--{{ $pages }}--}}
                     {{--</a>--}}
                     {{--<span class="sortLink__separate"></span>--}}
                 {{--@endfor--}}
-                @if(count($carerResult)>5)
+                @if($carerResultCount>5)
+                    <input type="hidden" id="id-carer" name="id" value="{{$carerResult[count($carerResult)-1]->id}}">
+                    <input type="hidden" name="load-more" id="load-more" value="0">
                 <div class="moreBtn moreBtn--book ">
-                    <a href="" class="moreBtn__item moreBtn__item--book centeredLink">
+                    <a href="" class="moreBtn__item moreBtn__item--book centeredLink moreLink">
                         Load More
                     </a>
                 </div>
