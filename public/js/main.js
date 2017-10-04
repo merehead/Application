@@ -746,6 +746,16 @@ $(document).ready(function () {
 
     });
 
+    $("input[name='behaviour[9]']").change(function () {
+        if (this.checked) {
+            $(".depend_from_behaviour9").slideDown("slow");
+        } else {
+            $(".depend_from_behaviour9").slideUp();
+        }
+
+    });
+
+
     $("input[name='languages[12]']").change(function () {
         if (this.checked) {
             $(".otherLanguages").slideDown("slow");

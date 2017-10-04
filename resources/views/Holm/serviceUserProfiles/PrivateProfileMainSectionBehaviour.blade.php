@@ -86,7 +86,8 @@ array('class' => 'checkboxNew','id'=>'behaviour'.$behaviour[8]->id)) !!}
         </div>
     </div>
 
-        <div class="profileRow">
+
+        <div class="profileRow depend_from_behaviour9" {!!  ($serviceUsersProfile->Behaviours->contains('id', $behaviour[8]->id) )? '' : ' style="display:none"'!!}>
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                   <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
