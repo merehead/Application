@@ -106,6 +106,18 @@ class Appointment extends Model implements Constants
         }
     }
 
+    public function getIsPastAttribute(){
+        return \Carbon\Carbon::parse(date("Y-m-d ", strtotime($this->date_start)).' '.$this->time_from)->isPast();
+    }
+
+    public function getFormattedTimeFromAttribute(){
+       return date("h:i A", strtotime(str_replace('.', ':', $this->time_from)));
+    }
+
+    public function getFormattedTimeToAttribute(){
+        return date("h:i A", strtotime(str_replace('.', ':', $this->time_to)));
+    }
+
     private function isHourNight(int $hour){
         $nightHours = ['from' => 20, 'to' => 8];
         return $hour >= $nightHours['from'] || $hour <= $nightHours['to'];
