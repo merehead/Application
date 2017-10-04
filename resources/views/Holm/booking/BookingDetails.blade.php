@@ -1,15 +1,15 @@
 <section class="mainSection">
     <div class="container">
         <div class="breadcrumbs">
-            <a href="index.html" class="breadcrumbs__item">
+            <a href="/" class="breadcrumbs__item">
                 Home
             </a>
             <span class="breadcrumbs__arrow">></span>
-            <a href="Carer_Private_profile_page.html" class="breadcrumbs__item">
+            <a href="{{route('purchaserSettings')}}" class="breadcrumbs__item">
                 My profile
             </a>
             <span class="breadcrumbs__arrow">></span>
-            <a href="MY_BOOKINGS_TAB_CARER_All.html" class="breadcrumbs__item">
+            <a href="{{route('purchaserBookingStatus')}}" class="breadcrumbs__item">
                 My Bookings
             </a>
 
