@@ -21,13 +21,18 @@
                 <span class="help-block"><strong>{{ $errors->first('getting_dressed_for_bed') }}</strong></span>
             @endif
         </div>
-{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->getting_dressed_for_bed == 'No' || is_null($serviceUsersProfile->getting_dressed_for_bed) )? 'style="display:none"' : ''!!}>
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('dressed_for_bed_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
-            @if ($errors->has('dressed_for_bed_details'))
-                <span class="help-block"><strong>{{ $errors->first('dressed_for_bed_details') }}</strong></span>
+    </div>
+
+    <div class="profileRow getting_dressed_for_bed_depend" {!!  ($serviceUsersProfile->getting_dressed_for_bed != 'Yes' || is_null($serviceUsersProfile->getting_dressed_for_bed) )? ' style="display:none"' : ''!!}>
+        <div class="profileField">
+            <h2 class="profileField__title ordinaryTitle "><span class="ordinaryTitle__text ordinaryTitle__text--smaller">NEEDS help getting ready for bed?</span></h2>
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
+            if (is_null($serviceUsersProfile->getting_ready_for_bed)) $atrr['placeholder'] = 'Please select';?>
+            {!! Form::select('getting_ready_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
+            @if ($errors->has('getting_ready_for_bed'))
+                <span class="help-block"><strong>{{ $errors->first('getting_ready_for_bed') }}</strong></span>
             @endif
-        </div>--}}
+        </div>
     </div>
 
     <div class="profileRow getting_dressed_for_bed_depend" {!!  ($serviceUsersProfile->getting_dressed_for_bed != 'Yes' || is_null($serviceUsersProfile->getting_dressed_for_bed) )? ' style="display:none"' : ''!!}>
@@ -83,21 +88,26 @@
     <div class="profileRow">
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Needs help going to the toilet at night</span></h2>
-            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile toilet_at_night_selector'];
             if (is_null($serviceUsersProfile->toilet_at_night)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('toilet_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
             @if ($errors->has('toilet_at_night'))
                 <span class="help-block"><strong>{{ $errors->first('toilet_at_night') }}</strong></span>
             @endif
         </div>
-{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->toilet_at_night == 'No' || is_null($serviceUsersProfile->toilet_at_night) )? 'style="display:none"' : ''!!}>
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('toiled_help_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
-            @if ($errors->has('toiled_help_details'))
-                <span class="help-block"><strong>{{ $errors->first('toiled_help_details') }}</strong></span>
-            @endif
-        </div>--}}
     </div>
 
+
+    <div class="profileRow toilet_at_night_depend" {!!  ($serviceUsersProfile->toilet_at_night == 'No' || is_null($serviceUsersProfile->toilet_at_night) )? 'style="display:none"' : ''!!}>
+        <div class="profileField">
+            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">NEEDS someone to help at night?</span></h2>
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
+            if (is_null($serviceUsersProfile->helping_toilet_at_night)) $atrr['placeholder'] = 'Please select';?>
+            {!! Form::select('helping_toilet_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
+            @if ($errors->has('helping_toilet_at_night'))
+                <span class="help-block"><strong>{{ $errors->first('helping_toilet_at_night') }}</strong></span>
+            @endif
+        </div>
+    </div>
 </div>
 {!! Form::close()!!}

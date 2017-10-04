@@ -337,6 +337,7 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
                 'assistance_moving' => 'nullable|in:"Yes","No","Sometimes"',
                 'assistance_moving_details' => 'nullable|string|max:255',
                 'carer_enter' => 'nullable|string|max:510',
+                'entering_aware' => 'nullable|in:"Yes","No"',
                 'other_detail' => 'nullable|string|max:510',
                 'anyone_else_live' => 'nullable|in:"Yes","No","Sometimes"',
                 'anyone_detail' => 'nullable|string|max:255',
@@ -363,6 +364,7 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
             if (isset($input['assistance_moving'])) $serviceUsersProfile->assistance_moving = $input['assistance_moving'];
             if (isset($input['assistance_moving_details'])) $serviceUsersProfile->assistance_moving_details = $input['assistance_moving_details']; else $serviceUsersProfile->assistance_moving_details =null;
             if (isset($input['carer_enter'])) $serviceUsersProfile->carer_enter = $input['carer_enter']; else $serviceUsersProfile->carer_enter =null;
+            if (isset($input['entering_aware'])) $serviceUsersProfile->entering_aware = $input['entering_aware'];
             if (isset($input['other_detail'])) $serviceUsersProfile->other_detail = $input['other_detail']; else $serviceUsersProfile->other_detail =null;
             if (isset($input['anyone_else_live'])) $serviceUsersProfile->anyone_else_live = $input['anyone_else_live'];
             if (isset($input['anyone_detail'])) $serviceUsersProfile->anyone_detail = $input['anyone_detail']; else $serviceUsersProfile->anyone_detail =null;
@@ -393,6 +395,8 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
                 'time_to_night_helping' => 'nullable|string|max:16',
                 'toilet_at_night' => 'nullable|in:"Yes","No","Sometimes"',
                 'toiled_help_details' => 'nullable|string|max:255',
+
+                'getting_ready_for_bed' => 'nullable|in:"Yes","No","Sometimes"',
             ]);
 
 
@@ -407,8 +411,7 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
             if (isset($input['toilet_at_night'])) $serviceUsersProfile->toilet_at_night = $input['toilet_at_night'];
             if (isset($input['toiled_help_details'])) $serviceUsersProfile->toiled_help_details = $input['toiled_help_details'];else $serviceUsersProfile->toiled_help_details =null;
 
-            //dd($input);
-
+            if (isset($input['getting_ready_for_bed'])) $serviceUsersProfile->getting_ready_for_bed = $input['getting_ready_for_bed'];
 
             $serviceUsersProfile->update();
             unset($serviceUsersProfile);
@@ -432,7 +435,7 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
                 'we_missed_details' => 'nullable|string|max:510',
             ]);
 
-            $depart = "#nightTime";
+            $depart = "#other";
 
             if (isset($input['religious_beliefs']))             $serviceUsersProfile->religious_beliefs = $input['religious_beliefs'                            ];
             if (isset($input['religious_beliefs_details']))     $serviceUsersProfile->religious_beliefs_details = $input['religious_beliefs_details'            ];else $serviceUsersProfile->religious_beliefs_details =null;
@@ -456,14 +459,19 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
                 'behaviour' => 'required|array',
                 'other_behaviour' => 'nullable|string|max:200',
                 'consent_details' => 'nullable|string|max:510',
+                'consent'=> 'nullable|in:"Yes","No","Sometimes"',
             ]);
 
             $depart = "#behaviour";
 
+
+
             $behaviour = $request->input('behaviour');
             $serviceUsersProfile->Behaviours()->sync(array_keys($behaviour));
-            $serviceUsersProfile->other_behaviour = $request->input('other_behaviour');
-            $serviceUsersProfile->consent_details = $request->input('consent_details');
+
+            if (isset($input[ 'other_behaviour'])) $serviceUsersProfile-> other_behaviour= $input[ 'other_behaviour'];else $serviceUsersProfile->other_behaviour =null;
+            if (isset($input[ 'consent'])) $serviceUsersProfile-> consent= $input[ 'consent'];
+            if (isset($input[ 'consent_details'])) $serviceUsersProfile-> consent_details= $input[ 'consent_details'];else $serviceUsersProfile->consent_details =null;
 
             $serviceUsersProfile->save();
             unset($serviceUsersProfile);
@@ -549,6 +557,12 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
                 'have_incontinence'                         => 'nullable|in:"Yes","No","Sometimes"',
                 'choosing_incontinence_products'            => 'nullable|in:"Yes","No","Sometimes"',
                 'incontinence_wear'                         => 'nullable|in:"Yes","No","Sometimes"',
+                'have_dementia'                             => 'nullable|in:"Yes","No","Sometimes"',
+                'preferences_of_food'                       => 'nullable|in:"Yes","No","Sometimes"',
+                'bathing_times_per_week'                    => 'nullable|integer',
+
+
+
 
                 'other_behaviour'                                   => 'nullable|string|max:255',
                 'comprehension_detail'                              => 'nullable|string|max:510',
@@ -581,6 +595,9 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
                 'choosing_incontinence_products_detail'             => 'nullable|string|max:255',
                 'incontinence_products_stored'                      => 'nullable|string|max:255',
                 'incontinence_wear_detail'                          => 'nullable|string|max:255',
+                'dementia_detail'                                   => 'nullable|string|max:510',
+                'preferences_of_food_requirements'                  => 'nullable|string|max:255',
+
             ]);
 
             $depart = "#health-div";
@@ -615,6 +632,11 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
             if (isset($input[ 'have_incontinence'               ])) $serviceUsersProfile-> have_incontinence               = $input[ 'have_incontinence'               ];
             if (isset($input[ 'choosing_incontinence_products'  ])) $serviceUsersProfile-> choosing_incontinence_products  = $input[ 'choosing_incontinence_products'  ];
             if (isset($input[ 'incontinence_wear'               ])) $serviceUsersProfile-> incontinence_wear               = $input[ 'incontinence_wear'               ];
+            if (isset($input[ 'have_dementia'                   ])) $serviceUsersProfile-> have_dementia                   = $input[ 'have_dementia'               ];
+            if (isset($input[ 'preferences_of_food'             ])) $serviceUsersProfile-> preferences_of_food              = $input[ 'preferences_of_food'               ];
+            if (isset($input[ 'bathing_times_per_week'          ])) $serviceUsersProfile-> bathing_times_per_week           = $input[ 'bathing_times_per_week'               ];
+
+
 
 
             if (isset($input[ 'other_behaviour'                         ])) $serviceUsersProfile-> other_behaviour                         = $input[ 'other_behaviour'                         ];
@@ -648,8 +670,10 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
             if (isset($input[ 'choosing_incontinence_products_detail'   ])) $serviceUsersProfile-> choosing_incontinence_products_detail   = $input[ 'choosing_incontinence_products_detail'   ];else $serviceUsersProfile->choosing_incontinence_products_detail =null;
             if (isset($input[ 'incontinence_products_stored'            ])) $serviceUsersProfile-> incontinence_products_stored            = $input[ 'incontinence_products_stored'            ];else $serviceUsersProfile->incontinence_products_stored =null;
             if (isset($input[ 'incontinence_wear_detail'                ])) $serviceUsersProfile-> incontinence_wear_detail                = $input[ 'incontinence_wear_detail'                ];else $serviceUsersProfile->incontinence_wear_detail =null;
+            if (isset($input[ 'dementia_detail'                         ])) $serviceUsersProfile-> dementia_detail                         = $input[ 'dementia_detail'                         ];else $serviceUsersProfile->dementia_detail =null;
+            if (isset($input[ 'preferences_of_food_requirements'        ])) $serviceUsersProfile-> preferences_of_food_requirements        = $input[ 'preferences_of_food_requirements'        ];else $serviceUsersProfile->preferences_of_food_requirements =null;
 
-//dd($input);
+
 
             if(isset($input['serviceUserCondition']))
                 $serviceUsersProfile->ServiceUserConditions()->sync(array_keys($input['serviceUserCondition']));

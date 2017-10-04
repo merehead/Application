@@ -428,7 +428,7 @@ a.blogFilter__item.active {
     /*
     если убрать этот индекс, до датапикеры в регистрации открываются под дивами для загрузки изображений
     */
-    z-index : 99!important;
+   /* z-index : 99!important;*/
 }
 
 .serviceUserTimeNeed {
@@ -602,7 +602,7 @@ label.correct2 {
   border: 1px solid #F44336;
 }
 
-.advantage_label i{
+.advantage_label i, .availability__item.availability__item--full i{
   color: #80cb2d;
 }
 .grid .userContainer{
@@ -625,5 +625,14 @@ label.correct2 {
     margin-left: auto;
 }
 
+.advantageColumn.advantageColumn--full-row{
+    width: 99%;
+    text-transform: uppercase;
+}
+
+
+
+
 .singleAppointment--progress .singleAppointment__header h2{background:#dfb815}
 .singleAppointment--new .singleAppointment__header h2{background:#80cb2d}
+
