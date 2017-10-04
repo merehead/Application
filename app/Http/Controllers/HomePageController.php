@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CarersProfile;
 use Illuminate\Http\Request;
 
 class HomePageController extends FrontController
@@ -27,6 +28,19 @@ class HomePageController extends FrontController
 
         $this->content = view(config('settings.frontTheme').'.homePage.homePage')->render();
 
+
+
+
         return $this->renderOutput();
     }
+
+    public function getTopCarers(){
+
+        return DB::select("SELECT cp.id, cp.first_name,cp.family_name,cp.sentence_yourself 
+FROM `carers_profiles` as cp
+WHERE 1 LIMIT 0,12");
+
+    }
+
+
 }
