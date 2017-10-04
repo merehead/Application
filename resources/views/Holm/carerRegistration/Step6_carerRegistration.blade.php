@@ -68,15 +68,15 @@
                 <div class="inputWrap">
 
                     @if($carersProfile->dbs_date === "01/01/1970")
-                        <input name="dbs_date" id="datepicker15" class="profileField__input" placeholder="dd/mm/yyyy" type="text">
+                        <input name="dbs_date" id="DBS_certificate_date" class="profileField__input" placeholder="dd/mm/yyyy" type="text">
                     @else
-                        {!! Form::text('dbs_date',null,['id'=>'datepicker15','class'=>'formInput','placeholder'=>'Date of certificate']) !!}
+                        {!! Form::text('dbs_date',null,['id'=>'DBS_certificate_date','class'=>'formInput','placeholder'=>'Date of certificate']) !!}
                     @endif
 
                 </div>
-                @if ($errors->has('DBS'))
+                @if ($errors->has('dbs_date'))
                     <span class="help-block">
-                                        <strong>{{ $errors->first('DBS') }}</strong>
+                                        <strong>{{ $errors->first('dbs_date') }}</strong>
                                     </span>
                 @endif
             </div>

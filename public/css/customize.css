@@ -423,13 +423,13 @@ a.blogFilter__item.active {
     border-radius: 50%;
 }
 
-#ui-datepicker-div, #datepicker_insurance, #datepicker_driver_licence {
+/*#ui-datepicker-div, #datepicker_insurance, #datepicker_driver_licence {
 
-    /*
+    !*
     если убрать этот индекс, до датапикеры в регистрации открываются под дивами для загрузки изображений
-    */
-   /* z-index : 99!important;*/
-}
+    *!
+   !* z-index : 99!important;*!
+}*/
 
 .serviceUserTimeNeed {
     padding-bottom: 7px;
