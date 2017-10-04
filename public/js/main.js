@@ -2118,4 +2118,10 @@ $(document).ready(function () {
       })
     })
 
+    // -- MASONRY -------
+    $('.grid').masonry({
+      itemSelector: '.grid .userContainer',
+      percentPosition: true
+    })
+
 });
