@@ -47,7 +47,7 @@
     });
 
 
-    $(function () {
+/*    $(function () {
         $("#datepicker15").datepicker({
             changeMonth: true,
             changeYear: true,
@@ -57,7 +57,7 @@
             maxDate: "-1D",
             yearRange: "-2:+2"
         });
-    });
+    });*/
 
     $(function () {
         $("#datepicker_when_start").datepicker({
@@ -71,28 +71,7 @@
         });
     });
 
-    $( function() {
-        $( "#datepicker_driver_licence" ).datepicker({
-            changeMonth: true,
-            changeYear: true,
-            dateFormat:"dd/mm/yy",
-            showAnim:"slideDown",
-            minDate: "+0D",
-            maxDate: "+50Y",
-            yearRange: "0:+50"
-        });
-    } );
-    $( function() {
-        $( "#datepicker_insurance" ).datepicker({
-            changeMonth: true,
-            changeYear: true,
-            dateFormat:"dd/mm/yy",
-            showAnim:"slideDown",
-            minDate: "+0D",
-            maxDate: "+50Y",
-            yearRange: "0:+50"
-        });
-    } );
+
     $(document).ready(function () {
 
         //alert($("#main-if").val());

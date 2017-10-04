@@ -916,12 +916,19 @@
                                     <div class="serviceRow serviceRow--forLabel">
 
                                         @foreach($behaviour as $beh)
+                                            @if($beh->name == 'other')
+                                                <p class="advantage_label">
+                                                    <i class="fa fa-check"></i>
+                                                {{$serviceUsers->other_behaviour}}
+                                                </p>
+                                            @else
                                             <div class="serviceColumn">
                                                 <p class="advantage_label">
                                                     <i class="fa fa-check"></i>
                                                     {{$beh->name}}
                                                 </p>
                                             </div>
+                                            @endif
                                         @endforeach
                                     </div>
                                 </div>

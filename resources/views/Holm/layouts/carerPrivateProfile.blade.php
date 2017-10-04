@@ -16,7 +16,7 @@
         window.open(href, '_blank').focus();
     });
 
-    $( function() {
+/*    $( function() {
         $( "#datepicker_driver_licence" ).datepicker({
             changeMonth: true,
             changeYear: true,
@@ -26,7 +26,7 @@
             maxDate: "+50Y",
             yearRange: "0:+50"
         });
-    } );
+    } );*/
     $( function() {
         $( ".datepicker_message" ).datepicker({
             changeMonth: true,
@@ -38,43 +38,7 @@
             yearRange: "0:+50"
         });
     } );
-//    $( function() {
-//        $( ".timepicker_message" ).timepicker({
-//            timeFormat: 'h:mm p',
-//            interval: 30,
-//            //minTime: '10',
-//            //maxTime: '6:00pm',
-//            //defaultTime: '18',
-//            startTime: '18:00',
-//            dynamic: true,
-//            dropdown: true,
-//            scrollbar: true
-//        });
-//    } );
 
-    $( function() {
-        $( "#datepicker_insurance" ).datepicker({
-            changeMonth: true,
-            changeYear: true,
-            dateFormat:"dd/mm/yy",
-            showAnim:"slideDown",
-            minDate: "+0D",
-            maxDate: "+50Y",
-            yearRange: "0:+50"
-        });
-    } );
-    $( function() {
-        $( "#datepicker_date_sertificate" ).datepicker({
-            changeMonth: true,
-            changeYear: true,
-            dateFormat:"dd/mm/yy",
-            showAnim:"slideDown",
-            minDate: "+0D",
-            maxDate: "+50Y",
-            yearRange: "0:+50",
-            ignoreReadonly:false
-        });
-    });
 
     $( document ).ready(function() {
 

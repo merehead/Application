@@ -119,11 +119,11 @@ From £ 12</span><span class="hourPrice__timing">/hour</span>
             </div>
             <div class="singleReview__rate">
                 <div class="profileRating ">
+                    <span class="profileRating__item {{($review->raiting>=0)? ' active' : '' }}"><i class="fa fa-heart"></i></span>
                     <span class="profileRating__item {{($review->raiting>=1)? ' active' : '' }}"><i class="fa fa-heart"></i></span>
                     <span class="profileRating__item {{($review->raiting>=2)? ' active' : '' }}"><i class="fa fa-heart"></i></span>
                     <span class="profileRating__item {{($review->raiting>=3)? ' active' : '' }}"><i class="fa fa-heart"></i></span>
                     <span class="profileRating__item {{($review->raiting>=4)? ' active' : '' }}"><i class="fa fa-heart"></i></span>
-                    <span class="profileRating__item {{($review->raiting>=5)? ' active' : '' }}"><i class="fa fa-heart"></i></span>
                 </div>
                 <!--  <p class="hourPrice">
                 <span class="hourPrice__price hourPrice__price--review">
