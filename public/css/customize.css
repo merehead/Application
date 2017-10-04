@@ -428,7 +428,7 @@ a.blogFilter__item.active {
     /*
     если убрать этот индекс, до датапикеры в регистрации открываются под дивами для загрузки изображений
     */
-    z-index : 99!important;
+   /* z-index : 99!important;*/
 }
 
 .serviceUserTimeNeed {
