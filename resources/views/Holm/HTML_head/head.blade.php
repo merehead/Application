@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="{{asset('css/main.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/customize.css')}}">
+    <link rel="stylesheet" href="{{asset('css/main2.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/cupertino/jquery-ui.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('css/owl.carousel.css')}}">

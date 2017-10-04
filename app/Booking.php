@@ -78,7 +78,7 @@ class Booking extends Model
     public function getPurchaserRateAttribute(){
         return 13;
     }
-
+ 
     public function getHoursAttribute(){
         $hours = 0;
         $appointments = $this->appointments()->get();

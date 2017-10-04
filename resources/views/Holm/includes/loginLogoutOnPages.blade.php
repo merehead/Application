@@ -107,19 +107,11 @@
 
 @else
 
-
-
     <div class="loginBox">
-        <a href="/login" class=" centeredLink loginBox__link"
-           data-toggle="modal" data-target="#login"
-                {{--onclick="event.preventDefault();document.getElementById('login').style.display = 'block';"--}}
-        >
+        <a href="/login" class=" centeredLink loginBox__link" data-toggle="modal" data-target="#login">
             Login
         </a>
-        <a href="/" id="sign_up_button" class=" centeredLink loginBox__link loginBox__link--active"
-           data-toggle="modal" data-target="#signUpdiv"
-                {{--onclick="event.preventDefault();document.getElementById('sign_up_div').style.display = 'block';"--}}
-        >
+        <a href="/" id="sign_up_button" class=" centeredLink loginBox__link loginBox__link--active" data-toggle="modal" data-target="#signUpdiv">
             Sign up
         </a>
     </div>
