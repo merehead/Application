@@ -23,6 +23,7 @@
         function geocodeAddress(geocoder, resultsMap) {
             var addr = ($('input[name="address_line1"]').val()!='не указан')?$('input[name="address_line1"]').val():'';
             var address = $('input[name="town"]').val()+' '+ addr;
+
             geocoder.geocode({'address': address}, function(results, status) {
                 if (status === 'OK') {
                     resultsMap.setCenter(results[0].geometry.location);

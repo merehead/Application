@@ -1,13 +1,68 @@
 <link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">
 <script src="/js/jquery-ui-timepicker-addon.js"></script>
 <script>
+    function resizeMap()
+    {
+        google.maps.event.trigger(map,'resize');
+        map.setZoom( map.getZoom() );
+    }
     $(document).ready(function () {
-        map = new google.maps.Map(document.getElementById('map_canvas'), {
-            zoom: 17,
-            center: {lat: -34.397, lng: 150.644}
+
+        $('.needCare__item').on('click',function(){
+            map = new google.maps.Map(document.getElementById('map_canvas_booking'), {
+                zoom: 17,
+                center: {lat: -34.397, lng: 150.644}
+            });
+            var geocoder = new google.maps.Geocoder();
+           var that = $(this).find('input');
+            var addr = $(that).attr('data_address_line1');
+            var address = $(that).attr('data-town')+' '+ addr;
+            geocoder.geocode({'address': address}, function(results, status) {
+                if (status === 'OK') {
+                    if(marker)marker.setMap(null);
+                    marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                    map.setCenter(results[0].geometry.location);
+                    resizeMap();
+                    $('.profileMap').show();
+                } else {
+                    $('.fieldCategory').after('<div class="alert alert-warning alert-dismissable fade in">\n' +
+                        '    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
+                        '    <strong>Warning!</strong> You entered an incorrect address. Please enter your real address.\n' +
+                        '  </div>')
+                    //alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+
         });
-        var geocoder = new google.maps.Geocoder();
-        geocodeAddress(geocoder, map);
+
+//        $(document).on('show.bs.modal','#message-carer', function() {
+//
+//            var addr = $('input[name="service_user_id"]').first().attr('data_address_line1');
+//            var address = $('input[name="service_user_id"]').first().attr('data-town')+' '+ addr;
+//            google.maps.event.trigger(map, 'resize');
+//            geocoder.geocode({'address': address}, function(results, status) {
+//                if (status === 'OK') {
+//
+//                    if(marker)marker.setMap(null);
+//                    marker = new google.maps.Marker({
+//                        map: map,
+//                        position: results[0].geometry.location
+//                    });
+//                    map.setCenter(results[0].geometry.location);
+//                    resizeMap();
+//                    //$('.profileMap').show();
+//                } else {
+//                    $('.fieldCategory').after('<div class="alert alert-warning alert-dismissable fade in">\n' +
+//                        '    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
+//                        '    <strong>Warning!</strong> You entered an incorrect address. Please enter your real address.\n' +
+//                        '  </div>')
+//                    //alert('Geocode was not successful for the following reason: ' + status);
+//                }
+//            });
+//        });
         $carer_profile.find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
         $carer_profile.find('input[type="text"]').attr("readonly", false).removeClass('profileField__input--greyBg');
     });
@@ -26,8 +81,8 @@
             </div>
             <form id="bookings__form" method="POST" action="/bookings">
                 <input type="hidden" name="carer_id" value="{{$carerProfile->id}}">
-                <input type="hidden" name="town" value="{{$carerProfile->town}}">
-                <input type="hidden" name="address_line1" value="{{$carerProfile->address_line1}}">
+                {{--<input type="hidden" name="town" value="{{$carerProfile->town}}">--}}
+                {{--<input type="hidden" name="address_line1" value="{{$carerProfile->address_line1}}">--}}
                 {{csrf_field()}}
 
                 <div class="message__body">
@@ -54,7 +109,8 @@
                                                            class="needCare__item centeredLink btn btn-default">
                                                             {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
                                                             <input type="radio" id="q{{$serviceUser->id}}"
-                                                                   name="service_user_id"
+                                                                   name="service_user_id" data-town="{{$serviceUser->town}}"
+                                                                   data_address_line1="{{$serviceUser->address_line1}}"
                                                                    value="{{$serviceUser->id}}" {{$i == 1 ? 'checked' : ''}}/>
                                                         </a>
                                                     @endif
@@ -63,9 +119,7 @@
                                                 @endif
                             </div>
                             <div class="messageMap map">
-                                <div class="profileMap map" style="width:100%;height:200px">
-                                    <div id="map_canvas" style="clear:both; height:200px;"></div>
-                                </div>
+                                <div id="map_canvas_booking" style="clear:both;width: 370px; height:200px;overflow:visible;"></div>
                             </div>
                         </div>
                     </div>
@@ -148,6 +202,12 @@
                                            class="customCheckbox periodicity weekly"
                                            id="boxD2">
                                     <label for="boxD2">weekly</label>
+                                </div>
+                                <div class="checkBox_item">
+                                    <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single"
+                                           class="customCheckbox periodicity Single"
+                                           id="boxD3">
+                                    <label for="boxD3">Single</label>
                                 </div>
                                 <label class="checkBox_item correct nhide" for="date_end">Continue until</label>
                                 <div class="messageInputs__field messageDate nhide">

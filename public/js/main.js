@@ -1023,7 +1023,13 @@ $(document).ready(function () {
             $(form).find('.Daily').attr('disabled',false);
         }
     });
-
+    $(document).on('click','.Single',function(){
+        var that = $(this);
+        var datetime = $(that).parent().parent().find('.datepicker_message');
+        var label = $(that).parent().parent().find('.correct');
+        $(datetime).parent().hide();
+        $(label).hide();
+    });
     $(document).on('click','.weekly',function(){
         var that = $(this);
         var datetime = $(that).parent().parent().find('.datepicker_message');
