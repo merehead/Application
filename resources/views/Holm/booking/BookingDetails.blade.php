@@ -200,6 +200,12 @@
                                     completed
                                 </button>
                             </div>
+                        @elseif($booking->status_id == 7)
+                            <div class="roundedBtn">
+                                <button {{$booking->overviews()->get()->count() ? 'disabled' : ''}} onclick="location.replace('{{url('/bookings/'.$booking->id.'/leave_review')}}')" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--forReview">
+                                    leave review
+                                </button>
+                            </div>
                         @endif
                     @endif
                 </div>
@@ -273,11 +279,12 @@
                                     #{{$i}}
                                   </span>
                                     <h2>
-                                        {{in_array($appointment->status_id, [1]) ? 'new' : ''}}
                                         {{in_array($appointment->status_id, [4]) ? 'completed' : ''}}
                                         {{in_array($appointment->status_id, [5]) ? 'rejected' : ''}}
-                                        {{in_array($appointment->status_id, [2]) ? 'in progress' : ''}}
                                         {{in_array($appointment->status_id, [3]) ? 'in dispute' : ''}}
+                                        @if(in_array($appointment->status_id, [1, 2]))
+                                            {{$appointment->is_past ? 'in progress' : 'new'}}
+                                        @endif
                                     </h2>
                                 </div>
                                 <div class="singleAppointment__body">
