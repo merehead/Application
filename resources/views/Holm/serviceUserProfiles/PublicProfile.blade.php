@@ -1,4 +1,3 @@
-
 <script>
     $(document).ready(function () {
         var geocoder = new google.maps.Geocoder();
@@ -137,8 +136,9 @@
                     <h2 class="profileTitle">
                         health
                     </h2>
-                    <div class="row">
-                        <div class="col-sm-6">
+                    <div class="grid">
+                    <!-- <div class="row"> -->
+                        <!-- <div class="col-sm-6"> -->
 
 
 
@@ -328,10 +328,10 @@
                                 </div>
                                     @endif
                             </div>
-                        </div>
+                        <!-- </div> -->
 
 
-                        <div class="col-sm-6">
+                        <!-- <div class="col-sm-6"> -->
                             <div class="userContainer" {!!  ($serviceUsersProfile->assistance_in_medication == 'No' || is_null($serviceUsersProfile->assistance_in_medication) )? ' style="display:none"' : ''!!}>
                                 <h2 class="ordinaryTitle">
                                     <span class="ordinaryTitle__text">Medication</span>
@@ -638,7 +638,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
                     </div>
                 </div>
 
@@ -675,8 +675,9 @@
                         <h2 class="profileTitle">
                             home
                         </h2>
-                        <div class="row">
-                            <div class="col-sm-6">
+                        <div class="grid">
+                          <!-- <div class="row"> -->
+                            <!-- <div class="col-sm-6"> -->
                                 <div class="userContainer">
                                     <div class="serviceRow">
                                         <div class="serviceColumn serviceColumn--midSize">
@@ -820,9 +821,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <!-- </div> -->
 
-                            <div class="col-sm-6">
+                            <!-- <div class="col-sm-6"> -->
 
                                 @if(!$restrictedAccess)
                                     <div class="userContainer" {!! (strlen($serviceUsers->carer_enter)==0)? ' style="display:none"' : ''!!}>
@@ -895,7 +896,7 @@
                                 </div>
 
 
-                            </div>
+                            <!-- </div> -->
                         </div>
                     </div>
 

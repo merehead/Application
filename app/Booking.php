@@ -96,6 +96,15 @@ class Booking extends Model
             return 13;
     }
 
+    public function getPriceAttribute(){
+        $price = 0;
+        $appointments = $this->appointments()->get();
+        foreach ($appointments as $appointment)
+            $price += $appointment->price;
+
+        return $price;
+    }
+
     public function getCarerAmountAttribute(){
         return $this->hours * $this->purchaser_rate;
     }

@@ -76,7 +76,7 @@
                             <div class="bookInfo__date">
                                 <span class="bookDate">{{$booking->appointments()->get()->count()}} Appointment{{$booking->appointments()->get()->count() > 1 ? 's':''}}</span>
                                 <p class="hourPrice">
-                                    {{$booking->hours}}h / <span>£{{$booking->hour_price * $booking->hours}}</span>
+                                    {{$booking->hours}}h / <span>£{{$booking->price}}</span>
 
                                 </p>
                             </div>
@@ -127,7 +127,7 @@
                             <div class="bookInfo__date">
                                 <span class="bookDate">{{$booking->appointments()->get()->count()}} Appointment{{$booking->appointments()->get()->count() > 1 ? 's':''}}</span>
                                 <p class="hourPrice">
-                                    {{$booking->hours}}h / <span>£{{$booking->hour_price * $booking->hours}}</span>
+                                    {{$booking->hours}}h / <span>£{{$booking->price}}</span>
 
                                 </p>
                             </div>
@@ -183,7 +183,7 @@
                                 <div class="bookInfo__date">
                                     <span class="bookDate">{{$booking->appointments()->get()->count()}} Appointment{{$booking->appointments()->get()->count() > 1 ? 's':''}}</span>
                                     <p class="hourPrice">
-                                        {{$booking->hours}}h / <span>£{{$booking->hour_price * $booking->hours}}</span>
+                                        {{$booking->hours}}h / <span>£{{$booking->price}}</span>
                                     </p>
                                     <div class="roundedBtn">
                                         <a href="/bookings/{{$booking->id}}/leave_review" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--forReview">
@@ -227,7 +227,7 @@
                                 <div class="bookInfo__date">
                                     <span class="bookDate">{{$booking->appointments()->get()->count()}} Appointment{{$booking->appointments()->get()->count() > 1 ? 's':''}}</span>
                                     <p class="hourPrice">
-                                        {{$booking->hours}}h / <span>£{{$booking->hour_price * $booking->hours}}</span>
+                                        {{$booking->hours}}h / <span>£{{$booking->price}}</span>
                                     </p>
                                 </div>
                             </div>

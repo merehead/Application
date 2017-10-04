@@ -30,7 +30,7 @@
 <div class="profilePricing">
     <p class="hourPrice hourPrice">
 <span class="hourPrice__price hourPrice__price--big">
-From £ {{random_int(8,15)}}</span><span class="hourPrice__timing">/hour</span>
+From £ 12</span><span class="hourPrice__timing">/hour</span>
     </p>
     @if(Auth::check())
 {{--todo карер не может себе создавать букинг, ТУТ ЧТО-ТО НЕ ТО --}}

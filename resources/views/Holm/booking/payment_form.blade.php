@@ -95,7 +95,7 @@
                            £{{$user->bonus_balance}}
                          </span>
                          <span class="bonusPay__label">
-                           £{{$user->bonus_balance - $booking->hour_price * $booking->hours}}
+                           £{{$user->bonus_balance - $booking->price}}
                          </span>
                        </div>
 
@@ -130,7 +130,7 @@
                                 {{$booking->hours}} Hour{{($booking->hours > 1 ? 's' : '')}}
                             </p>
                             <p class="paymentTotal__value">
-                                £{{$booking->hour_price * $booking->hours}}
+                                £{{$booking->price}}
                             </p>
                         </div>
 
