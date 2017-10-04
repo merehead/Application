@@ -35,7 +35,8 @@ function carerSearchAjax(){
     var form = $('#carerSearchForm');
     //$(form).submit();
     var token = $(form).find('input[name=_token]').val();
-    $('.result').remove();
+    if($('#load-more').val()==0)
+        $('.carer-result').empty();
     $('#loader-search').show();
     $('.error-text').hide();
     $('.moreBtn__item').hide();
@@ -48,12 +49,16 @@ function carerSearchAjax(){
         dataType: "json",
         success: function (response) {
             console.log(response);
-            $('.result').remove();
+            if($('#load-more').val()==0)
+                $('.carer-result').empty();
             $('#loader-search').hide();
             if (response.success == true) {
-                $('#loader-search').after(response.html);
+                $('.carer-result').append(response.html);
                 $('.Paginator').html(response.htmlHeader);
                 $('.moreBtn__item').show();
+                if(response.id==0)$('.moreBtn__item').hide();
+                $('#load-more').val(0);
+                $('#id-carer').val(response.id);
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -1300,7 +1305,12 @@ $(document).ready(function () {
 
     $('.sliderControl').on('click', function (e) {
       e.preventDefault()
-    })
+    });
+
+    $('.moreLink').on('click', function (e) {
+        $('#load-more').val(1);
+        carerSearchAjax();
+    });
 
     /*-------------- Home page slider (popular carers) ------------*/
     if ($('div').is('.appointmentSlider')) {

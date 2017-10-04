@@ -636,3 +636,7 @@ label.correct2 {
 .singleAppointment--progress .singleAppointment__header h2{background:#dfb815}
 .singleAppointment--new .singleAppointment__header h2{background:#80cb2d}
 
+.advantageColumn {
+    width: 50%;
+    text-transform: uppercase;
+}

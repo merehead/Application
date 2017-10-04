@@ -21,7 +21,7 @@
             <div class="justifyContainer">
                 <h2 class="profileName profileName--biger"><a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}"> {{$carerProfile->first_name}} {{$carerProfile->family_name}}</a></h2>
                 <p class="hourPrice hourPrice">
-                    <span class="hourPrice__price"> £ 12</span>
+                    <span class="hourPrice__price">From £ 12</span>
                     <span class="hourPrice__timing">/hour</span>
                 </p>
             </div>
