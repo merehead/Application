@@ -671,6 +671,81 @@ $(document).ready(function () {
 
     });
 
+    $(document).on('change', '.move_available_switcher',function () {
+
+        if ($(this).val() == 'Yes') {
+            $(".depend_from_move_available").hide();
+        }
+        else  {
+            $(".depend_from_move_available").show();
+        }
+
+    });
+    $(document).on('change', '.other_detail_switcher',function () {
+
+        if ($(this).val() == 'Yes') {
+            $(".depend_from_entering_aware").slideDown("slow");
+        }
+        else  {
+            $(".depend_from_entering_aware").slideUp();
+        }
+
+    });
+    $(document).on('change', '.assistance_keeping_switcher',function () {
+
+        if ($(this).val() == 'Yes') {
+            $(".depend_from_home_safe").hide();
+        }
+        else  {
+            $(".depend_from_home_safe").show();
+        }
+
+    });
+
+    $(document).on('change', '.toilet_switcher',function () {
+
+        if ($(this).val() != 'No') {
+            $(".depend_from_managing_toilet_needs").slideDown("slow");
+        }
+        else  {
+            $(".depend_from_managing_toilet_needs").slideUp();
+        }
+
+    });
+
+    $(document).on('change', '.incontinence_switcher',function () {
+
+        if ($(this).val() != 'No') {
+            $(".depend_from_have_incontinence").slideDown("slow");
+        }
+        else  {
+            $(".depend_from_have_incontinence").slideUp();
+        }
+
+    });
+
+    $(document).on('change', '.consent_switcher',function () {
+
+        if ($(this).val() != 'No') {
+            $(".depend_from_consent").slideDown("slow");
+        }
+        else  {
+            $(".depend_from_consent").slideUp();
+        }
+
+    });
+
+    $(document).on('change', '.toilet_at_night_selector',function () {
+
+        if ($(this).val() != 'No') {
+            $(".toilet_at_night_depend").slideDown("slow");
+        }
+        else  {
+            $(".toilet_at_night_depend").slideUp();
+        }
+
+    });
+
     $("input[name='languages[12]']").change(function () {
         if (this.checked) {
             $(".otherLanguages").slideDown("slow");

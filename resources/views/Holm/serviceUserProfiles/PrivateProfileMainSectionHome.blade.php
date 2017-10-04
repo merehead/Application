@@ -49,14 +49,14 @@
             <h2 class="profileField__title ordinaryTitle"><span
                         class="ordinaryTitle__text ordinaryTitle__text--smaller">Can keep the home safe and clean by themself</span>
             </h2>
-            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select'];
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select assistance_keeping_switcher'];
             if (is_null($serviceUsersProfile->home_safe)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('home_safe',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
             @if ($errors->has('home_safe'))
                 <span class="help-block"><strong>{{ $errors->first('home_safe') }}</strong></span>
             @endif
         </div>
-        <div class="profileField">
+        <div class="profileField depend_from_home_safe" {!!  ($serviceUsersProfile->home_safe == 'Yes' || is_null($serviceUsersProfile->home_safe) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span
                         class="ordinaryTitle__text ordinaryTitle__text--smaller">Requires assistance keeping the home safe and clean</span>
             </h2>
@@ -67,38 +67,31 @@
                 <span class="help-block"> <strong>{{ $errors->first('assistance_keeping') }}</strong> </span>
             @endif
         </div>
-        <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle"><span
-                        class="ordinaryTitle__text ordinaryTitle__text--smaller">Requires assistance moving around home</span>
-            </h2>
-            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select'];
-            if (is_null($serviceUsersProfile->move_available)) $atrr['placeholder'] = 'Please select';?>
-            {!! Form::select('move_available',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
-            @if ($errors->has('move_available'))
-                <span class="help-block"><strong>{{ $errors->first('assistance_keeping') }}</strong></span>
-            @endif
-        </div>
+
     </div>
-    <div class="profileRow">
+    <div class="profileRow " >
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span
                         class="ordinaryTitle__text ordinaryTitle__text--smaller">Can move around home safely by themself</span>
             </h2>
-            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select  move_available_switcher'];
             if (is_null($serviceUsersProfile->assistance_moving)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('assistance_moving',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
             @if ($errors->has('assistance_moving'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_moving') }}</strong></span>
             @endif
         </div>
-{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_moving == 'No' || is_null($serviceUsersProfile->assistance_moving) )? ' style="display:none"' : ''!!}>
+        <div class="profileField depend_from_move_available" {!!  ($serviceUsersProfile->move_available == 'Yes' || is_null($serviceUsersProfile->move_available) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span
-                        class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('assistance_moving_details',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"250"]) !!}
-            @if ($errors->has('assistance_moving_details'))
-                <span class="help-block"><strong>{{ $errors->first('assistance_moving_details') }}</strong></span>
+                        class="ordinaryTitle__text ordinaryTitle__text--smaller">Requires assistance moving around home</span>
+            </h2>
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select move_available_switcher'];
+            if (is_null($serviceUsersProfile->move_available)) $atrr['placeholder'] = 'Please select';?>
+            {!! Form::select('move_available',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
+            @if ($errors->has('move_available'))
+                <span class="help-block"><strong>{{ $errors->first('assistance_keeping') }}</strong></span>
             @endif
-        </div>--}}
+        </div>
     </div>
 </div>
 <div class="borderContainer">
@@ -116,14 +109,26 @@
 <div class="borderContainer">
     <h2 class="fieldCategory">Other home information</h2>
     <div class="profileRow">
-        <div class="profileField profileField--full-width">
+        <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Is there anything else the Carer should be aware of when entering the home?</span></h2>
-            {!! Form::textarea('other_detail',null,['class'=>'formArea ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile other_detail_switcher'];
+            if (is_null($serviceUsersProfile->entering_aware)) $atrr['placeholder'] = 'Please select';?>
+            {!! Form::select('entering_aware',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
+            @if ($errors->has('entering_aware'))
+                <span class="help-block"><strong>{{ $errors->first('entering_aware') }}</strong></span>
+            @endif
+        </div>
+    </div>
+    <div class="profileRow depend_from_entering_aware" {!!  ($serviceUsersProfile->entering_aware == 'No' || is_null($serviceUsersProfile->entering_aware) )? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--full-width ">
+            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">PLEASE, GIVE DETAILS </span></h2>
+            {!! Form::textarea('other_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('other_detail'))
                 <span class="help-block"><strong>{{ $errors->first('other_detail') }}</strong></span>
             @endif
         </div>
     </div>
+
 </div>
 <div class="borderContainer">
     <h2 class="fieldCategory">Other inhabitants</h2>
