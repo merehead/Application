@@ -1,5 +1,5 @@
 <div id="signUpdiv" class="modal fade" role="dialog">
-    <div class="login" style="position:fixed; top:20%; left:40%; ">
+    <div class="login" style="position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
         <div class="login__header">
             <h2>Are You</h2>
             {{--        <a href="/close" class="closeModal"
@@ -21,7 +21,8 @@
     </div>
 </div>
 <div id="login" class="modal fade" role="dialog">
-    <div class="login" style="position: fixed; top:20%; left:40%; ">
+    <div class="login" style="position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
+
         <div class="login__header">
             <h2>login</h2>
             {{--        <a href="/close" class="closeModal"

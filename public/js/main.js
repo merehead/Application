@@ -328,6 +328,14 @@ function scale(block) {
 // -- Document events ---------------
 $(document).ready(function () {
 
+    /*-------mob menu----------*/
+
+    $('.xsNav').click(function(e){
+        e.preventDefault();
+        $('.collapseBox').toggleClass('active');
+        $('body').toggleClass('no-scrolling');
+
+    });
 
 //
 //     $('#timepicker1').timepicker({

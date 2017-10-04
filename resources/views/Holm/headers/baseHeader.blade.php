@@ -1,25 +1,15 @@
 <header class="header">
+
     <div class="container">
         <div class="headerContainer">
-            <a href="\" class="themeLogo">
-            </a>
-            <a href="\" class="xsNav">
-        <span class="">
-          <i class="fa fa-navicon"></i>
-        </span>
-            </a>
+            <a href="\" class="themeLogo"></a>
+            <a href="\" class="xsNav"><span class=""><i class="fa fa-navicon"></i></span></a>
             <div class="collapseBox">
-                <a href="{{ route('welcomeCarer') }}" class="carerSelf">
-                    i am a carer
-                </a>
+                <a href="{{ route('welcomeCarer') }}" class="carerSelf">i am a carer</a>
                 <div class="headerNav_container">
                     <div class="headerNav">
-                        <a href="{{route('searchPage')}}" class="headerNav__link">
-                            find a carer
-                        </a>
-                        <a href="{{route('AboutPage')}}" class="headerNav__link">
-                            about us
-                        </a>
+                        <a href="{{route('searchPage')}}" class="headerNav__link">find a carer</a>
+                        <a href="{{route('AboutPage')}}" class="headerNav__link">about us</a>
                     </div>
                     <div class="headerSocial">
                         <a href="https://www.facebook.com/HolmCareUK/" class="centeredLink headerSocial__link headerSocial__link--facebook">
@@ -30,10 +20,12 @@
                         </a>
                     </div>
                     @if (Route::has('login'))
+{{--
                         <div class="top-right links">
-                        {{--@include(config('settings.frontTheme').'.includes.loginOnPages')--}}
+--}}
+                       {{-- <div class="loginBox">--}}
                             @include(config('settings.frontTheme').'.includes.loginLogoutOnPages')
-                        </div>
+                       {{-- </div>--}}
                     @endif
                 </div>
             </div>
