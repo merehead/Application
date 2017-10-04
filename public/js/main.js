@@ -939,6 +939,7 @@ $(document).ready(function () {
         var currentLength = $( this ).val().length;
         var symbolsLeft = maxLenght - currentLength;
         $( this ).before('<span class="help-block" style="margin: 0;padding: 0;color: green">Characters remaining ('+currentLength+'/'+maxLenght+')</span>');
+        $(this).next("span").css("top", "28px");
     });
     $( "textarea, .countable" ).keyup(function() {
         var maxLenght = $( this ).attr('maxlength');
@@ -948,6 +949,7 @@ $(document).ready(function () {
     });
     $("textarea, .countable").focusout(function () {
         $(this).prev("span").remove();
+        $(this).next("span").css("top", "12px");
     });
 
 //^^^^^^^Иван 20170922 для регистрации профиля пользователя
