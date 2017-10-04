@@ -6,6 +6,8 @@ use App\Interfaces\Constants;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Auth;
+use App\Holiday;
+use DB;
 
 class Appointment extends Model implements Constants
 {
@@ -100,7 +102,7 @@ class Appointment extends Model implements Constants
         if ($this->isDayHoliday($date)) {
             return constant('self::'.$userType.'_RATE_HOLIDAYS');
         } elseif($this->isHourNight($hour)){
-            return constant('self::'.$userType.'_RATE_DAY');
+            return constant('self::'.$userType.'_RATE_NIGHT');
         } else {
             return constant('self::'.$userType.'_RATE_DAY');
         }
@@ -124,6 +126,10 @@ class Appointment extends Model implements Constants
     } 
 
     private function isDayHoliday($date){
-        return false;
+        $dt = Carbon::parse($date);
+        $sql = 'SELECT * FROM holidays WHERE  date >= \''.$dt->format("Y-m-d").'\' AND date < \''.$dt->addDays(1)->format("Y-m-d").'\'';
+        $res = DB::select($sql);
+
+        return $dt->dayOfWeek == 0 || $dt->dayOfWeek == 6 || count($res) > 0;
     }
 }
