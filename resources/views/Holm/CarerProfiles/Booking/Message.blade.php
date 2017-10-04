@@ -209,8 +209,9 @@
                                            id="boxD3">
                                     <label for="boxD3">Single</label>
                                 </div>
-                                <label class="checkBox_item correct nhide" for="date_end">Continue until</label>
-                                <div class="messageInputs__field messageDate nhide">
+                                <br>
+                                <label class="checkBox_item ordinaryTitle correct nhide" for="date_end">Continue until</label>
+                                <div class="messageInputs__field messageDate correct3 nhide">
                                     <input type="text" class="messageInput datepicker datepicker_message" id="date_end"
                                            name="bookings[0][appointments][0][date_end]" placeholder=" 08.08.2017">
                                     <a href="#" class="messageIco centeredLink">
