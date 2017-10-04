@@ -200,6 +200,12 @@
                                     completed
                                 </button>
                             </div>
+                        @elseif($booking->status_id == 7)
+                            <div class="roundedBtn">
+                                <button {{$booking->overviews()->get()->count() ? 'disabled' : ''}} onclick="location.replace('{{url('/bookings/'.$booking->id.'/leave_review')}}')" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--forReview">
+                                    leave review
+                                </button>
+                            </div>
                         @endif
                     @endif
                 </div>
@@ -273,11 +279,12 @@
                                     #{{$i}}
                                   </span>
                                     <h2>
-                                        {{in_array($appointment->status_id, [1]) ? 'new' : ''}}
                                         {{in_array($appointment->status_id, [4]) ? 'completed' : ''}}
                                         {{in_array($appointment->status_id, [5]) ? 'rejected' : ''}}
-                                        {{in_array($appointment->status_id, [2]) ? 'in progress' : ''}}
                                         {{in_array($appointment->status_id, [3]) ? 'in dispute' : ''}}
+                                        @if(in_array($appointment->status_id, [1, 2]))
+                                            {{$appointment->is_past ? 'in progress' : 'new'}}
+                                        @endif
                                     </h2>
                                 </div>
                                 <div class="singleAppointment__body">
@@ -413,12 +420,18 @@
         }, callback);
 
       function callback(response, status) {
-        console.log(response)
-        // convert km to miles
-        var convert = parseInt(response.rows[0].elements[0].distance.text)*0.62137;
+        console.log(response.rows[0].elements[0].status)
+        if(response.rows[0].elements[0].status === 'OK'){
+          // convert km to miles
+          var convert = parseInt(response.rows[0].elements[0].distance.text)*0.62137;
 
-        $('#distance').html(convert.toFixed(3) + ' (miles)');
-        $('#duration').html(response.rows[0].elements[0].duration.text);
+          $('#distance').html(convert.toFixed(3) + ' (miles)');
+          $('#duration').html(response.rows[0].elements[0].duration.text);
+        }
+        if(response.rows[0].elements[0].status === 'NOT_FOUND'){
+          $('#distance').html('(not found)');
+          $('#duration').html('(not found)');
+        }
       }
     }
 
@@ -433,7 +446,7 @@
     }
 
     function codeAddress() {
-      var address = '{{$carerProfile->address_line2}}';
+      var address = '{{$carerProfile->address_line1}}';
       geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == 'OK') {
           map.setCenter(results[0].geometry.location);

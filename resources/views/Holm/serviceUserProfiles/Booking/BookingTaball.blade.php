@@ -166,9 +166,9 @@
                                         {{$booking->hours}}h / <span>£{{$booking->price}}</span>
                                     </p>
                                     <div class="roundedBtn">
-                                        <a href="/bookings/{{$booking->id}}/leave_review" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--forReview">
+                                        <button {{$booking->overviews()->get()->count() ? 'disabled' : ''}} onclick="location.replace('{{url('/bookings/'.$booking->id.'/leave_review')}}')" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--forReview">
                                             leave review
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

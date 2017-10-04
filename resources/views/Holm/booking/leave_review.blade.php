@@ -148,10 +148,10 @@
                     </div>
 
                     <form class="reviewForm" method="post" action="/bookings/{{$booking->id}}/review">
-                        <input type="hidden" name="punctuality" value="5">
-                        <input type="hidden" name="friendliness" value="4">
-                        <input type="hidden" name="communication" value="3">
-                        <input type="hidden" name="performance" value="2">
+                        <input type="hidden" name="punctuality" value="1">
+                        <input type="hidden" name="friendliness" value="1">
+                        <input type="hidden" name="communication" value="1">
+                        <input type="hidden" name="performance" value="1">
                         <div class="formField">
                             <textarea class="formArea formArea--review " placeholder="Type your comment" name="comment" maxlength="150"></textarea>
 
