@@ -413,12 +413,18 @@
         }, callback);
 
       function callback(response, status) {
-        console.log(response)
-        // convert km to miles
-        var convert = parseInt(response.rows[0].elements[0].distance.text)*0.62137;
+        console.log(response.rows[0].elements[0].status)
+        if(response.rows[0].elements[0].status === 'OK'){
+          // convert km to miles
+          var convert = parseInt(response.rows[0].elements[0].distance.text)*0.62137;
 
-        $('#distance').html(convert.toFixed(3) + ' (miles)');
-        $('#duration').html(response.rows[0].elements[0].duration.text);
+          $('#distance').html(convert.toFixed(3) + ' (miles)');
+          $('#duration').html(response.rows[0].elements[0].duration.text);
+        }
+        if(response.rows[0].elements[0].status === 'NOT_FOUND'){
+          $('#distance').html('(not found)');
+          $('#duration').html('(not found)');
+        }
       }
     }
 
@@ -433,7 +439,7 @@
     }
 
     function codeAddress() {
-      var address = '{{$carerProfile->address_line2}}';
+      var address = '{{$carerProfile->address_line1}}';
       geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == 'OK') {
           map.setCenter(results[0].geometry.location);
