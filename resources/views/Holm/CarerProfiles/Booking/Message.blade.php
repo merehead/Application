@@ -159,8 +159,8 @@
 
                                 <div class="messageInputs__field messageTime ">
                                     <input type="text" class="messageInput timepicker_message" id="time_to_from"
-                                           name="bookings[0][appointments][0][time_from]" placeholder="{{date('g:i')}}"
-                                           value="{{date('g:i')}}">
+                                           name="bookings[0][appointments][0][time_from]" placeholder="1:30 PM"
+                                           value="1:30 PM">
                                     <a href="#" class="messageIco centeredLink">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </a>
@@ -177,8 +177,8 @@
                                 <label class="checkBox_item correct2" for="date_end">End</label>
                                 <div class="messageInputs__field messageTime ">
                                     <input type="text" class="messageInput timepicker_message" id="time_to_bed"
-                                           name="bookings[0][appointments][0][time_to]" placeholder="{{date('g:i')}}"
-                                           value="{{date('g:i')}}">
+                                           name="bookings[0][appointments][0][time_to]" placeholder="3:30 PM"
+                                           value="3:30 PM">
                                     <a href="#" class="messageIco centeredLink">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </a>
