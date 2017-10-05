@@ -69,7 +69,7 @@
                                     : route('ServiceUserSetting',['id'=>$serviceUser->id])}}"
                                    class="dropdownUser__item">
                                     <div class="profilePhoto dropdownUser__img">
-                                        <img class="profile_photo_service_user" src="/img/service_user_profile_photos/{{$serviceUser->id}}.png" onerror="this.src='/img/no_photo.png'" alt="">
+                                        <img id="pf-{{$serviceUser->id}}" class="profile_photo_service_user" src="/img/service_user_profile_photos/{{$serviceUser->id}}.png" onerror="this.src='/img/no_photo.png'" alt="">
                                     </div>
                                     <h2 class="profileName">
                                         {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
