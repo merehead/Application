@@ -211,12 +211,42 @@ class BookingsController extends FrontController implements Constants
                     'purchaser_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
                 ]);
             //todo Отправить мыло
+            try {
+                Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
+                    ['user' => $user],
+                    function ($m) use ($user) {
+                        $m->to($user->email)->subject('Canceled booking');
+                    });
+            } catch (Swift_TransportException $STe) {
+
+                $error = MailError::create([
+                    'error_message' => $STe->getMessage(),
+                    'function' => __METHOD__,
+                    'action' => 'Try to sent Canceled booking',
+                    'user_id' => $user->id
+                ]);
+            }
         } else {
             if($booking->carer_status_id == self::COMPLETED){
                 $booking->status_id = self::DISPUTE;
                 $booking->purchaser_status_id = self::CANCELLED;
             }
             //todo Отправить мыло
+            try {
+                Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
+                    ['user' => $user],
+                    function ($m) use ($user) {
+                        $m->to($user->email)->subject('Canceled booking');
+                    });
+            } catch (Swift_TransportException $STe) {
+
+                $error = MailError::create([
+                    'error_message' => $STe->getMessage(),
+                    'function' => __METHOD__,
+                    'action' => 'Try to sent Canceled booking',
+                    'user_id' => $user->id
+                ]);
+            }
         }
 
         $booking->save();

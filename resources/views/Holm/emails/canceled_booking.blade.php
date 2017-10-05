@@ -66,14 +66,6 @@
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-                            Don’t forget your booked appointment!<br />
-                            Please don’t forget the following appointment.<br />
-                            [service user name]<br />
-                            [Carer name] <br />
-                            [address] <br />
-                            [date] <br />
-                            [time]
-
 
 
                             [User name] has cancelled the following booking:<br />
