@@ -12,30 +12,34 @@ use App\ServiceType;
 use App\WorkingTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Swift_TransportException;
 
 class CarerRegistrationController extends FrontController
 {
 
     private $carersProfile;
 
-    public function __construct(CarerRegistration $carersProfile) {
+    public function __construct(CarerRegistration $carersProfile)
+    {
         parent::__construct();
         $this->carersProfile = $carersProfile;
 
-        $this->template = config('settings.frontTheme').'.templates.userRegistration';
+        $this->template = config('settings.frontTheme') . '.templates.userRegistration';
     }
 
-    public function index($stepback=null){
+    public function index($stepback = null)
+    {
 
         $this->title = 'Carer Registration';
 
-        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
-        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
-        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+        $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme') . '.includes.modals')->render();
 
-        $this->vars = array_add($this->vars,'header',$header);
-        $this->vars = array_add($this->vars,'footer',$footer);
-        $this->vars = array_add($this->vars,'modals',$modals);
+        $this->vars = array_add($this->vars, 'header', $header);
+        $this->vars = array_add($this->vars, 'footer', $footer);
+        $this->vars = array_add($this->vars, 'modals', $modals);
 
         $user = Auth::user();
 
@@ -43,22 +47,21 @@ class CarerRegistrationController extends FrontController
 
 
         if (!$user) {
-            $step = view(config('settings.frontTheme').'.carerRegistration.Step1_carerRegistration')->with($this->vars)->render();
-            $this->vars = array_add($this->vars,'activeStep',1);
-        }
-        else {
+            $step = view(config('settings.frontTheme') . '.carerRegistration.Step1_carerRegistration')->with($this->vars)->render();
+            $this->vars = array_add($this->vars, 'activeStep', 1);
+        } else {
 
             //dd($this->user, $this->carersProfile->getID(),$this->carersProfile->getNextStep());
             $carersProfile = CarersProfile::find($user->id);
 
-            if(!$carersProfile) {
+            if (!$carersProfile) {
                 return redirect('/');
             }
 
 
             //dd($carersProfile->registration_progress);
 
-            if($carersProfile->registration_progress=='20') {
+            if ($carersProfile->registration_progress == '20') {
                 return redirect('/carer-settings');
             }
 
@@ -88,25 +91,26 @@ class CarerRegistrationController extends FrontController
                 $this->vars = array_add($this->vars, 'languages', $languages);
             }
 
-/*            if ($this->carersProfile->getNextStep($stepback) == 'Step13_carerRegistration') {
-                $languages = Language::all();
-                $this->vars = array_add($this->vars, 'languages', $languages);
-            }*/
+            /*            if ($this->carersProfile->getNextStep($stepback) == 'Step13_carerRegistration') {
+                            $languages = Language::all();
+                            $this->vars = array_add($this->vars, 'languages', $languages);
+                        }*/
 
-            $this->vars = array_add($this->vars,'activeStep',$this->carersProfile->getActiveStep($user->id));
+            $this->vars = array_add($this->vars, 'activeStep', $this->carersProfile->getActiveStep($user->id));
 
-            $step = view(config('settings.frontTheme').'.carerRegistration.'.$this->carersProfile->getNextStep($stepback))->with($this->vars)->render();
+            $step = view(config('settings.frontTheme') . '.carerRegistration.' . $this->carersProfile->getNextStep($stepback))->with($this->vars)->render();
         }
         //dd($assistanceTypes);
 
-        $this->vars = array_add($this->vars,'step',$step);
+        $this->vars = array_add($this->vars, 'step', $step);
 
-        $this->content = view(config('settings.frontTheme').'.carerRegistration.carerRegistration')->with($this->vars)->render();
+        $this->content = view(config('settings.frontTheme') . '.carerRegistration.carerRegistration')->with($this->vars)->render();
 
         return $this->renderOutput();
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
 
 //dd($request->all());
 
@@ -116,7 +120,7 @@ class CarerRegistrationController extends FrontController
 
             $carerProfiles = CarersProfile::findOrFail($request->input('carersProfileID'));
 
-            if($stepback == '4' && $carerProfiles->criminal_conviction == 'Some' && $carerProfiles->registration_progress !='5')
+            if ($stepback == '4' && $carerProfiles->criminal_conviction == 'Some' && $carerProfiles->registration_progress != '5')
                 $stepback = '5';
 
 
@@ -136,23 +140,47 @@ class CarerRegistrationController extends FrontController
 
     }
 
-    public function sendContinueRegistration(){
-
-
-        $this->title = 'Carer Registration';
-
-        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
-        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
-        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
-
-        $this->vars = array_add($this->vars,'header',$header);
-        $this->vars = array_add($this->vars,'footer',$footer);
-        $this->vars = array_add($this->vars,'modals',$modals);
+    public function sendContinueRegistration()
+    {
 
         $user = Auth::user();
 
+        if(!$user) {
+            return redirect('/');
+        }
 
-        $this->content = view(config('settings.frontTheme').'.carerRegistration.thankYou')->render();
+        $this->title = 'Carer Registration';
+
+        $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme') . '.includes.modals')->render();
+
+        $this->vars = array_add($this->vars, 'header', $header);
+        $this->vars = array_add($this->vars, 'footer', $footer);
+        $this->vars = array_add($this->vars, 'modals', $modals);
+
+
+        $this->vars = array_add($this->vars, 'signUpUntil', $user->created_at->addWeek()->format('d/m/Y h:i A'));
+
+
+        try {
+            Mail::send(config('settings.frontTheme') . '.emails.continue_sign_up_carer',
+                ['user' => $user, 'regTime' => $user->created_at->addWeek()->format('d/m/Y h:i A')],
+                function ($m) use ($user) {
+                    $m->to($user->email)->subject('Registration on HOLM');
+                });
+        } catch (Swift_TransportException $STe) {
+
+            $error = MailError::create([
+                'error_message' => $STe->getMessage(),
+                'function' => __METHOD__,
+                'action' => 'Try to sent continue_sign_up_carer',
+                'user_id' => $user->id
+            ]);
+        }
+
+
+        $this->content = view(config('settings.frontTheme') . '.carerRegistration.thankYou')->with($this->vars)->render();
 
         return $this->renderOutput();
     }

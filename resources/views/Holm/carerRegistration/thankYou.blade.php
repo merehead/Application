@@ -19,7 +19,7 @@
           <i class="fa fa-check" aria-hidden="true"></i>
         </span>
             <p class="info-p">
-                You will be able to continue sign up until [current dd/mm/yy hh:mm am/pm].
+                You will be able to continue sign up until {{$signUpUntil}}.
 
             </p>
         </div>
