@@ -215,7 +215,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->skin_scores == 'No' || is_null($serviceUsersProfile->skin_scores) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('skin_scores_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::text('skin_scores_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('skin_scores_detail'))
                 <span class="help-block"><strong>{{ $errors->first('skin_scores_detail') }}</strong></span>
             @endif

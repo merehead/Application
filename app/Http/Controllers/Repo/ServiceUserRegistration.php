@@ -970,7 +970,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'skin_scores' => 'required|in:"Yes","No","Sometimes"',
-            'skin_scores_detail' => 'required_if:skin_scores,"Yes","Sometimes"|nullable|string|max:255',
+            'skin_scores_detail' => 'required_if:skin_scores,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
