@@ -50,6 +50,7 @@
                                 <option value="I need help finding a carer">I need help finding a carer</option>
                                 <option value="I need help registering as a care worker">I need help registering as a care worker</option>
                                 <option value="I need help registering to buy care">I need help registering to buy care</option>
+                                <option value="I need help editing my profile">I need help registering to buy care</option>
                                 <option value="I have a payment question">I have a payment question</option>
                                 <option value="I would like to change a booking">I would like to change a booking</option>
                                 <option value="I need help with a recent appointment">I need help with a recent appointment</option>

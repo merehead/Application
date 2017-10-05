@@ -31,7 +31,7 @@
                 <span class="profileRating__item {{ ($topCarer->rate->avg_total>0)? 'active' : ''  }}">
                   <i class="fa fa-heart"></i>
                 </span>
-                  <span class="profileRating__item {{ ($topCarer->rate->avg_total>1)? 'active' : ''  }}">
+                  <span class="profileRating__item {{ ($topCarer->rate->avg_total>=1)? 'active' : ''  }}">
                   <i class="fa fa-heart"></i>
                 </span>
                   <span class="profileRating__item {{ ($topCarer->rate->avg_total>=2)? 'active' : ''  }}">
@@ -54,13 +54,13 @@
                 </p>
                 <p class="hourPrice">
                 <span class="hourPrice__price">
-                £ {{(Auth::check()&&Auth::user()->user_type_id==1)? 10 : 12  }}</span><span class="hourPrice__timing">/hour</span>
+                 From £ {{(Auth::check()&&Auth::user()->user_type_id==1)? 10 : 12  }}</span><span class="hourPrice__timing">/hour</span>
                 </p>
               </div>
             </div>
             @endforeach
 
-
+{{--
             <div class="popularSlider__item popularCard">
               <div class="profilePhoto">
                 <img src="/img/profile4.png" alt="">
@@ -92,7 +92,7 @@
                 <span class="hourPrice__price">
                 £ 11</span><span class="hourPrice__timing">/hour</span>
               </p>
-            </div>
+            </div>--}}
 
 
           </div>

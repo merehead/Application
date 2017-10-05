@@ -1245,7 +1245,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'consent' => 'required|in:"Yes","No","Sometimes"',
-            'consent_details' => 'required_if:consent,"Yes","Sometimes"|nullable|string|max:255',
+            'consent_details' => 'required_if:consent,"Yes","Sometimes"|nullable|string|max:510',
 
         ]);
 
