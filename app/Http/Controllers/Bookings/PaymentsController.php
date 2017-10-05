@@ -26,6 +26,10 @@ class PaymentsController extends FrontController
         $this->vars = array_add($this->vars, 'user', $this->user);
         $this->vars = array_add($this->vars, 'booking', $booking);
 
+        $serviceUser = $booking->bookingServiceUser()->get()->first();
+
+        $this->vars = array_add($this->vars, 'serviceUser', $serviceUser);
+
         $this->content = view(config('settings.frontTheme') . '.booking.payment_form')->with($this->vars)
             ->render();
 
