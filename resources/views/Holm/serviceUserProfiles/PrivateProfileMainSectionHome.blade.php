@@ -99,7 +99,7 @@
     <div class="profileRow">
         <div class="profileField profileField--full-width">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">How should the carer enter the {{$userNameForSite}}’s home?</span></h2>
-            {!! Form::textarea('carer_enter',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::textarea('carer_enter',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('carer_enter'))
                 <span class="help-block"><strong>{{ $errors->first('carer_enter') }}</strong></span>
             @endif

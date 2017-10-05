@@ -653,7 +653,7 @@ class ServiceUserRegistration
     private function saveStep14($request) {
 
         $this->validate($request,[
-            'carer_enter' => 'nullable|string|max:510',
+            'carer_enter' => 'nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -669,7 +669,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'entering_aware' => 'required|in:"Yes","No","Sometimes"',
-            'other_detail' => 'required_if:entering_aware,"Yes","Sometimes"|nullable|string|max:510',
+            'other_detail' => 'required_if:entering_aware,"Yes","Sometimes"|nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
