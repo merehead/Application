@@ -38,31 +38,6 @@
 
         });
 
-//        $(document).on('show.bs.modal','#message-carer', function() {
-//
-//            var addr = $('input[name="service_user_id"]').first().attr('data_address_line1');
-//            var address = $('input[name="service_user_id"]').first().attr('data-town')+' '+ addr;
-//            google.maps.event.trigger(map, 'resize');
-//            geocoder.geocode({'address': address}, function(results, status) {
-//                if (status === 'OK') {
-//
-//                    if(marker)marker.setMap(null);
-//                    marker = new google.maps.Marker({
-//                        map: map,
-//                        position: results[0].geometry.location
-//                    });
-//                    map.setCenter(results[0].geometry.location);
-//                    resizeMap();
-//                    //$('.profileMap').show();
-//                } else {
-//                    $('.fieldCategory').after('<div class="alert alert-warning alert-dismissable fade in">\n' +
-//                        '    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
-//                        '    <strong>Warning!</strong> You entered an incorrect address. Please enter your real address.\n' +
-//                        '  </div>')
-//                    //alert('Geocode was not successful for the following reason: ' + status);
-//                }
-//            });
-//        });
         $carer_profile.find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
         $carer_profile.find('input[type="text"]').attr("readonly", false).removeClass('profileField__input--greyBg');
     });
@@ -134,7 +109,7 @@
                                     <div class="checkBox_item">
 
                                         {!! Form::checkbox('bookings[0][assistance_types][]', $care->id, null,
-                                                    array('class' => 'customCheckbox assistance_types','id'=>'assistance_types'.$care->id)) !!}
+                                                    array('class' => 'customCheckbox assistance_types','onclick'=>'calculate_price();','id'=>'assistance_types'.$care->id)) !!}
                                         <label for="assistance_types{{$care->id}}">{{$care->name}}</label>
                                     </div>
                                 @endforeach
@@ -148,7 +123,7 @@
                             </h2>
                             <div class="messageInputs datetime ">
                                 <div class="messageInputs__field messageDate">
-                                    <input type="text" name="bookings[0][appointments][0][date_start]"
+                                    <input  onchange="calculate_price()" type="text" name="bookings[0][appointments][0][date_start]"
                                            class="messageInput datepicker datepicker_message" placeholder="06.06.2017 ">
 
                                     <a href="#" class="messageIco centeredLink">
@@ -158,7 +133,7 @@
                                 <label class="checkBox_item correct2" for="date_end">Start</label>
 
                                 <div class="messageInputs__field messageTime ">
-                                    <input type="text" class="messageInput timepicker_message" id="time_to_from"
+                                    <input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_from"
                                            name="bookings[0][appointments][0][time_from]" placeholder="1:30 PM"
                                            value="1:30 PM">
                                     <a href="#" class="messageIco centeredLink">
@@ -176,7 +151,7 @@
 
                                 <label class="checkBox_item correct2" for="date_end">End</label>
                                 <div class="messageInputs__field messageTime ">
-                                    <input type="text" class="messageInput timepicker_message" id="time_to_bed"
+                                    <input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_bed"
                                            name="bookings[0][appointments][0][time_to]" placeholder="3:30 PM"
                                            value="3:30 PM">
                                     <a href="#" class="messageIco centeredLink">
@@ -193,26 +168,26 @@
                             <div class="messageCheckbox checktime" data-id="d0">
                                 <div class="checkBox_item">
                                     <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Daily"
-                                           class="customCheckbox periodicity Daily"
+                                           class="customCheckbox periodicity Daily" onclick="calculate_price()"
                                            id="boxD1">
                                     <label for="boxD1">Daily</label>
                                 </div>
                                 <div class="checkBox_item">
                                     <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Weekly"
-                                           class="customCheckbox periodicity weekly"
+                                           class="customCheckbox periodicity weekly" onclick="calculate_price()"
                                            id="boxD2">
                                     <label for="boxD2">weekly</label>
                                 </div>
                                 <div class="checkBox_item">
                                     <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single"
-                                           class="customCheckbox periodicity Single"
+                                           class="customCheckbox periodicity Single" onclick="calculate_price()"
                                            id="boxD3">
                                     <label for="boxD3">Single</label>
                                 </div>
                                 <br>
                                 <label class="checkBox_item ordinaryTitle correct nhide" for="date_end">Continue until</label>
                                 <div class="messageInputs__field messageDate correct3 nhide">
-                                    <input type="text" class="messageInput datepicker datepicker_message" id="date_end"
+                                    <input  onchange="calculate_price()" type="text" class="messageInput datepicker datepicker_message" id="date_end" onchange="calculate_price()"
                                            name="bookings[0][appointments][0][date_end]" placeholder=" 08.08.2017">
                                     <a href="#" class="messageIco centeredLink">
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -251,9 +226,9 @@
                             <div class="total__item  totalBox">
                                 <div class="totalTitle">
                                     <p>Total </p>
-                                    <span>  5 hours </span>
+                                    <span>  0 hours </span>
                                 </div>
-                                <p class="totalPrice"> £60 </p>
+                                <p class="totalPrice"> £0 </p>
                             </div>
                         </div>
 
