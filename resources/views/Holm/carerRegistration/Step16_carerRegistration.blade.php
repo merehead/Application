@@ -59,7 +59,7 @@
            onclick="event.preventDefault();document.getElementById('stepback').submit();">
             <i class="fa fa-arrow-left "></i>back
         </a>
-        <a href="/" class="registrationBtns__item registrationBtns__item--later">
+        <a href="{{route('thankYou')}}" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>

@@ -52,7 +52,7 @@
         >
             <i class="fa fa-arrow-left "></i>back
         </a>
-        <a href="Thank__you.html" class="registrationBtns__item registrationBtns__item--later">
+        <a href="{{route('thankYou')}}" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>
