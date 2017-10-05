@@ -31,7 +31,7 @@
 
 
 <body style="margin: 0; background: #fff;">
-
+@component('mail::message')
 <table cellpadding="0" cellspacing="0" border="0" align="center"
        style="margin-top: 30px;
       border-collapse: collapse;
@@ -62,17 +62,14 @@
                 <tr>
                     <td style="padding: 30px 40px;font-family: 'Roboto', sans-serif; line-height: 1.5; background: #f9f9f9; "  valign="top" class="">
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
-{{dd(old('email'))}}
-                            @if($user)
-                                Hello  {{session('user')->userName}}!
-                            @endif
-                            @if(session('user')->isPurchaser())
+
+                            @if(session('user'))
                                 Hello  {{session('user')->userName}}!
                             @endif
                         </h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0; ">
-                            We received a request to reset your password for your account {{session('user')->email}}. We are here to help!<br>
-                            Simply click on the {{$actionUrl}} to set a new password.
+                            We received a request to reset your password for your account {{session('email')}}. We are here to help!<br>
+                            Simply click on the ?? to set a new password.
                             <br>
 
 
@@ -141,6 +138,6 @@
     </tr>
 
 </table>
-
+@endcomponent
 </body>
 </html>

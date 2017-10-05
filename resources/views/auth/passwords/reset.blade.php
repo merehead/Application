@@ -1,5 +1,8 @@
-@include('main.main')
+@extends(config('settings.frontTheme').'.layouts.carerPrivateProfile',['title'=>''])
+@section('header')
+    @include(config('settings.frontTheme').'.headers.baseHeader')
 
+@endsection
 @section('content')
     @if (session('status'))
         <div class="alert alert-success">
@@ -96,7 +99,12 @@
 
 @endsection
 
-
+@section('footer')
+    @include(config('settings.frontTheme').'.footers.baseFooter')
+@endsection
+@section('modals')
+    @include(config('settings.frontTheme').'.includes.modals')
+@endsection
 
 {{--@section('content')
 <div class="container">
