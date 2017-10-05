@@ -6,18 +6,22 @@ use App\Appointment;
 use App\Booking;
 use App\BookingOverview;
 use App\BookingsMessage;
+use App\CarersProfile;
 use App\Http\Requests\BookingCreateRequest;
 use App\Interfaces\Constants;
 use App\PaymentServices\StripeService;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FrontController;
+use App\PurchasersProfile;
 use App\ServiceUsersProfile;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use SebastianBergmann\Comparator\Book;
 use Auth;
 use Carbon\Carbon;
 use DB;
+use Swift_TransportException;
 
 class BookingsController extends FrontController implements Constants
 {
@@ -319,6 +323,26 @@ class BookingsController extends FrontController implements Constants
                 'carer_status_id' => 2,
                 'purchaser_status_id' => 1,
             ]);
+
+            //$user=Auth::user();
+            $purchaserProfile = PurchasersProfile::find($purchaser->id);
+            $carerProfile = CarersProfile::find($carer->id);
+
+            try {
+                Mail::send(config('settings.frontTheme') . '.emails.new_booking',
+                    ['$purchaser' => $purchaserProfile,'booking'=>$booking,'serviceUser'=>$serviceUser,'carer'=>$carerProfile],
+                    function ($m) use ($purchaser) {
+                        $m->to($purchaser->email)->subject('New booking');
+                    });
+            } catch (Swift_TransportException $STe) {
+
+                $error = MailError::create([
+                    'error_message' => $STe->getMessage(),
+                    'function' => __METHOD__,
+                    'action' => 'Try to sent new_booking',
+                    'user_id' => $purchaser->id
+                ]);
+            }
 
             //Attaching booking`s assistance_types
             if(isset($booking_item['assistance_types']))
