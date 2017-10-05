@@ -12,7 +12,7 @@ use SebastianBergmann\Comparator\Book;
 class PaymentsController extends FrontController
 {
     public function payment_form(Request $request, Booking $booking){
-        if(!in_array($booking->status_id, [2, 5, 7]))
+        if($booking->status_id != 1)
             return;
         $this->template = config('settings.frontTheme') . '.templates.bookings';
         $this->title = 'Payment';

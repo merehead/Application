@@ -765,7 +765,7 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
 
         $this->vars = array_add($this->vars, 'status', $status);
 
-        $newBookings = Booking::whereIn('status_id', [self::NEW, self::AWAITING_CONFIRMATION])->where('purchaser_id', $user->id)->where('service_user_id', $serviceUserProfile->id)->get();
+        $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('purchaser_id', $user->id)->where('service_user_id', $serviceUserProfile->id)->get();
         $this->vars = array_add($this->vars, 'newBookings', $newBookings);
 
         $inProgressBookings = Booking::where('status_id', 5)->where('purchaser_id', $user->id)->where('service_user_id', $serviceUserProfile->id)->get();
