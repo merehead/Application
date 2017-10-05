@@ -40,10 +40,11 @@ class BookingsController extends FrontController implements Constants
 
         $booking = $this->createBooking($request);
         $price = $booking->price;
+        $hours = $booking->hours;
 
         DB::rollBack();
 
-        return $price;
+        return response(['price' => $price, 'hours' => $hours]);
     }
 
     public function update(Booking $booking, Request $request){

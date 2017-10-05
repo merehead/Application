@@ -102,7 +102,7 @@ class Booking extends Model
         foreach ($appointments as $appointment)
             $price += $appointment->price;
 
-        return $price;
+        return round($price, 2);
     }
 
     public function getCarerAmountAttribute(){
