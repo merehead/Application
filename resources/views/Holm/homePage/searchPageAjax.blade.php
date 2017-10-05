@@ -39,13 +39,11 @@
                 </div>
                 <div class="result__rate">
                     <div class="profileRating ">
-                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                        @for($i = 1; $i <= 5; $i++)
+                            <span class="profileRating__item {{$carerProfile->avg_total >= $i ? 'active' : ''}}"><i class="fa fa-heart"></i></span>
+                        @endfor
                     </div>
-                    <span class="subLabel">(0 reviews)</span>
+                    <span class="subLabel">({{$carerProfile->creview*1}} reviews)</span>
                 </div>
 
                 <div class="bookBtn">

@@ -1330,6 +1330,28 @@ $(document).ready(function () {
         carerSearchAjax();
     });
 
+    $(document).on('click','.sort-rating', function (e) {
+        $('#sort-rating').val(1);
+        $('#sort-id').val(0);
+        if($('#sort-rating-order').val()=='asc'){
+            $('#sort-rating-order').val('desc');
+        }else{
+            $('#sort-rating-order').val('asc');
+        }
+        carerSearchAjax();
+    });
+
+    $(document).on('click','.sort-id', function (e) {
+        $('#sort-id').val(1);
+        $('#sort-rating').val(0);
+        if($('#sort-id-order').val()=='asc'){
+            $('#sort-id-order').val('desc');
+        }else{
+            $('#sort-id-order').val('asc');
+        }
+        carerSearchAjax();
+    });
+
     /*-------------- Home page slider (popular carers) ------------*/
     if ($('div').is('.appointmentSlider')) {
         $('.appointmentSlider').owlCarousel({
