@@ -47,7 +47,7 @@ class BookingsController extends FrontController implements Constants
         return response(['price' => $price, 'hours' => $hours]);
     }
 
-    public function update(Booking $booking, BookingCreateRequest $request){
+    public function update(Booking $booking, Request $request){
         //Offer alterntive time
 
         $user = Auth::user();
@@ -71,9 +71,13 @@ class BookingsController extends FrontController implements Constants
                 GROUP BY batch ORDER BY batch';
         $appointments = DB::select($sql);
 
-
-
-        //todo букинги тут $booking. апоинтменты тут
+       $this->vars = array_add($this->vars,'appointments',$appointments);
+       $this->vars = array_add($this->vars,'assistance_types',$booking->assistance_types);
+       $this->vars = array_add($this->vars,'serviceUsers',$booking->bookingServiceUser);
+       $this->vars = array_add($this->vars,'booking',$booking);
+       $content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.MessageEdit')->with($this->vars)->render();
+       return  $content;
+       //todo букинги тут $booking. апоинтменты тут
     }
 
     public function view_details(Booking $booking){

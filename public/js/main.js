@@ -1211,6 +1211,53 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on('click','.roundedBtn__item--alternative-smal',function(e){
+       e.preventDefault();
+       var id=$(this).attr('data-id');
+        $.ajax({
+            url: '/bookings/'+id+'/modal_edit',
+            type: 'get',
+            dataType: "html",
+            success: function (response) {
+                $('#message-booking').remove();
+                $('body').append(response);
+                $(".datepicker_message").datepicker({
+                    beforeShow: function(input, inst) {
+                        inst.dpDiv.css({"z-index":"2000!important;"});
+                    },
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: "dd/mm/yy",
+                    showAnim: "slideDown",
+                    minDate: "+0D",
+                    maxDate: "+50Y",
+                    yearRange: "0:+50"
+                });
+                $('.timepicker_message').timepicker({
+                    beforeShow: function(input, inst) {
+                        inst.dpDiv.css({"z-index":"2000!important;"});
+                    },onSelect: function() {
+                        $(this).change();
+                    },
+                    timeFormat: 'h:mm p',
+                    interval: 30,
+                    //minTime: '10',
+                    //maxTime: '6:00pm',
+                    //defaultTime: '18',
+                    startTime: '6:00 p',
+                    dynamic: true,
+                    dropdown: true,
+                    scrollbar: true
+                });
+                $('#message-booking').modal('show');
+                $('.needCare__item').click();
+            },
+            error: function (response) {
+
+            }
+        });
+    });
+
     $(document).on('click','a.additionalTime', function (e) {
         e.preventDefault();
         var $that =$(this);
@@ -1579,11 +1626,17 @@ $(document).ready(function () {
             url: $(form).attr('action'),
             headers: {'X-CSRF-TOKEN': token},
             data: $(form).serialize(),
-            type: 'POST',
+            type: $(form).attr('method'),
             dataType: "application/json",
             success: function (response) {
+                if(response.status!=undefined){
+                    if($(form).attr('method')=='PUT')$('#bookings__form').modal('hide');
+                }
             },
             error: function (response) {
+                if(response.responseText.indexOf('success')){
+                    if($(form).attr('method')=='PUT')$('#message-booking').modal('hide');
+                }
                 if( response.responseText.indexOf('purchase')>0){
                     window.location.href='/'+response.responseText;
                 }
