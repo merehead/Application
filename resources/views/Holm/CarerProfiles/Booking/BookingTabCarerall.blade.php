@@ -90,7 +90,7 @@
                                 </button>
                             </div>
                             <div class="roundedBtn">
-                                <button {{!in_array($booking->carer_status_id, [2]) ? 'disabled' : ''}} class="roundedBtn__item   roundedBtn__item--alternative-smal">
+                                <button {{!in_array($booking->carer_status_id, [2]) ? 'disabled' : ''}} data-id="{{$booking->id}}" class="roundedBtn__item   roundedBtn__item--alternative-smal">
                                     OFFER ALTERNATIVE TIME
                                 </button>
                             </div>

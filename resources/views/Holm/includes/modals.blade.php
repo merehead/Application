@@ -16,7 +16,6 @@
                     Buying Care?
                 </a>
             </div>
-
         </div>
     </div>
 </div>
