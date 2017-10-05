@@ -27,6 +27,11 @@
         </div>
         {!! Form::model($carerResult, ['method'=>'POST','route'=>'searchPagePost','id'=>'carerSearchForm']) !!}
         {!! Form::hidden('stage','carerSearch') !!}
+        <input type="hidden" name="sort-rating" id="sort-rating" value="0">
+        <input type="hidden" name="sort-rating-order" id="sort-rating-order" value="asc">
+
+        <input type="hidden" name="sort-id" id="sort-id" value="0">
+        <input type="hidden" name="sort-id-order" id="sort-id-order" value="asc">
         {{csrf_field()}}
         <div class="row">
             <div class="col-sm-4 col-md-3">
@@ -131,14 +136,14 @@
                 <div class="resultHeader Paginator">
                     <p class="resultHeader__info">Showing {{(($page*$perPage)-$perPage==0)?'1':($page*$perPage)-$perPage}}-{{($carerResultCount<$perPage)?$page*$carerResultCount:$page*$perPage}} of {{$carerResultCount}} CARERs</p>
                     <div class="sortLink">
-                        SEARCH BY &nbsp; <a href="#" class="sortLink__item"> <span> </span> rating
+                        SEARCH BY &nbsp; <a href="#" class="sortLink__item sort-rating"> <span> </span> rating
                         </a>
                         <p> &nbsp; - &nbsp; </p>
                         <!--<span class="sortLink__separate">
 
                         </span>
                         -->
-                        <a href="#" class="sortLink__item">
+                        <a href="#" class="sortLink__item sort-id">
                             MOST RECENT
                         </a>
                     </div>
@@ -185,13 +190,11 @@
                                 </div>
                                 <div class="result__rate">
                                     <div class="profileRating ">
-                                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
-                                        <span class="profileRating__item"><i class="fa fa-heart"></i></span>
+                                        @for($i = 1; $i <= 5; $i++)
+                                            <span class="profileRating__item {{$carerProfile->avg_total >= $i ? 'active' : ''}}"><i class="fa fa-heart"></i></span>
+                                        @endfor
                                     </div>
-                                    <span class="subLabel">(0 reviews)</span>
+                                    <span class="subLabel">({{$carerProfile->creview*1}} reviews)</span>
                                 </div>
 
                                 <div class="bookBtn">

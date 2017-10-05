@@ -66,6 +66,9 @@ class SearchController extends FrontController
             $where .= 'inner join carer_profile_working_time cw on cw.carer_profile_id = cp.id and cw.working_times_id in ('.implode(',',$working_times[$dayofweek]).')';
         }
 
+
+            $where .= 'left join review r on cp.id=r.carer_id';
+
         $where .=' where registration_progress=20';
         if ($request->get('gender'))
             $where .= " and cp.gender in ('" . implode("','",array_keys($request->get('gender'))) . "')";
@@ -82,9 +85,15 @@ class SearchController extends FrontController
         if ($request->get('load-more',0)==1)
             $where .= " and cp.id > " . $request->get('id');
 
-        $sql = 'select cp.id,first_name,family_name,sentence_yourself,town from carers_profiles cp '.$where. ' group by cp.id,first_name,family_name,sentence_yourself,town order by cp.id';
-        $carerResult = DB::select($sql);
+        $order=[];
+        if ($request->get('sort-rating',0)==1)
+            $order[]='avg_total '.$request->get('sort-rating-order','asc');
+        if ($request->get('sort-id',0)==1)
+                $order[]='cp.id '.$request->get('sort-id-order','asc');
 
+        if(empty($order))$order[]='cp.id asc';
+        $sql = 'select cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview from carers_profiles cp '.$where. ' group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview order by '.implode(',',$order);
+        $carerResult = DB::select($sql);
 
         $start = (($page*$perPage)-$perPage==0)?'1':($page*$perPage)-$perPage;
         if(count($carerResult)==1)$start=0;
