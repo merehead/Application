@@ -130,6 +130,6 @@ class Appointment extends Model implements Constants
         $sql = 'SELECT * FROM holidays WHERE  date >= \''.$dt->format("Y-m-d").'\' AND date < \''.$dt->addDays(1)->format("Y-m-d").'\'';
         $res = DB::select($sql);
 
-        return $dt->dayOfWeek == 0 || $dt->dayOfWeek == 6 || count($res) > 0;
+        return $dt->dayOfWeek == 0  || count($res) > 0;
     }
 }
