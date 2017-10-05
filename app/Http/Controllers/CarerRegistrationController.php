@@ -61,7 +61,7 @@ class CarerRegistrationController extends FrontController
 
             //dd($carersProfile->registration_progress);
 
-            if ($carersProfile->registration_progress == '20') {
+            if ($carersProfile->registration_progress == '21') {
                 return redirect('/carer-settings');
             }
 
@@ -185,4 +185,32 @@ class CarerRegistrationController extends FrontController
         return $this->renderOutput();
     }
 
+    public function sendCompleteRegistration()
+    {
+
+        $user = Auth::user();
+
+        if(!$user) {
+            return redirect('/');
+        }
+
+        try {
+            Mail::send(config('settings.frontTheme') . '.emails.complete_sign_up_carer',
+                ['user' => $user],
+                function ($m) use ($user) {
+                    $m->to($user->email)->subject('Welcome on HOLM');
+                });
+        } catch (Swift_TransportException $STe) {
+
+            $error = MailError::create([
+                'error_message' => $STe->getMessage(),
+                'function' => __METHOD__,
+                'action' => 'Try to sent complete_sign_up_carer',
+                'user_id' => $user->id
+            ]);
+        }
+
+
+        return redirect('/carer-settings');
+    }
 }
