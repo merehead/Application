@@ -91,6 +91,19 @@ class BookingsController extends FrontController implements Constants
         }
     }
 
+    public function getModalEditBooking(Booking $booking){
+
+        $sql = 'SELECT  min(date_start) as date_start,  max(date_start) as date_end, min(time_from) as time_from, min(time_to) as time_to, min(periodicity) as periodicity
+                FROM appointments
+                WHERE booking_id = '.$booking->id.'
+                GROUP BY batch ORDER BY batch';
+        $appointments = DB::select($sql);
+
+
+        
+        //todo букинги тут $booking. апоинтменты тут
+    }
+
     public function view_details(Booking $booking){
 
 //        if(!in_array($booking->status_id, [2, 5, 7]))
@@ -346,7 +359,7 @@ class BookingsController extends FrontController implements Constants
             ]);
 
             //Generating appointments
-            foreach ($booking_item['appointments'] as $appointment_item){
+            foreach ($booking_item['appointments'] as $batch => $appointment_item){
                 isset($appointment_item['periodicity']) ? false : $appointment_item['periodicity'] = 'single';
                 $days = [];
                 switch (strtolower($appointment_item['periodicity'])){
@@ -370,6 +383,7 @@ class BookingsController extends FrontController implements Constants
                         'status_id' => 1,
                         'carer_status_id' => 1,
                         'purchaser_status_id' => 1,
+                        'batch' => $batch,
                     ]);
                 }
             }

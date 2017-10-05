@@ -84,6 +84,7 @@ Route::get('/serviceUser-settings/booking/{serviceUserProfile}/{status?}', 'Serv
 
 Route::post('/bookings','Bookings\BookingsController@create');
 Route::post('/bookings/calculate_price','Bookings\BookingsController@calculateBookingPrice');
+Route::get('/bookings/{booking}/modal_edit', 'Bookings\BookingsController@getModalEditBooking');
 Route::get('/bookings/{booking}/details', 'Bookings\BookingsController@view_details');
 Route::get('/bookings/{booking}/purchase', 'Bookings\PaymentsController@payment_form');
 Route::post('/bookings/{booking}/message','Bookings\BookingsController@create_message');

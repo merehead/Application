@@ -11,7 +11,7 @@ use DB;
 
 class Appointment extends Model implements Constants
 {
-    protected $fillable = ['booking_id','date_start','date_end','amount_for_purchaser','amount_for_carer','status_id','carer_status_id','carer_status_date','purchaser_status_id','purchaser_status_date', 'time_from', 'time_to', 'periodicity'];
+    protected $fillable = ['booking_id','date_start','date_end','amount_for_purchaser','amount_for_carer','status_id','carer_status_id','carer_status_date','purchaser_status_id','purchaser_status_date', 'time_from', 'time_to', 'periodicity', 'batch'];
 
     public function getFormattedDateStartAttribute()
     {
