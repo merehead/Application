@@ -84,7 +84,7 @@
                         if (is_null($serviceUserProfile->choosing_incontinence_products))
                             $atrr['placeholder'] = 'Please select';
                         ?>
-                        {!! Form::select('choosing_incontinence_products',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
+                        {!! Form::select('choosing_incontinence_products',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
                         @if ($errors->has('choosing_incontinence_products'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('choosing_incontinence_products') }}</strong>

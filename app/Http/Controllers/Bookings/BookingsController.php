@@ -47,48 +47,33 @@ class BookingsController extends FrontController implements Constants
         return response(['price' => $price, 'hours' => $hours]);
     }
 
-    public function update(Booking $booking, Request $request){
-        //Встречное предложение
+    public function update(Booking $booking, BookingCreateRequest $request){
+        //Offer alterntive time
 
-        $purchaser = Auth::user();
-        $carer = User::find($request->carer_id);
+        $user = Auth::user();
 
-
-        if(isset($request->bookings['service_user_id']))
-            $bookings[0] = $request->bookings;
-        else
-            $bookings = $request->bookings;
-
-
-
-        foreach ($bookings as $booking_item){
-            $serviceUser = User::find($request->service_user_id);
-
-            $booking->appintments()->delete();
-
-            foreach ($booking_item['appointments'] as $appointment_item){
-                $days = $this->generateDateRange(Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")), Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d")));
-                foreach ($days as $day){
-                    $booking->appointments()->create([
-                        'date_start' => $day,
-                        'date_end' => $day,
-                        'time_from' => $appointment_item['time_from'],
-                        'time_to' => $appointment_item['time_to'],
-                        'periodicity' => $appointment_item['periodicity'],
-                        'status_id' => 1,
-                        'carer_status_id' => 1,
-                        'purchaser_status_id' => 1,
-                    ]);
-                }
-            }
-
-            $booking->assistance_types()->attach($booking_item['assistance_types']);
-
-            //отправить почту
-            //todo
-
-            return redirect('bookings/'.$booking->id.'/purchase');
+        foreach ($request->bookings as $booking_item){
+            $booking->appointments()->delete();
+            //Generating appointments
+            $this->createAppointments($booking, $booking_item['appointments']);
         }
+
+        //todo отправить почту базируясь на $user->user_type_id (либо кереру, либо пурчасеру)
+
+        return response(['status' => 'success']);
+    }
+
+    public function getModalEditBooking(Booking $booking){
+
+        $sql = 'SELECT  min(date_start) as date_start,  max(date_start) as date_end, min(time_from) as time_from, min(time_to) as time_to, min(periodicity) as periodicity
+                FROM appointments
+                WHERE booking_id = '.$booking->id.'
+                GROUP BY batch ORDER BY batch';
+        $appointments = DB::select($sql);
+
+
+
+        //todo букинги тут $booking. апоинтменты тут
     }
 
     public function view_details(Booking $booking){
@@ -320,6 +305,7 @@ class BookingsController extends FrontController implements Constants
     private function createBooking(BookingCreateRequest $data) : Booking
     {
         $purchaser = Auth::user();
+        $purchaser = User::find(1);
         $carer = User::find($data->carer_id);
 
         foreach ($data->bookings as $booking_item){
@@ -346,35 +332,43 @@ class BookingsController extends FrontController implements Constants
             ]);
 
             //Generating appointments
-            foreach ($booking_item['appointments'] as $appointment_item){
-                isset($appointment_item['periodicity']) ? false : $appointment_item['periodicity'] = 'single';
-                $days = [];
-                switch (strtolower($appointment_item['periodicity'])){
-                    case 'daily':
-                        $days = $this->generateDateRange(Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")), Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d")));
-                        break;
-                    case 'weekly':
-                        $days = $this->generateDateRange(Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")), Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d")), 7);
-                        break;
-                    case 'single':
-                        $days = $this->generateDateRange(Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")), Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")));
-                        break;
-                }
-                foreach ($days as $day) {
-                    $booking->appointments()->create([
-                        'date_start' => $day,
-                        'date_end' => $day,
-                        'time_from' => date("H.i", strtotime($appointment_item['time_from'])),
-                        'time_to' => date("H.i", strtotime($appointment_item['time_to'])),
-                        'periodicity' => $appointment_item['periodicity'],
-                        'status_id' => 1,
-                        'carer_status_id' => 1,
-                        'purchaser_status_id' => 1,
-                    ]);
-                }
-            }
+            $this->createAppointments($booking, $booking_item['appointments']);
+
 
             return $booking;
         }
+    }
+
+    private function createAppointments(Booking $booking, array $appointments) : bool {
+        foreach ($appointments as $batch => $appointment_item){
+            isset($appointment_item['periodicity']) ? false : $appointment_item['periodicity'] = 'single';
+            $days = [];
+            switch (strtolower($appointment_item['periodicity'])){
+                case 'daily':
+                    $days = $this->generateDateRange(Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")), Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d")));
+                    break;
+                case 'weekly':
+                    $days = $this->generateDateRange(Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")), Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d")), 7);
+                    break;
+                case 'single':
+                    $days = $this->generateDateRange(Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")), Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")));
+                    break;
+            }
+            foreach ($days as $day) {
+                $booking->appointments()->create([
+                    'date_start' => $day,
+                    'date_end' => $day,
+                    'time_from' => date("H.i", strtotime($appointment_item['time_from'])),
+                    'time_to' => date("H.i", strtotime($appointment_item['time_to'])),
+                    'periodicity' => $appointment_item['periodicity'],
+                    'status_id' => 1,
+                    'carer_status_id' => 1,
+                    'purchaser_status_id' => 1,
+                    'batch' => $batch,
+                ]);
+            }
+        }
+
+        return true;
     }
 }

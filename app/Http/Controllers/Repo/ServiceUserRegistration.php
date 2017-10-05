@@ -653,7 +653,7 @@ class ServiceUserRegistration
     private function saveStep14($request) {
 
         $this->validate($request,[
-            'carer_enter' => 'nullable|string|max:510',
+            'carer_enter' => 'nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -669,7 +669,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'entering_aware' => 'required|in:"Yes","No","Sometimes"',
-            'other_detail' => 'required_if:entering_aware,"Yes","Sometimes"|nullable|string|max:510',
+            'other_detail' => 'required_if:entering_aware,"Yes","Sometimes"|nullable|string|max:255',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -970,7 +970,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'skin_scores' => 'required|in:"Yes","No","Sometimes"',
-            'skin_scores_detail' => 'required_if:skin_scores,"Yes","Sometimes"|nullable|string|max:255',
+            'skin_scores_detail' => 'required_if:skin_scores,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -987,7 +987,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'assistance_with_dressings' => 'required|in:"Yes","No","Sometimes"',
-            'dressings_detail' => 'required_if:assistance_with_dressings,"Yes","Sometimes"|nullable|string|max:255',
+            'dressings_detail' => 'required_if:assistance_with_dressings,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1386,7 +1386,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'we_missed' => 'required|in:"Yes","No","Sometimes"',
-            'we_missed_details' => 'required_if:we_missed,"Yes","Sometimes"|nullable|string|max:255',
+            'we_missed_details' => 'required_if:we_missed,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));

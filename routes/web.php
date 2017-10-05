@@ -83,7 +83,9 @@ Route::post('/serviceUser-settings/{serviceUserProfile}','ServiceUserPrivateProf
 Route::get('/serviceUser-settings/booking/{serviceUserProfile}/{status?}', 'ServiceUserPrivateProfileController@bookingFilter')->name('ServiceUserBookingStatus'); //synonym for ImCarerPage
 
 Route::post('/bookings','Bookings\BookingsController@create');
+Route::put('/bookings/{booking}','Bookings\BookingsController@update');
 Route::post('/bookings/calculate_price','Bookings\BookingsController@calculateBookingPrice');
+Route::get('/bookings/{booking}/modal_edit', 'Bookings\BookingsController@getModalEditBooking');
 Route::get('/bookings/{booking}/details', 'Bookings\BookingsController@view_details');
 Route::get('/bookings/{booking}/purchase', 'Bookings\PaymentsController@payment_form');
 Route::post('/bookings/{booking}/message','Bookings\BookingsController@create_message');
@@ -102,6 +104,9 @@ Route::post('/document/upload','DocumentsController@upload')->name('UploadDocume
 Route::get('/documents','DocumentsController@GetDocuments')->name('GetDocuments');
 Route::post('/profile-photo','ProfilePhotosController@uploadUserProfilePhoto');
 Route::post('/service-user-profile-photo','ProfilePhotosController@uploadServiceUserProfilePhoto');
+
+Route::get('/thank-you', 'CarerRegistrationController@sendContinueRegistration')->name('thankYou');
+
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
 

@@ -11,7 +11,7 @@ use DB;
 
 class Appointment extends Model implements Constants
 {
-    protected $fillable = ['booking_id','date_start','date_end','amount_for_purchaser','amount_for_carer','status_id','carer_status_id','carer_status_date','purchaser_status_id','purchaser_status_date', 'time_from', 'time_to', 'periodicity'];
+    protected $fillable = ['booking_id','date_start','date_end','amount_for_purchaser','amount_for_carer','status_id','carer_status_id','carer_status_date','purchaser_status_id','purchaser_status_date', 'time_from', 'time_to', 'periodicity', 'batch'];
 
     public function getFormattedDateStartAttribute()
     {
@@ -130,6 +130,6 @@ class Appointment extends Model implements Constants
         $sql = 'SELECT * FROM holidays WHERE  date >= \''.$dt->format("Y-m-d").'\' AND date < \''.$dt->addDays(1)->format("Y-m-d").'\'';
         $res = DB::select($sql);
 
-        return $dt->dayOfWeek == 0 || $dt->dayOfWeek == 6 || count($res) > 0;
+        return $dt->dayOfWeek == 0  || count($res) > 0;
     }
 }

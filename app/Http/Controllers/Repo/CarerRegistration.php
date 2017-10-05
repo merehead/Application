@@ -214,7 +214,7 @@ class CarerRegistration
             Auth::login($user, true);
 
 
-            try {
+/*            try {
                 Mail::send(config('settings.frontTheme').'.emails.continue_sign_up_carer',
                     ['user' => $user, 'password' => $request['password'], 'regTime'=>$user->created_at->addWeek()->format('d/m/Y h:i A')],
                     function ($m) use ($request) {$m->to($request['email'])->subject('Registration on HOLM');});
@@ -227,7 +227,7 @@ class CarerRegistration
                     'action'=>'Try to sent continue_sign_up_carer',
                     'user_id'=>$user->id
                 ]);
-            }
+            }*/
 
         }
 
