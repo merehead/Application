@@ -43,7 +43,7 @@ function calculate_price() {
         dataType: "json",
         success: function (response) {
             if(response.price !=undefined){
-                $('.totalPrice').html(response.price);
+                $('.totalPrice').html('£'+response.price);
             }
             if(response.hours !=undefined){
                 $('.totalTitle>span').html(response.hours+' hours');
