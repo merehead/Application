@@ -2,11 +2,11 @@
 
     <div class="container">
         <div class="breadcrumbs">
-            <a href="index.html" class="breadcrumbs__item">
+            <a href="/" class="breadcrumbs__item">
                 Home
             </a>
             <span class="breadcrumbs__arrow">&gt;</span>
-            <a href="faq.html" class="breadcrumbs__item">
+            <a href="/faq" class="breadcrumbs__item">
                 faq
             </a>
         </div>
