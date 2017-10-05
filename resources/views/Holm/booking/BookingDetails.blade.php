@@ -156,7 +156,7 @@
                                 </button>
                             </div>
                             <div class="roundedBtn">
-                                <button  class="roundedBtn__item   roundedBtn__item--alternative">
+                                <button  class="roundedBtn__item   roundedBtn__item--alternative" data-id="{{$booking->id}}">
                                     OFFER ALTERNATIVE TIME
                                 </button>
                             </div>
@@ -185,7 +185,7 @@
                                 </button>
                             </div>
                             <div class="roundedBtn">
-                                <button  class="roundedBtn__item   roundedBtn__item--alternative">
+                                <button  class="roundedBtn__item   roundedBtn__item--alternative" data-id="{{$booking->id}}">
                                     OFFER ALTERNATIVE TIME
                                 </button>
                             </div>
