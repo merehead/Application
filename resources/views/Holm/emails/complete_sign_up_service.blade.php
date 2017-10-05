@@ -64,16 +64,16 @@
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
 {{--
                             Hello [user_first_name]!
---}}                        Hello {{$user->like_name}}!
+--}}                        Hello {{$user->userName()}}!
 
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
 
-                            Thank you for sign up!
-                            Your <a href="{{route('carerSettings')}}">carer</a> account at <a href="{{route('mainHomePage')}}">HOLM</a> was created and waiting for an approvement by admin. As your account will be confirmed you will be sent an letter.
-                            We hope you will enjoy HOLM!
 
+                            Thank you for sign up!
+                            Your <a href="{{route('ServiceUserSetting',['id'=>$user->id])}}">purchaser</a> account at <a href="{{route('mainHomePage')}}">HOLM</a> was created.
+                            We hope you will enjoy HOLM!
 
                         </p>
 

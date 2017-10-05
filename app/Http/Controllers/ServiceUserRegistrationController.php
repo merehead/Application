@@ -7,12 +7,14 @@ use App\Behaviour;
 use App\Floor;
 use App\Http\Controllers\Repo\ServiceUserRegistration;
 use App\Language;
+use App\MailError;
 use App\ServiceType;
 use App\ServiceUserCondition;
 use App\ServiceUsersProfile;
 use App\WorkingTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 //use Illuminate\Http\Request;
 
@@ -129,6 +131,79 @@ class ServiceUserRegistrationController extends FrontController
             $this->serviceUserProfile->saveStep($request);
         }
         return redirect('/service-registration/'.$serviceUserProfileId);
+    }
+    public function sendContinueRegistration($id)
+    {
+
+        $user = Auth::user();
+
+        if(!$user) {
+            return redirect('/');
+        }
+
+/*        $srvUser = ServiceUsersProfile::findorfail($id);
+
+        dd($srvUser);*/
+
+        $this->title = 'Purchaser Registration';
+
+        $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme') . '.includes.modals')->render();
+
+        $this->vars = array_add($this->vars, 'header', $header);
+        $this->vars = array_add($this->vars, 'footer', $footer);
+        $this->vars = array_add($this->vars, 'modals', $modals);
+
+
+        $this->vars = array_add($this->vars, 'signUpUntil', $user->created_at->addWeek()->format('d/m/Y h:i A'));
+
+
+        try {
+            Mail::send(config('settings.frontTheme') . '.emails.continue_sign_up_service_user',
+                ['user' => $user],
+                function ($m) use ($user) {
+                    $m->to($user->email)->subject('Registration on HOLM');
+                });
+        } catch (Swift_TransportException $STe) {
+
+            $error = MailError::create([
+                'error_message' => $STe->getMessage(),
+                'function' => __METHOD__,
+                'action' => 'Try to sent continue_sign_up_purchaser',
+                'user_id' => $user->id
+            ]);
+        }
+        $this->content = view(config('settings.frontTheme') . '.carerRegistration.thankYou')->with($this->vars)->render();
+
+        return $this->renderOutput();
+    }
+    public function sendCompleteRegistration($id)
+    {
+
+        $user = Auth::user();
+
+        if(!$user) {
+            return redirect('/');
+        }
+
+        try {
+            Mail::send(config('settings.frontTheme') . '.emails.complete_sign_up_service',
+                ['user' => $user],
+                function ($m) use ($user) {
+                    $m->to($user->email)->subject('Welcome on HOLM');
+                });
+        } catch (Swift_TransportException $STe) {
+
+            $error = MailError::create([
+                'error_message' => $STe->getMessage(),
+                'function' => __METHOD__,
+                'action' => 'Try to sent complete_sign_up_service',
+                'user_id' => $user->id
+            ]);
+        }
+
+        return redirect(route('ServiceUserSetting',['id'=>$id]));
     }
 }
 
