@@ -65,7 +65,7 @@ class CarerController extends FrontController implements Constants
             return \redirect('welcome-carer');
             //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
         } else {
-            $newBookings = Booking::whereIn('status_id', [self::NEW, self::AWAITING_CONFIRMATION])->where('purchaser_id', Auth::user()->id)->get();
+            $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('purchaser_id', Auth::user()->id)->get();
             $this->vars = array_add($this->vars, 'newBookings', $newBookings);
 
             $carerProfile = CarersProfile::findOrFail($this->user->id);
@@ -83,7 +83,7 @@ class CarerController extends FrontController implements Constants
             $languages = Language::all();
             $this->vars = array_add($this->vars, 'languages', $languages);
             //dd($this->user,$carerProfile);
-            $newBookings = Booking::whereIn('status_id', [self::NEW, self::AWAITING_CONFIRMATION])->where('carer_id', Auth::user()->id)->get();
+            $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('carer_id', Auth::user()->id)->get();
             $this->vars['newBookings'] = $newBookings;
             $this->content = view(config('settings.frontTheme') . '.CarerProfiles.PrivateProfile')->with($this->vars)->render();
 
@@ -207,7 +207,7 @@ class CarerController extends FrontController implements Constants
 
         $this->vars = array_add($this->vars, 'status', $status);
 
-        $newBookings = Booking::whereIn('status_id', [self::NEW, self::AWAITING_CONFIRMATION])->where('carer_id', $user->id)->get();
+        $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('carer_id', $user->id)->get();
         $this->vars = array_add($this->vars, 'newBookings', $newBookings);
 
         $inProgressBookings = Booking::whereIn('status_id', [self::CONFIRMED, self::IN_PROGRESS, self::DISPUTE])->where('carer_id', $user->id)->get();

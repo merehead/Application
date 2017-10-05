@@ -43,7 +43,7 @@ function calculate_price() {
         dataType: "json",
         success: function (response) {
             if(response.price !=undefined){
-                $('.totalPrice').html(response.price);
+                $('.totalPrice').html('£'+response.price);
             }
             if(response.hours !=undefined){
                 $('.totalTitle>span').html(response.hours+' hours');
@@ -1153,31 +1153,35 @@ $(document).ready(function () {
     });
     $(document).on('click','.Single',function(){
         var that = $(this);
-        var datetime = $(that).parent().parent().find('.datepicker_message');
-        var label = $(that).parent().parent().find('.correct');
-        $(datetime).parent().hide();
-        $(label).hide();
+        if($(that).attr('checked')) {
+            var datetime = $(that).parent().parent().find('.datepicker_message');
+            var label = $(that).parent().parent().find('.correct');
+            $(datetime).parent().hide();
+            $(label).hide();
+        }
     });
     $(document).on('click','.weekly',function(){
         var that = $(this);
-        var datetime = $(that).parent().parent().find('.datepicker_message');
-        var label = $(that).parent().parent().find('.correct');
-        $(datetime).parent().show();
-        $(label).show();
-        $(datetime).removeClass("hasDatepicker").removeAttr('id');
-        $(datetime).datepicker({
-            beforeShow: function(input, inst) {
-                inst.dpDiv.css({"z-index":"2000!important;"});
-            },
-            changeMonth: true,
-            changeYear: true,
-            dateFormat: "dd/mm/yy",
-            showAnim: "slideDown",
+        if($(that).attr('checked')) {
+            var datetime = $(that).parent().parent().find('.datepicker_message');
+            var label = $(that).parent().parent().find('.correct');
+            $(datetime).parent().show();
+            $(label).show();
+            $(datetime).removeClass("hasDatepicker").removeAttr('id');
+            $(datetime).datepicker({
+                beforeShow: function (input, inst) {
+                    inst.dpDiv.css({"z-index": "2000!important;"});
+                },
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "dd/mm/yy",
+                showAnim: "slideDown",
 
-            minDate: "+7D",
-            maxDate: "+90D",
-            yearRange: "0:+2"
-        });
+                minDate: "+7D",
+                maxDate: "+90D",
+                yearRange: "0:+2"
+            });
+        }
     });
 
     $(document).on('click','.delete',function(){
@@ -1192,26 +1196,28 @@ $(document).ready(function () {
 
     $(document).on('click','.Daily',function(){
         var that = $(this);
-        var datetime = $(that).parent().parent().find('.datepicker_message');
-        var label = $(that).parent().parent().find('.correct');
-        $(datetime).parent().show();
-        $(label).show();
-        $(datetime).removeClass("hasDatepicker").removeAttr('id');
-        $(datetime).datepicker({
-            beforeShow: function(input, inst) {
-                inst.dpDiv.css({"z-index":"2000!important;"});
-            },
-            changeMonth: true,
-            changeYear: true,
-            dateFormat: "dd/mm/yy",
-            showAnim: "slideDown",
-            minDate: "+0D",
-            maxDate: "+90D",
-            yearRange: "0:+2"
-        });
+        if($(that).attr('checked')) {
+            var datetime = $(that).parent().parent().find('.datepicker_message');
+            var label = $(that).parent().parent().find('.correct');
+            $(datetime).parent().show();
+            $(label).show();
+            $(datetime).removeClass("hasDatepicker").removeAttr('id');
+            $(datetime).datepicker({
+                beforeShow: function (input, inst) {
+                    inst.dpDiv.css({"z-index": "2000!important;"});
+                },
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "dd/mm/yy",
+                showAnim: "slideDown",
+                minDate: "+0D",
+                maxDate: "+90D",
+                yearRange: "0:+2"
+            });
+        }
     });
 
-    $(document).on('click','.roundedBtn__item--alternative-smal',function(e){
+    $(document).on('click','.roundedBtn__item--alternative-smal,.roundedBtn__item--alternative',function(e){
        e.preventDefault();
        var id=$(this).attr('data-id');
         $.ajax({
@@ -1629,13 +1635,17 @@ $(document).ready(function () {
             type: $(form).attr('method'),
             dataType: "application/json",
             success: function (response) {
-                if(response.status!=undefined){
-                    if($(form).attr('method')=='PUT')$('#bookings__form').modal('hide');
+                if(response.responseText.indexOf('success')){
+                    if($(form).attr('method')=='PUT')
+                        window.refresh();
+                    //$('#message-booking').modal('hide');
                 }
             },
             error: function (response) {
                 if(response.responseText.indexOf('success')){
-                    if($(form).attr('method')=='PUT')$('#message-booking').modal('hide');
+                    if($(form).attr('method')=='PUT')
+                        location.reload();
+                        //$('#message-booking').modal('hide');
                 }
                 if( response.responseText.indexOf('purchase')>0){
                     window.location.href='/'+response.responseText;

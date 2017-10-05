@@ -48,7 +48,7 @@ class HomePageController extends FrontController
 
         return DB::select("SELECT cp.id, cp.first_name,cp.family_name,cp.sentence_yourself 
 FROM `carers_profiles` as cp
-WHERE 1 LIMIT 0,12");
+WHERE 	registration_progress=20 LIMIT 0,12");
 
     }
 

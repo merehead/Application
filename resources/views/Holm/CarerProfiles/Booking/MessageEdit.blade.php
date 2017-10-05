@@ -103,19 +103,19 @@
                             <div class="messageCheckbox checktime" data-id="d0">
                                 <div class="checkBox_item">
                                     <input type="radio" name="bookings[0][appointments][{{$loop->index}}][periodicity]" value="Daily"
-                                           class="customCheckbox periodicity Daily" onclick="calculate_price()" disabled="disabled"
+                                           class="customCheckbox periodicity Daily" onclick="calculate_price();return false;"
                                            id="boxD{{$loop->index+1}}" {{($appointment->periodicity=='daily')?'checked':''}}>
                                     <label for="boxD{{$loop->index+1}}">Daily</label>
                                 </div>
                                 <div class="checkBox_item">
                                     <input type="radio" name="bookings[0][appointments][{{$loop->index}}][periodicity]" value="Weekly"
-                                           class="customCheckbox periodicity weekly" onclick="calculate_price()" disabled="disabled"
+                                           class="customCheckbox periodicity weekly" onclick="calculate_price();return false;"
                                            id="boxD{{$loop->index+2}}" {{($appointment->periodicity=='weekly')?'checked':''}}>
                                     <label for="boxD{{$loop->index+2}}">weekly</label>
                                 </div>
                                 <div class="checkBox_item">
                                     <input type="radio" name="bookings[0][appointments][{{$loop->index}}][periodicity]" value="Single"
-                                           class="customCheckbox periodicity Single" onclick="calculate_price()" disabled="disabled"
+                                           class="customCheckbox periodicity Single" onclick="calculate_price();return false;"
                                            id="boxD{{$loop->index+3}}" {{($appointment->periodicity=='single')?'checked':''}}>
                                     <label for="boxD{{$loop->index+3}}">Single</label>
                                 </div>
