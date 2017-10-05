@@ -987,7 +987,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'assistance_with_dressings' => 'required|in:"Yes","No","Sometimes"',
-            'dressings_detail' => 'required_if:assistance_with_dressings,"Yes","Sometimes"|nullable|string|max:255',
+            'dressings_detail' => 'required_if:assistance_with_dressings,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));

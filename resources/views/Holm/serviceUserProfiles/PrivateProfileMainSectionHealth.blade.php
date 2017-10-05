@@ -233,7 +233,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_with_dressings == 'No' || is_null($serviceUsersProfile->assistance_with_dressings) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('dressings_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::text('dressings_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('dressings_detail'))
                 <span class="help-block"><strong>{{ $errors->first('dressings_detail') }}</strong></span>
             @endif
