@@ -1386,7 +1386,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'we_missed' => 'required|in:"Yes","No","Sometimes"',
-            'we_missed_details' => 'required_if:we_missed,"Yes","Sometimes"|nullable|string|max:255',
+            'we_missed_details' => 'required_if:we_missed,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));

@@ -164,7 +164,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('we_missed_details',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::text('we_missed_details',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('we_missed_details'))
                 <span class="help-block"><strong>{{ $errors->first('we_missed_details') }}</strong></span>
             @endif
