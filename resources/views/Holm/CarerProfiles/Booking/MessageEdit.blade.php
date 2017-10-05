@@ -121,7 +121,7 @@
                                 </div>
                                 <br>
                                 <label class="checkBox_item ordinaryTitle correct {{($appointment->periodicity=='single')?'nhide':''}}" for="date_end">Continue until</label>
-                                <div class="messageInputs__field messageDate correct3 nhide">
+                                <div class="messageInputs__field messageDate correct3 {{($appointment->periodicity=='single')?'nhide':''}}">
                                     <input  onchange="calculate_price()" type="text" class="messageInput datepicker datepicker_message" id="date_end" onchange="calculate_price()"
                                            name="bookings[0][appointments][{{$loop->index}}][date_end]" placeholder=" 08.08.2017" value="{{date('d/m/Y',strtotime($appointment->date_end))}}">
                                     <a href="#" class="messageIco centeredLink">
