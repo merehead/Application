@@ -10,7 +10,7 @@
             MY Profile
         </a>
         <span class="breadcrumbs__arrow">></span>
-         <a href="#" class="breadcrumbs__item">
+         <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}" class="breadcrumbs__item">
              {{$serviceUser->full_name}}
          </a>
 

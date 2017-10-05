@@ -644,3 +644,15 @@ label.correct2 {
     width: 50%;
     text-transform: uppercase;
 }
+
+.ccf:checked + label::after, .ccf:not(:checked) + label::after {
+    content: '\2713';
+    position: absolute;
+    top: 3px;
+    left: 13px;
+    font-size: 18px;
+    line-height: .8;
+    color: #80cb2d;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+}

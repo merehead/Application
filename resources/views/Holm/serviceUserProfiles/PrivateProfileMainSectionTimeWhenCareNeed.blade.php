@@ -34,22 +34,22 @@
             <div class="checkRow">
                 <div class="checkBox_item">
                     {!! Form::checkbox('workingTime['.$workingTimes[1]->id.']', null,($serviceUsersProfile->WorkingTimes->contains('id', $workingTimes[1]->id)? 1 : null),
-array('class' =>  'customCheckbox '.$workingTimes[1]->css_name,'id'=>'checkD'.$workingTimes[1]->id)) !!}
+array('class' =>  'customCheckbox ccf '.$workingTimes[1]->css_name,'id'=>'checkD'.$workingTimes[1]->id)) !!}
                     <label for="checkD{{$workingTimes[1]->id}}">{{$workingTimes[1]->name}}</label>
                 </div>
                 <div class="checkBox_item">
                     {!! Form::checkbox('workingTime['.$workingTimes[2]->id.']', null,($serviceUsersProfile->WorkingTimes->contains('id', $workingTimes[2]->id)? 1 : null),
-array('class' =>  'customCheckbox '.$workingTimes[2]->css_name,'id'=>'checkD'.$workingTimes[2]->id)) !!}
+array('class' =>  'customCheckbox ccf '.$workingTimes[2]->css_name,'id'=>'checkD'.$workingTimes[2]->id)) !!}
                     <label for="checkD{{$workingTimes[2]->id}}">{{$workingTimes[2]->name}}</label>
                 </div>
                 <div class="checkBox_item">
                     {!! Form::checkbox('workingTime['.$workingTimes[3]->id.']', null,($serviceUsersProfile->WorkingTimes->contains('id', $workingTimes[3]->id)? 1 : null),
-array('class' =>  'customCheckbox '.$workingTimes[3]->css_name,'id'=>'checkD'.$workingTimes[3]->id)) !!}
+array('class' =>  'customCheckbox ccf '.$workingTimes[3]->css_name,'id'=>'checkD'.$workingTimes[3]->id)) !!}
                     <label for="checkD{{$workingTimes[3]->id}}">{{$workingTimes[3]->name}}</label>
                 </div>
                 <div class="checkBox_item">
                     {!! Form::checkbox('workingTime['.$workingTimes[0]->id.']', null,($serviceUsersProfile->WorkingTimes->contains('id', $workingTimes[0]->id)? 1 : null),
-array('class' =>  'customCheckbox '.$workingTimes[0]->css_name,'id'=>'checkD'.$workingTimes[0]->id)) !!}
+array('class' =>  'customCheckbox ccf '.$workingTimes[0]->css_name,'id'=>'checkD'.$workingTimes[0]->id)) !!}
                     <label for="checkD{{$workingTimes[0]->id}}">{{$workingTimes[0]->name}}</label>
                 </div>
             </div>

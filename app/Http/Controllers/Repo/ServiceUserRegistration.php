@@ -953,7 +953,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'assistance_in_medication' => 'required|in:"Yes","No","Sometimes"',
-            'in_medication_detail' => 'required_if:assistance_in_medication,"Yes","Sometimes"|nullable|string|max:255',
+            'in_medication_detail' => 'required_if:assistance_in_medication,"Yes","Sometimes"|nullable|string|max:510',
         ]);
 
         $serviceUserProfile = $this->model->findOrFail($request->input('serviceUserProfileID'));
@@ -1245,7 +1245,7 @@ class ServiceUserRegistration
 
         $this->validate($request,[
             'consent' => 'required|in:"Yes","No","Sometimes"',
-            'consent_details' => 'required_if:consent,"Yes","Sometimes"|nullable|string|max:255',
+            'consent_details' => 'required_if:consent,"Yes","Sometimes"|nullable|string|max:510',
 
         ]);
 

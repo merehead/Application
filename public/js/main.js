@@ -2155,7 +2155,8 @@ $(document).ready(function () {
       var reader  = new FileReader()
       reader.addEventListener("load", function() {
 
-      $('.profile_photo_service_user').attr('src', reader.result)
+      _this.parent().find('.profile_photo_service_user').attr('src', reader.result)
+      $('#pf-'+serviceUserId+'').attr('src', reader.result)
 
       var data = {
         image: reader.result,
@@ -2163,8 +2164,6 @@ $(document).ready(function () {
       }
 
       ProfilePhotoSeviceUser.push(data)
-
-      console.log(ProfilePhotoSeviceUser)
 
       }, false)
       reader.readAsDataURL(file)
