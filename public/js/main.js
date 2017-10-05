@@ -1629,13 +1629,17 @@ $(document).ready(function () {
             type: $(form).attr('method'),
             dataType: "application/json",
             success: function (response) {
-                if(response.status!=undefined){
-                    if($(form).attr('method')=='PUT')$('#bookings__form').modal('hide');
+                if(response.responseText.indexOf('success')){
+                    if($(form).attr('method')=='PUT')
+                        window.refresh();
+                    //$('#message-booking').modal('hide');
                 }
             },
             error: function (response) {
                 if(response.responseText.indexOf('success')){
-                    if($(form).attr('method')=='PUT')$('#message-booking').modal('hide');
+                    if($(form).attr('method')=='PUT')
+                        window.refresh();
+                        //$('#message-booking').modal('hide');
                 }
                 if( response.responseText.indexOf('purchase')>0){
                     window.location.href='/'+response.responseText;
