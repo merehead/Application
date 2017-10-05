@@ -105,8 +105,8 @@ Route::get('/documents','DocumentsController@GetDocuments')->name('GetDocuments'
 Route::post('/profile-photo','ProfilePhotosController@uploadUserProfilePhoto');
 Route::post('/service-user-profile-photo','ProfilePhotosController@uploadServiceUserProfilePhoto');
 
-Route::get('/thank-you', 'CarerRegistrationController@sendContinueRegistration')->name('thankYou');
-
+Route::get('/thank-you', 'CarerRegistrationController@sendContinueRegistration')->name('thankYou'); //mail - continue registration
+Route::get('/carer-registration-completed', 'CarerRegistrationController@sendCompleteRegistration')->name('welcomeNewCarer'); //mail - completed registration
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
 
