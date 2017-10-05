@@ -194,11 +194,13 @@ class BookingsController extends FrontController implements Constants
                     'carer_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
                     'purchaser_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
                 ]);
+            //todo Отправить мыло
         } else {
             if($booking->carer_status_id == self::COMPLETED){
                 $booking->status_id = self::DISPUTE;
                 $booking->purchaser_status_id = self::CANCELLED;
             }
+            //todo Отправить мыло
         }
 
         $booking->save();
@@ -309,7 +311,6 @@ class BookingsController extends FrontController implements Constants
     private function createBooking(BookingCreateRequest $data) : Booking
     {
         $purchaser = Auth::user();
-        $purchaser = User::find(1);
         $carer = User::find($data->carer_id);
 
         foreach ($data->bookings as $booking_item){

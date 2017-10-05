@@ -66,7 +66,7 @@
                         @foreach($appointments as $appointment)
                         <div class="messageInputs datetime ">
                             <div class="messageInputs__field messageDate">
-                                <input  onchange="calculate_price()" type="text" name="bookings[0][appointments][0][date_start]"
+                                <input  onchange="calculate_price()" type="text" name="bookings[0][appointments][{{$loop->index}}][date_start]"
                                         class="messageInput datepicker datepicker_message" placeholder="06.06.2017 "
                                 value="{{date('d/m/Y',strtotime($appointment->date_start))}}"
                                 >
@@ -79,7 +79,7 @@
 
                             <div class="messageInputs__field messageTime ">
                                 <input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_from"
-                                        name="bookings[0][appointments][0][time_from]" placeholder="1:30 PM"
+                                        name="bookings[0][appointments][{{$loop->index}}][time_from]" placeholder="1:30 PM"
                                         value="{{$appointment->time_from}}">
                                 <a href="#" class="messageIco centeredLink">
                                     <i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -88,7 +88,7 @@
                             <label class="checkBox_item correct2" for="date_end">End</label>
                             <div class="messageInputs__field messageTime ">
                                 <input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_bed"
-                                        name="bookings[0][appointments][0][time_to]" placeholder="3:30 PM"
+                                        name="bookings[0][appointments][{{$loop->index}}][time_to]" placeholder="3:30 PM"
                                         value="{{$appointment->time_to}}">
                                 <a href="#" class="messageIco centeredLink">
                                     <i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -102,38 +102,33 @@
                             </h2>
                             <div class="messageCheckbox checktime" data-id="d0">
                                 <div class="checkBox_item">
-                                    <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Daily"
+                                    <input type="radio" name="bookings[0][appointments][{{$loop->index}}][periodicity]" value="Daily"
                                            class="customCheckbox periodicity Daily" onclick="calculate_price()" disabled="disabled"
-                                           id="boxD1" {{($appointment->periodicity=='daily')?'checked':''}}>
-                                    <label for="boxD1">Daily</label>
+                                           id="boxD{{$loop->index+1}}" {{($appointment->periodicity=='daily')?'checked':''}}>
+                                    <label for="boxD{{$loop->index+1}}">Daily</label>
                                 </div>
                                 <div class="checkBox_item">
-                                    <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Weekly"
+                                    <input type="radio" name="bookings[0][appointments][{{$loop->index}}][periodicity]" value="Weekly"
                                            class="customCheckbox periodicity weekly" onclick="calculate_price()" disabled="disabled"
-                                           id="boxD2" {{($appointment->periodicity=='weekly')?'checked':''}}>
-                                    <label for="boxD2">weekly</label>
+                                           id="boxD{{$loop->index+2}}" {{($appointment->periodicity=='weekly')?'checked':''}}>
+                                    <label for="boxD{{$loop->index+2}}">weekly</label>
                                 </div>
                                 <div class="checkBox_item">
-                                    <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single"
+                                    <input type="radio" name="bookings[0][appointments][{{$loop->index}}][periodicity]" value="Single"
                                            class="customCheckbox periodicity Single" onclick="calculate_price()" disabled="disabled"
-                                           id="boxD3" {{($appointment->periodicity=='single')?'checked':''}}>
-                                    <label for="boxD3">Single</label>
+                                           id="boxD{{$loop->index+3}}" {{($appointment->periodicity=='single')?'checked':''}}>
+                                    <label for="boxD{{$loop->index+3}}">Single</label>
                                 </div>
                                 <br>
-                                <label class="checkBox_item ordinaryTitle correct nhide" for="date_end">Continue until</label>
-                                <div class="messageInputs__field messageDate correct3 nhide">
+                                <label class="checkBox_item ordinaryTitle correct {{($appointment->periodicity=='single')?'nhide':''}}" for="date_end">Continue until</label>
+                                <div class="messageInputs__field messageDate correct3 {{($appointment->periodicity=='single')?'nhide':''}}">
                                     <input  onchange="calculate_price()" type="text" class="messageInput datepicker datepicker_message" id="date_end" onchange="calculate_price()"
-                                           name="bookings[0][appointments][0][date_end]" placeholder=" 08.08.2017" value="{{date('d/m/Y',strtotime($appointment->date_end))}}">
+                                           name="bookings[0][appointments][{{$loop->index}}][date_end]" placeholder=" 08.08.2017" value="{{date('d/m/Y',strtotime($appointment->date_end))}}">
                                     <a href="#" class="messageIco centeredLink">
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                     </a>
                                 </div>
-                                <div class="checkBox_item nhide">
-                                    <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single" disabled="disabled"
-                                           class="customCheckbox periodicity Single"
-                                           id="boxD3">
-                                    <label for="boxD3">Single</label>
-                                </div>
+
                             </div>
                         </div>
                         @endforeach
