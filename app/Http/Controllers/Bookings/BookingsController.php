@@ -311,7 +311,6 @@ class BookingsController extends FrontController implements Constants
     private function createBooking(BookingCreateRequest $data) : Booking
     {
         $purchaser = Auth::user();
-        $purchaser = User::find(1);
         $carer = User::find($data->carer_id);
 
         foreach ($data->bookings as $booking_item){
