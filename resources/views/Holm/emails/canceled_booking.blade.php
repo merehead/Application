@@ -74,6 +74,19 @@
                             [date] <br />
                             [time]
 
+
+
+                            [User name] has cancelled the following booking:<br />
+                            [service user name]<br />
+                            [Carer name]<br />
+                            [address]<br />
+                            [date]<br />
+                            [time]<br />
+
+
+
+
+
                         </p>
 
                         <a href="#" class=""
