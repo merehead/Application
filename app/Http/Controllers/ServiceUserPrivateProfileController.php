@@ -570,7 +570,7 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
                 'speech_detail'                                     => 'nullable|string|max:510',
                 'vision_detail'                                     => 'nullable|string|max:510',
                 'hearing_detail'                                    => 'nullable|string|max:510',
-                'in_medication_detail'                              => 'nullable|string|max:255',
+                'in_medication_detail'                              => 'nullable|string|max:510',
                 'allergies_detail'                                  => 'nullable|string|max:510',
                 'skin_scores_detail'                                => 'nullable|string|max:255',
                 'dressings_detail'                                  => 'nullable|string|max:255',
