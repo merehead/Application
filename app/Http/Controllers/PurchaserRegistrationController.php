@@ -157,7 +157,7 @@ class PurchaserRegistrationController extends FrontController
             return redirect('/');
         }
 
-        $this->title = 'Carer Registration';
+        $this->title = 'Purchaser Registration';
 
         $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
         $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
@@ -213,7 +213,7 @@ class PurchaserRegistrationController extends FrontController
         return $this->renderOutput();
     }
 
-    public function sendCompleteRegistration()
+/*    public function sendCompleteRegistration()
     {
 
         $user = Auth::user();
@@ -240,5 +240,5 @@ class PurchaserRegistrationController extends FrontController
 
 
         return redirect('/carer-settings');
-    }
+    }*/
 }

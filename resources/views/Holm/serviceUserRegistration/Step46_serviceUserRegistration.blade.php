@@ -81,7 +81,7 @@
         >
             <i class="fa fa-arrow-left "></i>back
         </a>
-        <a href="/" class="registrationBtns__item registrationBtns__item--later">
+        <a href="{{route('thankYouSrvUser',[$serviceUserProfileID])}}" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>

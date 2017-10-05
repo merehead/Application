@@ -62,11 +62,11 @@
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; "  valign="top" class="">
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
-                            Hello {{$user->userCarerProfile->first_name}}!
+                            Hello {{$carer->first_name}}!
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-                            {{$serviceUsersProfile->first_name}} would like to book you on [date].
+                            {{$serviceUser->first_name}} would like to book you on {{$booking->date_from}}.
                             Please click the button below to accept or reject the booking request.
                             You can not be paid unless you complete the booking request.
 
@@ -97,7 +97,7 @@
                             <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;" >
                                 <tr>
                                     <td align="center" style="text-align:left; ">
-                                        <img src="{{asset('/img/service_user_profile_photos/'.$serviceUsersProfile->id.'.png')}}" onerror="this.src='{{asset('/img/no_photo.png')}}'" alt="avatar" class="user"
+                                        <img src="{{asset('/img/service_user_profile_photos/'.$serviceUser->id.'.png')}}" onerror="this.src='{{asset('/img/no_photo.png')}}'" alt="avatar" class="user"
                                              style="width: 70px;
                             display: block;
                             marign-top: 10px;
@@ -114,7 +114,7 @@
                                 <tr>
                                     <td align="center" style="text-align:left;">
                                         <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
-                                            <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUsersProfile->id])}}" style=" color: #6178fc;">{{$serviceUsersProfile->first_name}}</a>
+                                            <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}" style=" color: #6178fc;">{{$serviceUser->first_name}}</a>
                                             <span style="display: block;">
                               Booked you
                             </span>
@@ -146,7 +146,7 @@
                              5h /
                             </span>
                                             <span style=" font-weight: 900;color:#80cb2d;">
-                             £100
+                             £{{$booking->price}}
                             </span>
                                         </p>
                                 </tr>

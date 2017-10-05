@@ -105,11 +105,17 @@ Route::get('/documents','DocumentsController@GetDocuments')->name('GetDocuments'
 Route::post('/profile-photo','ProfilePhotosController@uploadUserProfilePhoto');
 Route::post('/service-user-profile-photo','ProfilePhotosController@uploadServiceUserProfilePhoto');
 
+
+// registration mail
 Route::get('/thank-you-carer', 'CarerRegistrationController@sendContinueRegistration')->name('thankYou'); //mail - continue registration
 Route::get('/carer-registration-completed', 'CarerRegistrationController@sendCompleteRegistration')->name('welcomeNewCarer'); //mail - completed registration
 
 Route::get('/thank-you', 'PurchaserRegistrationController@sendContinueRegistration')->name('thankYouUser'); //mail - continue registration
-Route::get('/user-registration-completed', 'PurchaserRegistrationController@sendCompleteRegistration')->name('welcomeNewUser'); //mail - completed registration
+Route::get('/thank-you-user/{id}', 'ServiceUserRegistrationController@sendContinueRegistration')->name('thankYouSrvUser'); //mail - continue registration
+
+Route::get('/user-registration-completed/{id}', 'ServiceUserRegistrationController@sendCompleteRegistration')->name('serviceUserRegistrationComplete'); //mail - completed registration
+//^^^registration mail
+
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
 
