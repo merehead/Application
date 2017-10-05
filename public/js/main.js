@@ -31,6 +31,32 @@ function isHTML(str) {
     return false;
 }
 
+function calculate_price() {
+    var form = $('#bookings__form');
+    var token = $(form).find('input[name="_token"]').val();
+    console.log(form.serialize());
+    $.ajax({
+        url: '/bookings/calculate_price',
+        headers: {'X-CSRF-TOKEN': token},
+        data: $(form).serialize(),
+        type: 'POST',
+        dataType: "json",
+        success: function (response) {
+            if(response.price !=undefined){
+                $('.totalPrice').html(response.price);
+            }
+            if(response.hours !=undefined){
+                $('.totalTitle>span').html(response.hours+' hours');
+            }
+        },
+        error: function (response) {
+            if(response.price !=undefined){
+                $('.totalPrice').html(response.price);
+            }
+        }
+    });
+};
+
 function carerSearchAjax(){
     var form = $('#carerSearchForm');
     //$(form).submit();
@@ -872,6 +898,9 @@ $(document).ready(function () {
 
     //if($.isFunction('timepicker')){
         $('#time_to_bed').timepicker({
+            onSelect: function() {
+                $(this).change();
+            },
             timeFormat: 'h:mm p',
             interval: 30,
             //minTime: '10',
@@ -883,6 +912,9 @@ $(document).ready(function () {
             scrollbar: true
         });
         $('#time_to_from').timepicker({
+            onSelect: function() {
+                $(this).change();
+            },
             timeFormat: 'h:mm p',
             interval: 30,
             //minTime: '10',
@@ -896,6 +928,9 @@ $(document).ready(function () {
     //}
     //if($.isFunction('timepicker')) {
         $('#time_to_night_helping').timepicker({
+            onSelect: function() {
+                $(this).change();
+            },
             timeFormat: 'h:mm p',
             interval: 30,
             //minTime: '10',
@@ -1014,6 +1049,9 @@ $(document).ready(function () {
     });
     if($.isFunction('timepicker')) {
         $('.timepicker_message').timepicker({
+            onSelect: function() {
+                $(this).change();
+            },
             timeFormat: 'h:mm p',
             interval: 30,
             //minTime: '10',
@@ -1078,6 +1116,8 @@ $(document).ready(function () {
         $('.timepicker_message').timepicker({
             beforeShow: function(input, inst) {
                 inst.dpDiv.css({"z-index":"2000!important;"});
+            },onSelect: function() {
+                $(this).change();
             },
             timeFormat: 'h:mm p',
             interval: 30,
@@ -1236,6 +1276,8 @@ $(document).ready(function () {
         $('.timepicker_message').timepicker({
             beforeShow: function(input, inst) {
                 inst.dpDiv.css({"z-index":2000});
+            },onSelect: function() {
+                $(this).change();
             },
             timeFormat: 'h:mm p',
             interval: 30,

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Auth\Request;
-use App\Http\Controllers\FrontController;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Http\Request;
 
-class ForgotPasswordController extends FrontController
+class ForgotPasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -31,10 +30,15 @@ class ForgotPasswordController extends FrontController
     public function __construct()
     {
         $this->middleware('guest');
-        $this->title ='Holm - Reset Password';
-        $this->template = config('settings.frontTheme').'.templates.homePage';
     }
 
+
+    /**
+     * Send a reset link to the given user.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function sendResetLinkEmail(Request $request)
     {
         $this->validateEmail($request);
@@ -42,37 +46,17 @@ class ForgotPasswordController extends FrontController
         // We will send the password reset link to this user. Once we have attempted
         // to send the link, we will examine the response then see the message we
         // need to show to the user. Finally, we'll send out a proper response.
+        $email=$request->get('email');
+        $user = User::where('email','=',$email)->get();
+        $resquests = ['email'=>$request->get('email')];
         $response = $this->broker()->sendResetLink(
-            $request->only('email')
+            $resquests
         );
-        $request->session()->put('email', $request->get('email'));
-//        $user = User::all()->where('email','=',$request->get('email'));
-//        $request->session()->put('user',$user);
 
         return $response == Password::RESET_LINK_SENT
             ? $this->sendResetLinkResponse($response)
             : $this->sendResetLinkFailedResponse($request, $response);
     }
 
-    public function showLinkRequestForm()
-    {
-        $this->title ='Holm - Reset Password';
-        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
-        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
-        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
 
-        $this->vars = array_add($this->vars,'header',$header);
-        $this->vars = array_add($this->vars,'header',$header);
-        $this->vars = array_add($this->vars,'footer',$footer);
-        $this->vars = array_add($this->vars,'modals',$modals);
-
-        $this->vars = array_add($this->vars,'title', $this->title);
-
-
-        $this->content = view('auth.passwords.myPasswordReset',$this->vars)->render();
-
-        $this->vars = array_add($this->vars,'content',$this->content);
-        return $this->renderOutput();
-
-    }
 }
