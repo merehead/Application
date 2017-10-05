@@ -33,6 +33,17 @@
             @endif
         </div>
     </div>
+
+    <div class="profileRow depend_from_consent" {!!  ($serviceUsersProfile->consent != 'Yes' || is_null($serviceUsersProfile->consent) )? ' style="display:none"' : ''!!}>
+        <div class="profileField profileField--full-width">
+            <h2 class="profileField__title ordinaryTitle"><span
+                        class="ordinaryTitle__text ordinaryTitle__text--smaller">LONG TERM MEDICAL CONDITIONS</span></h2>
+            {!! Form::textarea('long_term_conditions',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"200"]) !!}
+            @if ($errors->has('long_term_conditions'))
+                <span class="help-block"><strong>{{ $errors->first('long_term_conditions') }}</strong></span>
+            @endif
+        </div>
+    </div>
 </div>
 <div class="borderContainer">
     <h2 class="fieldCategory">DEMENTIA</h2>
@@ -569,7 +580,7 @@
     <div class="profileRow depend_from_have_incontinence" {!!  ($serviceUsersProfile->have_incontinence != 'Yes' || is_null($serviceUsersProfile->have_incontinence) )? ' style="display:none"' : ''!!}>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Has own supply of incontinence wear</span></h2>
-            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
+            <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile incontinence_wear_switcher'];
             if (is_null($serviceUsersProfile->incontinence_wear)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('incontinence_wear',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
             @if ($errors->has('incontinence_wear'))
@@ -577,7 +588,9 @@
             @endif
         </div>
     </div>
-    <div class="profileRow depend_from_have_incontinence" {!!  ($serviceUsersProfile->have_incontinence != 'Yes' || is_null($serviceUsersProfile->have_incontinence) )? ' style="display:none"' : ''!!} >
+    <div class="profileRow depend_from_have_incontinence_incontinence_wear" {!!
+    ($serviceUsersProfile->incontinence_wear != 'Yes' || is_null($serviceUsersProfile->incontinence_wear)
+    || $serviceUsersProfile->have_incontinence != 'Yes' || is_null($serviceUsersProfile->have_incontinence) )? ' style="display:none"' : ''!!}>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Needs help in choosing incontinence products</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
@@ -589,7 +602,9 @@
         </div>
 
     </div>
-    <div class="profileRow depend_from_have_incontinence" {!!  ($serviceUsersProfile->have_incontinence != 'Yes' || is_null($serviceUsersProfile->have_incontinence) )? ' style="display:none"' : ''!!}>
+    <div class="profileRow depend_from_have_incontinence_incontinence_wear" {!!
+    ($serviceUsersProfile->incontinence_wear != 'Yes' || is_null($serviceUsersProfile->incontinence_wear)
+    || $serviceUsersProfile->have_incontinence != 'Yes' || is_null($serviceUsersProfile->have_incontinence) )? ' style="display:none"' : ''!!}>
         <div class="profileField profileField--full-width">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">The incontinence products are stored...    </span></h2>
             {!! Form::textarea('incontinence_products_stored',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"250"]) !!}

@@ -208,13 +208,7 @@
                 <span class="help-block"><strong>{{ $errors->first('social_interaction') }}</strong></span>
             @endif
         </div>
-{{--        <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->social_interaction == 'No'  || is_null($serviceUsersProfile->social_interaction) )? ' style="display:none"' : ''!!}>
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('companionship_interaction_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"200"]) !!}
-            @if ($errors->has('companionship_interaction_details'))
-                <span class="help-block"><strong>{{ $errors->first('companionship_interaction_details') }}</strong></span>
-            @endif
-        </div>--}}
+
     </div>
     <div class="profileRow">
         <div class="profileField">
@@ -226,13 +220,7 @@
                 <span class="help-block"><strong>{{ $errors->first('visit_for_companionship') }}</strong></span>
             @endif
         </div>
-{{--        <div class="profileField profileField--two-thirds" {!!  ($serviceUsersProfile->visit_for_companionship == 'No' || is_null($serviceUsersProfile->visit_for_companionship) )? ' style="display:none"' : ''!!}>
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('companionship_visit_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"200"]) !!}
-            @if ($errors->has('companionship_visit_details'))
-                <span class="help-block"><strong>{{ $errors->first('companionship_visit_details') }}</strong></span>
-            @endif
-        </div>--}}
+
     </div>
 
 </div>

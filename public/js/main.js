@@ -730,9 +730,25 @@ $(document).ready(function () {
 
         if ($(this).val() != 'No') {
             $(".depend_from_have_incontinence").slideDown("slow");
+
+            if($('.incontinence_wear_switcher').val() != 'No') {
+                $(".depend_from_have_incontinence_incontinence_wear").slideDown("slow");
+            }
+
         }
         else  {
             $(".depend_from_have_incontinence").slideUp();
+            $(".depend_from_have_incontinence_incontinence_wear").slideUp();
+        }
+
+    });
+    $(document).on('change', '.incontinence_wear_switcher',function () {
+
+        if ($(this).val() != 'No') {
+            $(".depend_from_have_incontinence_incontinence_wear").slideDown("slow");
+        }
+        else  {
+            $(".depend_from_have_incontinence_incontinence_wear").slideUp();
         }
 
     });
