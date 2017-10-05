@@ -136,6 +136,7 @@ class BookingsController extends FrontController implements Constants
             ]);
             $booking->card_token = $cardToken->id;
         }
+        $booking->status_id = 2;
         $booking->save();
 
         return response(['status' => 'success']);
@@ -320,7 +321,7 @@ class BookingsController extends FrontController implements Constants
                 'purchaser_id' => $purchaser->id,
                 'service_user_id' => $serviceUser->id,
                 'carer_id' => $carer->id,
-                'status_id' => 2,
+                'status_id' => 1,
                 'carer_status_id' => 2,
                 'purchaser_status_id' => 1,
             ]);
