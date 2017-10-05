@@ -62,12 +62,12 @@
                 <tr>
                     <td style="padding: 30px 40px;font-family: 'Roboto', sans-serif; line-height: 1.5; background: #f9f9f9; "  valign="top" class="">
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
-
-                            @if(session('user')->isCarer())
-                                Hello  {{session('user')->userCarerProfile->first_name}}!
+{{dd(old('email'))}}
+                            @if($user)
+                                Hello  {{session('user')->userName}}!
                             @endif
                             @if(session('user')->isPurchaser())
-                                Hello  {{session('user')->userPurchaserProfile->first_name}}!
+                                Hello  {{session('user')->userName}}!
                             @endif
                         </h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0; ">
