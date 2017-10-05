@@ -70,7 +70,7 @@
                             </h1>
                             <p style=" text-align: justify; font-weight: 300; margin: 10px 0; ">
                                 We received a request to reset your password for your account {{session('email')}}. We are here to help!<br>
-                                Simply click on the {{ $actionUrl }} to set a new password.
+                                Simply click on the <a href="{{ $actionUrl }}">Reset password</a> to set a new password.
                                 <br>
                             </p>
                             <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
