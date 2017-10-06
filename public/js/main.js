@@ -910,6 +910,9 @@ $(document).ready(function () {
 
     //if($.isFunction('timepicker')){
         $('#time_to_bed').timepicker({
+            beforeShow: function(i) {
+                if ($(i).attr('readonly')) { return false; }
+                },
             onSelect: function() {
                 $(this).change();
             },
@@ -1117,6 +1120,7 @@ $(document).ready(function () {
         $(".datepicker_message").datepicker({
             beforeShow: function(input, inst) {
                 inst.dpDiv.css({"z-index":"2000!important;"});
+                if ($(input).attr('readonly')) { return false; }
             },
             changeMonth: true,
             changeYear: true,
@@ -1181,6 +1185,7 @@ $(document).ready(function () {
             $(datetime).datepicker({
                 beforeShow: function (input, inst) {
                     inst.dpDiv.css({"z-index": "2000!important;"});
+                    if ($(input).attr('readonly')) { return false; }
                 },
                 changeMonth: true,
                 changeYear: true,
@@ -1215,6 +1220,7 @@ $(document).ready(function () {
             $(datetime).datepicker({
                 beforeShow: function (input, inst) {
                     inst.dpDiv.css({"z-index": "2000!important;"});
+                    if ($(input).attr('readonly')) { return false; }
                 },
                 changeMonth: true,
                 changeYear: true,
@@ -1240,6 +1246,7 @@ $(document).ready(function () {
                 $(".datepicker_message").datepicker({
                     beforeShow: function(input, inst) {
                         inst.dpDiv.css({"z-index":"2000!important;"});
+                        if ($(input).attr('readonly')) { return false; }
                     },
                     changeMonth: true,
                     changeYear: true,
@@ -1327,6 +1334,7 @@ $(document).ready(function () {
         $(".datepicker_message").datepicker({
             beforeShow: function(input, inst) {
                 inst.dpDiv.css({"z-index":"9999!important"});
+                if ($(input).attr('readonly')) { return false; }
             },
             changeMonth: true,
             changeYear: true,
@@ -1339,6 +1347,7 @@ $(document).ready(function () {
         $('.timepicker_message').timepicker({
             beforeShow: function(input, inst) {
                 inst.dpDiv.css({"z-index":2000});
+                if ($(input).attr('readonly')) { return false; }
             },onSelect: function() {
                 $(this).change();
             },
