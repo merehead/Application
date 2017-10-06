@@ -394,7 +394,20 @@ class BookingsController extends FrontController implements Constants
             $this->createAppointments($booking, $booking_item['appointments']);
 
 
-            //$user=Auth::user();
+
+
+            //Attaching booking`s assistance_types
+            if(isset($booking_item['assistance_types']))
+                $booking->assistance_types()->attach($booking_item['assistance_types']);
+
+            //Booking status for workroom
+            BookingsMessage::create([
+                'booking_id' => $booking->id,
+                'type' => 'status_change',
+                'new_status' => 'pending',
+            ]);
+
+/*            //$user=Auth::user();
             $purchaserProfile = PurchasersProfile::find($purchaser->id);
             $carerProfile = CarersProfile::find($carer->id);
 
@@ -412,18 +425,7 @@ class BookingsController extends FrontController implements Constants
                     'action' => 'Try to sent new_booking',
                     'user_id' => $purchaser->id
                 ]);
-            }
-
-            //Attaching booking`s assistance_types
-            if(isset($booking_item['assistance_types']))
-                $booking->assistance_types()->attach($booking_item['assistance_types']);
-
-            //Booking status for workroom
-            BookingsMessage::create([
-                'booking_id' => $booking->id,
-                'type' => 'status_change',
-                'new_status' => 'pending',
-            ]);
+            }*/
 
             return $booking;
         }
