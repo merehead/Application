@@ -176,8 +176,8 @@ class PurchaserRegistration
 
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']],TRUE)) {
             Auth::login($user, true);
-
-            try {
+        }
+/*            try {
 
                 Mail::send(config('settings.frontTheme') . '.emails.continue_sign_up_service_user',
                     ['user' => $user, 'password' => $request['password']],
@@ -193,9 +193,9 @@ class PurchaserRegistration
                         'action'=>'Try to sent continue_sign_up_service_user',
                         'user_id'=>$user->id
                     ]);
-                }
+                }*/
 
-        }
+
 
         return;
     }

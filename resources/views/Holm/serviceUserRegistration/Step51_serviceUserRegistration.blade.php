@@ -36,7 +36,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('consent_details',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"500"]) !!} //todo 512
+                        {!! Form::textarea('consent_details',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"500"]) !!}
                         @if ($errors->has('consent_details'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('consent_details') }}</strong>
@@ -70,7 +70,7 @@
         >
             <i class="fa fa-arrow-left "></i>back
         </a>
-        <a href="/" class="registrationBtns__item registrationBtns__item--later">
+        <a href="{{route('thankYouSrvUser',[$serviceUserProfileID])}}" class="registrationBtns__item registrationBtns__item--later">
             continue later
         </a>
     </div>

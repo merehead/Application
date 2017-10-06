@@ -6,18 +6,23 @@ use App\Appointment;
 use App\Booking;
 use App\BookingOverview;
 use App\BookingsMessage;
+use App\CarersProfile;
 use App\Http\Requests\BookingCreateRequest;
 use App\Interfaces\Constants;
+use App\MailError;
 use App\PaymentServices\StripeService;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FrontController;
+use App\PurchasersProfile;
 use App\ServiceUsersProfile;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use SebastianBergmann\Comparator\Book;
 use Auth;
 use Carbon\Carbon;
 use DB;
+use Swift_TransportException;
 
 class BookingsController extends FrontController implements Constants
 {
@@ -57,6 +62,17 @@ class BookingsController extends FrontController implements Constants
             //Generating appointments
             $this->createAppointments($booking, $booking_item['appointments']);
         }
+
+        if($user->user_type_id == 3){
+            //carer
+            $booking->carer_status_id = 1;
+            $booking->purchaser_status_id = 2;
+        } else{
+            $booking->carer_status_id = 2;
+            $booking->purchaser_status_id = 1;
+        }
+        
+        $booking->save();
 
         //todo отправить почту базируясь на $user->user_type_id (либо кереру, либо пурчасеру)
 
@@ -139,6 +155,27 @@ class BookingsController extends FrontController implements Constants
         $booking->status_id = 2;
         $booking->save();
 
+                    //$user=Auth::user();
+            $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
+            $carerProfile = CarersProfile::find($booking->carer_id);
+            $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
+            //$user = Auth::user();
+            try {
+                Mail::send(config('settings.frontTheme') . '.emails.new_booking',
+                    ['$purchaser' => $purchaserProfile,'booking'=>$booking,'serviceUser'=>$serviceUser,'carer'=>$carerProfile],
+                    function ($m) use ($carerProfile) {
+                        $m->to($carerProfile->email)->subject('New booking');
+                    });
+            } catch (Swift_TransportException $STe) {
+
+                $error = MailError::create([
+                    'error_message' => $STe->getMessage(),
+                    'function' => __METHOD__,
+                    'action' => 'Try to sent new_booking',
+                    'user_id' => $carerProfile->id
+                ]);
+            }
+
         return response(['status' => 'success']);
     }
 
@@ -196,12 +233,65 @@ class BookingsController extends FrontController implements Constants
                     'purchaser_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
                 ]);
             //todo Отправить мыло
+
+            $carer = CarersProfile::find($booking->carer_id);
+            $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
+            $purchaser = PurchasersProfile::find($booking->purchaser_id);
+
+
+
+            try {
+                Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
+                    [   'user_first_name' => $purchaser->first_name,
+                        'user_name' => $carer->first_name,
+                        'service_user_name' => $serviceUser->first_name,
+                        'address' => $serviceUser->addresss_line1,
+                        'date' => 'date',
+                        'time' => 'time',],
+                    function ($m) use ($purchaser) {
+                        $m->to($purchaser->email)->subject('Canceled booking');
+                    });
+            } catch (Swift_TransportException $STe) {
+
+                $error = MailError::create([
+                    'error_message' => $STe->getMessage(),
+                    'function' => __METHOD__,
+                    'action' => 'Try to sent Canceled booking',
+                    'user_id' => $user->id
+                ]);
+            }
         } else {
             if($booking->carer_status_id == self::COMPLETED){
                 $booking->status_id = self::DISPUTE;
                 $booking->purchaser_status_id = self::CANCELLED;
             }
             //todo Отправить мыло
+            $carer = CarersProfile::find($booking->carer_id);
+            $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
+            $purchaser = PurchasersProfile::find($booking->purchaser_id);
+
+            //dd($booking,$carer,$serviceUser,$purchaser);
+
+            try {
+                Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
+                    [   'user_first_name' => $carer->first_name,
+                        'user_name' => $purchaser->first_name,
+                        'service_user_name' => $serviceUser->first_name,
+                        'address' => $serviceUser->address_line1,
+                        'date' => 'date',
+                        'time' => 'time',],
+                    function ($m) use ($user) {
+                        $m->to($user->email)->subject('Canceled booking');
+                    });
+            } catch (Swift_TransportException $STe) {
+
+                $error = MailError::create([
+                    'error_message' => $STe->getMessage(),
+                    'function' => __METHOD__,
+                    'action' => 'Try to sent Canceled booking',
+                    'user_id' => $user->id
+                ]);
+            }
         }
 
         $booking->save();
@@ -326,6 +416,12 @@ class BookingsController extends FrontController implements Constants
                 'purchaser_status_id' => 1,
             ]);
 
+            //Generating appointments
+            $this->createAppointments($booking, $booking_item['appointments']);
+
+
+
+
             //Attaching booking`s assistance_types
             if(isset($booking_item['assistance_types']))
                 $booking->assistance_types()->attach($booking_item['assistance_types']);
@@ -337,8 +433,6 @@ class BookingsController extends FrontController implements Constants
                 'new_status' => 'pending',
             ]);
 
-            //Generating appointments
-            $this->createAppointments($booking, $booking_item['appointments']);
 
 
             return $booking;

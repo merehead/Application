@@ -29,7 +29,7 @@
             </p>
 
 
-            <p class="info-p info-p--roboto"> Press  <span class="accent-p">'SUBMIT'</span> to finish.
+            <p class="info-p info-p--roboto"> Press  <span class="accent-p"> 'SUBMIT'</span> to finish.
             </p>
         </div>
 
@@ -38,14 +38,18 @@
     </div>
 
 </div>
-<form id="step" method="GET" action="/carer-settings">
+<form id="step" method="GET" action="{{ route('welcomeNewCarer') }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value = '21'>
     <input type="hidden" name="carersProfileID" value = {{$carersProfileID}}>
 </form>
+
+
+
+
 <div class="registrationBtns registrationBtns--center">
 
-    <a href="Carer_Private_profile_page.html" class="registrationBtns__item"
+    <a href="{{route('welcomeNewCarer')}}" class="registrationBtns__item"
        onclick="event.preventDefault();document.getElementById('step').submit();"
     >
         submit

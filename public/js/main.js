@@ -1664,7 +1664,7 @@ $(document).ready(function () {
             error: function (response) {
                 if(response.responseText.indexOf('success')){
                     if($(form).attr('method')=='PUT')
-                        window.refresh();
+                        location.reload();
                         //$('#message-booking').modal('hide');
                 }
                 if( response.responseText.indexOf('purchase')>0){

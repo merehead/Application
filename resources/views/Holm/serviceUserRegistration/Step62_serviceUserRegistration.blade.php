@@ -30,7 +30,7 @@
 </div>
 <div class="registrationBtns registrationBtns--center">
 
-    <a href="{{route('ServiceUserSetting',['id'=>$serviceUserProfileID])}}" class="registrationBtns__item">
+    <a href="{{route('serviceUserRegistrationComplete',['id'=>$serviceUserProfileID])}}" class="registrationBtns__item">
         submit
     </a>
 </div>
@@ -38,11 +38,14 @@
 
 
 
-<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
+{{--<form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value='62'>
     <input type="hidden" name="serviceUserProfileID" value = {{$serviceUserProfileID}}>
-</form>
+</form>--}}
+
+
+
 
 <form id="stepback" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">
     {{ csrf_field() }}
@@ -52,27 +55,4 @@
 </form>
 
 
-{{--
 
-<div class="registrationBtns">
-
-    <div class="registrationBtns__left">
-        <a href="back" class="registrationBtns__item registrationBtns__item--back"
-           onclick="event.preventDefault();document.getElementById('stepback').submit();"
-        >
-            <i class="fa fa-arrow-left "></i>back
-        </a>
-        <a href="/" class="registrationBtns__item registrationBtns__item--later">
-            continue later
-        </a>
-    </div>
-
-
-    <a href="next" class="registrationBtns__item"
-       onclick="event.preventDefault();document.getElementById('step').submit();"
-    >
-        next step
-        <i class="fa fa-arrow-right"></i>
-    </a>
-</div>
---}}
