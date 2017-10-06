@@ -151,6 +151,15 @@ WHERE `carer_id` = ".$this->id." LIMIT 0,4");
         return $data;
     }
 
+    public function getOwnReferralCodeAttribute()
+    {
+        $res = DB::select("select own_referral_code from users where id = ".$this->id);
+
+        $data = $res[0]->own_referral_code;
+
+        return $data;
+    }
+
 }
 
 
