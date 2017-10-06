@@ -155,6 +155,27 @@ class BookingsController extends FrontController implements Constants
         $booking->status_id = 2;
         $booking->save();
 
+                    //$user=Auth::user();
+            $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
+            $carerProfile = CarersProfile::find($booking->carer_id);
+            $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
+            //$user = Auth::user();
+            try {
+                Mail::send(config('settings.frontTheme') . '.emails.new_booking',
+                    ['$purchaser' => $purchaserProfile,'booking'=>$booking,'serviceUser'=>$serviceUser,'carer'=>$carerProfile],
+                    function ($m) use ($carerProfile) {
+                        $m->to($carerProfile->email)->subject('New booking');
+                    });
+            } catch (Swift_TransportException $STe) {
+
+                $error = MailError::create([
+                    'error_message' => $STe->getMessage(),
+                    'function' => __METHOD__,
+                    'action' => 'Try to sent new_booking',
+                    'user_id' => $carerProfile->id
+                ]);
+            }
+
         return response(['status' => 'success']);
     }
 
@@ -256,7 +277,7 @@ class BookingsController extends FrontController implements Constants
                     [   'user_first_name' => $carer->first_name,
                         'user_name' => $purchaser->first_name,
                         'service_user_name' => $serviceUser->first_name,
-                        'address' => $serviceUser->addresss_line1,
+                        'address' => $serviceUser->address_line1,
                         'date' => 'date',
                         'time' => 'time',],
                     function ($m) use ($user) {
@@ -412,25 +433,7 @@ class BookingsController extends FrontController implements Constants
                 'new_status' => 'pending',
             ]);
 
-/*            //$user=Auth::user();
-            $purchaserProfile = PurchasersProfile::find($purchaser->id);
-            $carerProfile = CarersProfile::find($carer->id);
 
-            try {
-                Mail::send(config('settings.frontTheme') . '.emails.new_booking',
-                    ['$purchaser' => $purchaserProfile,'booking'=>$booking,'serviceUser'=>$serviceUser,'carer'=>$carerProfile],
-                    function ($m) use ($purchaser) {
-                        $m->to($purchaser->email)->subject('New booking');
-                    });
-            } catch (Swift_TransportException $STe) {
-
-                $error = MailError::create([
-                    'error_message' => $STe->getMessage(),
-                    'function' => __METHOD__,
-                    'action' => 'Try to sent new_booking',
-                    'user_id' => $purchaser->id
-                ]);
-            }*/
 
             return $booking;
         }

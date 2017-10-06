@@ -143,7 +143,7 @@
                                     <td align="center" style="text-align:left;">
                                         <p style="margin-top: 10px;font-size: 25px;font-family: 'Lato', sans-serif;">
                             <span style="font-weight: 700;">
-                             5h /
+                             {{$booking->hours}}h /
                             </span>
                                             <span style=" font-weight: 900;color:#80cb2d;">
                              £{{$booking->price}}
@@ -156,6 +156,8 @@
                 </tr>
             </table>
         </td>
+
+
     </tr>
     <tr>
         <td   valign="top" align="left" bgcolor="#ffffff"  >

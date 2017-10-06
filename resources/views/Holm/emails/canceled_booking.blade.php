@@ -67,17 +67,12 @@
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
 
-
                             {{$user_name}} has cancelled the following booking:<br />
                             Service user - {{$service_user_name}}<br />
                             Carer - {{$user_name}}<br />
                             Service user adress - {{$address}}<br />
                             Date - {{$date}}<br />
                             Time - {{$time}}<br />
-
-
-
-
 
                         </p>
 

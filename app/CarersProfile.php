@@ -142,6 +142,15 @@ WHERE `carer_id` = ".$this->id." LIMIT 0,4");
 
     }
 
+    public function getEmailAttribute()
+    {
+        $res = DB::select("select email from users where id = ".$this->id);
+
+        $data = $res[0]->email;
+
+        return $data;
+    }
+
 }
 
 
