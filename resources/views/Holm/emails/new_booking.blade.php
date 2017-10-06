@@ -82,8 +82,12 @@
                                 Please click the button below to accept or reject the booking request.
                                 You can not be paid unless you complete the booking request.
                             @else
-                                You booked <a
+
+                                                            You booked <a
                                         href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{$carer->first_name}}</a>
+                                on {{\Carbon\Carbon::parse($booking->date_start)->toFormattedDateString()}} -
+                                {{\Carbon\Carbon::parse($booking->date_end)->toFormattedDateString()}}.
+
                             @endif
                         </p>
                     </td>
