@@ -53,7 +53,14 @@ class ForgotPasswordController extends Controller
         $user=$user->shift();
         $resquests = ['email' => $request->get('email')];
         $request->session()->put('email', $request->get('email'));
-        $request->session()->put('name', str_replace('&nbsp',' ',$user->userName()));
+        switch ($user->user_type_id) {
+            case 1: $name='Purchaser';break;
+            case 2: $name='Service user';break;
+            case 3: $name='Carer';break;
+            case 4: $name='Admin';break;
+
+        }
+        $request->session()->put('name', $name);
         $response = $this->broker()->sendResetLink(
             $resquests
         );
