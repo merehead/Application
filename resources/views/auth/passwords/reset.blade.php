@@ -1,102 +1,150 @@
-@include('main.main')
+@extends(config('settings.frontTheme').'.layouts.carerPrivateProfile',['title'=>''])
+@section('header')
+    @include(config('settings.frontTheme').'.headers.baseHeader')
 
+@endsection
 @section('content')
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
-    <section class="loginSection">
-        <div class="loginLogo">
-            <a href="/" class="loginLogo__item"></a>
-        </div>
-        <div class="loginBox loginBox--set">
-            <div class="login">
-                <div class="login__header">
-                    <h2>set a new password</h2>
-                    <a href="/" class="closeModal">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
-                <div class="login__body" >
 
-                    <form id="login__form" class="login__form" method="POST" action="{{ route('password.request') }}">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="token" value="{{ $token }}">
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <div class="formField">
+    <section class="mainSection">
+        <div class="container">
+            <div class="breadcrumbs">
+                <a href="/" class="breadcrumbs__item">
+                    Home
+                </a>
+                <span class="breadcrumbs__arrow">&gt;</span>
+                <a href="{{ route('password.request') }}" class="breadcrumbs__item">
+                    set a new password
+                </a>
 
-                                <div class="fieldWrap">
-                                    {{--<input type="text" class="formItem formItem--input" placeholder="Your Email">--}}
-                                    <input id="email" type="email" class="formItem formItem--input {{$errors->has('email') ? ' formItem--error' : ''}}"
-                                           placeholder="Your Email" name="email" value="{{ old('email') }}" required>
-                                    <span class="fieldIco"><i class="fa fa-envelope"></i></span>
-                                </div>
+            </div>
 
+            <div class="forgottenBox">
+                <form class="form-horizontal" method="POST" action="{{ route('password.request') }}">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="token" value="{{ $token }}">
+                    <div class="forgotPass">
+                        <div class="forgotPass__title">
+                            <h2>
+                                set a new password
+                            </h2>
+                        </div>
+                        <p class="forgot-p forgot-p--center">
+                            Please enter your email and new password
+                        </p>
+
+                        @if ($errors->any())
+                            <br>
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
-                            @if ($errors->has('email'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                            @endif
+                        @endif
+                        <div class="formRow">
+                            <div class="formColumn ">
+                                <div class="formField">
+                                    <h2 class="formLabel">
+                                        E-Mail Address
+                                    </h2>
+                                    <div class="inputWrap {{ $errors->has('email') ? ' has-error' : '' }}">
+                                        <input minlength="6" name="email" class="formInput registrationForm__input"
+                                               placeholder="*********" type="email">
+                                        <span class="inputIco registrationForm__ico">
+                  <i class="fa fa-lock" aria-hidden="true"></i>
+                  </span>
+                                        <span class="inputIco registrationForm__ico registrationForm__ico--right">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </span>
+
+                                    </div>
+                                    @if ($errors->has('email'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="formRow">
+                            <div class="formColumn ">
+                                <div class="formField">
+                                    <h2 class="formLabel">
+                                        new password
+                                    </h2>
+                                    <div class="inputWrap {{ $errors->has('password') ? ' has-error' : '' }}">
+                                        <input minlength="6" name="password" class="formInput registrationForm__input"
+                                               placeholder="*********" type="password">
+                                        <span class="inputIco registrationForm__ico">
+                  <i class="fa fa-lock" aria-hidden="true"></i>
+                  </span>
+                                        <span class="inputIco registrationForm__ico registrationForm__ico--right">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </span>
+
+                                    </div>
+                                    @if ($errors->has('password'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="formRow">
+                            <div class="formColumn ">
+                                <div class="formField">
+                                    <h2 class="formLabel">
+                                        repeat password
+                                    </h2>
+                                    <div class="inputWrap {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                                        <input minlength="6" class="formInput registrationForm__input"
+                                               name="password_confirmation"
+                                               id="password_confirmation"
+                                               placeholder="*********" type="password">
+                                        <span class="inputIco registrationForm__ico">
+                  <i class="fa fa-lock" aria-hidden="true"></i>
+                  </span>
+                                        <span class="inputIco registrationForm__ico registrationForm__ico--right">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </span>
+
+                                    </div>
+                                    @if ($errors->has('password_confirmation'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
 
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <div class="formField">
-                                <h2 class="fieldLabel">new password</h2>
-                                <div class="fieldWrap">
-                                    <input id="password" type="password" class="formItem formItem--input {{ $errors->has('password') ? ' formItem--error' : '' }}" name="password" placeholder="********">
-                                    <span class="fieldIco">
-                  <i class="fa fa-lock"></i>
-                </span>
-                                </div>
-                            </div>
-                            @if ($errors->has('password'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                            @endif
+                        <div class="roundedBtn roundedBtn--center roundedBtn--margin-top">
+                            <button type="submit"
+                                    class="roundedBtn__item roundedBtn__item--full roundedBtn__item--full">
+                                Confirm password
+                            </button>
                         </div>
 
-
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <div class="formField">
-                                <h2 class="fieldLabel">Repeat Password</h2>
-                                <div class="fieldWrap">
-                                    <input id="password-confirm" type="password" class="formItem formItem--input {{ $errors->has('password_confirmation') ? ' formItem--error' : '' }}" name="password_confirmation"
-                                           placeholder="********">
-                                    <span class="fieldIco">
-                  <i class="fa fa-lock"></i>
-                </span>
-                                </div>
-                            </div>
-                            @if ($errors->has('password_confirmation'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                            @endif
-                        </div>
-
-
-                    </form>
-                </div>
-
-                <div class="login__footer">
-
-                    <button class="actionsBtn  actionsBtn--accept actionsBtn--full"
-                            onclick="event.preventDefault();document.getElementById('login__form').submit();">
-                        confirm password
-                    </button>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </section>
 
+    </section>
 
 @endsection
 
-
+@section('footer')
+    @include(config('settings.frontTheme').'.footers.baseFooter')
+@endsection
+@section('modals')
+    @include(config('settings.frontTheme').'.includes.modals')
+@endsection
 
 {{--@section('content')
 <div class="container">

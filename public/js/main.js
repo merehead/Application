@@ -21,7 +21,19 @@ var is_data_changed=false;
 // window.onbeforeunload = function () {
 //     return (is_data_changed ? "Измененные данные не сохранены. Закрыть страницу?" : null);
 // }
+function getTime( ) {
+    var d = new Date( );
+    d.setHours( d.getHours() ); // offset from local time
+    var h = (d.getHours() % 12) || 12; // show midnight & noon as 12
+    return (
+        ( h < 10 ? '0' : '') + h +
+        ( d.getMinutes() < 10 ? ':0' : ':') + d.getMinutes() +
+        // optional seconds display
+        // ( d.getSeconds() < 10 ? ':0' : ':') + d.getSeconds() +
+        ( d.getHours() < 12 ? ' AM' : ' PM' )
+    );
 
+}
 function isHTML(str) {
     var a = document.createElement('div');
     a.innerHTML = str;
@@ -917,10 +929,10 @@ $(document).ready(function () {
             },
             timeFormat: 'h:mm p',
             interval: 30,
-            //minTime: '10',
+            minTime: getTime(),
             //maxTime: '6:00pm',_step48
             //defaultTime: '18',
-            startTime: '18:00',
+            startTime: getTime(),
             dynamic: true,
             dropdown: true,
             scrollbar: true
@@ -1057,6 +1069,7 @@ $(document).ready(function () {
             //minTime: '10',
             //maxTime: '6:00pm',
             //defaultTime: '18',
+            startTime: getTime(),
             startTime: '18:00',
             dynamic: true,
             dropdown: true,
@@ -1121,10 +1134,7 @@ $(document).ready(function () {
             },
             timeFormat: 'h:mm p',
             interval: 30,
-            //minTime: '10',
-            //maxTime: '6:00pm',
-            //defaultTime: '18',
-            startTime: '18:00',
+            startTime: getTime(),
             dynamic: true,
             dropdown: true,
             scrollbar: true
@@ -1250,7 +1260,7 @@ $(document).ready(function () {
                     //minTime: '10',
                     //maxTime: '6:00pm',
                     //defaultTime: '18',
-                    startTime: '6:00 p',
+                    startTime: getTime(),
                     dynamic: true,
                     dropdown: true,
                     scrollbar: true
@@ -1334,10 +1344,9 @@ $(document).ready(function () {
             },
             timeFormat: 'h:mm p',
             interval: 30,
-            //minTime: '10',
-            //maxTime: '6:00pm',
+            //maxTime: '6:00pm',_step48
             //defaultTime: '18',
-            startTime: '18:00',
+            startTime: getTime(),
             dynamic: true,
             dropdown: true,
             scrollbar: true
@@ -1426,6 +1435,7 @@ $(document).ready(function () {
     });
 
     $(document).on('click','.sort-rating', function (e) {
+        e.preventDefault();
         $('#sort-rating').val(1);
         $('#sort-id').val(0);
         if($('#sort-rating-order').val()=='asc'){
@@ -1437,6 +1447,7 @@ $(document).ready(function () {
     });
 
     $(document).on('click','.sort-id', function (e) {
+        e.preventDefault();
         $('#sort-id').val(1);
         $('#sort-rating').val(0);
         if($('#sort-id-order').val()=='asc'){
@@ -2288,7 +2299,7 @@ $(document).ready(function () {
 
     if($carer_profile.length){
       axios.get(
-        'documents'
+        '/documents'
       ).then( function(response) {
         var newDoc = Object.entries(response.data.data.documents)
 
