@@ -167,6 +167,8 @@ class PurchaserRegistration
 
         if ($user) {
 
+            $user->own_referral_code = mb_substr($user->id.md5($user->id),0,8);
+
             $purchaserProfile = new PurchasersProfile();
 
             $purchaserProfile->id = $user->id;

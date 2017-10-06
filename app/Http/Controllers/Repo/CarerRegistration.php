@@ -203,6 +203,10 @@ class CarerRegistration
 
         if ($user) {
 
+            $user->own_referral_code = mb_substr($user->id.md5($user->id),0,8);
+
+            $user->update();
+
             $carerPrifile = new CarersProfile();
 
             $carerPrifile->id = $user->id;
