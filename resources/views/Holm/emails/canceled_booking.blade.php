@@ -69,11 +69,11 @@
 
 
                             {{$user_name}} has cancelled the following booking:<br />
-                            {{$service_user_name}}<br />
-                            {{$user_name}}<br />
-                            {{$address}}<br />
-                            {{$date}}<br />
-                            {{$time}}<br />
+                            Service user - {{$service_user_name}}<br />
+                            Carer - {{$user_name}}<br />
+                            Service user adress - {{$address}}<br />
+                            Date - {{$date}}<br />
+                            Time - {{$time}}<br />
 
 
 

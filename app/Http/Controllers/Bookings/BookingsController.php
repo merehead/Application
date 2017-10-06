@@ -215,14 +215,16 @@ class BookingsController extends FrontController implements Constants
 
             $carer = CarersProfile::find($booking->carer_id);
             $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
-            $purchaser = PurchasersProfile::find($booking->puchaser_id);
+            $purchaser = PurchasersProfile::find($booking->purchaser_id);
+
+
 
             try {
                 Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
                     [   'user_first_name' => $purchaser->first_name,
                         'user_name' => $carer->first_name,
                         'service_user_name' => $serviceUser->first_name,
-                        'address' => $serviceUser->adres_line1,
+                        'address' => $serviceUser->addresss_line1,
                         'date' => 'date',
                         'time' => 'time',],
                     function ($m) use ($purchaser) {
@@ -245,15 +247,18 @@ class BookingsController extends FrontController implements Constants
             //todo Отправить мыло
             $carer = CarersProfile::find($booking->carer_id);
             $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
-            $purchaser = PurchasersProfile::find($booking->puchaser_id);
+            $purchaser = PurchasersProfile::find($booking->purchaser_id);
+
+            //dd($booking,$carer,$serviceUser,$purchaser);
+
             try {
                 Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
                     [   'user_first_name' => $carer->first_name,
                         'user_name' => $purchaser->first_name,
                         'service_user_name' => $serviceUser->first_name,
-                        'address' => $serviceUser->adres_line1,
-                        'date' => 'data',
-                        'time' => 'data',],
+                        'address' => $serviceUser->addresss_line1,
+                        'date' => 'date',
+                        'time' => 'time',],
                     function ($m) use ($user) {
                         $m->to($user->email)->subject('Canceled booking');
                     });
