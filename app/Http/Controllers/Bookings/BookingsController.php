@@ -96,6 +96,18 @@ class BookingsController extends FrontController implements Constants
             $item->time_to = Carbon::parse($item->time_to)->format("h:i A");;
         }, $appointments);
 
+        $user = Auth::user();
+       $this->vars = array_add($this->vars,'user',$user);
+       $this->vars = array_add($this->vars,'appointments',$appointments);
+       $this->vars = array_add($this->vars,'assistance_types',$booking->assistance_types);
+       $this->vars = array_add($this->vars,'serviceUsers',$booking->bookingServiceUser);
+       $this->vars = array_add($this->vars,'booking',$booking);
+       $content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.MessageEdit')->with($this->vars)->render();
+       return  $content;
+       //todo букинги тут $booking. апоинтменты тут
+
+
+
 
         $this->vars = array_add($this->vars, 'appointments', $appointments);
         $this->vars = array_add($this->vars, 'assistance_types', $booking->assistance_types);
