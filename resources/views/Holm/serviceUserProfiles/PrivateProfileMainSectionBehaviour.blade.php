@@ -122,7 +122,7 @@ array('class' => 'checkboxNew','id'=>'behaviour'.$behaviour[8]->id)) !!}
         <div class="profileField profileField--full-width">
             <h2 class="profileField__title ordinaryTitle"><span
                         class="ordinaryTitle__text ordinaryTitle__text--smaller">PLEASE, GIVE DETAILS</span></h2>
-            {!! Form::textarea('consent_details',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"500"]) !!} //to 512
+            {!! Form::textarea('consent_details',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('consent_details'))
                 <span class="help-block"><strong>{{ $errors->first('consent_details') }}</strong></span>
             @endif
