@@ -86,7 +86,8 @@ class BookingsController extends FrontController implements Constants
                 WHERE booking_id = '.$booking->id.'
                 GROUP BY batch ORDER BY batch';
         $appointments = DB::select($sql);
-
+        $user = Auth::user();
+       $this->vars = array_add($this->vars,'user',$user);
        $this->vars = array_add($this->vars,'appointments',$appointments);
        $this->vars = array_add($this->vars,'assistance_types',$booking->assistance_types);
        $this->vars = array_add($this->vars,'serviceUsers',$booking->bookingServiceUser);
