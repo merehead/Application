@@ -25,12 +25,16 @@ function getTime( ) {
     var d = new Date( );
     d.setHours( d.getHours() ); // offset from local time
     var h = (d.getHours() % 12) || 12; // show midnight & noon as 12
+    var m = d.getMinutes();
+    if(m<30){m=0;} else{
+        h=h+1;m=0;
+    }
     return (
         ( h < 10 ? '0' : '') + h +
-        ( d.getMinutes() < 10 ? ':0' : ':') + d.getMinutes() +
+        ( m < 10 ? ':0' : ':') + m +
         // optional seconds display
         // ( d.getSeconds() < 10 ? ':0' : ':') + d.getSeconds() +
-        ( d.getHours() < 12 ? ' AM' : ' PM' )
+        ( h < 12 ? ' AM' : ' PM' )
     );
 
 }
@@ -913,7 +917,7 @@ $(document).ready(function () {
             beforeShow: function(i) {
                 if ($(i).attr('readonly')) { return false; }
                 },
-            onSelect: function() {
+            change: function() {
                 $(this).change();
             },
             timeFormat: 'h:mm p',
@@ -927,7 +931,7 @@ $(document).ready(function () {
             scrollbar: true
         });
         $('#time_to_from').timepicker({
-            onSelect: function() {
+            change: function() {
                 $(this).change();
             },
             timeFormat: 'h:mm p',
@@ -943,7 +947,7 @@ $(document).ready(function () {
     //}
     //if($.isFunction('timepicker')) {
         $('#time_to_night_helping').timepicker({
-            onSelect: function() {
+            change: function() {
                 $(this).change();
             },
             timeFormat: 'h:mm p',
@@ -1064,8 +1068,9 @@ $(document).ready(function () {
     });
     if($.isFunction('timepicker')) {
         $('.timepicker_message').timepicker({
-            onSelect: function() {
+            change: function() {
                 $(this).change();
+                console.log('time change');
             },
             timeFormat: 'h:mm p',
             interval: 30,
@@ -1077,6 +1082,7 @@ $(document).ready(function () {
             dynamic: true,
             dropdown: true,
             scrollbar: true
+
         });
     }
 
@@ -1133,7 +1139,7 @@ $(document).ready(function () {
         $('.timepicker_message').timepicker({
             beforeShow: function(input, inst) {
                 inst.dpDiv.css({"z-index":"2000!important;"});
-            },onSelect: function() {
+            },change: function() {
                 $(this).change();
             },
             timeFormat: 'h:mm p',
@@ -1143,6 +1149,7 @@ $(document).ready(function () {
             dropdown: true,
             scrollbar: true
         });
+
         bookings_pos++;
         return false;
     });
@@ -1259,7 +1266,7 @@ $(document).ready(function () {
                 $('.timepicker_message').timepicker({
                     beforeShow: function(input, inst) {
                         inst.dpDiv.css({"z-index":"2000!important;"});
-                    },onSelect: function() {
+                    },change: function() {
                         $(this).change();
                     },
                     timeFormat: 'h:mm p',
@@ -1348,7 +1355,8 @@ $(document).ready(function () {
             beforeShow: function(input, inst) {
                 inst.dpDiv.css({"z-index":2000});
                 if ($(input).attr('readonly')) { return false; }
-            },onSelect: function() {
+            },
+            change: function() {
                 $(this).change();
             },
             timeFormat: 'h:mm p',
