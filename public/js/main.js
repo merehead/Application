@@ -1359,7 +1359,7 @@ $(document).ready(function () {
             change: function() {
                 $(this).change();
             },
-            timeFormat: 'h:mm p',
+            timeFormat: 'g:i A',
             interval: 30,
             //maxTime: '6:00pm',_step48
             //defaultTime: '18',

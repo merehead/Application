@@ -11,7 +11,7 @@
             </div>
             <form id="bookings__form" method="PUT" action="/bookings/{{$booking->id}}">
                 {{csrf_field()}}
-                <input type="hidden" name="carer_id" value="{{var_dump($booking->carer_id)}}">
+                <input type="hidden" name="carer_id" value="{{$booking->carer_id}}">
                 <div class="message__body">
                     <div class="messageGroup">
                         <h2 class="ordinaryTitle ordinaryTitle--smaller">
@@ -171,8 +171,8 @@
             </form>
         </div>
     </div>
-    <link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">
-    <script src="/js/jquery-ui-timepicker-addon.js"></script>
+    {{--<link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">--}}
+    {{--<script src="/js/jquery-ui-timepicker-addon.js"></script>--}}
     <script>
         function resizeMap()
         {
