@@ -9,6 +9,7 @@ use App\BookingsMessage;
 use App\CarersProfile;
 use App\Http\Requests\BookingCreateRequest;
 use App\Interfaces\Constants;
+use App\MailError;
 use App\PaymentServices\StripeService;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FrontController;
@@ -211,11 +212,21 @@ class BookingsController extends FrontController implements Constants
                     'purchaser_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
                 ]);
             //todo Отправить мыло
+
+            $carer = CarersProfile::find($booking->carer_id);
+            $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
+            $purchaser = PurchasersProfile::find($booking->puchaser_id);
+
             try {
                 Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
-                    ['user' => $user],
-                    function ($m) use ($user) {
-                        $m->to($user->email)->subject('Canceled booking');
+                    [   'user_first_name' => $purchaser->first_name,
+                        'user_name' => $carer->first_name,
+                        'service_user_name' => $serviceUser->first_name,
+                        'address' => $serviceUser->adres_line1,
+                        'date' => 'date',
+                        'time' => 'time',],
+                    function ($m) use ($purchaser) {
+                        $m->to($purchaser->email)->subject('Canceled booking');
                     });
             } catch (Swift_TransportException $STe) {
 
@@ -232,9 +243,17 @@ class BookingsController extends FrontController implements Constants
                 $booking->purchaser_status_id = self::CANCELLED;
             }
             //todo Отправить мыло
+            $carer = CarersProfile::find($booking->carer_id);
+            $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
+            $purchaser = PurchasersProfile::find($booking->puchaser_id);
             try {
                 Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
-                    ['user' => $user],
+                    [   'user_first_name' => $carer->first_name,
+                        'user_name' => $purchaser->first_name,
+                        'service_user_name' => $serviceUser->first_name,
+                        'address' => $serviceUser->adres_line1,
+                        'date' => 'data',
+                        'time' => 'data',],
                     function ($m) use ($user) {
                         $m->to($user->email)->subject('Canceled booking');
                     });
@@ -371,6 +390,10 @@ class BookingsController extends FrontController implements Constants
                 'purchaser_status_id' => 1,
             ]);
 
+            //Generating appointments
+            $this->createAppointments($booking, $booking_item['appointments']);
+
+
             //$user=Auth::user();
             $purchaserProfile = PurchasersProfile::find($purchaser->id);
             $carerProfile = CarersProfile::find($carer->id);
@@ -401,10 +424,6 @@ class BookingsController extends FrontController implements Constants
                 'type' => 'status_change',
                 'new_status' => 'pending',
             ]);
-
-            //Generating appointments
-            $this->createAppointments($booking, $booking_item['appointments']);
-
 
             return $booking;
         }

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\MailError;
 use Illuminate\Http\Request;
 use App\Mail\OrderShipped;
-use Mail;
+use Illuminate\Support\Facades\Mail;
+
+use Swift_TransportException;
 
 class ContactController extends FrontController
 {
@@ -71,7 +74,7 @@ class ContactController extends FrontController
             Mail::send(config('settings.frontTheme') . '.emails.contact',
                 ['userMessage'=>$input['message'],'phone'=>$input['phone'],'email'=>$input['email'],'userName'=>$input['name']],
                 function ($m) use ($input) {
-                    $m->from($input['email'])->to('info@holm.care')->subject($input['topic']);
+                    $m->to('info@holm.care')->subject($input['topic']);
                 });
         }
         catch (Swift_TransportException $STe){

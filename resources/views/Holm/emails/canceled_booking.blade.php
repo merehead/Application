@@ -62,18 +62,18 @@
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; "  valign="top" class="">
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
-                            Hello [user_first_name]!
+                            Hello {{$user_first_name}}!
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
 
 
-                            [User name] has cancelled the following booking:<br />
-                            [service user name]<br />
-                            [Carer name]<br />
-                            [address]<br />
-                            [date]<br />
-                            [time]<br />
+                            {{$user_name}} has cancelled the following booking:<br />
+                            {{$service_user_name}}<br />
+                            {{$user_name}}<br />
+                            {{$address}}<br />
+                            {{$date}}<br />
+                            {{$time}}<br />
 
 
 
@@ -81,13 +81,7 @@
 
                         </p>
 
-                        <a href="#" class=""
-                           style="text-transform: uppercase;
-                  color: #7bb7dc;
-                  font-weight: 700;
-                  text-decoration: underline;">
-                            Click here to view your appointment booking
-                        </a>
+
                     </td>
                 </tr>
             </table>
