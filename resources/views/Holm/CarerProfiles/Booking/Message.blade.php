@@ -135,7 +135,7 @@
                                 <div class="messageInputs__field messageTime ">
                                     <input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_from"
                                            name="bookings[0][appointments][0][time_from]" placeholder="1:30 PM"
-                                           value="1:30 PM">
+                                           value="{{date('h:i A', time())}}">
                                     <a href="#" class="messageIco centeredLink">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </a>
