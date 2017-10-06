@@ -1167,7 +1167,7 @@ $(document).ready(function () {
     });
     $(document).on('click','.Single',function(){
         var that = $(this);
-        if($(that).attr('checked')) {
+        if( $(that).is(':checked')) {
             var datetime = $(that).parent().parent().find('.datepicker_message');
             var label = $(that).parent().parent().find('.correct');
             $(datetime).parent().hide();
@@ -1176,7 +1176,7 @@ $(document).ready(function () {
     });
     $(document).on('click','.weekly',function(){
         var that = $(this);
-        if($(that).attr('checked')) {
+        if( $(that).is(':checked')) {
             var datetime = $(that).parent().parent().find('.datepicker_message');
             var label = $(that).parent().parent().find('.correct');
             $(datetime).parent().show();
@@ -1211,7 +1211,7 @@ $(document).ready(function () {
 
     $(document).on('click','.Daily',function(){
         var that = $(this);
-        if($(that).attr('checked')) {
+        if( $(that).is(':checked')) {
             var datetime = $(that).parent().parent().find('.datepicker_message');
             var label = $(that).parent().parent().find('.correct');
             $(datetime).parent().show();
