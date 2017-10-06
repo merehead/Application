@@ -9,7 +9,9 @@
 namespace App\Http\Controllers\Admin\Repo\Models\User;
 
 
+use App\CarersProfile;
 use App\Http\Controllers\Admin\Repo\Models\AdminModel;
+use App\PurchasersProfile;
 use App\User;
 use App\UserType;
 
@@ -37,7 +39,7 @@ class AdminUsers extends AdminModel
 
         $profileType = UserType::all()->toArray();
 
-        var_dump($profileType);
+        //var_dump($profileType);
 
         return ['1'=>'Purchaser','2'=>'Service user','3'=>'Carer'];
 
@@ -65,6 +67,26 @@ class AdminUsers extends AdminModel
 
     // как бы выборка данных из таблицы пользователей для админки Профиля менеджеров
     public function getUserList(){
+
+/*        $carers = CarersProfile::all(['id','first_name','family_name']);
+        $purchaser = PurchasersProfile::all(['id','first_name','family_name']);
+
+        $merged = $carers->merge($purchaser);*/
+
+        $merged2 = CarersProfile::all(['id','first_name','family_name'])
+            ->merge(PurchasersProfile::all(['id','first_name','family_name']))
+            ->sortByDesc('id')
+            ->slice(0, 40);
+
+
+
+
+//            dd($carers,$purchaser,$merged,$merged2);
+        //dd($merged2);
+
+
+        return $merged2;
+
 
         $user[1] = ['id'=>1,'name'=>'chris','userType'=>'purchaser','userStatus'=>'NEW','nta'=>1];
         $user[2] = ['id'=>2,'name'=>'john','userType'=>'service','userStatus'=>'NEW','nta'=>45];

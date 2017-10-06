@@ -6,13 +6,13 @@
         <table class="innerTable">
             <tr>
                 <td>
-                    <span>{{$item['id']}}</span>
+                    <span>{{$item->id}}</span>
                 </td>
                 <td>
-                    <a href="#" class="tableLink"><span>{{$item['name']}}</span></a>
+                    <a href="#" class="tableLink"><span>{{$item->first_name}}</span></a>
                 </td>
                 <td>
-                    <span>{{$item['userType']}}</span>
+                    <span>{{$item->family_name}}</span>
                 </td>
             </tr>
 
@@ -20,12 +20,12 @@
     </td>
     <td>
         <div class="profStatus">
-            <span class="profStatus__item profStatus__item--{{$rowClass}}">{{$item['userStatus']}}</span>
+          {{--  <span class="profStatus__item profStatus__item--{{$rowClass}}">{{$item['userStatus']}}</span>--}}
         </div>
     </td>
     <td>
         <div class="tdBox">
-            <span class="tdValue">{{$item['nta']}}</span>
+            {{--<span class="tdValue">{{$item['nta']}}</span>--}}
             <a href="#" class="actionsBtn actionsBtn--view"
                onclick="event.preventDefault();document.getElementById('popupWrap1').style.display = 'block';">
                 view
