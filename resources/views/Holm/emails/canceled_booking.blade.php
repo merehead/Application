@@ -106,7 +106,7 @@
                                                     {{$user_name}}</a>{{--<span style="display: block;">Booked you</span>--}}</p>
                                         @else
                                             <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
-                                               {{-- <span style="display: block;">You booked</span>--}}<a href="{{route('carerPublicProfile',['carerPublicProfile'=>$booking->carer_id])}}" style="color: #6178fc; font-weight: 900;">{{$booking->carer_id}}</a></p>
+                                               {{-- <span style="display: block;">You booked</span>--}}<a href="{{route('carerPublicProfile',['carerPublicProfile'=>$booking->carer_id])}}" style="color: #6178fc; font-weight: 900;">{{$user_name}}</a></p>
                                     @endif
                                 </tr>
                             </table>
