@@ -72,7 +72,7 @@
 
 
                             Thank you for sign up!
-                            Your <a href="{{route('ServiceUserSetting',['id'=>$user->id])}}">purchaser</a> account at <a href="{{route('mainHomePage')}}">HOLM</a> was created.
+                            Your <a href="{{route('ServiceUserSetting',['id'=>$user->id])}}">account</a>  at <a href="{{route('mainHomePage')}}">HOLM</a> was created.
                             We hope you will enjoy HOLM!
 
                         </p>

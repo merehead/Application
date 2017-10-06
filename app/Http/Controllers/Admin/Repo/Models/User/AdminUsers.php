@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin\Repo\Models\User;
 
 use App\Http\Controllers\Admin\Repo\Models\AdminModel;
 use App\User;
+use App\UserType;
 
 class AdminUsers extends AdminModel
 {
@@ -33,7 +34,13 @@ class AdminUsers extends AdminModel
 
     // как бы справочник типов профилей
     public function getProfileType (){
+
+        $profileType = UserType::all()->toArray();
+
+        var_dump($profileType);
+
         return ['1'=>'Purchaser','2'=>'Service user','3'=>'Carer'];
+
     }
 
     // как бы справочник статусов

@@ -159,10 +159,10 @@ class BookingsController extends FrontController implements Constants
             $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
             $carerProfile = CarersProfile::find($booking->carer_id);
             $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
-            //$user = Auth::user();
+            //message for carer
             try {
                 Mail::send(config('settings.frontTheme') . '.emails.new_booking',
-                    ['$purchaser' => $purchaserProfile,'booking'=>$booking,'serviceUser'=>$serviceUser,'carer'=>$carerProfile],
+                    ['$purchaser' => $purchaserProfile,'booking'=>$booking,'serviceUser'=>$serviceUser,'carer'=>$carerProfile,'sendTo'=>'carer'],
                     function ($m) use ($carerProfile) {
                         $m->to($carerProfile->email)->subject('New booking');
                     });
@@ -171,10 +171,26 @@ class BookingsController extends FrontController implements Constants
                 $error = MailError::create([
                     'error_message' => $STe->getMessage(),
                     'function' => __METHOD__,
-                    'action' => 'Try to sent new_booking',
+                    'action' => 'Try to sent new_booking to carer',
                     'user_id' => $carerProfile->id
                 ]);
             }
+        //message for purchaser
+        try {
+            Mail::send(config('settings.frontTheme') . '.emails.new_booking',
+                ['purchaser' => $purchaserProfile,'booking'=>$booking,'serviceUser'=>$serviceUser,'carer'=>$carerProfile,'sendTo'=>'purchaser'],
+                function ($m) use ($purchaserProfile) {
+                    $m->to($purchaserProfile->email)->subject('New booking');
+                });
+        } catch (Swift_TransportException $STe) {
+
+            $error = MailError::create([
+                'error_message' => $STe->getMessage(),
+                'function' => __METHOD__,
+                'action' => 'Try to sent new_booking to purchaser',
+                'user_id' => $purchaserProfile->id
+            ]);
+        }
 
         return response(['status' => 'success']);
     }

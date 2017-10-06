@@ -62,25 +62,18 @@
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; "  valign="top" class="">
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
-                            Hello {{$carer->first_name}}!
+                            Hello {{( $sendTo == 'carer') ? $carer->first_name : $purchaser->first_name}}!
                         </h1>
-
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-                            {{$serviceUser->first_name}} would like to book you on {{$booking->date_from}}.
+                            @if($sendTo == 'carer')
+                            <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}" >{{$serviceUser->first_name}}</a>
+                            would like to book you on {{\Carbon\Carbon::parse($booking->date_from)->toFormattedDateString()}}.
                             Please click the button below to accept or reject the booking request.
                             You can not be paid unless you complete the booking request.
-
+                            @else
+                                You booked <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}" >{{$carer->first_name}}</a>
+                            @endif
                         </p>
-
-                        <!-- <a href="#" class=""
-                           style="text-transform: uppercase;
-                           color: #7bb7dc;
-                           font-weight: 700;
-                           text-decoration: underline;">
-                           Est eu pertinaciaen delacrue instructiol
-                         </a> -->
-
-
                     </td>
                 </tr>
             </table>
@@ -127,12 +120,12 @@
                                 <tr>
                                     <td align="center" style="text-align:left;">
                                         <p style="margin-top: 10px;  font-size: 16px;font-family: 'Roboto', sans-serif;">
-                            <span style="color: #909090;">
-                              10 May 2017
+                           <span style="color: #909090;">
+                              {{$booking->appointments()->get()->count()}} Appointment{{$booking->appointments()->get()->count() > 1 ? 's':''}}
                             </span>
-                                            <span style="display: block; font-weight:700; ">
+  {{--                                           <span style="display: block; font-weight:700; ">
                               12:00 PM - 5:00 PM
-                            </span>
+                            </span>--}}
                                         </p>
                                 </tr>
                             </table>
@@ -159,11 +152,12 @@
 
 
     </tr>
+    @if($sendTo == 'carer')
     <tr>
         <td   valign="top" align="left" bgcolor="#ffffff"  >
             <table cellpadding="0" cellspacing="0" border="0"  style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"  class="t-content">               <tr>
                     <td style="padding: 30px 10px; background: #f9f9f9; "  valign="top" class="">
-                        <a href="#" class=""
+                        <a href="{{route('carerBooking',['2'])}}" class=""
                            style="
                     display: block;
                     width: 240px;
@@ -187,6 +181,7 @@
             </table>
         </td>
     </tr>
+    @endif
     <tr>
         <td   valign="top" align="left" bgcolor="#ffffff"  style="font-family: 'Roboto', sans-serif;">
             <table cellpadding="0" cellspacing="0" border="0"  style="    margin: 0; " width="100%"  class="t-content">
