@@ -87,6 +87,12 @@ class BookingsController extends FrontController implements Constants
                 GROUP BY batch ORDER BY batch';
         $appointments = DB::select($sql);
 
+        array_map(function ($item){
+            $item->time_from = Carbon::parse($item->time_from)->format("h:i A");
+            $item->time_to = Carbon::parse($item->time_to)->format("h:i A");;
+        }, $appointments);
+
+
        $this->vars = array_add($this->vars,'appointments',$appointments);
        $this->vars = array_add($this->vars,'assistance_types',$booking->assistance_types);
        $this->vars = array_add($this->vars,'serviceUsers',$booking->bookingServiceUser);
