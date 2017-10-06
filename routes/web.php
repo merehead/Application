@@ -86,7 +86,7 @@ Route::post('/bookings','Bookings\BookingsController@create');
 Route::put('/bookings/{booking}','Bookings\BookingsController@update');
 Route::post('/bookings/calculate_price','Bookings\BookingsController@calculateBookingPrice');
 Route::get('/bookings/{booking}/modal_edit', 'Bookings\BookingsController@getModalEditBooking');
-Route::get('/bookings/{booking}/details', 'Bookings\BookingsController@view_details');
+Route::get('/bookings/{booking}/details', 'Bookings\BookingsController@view_details')->name('viewBookingDetails');
 Route::get('/bookings/{booking}/purchase', 'Bookings\PaymentsController@payment_form');
 Route::post('/bookings/{booking}/message','Bookings\BookingsController@create_message');
 Route::post('/bookings/{booking}/setPaymentMethod','Bookings\BookingsController@setPaymentMethod')->name('setBookingPaymentMethod');

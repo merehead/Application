@@ -36,7 +36,7 @@
        style="margin-top: 30px;
       border-collapse: collapse;
       -webkit-box-shadow: 0px 0px 101px 0px rgba(31, 31, 33, 0.15);
-      box-shadow: 0px 0px 101px 0px rgba(31, 31, 33, 0.15); width: 100%; max-width: 940px;  background: url({{asset('img/letter_bg.png')}}) no-repeat bottom center;"
+      box-shadow: 0px 0px 101px 0px rgba(31, 31, 33, 0.15); width: 100%; max-width: 940px;"
        bgcolor="#ffffff"
        class="container">
     <tr>
@@ -58,41 +58,108 @@
     <tr>
         <td   valign="top" align="left" bgcolor="#ffffff"  style="font-family: 'Roboto', sans-serif;">
             <table cellpadding="0" cellspacing="0" border="0"  style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"  class="t-content">
-
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; "  valign="top" class="">
-                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
-                            Hello {{$user_first_name}}!
-                        </h1>
-
-                        <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-
-                            {{$user_name}} has cancelled the following booking:<br />
-                            Service user - {{$service_user_name}}<br />
-                            Carer - {{$user_name}}<br />
-                            Service user adress - {{$address}}<br />
-                            Date - {{$date}}<br />
-                            Time - {{$time}}<br />
-
-                        </p>
-
-
+                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">Hello {{$user_first_name}}!</h1>
+                        <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">{{$user_name}} has cancelled the following <a href="{{route('viewBookingDetails',[$booking->id])}}">booking</a>:<br /></p>
                     </td>
                 </tr>
             </table>
         </td>
     </tr>
     <tr>
-        <td   valign="top" align="left" bgcolor="#ffffff"  style="font-family: 'Roboto', sans-serif;">
-            <table cellpadding="0" cellspacing="0" border="0"  style="    margin: 0; " width="100%"  class="t-content">
+
+        <td style="padding:40px ;">
+            <table cellpadding="0" cellspacing="0" border="0"
+                   style="overflow-x: auto;border: 1px solid rgb(225, 225, 225);box-shadow: 0px 0px 26.73px 0.27px rgba(0, 0, 0, 0.11);border-collapse: collapse;   margin: 0; "
+                   width="100%" class="t-content">
+                <tr>
+                    <td style="padding: 20px 15px 30px 15px;  " valign="middle">
+
+                        <div class="column"
+                             style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;">
+                            <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;">
+                                <tr>
+                                    <td align="center" style="text-align:left; ">
+                                        <img src="{{asset('/img/service_user_profile_photos/'.$booking->service_user_id.'.png')}}"
+                                             onerror="this.src='{{asset('/img/no_photo.png')}}'" alt="avatar"
+                                             class="user"
+                                             style="width: 70px;
+                            display: block;
+                            marign-top: 10px;
+                            height: 70px;
+                            border-radius: 50%;
+                            object-fit: cover; -webkit-object-fit: cover;">
+
+
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="column"
+                             style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;;">
+                            <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;">
+                                <tr>
+                                    <td align="center" style="text-align:left;">
+                                        @if($sendTo == 'carer')
+                                            <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
+                                                <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$booking->service_user_id])}}" style=" color: #6178fc;">
+                                                    {{$user_name}}</a>{{--<span style="display: block;">Booked you</span>--}}</p>
+                                        @else
+                                            <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
+                                               {{-- <span style="display: block;">You booked</span>--}}<a href="{{route('carerPublicProfile',['carerPublicProfile'=>$booking->carer_id])}}" style="color: #6178fc; font-weight: 900;">{{$booking->carer_id}}</a></p>
+                                    @endif
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="column"
+                             style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;;">
+                            <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;">
+                                <tr>
+                                    <td align="center" style="text-align:left;">
+                                        <p style="margin-top: 10px;  font-size: 16px;font-family: 'Roboto', sans-serif;">
+                           <span style="color: #909090;">
+                              {{$booking->appointments()->get()->count()}}
+                               Appointment{{$booking->appointments()->get()->count() > 1 ? 's':''}}
+                            </span>
+
+                                        </p>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="column"
+                             style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;;">
+                            <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;">
+                                <tr>
+                                    <td align="center" style="text-align:left;">
+                                        <p style="margin-top: 10px;font-size: 25px;font-family: 'Lato', sans-serif;">
+                            <span style="font-weight: 700;">
+                             {{$booking->hours}}h /
+                            </span>
+                                            <span style=" font-weight: 900;color:#80cb2d;">
+                             £{{$booking->price}}
+                            </span>
+                                        </p>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+
+
+    </tr>
+    <tr>
+        <td valign="top" align="left" bgcolor="#ffffff" style="font-family: 'Roboto', sans-serif;">
+            <table cellpadding="0" cellspacing="0" border="0" style="    margin: 0; " width="100%" class="t-content">
 
                 <tr>
-                    <td style="padding: 30px 40px; background: #fff; "  valign="top" class="">
+                    <td style="padding: 30px 40px; background: #fff; " valign="top" class="">
                         <p style="
                    text-transform: uppercase;
                    font-size: 14px;
                  margin-bottom:0;">
-                            best wishes <br />
+                            best wishes <br/>
                             the holm team
                         </p>
                         <a href="#" class=""
@@ -104,20 +171,22 @@
                             Holm.com
                         </a>
                     </td>
-                    <td style="padding: 30px 40px; background: #fff; "  valign="top" class="">
+                    <td style="padding: 30px 40px; background: #fff; " valign="top" class="">
                         <ul style="float: right;">
-                            <li  style="list-style: none; display: inline-block;">
-                                <a href="https://www.facebook.com/HolmCareUK/" style="margin-left: 10px; color: #a5a7af; ">
+                            <li style="list-style: none; display: inline-block;">
+                                <a href="https://www.facebook.com/HolmCareUK/"
+                                   style="margin-left: 10px; color: #a5a7af; ">
                                     <img src="{{asset('img/s1.png')}}" alt="">
                                 </a>
                             </li>
-                            <li  style="list-style: none;display: inline-block;">
+                            <li style="list-style: none;display: inline-block;">
                                 <a href="https://twitter.com/holmcare" style="margin-left: 10px; color: #a5a7af;">
                                     <img src="{{asset('img/s2.png')}}" alt="">
                                 </a>
                             </li>
                             <li style="list-style: none;display: inline-block;">
-                                <a href="https://plus.google.com/communities/102900900688938220709" style="margin-left: 10px; color: #a5a7af;">
+                                <a href="https://plus.google.com/communities/102900900688938220709"
+                                   style="margin-left: 10px; color: #a5a7af;">
                                     <img src="{{asset('img/s3.png')}}" alt="">
                                 </a>
                             </li>
