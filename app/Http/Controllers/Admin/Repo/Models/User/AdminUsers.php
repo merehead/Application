@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\Repo\Models\AdminModel;
 use App\PurchasersProfile;
 use App\User;
 use App\UserType;
+use Illuminate\Support\Facades\DB;
 
 class AdminUsers extends AdminModel
 {
@@ -51,58 +52,78 @@ class AdminUsers extends AdminModel
     }
 
     // как бы подсчет сумарных данных по зарегистрированным пользователям
-    public function getTotals (){
-        return ['New'=>'12','Active'=>'345','Rejected'=>'6','Edited'=>'8','Blocked'=>'45'];
+    public function getTotals ($totalsByUserType) : array
+    {
+
+        $result = array();
+
+        $result['New'] = $totalsByUserType->sum('New');
+        $result['Active'] = $totalsByUserType->sum('Active');
+        $result['Rejected'] = $totalsByUserType->sum('Rejected');
+        $result['Edited'] = $totalsByUserType->sum('Edited');
+        $result['Blocked'] = $totalsByUserType->sum('Blocked');
+
+
+        return $result;
     }
 
-    // как бы подсчет сумарных данных по зарегистрированным пользователям в разрезе типов пользователей
+    //подсчет сумарных данных по зарегистрированным пользователям в разрезе типов пользователей
     public function getTotalsByUserType (){
 
-        $userByType['purchaser'] = ['type'=>'purchaser','New'=>'2','Active'=>'145','Rejected'=>'1','Edited'=>'3','Blocked'=>'15'];
-        $userByType['service']    = ['type'=>'service','New'=>'7','Active'=>'150','Rejected'=>'3','Edited'=>'4','Blocked'=>'15'];
-        $userByType['carer']      = ['type'=>'carer','New'=>'3','Active'=>'50','Rejected'=>'2','Edited'=>'1','Blocked'=>'15'];
+        $userByType = array();
+
+        $result  = DB::select("select `profiles_status_id`, count(*) as profiles_count from `purchasers_profiles` group by `profiles_status_id`");
+        if ($result) {
+            $userByType['purchaser']=['type'=>'purchaser'];
+            foreach ($result as $value) {
+                switch ($value->profiles_status_id){
+                    case 1 : $userByType['purchaser']['New'] = $value->profiles_count; break;
+                    case 2 : $userByType['purchaser']['Active'] = $value->profiles_count; break;
+                    case 3 : $userByType['purchaser']['Rejected'] = $value->profiles_count; break;
+                    case 4 : $userByType['purchaser']['Edited'] = $value->profiles_count; break;
+                    case 5 : $userByType['purchaser']['Blocked'] = $value->profiles_count; break;
+                }
+            }
+        }
+        $result  = DB::select("select `profiles_status_id`, count(*) as profiles_count from `carers_profiles` group by `profiles_status_id`");
+        if ($result) {
+            $userByType['carer']=['type'=>'carer'];
+            foreach ($result as $value) {
+                switch ($value->profiles_status_id){
+                    case 1 : $userByType['carer']['New'] = $value->profiles_count; break;
+                    case 2 : $userByType['carer']['Active'] = $value->profiles_count; break;
+                    case 3 : $userByType['carer']['Rejected'] = $value->profiles_count; break;
+                    case 4 : $userByType['carer']['Edited'] = $value->profiles_count; break;
+                    case 5 : $userByType['carer']['Blocked'] = $value->profiles_count; break;
+                }
+            }
+        }
+        $result  = DB::select("select `profiles_status_id`, count(*) as profiles_count from `service_users_profiles` group by `profiles_status_id`");
+        if ($result) {
+            $userByType['service']=['type'=>'purchaser'];
+            foreach ($result as $value) {
+                switch ($value->profiles_status_id){
+                    case 1 : $userByType['service']['New'] = $value->profiles_count; break;
+                    case 2 : $userByType['service']['Active'] = $value->profiles_count; break;
+                    case 3 : $userByType['service']['Rejected'] = $value->profiles_count; break;
+                    case 4 : $userByType['service']['Edited'] = $value->profiles_count; break;
+                    case 5 : $userByType['service']['Blocked'] = $value->profiles_count; break;
+                }
+            }
+        }
 
         return collect($userByType);
     }
 
-    // как бы выборка данных из таблицы пользователей для админки Профиля менеджеров
+    // выборка профилей пользователей из всех таблиц профилей для админки Профиля менеджеров
     public function getUserList(){
 
-/*        $carers = CarersProfile::all(['id','first_name','family_name']);
-        $purchaser = PurchasersProfile::all(['id','first_name','family_name']);
-
-        $merged = $carers->merge($purchaser);*/
-
-        $merged2 = CarersProfile::all(['id','first_name','family_name'])
-            ->merge(PurchasersProfile::all(['id','first_name','family_name']))
+        $userProfileList = CarersProfile::all(['id','first_name','family_name','registration_status','profiles_status_id'])
+            ->merge(PurchasersProfile::all(['id','first_name','family_name','registration_status','profiles_status_id']))
             ->sortByDesc('id')
             ->slice(0, 40);
 
-
-
-
-//            dd($carers,$purchaser,$merged,$merged2);
-        //dd($merged2);
-
-
-        return $merged2;
-
-
-        $user[1] = ['id'=>1,'name'=>'chris','userType'=>'purchaser','userStatus'=>'NEW','nta'=>1];
-        $user[2] = ['id'=>2,'name'=>'john','userType'=>'service','userStatus'=>'NEW','nta'=>45];
-        $user[3] = ['id'=>3,'name'=>'stan','userType'=>'purchaser','userStatus'=>'ACTIVE','nta'=>65];
-        $user[4] = ['id'=>4,'name'=>'bob','userType'=>'carer','userStatus'=>'CANCELLED','nta'=>5];
-        $user[5] = ['id'=>5,'name'=>'ruby','userType'=>'purchaser','userStatus'=>'ACTIVE','nta'=>45];
-        $user[6] = ['id'=>6,'name'=>'salomon','userType'=>'service','userStatus'=>'EDITED','nta'=>00];
-        $user[7] = ['id'=>7,'name'=>'jacky','userType'=>'purchaser','userStatus'=>'ACTIVE','nta'=>1];
-        $user[8] = ['id'=>8,'name'=>'merry','userType'=>'carer','userStatus'=>'ACTIVE','nta'=>5];
-        $user[9] = ['id'=>9,'name'=>'ann','userType'=>'purchaser','userStatus'=>'ACTIVE','nta'=>7];
-        $user[10] = ['id'=>10,'name'=>'robinson','userType'=>'service','userStatus'=>'EDITED','nta'=>45];
-        $user[11] = ['id'=>11,'name'=>'stafford','userType'=>'carer','userStatus'=>'CANCELLED','nta'=>56];
-        $user[12] = ['id'=>12,'name'=>'anderson','userType'=>'purchaser','userStatus'=>'ACTIVE','nta'=>11];
-        $user[13] = ['id'=>13,'name'=>'vasya','userType'=>'service','userStatus'=>'ACTIVE','nta'=>44];
-
-        return collect($user);
+        return $userProfileList;
     }
 
 

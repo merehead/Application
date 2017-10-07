@@ -20,16 +20,18 @@
     </td>
     <td>
         <div class="profStatus">
-          {{--  <span class="profStatus__item profStatus__item--{{$rowClass}}">{{$item['userStatus']}}</span>--}}
+          <span class="profStatus__item profStatus__item--{{$item->profileStatus->css_admin}}">{{$item->profileStatus->name}}</span>
         </div>
     </td>
     <td>
         <div class="tdBox">
-            {{--<span class="tdValue">{{$item['nta']}}</span>--}}
+            @if($item->nta)
+            <span class="tdValue">{{$item->nta}}</span>
             <a href="#" class="actionsBtn actionsBtn--view"
                onclick="event.preventDefault();document.getElementById('popupWrap1').style.display = 'block';">
                 view
             </a>
+                @endif
         </div>
     </td>
     <td class="for-inner">

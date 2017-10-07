@@ -60,22 +60,7 @@
 
         <tbody>
         @foreach($userList as $item)
-            <?php
-            switch ($item['userStatus']) {
-                case 'NEW':
-                    $rowClass = 'new';
-                    break;
-                case 'ACTIVE':
-                    $rowClass = 'active';
-                    break;
-                case 'EDITED':
-                    $rowClass = 'edit';
-                    break;
-                case 'CANCELLED':
-                    $rowClass = 'canceled';
-                    break;
-            }
-            ?>@include(config('settings.theme').'.profilesManagement.mainTableRow')
+            @include(config('settings.theme').'.profilesManagement.mainTableRow')
         @endforeach
         </tbody>
     </table>

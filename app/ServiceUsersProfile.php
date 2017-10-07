@@ -55,6 +55,9 @@ class ServiceUsersProfile extends Model
 
     }
 
+    public function profileStatus(){
+        return $this->belongsTo('App\UserStatus','profiles_status_id','id');
+    }
     public function getDoBAttribute($value)
     {
         return date('d/m/Y',strtotime($value));
@@ -91,4 +94,14 @@ class ServiceUsersProfile extends Model
         return false;
     }
 
+
+    /**
+     * @return false|integer
+     */
+    public function getNtaAttribute()
+    {
+
+        //todo check count nta answer Yes
+        return 12;
+    }
 }

@@ -33,12 +33,11 @@ class UserController extends AdminController
         $profileType = $this->siteUsers->getProfileType();
         // getStatusType
         $statusType = $this->siteUsers->getStatusType();
-        // getTotals
-        $totals = $this->siteUsers->getTotals();
-        // getTotalsByUserType
-        $totalsByUserType = $this->siteUsers->getTotalsByUserType();
 
-        // getUserRecords
+
+
+        $totalsByUserType = $this->siteUsers->getTotalsByUserType();
+        $totals = $this->siteUsers->getTotals($totalsByUserType);
         $userList = $this->siteUsers->getUserList();
 
         $this->vars = array_add($this->vars,'profileType',$profileType);

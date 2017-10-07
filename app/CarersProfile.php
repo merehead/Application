@@ -38,6 +38,10 @@ class CarersProfile extends Model
         return $this->belongsToMany('App\CarerReference', 'carer_profile_reference', 'carer_profile_id', 'reference_id');
     }
 
+    public function profileStatus(){
+        return $this->belongsTo('App\UserStatus','profiles_status_id','id');
+    }
+
     public function setDoBAttribute($value)
     {
         $date = DateTime::createFromFormat('d/m/Y', $value);
@@ -158,6 +162,15 @@ WHERE `carer_id` = ".$this->id." LIMIT 0,4");
         $data = $res[0]->own_referral_code;
 
         return $data;
+    }
+
+
+    /**
+     * @return false
+     */
+    public function getNtaAttribute()
+    {
+        return false;
     }
 
 }
