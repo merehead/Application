@@ -173,6 +173,14 @@ WHERE `carer_id` = ".$this->id." LIMIT 0,4");
         return false;
     }
 
+    /**
+     * @return string
+     */
+    public function getUserTypeAttribute()
+    {
+        return 'carer';
+    }
+
 }
 
 

@@ -56,4 +56,11 @@ class PurchasersProfile extends Model
     {
         return false;
     }
+    /**
+     * @return string
+     */
+    public function getUserTypeAttribute()
+    {
+        return 'purchaser';
+    }
 }

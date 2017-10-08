@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin\Repo\Models\User;
 use App\CarersProfile;
 use App\Http\Controllers\Admin\Repo\Models\AdminModel;
 use App\PurchasersProfile;
+use App\ServiceUsersProfile;
 use App\User;
 use App\UserType;
 use Illuminate\Support\Facades\DB;
@@ -42,7 +43,7 @@ class AdminUsers extends AdminModel
 
         //var_dump($profileType);
 
-        return ['1'=>'Purchaser','2'=>'Service user','3'=>'Carer'];
+        return ['purchaser'=>'Purchaser','service'=>'Service user','carer'=>'Carer'];
 
     }
 
@@ -51,7 +52,7 @@ class AdminUsers extends AdminModel
         return ['1'=>'New','2'=>'Active','3'=>'Rejected','4'=>'Edited','5'=>'Blocked'];
     }
 
-    // как бы подсчет сумарных данных по зарегистрированным пользователям
+    // подсчет сумарных данных по зарегистрированным пользователям
     public function getTotals ($totalsByUserType) : array
     {
 
@@ -116,17 +117,51 @@ class AdminUsers extends AdminModel
     }
 
     // выборка профилей пользователей из всех таблиц профилей для админки Профиля менеджеров
-    public function getUserList(){
+    public function getUserList($profileTypeFilter,$statusTypeFilter){
 
-        $userProfileList = CarersProfile::all(['id','first_name','family_name','registration_status','profiles_status_id'])
-            ->merge(PurchasersProfile::all(['id','first_name','family_name','registration_status','profiles_status_id']))
-            ->sortByDesc('id')
-            ->slice(0, 40);
 
+        if (empty($profileTypeFilter)) {
+            $profileList = CarersProfile::all(['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id'])
+                ->merge(PurchasersProfile::all(['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id']))
+                ->sortByDesc('id')
+                ->slice(0, 40);
+
+            $userProfileList = collect();
+
+            foreach ($profileList as $user) {
+                $userProfileList->push($user);
+                if ($user instanceof PurchasersProfile && count($user->serviceUsers)) {
+                    foreach ($user->serviceUsers as $serviceUser) {
+                        $serviceUserProfile = ServiceUsersProfile::find($serviceUser->id, ['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id',
+                            'visit_for_companionship', 'start_date', 'assistance_with_eating', 'choosing_incontinence_products', 'consent', 'time_to_bed', 'keeping_safe_at_night', 'multiple_carers', 'we_missed']);
+                        $userProfileList->push($serviceUserProfile);
+                    }
+                }
+            }
+        } else {
+            switch ($profileTypeFilter) {
+                case 'purchaser' : $userProfileList=PurchasersProfile::all(['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id'])
+                    ->sortByDesc('id')
+                    ->slice(0, 40); break;
+                case 'carer' : $userProfileList=CarersProfile::all(['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id'])
+                    ->sortByDesc('id')
+                    ->slice(0, 40);break;
+                case 'service' : $userProfileList=ServiceUsersProfile::all(['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id',
+                    'visit_for_companionship', 'start_date', 'assistance_with_eating', 'choosing_incontinence_products', 'consent', 'time_to_bed', 'keeping_safe_at_night', 'multiple_carers', 'we_missed'])
+                    ->sortByDesc('id')
+                    ->slice(0, 40);
+            }
+        }
+
+
+        //$filtered = $collection->where('price', 100);  profiles_status_id
+
+        if (!empty($statusTypeFilter))
+            $userProfileList = $userProfileList->where('profiles_status_id',$statusTypeFilter);
+
+
+        //dd($userProfileList);
         return $userProfileList;
     }
-
-
-
 
 }
