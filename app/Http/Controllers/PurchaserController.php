@@ -19,7 +19,7 @@ class PurchaserController extends FrontController implements Constants
 
     }
 
-    public function index()
+    public function index($id)
     {
 
         $this->template = config('settings.frontTheme') . '.templates.purchaserPrivateProfile';
@@ -46,7 +46,12 @@ class PurchaserController extends FrontController implements Constants
             $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('purchaser_id', $this->user->id)->get();
             $this->vars = array_add($this->vars, 'newBookings', $newBookings);
 
-            $purchaserProfile = PurchasersProfile::findOrFail($this->user->id);
+            if(!empty($id) && Auth::user()->user_type_id==4){ //админ
+                $purchaserProfile = PurchasersProfile::findOrFail($id);
+            } else {
+                $purchaserProfile = PurchasersProfile::findOrFail($this->user->id);
+            }
+
             $serviceUsers = $purchaserProfile->serviceUsers;
 
             $this->vars = array_add($this->vars, 'user', $this->user);

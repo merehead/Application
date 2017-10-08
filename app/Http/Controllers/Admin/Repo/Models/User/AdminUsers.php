@@ -22,19 +22,6 @@ class AdminUsers extends AdminModel
     public function __construct(User $users) {
         $this->model = $users;
     }
-    public function viewUserList()
-    {
-        return;
-    }
-    public function viewUser()
-    {
-        return;
-    }
-
-
-
-
-    // заглушки
 
     // как бы справочник типов профилей
     public function getProfileType (){
@@ -51,6 +38,7 @@ class AdminUsers extends AdminModel
     public function getStatusType (){
         return ['1'=>'New','2'=>'Active','3'=>'Rejected','4'=>'Edited','5'=>'Blocked'];
     }
+
 
     // подсчет сумарных данных по зарегистрированным пользователям
     public function getTotals ($totalsByUserType) : array
@@ -153,15 +141,9 @@ class AdminUsers extends AdminModel
             }
         }
 
-
-        //$filtered = $collection->where('price', 100);  profiles_status_id
-
         if (!empty($statusTypeFilter))
             $userProfileList = $userProfileList->where('profiles_status_id',$statusTypeFilter);
 
-
-        //dd($userProfileList);
         return $userProfileList;
     }
-
 }

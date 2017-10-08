@@ -9,7 +9,13 @@
                     <span>{{$item->id}}</span>
                 </td>
                 <td>
-                    <a href="#" class="tableLink"><span>{{$item->first_name}} {{$item->family_name}}</span></a>
+                    @if($item->user_type == 'service')
+                        <a href="{{route('ServiceUserSetting',[$item->id])}}" class="tableLink"><span>{{$item->first_name}} {{$item->family_name}}</span></a>
+                    @elseif($item->user_type == 'purchaser')
+                        <a href="{{route('purchaserSettings',[$item->id])}}" class="tableLink"><span>{{$item->first_name}} {{$item->family_name}}</span></a>
+                    @elseif($item->user_type == 'carer')
+                        <a href="{{route('carerSettings',[$item->id])}}" class="tableLink"><span>{{$item->first_name}} {{$item->family_name}}</span></a>
+                    @endif
                 </td>
                 <td>
                     <span>{{$item->user_type}}</span>
