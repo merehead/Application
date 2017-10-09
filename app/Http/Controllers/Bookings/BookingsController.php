@@ -421,7 +421,7 @@ class BookingsController extends FrontController implements Constants
         return $dates;
     }
 
-    private function createBooking(BookingCreateRequest $data) : Booking
+    private function createBooking(BookingCreateRсequest $data) : Booking
     {
         $purchaser = Auth::user();
         $carer = User::find($data->carer_id);
