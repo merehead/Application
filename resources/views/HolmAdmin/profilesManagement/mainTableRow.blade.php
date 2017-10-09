@@ -33,15 +33,29 @@
         <div class="tdBox">
             @if($item->nta)
             <span class="tdValue">{{count($item->nta)}}</span>
-            <a href="#" class="actionsBtn actionsBtn--view"
-               onclick="event.preventDefault();document.getElementById('popupWrap{{$item->id}}').style.display = 'block';">
+            <a href="#" class="actionsBtn actionsBtn--view" data-toggle="modal" data-target="#myModal{{$item->id}}">
+              {{-- onclick="event.preventDefault();document.getElementById('popupWrap{{$item->id}}').style.display = 'block';">--}}
                 view
             </a>
                 @endif
         </div>
     </td>
+
+    <div class="modal fade" id="myModal{{$item->id}}" role="dialog">
+        <div class="modal-dialog">
+            {{var_dump($item->nta)}}
+        </div>
+    </div>
+
+
+    {{--
+
     @include(config('settings.theme').'.profilesManagement.ntaAnswers')
-{{--    <div id="popupWrap{{$item->id}}" class="popupWrap" style="display:none;position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
+
+    --}}
+
+
+    {{--    <div id="popupWrap{{$item->id}}" class="popupWrap" style="display:none;position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
         <div class="adminPopup ">
             <div class="adminPopup__head popupHead">
                 <a href="#" class="closeModal"
