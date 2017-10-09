@@ -7,6 +7,7 @@ use App\Booking;
 use App\BookingOverview;
 use App\BookingsMessage;
 use App\CarersProfile;
+use App\Events\BookingCompletedEvent;
 use App\Http\Requests\BookingCreateRequest;
 use App\Interfaces\Constants;
 use App\MailError;
@@ -367,12 +368,14 @@ class BookingsController extends FrontController implements Constants
                     'new_status' => 'completed',
                 ]);
                 $booking->status_id = self::COMPLETED;
+                event(new BookingCompletedEvent($booking));
             }
 
         } else {
             //Purchaser
             $booking->purchaser_status_id = self::COMPLETED;
             $booking->status_id = self::COMPLETED;
+            event(new BookingCompletedEvent($booking));
             BookingsMessage::create([
                 'booking_id' => $booking->id,
                 'type' => 'status_change',
