@@ -40,7 +40,8 @@
                 @endif
         </div>
     </td>
-    <div id="popupWrap{{$item->id}}" class="popupWrap" style="display:none;position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
+    @include(config('settings.theme').'.profilesManagement.ntaAnswers')
+{{--    <div id="popupWrap{{$item->id}}" class="popupWrap" style="display:none;position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
         <div class="adminPopup ">
             <div class="adminPopup__head popupHead">
                 <a href="#" class="closeModal"
@@ -60,7 +61,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--}}
     <td class="for-inner">
         <table class="innerTable innerTable--fixed">
             <tr>
@@ -127,3 +128,5 @@
     </td>
 
 </tr>
+
+
