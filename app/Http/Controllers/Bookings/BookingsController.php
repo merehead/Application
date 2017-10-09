@@ -262,6 +262,8 @@ class BookingsController extends FrontController implements Constants
 
     public function cancel(Booking $booking)
     {
+
+
         $user = Auth::user();
         if ($user->user_type_id == 3) {
             //Carer
