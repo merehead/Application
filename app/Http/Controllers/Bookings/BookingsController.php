@@ -283,7 +283,7 @@ class BookingsController extends FrontController implements Constants
 
             try {
                 Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
-                    ['user_first_name' => $purchaser->first_name,
+                    ['user_like_name' => $purchaser->like_name,
                         'user_name' => $carer->first_name,
                         'service_user_name' => $serviceUser->first_name,
                         'address' => $serviceUser->addresss_line1,
@@ -320,7 +320,7 @@ class BookingsController extends FrontController implements Constants
 
                 try {
                     Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
-                        ['user_first_name' => $carer->first_name,
+                        ['user_like_name' => $carer->like_name,
                             'user_name' => $purchaser->first_name,
                             'service_user_name' => $serviceUser->first_name,
                             'address' => $serviceUser->addresss_line1,

@@ -35,6 +35,8 @@ class BookingController extends AdminController
         $bookings = $this->booking->get('*', FALSE, FALSE,  $filter, ['id','desc']);
         $this->vars = array_add($this->vars,'bookings',$bookings);
 
+        //dd($bookings);
+
         $this->content = view(config('settings.theme').'.bookingsDetails.bookingsDetails')->with($this->vars)->render();
 
         return $this->renderOutput();

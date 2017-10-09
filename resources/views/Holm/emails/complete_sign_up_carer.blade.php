@@ -62,19 +62,16 @@
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; font-family: 'Roboto', sans-serif; line-height: 1.5; "  valign="top" class="">
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
-{{--
-                            Hello [user_first_name]!
---}}                        Hello {{$user->like_name}}!
+                        Dear {{$like_name}}!
 
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-
-                            Thank you for sign up!
-                            Your <a href="{{route('carerSettings')}}">carer</a> account at <a href="{{route('mainHomePage')}}">HOLM</a> was created and waiting for an approvement by admin. As your account will be confirmed you will be sent an letter.
-                            We hope you will enjoy HOLM!
-
-
+                            Thank you for registering with Holm.
+                            Your account has been created and is now being checked. We will contact you if we need any
+                            further information, or would like to discuss matters further.
+                            <br />
+                            You will receive another email once your account has been approved. We hope you will enjoy Holm!
                         </p>
 
                     </td>
@@ -92,10 +89,10 @@
                    text-transform: uppercase;
                    font-size: 14px;
                  margin-bottom:0;">
-                            best wishes <br />
-                            the holm team
+                            Best wishes <br />
+                            The Holm Team
                         </p>
-                        <a href="#" class=""
+                        <a href="{{route('mainHomePage')}}" class=""
                            style="
                     color: #373c4d;
                     text-transform: uppercase;

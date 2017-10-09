@@ -122,6 +122,8 @@ class UserController extends AdminController
                 break;
         }
 
+        $previous = $profile->profiles_status_id;
+
         if ($profile) {
             switch ($request->get('action')) {
                 case 'accept':
@@ -140,7 +142,87 @@ class UserController extends AdminController
 
         $profile->update();
 
-        if ($request->get('user_type') == 'carer' && $request->get('action') == 'accept') {
+
+        if ($profile) {
+            switch ($request->get('action')) {
+                case 'accept':{
+
+                    if ($previous == 5) {
+                        $user = User::findOrFail($profile->id);
+                        try {
+                            Mail::send(config('settings.frontTheme') . '.emails.unblock_account_by_admin',
+                                [
+                                    'user' => $user,
+                                    'like_name' => $profile->like_name
+                                ],
+                                function ($m) use ($user) {
+                                    $m->to($user->email)->subject('Unblock account by admin');
+                                });
+                        } catch (Swift_TransportException $STe) {
+
+                            $error = MailError::create([
+                                'error_message' => $STe->getMessage(),
+                                'function' => __METHOD__,
+                                'action' => 'Try to sent accepting massage',
+                                'user_id' => $user->id
+                            ]);
+                        }
+                    }
+                    break;
+                }
+                case 'reject': {
+                    $user = User::findOrFail($profile->id);
+                    try {
+                        Mail::send(config('settings.frontTheme') . '.emails.reject_account_by_admin',
+                            [
+                                'user' => $user,
+                                'like_name' => $profile->like_name
+                            ],
+                            function ($m) use ($user) {
+                                $m->to($user->email)->subject('Reject account by admin');
+                            });
+                    } catch (Swift_TransportException $STe) {
+
+                        $error = MailError::create([
+                            'error_message' => $STe->getMessage(),
+                            'function' => __METHOD__,
+                            'action' => 'Try to sent accepting massage',
+                            'user_id' => $user->id
+                        ]);
+                    }
+                }
+                    break;
+                case 'block':{
+                    $user = User::findOrFail($profile->id);
+                    try {
+                        Mail::send(config('settings.frontTheme') . '.emails.block_account_by_admin',
+                            [
+                                'user' => $user,
+                                'like_name'=>$profile->like_name
+                            ],
+                            function ($m) use ($user) {
+                                $m->to($user->email)->subject('Block account by admin');
+                            });
+                    } catch (Swift_TransportException $STe) {
+
+                        $error = MailError::create([
+                            'error_message' => $STe->getMessage(),
+                            'function' => __METHOD__,
+                            'action' => 'Try to sent accepting massage',
+                            'user_id' => $user->id
+                        ]);
+                    }
+                    break;
+                }
+
+            }
+        } else {
+            dd($request->all());
+        }
+
+
+
+        if ($request->get('user_type') == 'carer' && $request->get('action') == 'accept' && $previous==1) {
 
             $user = User::findOrFail($profile->id);
 

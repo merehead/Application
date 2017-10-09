@@ -72,23 +72,19 @@
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; " valign="top" class="">
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
-                            Hello {{( $sendTo == 'carer') ? $carer->first_name : $purchaser->first_name}}!
+                            Dear {{( $sendTo == 'carer') ? $carer->like_name : $purchaser->like_name}}!
                         </h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             @if($sendTo == 'carer')
                                 <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{$serviceUser->first_name}}</a>
                                 would like to book you
-                                on {{\Carbon\Carbon::parse($booking->date_from)->toFormattedDateString()}}.
+                                for {{\Carbon\Carbon::parse($booking->date_from)->toFormattedDateString()}}.
                                 Please click the button below to accept or reject the booking request.
-                                You can not be paid unless you complete the booking request.
+                                The booking request is not be confirmed until then, and you will not be paid unless the request is accepted.
+
                             @else
-
-                                                            You booked <a
-                                        href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{$carer->first_name}}</a>
-                            on {{$booking->date_start}} - {{$booking->date_end}}
-
-{{--                                on {{\Carbon\Carbon::parse($booking->date_start)->toFormattedDateString()}} -
-                                {{\Carbon\Carbon::parse($booking->date_end)->toFormattedDateString()}}.--}}
+                                You booked <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{$carer->first_name}}</a>
+                                on {{$booking->date_start}} - {{$booking->date_end}}
 
                             @endif
                         </p>
@@ -151,9 +147,7 @@
                               {{$booking->appointments()->get()->count()}}
                                Appointment{{$booking->appointments()->get()->count() > 1 ? 's':''}}
                             </span>
-                                            {{--                                           <span style="display: block; font-weight:700; ">
-                                                                        12:00 PM - 5:00 PM
-                                                                      </span>--}}
+
                                         </p>
                                 </tr>
                             </table>
@@ -224,10 +218,10 @@
                    text-transform: uppercase;
                    font-size: 14px;
                  margin-bottom:0;">
-                            best wishes <br/>
-                            the holm team
+                            Best wishes <br />
+                            The Holm Team
                         </p>
-                        <a href="#" class=""
+                        <a href="{{route('mainHomePage')}}" class=""
                            style="
                     color: #373c4d;
                     text-transform: uppercase;

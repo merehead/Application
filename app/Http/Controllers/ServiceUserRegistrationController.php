@@ -158,10 +158,12 @@ class ServiceUserRegistrationController extends FrontController
 
         $this->vars = array_add($this->vars, 'signUpUntil', $user->created_at->addWeek()->format('d/m/Y h:i A'));
 
+        $serviceProfile = ServiceUsersProfile::findOrFail($id);
 
         try {
             Mail::send(config('settings.frontTheme') . '.emails.continue_sign_up_service_user',
-                ['user' => $user],
+                ['user' => $user,
+                    'like_name'=>$serviceProfile->like_name],
                 function ($m) use ($user) {
                     $m->to($user->email)->subject('Registration on HOLM');
                 });
@@ -194,7 +196,10 @@ class ServiceUserRegistrationController extends FrontController
 
         try {
             Mail::send(config('settings.frontTheme') . '.emails.complete_sign_up_service',
-                ['user' => $user],
+                [
+                    'user' => $user,
+                    'like_name'=>$serviceProfile->like_name
+                ],
                 function ($m) use ($user) {
                     $m->to($user->email)->subject('Welcome on HOLM');
                 });

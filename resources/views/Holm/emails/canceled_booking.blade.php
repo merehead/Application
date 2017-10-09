@@ -60,7 +60,7 @@
             <table cellpadding="0" cellspacing="0" border="0"  style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"  class="t-content">
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; "  valign="top" class="">
-                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">Hello {{$user_first_name}}!</h1>
+                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">Hello {{$user_like_name}}!</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">{{$user_name}} has cancelled the following <a href="{{route('viewBookingDetails',[$booking->id])}}">booking</a>:<br /></p>
                     </td>
                 </tr>

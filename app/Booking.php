@@ -11,10 +11,18 @@ class Booking extends Model
 
     public function getDateStartAttribute()
     {
-        return date('d/m/Y', strtotime($this->appointments()->orderBy('date_start')->get()->first()->date_start));
+        if($this->appointments()->get()->count())
+            return date('d/m/Y', strtotime($this->appointments()->orderBy('date_start')->get()->first()->date_start));
     }
+
+/*    public function getDateFromAttribute(){
+        if($this->appointments()->get()->count())
+            return $this->appointments()->orderBy('date_start')->get()->first()->date_start;
+    }*/
+
     public function getDateEndAttribute()
     {
+        if($this->appointments()->get()->count())
         return date('d/m/Y', strtotime($this->appointments()->orderByDesc('date_start')->get()->first()->date_start));
     }
 
@@ -24,6 +32,11 @@ class Booking extends Model
     public function bookingPurchaser()
     {
         return $this->belongsTo('App\User','purchaser_id','id');
+    }
+
+    public function bookingPurchaserProfile()
+    {
+        return $this->belongsTo('App\PurchasersProfile','purchaser_id','id');
     }
 
 //    public function bookingServiceUser()
@@ -38,6 +51,11 @@ class Booking extends Model
     public function bookingCarer()
     {
         return $this->belongsTo('App\User','carer_id','id');
+    }
+
+    public function bookingCarerProfile()
+    {
+        return $this->belongsTo('App\CarersProfile','carer_id','id');
     }
 
     public function bookingStatus ()
