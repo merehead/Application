@@ -162,7 +162,7 @@ class CarerRegistrationController extends FrontController
 
         $this->vars = array_add($this->vars, 'signUpUntil', $user->created_at->addWeek()->format('d/m/Y h:i A'));
 
-        $carerProfile = findOrFail($user->id);
+        $carerProfile = CarersProfile::findOrFail($user->id);
 
         try {
             Mail::send(config('settings.frontTheme') . '.emails.continue_sign_up_carer',

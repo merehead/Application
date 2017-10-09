@@ -170,10 +170,12 @@ class PurchaserRegistrationController extends FrontController
 
         $this->vars = array_add($this->vars, 'signUpUntil', $user->created_at->addWeek()->format('d/m/Y h:i A'));
 
+        $purchaser = PurchasersProfile::findorFail($user->id);
 
         try {
             Mail::send(config('settings.frontTheme') . '.emails.continue_sign_up_service_user',
-                ['user' => $user],
+                ['user' => $user,
+                'like_name'=>$purchaser->like_name],
                 function ($m) use ($user) {
                     $m->to($user->email)->subject('Registration on HOLM');
                 });

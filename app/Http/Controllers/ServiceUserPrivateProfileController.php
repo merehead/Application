@@ -115,8 +115,7 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
         $this->vars = array_add($this->vars, 'user', $activeUser);
 
         $this->vars = array_add($this->vars, 'serviceUsers', $serviceUsersProfile);
-        //todo с как-го Х надо использовать две одинаковые переменные?????
-        //todo - Та это я затупил в свое время..
+
         $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
 
         $this->vars = array_add($this->vars, 'userNameForSite', $serviceUsersProfile->like_name);

@@ -70,7 +70,7 @@
                             Thank you for registering with Holm.
                             Your account has been created and is now being checked. We will contact you if we need any
                             further information, or would like to discuss matters further.
-                            <br />
+                            <br /><br />
                             You will receive another email once your account has been approved. We hope you will enjoy Holm!
                         </p>
 
