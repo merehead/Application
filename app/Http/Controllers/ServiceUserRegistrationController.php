@@ -187,6 +187,11 @@ class ServiceUserRegistrationController extends FrontController
             return redirect('/');
         }
 
+        $serviceProfile = ServiceUsersProfile::findOrFail($id);
+
+        $serviceProfile->profiles_status_id = 2;
+        $serviceProfile->registration_status = 'completed';
+
         try {
             Mail::send(config('settings.frontTheme') . '.emails.complete_sign_up_service',
                 ['user' => $user],

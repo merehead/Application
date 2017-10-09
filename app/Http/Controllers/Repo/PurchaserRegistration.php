@@ -302,6 +302,10 @@ class PurchaserRegistration
         $purchaserProfile->town             = $request->input('town');
         $purchaserProfile->postcode         = strtoupper($request->input('postcode'));
         $purchaserProfile->DoB              = $request->input('DoB');
+
+        $purchaserProfile->profiles_status_id = 2;
+        $purchaserProfile->registration_status = 'completed';
+
         $purchaserProfile->update();
         //dd($request->all());
 

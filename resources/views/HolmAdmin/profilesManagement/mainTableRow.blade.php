@@ -109,14 +109,14 @@
                         <input type="hidden" name="user_type" value={{$item->user_type}} />
                     </form>
                         @else
-                        <a href="{{ route('user.update',$item['id']) }}" class="actionsBtn actionsBtn--block"
-                           onclick="event.preventDefault();document.getElementById('block-form{{$item['id']}}').submit();">
-                            block
+                        <a href="{{ route('user.update',$item['id']) }}" class="actionsBtn actionsBtn--accept"
+                           onclick="event.preventDefault();document.getElementById('unblock-form{{$item['id']}}').submit();">
+                            unblock
                         </a>
-                        <form id="block-form{{$item['id']}}" action="{{ route('user.update',$item['id']) }}" method="POST" style="display: none;">
+                        <form id="unblock-form{{$item['id']}}" action="{{ route('user.update',$item['id']) }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="put" />
-                            <input type="hidden" name="action" value="unblock" />
+                            <input type="hidden" name="action" value="accept" />
                             <input type="hidden" name="user_type" value={{$item->user_type}} />
                         </form>
                     @endif

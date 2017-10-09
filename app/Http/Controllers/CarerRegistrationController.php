@@ -194,6 +194,10 @@ class CarerRegistrationController extends FrontController
             return redirect('/');
         }
 
+        $carerProfile = CarersProfile::findOrFail($user->id);
+
+        $carerProfile->registration_status = 'completed';
+
         try {
             Mail::send(config('settings.frontTheme') . '.emails.complete_sign_up_carer',
                 ['user' => $user],
