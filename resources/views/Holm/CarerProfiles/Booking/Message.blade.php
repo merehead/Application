@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">
-<script src="/js/jquery-ui-timepicker-addon.js"></script>
+{{--<link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">--}}
+{{--<script src="/js/jquery-ui-timepicker-addon.js"></script>--}}
 <script>
     function resizeMap()
     {
@@ -135,7 +135,7 @@
                                 <div class="messageInputs__field messageTime ">
                                     <input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_from"
                                            name="bookings[0][appointments][0][time_from]" placeholder="1:30 PM"
-                                           value="{{date('h:i A', time())}}">
+                                           value="">
                                     <a href="#" class="messageIco centeredLink">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </a>
@@ -153,7 +153,7 @@
                                 <div class="messageInputs__field messageTime ">
                                     <input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_bed"
                                            name="bookings[0][appointments][0][time_to]" placeholder="3:30 PM"
-                                           value="3:30 PM">
+                                           value="">
                                     <a href="#" class="messageIco centeredLink">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </a>

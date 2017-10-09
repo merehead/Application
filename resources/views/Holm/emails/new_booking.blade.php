@@ -85,8 +85,10 @@
 
                                                             You booked <a
                                         href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{$carer->first_name}}</a>
-                                on {{\Carbon\Carbon::parse($booking->date_start)->toFormattedDateString()}} -
-                                {{\Carbon\Carbon::parse($booking->date_end)->toFormattedDateString()}}.
+                            on {{$booking->date_start}} - {{$booking->date_end}}
+
+{{--                                on {{\Carbon\Carbon::parse($booking->date_start)->toFormattedDateString()}} -
+                                {{\Carbon\Carbon::parse($booking->date_end)->toFormattedDateString()}}.--}}
 
                             @endif
                         </p>

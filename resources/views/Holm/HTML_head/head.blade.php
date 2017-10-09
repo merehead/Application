@@ -27,7 +27,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.0/masonry.pkgd.min.js"></script>
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
-    <link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">
+    {{--<link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">--}}
     {{--<script src="/js/jquery-ui-timepicker-addon.js"></script>--}}
     <script src="{{asset('js/owl.carousel.min.js')}}" defer ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -35,7 +35,7 @@
     {{--<link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">--}}
     {{--<script src="/js/jquery-ui.min.js"></script>--}}
 
-    <script src="{{asset('js/jquery-ui-timepicker-addon.js')}}"></script>
+    {{--<script src="{{asset('js/jquery-ui-timepicker-addon.js')}}"></script>--}}
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJaLv-6bVXViUGJ_e_-nR5RZlt9GUuC4M"></script>

@@ -15,7 +15,9 @@ class PurchasersProfile extends Model
     }
 
 
-
+    public function profileStatus(){
+        return $this->belongsTo('App\UserStatus','profiles_status_id','id');
+    }
 
     public function setDoBAttribute($value)
     {
@@ -37,5 +39,28 @@ class PurchasersProfile extends Model
         $data = $res[0]->email;
 
         return $data;
+    }
+
+    public function getOwnReferralCodeAttribute()
+    {
+        $res = DB::select("select own_referral_code from users where id = ".$this->id);
+
+        $data = $res[0]->own_referral_code;
+
+        return $data;
+    }
+    /**
+     * @return false
+     */
+    public function getNtaAttribute()
+    {
+        return false;
+    }
+    /**
+     * @return string
+     */
+    public function getUserTypeAttribute()
+    {
+        return 'purchaser';
     }
 }

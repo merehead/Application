@@ -5,7 +5,7 @@
           </span>
         Profiles managment
     </h2>
-    {!! Form::open(['method'=>'POST','route'=>'user.store']) !!}
+    {!! Form::open(['method'=>'GET','action'=>'Admin\User\UserController@index','id'=>'user_filter']) !!}
     <div class="panelHead">
         <div class="filterGroup">
             <div class="filterBox">
@@ -28,7 +28,8 @@
 
             </div>
         </div>
-        <a href="#" class="actionsBtn actionsBtn--filter actionsBtn--bigger">
+        <a href="#" class="actionsBtn actionsBtn--filter actionsBtn--bigger"
+           onclick="event.preventDefault();document.getElementById('user_filter').submit();">
             filter
         </a>
 
@@ -46,24 +47,3 @@
 
 </div>
 
-<div id="popupWrap1" class="popupWrap" style="display:none;position: fixed;top: 0; right: 30%;">
-    <div class="adminPopup ">
-        <div class="adminPopup__head popupHead">
-            <a href="#" class="closeModal"
-               onclick="event.preventDefault();document.getElementById('popupWrap1').style.display = 'none';">
-                <i class="fa fa-times"></i>
-            </a>
-            <p>Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran ende salutandi no per?</p>
-        </div>
-        <div class="adminPopup__body">
-            <h2 class="themeTitle  themeTitle--small">
-                answer
-            </h2>
-            <div class="popupAnswer">
-                <p>
-                    Est eu pertinaciaen delacrue instructiol vel eu natum vedi idqran ende salutandi no per. Lorem ipsum dolor sit amet, ea sit cetero assusamus, a idqran ende salutandi no per.
-                </p>
-            </div>
-        </div>
-    </div>
-</div>

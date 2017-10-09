@@ -1,22 +1,23 @@
-{{--
-2017-09-11
---}}
+<div class="registration">
+    <div class="registration__full">
+        <div class="thank thank--full">
+            <h2 class="thank__title">
+                Thank you for registering
+            </h2>
+            <span class="successIco">
+            <i class="fa fa-check" aria-hidden="true"></i>
+          </span>
+            <p class="info-p thank__text">
+                You will need to fill in a care and health questionnaire about {{$purchasersProfile->serviceUsers->first()->like_name}} before booking a carer.
+                You can do that later, or you can press 'Next step' and do that now.
 
-<div class="thank">
-    <h2 class="thank__title">
-        Thank you for registering
-    </h2>
-    <span class="successIco">
-          <i class="fa fa-check" aria-hidden="true"></i>
-        </span>
-    <p class="info-p">
-        You will need to fill in a care and health questionnaire about {{$purchasersProfile->serviceUsers->first()->like_name}} before booking a carer.
-    </p>
-    <p >
-        You can do that later, or you can press 'Next step' and do that now.
+            </p>
+        </div>
+    </div>
 
-    </p>
 </div>
+
+
 <form id="step" method="POST" action="{{ route('ServiceUserRegistration', ['id' => $purchasersProfile->serviceUsers->first()->id]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="step" value = '4_1_2_1'>
