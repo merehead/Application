@@ -108,7 +108,7 @@
                         <input type="hidden" name="action" value="block" />
                         <input type="hidden" name="user_type" value={{$item->user_type}} />
                     </form>
-                        @elseif
+                        @else
                         <a href="{{ route('user.update',$item['id']) }}" class="actionsBtn actionsBtn--block"
                            onclick="event.preventDefault();document.getElementById('block-form{{$item['id']}}').submit();">
                             block
