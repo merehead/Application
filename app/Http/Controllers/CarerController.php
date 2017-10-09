@@ -45,7 +45,7 @@ class CarerController extends FrontController implements Constants
         return $this->renderOutput();
     }
 
-    public function index($id)
+    public function index($id=null)
     {
 
         $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';

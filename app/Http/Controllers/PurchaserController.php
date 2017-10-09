@@ -19,7 +19,7 @@ class PurchaserController extends FrontController implements Constants
 
     }
 
-    public function index($id)
+    public function index($id=null)
     {
 
         $this->template = config('settings.frontTheme') . '.templates.purchaserPrivateProfile';

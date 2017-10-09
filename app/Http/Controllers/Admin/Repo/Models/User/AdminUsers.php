@@ -89,7 +89,7 @@ class AdminUsers extends AdminModel
         }
         $result  = DB::select("select `profiles_status_id`, count(*) as profiles_count from `service_users_profiles` group by `profiles_status_id`");
         if ($result) {
-            $userByType['service']=['type'=>'purchaser'];
+            $userByType['service']=['type'=>'service'];
             foreach ($result as $value) {
                 switch ($value->profiles_status_id){
                     case 1 : $userByType['service']['New'] = $value->profiles_count; break;

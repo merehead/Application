@@ -82,6 +82,7 @@
                 </td>
                 <td>
                     @if($item->profileStatus->name != 'Rejected')
+                        @if ($item instanceof \App\CarersProfile)
                     <a href="{{ route('user.update',$item['id']) }}" class="actionsBtn actionsBtn--reject"
                        onclick="event.preventDefault();document.getElementById('reject-form{{$item['id']}}').submit();">
                         reject
@@ -92,6 +93,7 @@
                         <input type="hidden" name="action" value="reject" />
                         <input type="hidden" name="user_type" value={{$item->user_type}} />
                     </form>
+                            @endif
                     @endif
                 </td>
                 <td>
@@ -106,6 +108,17 @@
                         <input type="hidden" name="action" value="block" />
                         <input type="hidden" name="user_type" value={{$item->user_type}} />
                     </form>
+                        @elseif
+                        <a href="{{ route('user.update',$item['id']) }}" class="actionsBtn actionsBtn--block"
+                           onclick="event.preventDefault();document.getElementById('block-form{{$item['id']}}').submit();">
+                            block
+                        </a>
+                        <form id="block-form{{$item['id']}}" action="{{ route('user.update',$item['id']) }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="_method" value="put" />
+                            <input type="hidden" name="action" value="unblock" />
+                            <input type="hidden" name="user_type" value={{$item->user_type}} />
+                        </form>
                     @endif
                 </td>
             </tr>
