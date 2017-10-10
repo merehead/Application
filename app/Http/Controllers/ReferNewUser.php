@@ -36,11 +36,14 @@ class ReferNewUser extends FrontController
 
     public function create(Request $request){
 
-        dd($request->all());
+        //dd($request->all());
 
-        $this->validate($request,[
+/*        $this->validate($request,[
             'assistanceType' => 'required|array',
-        ]);
+        ]);*/
+
+        if (empty($request->get('email')))
+            dd('empty');
 
         return redirect()->back();
     }
