@@ -10,10 +10,10 @@
         {{$appointment->id}}
     </td>
     <td class=" ">
-        <span>{{$appointment->date_start}}</span>
+        <span>{{$appointment->formatted_date_start}} {{$appointment->formatted_time_from}}</span>
     </td>
     <td class=" ">
-        <span>{{$appointment->date_end}}</span>
+        <span>{{$appointment->formatted_date_start}} {{$appointment->formatted_time_to}}</span>
 
     </td>
     <td class="">
