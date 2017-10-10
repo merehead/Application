@@ -1512,6 +1512,20 @@ $(document).ready(function () {
         interval: 5000
     });
 
+    $('#theCarousel1').on('slide.bs.carousel', function () {
+      var data_id = $('#theCarousel_users').children()
+      var peopleBox = $('.peopleBox').children()
+      current_id = $(this).find('.active').attr('id').replace(/[^1-9]/g, '')
+
+      peopleBox.removeClass('activeImg')
+      $.each( data_id, function( key, value ) {
+        if($(this).attr('data-id') === current_id){
+          $(this).children().addClass('activeImg')
+        }
+      });
+      // console.log(data_id, current_id)
+    })
+
     // change quote
     $('.peopleBox').on('click', function (e) {
         e.preventDefault();
