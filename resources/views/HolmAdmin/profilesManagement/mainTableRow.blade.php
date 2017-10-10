@@ -41,41 +41,8 @@
         </div>
     </td>
 
-    <div class="modal fade" id="myModal{{$item->id}}" role="dialog">
-        <div class="modal-dialog">
-            {{var_dump($item->nta)}}
-        </div>
-    </div>
-
-
-    {{--
-
     @include(config('settings.theme').'.profilesManagement.ntaAnswers')
 
-    --}}
-
-
-    {{--    <div id="popupWrap{{$item->id}}" class="popupWrap" style="display:none;position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
-        <div class="adminPopup ">
-            <div class="adminPopup__head popupHead">
-                <a href="#" class="closeModal"
-                   onclick="event.preventDefault();document.getElementById('popupWrap{{$item->id}}').style.display = 'none';">
-                    <i class="fa fa-times"></i>
-                </a>
-                <p>{{$item->first_name}} {{$item->family_name}}</p>
-            </div>
-            <div class="adminPopup__body">
-                <h2 class="themeTitle  themeTitle--small">
-                    answer
-                </h2>
-                <div class="popupAnswer">
-                    <p>
-                        {{var_dump($item->nta)}}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>--}}
     <td class="for-inner">
         <table class="innerTable innerTable--fixed">
             <tr>

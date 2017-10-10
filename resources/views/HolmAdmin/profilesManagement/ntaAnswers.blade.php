@@ -1,309 +1,263 @@
-<div id="popupWrap{{$item->id}}" class="popupWrap"style="background:white; display:none;position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
-    <div class="adminPopup ">
-        <div class="adminPopup__head popupHead">
-            <a href="#" class="closeModal">
-                onclick="event.preventDefault();document.getElementById('popupWrap{{$item->id}}').style.display = 'none';">
-                <i class="fa fa-times"></i>
-            </a>
-            <p>NTA anwsers</p>
-        </div>
-        <div class="question-body">
+<div class="modal fade" id="myModal{{$item->id}}" role="dialog">
+    <div class="modal-dialog">
+        <div id="popupWrap{{$item->id}}" class="popupWrap">
+            <div class="adminPopup ">
+                <div class="adminPopup__head popupHead">
+                    {{--            <a href="#" class="closeModal">
 
-            <div class="question-row">
-                <div class="question-column">
-                    <h2 class="ordinaryTitle">
-                        COMPANIONSHIP
-                    </h2>
-                    <p class="question-info">
-                        WOULD THE SERVICE USER LIKE SOMEONE TO VISIT REGULARLY FOR COMPANIONSHIP?
-                    </p>
+                                    <i class="fa fa-times"></i>
+                                </a>--}}
+                    <p>NTA anwsers</p>
                 </div>
-                <div class="question-column">
-                    <div class="question-choise">
-                        <div class="choise-item">
-                            <input type="radio" class="radio radio--green" id="radio" name="radio" />
-                            <label for="radio">yes</label>
-                        </div>
-                        <div class="choise-item">
-                            <input type="radio" class="radio radio--green" id="radio2" name="radio" />
-                            <label for="radio2">no</label>
-                        </div>
-                    </div>
-                    <div class="question-comment">
-                        <input type="text" class="question-comment__field" placeholder="Comment">
-                    </div>
+                <div class="question-body">
 
-                </div>
-            </div>
-            <div class="question-row">
-                <div class="question-column">
-                    <h2 class="ordinaryTitle">
-                        TYPE OF CARE NEEDED
-                    </h2>
-                </div>
-                <div class="question-column">
-                    <div class="question-checkboxes">
-                        <div class="check-column">
-                            <div class="question-check">
-                                <input type="checkbox" class="checkbox" id="checkbox" />
-                                <label for="checkbox"> MEDICATION</label>
+                    @if(!empty($item->nta['Would the service user like someone to visit regularly for companionship?'] ))
+                        <div class="question-row">
+                            <div class="question-column">
+                                <h2 class="ordinaryTitle">
+                                    COMPANIONSHIP
+                                </h2>
+                                <p class="question-info">
+                                    WOULD THE SERVICE USER LIKE SOMEONE TO VISIT REGULARLY FOR COMPANIONSHIP?
+                                </p>
                             </div>
-                            <div class="question-check">
-                                <input type="checkbox" class="checkbox" id="checkbox2" />
-                                <label for="checkbox2"> TREATMENTS</label>
+                            <div class="question-column">
+                                <div class="question-choise">
+                                    <div class="choise-item">
+                                        <b>Yes</b>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                        <div class="check-column">
-                        </div>
-
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="question-row">
-                <div class="question-column">
-                    <h2 class="ordinaryTitle">
-                        FIRST DATE FOR CARER
-                    </h2>
-
-                </div>
-                <div class="question-column">
-                    <div class="formField formField--full">
-                        <div class="fieldWrap">
-                            <input type="text" class="formItem formItem--input formItem--date-ico " placeholder="06/06/2017">
-                            <span class="field-ico">
-                 <i class="fa fa-calendar"></i>
-               </span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="question-row">
-                <div class="question-column">
-                    <h2 class="ordinaryTitle">
-                        NUTRITION
-                    </h2>
-                    <p class="question-info">
-                        REQUIRE ASSISTANCE WITH EATING / DRINKING
-                    </p>
-                </div>
-                <div class="question-column">
-                    <div class="question-choise">
-                        <div class="choise-item">
-                            <input type="radio" class="radio radio--green" id="radio3" name="radio1" />
-                            <label for="radio3">yes</label>
-                        </div>
-                        <div class="choise-item">
-                            <input type="radio" class="radio radio--green" id="radio4" name="radio1" />
-                            <label for="radio4">no</label>
-                        </div>
-                    </div>
-                    <div class="question-comment">
-                        <input type="text" class="question-comment__field" placeholder="Comment">
-                    </div>
-
-                </div>
-            </div>
-            <div class="question-row">
-                <div class="question-column">
-                    <h2 class="ordinaryTitle">
-                        PERSONAL HYGIENE
-                    </h2>
-                    <p class="question-info">
-                        NEEDS HELP IN CHOOSING INCONTINENCE PRODUCTS
-                    </p>
-                </div>
-                <div class="question-column">
-                    <div class="question-choise">
-                        <div class="choise-item">
-                            <input type="radio" class="radio radio--green" id="radio5" name="radio2" />
-                            <label for="radio5">yes</label>
-                        </div>
-                        <div class="choise-item">
-                            <input type="radio" class="radio radio--green" id="radio6" name="radio2" />
-                            <label for="radio6">no</label>
-                        </div>
-                    </div>
-                    <div class="question-comment">
-                        <input type="text" class="question-comment__field" placeholder="Comment">
-                    </div>
-
-                </div>
-            </div>
-            <div class="question-row">
-                <div class="question-column">
-                    <h2 class="ordinaryTitle">
-                        ВEHAVIOUR
-                    </h2>
-                </div>
-                <div class="question-column">
-                    <div class="question-checkboxes">
-                        <div class="check-column">
-                            <div class="question-check">
-                                <input type="checkbox" class="checkbox" id="checkbox3" />
-                                <label for="checkbox3"> AGGRESSION</label>
+                    @endif
+                    @if(!empty($item->nta['REQUIRES ASSISTANCE IN TAKING MEDICATION TREATMENTS'] ))
+                        <div class="question-row">
+                            <div class="question-column">
+                                <h2 class="ordinaryTitle">
+                                    TYPE OF CARE NEEDED
+                                </h2>
                             </div>
-                            <div class="question-check">
-                                <input type="checkbox" class="checkbox" id="checkbox4" />
-                                <label for="checkbox4"> ANXIETY</label>
-                            </div>
-                            <div class="question-check">
-                                <input type="checkbox" class="checkbox" id="checkbox5" />
-                                <label for="checkbox5"> VIOLENCE</label>
-                            </div>
-                            <div class="question-check">
-                                <input type="checkbox" class="checkbox" id="checkbox6" />
-                                <label for="checkbox6"> AGITATION</label>
-                            </div>
-                            <div class="question-check">
-                                <input type="checkbox" class="checkbox" id="checkbox7" />
-                                <label for="checkbox7"> ANTISOCIAL BEHAVIOUR</label>
+                            <div class="question-column">
+                                <div class="question-checkboxes">
+                                    <div class="check-column">
+                                        <div class="question-check">
+                                            <strong> MEDICATION/TREATMENTS</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="question-comment">
+                                    <input type="text" class="question-comment__field"
+                                           value="{{$item->nta['REQUIRES ASSISTANCE IN TAKING MEDICATION TREATMENTS']}}"
+                                           placeholder="Comment">
+                                </div>
                             </div>
                         </div>
-                        <div class="check-column">
-                            <div class="question-check">
-                                <input type="checkbox" class="checkbox" id="checkbox8" />
-                                <label for="checkbox8"> CONFUSION</label>
+                    @endif
+                    @if(!empty($item->nta['Date of start'] ))
+                        <div class="question-row">
+                            <div class="question-column">
+                                <h2 class="ordinaryTitle">
+                                    FIRST DATE FOR CARER
+                                </h2>
+
                             </div>
-                            <div class="question-check">
-                                <input type="checkbox" class="checkbox" id="checkbox9" />
-                                <label for="checkbox9"> AGITATION</label>
+                            <div class="question-column">
+                                <div class="formField formField--full">
+                                    <div class="fieldWrap">
+                                        <div class="question-check">
+                                            <strong>{{$item->nta['Date of start']}}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="question-check">
-                                <input type="checkbox" class="checkbox" id="checkbox10" />
-                                <label for="checkbox10"> INAPPROPRIATE SEXUAL BEHAVIOUR</label>
+                        </div>
+                    @endif
+                    @if(!empty($item->nta['Require assistance with eating / drinking']))
+                        <div class="question-row">
+                            <div class="question-column">
+                                <h2 class="ordinaryTitle">
+                                    NUTRITION
+                                </h2>
+                                <p class="question-info">
+                                    REQUIRE ASSISTANCE WITH EATING / DRINKING
+                                </p>
+                            </div>
+                            <div class="question-column">
+
+                                <div class="question-comment">
+                                    <input type="text" class="question-comment__field"
+                                           value="{{$item->nta['Require assistance with eating / drinking']}}"
+                                           placeholder="Comment">
+                                </div>
+
                             </div>
                         </div>
+                    @endif
+                    @if(!empty($item->nta['Needs help in choosing incontinence products']))
+                        <div class="question-row">
+                            <div class="question-column">
+                                <h2 class="ordinaryTitle">
+                                    PERSONAL HYGIENE
+                                </h2>
+                                <p class="question-info">
+                                    NEEDS HELP IN CHOOSING INCONTINENCE PRODUCTS
+                                </p>
+                            </div>
+                            <div class="question-column">
+                                <div class="question-comment">
+                                    Yes
+                                </div>
 
-                    </div>
+                            </div>
+                        </div>
+                    @endif
+                    @if(count($item->Behaviours))
+                        <div class="question-row">
+                            <div class="question-column">
+                                <h2 class="ordinaryTitle">
+                                    ВEHAVIOUR
+                                </h2>
+                            </div>
+                            <div class="question-column">
+                                <div class="question-checkboxes">
+                                    <div class="check-column">
 
 
+                                        @foreach($item->Behaviours->splice(0,count($item->Behaviours)/2) as $behaviour)
+
+                                            @if($behaviour->name != 'other')
+                                                @if($behaviour->name != 'None')
+
+                                                    <div class="question-check">
+                                                        <label for="checkbox3"> {{$behaviour->name}} </label>
+                                                    </div>
+
+                                                @endif
+                                            @endif
+                                        @endforeach
+
+                                    </div>
+                                    <div class="check-column">
+                                        @foreach($item->Behaviours as $behaviour)
+                                            @if($behaviour->name != 'other')
+                                                @if($behaviour->name != 'None')
+                                                    <div class="question-check">
+                                                        <label for="checkbox3"> {{$behaviour->name}} </label>
+                                                    </div>
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    @if(!empty($item->nta['doctors_note']))
+                        <div class="question-row">
+                            <div class="question-column">
+                                <h2 class="ordinaryTitle">
+                                    Details
+                                </h2>
+                                <p class="question-info">
+                                    HAS A DOCTOR'S NOTE OR COURT ORDER SAYING THAT THEY ARE NOT ABLE TO GIVE CONSENT
+                                </p>
+                            </div>
+                            <div class="question-column">
+                                <div class="question-comment">
+                                    <input type="text" class="question-comment__field"
+                                           value="{{$item->nta['doctors_note']}}"
+                                           placeholder="Comment">
+                                </div>
+
+                            </div>
+                        </div>
+                    @endif
+                    @if(!empty($item->nta['Time would they like someone']))
+                        <div class="question-row">
+                            <div class="question-column">
+                                <h2 class="ordinaryTitle">
+                                    Night Time
+                                </h2>
+                                <p class="question-info">
+                                    WHAT TIME WOULD THEY LIKE SOMEONE TO COME AND HELP?
+                                </p>
+                            </div>
+                            <div class="question-column">
+                                <div class="formField formField--full">
+                                    <div class="fieldWrap">
+                                        {{$item->nta['Time would they like someone']}}
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    @endif
+                    @if(!empty($item->nta['Needs assistance keeping safe at night']))
+                        <div class="question-row">
+                            <div class="question-column">
+                                <p class="question-info">
+                                    NEEDS ASSISTANCE KEEPING SAFE AT NIGHT
+                                </p>
+                            </div>
+                            <div class="question-column">
+
+                                <div class="question-comment">
+                                    <input type="text" class="question-comment__field"
+                                           value="{{$item->nta['Needs assistance keeping safe at night']}}"
+                                           placeholder="Comment">
+                                </div>
+
+                            </div>
+                        </div>
+                    @endif
+                    @if(!empty($item->nta['Needs the assistance of more than one person at a time']))
+                        <div class="question-row">
+                            <div class="question-column">
+                                <h2 class="ordinaryTitle">
+                                    other
+                                </h2>
+                                <p class="question-info">
+                                    NEEDS THE ASSISTANCE OF MORE THAN ONE PERSON AT A TIME TO ACHIEVE ANY PARTICULAR
+                                    TASK
+                                </p>
+                            </div>
+                            <div class="question-column">
+
+                                <div class="question-comment">
+                                    <input type="text" class="question-comment__field"
+                                           value="{{$item->nta['Needs the assistance of more than one person at a time']}}"
+                                           placeholder="Comment">
+                                </div>
+
+                            </div>
+                        </div>
+                    @endif
+                    @if(!empty($item->nta['Are there any other medical conditions']))
+                        <div class="question-row">
+                            <div class="question-column">
+
+                                <p class="question-info">
+                                    ARE THERE ANY OTHER MEDICAL CONDITIONS, DISABILITIES, OR OTHER PIECES OF INFORMATION
+                                    NOT
+                                    ALREADY COVERED WHICH YOU FEEL MAY BE OF USE?
+                                </p>
+                            </div>
+                            <div class="question-column">
+
+                                <div class="question-comment">
+                                    <input type="text" class="question-comment__field"
+                                           value="{{$item->nta['Are there any other medical conditions']}}"
+                                           placeholder="Comment">
+                                </div>
+
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
-            <div class="question-row">
-                <div class="question-column">
-                    <h2 class="ordinaryTitle">
-                        Details
-                    </h2>
-                    <p class="question-info">
-                        HAS A DOCTOR'S NOTE OR COURT ORDER SAYING THAT THEY ARE NOT ABLE TO GIVE CONSENT
-                    </p>
-                </div>
-                <div class="question-column">
-                    <div class="question-choise">
-                        <div class="choise-item">
-                            <input type="radio" class="radio radio--green" id="radio7" name="radio3" />
-                            <label for="radio7">yes</label>
-                        </div>
-                        <div class="choise-item">
-                            <input type="radio" class="radio radio--green" id="radio8" name="radio3" />
-                            <label for="radio8">no</label>
-                        </div>
-                    </div>
-                    <div class="question-comment">
-                        <input type="text" class="question-comment__field" placeholder="Comment">
-                    </div>
-
-                </div>
-            </div>
-            <div class="question-row">
-                <div class="question-column">
-                    <h2 class="ordinaryTitle">
-                        Night Time
-                    </h2>
-                    <p class="question-info">
-                        WHAT TIME WOULD THEY LIKE SOMEONE TO COME AND HELP?
-                    </p>
-                </div>
-                <div class="question-column">
-                    <div class="formField formField--full">
-                        <div class="fieldWrap">
-                            <input type="text" class="formItem formItem--input formItem--date-ico " placeholder="12:00 AM - 5:00 PM">
-                            <span class="field-ico">
-                 <i class="fa fa-clock-o"></i>
-               </span>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="question-row">
-                <div class="question-column">
-                    <p class="question-info">
-                        NEEDS ASSISTANCE KEEPING SAFE AT NIGHT
-                    </p>
-                </div>
-                <div class="question-column">
-                    <div class="question-choise">
-                        <div class="choise-item">
-                            <input type="radio" class="radio radio--green" id="radio01" name="radio01" />
-                            <label for="radio01">yes</label>
-                        </div>
-                        <div class="choise-item">
-                            <input type="radio" class="radio radio--green" id="radio01" name="radio01" />
-                            <label for="radio01">no</label>
-                        </div>
-                    </div>
-                    <div class="question-comment">
-                        <input type="text" class="question-comment__field" placeholder="Comment">
-                    </div>
-
-                </div>
-            </div>
-            <div class="question-row">
-                <div class="question-column">
-                    <h2 class="ordinaryTitle">
-                        other
-                    </h2>
-                    <p class="question-info">
-                        NEEDS THE ASSISTANCE OF MORE THAN ONE PERSON AT A TIME TO ACHIEVE ANY PARTICULAR TASK
-                    </p>
-                </div>
-                <div class="question-column">
-                    <div class="question-choise">
-                        <div class="choise-item">
-                            <input type="radio" class="radio radio--green" id="radio9" name="radio4" />
-                            <label for="radio9">yes</label>
-                        </div>
-                        <div class="choise-item">
-                            <input type="radio" class="radio radio--green" id="radio10" name="radio4" />
-                            <label for="radio10">no</label>
-                        </div>
-                    </div>
-                    <div class="question-comment">
-                        <input type="text" class="question-comment__field" placeholder="Comment">
-                    </div>
-
-                </div>
-            </div>
-            <div class="question-row">
-                <div class="question-column">
-
-                    <p class="question-info">
-                        ARE THERE ANY OTHER MEDICAL CONDITIONS, DISABILITIES, OR OTHER PIECES OF INFORMATION NOT ALREADY COVERED WHICH YOU FEEL MAY BE OF USE?
-                    </p>
-                </div>
-                <div class="question-column">
-                    <div class="question-choise">
-                        <div class="choise-item">
-                            <input type="radio" class="radio radio--green" id="radio11" name="radio5" />
-                            <label for="radio11">yes</label>
-                        </div>
-                        <div class="choise-item">
-                            <input type="radio" class="radio radio--green" id="radio12" name="radio5" />
-                            <label for="radio12">no</label>
-                        </div>
-                    </div>
-                    <div class="question-comment">
-                        <input type="text" class="question-comment__field" placeholder="Comment">
-                    </div>
-
-                </div>
-            </div>
-
         </div>
     </div>
 </div>
