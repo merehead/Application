@@ -36,10 +36,10 @@
 
             </div>
         </div>
-        <div class="carousel slide multi-item-carousel" id="theCarousel1">
+        <div class="carousel slide multi-item-carousel">
             <div class="carousel-inner carousel-inner1">
                 <div class="item active">
-                    <div class="testimonialsPeople">
+                    <div class="testimonialsPeople" id="theCarousel_users">
                         <a href="#" class="peopleBox" data-id="1">
                             <div class="profilePhoto peopleBox__photo activeImg">
                                 <img src="/img/Annie_B.png" alt="">
