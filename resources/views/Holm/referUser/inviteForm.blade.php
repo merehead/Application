@@ -6,7 +6,7 @@
                             email addresses
                         </h2>
                         <div class="inputWrap">
-                            <input type="text" name="email[1]" class="formInput" placeholder="Email addresses">
+                            <input type="email" name="email[1]" class="formInput" placeholder="Email addresses" required />
                         </div>
                     </div>
                     <a href="#" class="referal-field-btn referal-field-btn--add">

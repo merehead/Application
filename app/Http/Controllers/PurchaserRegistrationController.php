@@ -25,6 +25,16 @@ class PurchaserRegistrationController extends FrontController
     public function index()
     {
 
+        if (request()->has('ref')){
+
+            $ref_code = $this->checkReferCode(request()->get('ref'));
+
+            if ($ref_code !=0 ) {
+                $this->vars = array_add($this->vars, 'ref_code', $ref_code);
+            }
+
+        }
+
         $this->title = 'Purchaser Registration';
 
         $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();

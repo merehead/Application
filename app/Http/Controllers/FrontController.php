@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class FrontController extends Controller
 {
@@ -29,5 +30,15 @@ class FrontController extends Controller
 
         return view($this->template)->with($this->vars);
 
+    }
+
+    public function checkReferCode($referCode) {
+
+
+        $rc = DB::select("select `id` from `users` where `own_referral_code` = '".$referCode."'");
+
+        if ($rc) return $referCode;
+
+        return 0;
     }
 }

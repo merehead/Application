@@ -62,16 +62,14 @@
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; font-family: 'Roboto', sans-serif; line-height: 1.5; "  valign="top" class="">
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
-                        Dear {{$like_name}}!
-
+                            Hi!
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-                            Thank you for registering with Holm.
-                            Your account has been created and is now being checked. We will contact you if we need any
-                            further information, or would like to discuss matters further.
-                            <br /><br />
-                            You will receive another email once your account has been approved. We hope you will enjoy Holm!
+                            {!! $user->userName() !!} thought you’d really benefit from using Holm, and has invited you to join us.
+<br/><br/>
+                            Use their code <b>{{$user->own_referral_code}}</b> when registering at <a href="{{route('mainHomePage')}}">Holm</a> and you will each receive a £100 bonus.*
+                            Join us now and you can find out how Holm is helping so many people.
                         </p>
 
                     </td>
@@ -79,6 +77,75 @@
             </table>
         </td>
     </tr>
+    <tr>
+        <td   valign="top" align="left" bgcolor="#ffffff"  style="font-family: 'Roboto', sans-serif;">
+            <table align="center" cellpadding="0" cellspacing="0" border="0"  style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"  class="t-content">
+
+                <tr>
+                    <td style="padding: 30px 40px; background: #f9f9f9; font-family: 'Roboto', sans-serif; line-height: 1.5; "  valign="top" class="">
+                        <div style="margin: auto">
+                            <a href="{{route('TermsPage')}}">*Terms & Conditions</a>
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td   valign="top" align="left" bgcolor="#ffffff"  >
+            <table cellpadding="0" cellspacing="0" border="0"  style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"  class="t-content">
+                <tr>
+                    <td style="padding: 30px 10px; background: #f9f9f9; "  valign="top" class="">
+                        <a href="{{route('CarerRegistration',['ref'=>$user->own_referral_code])}}" class=""
+                           style="
+                    display: block;
+                    width: 240px;
+                    line-height: 1.4;
+                    margin: 0 auto;
+                    padding: 10px 10px;
+                    border-radius: 30px;
+                    text-align: center;
+                    background: #80cb2d;
+                    text-transform: uppercase;
+                    color: #7bb7dc;
+                    font-family: 'Lato', sans-serif;
+                    font-weight: 900;
+                    color: #fff;
+                    font-size: 14px;
+                    text-decoration: none !important;">
+                            JOIN AS CARER
+                        </a>
+                    </td>
+                    <td style="padding: 30px 10px; background: #f9f9f9; "  valign="top" class="">
+                        <a href="{{route('PurchaserRegistration',['ref'=>$user->own_referral_code])}}" class=""
+                           style="
+                    display: block;
+                    width: 240px;
+                    line-height: 1.4;
+                    margin: 0 auto;
+                    padding: 10px 10px;
+                    border-radius: 30px;
+                    text-align: center;
+                    background: #80cb2d;
+                    text-transform: uppercase;
+                    color: #7bb7dc;
+                    font-family: 'Lato', sans-serif;
+                    font-weight: 900;
+                    color: #fff;
+                    font-size: 14px;
+                    text-decoration: none !important;">
+                            JOIN AS PURCHASER
+                        </a>
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+
+    </tr>
+
+    <tr>
     <tr>
         <td   valign="top" align="left" bgcolor="#ffffff"  style="font-family: 'Roboto', sans-serif;">
             <table cellpadding="0" cellspacing="0" border="0"  style="    margin: 0; " width="100%"  class="t-content">

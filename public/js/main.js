@@ -1037,9 +1037,9 @@ $(document).ready(function () {
         var block = '         <div class="referal-row">\n' +
             '                    <div class="referal-field">\n' +
             '                        <div class="inputWrap">\n' +
-            '                            <input type="text" name="email['+
+            '                            <input type="email" name="email['+
             n +
-            ']" class="formInput" placeholder="Email addresses">\n' +
+            ']" class="formInput" placeholder="Email addresses" required />\n' +
             '                        </div>\n' +
             '                    </div>\n' +
             '                    <a href="#" class="referal-field-btn referal-field-btn--add"">\n' +
