@@ -1027,6 +1027,40 @@ $(document).ready(function () {
         $(this).next("span").css("top", "12px");
     });
 
+    $(document).on('click','a.referal-field-btn--add', function (e) {
+        e.preventDefault();
+
+        var n = $( ".referal-row" ).length + 1;
+
+        //alert(n);
+
+        var block = '         <div class="referal-row">\n' +
+            '                    <div class="referal-field">\n' +
+            '                        <div class="inputWrap">\n' +
+            '                            <input type="text" name="email['+
+            n +
+            ']" class="formInput" placeholder="Email addresses">\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '                    <a href="#" class="referal-field-btn referal-field-btn--add"">\n' +
+            '                        <i class="fa fa-plus"></i>\n' +
+            '                    </a>\n' +
+            '                    <a href="" class="referal-field-btn referal-field-btn--delete">\n' +
+            '                        <i class="fa fa-minus"></i>\n' +
+            '                    </a>\n' +
+            '                </div>';
+
+        var that = $(this);
+
+        $(that).parent().after(block);//.html('xflbjhilhjtrdlihj');
+
+    });
+    $(document).on('click','a.referal-field-btn--delete', function (e) {
+        e.preventDefault();
+
+        $(this).parent().remove();
+    });
+
 //^^^^^^^Иван 20170922 для регистрации профиля пользователя
     if ($("#step48sometimes-if").val() == 'Yes') {
         {
