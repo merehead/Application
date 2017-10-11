@@ -466,9 +466,11 @@
     }
 
     $(document).ready(function(){
-        DistanceMatrixService();
         initialize();
         codeAddress();
+        if({{$user->user_type_id}} !== 1){
+          DistanceMatrixService();
+        }
     });
 
     $('.changeBookingStatus').click(function () {
