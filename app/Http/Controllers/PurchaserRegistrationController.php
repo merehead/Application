@@ -25,6 +25,16 @@ class PurchaserRegistrationController extends FrontController
     public function index()
     {
 
+        if (request()->has('ref')){
+
+            $ref_code = $this->checkReferCode(request()->get('ref'));
+
+            if ($ref_code !=0 ) {
+                $this->vars = array_add($this->vars, 'ref_code', $ref_code);
+            }
+
+        }
+
         $this->title = 'Purchaser Registration';
 
         $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
@@ -172,6 +182,27 @@ class PurchaserRegistrationController extends FrontController
 
         $purchaser = PurchasersProfile::findorFail($user->id);
 
+
+
+        $text = view(config('settings.frontTheme') . '.emails.continue_sign_up_service_user')->with([
+            'user' => $user,
+            'like_name'=>$purchaser->like_name
+        ])->render();
+
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>$user->email,
+                    'subject' =>'Registration on HOLM',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
+
+
+
+
+/*
         try {
             Mail::send(config('settings.frontTheme') . '.emails.continue_sign_up_service_user',
                 ['user' => $user,
@@ -187,7 +218,7 @@ class PurchaserRegistrationController extends FrontController
                 'action' => 'Try to sent continue_sign_up_purchaser',
                 'user_id' => $user->id
             ]);
-        }
+        }*/
 /*
         try {
 

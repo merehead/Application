@@ -116,6 +116,9 @@ Route::get('/thank-you-user/{id}', 'ServiceUserRegistrationController@sendContin
 Route::get('/user-registration-completed/{id}', 'ServiceUserRegistrationController@sendCompleteRegistration')->name('serviceUserRegistrationComplete'); //mail - completed registration
 //^^^registration mail
 
+Route::get('/invite/refer-users', 'ReferNewUserController@index')->name('inviteReferUsers');
+Route::post('/invite/refer-users', 'ReferNewUserController@create')->name('inviteReferUsersPost');
+
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
 

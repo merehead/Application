@@ -29,6 +29,17 @@ class PurchaserRegistration
         $this->model = $purchaserProfile;
     }
 
+
+/*    public function checkReferCode($referCode) {
+
+
+        $rc = DB::select("select `id` from `users` where `own_referral_code` = '".$referCode."'");
+
+        if ($rc) return $referCode;
+
+        return 0;
+    }*/
+
     public function getNextStep()
     {
 

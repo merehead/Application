@@ -160,7 +160,23 @@ class ServiceUserRegistrationController extends FrontController
 
         $serviceProfile = ServiceUsersProfile::findOrFail($id);
 
-        try {
+
+        $text = view(config('settings.frontTheme') . '.emails.continue_sign_up_service_user')->with([
+            'user' => $user,
+            'like_name'=>$serviceProfile->like_name
+        ])->render();
+
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>$user->email,
+                    'subject' =>'Registration on HOLM',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
+
+/*        try {
             Mail::send(config('settings.frontTheme') . '.emails.continue_sign_up_service_user',
                 ['user' => $user,
                     'like_name'=>$serviceProfile->like_name],
@@ -175,7 +191,7 @@ class ServiceUserRegistrationController extends FrontController
                 'action' => 'Try to sent continue_sign_up_purchaser',
                 'user_id' => $user->id
             ]);
-        }
+        }*/
         $this->content = view(config('settings.frontTheme') . '.carerRegistration.thankYou')->with($this->vars)->render();
 
         return $this->renderOutput();
@@ -194,7 +210,38 @@ class ServiceUserRegistrationController extends FrontController
         $serviceProfile->profiles_status_id = 2;
         $serviceProfile->registration_status = 'completed';
 
-        try {
+        $text = view(config('settings.frontTheme') . '.emails.complete_sign_up_service')->with([
+            'user' => $user,
+            'like_name'=>$serviceProfile->like_name
+        ])->render();
+
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>$user->email,
+                    'subject' =>'Welcome on HOLM',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
+
+        $text = view(config('settings.frontTheme') . '.emails.promo_letter_for_referral_bonuses')->with([
+            'user' => $user,
+        ])->render();
+
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>$user->email,
+                    'subject' =>'How would you like an extra £100?',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now()->addHour(1),
+                    'status'=>'new'
+                ]);
+
+
+
+/*        try {
             Mail::send(config('settings.frontTheme') . '.emails.complete_sign_up_service',
                 [
                     'user' => $user,
@@ -211,7 +258,7 @@ class ServiceUserRegistrationController extends FrontController
                 'action' => 'Try to sent complete_sign_up_service',
                 'user_id' => $user->id
             ]);
-        }
+        }*/
 
         return redirect(route('ServiceUserSetting',['id'=>$id]));
     }
