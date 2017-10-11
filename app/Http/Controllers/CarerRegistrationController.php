@@ -10,8 +10,10 @@ use App\Language;
 use App\Postcode;
 use App\ServiceType;
 use App\WorkingTime;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Swift_TransportException;
 
@@ -31,7 +33,6 @@ class CarerRegistrationController extends FrontController
     public function index($stepback = null)
     {
 
-
         if (request()->has('ref')){
 
             $ref_code = $this->checkReferCode(request()->get('ref'));
@@ -39,7 +40,6 @@ class CarerRegistrationController extends FrontController
             if ($ref_code !=0 ) {
                 $this->vars = array_add($this->vars, 'ref_code', $ref_code);
             }
-
         }
 
 
@@ -176,6 +176,28 @@ class CarerRegistrationController extends FrontController
 
         $carerProfile = CarersProfile::findOrFail($user->id);
 
+
+
+
+
+        $text = view(config('settings.frontTheme') . '.emails.continue_sign_up_carer')->with([
+            'user' => $user,
+            'regTime' => $user->created_at->addWeek()->format('d/m/Y h:i A'),
+            'like_name' => $carerProfile->like_name,
+        ])->render();
+
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>$user->email,
+                    'subject' =>'Registration on HOLM',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
+
+
+/*
         try {
             Mail::send(config('settings.frontTheme') . '.emails.continue_sign_up_carer',
                 [
@@ -194,7 +216,7 @@ class CarerRegistrationController extends FrontController
                 'action' => 'Try to sent continue_sign_up_carer',
                 'user_id' => $user->id
             ]);
-        }
+        }*/
 
 
         $this->content = view(config('settings.frontTheme') . '.carerRegistration.thankYou')->with($this->vars)->render();
@@ -207,6 +229,9 @@ class CarerRegistrationController extends FrontController
 
         $user = Auth::user();
 
+
+
+
         if(!$user) {
             return redirect('/');
         }
@@ -215,7 +240,38 @@ class CarerRegistrationController extends FrontController
 
         $carerProfile->registration_status = 'completed';
 
-        try {
+        $text = view(config('settings.frontTheme') . '.emails.complete_sign_up_carer')->with([
+            'user' => $user,
+            'like_name'=>$carerProfile->like_name
+        ])->render();
+
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>$user->email,
+                    'subject' =>'Welcome on HOLM',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
+
+
+        $text = view(config('settings.frontTheme') . '.emails.promo_letter_for_referral_bonuses')->with([
+            'user' => $user,
+        ])->render();
+
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>$user->email,
+                    'subject' =>'How would you like an extra £100?',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now()->addHour(1),
+                    'status'=>'new'
+                ]);
+
+
+/*        try {
             Mail::send(config('settings.frontTheme') . '.emails.complete_sign_up_carer',
                 ['user' => $user,
                     'like_name'=>$carerProfile->like_name],
@@ -230,8 +286,10 @@ class CarerRegistrationController extends FrontController
                 'action' => 'Try to sent complete_sign_up_carer',
                 'user_id' => $user->id
             ]);
-        }
+        }*/
 
+
+        $carerProfile->update();
 
         return redirect('/carer-settings');
     }
