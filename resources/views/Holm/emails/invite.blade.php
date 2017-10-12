@@ -114,7 +114,7 @@
                     color: #fff;
                     font-size: 14px;
                     text-decoration: none !important;">
-                            JOIN AS CARER
+                            Join as a care worker
                         </a>
                     </td>
                     <td style="padding: 30px 10px; background: #f9f9f9; "  valign="top" class="">
@@ -135,7 +135,7 @@
                     color: #fff;
                     font-size: 14px;
                     text-decoration: none !important;">
-                            JOIN AS PURCHASER
+                            Join as a person buying care
                         </a>
                     </td>
                 </tr>
