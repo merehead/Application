@@ -1493,6 +1493,7 @@ $(document).ready(function () {
 
     $('.moreLink').on('click', function (e) {
         $('#load-more').val(1);
+        $('#load-count').val(parseInt($('#load-count').val())+5);
         carerSearchAjax();
     });
 

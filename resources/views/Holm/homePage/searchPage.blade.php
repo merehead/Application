@@ -134,15 +134,11 @@
                 </div>
 
                 <div class="resultHeader Paginator">
-                    <p class="resultHeader__info">Showing {{(($page*$perPage)-$perPage==0)?'1':($page*$perPage)-$perPage}}-{{($carerResultCount<$perPage)?$page*$carerResultCount:$page*$perPage}} of {{$carerResultCount}} CARERs</p>
+                    <p class="resultHeader__info">Showing {{$page*$perPage}} of {{$carerResultCount}} CARERs</p>
                     <div class="sortLink">
                         SEARCH BY &nbsp; <a href="#" class="sortLink__item sort-rating"> <span> </span> rating
                         </a>
                         <p> &nbsp; - &nbsp; </p>
-                        <!--<span class="sortLink__separate">
-
-                        </span>
-                        -->
                         <a href="#" class="sortLink__item sort-id">
                             MOST RECENT
                         </a>
@@ -219,6 +215,7 @@
                 @if($carerResultCount>5)
                     <input type="hidden" id="id-carer" name="id" value="{{$carerResult[count($carerResult)-1]->id}}">
                     <input type="hidden" name="load-more" id="load-more" value="0">
+                    <input type="hidden" name="load-more-count" id="load-count" value="{{$load_more_count}}">
                 <div class="moreBtn moreBtn--book ">
                     <a href="" class="moreBtn__item moreBtn__item--book centeredLink moreLink">
                         Load More

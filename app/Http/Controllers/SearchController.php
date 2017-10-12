@@ -29,7 +29,7 @@ class SearchController extends FrontController
         $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
         $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
         $modals = view(config('settings.frontTheme') . '.includes.modals')->render();
-
+        $load_more_count=$request->get('load-more-count',5);
         $languages = Language::all();
         $this->vars = array_add($this->vars, 'languages', $languages);
         $typeCare = AssistanceType::all();
@@ -40,6 +40,7 @@ class SearchController extends FrontController
         $this->vars = array_add($this->vars, 'header', $header);
         $this->vars = array_add($this->vars, 'footer', $footer);
         $this->vars = array_add($this->vars, 'modals', $modals);
+        $this->vars = array_add($this->vars, 'load_more_count', $load_more_count);
 
         $perPage = 5;
         $where = '';
@@ -92,8 +93,6 @@ class SearchController extends FrontController
         if ($request->get('postCode')&&!empty($request->get('postCode'))){
             $postCode = $request->get('postCode');
             if(strpos(' ',$postCode)===false) $postCode.=' ';
-            //$where .= " and (select count(*) from postcodes p where p.name = left('".$request->get('postCode')."',LENGTH(p.name)) and  p.name = LEFT(cp.postcode, LENGTH(p.name)))>0";
-//            $where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('".$request->get('postCode')."', LENGTH(p.name)) and  p.name = LEFT(cp.postcode, LENGTH(p.name)))>0";
             $where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('".$postCode."', POSITION(' ' IN '".$postCode."')) and  p.name = LEFT(cp.postcode, LENGTH(p.name)))>0";
         }
         if ($request->get('load-more',0)==1)
@@ -110,6 +109,7 @@ class SearchController extends FrontController
         $carerResult = DB::select($sql);
 
         $start = (($page*$perPage)-$perPage==0)?'1':($page*$perPage)-$perPage;
+        $countAll = count(DB::select(str_replace( " and cp.id > " . $request->get('id') ,'',$sql)));
         if(count($carerResult)==1)$start=0;
         $carerResultPage = array_slice($carerResult,$start,$perPage);
         $this->vars = array_add($this->vars, 'carerResult', $carerResultPage);
@@ -117,6 +117,7 @@ class SearchController extends FrontController
         $this->vars = array_add($this->vars, 'carerResultCount', count($carerResult));
         $this->vars = array_add($this->vars, 'page', $page);
         $this->vars = array_add($this->vars, 'requestSearch', $request->all());
+        $this->vars = array_add($this->vars, 'countAll', $countAll);
 
         $load_more = $request->get('load_more');
         $this->content = view(config('settings.frontTheme') . '.homePage.searchPage', $this->vars)->render();
@@ -141,6 +142,7 @@ class SearchController extends FrontController
                 'sql' => $sql,
                 'id'=>(count($carerResultPage)-1>0)?$carerResultPage[count($carerResultPage)-1]->id:0,
                 'count' => count($carerResult),
+                'countAll' => $countAll,
                 'htmlHeader' => $htmlHeader), 200, [$options]);
             exit;
         }
