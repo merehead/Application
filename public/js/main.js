@@ -1709,6 +1709,7 @@ $(document).ready(function () {
                 $('#datepicker_when_start').attr('readonly',true)
                     .datepicker("destroy");
             }
+            $('.error-onlyNumber').remove();
             var that = $(this);
             var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
             var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');
