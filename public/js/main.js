@@ -1193,6 +1193,14 @@ $(document).ready(function () {
             $(datetime).parent().show();
             $(label).show();
             $(datetime).removeClass("hasDatepicker").removeAttr('id');
+            var datestart = $(datetime).attr('name').substring(0,$(datetime).attr('name').length - 10)+'[date_start]';
+            var datestartDate = $('input[name="'+datestart+'"]').datepicker( "getDate" );
+            var inWeek = new Date();
+            var in90Day = new Date();
+            inWeek.setDate(datestartDate.getDate()+7);
+            in90Day.setDate(datestartDate.getDate()+90);
+
+            console.log(inWeek);
             $(datetime).datepicker({
                 beforeShow: function (input, inst) {
                     inst.dpDiv.css({"z-index": "2000!important;"});
@@ -1202,9 +1210,8 @@ $(document).ready(function () {
                 changeYear: true,
                 dateFormat: "dd/mm/yy",
                 showAnim: "slideDown",
-
-                minDate: "+7D",
-                maxDate: "+90D",
+                minDate: inWeek,
+                maxDate: in90Day,
                 yearRange: "0:+2"
             });
         }
