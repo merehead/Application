@@ -17,6 +17,7 @@ use App\ServiceUsersProfile;
 use App\User;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use SebastianBergmann\CodeCoverage\Exception;
 use Swift_TransportException;
@@ -30,6 +31,16 @@ class CarerRegistration
     public function __construct(CarersProfile $carersProfile) {
         $this->model = $carersProfile;
     }
+
+/*    public function checkReferCode($referCode) {
+
+
+        $rc = DB::select("select `id` from `users` where `own_referral_code` = '".$referCode."'");
+
+        if ($rc) return $referCode;
+
+        return 0;
+    }*/
 
     public function getID()
     {
@@ -202,6 +213,10 @@ class CarerRegistration
 
 
         if ($user) {
+
+            $user->own_referral_code = mb_substr($user->id.md5($user->id),0,8);
+
+            $user->update();
 
             $carerPrifile = new CarersProfile();
 

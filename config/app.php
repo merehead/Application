@@ -51,7 +51,8 @@ return [
     |
     */
 
-    'url' => env('APP_URL', $_SERVER['SERVER_NAME']),
+//    'url' => env('APP_URL', $_SERVER['SERVER_NAME']),
+    'url' => 'http://37.0.25.139',
 
     /*
     |--------------------------------------------------------------------------

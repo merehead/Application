@@ -1,19 +1,28 @@
-<div class="thank">
-    <h2 class="thank__title">
-        You only have to fill in this information once
-    </h2>
-    <p class="info-p">
-        It is so the carer has all the information to provide great care. Your information will be saved, and you can carry on later from where you left off if you have to stop. Please press 'submit' at the end to finish.
 
-    </p>
-    <p >
-        WE ARE WORKING HARD TO HELP OLDER PEOPLE TO RECEIVE THE BEST CARE POSSIBLE.
+<div class="registration">
+    <div class="registration__full">
+        <div class="thank thank--full">
+            <h2 class="thank__title">
+                You only have to fill in this information once
+            </h2>
+            <!-- <span class="successIco">
+              <i class="fa fa-check" aria-hidden="true"></i>
+             </span> -->
+            <p class="info-p">
+                It is so the carer has all the information to provide great care. Your information will be saved, and you can carry on later from where you left off if you have to stop. Please press 'submit' at the end to finish.
 
-    </p>
-    <p >
-        Press 'Start' to proceed'
+            </p>
+            <p >
+                WE ARE WORKING HARD TO HELP OLDER PEOPLE TO RECEIVE THE BEST CARE POSSIBLE.
 
-    </p>
+            </p>
+            <p >
+                Press 'Start' to proceed'
+
+            </p>
+
+        </div>
+    </div>
 
 </div>
 

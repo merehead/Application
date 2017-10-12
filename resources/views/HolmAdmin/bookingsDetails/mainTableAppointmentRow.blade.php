@@ -10,17 +10,17 @@
         {{$appointment->id}}
     </td>
     <td class=" ">
-        <span>{{$appointment->date_start}}</span>
+        <span>{{$appointment->formatted_date_start}} {{$appointment->formatted_time_from}}</span>
     </td>
     <td class=" ">
-        <span>{{$appointment->date_end}}</span>
+        <span>{{$appointment->formatted_date_start}} {{$appointment->formatted_time_to}}</span>
 
     </td>
     <td class="">
-        {{$appointment->amount_for_purchaser}}
+        {{$appointment->hours*13}}
     </td>
     <td class="">
-        {{$appointment->amount_for_carer}}
+        {{$appointment->hours*10}}
     </td>
     <td class=" ">
         <div class="profStatus profStatus--left">

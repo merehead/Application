@@ -9,7 +9,9 @@
                     <span>{{$booking->purchaser_id}}</span>
                 </td>
                 <td class="nameField">
-                    <a href="#" class="tableLink">{{$booking->bookingPurchaser->fname}}</a>
+                    @if(!empty($booking->bookingPurchaserProfile) && count($booking->bookingPurchaserProfile))
+                    <a href="#" class="tableLink">{{$booking->bookingPurchaserProfile->first_name}} {{$booking->bookingPurchaserProfile->family_name}}</a>
+                        @endif
                 </td>
             </tr>
         </table>
@@ -21,7 +23,9 @@
                     <span>{{$booking->service_user_id}}</span>
                 </td>
                 <td class="nameField">
-                    <a href="#" class="tableLink">{{$booking->bookingServiceUser->fname}}</a>
+                    @if(!empty($booking->bookingServiceUser && count($booking->bookingServiceUser)))
+                    <a href="#" class="tableLink">{{$booking->bookingServiceUser->first_name}} {{$booking->bookingServiceUser->family_name}}</a>
+                        @endif
                 </td>
             </tr>
         </table>
@@ -33,11 +37,16 @@
                     <span>{{$booking->carer_id}}</span>
                 </td>
                 <td class="nameField">
-                    <a href="#" class="tableLink">{{$booking->bookingCarer->fname}}</a>
+                    @if(!empty($booking->bookingCarerProfile && count($booking->bookingCarerProfile)))
+                    <a href="#" class="tableLink">{{$booking->bookingCarerProfile->first_name}} {{$booking->bookingCarerProfile->family_name}}</a>
+                        @endif
                 </td>
             </tr>
         </table>
     </td>
+
+
+
     <td class="for-inner">
         <table class="innerTable ">
             <tr>
@@ -48,31 +57,22 @@
                     <span>{{$booking->date_start}}</span>
                 </td>
                 <td class=" ">
-                    <span>{{$booking->date_end}}</span>
+                   <span>{{$booking->date_end}}</span>
                 </td>
                 <td class=" ">
-                    <span>{{$booking->frequency->name}}</span>
-                </td>
-                <td class=" ">
-                    <div class="profStatus profStatus--left">
-                        <span class="profStatus__item profStatus__item--{{$booking->bookingStatus->css_name}}">{{$booking->bookingStatus->name}}</span>
-                    </div>
-                </td>
-{{--                <td class=" ">
-                    <div class="profStatus profStatus--left">
-                        <span class="profStatus__item profStatus__item--{{$booking->bookingStatus->css_name}}">{{$booking->bookingStatus->name}}</span>
-                    </div>
+                    <span>frequency->name</span>
                 </td>
                 <td class=" ">
                     <div class="profStatus profStatus--left">
-                        <span class="profStatus__item profStatus__item--{{$booking->bookingStatus->css_name}}">{{$booking->bookingStatus->name}}</span>
+                       <span class="profStatus__item profStatus__item--{{$booking->bookingStatus->css_name}}">{{$booking->bookingStatus->name}}</span>
                     </div>
-                </td>--}}
-
+                </td>
             </tr>
 
         </table>
     </td>
+
+
     <td class="for-inner">
         <table class="innerTable ">
             @foreach($booking->appointments as $appointment)
@@ -80,5 +80,7 @@
             @endforeach
         </table>
     </td>
+
+
 
 </tr>

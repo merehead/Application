@@ -19,7 +19,7 @@ class PurchaserController extends FrontController implements Constants
 
     }
 
-    public function index()
+    public function index($id=null)
     {
 
         $this->template = config('settings.frontTheme') . '.templates.purchaserPrivateProfile';
@@ -46,31 +46,23 @@ class PurchaserController extends FrontController implements Constants
             $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('purchaser_id', $this->user->id)->get();
             $this->vars = array_add($this->vars, 'newBookings', $newBookings);
 
-            $purchaserProfile = PurchasersProfile::findOrFail($this->user->id);
+            if(!empty($id) && Auth::user()->user_type_id==4){ //админ
+                $purchaserProfile = PurchasersProfile::findOrFail($id);
+            } else {
+                $purchaserProfile = PurchasersProfile::findOrFail($this->user->id);
+            }
+
             $serviceUsers = $purchaserProfile->serviceUsers;
 
             $this->vars = array_add($this->vars, 'user', $this->user);
             $this->vars = array_add($this->vars, 'purchaserProfile', $purchaserProfile);
             $this->vars = array_add($this->vars, 'serviceUsers', $serviceUsers);
-/*            $postcodes = Postcode::all()->pluck('name', 'id')->toArray();
-            $this->vars = array_add($this->vars, 'postcodes', $postcodes);
-            $typeCare = AssistanceType::all();
-            $this->vars = array_add($this->vars, 'typeCare', $typeCare);
-            $workingTimes = WorkingTime::all();
-            $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
-            $languages = Language::all();
-            $this->vars = array_add($this->vars, 'languages', $languages);
-            //dd($this->user,$carerProfile);*/
+
             $this->content = view(config('settings.frontTheme') . '.purchaserProfiles.PrivateProfile')->with($this->vars)->render();
 
         }
 
-        //$step = view(config('settings.frontTheme').'.carerRegistration.'.$this->carersProfile->getNextStep())->with($this->vars)->render();
-        //$this->vars = array_add($this->vars,'step',$step);
 
-//        $this->content = view(config('settings.frontTheme').'.homePage.homePage')->with($this->vars)->render();
-
-        //dd($this->content);
 
         return $this->renderOutput();
     }

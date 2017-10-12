@@ -1031,6 +1031,40 @@ $(document).ready(function () {
         $(this).next("span").css("top", "12px");
     });
 
+    $(document).on('click','a.referal-field-btn--add', function (e) {
+        e.preventDefault();
+
+        var n = $( ".referal-row" ).length + 1;
+
+        //alert(n);
+
+        var block = '         <div class="referal-row">\n' +
+            '                    <div class="referal-field">\n' +
+            '                        <div class="inputWrap">\n' +
+            '                            <input type="email" name="email['+
+            n +
+            ']" class="formInput" placeholder="Email addresses" required />\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '                    <a href="#" class="referal-field-btn referal-field-btn--add"">\n' +
+            '                        <i class="fa fa-plus"></i>\n' +
+            '                    </a>\n' +
+            '                    <a href="" class="referal-field-btn referal-field-btn--delete">\n' +
+            '                        <i class="fa fa-minus"></i>\n' +
+            '                    </a>\n' +
+            '                </div>';
+
+        var that = $(this);
+
+        $(that).parent().after(block);//.html('xflbjhilhjtrdlihj');
+
+    });
+    $(document).on('click','a.referal-field-btn--delete', function (e) {
+        e.preventDefault();
+
+        $(this).parent().remove();
+    });
+
 //^^^^^^^Иван 20170922 для регистрации профиля пользователя
     if ($("#step48sometimes-if").val() == 'Yes') {
         {
@@ -1520,16 +1554,22 @@ $(document).ready(function () {
     /*-------------- Home/welcome-carer page slider (recalls) ------------*/
     // Carousel
     $('.multi-item-carousel').carousel({
-        interval: 5000
+        // interval: 5000
     });
 
-    // change quote
-    $('.peopleBox').on('click', function (e) {
-        e.preventDefault();
-        var quote = $(this).find('.people_quote').text().trim();
-        $('#testimonialSlider__item p').text(quote)
-    });
+    $('#theCarousel1').on('slide.bs.carousel', function () {
+      var data_id = $('#theCarousel_users').children()
+      var peopleBox = $('.peopleBox').children()
+      $(this).removeClass('active')
+      current_id = parseInt($(this).find('.active').attr('id').replace(/[^1-9]/g, '')) + 1
 
+      peopleBox.removeClass('activeImg')
+      $.each( data_id, function( key, value ) {
+        if(parseInt($(this).attr('data-id')) === current_id){
+          $(this).children().addClass('activeImg')
+        }
+      });
+    })
 
     $(".toggler").click(function (e) {
         e.preventDefault();

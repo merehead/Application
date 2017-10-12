@@ -1,16 +1,25 @@
-<div class="thank">
-    <h2 class="thank__title">
-        PLEASE ANSWER THESE QUESTIONS BEFORE BOOKING A CARER
-    </h2>
-    <p class="info-p">
-        THIS QUESTIONNAIRE NORMALLY TAKES ABOUT 15 MINUTES TO COMPLETE, PROBABLY LESS.
-    </p>
+<div class="registration">
+    <div class="registration__full">
+        <div class="thank thank--full">
+            <h2 class="thank__title">
+                PLEASE ANSWER THESE QUESTIONS BEFORE BOOKING A CARER
+            </h2>
+            <!-- <span class="successIco">
+               <i class="fa fa-check" aria-hidden="true"></i>
+             </span>
+             -->
+            <p class="info-p">
+                THIS QUESTIONNAIRE NORMALLY TAKES ABOUT 15 MINUTES TO COMPLETE, PROBABLY LESS.
+            </p>
 
-    <p> This isn't a test, so don't worry and relax. Fill in the questions the best you can. You can always change information later in your new profile.
-    </p>
-    <p>
-        Some of the questions may seem detailed, or personal. We guarantee privacy and confidentiality, but the information will help provide the best care possible.
-    </p>
+            <p> This isn't a test, so don't worry and relax. Fill in the questions the best you can. You can always change information later in your new profile.
+            </p>
+            <p>
+                Some of the questions may seem detailed, or personal. We guarantee privacy and confidentiality, but the information will help provide the best care possible.
+            </p>
+        </div>
+    </div>
+
 </div>
 
 <form id="step" method="POST" action="{{ route('ServiceUserRegistration',['id' =>$serviceUserProfileID]) }}">

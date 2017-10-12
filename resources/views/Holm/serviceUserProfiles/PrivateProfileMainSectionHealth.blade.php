@@ -173,7 +173,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_in_medication == 'No' || is_null($serviceUsersProfile->assistance_in_medication) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('in_medication_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::textarea('in_medication_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('in_medication_detail'))
                 <span class="help-block"><strong>{{ $errors->first('in_medication_detail') }}</strong></span>
             @endif

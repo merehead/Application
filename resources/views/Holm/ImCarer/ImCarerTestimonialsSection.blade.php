@@ -40,7 +40,7 @@
             <div class="carousel-inner carousel-inner1">
                 <div class="item active">
                     <div class="testimonialsPeople">
-                        <a href="#" class="peopleBox" data-id="1">
+                        <a href="#" class="peopleBox" data-id="4">
                             <div class="profilePhoto peopleBox__photo activeImg">
                                 <img src="/img/Annie_B.png" alt="">
                             </div>

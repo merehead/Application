@@ -38,7 +38,6 @@ Route::post('/search/page/{page}', 'SearchController@index')->name('searchPagePa
 Route::get('/terms', 'TermsController@index')->name('TermsPage');
 
 Route::get('/welcome-carer', 'CarerController@welcome')->name('welcomeCarer');
-Route::get('/carer-settings', 'CarerController@index')->name('carerSettings'); //synonym for ImCarerPage
 
 Route::get('/carer/profile/{user_id}', 'CarerController@profile')->name('carerPublicProfile'); //synonym for
 Route::get('/address/', 'CarerController@getAddress')->name('carerGetAddress'); //synonym for
@@ -50,6 +49,7 @@ Route::get('/carer/appointment/{user_id}', 'CarerController@appointment')->name(
 
 Route::get('/carer-settings/profile/{user_id}', 'CarerController@profile')->name('carerPublicProfile2'); //synonym for ImCarerPage
 Route::get('/carer-settings/booking/{status?}', 'CarerController@bookingFilter')->name('carerBooking'); //synonym for ImCarerPage
+Route::get('/carer-settings/{id?}', 'CarerController@index')->name('carerSettings'); //synonym for ImCarerPage
 
 
 
@@ -61,10 +61,10 @@ Route::get('/carer/{carer_id}', 'CarerController@carerProfile');
 Route::get('carer-registration/','CarerRegistrationController@index')->name('CarerRegistration');
 Route::post('carer-registration','CarerRegistrationController@update')->name('CarerRegistrationPost');
 
-
-Route::get('/purchaser-settings', 'PurchaserController@index')->name('purchaserSettings');
-Route::post('/purchaser-settings','PurchaserController@update')->name('purchaserSettingsPost');
 Route::get('/purchaser-settings/booking/{status?}', 'PurchaserController@bookingFilter')->name('purchaserBookingStatus'); //synonym for ImCarerPage
+
+Route::get('/purchaser-settings/{id?}', 'PurchaserController@index')->name('purchaserSettings');
+Route::post('/purchaser-settings','PurchaserController@update')->name('purchaserSettingsPost');
 
 Route::get('/purchaser-registration/','PurchaserRegistrationController@index')->name('PurchaserRegistration');
 Route::post('/purchaser-registration','PurchaserRegistrationController@update')->name('PurchaserRegistrationPost');
@@ -86,7 +86,7 @@ Route::post('/bookings','Bookings\BookingsController@create');
 Route::put('/bookings/{booking}','Bookings\BookingsController@update');
 Route::post('/bookings/calculate_price','Bookings\BookingsController@calculateBookingPrice');
 Route::get('/bookings/{booking}/modal_edit', 'Bookings\BookingsController@getModalEditBooking');
-Route::get('/bookings/{booking}/details', 'Bookings\BookingsController@view_details');
+Route::get('/bookings/{booking}/details', 'Bookings\BookingsController@view_details')->name('viewBookingDetails');
 Route::get('/bookings/{booking}/purchase', 'Bookings\PaymentsController@payment_form');
 Route::post('/bookings/{booking}/message','Bookings\BookingsController@create_message');
 Route::post('/bookings/{booking}/setPaymentMethod','Bookings\BookingsController@setPaymentMethod')->name('setBookingPaymentMethod');
@@ -115,6 +115,9 @@ Route::get('/thank-you-user/{id}', 'ServiceUserRegistrationController@sendContin
 
 Route::get('/user-registration-completed/{id}', 'ServiceUserRegistrationController@sendCompleteRegistration')->name('serviceUserRegistrationComplete'); //mail - completed registration
 //^^^registration mail
+
+Route::get('/invite/refer-users', 'ReferNewUserController@index')->name('inviteReferUsers');
+Route::post('/invite/refer-users', 'ReferNewUserController@create')->name('inviteReferUsersPost');
 
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {

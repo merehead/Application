@@ -26,20 +26,22 @@ use Swift_TransportException;
 
 class BookingsController extends FrontController implements Constants
 {
-    public function create(BookingCreateRequest $request){
+    public function create(BookingCreateRequest $request)
+    {
 
         $booking = $this->createBooking($request);
 
-        if($request->ajax()) // This is what i am needing.
+        if ($request->ajax()) // This is what i am needing.
         {
-            return 'bookings/'.$booking->id.'/purchase';
+            return 'bookings/' . $booking->id . '/purchase';
         }
 
-        return redirect('bookings/'.$booking->id.'/purchase');
+        return redirect('bookings/' . $booking->id . '/purchase');
     }
 
 
-    public function calculateBookingPrice(BookingCreateRequest $request){
+    public function calculateBookingPrice(BookingCreateRequest $request)
+    {
 
         DB::beginTransaction();
 
@@ -52,26 +54,27 @@ class BookingsController extends FrontController implements Constants
         return response(['price' => $price, 'hours' => $hours]);
     }
 
-    public function update(Booking $booking, Request $request){
+    public function update(Booking $booking, Request $request)
+    {
         //Offer alterntive time
 
         $user = Auth::user();
 
-        foreach ($request->bookings as $booking_item){
+        foreach ($request->bookings as $booking_item) {
             $booking->appointments()->delete();
             //Generating appointments
             $this->createAppointments($booking, $booking_item['appointments']);
         }
 
-        if($user->user_type_id == 3){
+        if ($user->user_type_id == 3) {
             //carer
             $booking->carer_status_id = 1;
             $booking->purchaser_status_id = 2;
-        } else{
+        } else {
             $booking->carer_status_id = 2;
             $booking->purchaser_status_id = 1;
         }
-        
+
         $booking->save();
 
         //todo отправить почту базируясь на $user->user_type_id (либо кереру, либо пурчасеру)
@@ -79,13 +82,20 @@ class BookingsController extends FrontController implements Constants
         return response(['status' => 'success']);
     }
 
-    public function getModalEditBooking(Booking $booking){
+    public function getModalEditBooking(Booking $booking)
+    {
 
         $sql = 'SELECT  min(date_start) as date_start,  max(date_start) as date_end, min(time_from) as time_from, min(time_to) as time_to, min(periodicity) as periodicity
                 FROM appointments
-                WHERE booking_id = '.$booking->id.'
+                WHERE booking_id = ' . $booking->id . '
                 GROUP BY batch ORDER BY batch';
         $appointments = DB::select($sql);
+
+        array_map(function ($item) {
+            $item->time_from = Carbon::parse($item->time_from)->format("h:i A");
+            $item->time_to = Carbon::parse($item->time_to)->format("h:i A");;
+        }, $appointments);
+
         $user = Auth::user();
        $this->vars = array_add($this->vars,'user',$user);
        $this->vars = array_add($this->vars,'appointments',$appointments);
@@ -95,9 +105,21 @@ class BookingsController extends FrontController implements Constants
        $content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.MessageEdit')->with($this->vars)->render();
        return  $content;
        //todo букинги тут $booking. апоинтменты тут
+
+
+
+
+        $this->vars = array_add($this->vars, 'appointments', $appointments);
+        $this->vars = array_add($this->vars, 'assistance_types', $booking->assistance_types);
+        $this->vars = array_add($this->vars, 'serviceUsers', $booking->bookingServiceUser);
+        $this->vars = array_add($this->vars, 'booking', $booking);
+        $content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.MessageEdit')->with($this->vars)->render();
+        return $content;
+        //todo букинги тут $booking. апоинтменты тут
     }
 
-    public function view_details(Booking $booking){
+    public function view_details(Booking $booking)
+    {
 
 //        if(!in_array($booking->status_id, [2, 5, 7]))
 //            return;
@@ -106,13 +128,13 @@ class BookingsController extends FrontController implements Constants
         $this->template = config('settings.frontTheme') . '.templates.purchaserPrivateProfile';
         $this->title = 'Booking details';
 
-        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
-        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
-        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+        $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme') . '.includes.modals')->render();
 
-        $this->vars = array_add($this->vars,'header',$header);
-        $this->vars = array_add($this->vars,'footer',$footer);
-        $this->vars = array_add($this->vars,'modals',$modals);
+        $this->vars = array_add($this->vars, 'header', $header);
+        $this->vars = array_add($this->vars, 'footer', $footer);
+        $this->vars = array_add($this->vars, 'modals', $modals);
 
         //todo костыль на логаут
         if (!Auth::check()) {
@@ -141,10 +163,11 @@ class BookingsController extends FrontController implements Constants
         return $this->renderOutput();
     }
 
-    public function setPaymentMethod(Booking $booking, Request $request, StripeService $stripeService){
+    public function setPaymentMethod(Booking $booking, Request $request, StripeService $stripeService)
+    {
         $booking->payment_method = $request->payment_method;
 
-        if($request->payment_method == 'credit_card'){
+        if ($request->payment_method == 'credit_card') {
             $cardToken = $stripeService->createCreditCardToken([
                 'card_number' => $request->card_number,
                 'exp_month' => $request->card_month,
@@ -156,40 +179,56 @@ class BookingsController extends FrontController implements Constants
         $booking->status_id = 2;
         $booking->save();
 
-                    //$user=Auth::user();
-            $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
-            $carerProfile = CarersProfile::find($booking->carer_id);
-            $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
-            //$user = Auth::user();
-            try {
-                Mail::send(config('settings.frontTheme') . '.emails.new_booking',
-                    ['$purchaser' => $purchaserProfile,'booking'=>$booking,'serviceUser'=>$serviceUser,'carer'=>$carerProfile],
-                    function ($m) use ($carerProfile) {
-                        $m->to($carerProfile->email)->subject('New booking');
-                    });
-            } catch (Swift_TransportException $STe) {
+        //$user=Auth::user();
+        $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
+        $carerProfile = CarersProfile::find($booking->carer_id);
+        $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
+        //message for carer
+        try {
+            Mail::send(config('settings.frontTheme') . '.emails.new_booking',
+                ['$purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'carer'],
+                function ($m) use ($carerProfile) {
+                    $m->to($carerProfile->email)->subject('New booking');
+                });
+        } catch (Swift_TransportException $STe) {
 
-                $error = MailError::create([
-                    'error_message' => $STe->getMessage(),
-                    'function' => __METHOD__,
-                    'action' => 'Try to sent new_booking',
-                    'user_id' => $carerProfile->id
-                ]);
-            }
+            $error = MailError::create([
+                'error_message' => $STe->getMessage(),
+                'function' => __METHOD__,
+                'action' => 'Try to sent new_booking to carer',
+                'user_id' => $carerProfile->id
+            ]);
+        }
+        //message for purchaser
+        try {
+            Mail::send(config('settings.frontTheme') . '.emails.new_booking',
+                ['purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'purchaser'],
+                function ($m) use ($purchaserProfile) {
+                    $m->to($purchaserProfile->email)->subject('New booking');
+                });
+        } catch (Swift_TransportException $STe) {
+
+            $error = MailError::create([
+                'error_message' => $STe->getMessage(),
+                'function' => __METHOD__,
+                'action' => 'Try to sent new_booking to purchaser',
+                'user_id' => $purchaserProfile->id
+            ]);
+        }
 
         return response(['status' => 'success']);
     }
 
-    public function accept(Booking $booking, StripeService $stripeService){
+    public function accept(Booking $booking, StripeService $stripeService)
+    {
         $user = Auth::user();
 //        if($booking->status_id == 2){
-        if($booking->payment_method == 'credit_card'){
+        if ($booking->payment_method == 'credit_card') {
             $purchase = $stripeService->createCharge([
                 'amount' => $booking->carer_amount * 100,
             ], $booking->card_token);
 //                dd($purchase);
-        }
-        else{
+        } else {
 
         }
         BookingsMessage::create([
@@ -204,25 +243,29 @@ class BookingsController extends FrontController implements Constants
         return response(['status' => 'success']);
     }
 
-    public function reject(Booking $booking){
+    public function reject(Booking $booking)
+    {
         $booking->status_id = self::CANCELLED;
         $booking->carer_status_id = self::CANCELLED;
         $booking->purchaser_status_id = self::CANCELLED;
         $booking->appointments()
             ->where('status_id', '!=', self::APPOINTMENT_STATUS_COMPLETED)
             ->update([
-            'status_id' => self::APPOINTMENT_STATUS_CANCELLED,
-            'carer_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
-            'purchaser_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
+                'status_id' => self::APPOINTMENT_STATUS_CANCELLED,
+                'carer_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
+                'purchaser_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
             ]);
         $booking->save();
 
         return response(['status' => 'success']);
     }
 
-    public function cancel(Booking $booking){
+    public function cancel(Booking $booking)
+    {
+
+
         $user = Auth::user();
-        if($user->user_type_id == 3){
+        if ($user->user_type_id == 3) {
             //Carer
             $booking->status_id = self::CANCELLED;
             $booking->carer_status_id = self::CANCELLED;
@@ -233,22 +276,24 @@ class BookingsController extends FrontController implements Constants
                     'carer_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
                     'purchaser_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
                 ]);
-            //todo Отправить мыло
+
 
             $carer = CarersProfile::find($booking->carer_id);
             $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
             $purchaser = PurchasersProfile::find($booking->purchaser_id);
 
 
-
             try {
                 Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
-                    [   'user_first_name' => $purchaser->first_name,
+                    ['user_like_name' => $purchaser->like_name,
                         'user_name' => $carer->first_name,
                         'service_user_name' => $serviceUser->first_name,
                         'address' => $serviceUser->addresss_line1,
                         'date' => 'date',
-                        'time' => 'time',],
+                        'time' => 'time',
+                        'booking'=>$booking,
+                        'sendTo' => 'purchaser'
+                        ],
                     function ($m) use ($purchaser) {
                         $m->to($purchaser->email)->subject('Canceled booking');
                     });
@@ -262,37 +307,44 @@ class BookingsController extends FrontController implements Constants
                 ]);
             }
         } else {
-            if($booking->carer_status_id == self::COMPLETED){
+            if ($booking->carer_status_id == self::COMPLETED) {
                 $booking->status_id = self::DISPUTE;
                 $booking->purchaser_status_id = self::CANCELLED;
+            } else {
+                $booking->status_id = self::CANCELLED;
+                $booking->purchaser_status_id = self::CANCELLED;
+
+                $carer = CarersProfile::find($booking->carer_id);
+                $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
+                $purchaser = PurchasersProfile::find($booking->purchaser_id);
+
+                //dd($booking,$carer,$serviceUser,$purchaser);
+
+                try {
+                    Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
+                        ['user_like_name' => $carer->like_name,
+                            'user_name' => $purchaser->first_name,
+                            'service_user_name' => $serviceUser->first_name,
+                            'address' => $serviceUser->addresss_line1,
+                            'date' => 'date',
+                            'time' => 'time',
+                            'booking'=>$booking,
+                            'sendTo' => 'carer'
+                        ],
+                        function ($m) use ($user) {
+                            $m->to($user->email)->subject('Canceled booking');
+                        });
+                } catch (Swift_TransportException $STe) {
+
+                    $error = MailError::create([
+                        'error_message' => $STe->getMessage(),
+                        'function' => __METHOD__,
+                        'action' => 'Try to sent Canceled booking',
+                        'user_id' => $user->id
+                    ]);
+                }
             }
-            //todo Отправить мыло
-            $carer = CarersProfile::find($booking->carer_id);
-            $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
-            $purchaser = PurchasersProfile::find($booking->purchaser_id);
 
-            //dd($booking,$carer,$serviceUser,$purchaser);
-
-            try {
-                Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
-                    [   'user_first_name' => $carer->first_name,
-                        'user_name' => $purchaser->first_name,
-                        'service_user_name' => $serviceUser->first_name,
-                        'address' => $serviceUser->address_line1,
-                        'date' => 'date',
-                        'time' => 'time',],
-                    function ($m) use ($user) {
-                        $m->to($user->email)->subject('Canceled booking');
-                    });
-            } catch (Swift_TransportException $STe) {
-
-                $error = MailError::create([
-                    'error_message' => $STe->getMessage(),
-                    'function' => __METHOD__,
-                    'action' => 'Try to sent Canceled booking',
-                    'user_id' => $user->id
-                ]);
-            }
         }
 
         $booking->save();
@@ -300,16 +352,17 @@ class BookingsController extends FrontController implements Constants
         return response(['status' => 'success']);
     }
 
-    public function completed(Booking $booking){
+    public function completed(Booking $booking)
+    {
         $user = Auth::user();
 
-        if($booking->has_active_appointments)
+        if ($booking->has_active_appointments)
             return response(['status' => 'error']);
 
-        if($user->user_type_id == 3){
+        if ($user->user_type_id == 3) {
             //Carer
             $booking->carer_status_id = self::COMPLETED;
-            if($booking->purchaser_status_id == self::COMPLETED){
+            if ($booking->purchaser_status_id == self::COMPLETED) {
                 BookingsMessage::create([
                     'booking_id' => $booking->id,
                     'type' => 'status_change',
@@ -317,7 +370,7 @@ class BookingsController extends FrontController implements Constants
                 ]);
                 $booking->status_id = self::COMPLETED;
             }
-            
+
         } else {
             //Purchaser
             $booking->purchaser_status_id = self::COMPLETED;
@@ -334,9 +387,10 @@ class BookingsController extends FrontController implements Constants
         return response(['status' => 'success']);
     }
 
-    public function create_message(Booking $booking, Request $request){
+    public function create_message(Booking $booking, Request $request)
+    {
         $user = Auth::user();
-        $sender  = ($user->user_type_id == 3 ? 'carer' : 'service_user');
+        $sender = ($user->user_type_id == 3 ? 'carer' : 'service_user');
         $BookingsMessage = BookingsMessage::create([
             'booking_id' => $booking->id,
             'sender' => $sender,
@@ -344,20 +398,21 @@ class BookingsController extends FrontController implements Constants
             'text' => $request->message,
         ]);
 
-        return redirect(url('/bookings/'.$booking->id.'/details#comments'));
+        return redirect(url('/bookings/' . $booking->id . '/details#comments'));
     }
 
-    public function leaveReviewPage(Booking $booking){
+    public function leaveReviewPage(Booking $booking)
+    {
         $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
         $this->title = 'Holm Care';
 
-        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
-        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
-        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+        $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme') . '.includes.modals')->render();
 
-        $this->vars = array_add($this->vars,'header',$header);
-        $this->vars = array_add($this->vars,'footer',$footer);
-        $this->vars = array_add($this->vars,'modals',$modals);
+        $this->vars = array_add($this->vars, 'header', $header);
+        $this->vars = array_add($this->vars, 'footer', $footer);
+        $this->vars = array_add($this->vars, 'modals', $modals);
 
         $this->vars = array_add($this->vars, 'user', $this->user);
         $this->vars = array_add($this->vars, 'booking', $booking);
@@ -368,7 +423,8 @@ class BookingsController extends FrontController implements Constants
         return $this->renderOutput();
     }
 
-    public function createReview(Booking $booking, Request $request){
+    public function createReview(Booking $booking, Request $request)
+    {
 
         BookingOverview::create([
             'booking_id' => $booking->id,
@@ -393,19 +449,19 @@ class BookingsController extends FrontController implements Constants
         $dates = [];
 
 
-        for($date = $start_date; $date->lte($end_date); $date->addDays($step)) {
+        for ($date = $start_date; $date->lte($end_date); $date->addDays($step)) {
             $dates[] = $date->format('Y-m-d');
         }
 
         return $dates;
     }
 
-    private function createBooking(BookingCreateRequest $data) : Booking
+    private function createBooking(BookingCreateRequest $data): Booking
     {
         $purchaser = Auth::user();
         $carer = User::find($data->carer_id);
 
-        foreach ($data->bookings as $booking_item){
+        foreach ($data->bookings as $booking_item) {
             //Creating booking
             $serviceUser = ServiceUsersProfile::find($data->service_user_id);
             $booking = Booking::create([
@@ -421,10 +477,8 @@ class BookingsController extends FrontController implements Constants
             $this->createAppointments($booking, $booking_item['appointments']);
 
 
-
-
             //Attaching booking`s assistance_types
-            if(isset($booking_item['assistance_types']))
+            if (isset($booking_item['assistance_types']))
                 $booking->assistance_types()->attach($booking_item['assistance_types']);
 
             //Booking status for workroom
@@ -435,16 +489,16 @@ class BookingsController extends FrontController implements Constants
             ]);
 
 
-
             return $booking;
         }
     }
 
-    private function createAppointments(Booking $booking, array $appointments) : bool {
-        foreach ($appointments as $batch => $appointment_item){
+    private function createAppointments(Booking $booking, array $appointments): bool
+    {
+        foreach ($appointments as $batch => $appointment_item) {
             isset($appointment_item['periodicity']) ? false : $appointment_item['periodicity'] = 'single';
             $days = [];
-            switch (strtolower($appointment_item['periodicity'])){
+            switch (strtolower($appointment_item['periodicity'])) {
                 case 'daily':
                     $days = $this->generateDateRange(Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_start'])->format("Y-m-d")), Carbon::parse(date_create_from_format('d/m/Y', $appointment_item['date_end'])->format("Y-m-d")));
                     break;

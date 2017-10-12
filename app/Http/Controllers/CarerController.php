@@ -45,7 +45,7 @@ class CarerController extends FrontController implements Constants
         return $this->renderOutput();
     }
 
-    public function index()
+    public function index($id=null)
     {
 
         $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
@@ -68,7 +68,13 @@ class CarerController extends FrontController implements Constants
             $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('purchaser_id', Auth::user()->id)->get();
             $this->vars = array_add($this->vars, 'newBookings', $newBookings);
 
-            $carerProfile = CarersProfile::findOrFail($this->user->id);
+            if(!empty($id) && Auth::user()->user_type_id==4) { //админ
+                $carerProfile = CarersProfile::findOrFail($id);
+            } else {
+                $carerProfile = CarersProfile::findOrFail($this->user->id);
+
+            }
+
             if ($carerProfile->registration_progress != '20') {
                 return redirect()->action('CarerRegistrationController@index');
             }

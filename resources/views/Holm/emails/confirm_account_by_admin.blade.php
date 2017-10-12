@@ -64,10 +64,10 @@
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
 
                             @if($user->isCarer())
-                                Hello  {{$user->userCarerProfile->like_name}}!
+                                Dear {{$user->userCarerProfile->like_name}}!
                             @endif
                             @if($user->isPurchaser())
-                                Hello  {{$user->userPurchaserProfile->like_name}}!
+                                    Dear  {{$user->userPurchaserProfile->like_name}}!
                             @endif
                         </h1>
 
@@ -78,19 +78,11 @@
                             @endif
                             @if($user->isPurchaser())
                                 purchaser
-                            @endif account at  <a href="{{route('mainHomePage')}}"> HOLM </a>  was confirmed and is now active. You are now free to use all our services.<br>
-                            <br>
-                            We hope you will enjoy HOLM!
-
+                            @endif account at  <a href="{{route('mainHomePage')}}"> HOLM </a>  was confirmed and is now active.
+                            You are now free to use all our services.<br />
+                            <br />
+                            We hope you will enjoy using Holm!
                         </p>
-
-                        <!--<a href="#" class=""
-                          style="text-transform: uppercase;
-                          color: #7bb7dc;
-                          font-weight: 700;
-                          text-decoration: underline;">
-                          Est eu pertinaciaen delacrue instructiol
-                        </a> -->
                     </td>
                 </tr>
             </table>
@@ -119,7 +111,7 @@
                             best wishes <br />
                             the holm team
                         </p>
-                        <a href="#" class=""
+                        <a href="{{route('mainHomePage')}}" class=""
                            style="
                     color: #373c4d;
                     text-transform: uppercase;

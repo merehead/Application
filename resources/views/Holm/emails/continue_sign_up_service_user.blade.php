@@ -62,22 +62,21 @@
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; font-family: 'Roboto', sans-serif; line-height: 1.5; "  valign="top" class="">
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
-                            Hello!
+                            Dear {{$like_name}}!
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
 
-                            It looks like you haven’t completed your registration at <a href="{{route('mainHomePage')}}"> HOLM </a>  yet. You won’t be able to book a carer until then.
-
-
-                        </p>
+                            It looks like you haven’t completed your registration at <a href="{{route('mainHomePage')}}"> HOLM </a>  yet.
+                            You won’t be able to book a carer until it has been completed.
+                                                    </p>
 
                         <a href="{{route('PurchaserRegistration')}}" class=""
                            style="text-transform: uppercase;
                   color: #7bb7dc;
                   font-weight: 700;
                   text-decoration: underline;">
-                            Please click here to complete the sign up process.
+                            Please click here to complete your registration.
                         </a>
                     </td>
                 </tr>
@@ -94,10 +93,10 @@
                    text-transform: uppercase;
                    font-size: 14px;
                  margin-bottom:0;">
-                            best wishes <br />
-                            the holm team
+                            Best wishes <br />
+                            The Holm Team
                         </p>
-                        <a href="#" class=""
+                        <a href="{{route('mainHomePage')}}" class=""
                            style="
                     color: #373c4d;
                     text-transform: uppercase;

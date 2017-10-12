@@ -29,6 +29,17 @@ class PurchaserRegistration
         $this->model = $purchaserProfile;
     }
 
+
+/*    public function checkReferCode($referCode) {
+
+
+        $rc = DB::select("select `id` from `users` where `own_referral_code` = '".$referCode."'");
+
+        if ($rc) return $referCode;
+
+        return 0;
+    }*/
+
     public function getNextStep()
     {
 
@@ -167,6 +178,8 @@ class PurchaserRegistration
 
         if ($user) {
 
+            $user->own_referral_code = mb_substr($user->id.md5($user->id),0,8);
+
             $purchaserProfile = new PurchasersProfile();
 
             $purchaserProfile->id = $user->id;
@@ -300,6 +313,10 @@ class PurchaserRegistration
         $purchaserProfile->town             = $request->input('town');
         $purchaserProfile->postcode         = strtoupper($request->input('postcode'));
         $purchaserProfile->DoB              = $request->input('DoB');
+
+        $purchaserProfile->profiles_status_id = 2;
+        $purchaserProfile->registration_status = 'completed';
+
         $purchaserProfile->update();
         //dd($request->all());
 

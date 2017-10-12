@@ -64,17 +64,17 @@
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
 {{--
                             Hello [user_first_name]!
---}}                        Hello {{$user->userName()}}!
+--}}                        Dear {{$like_name}}!
 
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-
-
-                            Thank you for sign up!
-                            Your <a href="{{route('ServiceUserSetting',['id'=>$user->id])}}">purchaser</a> account at <a href="{{route('mainHomePage')}}">HOLM</a> was created.
-                            We hope you will enjoy HOLM!
-
+                            Thank you for joining Holm.
+                            Your account has now been created, and you can check all your details by logging into your
+                            <a href="{{route('purchaserSettings',['id'=>$user->id])}}">profile</a>,
+                            and can also book the best care workers.
+                            <br />
+                            We hope you will enjoy Holm!
                         </p>
 
                     </td>
@@ -92,10 +92,10 @@
                    text-transform: uppercase;
                    font-size: 14px;
                  margin-bottom:0;">
-                            best wishes <br />
-                            the holm team
+                            Best wishes <br />
+                            The Holm Team
                         </p>
-                        <a href="#" class=""
+                        <a href="{{route('mainHomePage')}}" class=""
                            style="
                     color: #373c4d;
                     text-transform: uppercase;

@@ -99,6 +99,8 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
         }
 
 //dd($this->restrictedAccess($serviceUsersProfile));
+
+
         $this->vars = array_add($this->vars, 'restrictedAccess', $this->restrictedAccess($serviceUsersProfile));
 
         $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
@@ -115,8 +117,7 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
         $this->vars = array_add($this->vars, 'user', $activeUser);
 
         $this->vars = array_add($this->vars, 'serviceUsers', $serviceUsersProfile);
-        //todo с как-го Х надо использовать две одинаковые переменные?????
-        //todo - Та это я затупил в свое время..
+
         $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
 
         $this->vars = array_add($this->vars, 'userNameForSite', $serviceUsersProfile->like_name);
@@ -145,16 +146,24 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
 
     protected function restrictedAccess($serviceUsersProfile){
 
+
         $activeUser = Auth::user();
-//dd($activeUser->id ,$serviceUsersProfile->purchaser_id);
-        //может смотреть сам себя
-        if ($activeUser->id == $serviceUsersProfile->purchaser_id) return false;
 
-        //может смотреть карер у которого есть букинг в сосотянии Прогресс с этим карером
-        $booking = Booking::where('carer_id',$activeUser->id)->where('service_user_id',$serviceUsersProfile->id)->where('status_id','3')->get();
-        if (count($booking)) return false;
+        //current user is the profile owner?
+        if ($activeUser->id == $serviceUsersProfile->purchaser_id) return false; //full access
 
-        return true; //доступ ограничен
+        //can see carer which have booking with this service profile in progress or new statuses(5||1)
+        if ($activeUser->isCarer()) {
+            $booking5 = Booking::where('carer_id', $activeUser->id)
+                ->where('service_user_id', $serviceUsersProfile->id)
+                ->where('status_id', '5')->get();
+            $booking1 = Booking::where('carer_id', $activeUser->id)
+                ->where('service_user_id', $serviceUsersProfile->id)
+                ->where('status_id', '1')->get();
+            if (count($booking5)||count($booking1)) return false; // full access
+        }
+
+        return true; //access restricted
     }
 
 
