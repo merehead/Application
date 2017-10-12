@@ -49,9 +49,6 @@ class SearchController extends FrontController
         if ($request->get('typeService')) {
             $where .= 'inner join carer_profile_service_type ct on ct.carer_profile_id = cp.id and ct.service_type_id in (' . $request->get('typeService') . ')';
         }
-        if ($request->get('typeCare')) {
-            $where .= 'inner join carer_profile_assistance_type cs on cs.carer_profile_id = cp.id and cs.assistance_types_id in ('.implode(',',array_keys($request->get('typeCare'))).')';
-        }
 
         $working_times[1]=[5,6,7];
         $working_times[2]=[8,9,10];
@@ -79,6 +76,18 @@ class SearchController extends FrontController
 
         if ($request->get('work_with_pets'))
             $where .= " and cp.work_with_pets='Yes'";
+
+        if ($request->get('typeCare')) {
+            $careSelect = 'select carer_profile_id from (
+                              select carer_profile_id,assistance_types_id from carer_profile_assistance_type cs where assistance_types_id in ('.implode(',',array_keys($request->get('typeCare'))).')) as tb
+                            group by carer_profile_id
+                           having count(*)='.count(array_keys($request->get('typeCare')));
+
+            $careResult = DB::select($careSelect);
+            $carerId=[];
+            foreach ($careResult as $result)$carerId[]=$result->carer_profile_id;
+            $where .= ' and cp.id in ('.implode(',',array_values($carerId)).') ';
+        }
 
         if ($request->get('postCode')&&!empty($request->get('postCode'))){
             $postCode = $request->get('postCode');
