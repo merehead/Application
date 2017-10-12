@@ -170,28 +170,6 @@ class UserController extends AdminController
                                     'status'=>'new'
                                 ]);
 
-
-
-
-                    /*
-                        try {
-                            Mail::send(config('settings.frontTheme') . '.emails.unblock_account_by_admin',
-                                [
-                                    'user' => $user,
-                                    'like_name' => $profile->like_name
-                                ],
-                                function ($m) use ($user) {
-                                    $m->to($user->email)->subject('Unblock account by admin');
-                                });
-                        } catch (Swift_TransportException $STe) {
-
-                            $error = MailError::create([
-                                'error_message' => $STe->getMessage(),
-                                'function' => __METHOD__,
-                                'action' => 'Try to sent accepting massage',
-                                'user_id' => $user->id
-                            ]);
-                        }*/
                     }
                     break;
                 }
@@ -213,25 +191,6 @@ class UserController extends AdminController
                                 'status'=>'new'
                             ]);
 
-/*
-                    try {
-                        Mail::send(config('settings.frontTheme') . '.emails.reject_account_by_admin',
-                            [
-                                'user' => $user,
-                                'like_name' => $profile->like_name
-                            ],
-                            function ($m) use ($user) {
-                                $m->to($user->email)->subject('Reject account by admin');
-                            });
-                    } catch (Swift_TransportException $STe) {
-
-                        $error = MailError::create([
-                            'error_message' => $STe->getMessage(),
-                            'function' => __METHOD__,
-                            'action' => 'Try to sent accepting massage',
-                            'user_id' => $user->id
-                        ]);
-                    }*/
                 }
                     break;
                 case 'block':{
@@ -252,25 +211,6 @@ class UserController extends AdminController
                                 'status'=>'new'
                             ]);
 
-
-                 /*   try {
-                        Mail::send(config('settings.frontTheme') . '.emails.block_account_by_admin',
-                            [
-                                'user' => $user,
-                                'like_name'=>$profile->like_name
-                            ],
-                            function ($m) use ($user) {
-                                $m->to($user->email)->subject('Block account by admin');
-                            });
-                    } catch (Swift_TransportException $STe) {
-
-                        $error = MailError::create([
-                            'error_message' => $STe->getMessage(),
-                            'function' => __METHOD__,
-                            'action' => 'Try to sent accepting massage',
-                            'user_id' => $user->id
-                        ]);
-                    }*/
                 }
                     break;
 
@@ -302,26 +242,6 @@ class UserController extends AdminController
                     ]);
 
 
-
-
-          /*
-
-            try {
-                Mail::send(config('settings.frontTheme') . '.emails.confirm_account_by_admin',
-                    ['user' => $user,
-                    ],
-                    function ($m) use ($user) {
-                        $m->to($user->email)->subject('HOLM account confirmation');
-                    });
-            } catch (Swift_TransportException $STe) {
-
-                $error = MailError::create([
-                    'error_message' => $STe->getMessage(),
-                    'function' => __METHOD__,
-                    'action' => 'Try to sent accepting massage',
-                    'user_id' => $user->id
-                ]);
-            }*/
         }
 
 

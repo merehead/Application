@@ -69,7 +69,7 @@
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-                            Thank you for joining Holm.
+                            Thank you for joining Holm.<br /><br />
                             Your account has now been created, and you can check all your details by logging into your
                             <a href="{{route('purchaserSettings',['id'=>$user->id])}}">profile</a>,
                             and can also book the best care workers.
