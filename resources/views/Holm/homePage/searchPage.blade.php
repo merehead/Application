@@ -120,7 +120,7 @@
                     <a href="#" class="sortLinkXs">search by <span><i class="fa fa-angle-down"></i></span></a>
                     <div class="sortFilters hiddenSort hiddenSort--visible">
                         <div class="sortFilters__item">
-                            {!! Form::text('postCode',(isset($requestSearch['postCode'])?$requestSearch['postCode']:''),['class'=>'sortField','placeholder'=>'POST CODE','maxlength'=>16,'onkeydown'=>"if(event.keyCode==13){carerSearchAjax();}"]) !!}
+                            {!! Form::text('postCode',(isset($requestSearch['postCode'])?$requestSearch['postCode']:''),['class'=>'sortField disable','placeholder'=>'POST CODE','maxlength'=>16,'onkeydown'=>"if(event.keyCode==13){carerSearchAjax();}"]) !!}
                             <span class="fieldIco"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
                         </div>
                         <div class="sortFilters__item">
@@ -148,17 +148,19 @@
                         </a>
                     </div>
                 </div>
-                <div class="resultHeader error-text nhide">
-                    <p>No carers found.</p>
-                    <p>
+                <div class="card error-text result {{count($carerResult)>0?"nhide":""}}">
+                    <div class="card-block">
+                    <p class="text-uppercase">No carers found.</p>
+                    <p class="text-left">
                         Recommendations:
                     </p>
-                    <ul class="list-inline">
-                        <li>Make sure all words are spelled correctly.</li>
-                        <li>Try using different keywords.</li>
-                        <li>Try using more popular keywords.</li>
-                        <li>Try reducing the number of words in the query.</li>
-                    </ul>
+                        <ul class="text-left">
+                            <li class="list-inline ">Make sure all words are spelled correctly.</li>
+                            <li class="list-inline ">Try using different keywords.</li>
+                            <li class="list-inline ">Try using more popular keywords.</li>
+                            <li class="list-inline ">Try reducing the number of words in the query.</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="carer-result">

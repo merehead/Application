@@ -101,6 +101,10 @@ function carerSearchAjax(){
                 if(response.id==0)$('.moreBtn__item').hide();
                 $('#load-more').val(0);
                 $('#id-carer').val(response.id);
+            }else{
+                $('.carer-result').append(response.html);
+                $('.Paginator').html(response.htmlHeader);
+
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -1605,7 +1609,7 @@ $(document).ready(function () {
     //------------Google Address search -----------------------
     if ($.isFunction($.fn.autocomplete)) {
 
-        $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').autocomplete({
+        $('input[name="postcode"]:not(.disable),input[name="postCode"]:not(.disable),input[name="address_line1"]:not(.disable)').autocomplete({
                 serviceUrl: '/address/',
                 params: {query: $('input[name="town"]').val() + ' ' + $(this).val()},
                 minChars: 1,

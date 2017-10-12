@@ -52,6 +52,7 @@ class SearchController extends FrontController
         if ($request->get('typeCare')) {
             $where .= 'inner join carer_profile_assistance_type cs on cs.carer_profile_id = cp.id and cs.assistance_types_id in ('.implode(',',array_keys($request->get('typeCare'))).')';
         }
+
         $working_times[1]=[5,6,7];
         $working_times[2]=[8,9,10];
         $working_times[3]=[11,12,13];
@@ -79,9 +80,13 @@ class SearchController extends FrontController
         if ($request->get('work_with_pets'))
             $where .= " and cp.work_with_pets='Yes'";
 
-        if ($request->get('postCode')&&!empty($request->get('postCode')))
-            $where .= " and cp.postcode='".$request->get('postCode')."'";
-
+        if ($request->get('postCode')&&!empty($request->get('postCode'))){
+            $postCode = $request->get('postCode');
+            if(strpos(' ',$postCode)===false) $postCode.=' ';
+            //$where .= " and (select count(*) from postcodes p where p.name = left('".$request->get('postCode')."',LENGTH(p.name)) and  p.name = LEFT(cp.postcode, LENGTH(p.name)))>0";
+//            $where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('".$request->get('postCode')."', LENGTH(p.name)) and  p.name = LEFT(cp.postcode, LENGTH(p.name)))>0";
+            $where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('".$postCode."', POSITION(' ' IN '".$postCode."')) and  p.name = LEFT(cp.postcode, LENGTH(p.name)))>0";
+        }
         if ($request->get('load-more',0)==1)
             $where .= " and cp.id > " . $request->get('id');
 
@@ -110,18 +115,31 @@ class SearchController extends FrontController
             return $this->renderOutput();
         else {
             $html = view(config('settings.frontTheme') . '.homePage.searchPageAjax', $this->vars)->render();
+            $post_=true;
+            if ($request->get('postCode')&&!empty($request->get('postCode'))){
+                if($this->isExsistPostCode($postCode)==false){
+                    $post_=false;
+                    $html='<p>Sorry Holm is not yet available in this area. Please <a href="/contact">contact us</a> to request Holm in your area. Many thanks!</p>';
+                }
+            }
             $htmlHeader = view(config('settings.frontTheme') . '.homePage.searchPageHeaderAjax', $this->vars)->render();
             $options = app('request')->header('accept-charset') == 'utf-8' ? JSON_UNESCAPED_UNICODE : null;
             return response()->json(array(
-                'success' => true,
+                'success' => (count($carerResult)>0),
                 'load-more' => isset($load_more) && !empty($load_more)?1:0,
                 'html' => $html,
+                'post_'=>$post_,
                 'sql' => $sql,
                 'id'=>(count($carerResultPage)-1>0)?$carerResultPage[count($carerResultPage)-1]->id:0,
                 'count' => count($carerResult),
                 'htmlHeader' => $htmlHeader), 200, [$options]);
             exit;
         }
+    }
+    private function isExsistPostCode($postCode){
+        $sql = "select count(*) as ctn from postcodes p where p.name = left('".$postCode."', LENGTH(p.name)) and left('".$postCode."', LENGTH(p.name))='".$postCode."'";
+        $carerResult = DB::select($sql);//dd($carerResult[0]->ctn>0);
+        return $carerResult[0]->ctn>0;
     }
 }
    
