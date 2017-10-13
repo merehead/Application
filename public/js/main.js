@@ -1552,17 +1552,21 @@ $(document).ready(function () {
     });
 
     $('#theCarousel1').on('slide.bs.carousel', function () {
+      var _this = $(this)
       var data_id = $('#theCarousel_users').children()
       var peopleBox = $('.peopleBox').children()
       $(this).removeClass('active')
-      current_id = parseInt($(this).find('.active').attr('id').replace(/[^1-9]/g, '')) + 1
 
       peopleBox.removeClass('activeImg')
-      $.each( data_id, function( key, value ) {
-        if(parseInt($(this).attr('data-id')) === current_id){
-          $(this).children().addClass('activeImg')
-        }
-      });
+
+      setTimeout(function () {
+        current_id = parseInt(_this.find('.active').attr('id').replace(/[^1-9]/g, ''))
+        $.each( data_id, function( key, value ) {
+          if(parseInt($(this).attr('data-id')) === current_id){
+            $(this).children().addClass('activeImg')
+          }
+        });
+      }, 800)
     })
 
     $(".toggler").click(function (e) {
