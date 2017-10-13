@@ -1006,7 +1006,7 @@ $(document).ready(function () {
     });
 
 
-    $( "textarea, .countable" ).focus(function() {
+    $( "textarea, .countable" ).not('.doNotCount').focus(function() {
         var maxLenght = $( this ).attr('maxlength');
         var currentLength = $( this ).val().length;
         var symbolsLeft = maxLenght - currentLength;

@@ -316,7 +316,7 @@ class CarerRegistration
             'postcode' =>
                 array(
                     'required',
-                    'regex:#^([A-Za-z]{1,2}[0-9]{1,2}) [0-9][A-Za-z]{1,2}$#'
+                    'regex:#^([A-Za-z]{1,2}[0-9]{1,2}[A-Za-z]{0,1}) [0-9][A-Za-z]{1,2}[0-9]{0,1}$#'
 
 
                     //'regex:/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',

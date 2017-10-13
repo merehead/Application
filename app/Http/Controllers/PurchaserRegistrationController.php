@@ -61,8 +61,9 @@ class PurchaserRegistrationController extends FrontController
             $purchasersProfile = PurchasersProfile::findOrFail($user->id);
 
 
-            if ($purchasersProfile->registration_status == 'completed')
-            return redirect(route('purchaserSettings'));
+            if ($purchasersProfile->registration_status == 'completed' && !$purchasersProfile->is_uncompleted_service_user) {
+                return redirect(route('purchaserSettings'));
+            }
 
 
             $this->vars = array_add($this->vars, 'purchasersProfileID', $purchasersProfile->id);
