@@ -238,7 +238,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
                 </span>
                     </h2>
 
-                    {!! Form::text('Persons['.$number.'][phone]',$carerReference->phone,['class'=>'profileField__input','maxlength'=>'16']) !!}
+                    {!! Form::text('Persons['.$number.'][phone]',$carerReference->phone,['class'=>'profileField__input digitFilter','maxlength'=>'16']) !!}
                 </div>
                 <div class="profileField profileField--full-width">
                     <h2 class="profileField__title ordinaryTitle">

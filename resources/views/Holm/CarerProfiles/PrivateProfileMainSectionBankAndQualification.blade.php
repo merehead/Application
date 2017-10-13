@@ -30,7 +30,7 @@
               </span>
 
             </h2>
-            {!! Form::text('account_number',$carerProfile->account_number,['class'=>'profileField__input onlyNumber',
+            {!! Form::text('account_number',$carerProfile->account_number,['class'=>'profileField__input digitFilter onlyNumber',
             'placeholder'=>'Account number','type'=>'number','maxlength'=>30]) !!}
             @if ($errors->has('account_number'))
                 <span class="help-block">
