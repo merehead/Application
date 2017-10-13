@@ -93,7 +93,7 @@ class SearchController extends FrontController
         if ($request->get('postCode')&&!empty($request->get('postCode'))){
             $postCode = $request->get('postCode');
             if(strpos(' ',$postCode)===false) $postCode.=' ';
-            $where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('".$postCode."', POSITION(' ' IN '".$postCode."')) and  p.name = LEFT(cp.postcode, LENGTH(p.name)))>0";
+            $where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('".$postCode."', POSITION(' ' IN '".$postCode."')) and  p.name = LEFT(cp.postcode, POSITION(' ' IN '".$postCode."')))>0";
         }
         if ($request->get('load-more',0)==1)
             $where .= " and cp.id > " . $request->get('id');
@@ -108,7 +108,7 @@ class SearchController extends FrontController
         $sql = 'select cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview from carers_profiles cp '.$where. ' group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview order by '.implode(',',$order);
         $carerResult = DB::select($sql);
 
-        $start = (($page*$perPage)-$perPage==0)?'1':($page*$perPage)-$perPage;
+        $start = (($page*$perPage)-$perPage==0)?'0':($page*$perPage)-$perPage;
         $countAll = count(DB::select(str_replace( " and cp.id > " . $request->get('id') ,'',$sql)));
         if(count($carerResult)==1)$start=0;
         $carerResultPage = array_slice($carerResult,$start,$perPage);
