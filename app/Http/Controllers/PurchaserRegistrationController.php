@@ -55,6 +55,10 @@ class PurchaserRegistrationController extends FrontController
         } else {
             $purchasersProfile = PurchasersProfile::findOrFail($user->id);
 
+            //todo если у пурчасера нет не законченных регистраций сервисов, то кидать на профиль пурчасера,
+            //иначе - искать сервиса и кидать на продолжение регистрации????
+
+
             $this->vars = array_add($this->vars, 'purchasersProfileID', $purchasersProfile->id);
             $this->vars = array_add($this->vars, 'purchasersProfile', $purchasersProfile);
 

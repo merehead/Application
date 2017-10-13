@@ -40,7 +40,7 @@ class ServiceUserRegistrationController extends FrontController
         $serviceUserProfile = ServiceUsersProfile::findOrFail($serviceUserProfileId);
 
         if ($serviceUserProfile->purchaser_id != $this->user->id)
-        abort('404');
+            return redirect('/');
 
         $this->title = 'Service User Registration';
 

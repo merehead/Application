@@ -73,7 +73,7 @@ class CarerRegistrationController extends FrontController
 
             //dd($carersProfile->registration_progress);
 
-            if ($carersProfile->registration_progress == '21') {
+            if ($carersProfile->registration_status != 'new') {
                 return redirect('/carer-settings');
             }
 
