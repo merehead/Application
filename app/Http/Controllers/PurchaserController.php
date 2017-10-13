@@ -36,8 +36,6 @@ class PurchaserController extends FrontController implements Constants
 
 
 
-        //dd();
-
         if (!$this->user) {
             return redirect('/');
             //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
@@ -62,15 +60,13 @@ class PurchaserController extends FrontController implements Constants
 
         }
 
-
-
         return $this->renderOutput();
     }
 
+
+
+
     public function update(Request $request) {
-
-
-
 
         $input = $request->all();
         $purchaserProfile = PurchasersProfile::findOrFail($input['id']);
@@ -79,11 +75,7 @@ class PurchaserController extends FrontController implements Constants
             return response(json_encode(['status'=>'does not save | function don`t result']),400);
         }
 
-
-
         $depart = '';
-
-
 
         if ($input['stage'] == 'general') {
 

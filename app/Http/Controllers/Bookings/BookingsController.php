@@ -17,11 +17,11 @@ use App\PurchasersProfile;
 use App\ServiceUsersProfile;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use SebastianBergmann\Comparator\Book;
 use Auth;
 use Carbon\Carbon;
-use DB;
 use Swift_TransportException;
 
 class BookingsController extends FrontController implements Constants
@@ -184,6 +184,21 @@ class BookingsController extends FrontController implements Constants
         $carerProfile = CarersProfile::find($booking->carer_id);
         $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
         //message for carer
+
+
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>'info@holm.care',
+                    'subject' =>$input['topic'],
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
+
+
+
+
         try {
             Mail::send(config('settings.frontTheme') . '.emails.new_booking',
                 ['$purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'carer'],

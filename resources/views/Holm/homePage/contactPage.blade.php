@@ -35,7 +35,7 @@
                     <div class="contactForm__column">
                         <h2 class="fieldTitle">Phone Number</h2>
                         <div class="contactForm__field">
-                            <input type="text" name="phone" class="contactForm__item" placeholder="Your phone">
+                            <input type="text" name="phone" class="contactForm__item" placeholder="Your phone" maxlength="11">
                             <span class="contactForm__ico"><i class="fa fa-mobile"></i></span>
                         </div>
                     </div>

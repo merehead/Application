@@ -36,8 +36,6 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
     {
 
 
-        //dd($serviceUserProfile);
-
         $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
         $this->title = 'Holm Care';
 

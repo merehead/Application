@@ -66,10 +66,11 @@
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-                            {!! $user->userName() !!} thought you’d really benefit from using Holm, and has invited you to join us.
+                            {!! $user->first_name !!} thought you’d really benefit from using Holm, and has invited you to join us.
 <br/><br/>
-                            Use their code <b>{{$user->own_referral_code}}</b> when registering at <a href="{{route('mainHomePage')}}">Holm</a> and you will each receive a £100 bonus.*
-                            Join us now and you can find out how Holm is helping so many people.
+                            Use their code <b>{{$user->own_referral_code}}</b> when registering at <a href="{{route('mainHomePage')}}">Holm</a>
+                            and you will each receive a £100 bonus* whether you’re a professional carer, or buying care.
+                            <br/><br/>Join us now and you can find out how Holm is helping so many people.
                         </p>
 
                     </td>
@@ -114,7 +115,7 @@
                     color: #fff;
                     font-size: 14px;
                     text-decoration: none !important;">
-                            JOIN AS CARER
+                            Join as a care worker
                         </a>
                     </td>
                     <td style="padding: 30px 10px; background: #f9f9f9; "  valign="top" class="">
@@ -135,7 +136,7 @@
                     color: #fff;
                     font-size: 14px;
                     text-decoration: none !important;">
-                            JOIN AS PURCHASER
+                            Join as a person buying care
                         </a>
                     </td>
                 </tr>

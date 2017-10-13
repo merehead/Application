@@ -6,7 +6,9 @@
         payouts to carers
     </h2>
     <div class="panelHead">
-        <div class="filterBox">
+{{--        <div class="filterBox">
+
+
             <div class="formField formField--fix-biger">
                 <div class="fieldWrap">
                     <input type="search" class="formItem formItem--input formItem--search" placeholder="Search...">
@@ -16,7 +18,7 @@
                 </div>
             </div>
 
-        </div>
+        </div>--}}
 
 
         <div class="panelHead__group">
@@ -36,10 +38,17 @@
             <a href="#" class="actionsBtn actionsBtn--filter actionsBtn--bigger">
                 filter
             </a>
-            <a href="#" class="print">
+{{--            <a href="#" class="print">
+                <i class="fa fa-print" aria-hidden="true"></i>
+            </a>--}}
+        </div>
+
+        <div class="panelHead__group">
+            <a href="javascript: window.print();" class="print">
                 <i class="fa fa-print" aria-hidden="true"></i>
             </a>
         </div>
+
 
     </div>
 

@@ -120,12 +120,12 @@ class User extends Authenticatable
 
 
         if ($this->user_type_id == 3) { //carer
-            if ($this->userCarerProfile->registration_progress == '20') {
+            if ($this->userCarerProfile->registration_status != 'new') {
                 return true;
             }
         }
         if ($this->user_type_id == 1) { //purchaser
-            if ($this->userPurchaserProfile->registration_progress == '4_1_2_1') {
+            if ($this->userPurchaserProfile->registration_status != 'new') {
                 //return true;
                 return true;
             }
@@ -144,6 +144,19 @@ class User extends Authenticatable
             case 3:
                 $profile = $this->userCarerProfile()->first();
                 return $profile->first_name.' '.$profile->family_name[0].'.';
+                break;
+        }
+    }
+
+    public function getFirstNameAttribute(){
+        switch ($this->user_type_id){
+            case 1:
+                $profile = $this->userPurchaserProfile()->first();
+                return $profile->first_name;
+                break;
+            case 3:
+                $profile = $this->userCarerProfile()->first();
+                return $profile->first_name;
                 break;
         }
     }

@@ -101,6 +101,10 @@ function carerSearchAjax(){
                 if(response.id==0)$('.moreBtn__item').hide();
                 $('#load-more').val(0);
                 $('#id-carer').val(response.id);
+            }else{
+                $('.carer-result').append(response.html);
+                $('.Paginator').html(response.htmlHeader);
+
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -384,31 +388,6 @@ $(document).ready(function () {
 
     });
 
-//
-//     $('#timepicker1').timepicker({
-//         timeFormat: 'h:mm p',
-//         interval: 30,
-//         //minTime: '10',
-//         //maxTime: '6:00pm',
-//         //defaultTime: '18',
-//         startTime: '18:00',
-//         dynamic: true,
-//         dropdown: true,
-//         scrollbar: true
-//     });
-//
-//     $('#timepicker2').timepicker({
-//         timeFormat: 'h:mm p',
-//         interval: 30,
-// //minTime: '10',
-// //maxTime: '6:00pm',
-// //defaultTime: '18',
-//         startTime: '18:00',
-//         dynamic: true,
-//         dropdown: true,
-//         scrollbar: true
-//     });
-
     $('.onlyNumber').on('keyup', function () {
         $('.error-onlyNumber').remove();
         var errorText = '<span class="help-block error-onlyNumber">\n' +
@@ -446,6 +425,24 @@ $(document).ready(function () {
     //         that.value = that.value.replace(/^07[0-9]$/, '07');
     //     }
     // });
+
+    $(".digitFilter").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+            // Allow: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+
 
     // Иван функция уменшает автоматом шрифт у имени пользователя в шапке
     if ($('.profileName').lenght > 0)
@@ -1223,6 +1220,14 @@ $(document).ready(function () {
             $(datetime).parent().show();
             $(label).show();
             $(datetime).removeClass("hasDatepicker").removeAttr('id');
+            var datestart = $(datetime).attr('name').substring(0,$(datetime).attr('name').length - 10)+'[date_start]';
+            var datestartDate = $('input[name="'+datestart+'"]').datepicker( "getDate" );
+            var inWeek = new Date();
+            var in90Day = new Date();
+            inWeek.setDate(datestartDate.getDate()+7);
+            in90Day.setDate(datestartDate.getDate()+90);
+
+            console.log(inWeek);
             $(datetime).datepicker({
                 beforeShow: function (input, inst) {
                     inst.dpDiv.css({"z-index": "2000!important;"});
@@ -1232,9 +1237,8 @@ $(document).ready(function () {
                 changeYear: true,
                 dateFormat: "dd/mm/yy",
                 showAnim: "slideDown",
-
-                minDate: "+7D",
-                maxDate: "+90D",
+                minDate: inWeek,
+                maxDate: in90Day,
                 yearRange: "0:+2"
             });
         }
@@ -1482,6 +1486,7 @@ $(document).ready(function () {
 
     $('.moreLink').on('click', function (e) {
         $('#load-more').val(1);
+        $('#load-count').val(parseInt($('#load-count').val())+5);
         carerSearchAjax();
     });
 
@@ -1649,7 +1654,7 @@ $(document).ready(function () {
     //------------Google Address search -----------------------
     if ($.isFunction($.fn.autocomplete)) {
 
-        $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').autocomplete({
+        $('input[name="postcode"]:not(.disable),input[name="postCode"]:not(.disable),input[name="address_line1"]:not(.disable)').autocomplete({
                 serviceUrl: '/address/',
                 params: {query: $('input[name="town"]').val() + ' ' + $(this).val()},
                 minChars: 1,
@@ -1749,6 +1754,7 @@ $(document).ready(function () {
                 $('#datepicker_when_start').attr('readonly',true)
                     .datepicker("destroy");
             }
+            $('.error-onlyNumber').remove();
             var that = $(this);
             var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
             var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');

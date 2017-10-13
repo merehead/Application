@@ -1,14 +1,18 @@
-<div class="resultHeader nhide">
-    <p>No results found.</p>
-    <p>
-        Recommendations:
-    </p>
-    <ul>
-        <li>Make sure all words are spelled correctly.</li>
-        <li>Try using different keywords.</li>
-        <li>Try using more popular keywords.</li>
-        <li>Try reducing the number of words in the query.</li>
-    </ul>
+<div class="card error-text result {{count($carerResult)>0?"nhide":""}}">
+    <div class="card-block">
+        <p class="text-uppercase">No carers found.</p><br>
+        <spanp class="text-left">
+            Recommendations:
+        </spanp><br>
+        <div class="checkBox_item">
+        <ul class="text-left">
+            <li class="list-inline checkBox_item">Make sure all words are spelled correctly.</li>
+            <li class="list-inline checkBox_item">Try using different keywords.</li>
+            <li class="list-inline checkBox_item">Try using more popular keywords.</li>
+            <li class="list-inline checkBox_item">Try reducing the number of words in the query.</li>
+        </ul>
+        </div>
+    </div>
 </div>
 
 @foreach($carerResult as $carerProfile)

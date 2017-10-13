@@ -73,7 +73,7 @@ class CarerRegistrationController extends FrontController
 
             //dd($carersProfile->registration_progress);
 
-            if ($carersProfile->registration_progress == '21') {
+            if ($carersProfile->registration_status != 'new') {
                 return redirect('/carer-settings');
             }
 
@@ -124,8 +124,6 @@ class CarerRegistrationController extends FrontController
     public function update(Request $request)
     {
 
-//dd($request->all());
-
         if ($request->has('stepback')) {
 
             $stepback = $request->stepback;
@@ -134,9 +132,6 @@ class CarerRegistrationController extends FrontController
 
             if ($stepback == '4' && $carerProfiles->criminal_conviction == 'Some' && $carerProfiles->registration_progress != '5')
                 $stepback = '5';
-
-
-            //dd($request->all(),$carerProfiles,$stepback);
 
             $carerProfiles->registration_progress = $stepback;
 
@@ -176,10 +171,6 @@ class CarerRegistrationController extends FrontController
 
         $carerProfile = CarersProfile::findOrFail($user->id);
 
-
-
-
-
         $text = view(config('settings.frontTheme') . '.emails.continue_sign_up_carer')->with([
             'user' => $user,
             'regTime' => $user->created_at->addWeek()->format('d/m/Y h:i A'),
@@ -196,29 +187,6 @@ class CarerRegistrationController extends FrontController
                     'status'=>'new'
                 ]);
 
-
-/*
-        try {
-            Mail::send(config('settings.frontTheme') . '.emails.continue_sign_up_carer',
-                [
-                    'user' => $user,
-                    'regTime' => $user->created_at->addWeek()->format('d/m/Y h:i A'),
-                    'like_name' => $carerProfile->like_name,
-                ],
-                function ($m) use ($user) {
-                    $m->to($user->email)->subject('Registration on HOLM');
-                });
-        } catch (Swift_TransportException $STe) {
-
-            $error = MailError::create([
-                'error_message' => $STe->getMessage(),
-                'function' => __METHOD__,
-                'action' => 'Try to sent continue_sign_up_carer',
-                'user_id' => $user->id
-            ]);
-        }*/
-
-
         $this->content = view(config('settings.frontTheme') . '.carerRegistration.thankYou')->with($this->vars)->render();
 
         return $this->renderOutput();
@@ -228,9 +196,6 @@ class CarerRegistrationController extends FrontController
     {
 
         $user = Auth::user();
-
-
-
 
         if(!$user) {
             return redirect('/');
@@ -269,25 +234,6 @@ class CarerRegistrationController extends FrontController
                     'time_to_send' => Carbon::now()->addHour(1),
                     'status'=>'new'
                 ]);
-
-
-/*        try {
-            Mail::send(config('settings.frontTheme') . '.emails.complete_sign_up_carer',
-                ['user' => $user,
-                    'like_name'=>$carerProfile->like_name],
-                function ($m) use ($user) {
-                    $m->to($user->email)->subject('Welcome on HOLM');
-                });
-        } catch (Swift_TransportException $STe) {
-
-            $error = MailError::create([
-                'error_message' => $STe->getMessage(),
-                'function' => __METHOD__,
-                'action' => 'Try to sent complete_sign_up_carer',
-                'user_id' => $user->id
-            ]);
-        }*/
-
 
         $carerProfile->update();
 

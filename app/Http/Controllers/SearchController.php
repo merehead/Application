@@ -29,7 +29,7 @@ class SearchController extends FrontController
         $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
         $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
         $modals = view(config('settings.frontTheme') . '.includes.modals')->render();
-
+        $load_more_count=$request->get('load-more-count',5);
         $languages = Language::all();
         $this->vars = array_add($this->vars, 'languages', $languages);
         $typeCare = AssistanceType::all();
@@ -40,6 +40,7 @@ class SearchController extends FrontController
         $this->vars = array_add($this->vars, 'header', $header);
         $this->vars = array_add($this->vars, 'footer', $footer);
         $this->vars = array_add($this->vars, 'modals', $modals);
+        $this->vars = array_add($this->vars, 'load_more_count', $load_more_count);
 
         $perPage = 5;
         $where = '';
@@ -49,9 +50,7 @@ class SearchController extends FrontController
         if ($request->get('typeService')) {
             $where .= 'inner join carer_profile_service_type ct on ct.carer_profile_id = cp.id and ct.service_type_id in (' . $request->get('typeService') . ')';
         }
-        if ($request->get('typeCare')) {
-            $where .= 'inner join carer_profile_assistance_type cs on cs.carer_profile_id = cp.id and cs.assistance_types_id in ('.implode(',',array_keys($request->get('typeCare'))).')';
-        }
+
         $working_times[1]=[5,6,7];
         $working_times[2]=[8,9,10];
         $working_times[3]=[11,12,13];
@@ -79,9 +78,23 @@ class SearchController extends FrontController
         if ($request->get('work_with_pets'))
             $where .= " and cp.work_with_pets='Yes'";
 
-        if ($request->get('postCode')&&!empty($request->get('postCode')))
-            $where .= " and cp.postcode='".$request->get('postCode')."'";
+        if ($request->get('typeCare')) {
+            $careSelect = 'select carer_profile_id from (
+                              select carer_profile_id,assistance_types_id from carer_profile_assistance_type cs where assistance_types_id in ('.implode(',',array_keys($request->get('typeCare'))).')) as tb
+                            group by carer_profile_id
+                           having count(*)='.count(array_keys($request->get('typeCare')));
 
+            $careResult = DB::select($careSelect);
+            $carerId=[];
+            foreach ($careResult as $result)$carerId[]=$result->carer_profile_id;
+            $where .= ' and cp.id in ('.implode(',',array_values($carerId)).') ';
+        }
+
+        if ($request->get('postCode')&&!empty($request->get('postCode'))){
+            $postCode = $request->get('postCode');
+            if(strpos(' ',$postCode)===false) $postCode.=' ';
+            $where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('".$postCode."', POSITION(' ' IN '".$postCode."')) and  p.name = LEFT(cp.postcode, LENGTH(p.name)))>0";
+        }
         if ($request->get('load-more',0)==1)
             $where .= " and cp.id > " . $request->get('id');
 
@@ -96,6 +109,7 @@ class SearchController extends FrontController
         $carerResult = DB::select($sql);
 
         $start = (($page*$perPage)-$perPage==0)?'1':($page*$perPage)-$perPage;
+        $countAll = count(DB::select(str_replace( " and cp.id > " . $request->get('id') ,'',$sql)));
         if(count($carerResult)==1)$start=0;
         $carerResultPage = array_slice($carerResult,$start,$perPage);
         $this->vars = array_add($this->vars, 'carerResult', $carerResultPage);
@@ -103,6 +117,7 @@ class SearchController extends FrontController
         $this->vars = array_add($this->vars, 'carerResultCount', count($carerResult));
         $this->vars = array_add($this->vars, 'page', $page);
         $this->vars = array_add($this->vars, 'requestSearch', $request->all());
+        $this->vars = array_add($this->vars, 'countAll', $countAll);
 
         $load_more = $request->get('load_more');
         $this->content = view(config('settings.frontTheme') . '.homePage.searchPage', $this->vars)->render();
@@ -110,18 +125,32 @@ class SearchController extends FrontController
             return $this->renderOutput();
         else {
             $html = view(config('settings.frontTheme') . '.homePage.searchPageAjax', $this->vars)->render();
+            $post_=true;
+            if ($request->get('postCode')&&!empty($request->get('postCode'))){
+                if($this->isExsistPostCode($postCode)==false){
+                    $post_=false;
+                    $html='<p>Sorry Holm is not yet available in this area. Please <a href="/contact">contact us</a> to request Holm in your area. Many thanks!</p>';
+                }
+            }
             $htmlHeader = view(config('settings.frontTheme') . '.homePage.searchPageHeaderAjax', $this->vars)->render();
             $options = app('request')->header('accept-charset') == 'utf-8' ? JSON_UNESCAPED_UNICODE : null;
             return response()->json(array(
-                'success' => true,
+                'success' => (count($carerResult)>0),
                 'load-more' => isset($load_more) && !empty($load_more)?1:0,
                 'html' => $html,
+                'post_'=>$post_,
                 'sql' => $sql,
                 'id'=>(count($carerResultPage)-1>0)?$carerResultPage[count($carerResultPage)-1]->id:0,
                 'count' => count($carerResult),
+                'countAll' => $countAll,
                 'htmlHeader' => $htmlHeader), 200, [$options]);
             exit;
         }
+    }
+    private function isExsistPostCode($postCode){
+        $sql = "select count(*) as ctn from postcodes p where p.name = left('".$postCode."', LENGTH(p.name)) and left('".$postCode."', LENGTH(p.name))='".$postCode."'";
+        $carerResult = DB::select($sql);//dd($carerResult[0]->ctn>0);
+        return $carerResult[0]->ctn>0;
     }
 }
    
