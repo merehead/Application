@@ -80,7 +80,7 @@
                 <h2 class="formLabel questionForm__label">
                     Phone <span>*</span>
                 </h2>
-                {!! Form::text('phone',null,['class'=>'formInput','placeholder'=>'Phone','maxlength'=>"11"]) !!}
+                {!! Form::text('phone',null,['class'=>'formInput digitFilter','placeholder'=>'Phone','maxlength'=>"11"]) !!}
                 @if ($errors->has('phone'))
                     <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>

@@ -388,31 +388,6 @@ $(document).ready(function () {
 
     });
 
-//
-//     $('#timepicker1').timepicker({
-//         timeFormat: 'h:mm p',
-//         interval: 30,
-//         //minTime: '10',
-//         //maxTime: '6:00pm',
-//         //defaultTime: '18',
-//         startTime: '18:00',
-//         dynamic: true,
-//         dropdown: true,
-//         scrollbar: true
-//     });
-//
-//     $('#timepicker2').timepicker({
-//         timeFormat: 'h:mm p',
-//         interval: 30,
-// //minTime: '10',
-// //maxTime: '6:00pm',
-// //defaultTime: '18',
-//         startTime: '18:00',
-//         dynamic: true,
-//         dropdown: true,
-//         scrollbar: true
-//     });
-
     $('.onlyNumber').on('keyup', function () {
         $('.error-onlyNumber').remove();
         var errorText = '<span class="help-block error-onlyNumber">\n' +
@@ -450,6 +425,24 @@ $(document).ready(function () {
     //         that.value = that.value.replace(/^07[0-9]$/, '07');
     //     }
     // });
+
+    $(".digitFilter").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+            // Allow: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+
 
     // Иван функция уменшает автоматом шрифт у имени пользователя в шапке
     if ($('.profileName').lenght > 0)

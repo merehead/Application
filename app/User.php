@@ -148,6 +148,19 @@ class User extends Authenticatable
         }
     }
 
+    public function getFirstNameAttribute(){
+        switch ($this->user_type_id){
+            case 1:
+                $profile = $this->userPurchaserProfile()->first();
+                return $profile->first_name;
+                break;
+            case 3:
+                $profile = $this->userCarerProfile()->first();
+                return $profile->first_name;
+                break;
+        }
+    }
+
     public function getBonusBalanceAttribute(){
         return 2000;
     }
