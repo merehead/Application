@@ -33,7 +33,6 @@
 From £ 12</span><span class="hourPrice__timing">/hour</span>
     </p>
     @if(Auth::check())
-{{--todo карер не может себе создавать букинг, ТУТ ЧТО-ТО НЕ ТО --}}
         @if (Auth::user()->user_type_id !== 3)
         <div class="bookBtn">
             <a href="#" class="bookBtn__item  centeredLink" data-toggle="modal" data-target="#message-carer">
@@ -47,6 +46,15 @@ From £ 12</span><span class="hourPrice__timing">/hour</span>
                 </button>
             </div>
         @endif
+
+        @else
+
+        <div class="bookBtn">
+            <button disabled class="bookBtn__item  centeredLink" title="Please log in or sign up before proceeding with the booking.">
+                book carer
+            </button>
+        </div>
+
     @endif
 
 
