@@ -33,14 +33,18 @@ class ServiceUserRegistrationController extends FrontController
 
     public function index($serviceUserProfileId){
 
-        //dd($serviceUserProfileId);
-
         if(!Auth::check()) return redirect('/purchaser-registration');
 
         $serviceUserProfile = ServiceUsersProfile::findOrFail($serviceUserProfileId);
 
         if ($serviceUserProfile->purchaser_id != $this->user->id)
             return redirect('/');
+
+
+
+        if ($serviceUserProfile->registration_status == 'completed')
+            return redirect(route('ServiceUserSetting',['serviceUserProfile'=>$serviceUserProfile->id]));
+
 
         $this->title = 'Service User Registration';
 

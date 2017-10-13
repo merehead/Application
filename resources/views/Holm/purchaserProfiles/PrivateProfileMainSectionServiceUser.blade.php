@@ -13,7 +13,7 @@
 
                     @if(!$serviceUser->isDeleted())
 
-                        <?php if ($serviceUser->registration_progress!='61')
+                        <?php if ($serviceUser->registration_status!='completed')
                                 $uncompliteUser = $serviceUser->id;
                             ?>
                         <div class="peopleCare">
@@ -24,7 +24,7 @@
                                 </div>
 
                                 <h2 class="peopleCare__name">
-                                    <a href="{{ $serviceUser->registration_progress!='61'
+                                    <a href="{{ $serviceUser->registration_status!='completed'
                                     ? route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUser->id])
                                     : route('ServiceUserSetting',['id'=>$serviceUser->id])}}"
                                        target="blank">

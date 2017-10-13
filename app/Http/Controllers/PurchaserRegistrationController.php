@@ -48,15 +48,21 @@ class PurchaserRegistrationController extends FrontController
 
         $user = Auth::user();
 
+
+
+
         if (!$user) {
             $step = view(config('settings.frontTheme').'.purchaserRegistration.Step1_purchaserRegistration')->with($this->vars)->render();
             $this->vars = array_add($this->vars,'activeStep',1);
             $this->vars = array_add($this->vars,'activeSubStep',0);
         } else {
+
+
             $purchasersProfile = PurchasersProfile::findOrFail($user->id);
 
-            //todo если у пурчасера нет не законченных регистраций сервисов, то кидать на профиль пурчасера,
-            //иначе - искать сервиса и кидать на продолжение регистрации????
+
+            if ($purchasersProfile->registration_status = 'completed')
+            return redirect(route('purchaserSettings'));
 
 
             $this->vars = array_add($this->vars, 'purchasersProfileID', $purchasersProfile->id);
