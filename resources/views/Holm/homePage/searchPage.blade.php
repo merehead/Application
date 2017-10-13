@@ -120,7 +120,7 @@
                     <a href="#" class="sortLinkXs">search by <span><i class="fa fa-angle-down"></i></span></a>
                     <div class="sortFilters hiddenSort hiddenSort--visible">
                         <div class="sortFilters__item">
-                            {!! Form::text('postCode',(isset($requestSearch['postCode'])?$requestSearch['postCode']:''),['class'=>'sortField','placeholder'=>'POST CODE','maxlength'=>16,'onkeydown'=>"if(event.keyCode==13){carerSearchAjax();}"]) !!}
+                            {!! Form::text('postCode',(isset($requestSearch['postCode'])?$requestSearch['postCode']:''),['class'=>'sortField disable','placeholder'=>'POST CODE','maxlength'=>16,'onkeydown'=>"if(event.keyCode==13){carerSearchAjax();}"]) !!}
                             <span class="fieldIco"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
                         </div>
                         <div class="sortFilters__item">
@@ -134,31 +134,29 @@
                 </div>
 
                 <div class="resultHeader Paginator">
-                    <p class="resultHeader__info">Showing {{(($page*$perPage)-$perPage==0)?'1':($page*$perPage)-$perPage}}-{{($carerResultCount<$perPage)?$page*$carerResultCount:$page*$perPage}} of {{$carerResultCount}} CARERs</p>
+                    <p class="resultHeader__info">Showing {{$page*$perPage}} of {{$carerResultCount}} CARERs</p>
                     <div class="sortLink">
                         SEARCH BY &nbsp; <a href="#" class="sortLink__item sort-rating"> <span> </span> rating
                         </a>
                         <p> &nbsp; - &nbsp; </p>
-                        <!--<span class="sortLink__separate">
-
-                        </span>
-                        -->
                         <a href="#" class="sortLink__item sort-id">
                             MOST RECENT
                         </a>
                     </div>
                 </div>
-                <div class="resultHeader error-text nhide">
-                    <p>No carers found.</p>
-                    <p>
+                <div class="card error-text result {{count($carerResult)>0?"nhide":""}}">
+                    <div class="card-block">
+                    <p class="text-uppercase">No carers found.</p>
+                    <p class="text-left">
                         Recommendations:
                     </p>
-                    <ul class="list-inline">
-                        <li>Make sure all words are spelled correctly.</li>
-                        <li>Try using different keywords.</li>
-                        <li>Try using more popular keywords.</li>
-                        <li>Try reducing the number of words in the query.</li>
-                    </ul>
+                        <ul class="text-left">
+                            <li class="list-inline ">Make sure all words are spelled correctly.</li>
+                            <li class="list-inline ">Try using different keywords.</li>
+                            <li class="list-inline ">Try using more popular keywords.</li>
+                            <li class="list-inline ">Try reducing the number of words in the query.</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="carer-result">
@@ -217,6 +215,7 @@
                 @if($carerResultCount>5)
                     <input type="hidden" id="id-carer" name="id" value="{{$carerResult[count($carerResult)-1]->id}}">
                     <input type="hidden" name="load-more" id="load-more" value="0">
+                    <input type="hidden" name="load-more-count" id="load-count" value="{{$load_more_count}}">
                 <div class="moreBtn moreBtn--book ">
                     <a href="" class="moreBtn__item moreBtn__item--book centeredLink moreLink">
                         Load More

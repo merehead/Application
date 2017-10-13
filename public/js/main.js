@@ -101,6 +101,10 @@ function carerSearchAjax(){
                 if(response.id==0)$('.moreBtn__item').hide();
                 $('#load-more').val(0);
                 $('#id-carer').val(response.id);
+            }else{
+                $('.carer-result').append(response.html);
+                $('.Paginator').html(response.htmlHeader);
+
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -1223,6 +1227,14 @@ $(document).ready(function () {
             $(datetime).parent().show();
             $(label).show();
             $(datetime).removeClass("hasDatepicker").removeAttr('id');
+            var datestart = $(datetime).attr('name').substring(0,$(datetime).attr('name').length - 10)+'[date_start]';
+            var datestartDate = $('input[name="'+datestart+'"]').datepicker( "getDate" );
+            var inWeek = new Date();
+            var in90Day = new Date();
+            inWeek.setDate(datestartDate.getDate()+7);
+            in90Day.setDate(datestartDate.getDate()+90);
+
+            console.log(inWeek);
             $(datetime).datepicker({
                 beforeShow: function (input, inst) {
                     inst.dpDiv.css({"z-index": "2000!important;"});
@@ -1232,9 +1244,8 @@ $(document).ready(function () {
                 changeYear: true,
                 dateFormat: "dd/mm/yy",
                 showAnim: "slideDown",
-
-                minDate: "+7D",
-                maxDate: "+90D",
+                minDate: inWeek,
+                maxDate: in90Day,
                 yearRange: "0:+2"
             });
         }
@@ -1482,6 +1493,7 @@ $(document).ready(function () {
 
     $('.moreLink').on('click', function (e) {
         $('#load-more').val(1);
+        $('#load-count').val(parseInt($('#load-count').val())+5);
         carerSearchAjax();
     });
 
@@ -1645,7 +1657,7 @@ $(document).ready(function () {
     //------------Google Address search -----------------------
     if ($.isFunction($.fn.autocomplete)) {
 
-        $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').autocomplete({
+        $('input[name="postcode"]:not(.disable),input[name="postCode"]:not(.disable),input[name="address_line1"]:not(.disable)').autocomplete({
                 serviceUrl: '/address/',
                 params: {query: $('input[name="town"]').val() + ' ' + $(this).val()},
                 minChars: 1,
@@ -1745,6 +1757,7 @@ $(document).ready(function () {
                 $('#datepicker_when_start').attr('readonly',true)
                     .datepicker("destroy");
             }
+            $('.error-onlyNumber').remove();
             var that = $(this);
             var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
             var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');
