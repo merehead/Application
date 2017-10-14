@@ -687,6 +687,67 @@ $(document).ready(function () {
         }
     });
 
+    //step8 carer registration transport
+    if ($('#regCarerSt8_driving_licence').length > 0) {
+        if ($('#regCarerSt8_driving_licence').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_driving_licence').show();
+        } else {
+            $('.dependFrom_regCarerSt8_driving_licence').hide();
+            $('.dependFrom_regCarerSt8_have_car').hide();
+        }
+    }
+    $(document).on('change', '#regCarerSt8_driving_licence', function () {
+        if ($('#regCarerSt8_driving_licence').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_driving_licence').show();
+            if ($('#regCarerSt8_have_car').val() == "Yes") {
+                $('.dependFrom_regCarerSt8_have_car').show();
+            }
+            if ($('#regCarerSt8_use_car').val() == "Yes" && $('#regCarerSt8_have_car').val() == "Yes") {
+                $('.dependFrom_regCarerSt8_use_car').show();
+            }
+        } else {
+            $('.dependFrom_regCarerSt8_driving_licence').hide();
+            $('.dependFrom_regCarerSt8_have_car').hide();
+            $('.dependFrom_regCarerSt8_use_car').hide();
+        }
+    });
+
+    if ($('#regCarerSt8_have_car').length > 0) {
+        if ($('#regCarerSt8_have_car').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_have_car').show();
+        } else {
+            $('.dependFrom_regCarerSt8_have_car').hide();
+
+        }
+    }
+    $(document).on('change', '#regCarerSt8_have_car', function () {
+        if ($('#regCarerSt8_have_car').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_have_car').show();
+            if ($('#regCarerSt8_use_car').val() == "Yes") {
+                $('.dependFrom_regCarerSt8_use_car').show();
+            }
+        } else {
+            $('.dependFrom_regCarerSt8_have_car').hide();
+            $('.dependFrom_regCarerSt8_use_car').hide();
+        }
+    });
+    if ($('#regCarerSt8_use_car').length > 0) {
+        if ($('#regCarerSt8_use_car').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_use_car').show();
+        } else {
+            $('.dependFrom_regCarerSt8_use_car').hide();
+
+        }
+    }
+    $(document).on('change', '#regCarerSt8_use_car', function () {
+        if ($('#regCarerSt8_use_car').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_use_car').show();
+        } else {
+            $('.dependFrom_regCarerSt8_use_car').hide();
+        }
+    });
+    //^^^^^^step8 carer registration transport
+
     $('.text-limit').parent().css('margin-right', 0);
     $('.text-limit').parent().css('position', 'relative');
 

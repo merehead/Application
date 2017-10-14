@@ -427,8 +427,21 @@ class CarerRegistration
 
 
         $carerProfile->driving_licence  = $request->input('driving_licence');
-        $carerProfile->have_car  = $request->input('have_car');
-        $carerProfile->use_car  = $request->input('use_car');
+
+        if ($request->input('driving_licence') == 'No') {
+            $carerProfile->have_car  = null;
+            $carerProfile->use_car  = null;
+        } else {
+            $carerProfile->have_car  = $request->input('have_car');
+            $carerProfile->use_car  = $request->input('use_car');
+        }
+
+        if ($request->input('have_car') == 'No' || $request->input('driving_licence') == 'No') {
+            $carerProfile->use_car  = null;
+        } else {
+            $carerProfile->use_car  = $request->input('use_car');
+        }
+
         $carerProfile->DBS_number  = $request->input('DBS_number');
         $carerProfile->car_insurance_number  = $request->input('car_insurance_number');
         if(isset($input['driver_licence_valid_until'])) $carerProfile->driver_licence_valid_until  = $request->input('driver_licence_valid_until');
