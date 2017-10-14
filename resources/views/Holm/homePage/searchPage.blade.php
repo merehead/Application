@@ -55,7 +55,7 @@
                                 <div class="checkBox_item">
 
                                     {!! Form::checkbox('typeCare['.$care->id.']', null,((isset($requestSearch['typeCare']))&&in_array($care->id,$requestSearch['typeCare'])? 1 : null),
-                                                array('class' => 'customCheckbox ','id'=>'typeCarebox'.$care->id,'onclick'=>'carerSearchAjax()')) !!}
+                                                array('class' => 'customCheckbox ','id'=>'typeCarebox'.$care->id,'onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
                                     <label for="typeCarebox{{$care->id}}">{{$care->name}}</label>
                                 </div>
                             @endforeach
@@ -71,24 +71,24 @@
                         <div class="filterGroup__box filterGroup__box--active">
                             <div class="checkBox_item">
                                 {!! Form::checkbox('gender[Male]', null,((isset($requestSearch['gender']))&&in_array('Male',$requestSearch['gender'])? 1 : null),
-                                                array('class' => 'customCheckbox ','id'=>'boxgender1','onclick'=>'carerSearchAjax()')) !!}
+                                                array('class' => 'customCheckbox ','id'=>'boxgender1','onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
                                 <label for="boxgender1">male</label>
                             </div>
                             <div class="checkBox_item">
 
                                 {!! Form::checkbox('gender[Female]', null,((isset($requestSearch['gender']))&&in_array('Female',$requestSearch['gender'])? 1 : null),
-                                                array('class' => 'customCheckbox ','id'=>'boxgender2','onclick'=>'carerSearchAjax()')) !!}
+                                                array('class' => 'customCheckbox ','id'=>'boxgender2','onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
                                 <label for="boxgender2">female</label>
                             </div>
                             <div class="checkBox_item">
 
                                 {!! Form::checkbox('have_car', null,((isset($requestSearch['have_car']))? 1 : null),
-                                               array('class' => 'customCheckbox ','id'=>'have_car','onclick'=>'carerSearchAjax()')) !!}
+                                               array('class' => 'customCheckbox ','id'=>'have_car','onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
                                 <label for="have_car">HAS OWN TRANSPORT</label>
                             </div>
                             <div class="checkBox_item">
                                 {!! Form::checkbox('work_with_pets', null,((isset($requestSearch['work_with_pets']))? 1 : null),
-                                               array('class' => 'customCheckbox ','id'=>'work_with_pets','onclick'=>'carerSearchAjax()')) !!}
+                                               array('class' => 'customCheckbox ','id'=>'work_with_pets','onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
                                 <label for="work_with_pets">WORKS WITH PETS</label>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
                                 @foreach($languages as $lang)
                                     <div class="checkBox_item">
                                         {!! Form::checkbox('language['.$lang->id.']', null,((isset($requestSearch['language']))&&in_array($lang->id,$requestSearch['language'])? 1 : null),
-                                               array('class' => 'customCheckbox ','id'=>'languagebox'.$lang->id,'onclick'=>'carerSearchAjax()')) !!}
+                                               array('class' => 'customCheckbox ','id'=>'languagebox'.$lang->id,'onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
 
                                         <label for="languagebox{{$lang->id}}">{{$lang->carer_language}} </label>
                                     </div>
@@ -128,7 +128,7 @@
                             <span class="fieldIco"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                         </div>
                         <div class="sortFilters__item">
-                            {!! Form::select('typeService',[''=>'TYPE OF SERVICE','1'=>'SINGLE / REGULAR VISITS','2'=>'LIVE IN CARE','3'=>'RESPITE CARE'],null,['id'=>'typeService','class'=>'formSelect','onchange'=>'carerSearchAjax()']) !!}
+                            {!! Form::select('typeService',[''=>'TYPE OF SERVICE','1'=>'SINGLE / REGULAR VISITS','2'=>'LIVE IN CARE','3'=>'RESPITE CARE'],null,['id'=>'typeService','class'=>'formSelect','onchange'=>"$('#load-more').val(0);carerSearchAjax()"]) !!}
                         </div>
                     </div>
                 </div>

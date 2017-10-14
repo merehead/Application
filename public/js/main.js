@@ -1560,6 +1560,7 @@ $(document).ready(function () {
         }else{
             $('#sort-rating-order').val('asc');
         }
+        $('#load-more').val(0);
         carerSearchAjax();
     });
 
@@ -1572,6 +1573,7 @@ $(document).ready(function () {
         }else{
             $('#sort-id-order').val('asc');
         }
+        $('#load-more').val(0);
         carerSearchAjax();
     });
 
