@@ -90,9 +90,9 @@
                         <td class=" ">
                             <span class="extraTitle">to</span>
                         </td>
-                        <td class="">
+{{--                        <td class="">
                             <span class="extraTitle">FREQUENCY</span>
-                        </td>
+                        </td>--}}
                         <td class=" ">
                             <span class="extraTitle">status</span>
                         </td>
