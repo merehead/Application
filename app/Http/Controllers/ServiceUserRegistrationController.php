@@ -193,6 +193,7 @@ class ServiceUserRegistrationController extends FrontController
 
         $serviceProfile->profiles_status_id = 2;
         $serviceProfile->registration_status = 'completed';
+        $serviceProfile->update();
 
         $text = view(config('settings.frontTheme') . '.emails.complete_sign_up_service')->with([
             'user' => $user,
