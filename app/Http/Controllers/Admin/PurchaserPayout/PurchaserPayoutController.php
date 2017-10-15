@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin\PurchaserPayout;
 
 use App\Appointment;
 use App\Booking;
+use App\BookingStatus;
 use App\Http\Controllers\Admin\AdminController;
+use App\PurchasersProfile;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -37,9 +39,11 @@ class PurchaserPayoutController extends AdminController
 
         $this->title = 'Payout to purchasers';
 
-        $users = User::where('user_type_id','1')->get();
+        $purchasers = PurchasersProfile::all();
+        $this->vars = array_add($this->vars,'purchasers',$purchasers);
 
-        $this->vars = array_add($this->vars,'users',$users);
+        $bookingStatus = BookingStatus::all()->pluck('name','id')->toArray();
+        $this->vars = array_add($this->vars,'bookingStatus',$bookingStatus);
 
         $this->content = view(config('settings.theme').'.purchaserPayouts.purchaserPayouts')->with($this->vars)->render();
 

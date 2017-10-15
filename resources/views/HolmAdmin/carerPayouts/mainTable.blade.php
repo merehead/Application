@@ -4,7 +4,7 @@
 
         <tbody>
 
-        @foreach($users as $user)
+        @foreach($carers as $user)
             @include(config('settings.theme').'.carerPayouts.mainTableRow')
         @endforeach
 
