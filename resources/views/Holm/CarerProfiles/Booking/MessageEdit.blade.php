@@ -139,7 +139,7 @@
 
                         <a href="#" class="additionalTime nhide">
                             <i class="fa fa-clock-o" aria-hidden="true"></i>
-                            add additional time
+                            ADD ADDITIONAL APPOINTMENT
                         </a>
 
 

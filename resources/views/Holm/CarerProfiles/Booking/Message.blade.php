@@ -203,7 +203,7 @@
                         </div>
                         <a href="#" class="additionalTime">
                             <i class="fa fa-clock-o" aria-hidden="true"></i>
-                            add additional time
+                            ADD ADDITIONAL APPOINTMENT
                         </a>
 
 
