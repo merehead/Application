@@ -102,7 +102,7 @@ class SearchController extends FrontController
         if ($request->get('sort-rating',0)==1)
             $order[]='avg_total '.$request->get('sort-rating-order','asc');
         if ($request->get('sort-id',0)==1)
-                $order[]='cp.id '.$request->get('sort-id-order','asc');
+                $order[]='cp.id '.$request->get('sort-id-order','desc');
 
         if(empty($order))$order[]='cp.id asc';
         $sql = 'select cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview from carers_profiles cp '.$where. ' group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview order by '.implode(',',$order);
