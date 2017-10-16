@@ -1482,7 +1482,7 @@ $(document).ready(function () {
             change: function() {
                 $(this).change();
             },
-            timeFormat: 'g:i A',
+            timeFormat: 'h:mm p',
             interval: 30,
             //maxTime: '6:00pm',_step48
             //defaultTime: '18',
