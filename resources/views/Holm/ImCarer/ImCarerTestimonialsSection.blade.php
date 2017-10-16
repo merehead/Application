@@ -50,7 +50,7 @@
                         </a>
                         <a href="#" class="peopleBox" data-id="2">
                             <div class="profilePhoto peopleBox__photo">
-                                <img src="/img/John_r.png" alt="">
+                                <img src="/img/John_R.png" alt="">
                             </div>
                             <div class="peopleBox__info">
                                 <h2 class="profileName">JOHN R.</h2>
