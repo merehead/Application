@@ -656,3 +656,7 @@ label.correct2 {
     -webkit-transition: all .2s;
     transition: all .2s;
 }
+
+.close {
+    opacity: 0.9;
+}

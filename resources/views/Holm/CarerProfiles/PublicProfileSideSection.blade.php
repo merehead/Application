@@ -50,14 +50,50 @@ From £ 12</span><span class="hourPrice__timing">/hour</span>
         @else
 
         <div class="bookBtn">
-            <button disabled class="bookBtn__item  centeredLink" title="Please log in or sign up before proceeding with the booking.">
+            <a href="#" class="bookBtn__item  centeredLink" data-toggle="modal" data-target="#login-popup">
                 book carer
-            </button>
+            </a>
         </div>
 
+  {{--      <div class="bookBtn">
+            <button disabled class="bookBtn__item  centeredLink" data-toggle="modal" data-target="#login-popup">
+                book carer
+            </button>
+        </div>--}}
+
     @endif
+    <div id="login-popup" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+    <div  class="login">
+        <div class="login__header login__header--center">
+            <h2> Book carer</h2>
+            <a href="#" data-dismiss="modal" class="close closeModal">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+
+        <div class="who-you-are">
+            <p class="login-text login-text--header">
+                if not logged in - press button
+            </p>
+            <div class="who-you-are__box">
+                <a href="#" class="who-you-are__item">
+                    Login
+                </a>
+                <a href="#" class="who-you-are__item">
+                    signup
+                </a>
+            </div>
+            <p class="login-text login-text--footer">
+                Please log in or sign up before proceeding with the booking
+            </p>
+
+        </div>
 
 
+    </div>
+        </div>
+    </div>
     <div class="payment">
         <a href="" class="payment__item">
             <img src="/img/pay1.png" alt="">

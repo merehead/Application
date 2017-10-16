@@ -1,8 +1,11 @@
-<div class="modal fade" id="myModal{{$item->id}}" role="dialog">
+<div class="modal fade" id="myModal{{$item->id}}" role="dialog" style="position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
     <div class="modal-dialog">
         <div id="popupWrap{{$item->id}}" class="popupWrap">
             <div class="adminPopup ">
                 <div class="adminPopup__head popupHead">
+                    <a href="#" data-dismiss="modal" class="close closeModal" style="opacity: 0.9">
+                        <i class="fa fa-times"></i>
+                    </a>
                     {{--            <a href="#" class="closeModal">
 
                                     <i class="fa fa-times"></i>
@@ -22,12 +25,9 @@
                                 </p>
                             </div>
                             <div class="question-column">
-                                <div class="question-choise">
-                                    <div class="choise-item">
-                                        <b>Yes</b>
-                                    </div>
-                                </div>
-
+                                <p class="question-info">
+                                    yes
+                                </p>
                             </div>
                         </div>
                     @endif
@@ -39,17 +39,11 @@
                                 </h2>
                             </div>
                             <div class="question-column">
-                                <div class="question-checkboxes">
-                                    <div class="check-column">
-                                        <div class="question-check">
-                                            <strong> MEDICATION/TREATMENTS</strong>
-                                        </div>
-                                    </div>
-                                </div>
+                                <p class="question-info">
+                                    Medication/treatments
+                                </p>
                                 <div class="question-comment">
-                                    <input type="text" class="question-comment__field"
-                                           value="{{$item->nta['REQUIRES ASSISTANCE IN TAKING MEDICATION TREATMENTS']}}"
-                                           placeholder="Comment">
+                                    <p class="question-info">{{$item->nta['REQUIRES ASSISTANCE IN TAKING MEDICATION TREATMENTS']}}</p>
                                 </div>
                             </div>
                         </div>
@@ -63,13 +57,9 @@
 
                             </div>
                             <div class="question-column">
-                                <div class="formField formField--full">
-                                    <div class="fieldWrap">
-                                        <div class="question-check">
-                                            <strong>{{$item->nta['Date of start']}}</strong>
-                                        </div>
-                                    </div>
-                                </div>
+                                <p class="question-info">
+                                    <strong>{{$item->nta['Date of start']}}</strong>
+                                </p>
 
                             </div>
                         </div>
@@ -80,17 +70,14 @@
                                 <h2 class="ordinaryTitle">
                                     NUTRITION
                                 </h2>
-                                <p class="question-info">
-                                    REQUIRE ASSISTANCE WITH EATING / DRINKING
-                                </p>
+                                {{--                                <p class="question-info">
+                                                                    REQUIRE ASSISTANCE WITH EATING / DRINKING
+                                                                </p>--}}
                             </div>
                             <div class="question-column">
-
-                                <div class="question-comment">
-                                    <input type="text" class="question-comment__field"
-                                           value="{{$item->nta['Require assistance with eating / drinking']}}"
-                                           placeholder="Comment">
-                                </div>
+                                <p class="question-info">
+                                    {{$item->nta['Require assistance with eating / drinking']}}
+                                </p>
 
                             </div>
                         </div>
@@ -101,13 +88,13 @@
                                 <h2 class="ordinaryTitle">
                                     PERSONAL HYGIENE
                                 </h2>
-                                <p class="question-info">
-                                    NEEDS HELP IN CHOOSING INCONTINENCE PRODUCTS
-                                </p>
+                                {{-- <p class="question-info">
+                                     NEEDS HELP IN CHOOSING INCONTINENCE PRODUCTS
+                                 </p>--}}
                             </div>
                             <div class="question-column">
                                 <div class="question-comment">
-                                    Yes
+                                    NEEDS HELP IN CHOOSING INCONTINENCE PRODUCTS
                                 </div>
 
                             </div>
@@ -121,36 +108,30 @@
                                 </h2>
                             </div>
                             <div class="question-column">
-                                <div class="question-checkboxes">
-                                    <div class="check-column">
 
+                                @foreach($item->Behaviours->splice(0,count($item->Behaviours)/2) as $behaviour)
 
-                                        @foreach($item->Behaviours->splice(0,count($item->Behaviours)/2) as $behaviour)
+                                    @if($behaviour->name != 'other')
+                                        @if($behaviour->name != 'None')
 
-                                            @if($behaviour->name != 'other')
-                                                @if($behaviour->name != 'None')
+                                            <p class="question-info">
+                                                {{$behaviour->name}}
+                                            </p>
 
-                                                    <div class="question-check">
-                                                        <label for="checkbox3"> {{$behaviour->name}} </label>
-                                                    </div>
+                                        @endif
+                                    @endif
+                                @endforeach
 
-                                                @endif
-                                            @endif
-                                        @endforeach
+                                @foreach($item->Behaviours as $behaviour)
+                                    @if($behaviour->name != 'other')
+                                        @if($behaviour->name != 'None')
+                                            <p class="question-info">
+                                                {{$behaviour->name}}
+                                            </p>
+                                        @endif
+                                    @endif
+                                @endforeach
 
-                                    </div>
-                                    <div class="check-column">
-                                        @foreach($item->Behaviours as $behaviour)
-                                            @if($behaviour->name != 'other')
-                                                @if($behaviour->name != 'None')
-                                                    <div class="question-check">
-                                                        <label for="checkbox3"> {{$behaviour->name}} </label>
-                                                    </div>
-                                                @endif
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     @endif
@@ -160,16 +141,12 @@
                                 <h2 class="ordinaryTitle">
                                     Details
                                 </h2>
-                                <p class="question-info">
-                                    HAS A DOCTOR'S NOTE OR COURT ORDER SAYING THAT THEY ARE NOT ABLE TO GIVE CONSENT
-                                </p>
+                                {{-- <p class="question-info">
+                                     HAS A DOCTOR'S NOTE OR COURT ORDER SAYING THAT THEY ARE NOT ABLE TO GIVE CONSENT
+                                 </p>--}}
                             </div>
                             <div class="question-column">
-                                <div class="question-comment">
-                                    <input type="text" class="question-comment__field"
-                                           value="{{$item->nta['doctors_note']}}"
-                                           placeholder="Comment">
-                                </div>
+                                <p class="question-info">{{$item->nta['doctors_note']}}</p>
 
                             </div>
                         </div>
@@ -180,84 +157,72 @@
                                 <h2 class="ordinaryTitle">
                                     Night Time
                                 </h2>
-                                <p class="question-info">
-                                    WHAT TIME WOULD THEY LIKE SOMEONE TO COME AND HELP?
-                                </p>
+                                {{-- <p class="question-info">
+                                     WHAT TIME WOULD THEY LIKE SOMEONE TO COME AND HELP?
+                                 </p>--}}
                             </div>
-                            <div class="question-column">
-                                <div class="formField formField--full">
-                                    <div class="fieldWrap">
-                                        {{$item->nta['Time would they like someone']}}
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    @endif
-                    @if(!empty($item->nta['Needs assistance keeping safe at night']))
-                        <div class="question-row">
                             <div class="question-column">
                                 <p class="question-info">
-                                    NEEDS ASSISTANCE KEEPING SAFE AT NIGHT
+                                    {{$item->nta['Time would they like someone']}}
                                 </p>
                             </div>
-                            <div class="question-column">
-
-                                <div class="question-comment">
-                                    <input type="text" class="question-comment__field"
-                                           value="{{$item->nta['Needs assistance keeping safe at night']}}"
-                                           placeholder="Comment">
-                                </div>
-
-                            </div>
                         </div>
-                    @endif
-                    @if(!empty($item->nta['Needs the assistance of more than one person at a time']))
-                        <div class="question-row">
-                            <div class="question-column">
-                                <h2 class="ordinaryTitle">
-                                    other
-                                </h2>
-                                <p class="question-info">
-                                    NEEDS THE ASSISTANCE OF MORE THAN ONE PERSON AT A TIME TO ACHIEVE ANY PARTICULAR
-                                    TASK
-                                </p>
-                            </div>
-                            <div class="question-column">
-
-                                <div class="question-comment">
-                                    <input type="text" class="question-comment__field"
-                                           value="{{$item->nta['Needs the assistance of more than one person at a time']}}"
-                                           placeholder="Comment">
-                                </div>
-
-                            </div>
+                @endif
+                @if(!empty($item->nta['Needs assistance keeping safe at night']))
+                    <div class="question-row">
+                        <div class="question-column">
+                            <p class="question-info">
+                                NEEDS ASSISTANCE KEEPING SAFE AT NIGHT
+                            </p>
                         </div>
-                    @endif
-                    @if(!empty($item->nta['Are there any other medical conditions']))
-                        <div class="question-row">
-                            <div class="question-column">
-
-                                <p class="question-info">
-                                    ARE THERE ANY OTHER MEDICAL CONDITIONS, DISABILITIES, OR OTHER PIECES OF INFORMATION
-                                    NOT
-                                    ALREADY COVERED WHICH YOU FEEL MAY BE OF USE?
-                                </p>
-                            </div>
-                            <div class="question-column">
-
-                                <div class="question-comment">
-                                    <input type="text" class="question-comment__field"
-                                           value="{{$item->nta['Are there any other medical conditions']}}"
-                                           placeholder="Comment">
-                                </div>
-
-                            </div>
+                        <div class="question-column">
+                            <p class="question-info">
+                                {{$item->nta['Needs assistance keeping safe at night']}}"
+                            </p>
                         </div>
-                    @endif
-                </div>
+                    </div>
+                @endif
+                @if(!empty($item->nta['Needs the assistance of more than one person at a time']))
+                    <div class="question-row">
+                        <div class="question-column">
+                            <h2 class="ordinaryTitle">
+                                other
+                            </h2>
+                           {{-- <p class="question-info">
+                                NEEDS THE ASSISTANCE OF MORE THAN ONE PERSON AT A TIME TO ACHIEVE ANY PARTICULAR
+                                TASK
+                            </p>--}}
+                        </div>
+                        <div class="question-column">
+
+                            <p class="question-info">
+
+                                       {{$item->nta['Needs the assistance of more than one person at a time']}}
+                            </p>
+
+                        </div>
+                    </div>
+                @endif
+                @if(!empty($item->nta['Are there any other medical conditions']))
+                    <div class="question-row">
+                        <div class="question-column">
+                            <p class="question-info">
+                                ARE THERE ANY OTHER MEDICAL CONDITIONS, DISABILITIES, OR OTHER PIECES OF INFORMATION
+                                NOT
+                                ALREADY COVERED WHICH YOU FEEL MAY BE OF USE?
+                            </p>
+                        </div>
+                        <div class="question-column">
+
+                            <p class="question-info">
+                                {{$item->nta['Are there any other medical conditions']}}
+                            </p>
+
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
+</div>
 </div>
