@@ -1,5 +1,5 @@
 
-    <p class="resultHeader__info">Showing {{($countAll>=5)?$load_more_count:$countAll}} of {{$countAll}} CARERS</p>
+    <p class="resultHeader__info">Showing {{($countAll>=$load_more_count)?$load_more_count:$countAll}} of {{$countAll}} CARERS</p>
     <div class="sortLink">
         SORT BY &nbsp; <a href="#" class="sortLink__item  sort-rating"> <span> </span> rating
         </a>

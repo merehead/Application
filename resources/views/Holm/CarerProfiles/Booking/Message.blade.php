@@ -64,7 +64,7 @@
                     <div class="messageGroup">
                         <h2 class="ordinaryTitle ordinaryTitle--smaller">
                             <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                                Person needing care
+                                Please select person needing care
                             </span>
                         </h2>
                         <div class="needCareContainer">
