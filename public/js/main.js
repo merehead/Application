@@ -75,7 +75,6 @@ function calculate_price() {
 
 function carerSearchAjax(){
     var form = $('#carerSearchForm');
-    //$(form).submit();
     var token = $(form).find('input[name=_token]').val();
     if($('#load-more').val()==0){
         $('.carer-result').empty();
@@ -103,6 +102,7 @@ function carerSearchAjax(){
                 if(response.id==0)$('.moreBtn__item').hide();
                 $('#load-more').val(0);
                 $('#id-carer').val(response.id);
+                $('#page').val(response.page);
             }else{
                 $('.carer-result').append(response.html);
                 $('.Paginator').html(response.htmlHeader);
@@ -1589,6 +1589,7 @@ $(document).ready(function () {
     $('.moreLink').on('click', function (e) {
         $('#load-more').val(1);
         $('#load-count').val(parseInt($('#load-count').val())+5);
+        $('#page').val(parseInt($('#page').val())+1);
         carerSearchAjax();
     });
 

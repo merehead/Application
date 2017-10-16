@@ -134,7 +134,7 @@
                 </div>
 
                 <div class="resultHeader Paginator">
-                    <p class="resultHeader__info">Showing {{$page*$perPage}} of {{$carerResultCount}} CARERs</p>
+                    <p class="resultHeader__info">Showing {{($page*$perPage)<$countAll?$page*$perPage:$countAll}} of {{$countAll}} CARERS</p>
                     <div class="sortLink">
                         SORT BY &nbsp; <a href="#" class="sortLink__item sort-rating"> <span> </span> rating
                         </a>
@@ -212,9 +212,10 @@
                     {{--</a>--}}
                     {{--<span class="sortLink__separate"></span>--}}
                 {{--@endfor--}}
-                @if($carerResultCount>5)
+                @if($countAll>5)
                     <input type="hidden" id="id-carer" name="id" value="{{$carerResult[count($carerResult)-1]->id}}">
                     <input type="hidden" name="load-more" id="load-more" value="0">
+                    <input type="hidden" name="page" id="page" value="{{$page}}">
                     <input type="hidden" name="load-more-count" id="load-count" value="{{$load_more_count}}">
                 <div class="moreBtn moreBtn--book ">
                     <a href="" class="moreBtn__item moreBtn__item--book centeredLink moreLink">

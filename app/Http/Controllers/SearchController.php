@@ -23,10 +23,6 @@ class SearchController extends FrontController
 
     public function index(Request $request, $page = 1)
     {
-
-
-
-
         $data = [];
         $this->title = 'Holm Care - Search';
         $input = $request->all();
@@ -48,10 +44,6 @@ class SearchController extends FrontController
 
             return $this->renderOutput();
         }
-
-
-
-
 
         $load_more_count=$request->get('load-more-count',5);
         $languages = Language::all();
@@ -88,11 +80,9 @@ class SearchController extends FrontController
             $dayofweek =  date("w", mktime(0, 0, 0, $date[1], $date[0], $date[2]));
             $where .= 'inner join carer_profile_working_time cw on cw.carer_profile_id = cp.id and cw.working_times_id in ('.implode(',',$working_times[$dayofweek]).')';
         }
-
-
-            $where .= 'left join review r on cp.id=r.carer_id';
-
+        $where .= 'left join review r on cp.id=r.carer_id';
         $where .=' where registration_progress=20 and profiles_status_id=2 ';
+
         if ($request->get('gender'))
             $where .= " and cp.gender in ('" . implode("','",array_keys($request->get('gender'))) . "')";
 
@@ -120,7 +110,7 @@ class SearchController extends FrontController
             $where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('".$postCode."', POSITION(' ' IN '".$postCode."')) and  p.name = LEFT(cp.postcode, POSITION(' ' IN '".$postCode."')))>0";
         }
         if ($request->get('load-more',0)==1)
-            $where .= " and cp.id > " . $request->get('id');
+            $page = $request->get('page');
 
         $order=[];
         if ($request->get('sort-rating',0)==1)
@@ -129,13 +119,24 @@ class SearchController extends FrontController
                 $order[]='cp.id '.$request->get('sort-id-order','desc');
 
         if(empty($order))$order[]='cp.id asc';
-        $sql = 'select cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview from carers_profiles cp '.$where. ' group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview order by '.implode(',',$order);
+        $start = ($page - 1) * $perPage;
+        if($page==1) $start = 0;
+
+        $sql = 'select cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview 
+                  from carers_profiles cp '.$where. ' 
+                group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview 
+                order by '.implode(',',$order)." limit $start,$perPage";
         $carerResult = DB::select($sql);
 
         $start = (($page*$perPage)-$perPage==0)?'0':($page*$perPage)-$perPage;
-        $countAll = count(DB::select(str_replace( " and cp.id > " . $request->get('id') ,'',$sql)));
-        if(count($carerResult)<=5)$start=0;
-        $carerResultPage = array_slice($carerResult,$start,$perPage);
+        $countAllResult = DB::select('select cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview 
+                  from carers_profiles cp '.$where. ' 
+                group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview 
+                order by '.implode(',',$order));
+        $countAll=count($countAllResult);
+
+        //if(count($carerResult)<=5)$start=0;
+        $carerResultPage = $carerResult; //array_slice($carerResult,$start,$perPage);
         $this->vars = array_add($this->vars, 'carerResult', $carerResultPage);
         $this->vars = array_add($this->vars, 'perPage', $perPage);
         $this->vars = array_add($this->vars, 'carerResultCount', count($carerResult));
@@ -156,6 +157,7 @@ class SearchController extends FrontController
                     $html='<p>Sorry Holm is not yet available in this area. Please <a href="/contact">contact us</a> to request Holm in your area. Many thanks!</p>';
                 }
             }
+            //var_dump($carerResult[count($carerResult)-1]->id);
             $htmlHeader = view(config('settings.frontTheme') . '.homePage.searchPageHeaderAjax', $this->vars)->render();
             $options = app('request')->header('accept-charset') == 'utf-8' ? JSON_UNESCAPED_UNICODE : null;
             return response()->json(array(
@@ -164,7 +166,9 @@ class SearchController extends FrontController
                 'html' => $html,
                 'post_'=>$post_,
                 'sql' => $sql,
-                'id'=>(count($carerResult)>5)?$carerResultPage[count($carerResultPage)-1]->id:0,
+                'start'=>$start,
+                'page'=>$page,
+                'id'=>(ceil($countAll/$perPage)>$page)?$carerResult[count($carerResult)-1]->id:0,
                 'count' => count($carerResult),
                 'countAll' => $countAll,
                 'htmlHeader' => $htmlHeader), 200, [$options]);
