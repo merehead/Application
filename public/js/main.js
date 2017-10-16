@@ -77,8 +77,10 @@ function carerSearchAjax(){
     var form = $('#carerSearchForm');
     //$(form).submit();
     var token = $(form).find('input[name=_token]').val();
-    if($('#load-more').val()==0)
+    if($('#load-more').val()==0){
         $('.carer-result').empty();
+        $('#load-count').val(5);
+    }
     $('#loader-search').show();
     $('.error-text').hide();
     $('.moreBtn__item').hide();

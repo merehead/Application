@@ -134,7 +134,7 @@ class SearchController extends FrontController
 
         $start = (($page*$perPage)-$perPage==0)?'0':($page*$perPage)-$perPage;
         $countAll = count(DB::select(str_replace( " and cp.id > " . $request->get('id') ,'',$sql)));
-        if(count($carerResult)==1)$start=0;
+        if(count($carerResult)<=5)$start=0;
         $carerResultPage = array_slice($carerResult,$start,$perPage);
         $this->vars = array_add($this->vars, 'carerResult', $carerResultPage);
         $this->vars = array_add($this->vars, 'perPage', $perPage);
@@ -164,7 +164,7 @@ class SearchController extends FrontController
                 'html' => $html,
                 'post_'=>$post_,
                 'sql' => $sql,
-                'id'=>(count($carerResultPage)-1>0)?$carerResultPage[count($carerResultPage)-1]->id:0,
+                'id'=>(count($carerResult)>5)?$carerResultPage[count($carerResultPage)-1]->id:0,
                 'count' => count($carerResult),
                 'countAll' => $countAll,
                 'htmlHeader' => $htmlHeader), 200, [$options]);
