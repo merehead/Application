@@ -376,6 +376,21 @@ function scale(block) {
         }
     }
 }
+$(document).ready(function () {
+
+
+    $('#add-login-popup').on('click', function (){
+        $('#login-popup').modal('hide');
+        $('#login').modal('show');
+        $("body").addClass("modal-open");
+    });
+
+    $('#add-signin-popup').on('click', function (){
+        $('#login-popup').modal('hide');
+        $('#signUpdiv').modal('show');
+    });
+
+});
 // -- Document events ---------------
 $(document).ready(function () {
 
