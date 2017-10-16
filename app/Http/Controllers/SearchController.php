@@ -92,7 +92,7 @@ class SearchController extends FrontController
 
             $where .= 'left join review r on cp.id=r.carer_id';
 
-        $where .=' where registration_progress=20';
+        $where .=' where registration_progress=20 and profiles_status_id=2 ';
         if ($request->get('gender'))
             $where .= " and cp.gender in ('" . implode("','",array_keys($request->get('gender'))) . "')";
 
@@ -126,7 +126,7 @@ class SearchController extends FrontController
         if ($request->get('sort-rating',0)==1)
             $order[]='avg_total '.$request->get('sort-rating-order','asc');
         if ($request->get('sort-id',0)==1)
-                $order[]='cp.id '.$request->get('sort-id-order','asc');
+                $order[]='cp.id '.$request->get('sort-id-order','desc');
 
         if(empty($order))$order[]='cp.id asc';
         $sql = 'select cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview from carers_profiles cp '.$where. ' group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview order by '.implode(',',$order);
@@ -134,7 +134,7 @@ class SearchController extends FrontController
 
         $start = (($page*$perPage)-$perPage==0)?'0':($page*$perPage)-$perPage;
         $countAll = count(DB::select(str_replace( " and cp.id > " . $request->get('id') ,'',$sql)));
-        if(count($carerResult)==1)$start=0;
+        if(count($carerResult)<=5)$start=0;
         $carerResultPage = array_slice($carerResult,$start,$perPage);
         $this->vars = array_add($this->vars, 'carerResult', $carerResultPage);
         $this->vars = array_add($this->vars, 'perPage', $perPage);
@@ -164,7 +164,7 @@ class SearchController extends FrontController
                 'html' => $html,
                 'post_'=>$post_,
                 'sql' => $sql,
-                'id'=>(count($carerResultPage)-1>0)?$carerResultPage[count($carerResultPage)-1]->id:0,
+                'id'=>(count($carerResult)>5)?$carerResultPage[count($carerResultPage)-1]->id:0,
                 'count' => count($carerResult),
                 'countAll' => $countAll,
                 'htmlHeader' => $htmlHeader), 200, [$options]);
