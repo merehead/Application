@@ -56,11 +56,6 @@ From £ 12</span><span class="hourPrice__timing">/hour</span>
         </div>
 
 
-        <div class="ityuio">
-            <a href="#" class="yluyl  yli" data-toggle="modal" data-target="#login-popup">
-                book carer
-            </a>
-        </div>
 
 
     @endif

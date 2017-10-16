@@ -381,22 +381,30 @@ function scale(block) {
 $(document).ready(function () {
 
 
+/*    $('#login').modal().on('shown', function(){
+        $('body').css('overflow', 'hidden');
+    }).on('hidden', function(){
+        $('body').css('overflow', 'auto');
+    })*/
+
+
     $('#add-login-popup').on('click', function (){
+
+        //$('#login-popup').modal('hide');
+
         $('#login-popup').modal('hide');
 
-
-        $('#login').modal().on('show',function(){
-            $('body').css('overflow', 'hidden');
-        });
+        $('#login').modal('show');
 
 
 
-        //$("body").addClass("modal-open");
     });
 
     $('#add-signin-popup').on('click', function (){
         $('#login-popup').modal('hide');
+
         $('#signUpdiv').modal('show');
+
     });
 
 });
