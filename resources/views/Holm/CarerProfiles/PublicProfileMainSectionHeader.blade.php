@@ -15,10 +15,5 @@
 
         </a>
     </div>
-<!--    <div class="backBtn">-->
-<!--        <a href="SearchPage.html" class="backBtn__item ">-->
-<!--            <i class="fa fa-arrow-left"></i>-->
-<!--            BACK TO SEARCH RESULTS-->
-<!--        </a>-->
-<!--    </div>-->
+
 </div>

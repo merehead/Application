@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\MailError;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Swift_TransportException;
 
@@ -51,25 +53,40 @@ class ReferNewUserController extends FrontController
             $emails = $request->get('email');
             foreach ($emails as $email) {
 
+                $text = view(config('settings.frontTheme') . '.emails.invite')->with([
+                    'user' => $this->user,
+                ])->render();
 
-                try {
-                    Mail::send(config('settings.frontTheme') . '.emails.invite',
-                        ['user' => $this->user,
-                        ],
-                        function ($m) use ($email) {
-                            $m->to($email)->subject('Join Holm and receive £100');
-                        });
-                } catch (Swift_TransportException $STe) {
-
-                    $error = MailError::create([
-                        'error_message' => $STe->getMessage(),
-                        'function' => __METHOD__,
-                        'action' => 'Try to sent invite',
-                        'user_id' => $user->id
-                    ]);
-                }
+                DB::table('mails')
+                    ->insert(
+                        [
+                            'email' =>$email,
+                            'subject' =>'Join Holm and receive £100',
+                            'text' =>$text,
+                            'time_to_send' => Carbon::now()->addHour(),
+                            'status'=>'new'
+                        ]);
             }
         }
-        return redirect()->back();
+        return redirect(route('thankForInvite'));
+    }
+
+    public function show(){
+        //thank you page
+        $this->template = config('settings.frontTheme') . '.templates.purchaserPrivateProfile';
+
+        $this->title = 'Thank you for invite new user';
+
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
+        $this->content = view(config('settings.frontTheme') . '.referUser.thank')->with($this->vars)->render();
+
+        return $this->renderOutput();
     }
 }

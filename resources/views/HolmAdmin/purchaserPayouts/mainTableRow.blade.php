@@ -1,10 +1,10 @@
 <tr>
-    <td>
+{{--    <td>
 
     </td>
     <td>
 
-    </td>
+    </td>--}}
     <td class="for-inner">
         <table class="innerTable ">
             <tr>

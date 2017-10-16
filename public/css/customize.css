@@ -649,10 +649,14 @@ label.correct2 {
     content: '\2713';
     position: absolute;
     top: 3px;
-    left: 13px;
+    left: 2px;
     font-size: 18px;
     line-height: .8;
     color: #80cb2d;
     -webkit-transition: all .2s;
     transition: all .2s;
+}
+
+.close {
+    opacity: 0.9;
 }

@@ -114,23 +114,20 @@ class User extends Authenticatable
         }
         return false;
     }
+
     public function isReregistrationCompleted()
     {
-
-
-
         if ($this->user_type_id == 3) { //carer
-            if ($this->userCarerProfile->registration_progress == '20') {
+            if ($this->userCarerProfile->registration_status != 'new') {
                 return true;
             }
         }
         if ($this->user_type_id == 1) { //purchaser
-            if ($this->userPurchaserProfile->registration_progress == '4_1_2_1') {
+            if ($this->userPurchaserProfile->registration_status != 'new') {
                 //return true;
                 return true;
             }
         }
-
         return false;
     }
 
@@ -148,6 +145,19 @@ class User extends Authenticatable
         }
     }
 
+    public function getFirstNameAttribute(){
+        switch ($this->user_type_id){
+            case 1:
+                $profile = $this->userPurchaserProfile()->first();
+                return $profile->first_name;
+                break;
+            case 3:
+                $profile = $this->userCarerProfile()->first();
+                return $profile->first_name;
+                break;
+        }
+    }
+
     public function getBonusBalanceAttribute(){
         return 2000;
     }
@@ -160,6 +170,18 @@ class User extends Authenticatable
                 return '/carer/profile/'.$this->id;
                 break;
         }
+    }
+
+
+    public function getAccountStatusAttribute() {
+
+        //check for blocking purchaser account
+
+        if ($this->isPurchaser() && $this->userPurchaserProfile->profiles_status_id==5)
+            return 'blocked';
+
+        return;
+
     }
 
     /*

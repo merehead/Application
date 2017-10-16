@@ -2,6 +2,9 @@
     <div class="login" style="position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
         <div class="login__header">
             <h2>Are You</h2>
+            <a href="#" data-dismiss="modal" class="close closeModal">
+                <i class="fa fa-times"></i>
+            </a>
             {{--        <a href="/close" class="closeModal"
                        onclick="event.preventDefault();document.getElementById('sign_up_div').style.display = 'none';">
                         <i class="fa fa-times"></i>
@@ -24,6 +27,9 @@
 
         <div class="login__header">
             <h2>login</h2>
+            <a href="#" data-dismiss="modal" class="close closeModal">
+                <i class="fa fa-times"></i>
+            </a>
             {{--        <a href="/close" class="closeModal"
                        onclick="event.preventDefault();document.getElementById('login').style.display = 'none';">
                         <i class="fa fa-times"></i>

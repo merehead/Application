@@ -67,7 +67,7 @@
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-                            Thank you for registering with Holm.
+                            Thank you for registering with Holm.<br /> <br />
                             Your account has been created and is now being checked. We will contact you if we need any
                             further information, or would like to discuss matters further.
                             <br /><br />

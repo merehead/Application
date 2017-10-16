@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Language;
 use App\AssistanceType;
@@ -23,12 +24,35 @@ class SearchController extends FrontController
     public function index(Request $request, $page = 1)
     {
 
+
+
+
         $data = [];
-        $this->title = 'Holm Care - Saerch';
+        $this->title = 'Holm Care - Search';
         $input = $request->all();
         $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
         $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
         $modals = view(config('settings.frontTheme') . '.includes.modals')->render();
+
+        $this->vars = array_add($this->vars, 'header', $header);
+        $this->vars = array_add($this->vars, 'footer', $footer);
+        $this->vars = array_add($this->vars, 'modals', $modals);
+
+
+        $user = Auth::user();
+
+        if ($user && $user->isPurchaser() && $user->account_status == 'blocked') {
+
+            $content = view(config('settings.frontTheme') . '.homePage.sorryPageForBlockedPurchaser')->render();
+            $this->vars = array_add($this->vars, 'content', $content);
+
+            return $this->renderOutput();
+        }
+
+
+
+
+
         $load_more_count=$request->get('load-more-count',5);
         $languages = Language::all();
         $this->vars = array_add($this->vars, 'languages', $languages);

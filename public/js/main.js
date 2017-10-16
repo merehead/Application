@@ -376,6 +376,28 @@ function scale(block) {
         }
     }
 }
+$(document).ready(function () {
+
+
+    $('#add-login-popup').on('click', function (){
+        $('#login-popup').modal('hide');
+
+
+        $('#login').modal().on('show',function(){
+            $('body').css('overflow', 'hidden');
+        });
+
+
+
+        //$("body").addClass("modal-open");
+    });
+
+    $('#add-signin-popup').on('click', function (){
+        $('#login-popup').modal('hide');
+        $('#signUpdiv').modal('show');
+    });
+
+});
 // -- Document events ---------------
 $(document).ready(function () {
 
@@ -387,31 +409,6 @@ $(document).ready(function () {
         $('body').toggleClass('no-scrolling');
 
     });
-
-//
-//     $('#timepicker1').timepicker({
-//         timeFormat: 'h:mm p',
-//         interval: 30,
-//         //minTime: '10',
-//         //maxTime: '6:00pm',
-//         //defaultTime: '18',
-//         startTime: '18:00',
-//         dynamic: true,
-//         dropdown: true,
-//         scrollbar: true
-//     });
-//
-//     $('#timepicker2').timepicker({
-//         timeFormat: 'h:mm p',
-//         interval: 30,
-// //minTime: '10',
-// //maxTime: '6:00pm',
-// //defaultTime: '18',
-//         startTime: '18:00',
-//         dynamic: true,
-//         dropdown: true,
-//         scrollbar: true
-//     });
 
     $('.onlyNumber').on('keyup', function () {
         $('.error-onlyNumber').remove();
@@ -450,6 +447,24 @@ $(document).ready(function () {
     //         that.value = that.value.replace(/^07[0-9]$/, '07');
     //     }
     // });
+
+    $(".digitFilter").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+            // Allow: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+
 
     // Иван функция уменшает автоматом шрифт у имени пользователя в шапке
     if ($('.profileName').lenght > 0)
@@ -693,6 +708,67 @@ $(document).ready(function () {
             $(uc).hide();
         }
     });
+
+    //step8 carer registration transport
+    if ($('#regCarerSt8_driving_licence').length > 0) {
+        if ($('#regCarerSt8_driving_licence').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_driving_licence').show();
+        } else {
+            $('.dependFrom_regCarerSt8_driving_licence').hide();
+            $('.dependFrom_regCarerSt8_have_car').hide();
+        }
+    }
+    $(document).on('change', '#regCarerSt8_driving_licence', function () {
+        if ($('#regCarerSt8_driving_licence').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_driving_licence').show();
+            if ($('#regCarerSt8_have_car').val() == "Yes") {
+                $('.dependFrom_regCarerSt8_have_car').show();
+            }
+            if ($('#regCarerSt8_use_car').val() == "Yes" && $('#regCarerSt8_have_car').val() == "Yes") {
+                $('.dependFrom_regCarerSt8_use_car').show();
+            }
+        } else {
+            $('.dependFrom_regCarerSt8_driving_licence').hide();
+            $('.dependFrom_regCarerSt8_have_car').hide();
+            $('.dependFrom_regCarerSt8_use_car').hide();
+        }
+    });
+
+    if ($('#regCarerSt8_have_car').length > 0) {
+        if ($('#regCarerSt8_have_car').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_have_car').show();
+        } else {
+            $('.dependFrom_regCarerSt8_have_car').hide();
+
+        }
+    }
+    $(document).on('change', '#regCarerSt8_have_car', function () {
+        if ($('#regCarerSt8_have_car').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_have_car').show();
+            if ($('#regCarerSt8_use_car').val() == "Yes") {
+                $('.dependFrom_regCarerSt8_use_car').show();
+            }
+        } else {
+            $('.dependFrom_regCarerSt8_have_car').hide();
+            $('.dependFrom_regCarerSt8_use_car').hide();
+        }
+    });
+    if ($('#regCarerSt8_use_car').length > 0) {
+        if ($('#regCarerSt8_use_car').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_use_car').show();
+        } else {
+            $('.dependFrom_regCarerSt8_use_car').hide();
+
+        }
+    }
+    $(document).on('change', '#regCarerSt8_use_car', function () {
+        if ($('#regCarerSt8_use_car').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_use_car').show();
+        } else {
+            $('.dependFrom_regCarerSt8_use_car').hide();
+        }
+    });
+    //^^^^^^step8 carer registration transport
 
     $('.text-limit').parent().css('margin-right', 0);
     $('.text-limit').parent().css('position', 'relative');
@@ -1013,7 +1089,7 @@ $(document).ready(function () {
     });
 
 
-    $( "textarea, .countable" ).focus(function() {
+    $( "textarea, .countable" ).not('.doNotCount').focus(function() {
         var maxLenght = $( this ).attr('maxlength');
         var currentLength = $( this ).val().length;
         var symbolsLeft = maxLenght - currentLength;
@@ -1561,17 +1637,21 @@ $(document).ready(function () {
     });
 
     $('#theCarousel1').on('slide.bs.carousel', function () {
+      var _this = $(this)
       var data_id = $('#theCarousel_users').children()
       var peopleBox = $('.peopleBox').children()
       $(this).removeClass('active')
-      current_id = parseInt($(this).find('.active').attr('id').replace(/[^1-9]/g, '')) + 1
 
       peopleBox.removeClass('activeImg')
-      $.each( data_id, function( key, value ) {
-        if(parseInt($(this).attr('data-id')) === current_id){
-          $(this).children().addClass('activeImg')
-        }
-      });
+
+      setTimeout(function () {
+        current_id = parseInt(_this.find('.active').attr('id').replace(/[^1-9]/g, ''))
+        $.each( data_id, function( key, value ) {
+          if(parseInt($(this).attr('data-id')) === current_id){
+            $(this).children().addClass('activeImg')
+          }
+        });
+      }, 800)
     })
 
     $(".toggler").click(function (e) {
