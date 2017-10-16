@@ -79,3 +79,4 @@ array('class' =>  'customCheckbox ccf '.$workingTimes[0]->css_name,'id'=>'checkD
         </div>
     </div>
 </div>
+{!! Form::close()!!}
