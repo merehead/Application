@@ -37,7 +37,24 @@
             <div class="carousel-inner carousel-inner1">
                 <div class="item active">
                     <div class="testimonialsPeople" id="theCarousel_users">
-                        <a href="#" class="peopleBox" data-id="1">
+
+                        @foreach($carers as $carer)
+                            <a href="#" class="peopleBox" data-id="1">
+                                <div class="profilePhoto peopleBox__photo activeImg">
+                                    <img src="/img/profile_photos/{{$carer->id}}.png" onerror="this
+            .src='/img/no_photo.png'" alt="avatar">
+                                </div>
+                                <div class="peopleBox__info">
+                                    <h2 class="profileName">{{$carer->first_name}}&nbsp;{{mb_substr($carer->family_name,0,1)}}.</h2>
+                                    <div class="people_quote">
+                                        I got to choose who looked after my mother, and she loves her carer.
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+
+
+                        {{--<a href="#" class="peopleBox" data-id="1">
                             <div class="profilePhoto peopleBox__photo activeImg">
                                 <img src="/img/Annie_B.png" alt="">
                             </div>
@@ -69,7 +86,7 @@
                                     Holm helped me find great care and we saved so much. Now we can buy more care for our money.
                                 </div>
                             </div>
-                        </a>
+                        </a>--}}
                     </div>
                 </div>
 

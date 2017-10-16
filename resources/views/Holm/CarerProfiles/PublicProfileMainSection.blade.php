@@ -248,13 +248,13 @@ $documents['other_relevant_qualification']->count()>0)
                 @if($carerProfile->have_car=='Yes')
                 <p class="advantage_label">
                     <i class="fa fa-check "></i>
-                    have a car for work
+                    has a car for work
                 </p>
                 @endif
                     @if($carerProfile->driving_licence=='Yes')
                 <p class="advantage_label">
                     <i class="fa fa-check "></i>
-                    have UK/EEA Driving Licence
+                    has a UK/EEA Driving Licence
                 </p>
                     @endif
             </div>

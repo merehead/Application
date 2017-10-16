@@ -96,6 +96,44 @@ class Appointment extends Model implements Constants
         return $price;
     }
 
+    public function getCarerPriceAttribute(){
+        $price = 0;
+        $timeFrom = round($this->time_from);
+        $timeTo = round($this->time_to);
+        if($timeTo > $timeFrom){
+            for($i = $timeFrom; $i < $timeTo; $i++){
+                $price += $this->getCarerHourPrice($i, $this->date_start);
+            }
+        } else {
+            for($i = $timeFrom; $i < 24; $i++){
+                $price += $this->getCarerHourPrice($i, $this->date_start);
+            }
+            for($i = 0; $i < $timeTo; $i++){
+                $price += $this->getCarerHourPrice($i, $this->date_start);
+            }
+        }
+        return $price;
+    }
+
+    public function getPurchaserPriceAttribute(){
+        $price = 0;
+        $timeFrom = round($this->time_from);
+        $timeTo = round($this->time_to);
+        if($timeTo > $timeFrom){
+            for($i = $timeFrom; $i < $timeTo; $i++){
+                $price += $this->getPurchaserHourPrice($i, $this->date_start);
+            }
+        } else {
+            for($i = $timeFrom; $i < 24; $i++){
+                $price += $this->getPurchaserHourPrice($i, $this->date_start);
+            }
+            for($i = 0; $i < $timeTo; $i++){
+                $price += $this->getPurchaserHourPrice($i, $this->date_start);
+            }
+        }
+        return $price;
+    }
+
     private function getHourPrice(int $hour, $date) : float {
         $user = Auth::user();
         $userType = ($user && $user->user_type_id == 3 ? 'CARER' : 'PURCHASER');
@@ -107,6 +145,34 @@ class Appointment extends Model implements Constants
             return constant('self::'.$userType.'_RATE_DAY');
         }
     }
+
+    private function getCarerHourPrice(int $hour, $date) : float {
+
+        if ($this->isDayHoliday($date)) {
+            return constant('self::CARER_RATE_HOLIDAYS');
+        } elseif($this->isHourNight($hour)){
+            return constant('self::CARER_RATE_NIGHT');
+        } else {
+            return constant('self::CARER_RATE_DAY');
+        }
+    }
+
+    private function getPurchaserHourPrice(int $hour, $date) : float {
+
+        if ($this->isDayHoliday($date)) {
+            return constant('self::PURCHASER_RATE_HOLIDAYS');
+        } elseif($this->isHourNight($hour)){
+            return constant('self::PURCHASER_RATE_NIGHT');
+        } else {
+            return constant('self::PURCHASER_RATE_DAY');
+        }
+    }
+
+
+
+
+
+
 
     public function getIsPastAttribute(){
         return \Carbon\Carbon::parse(date("Y-m-d ", strtotime($this->date_start)).' '.$this->time_from)->isPast();

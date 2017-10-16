@@ -49,6 +49,20 @@ class PurchasersProfile extends Model
 
         return $data;
     }
+
+    /**
+     * @return boolean
+     */
+
+    public function getIsUncompletedServiceUserAttribute(){
+
+
+        if(count($this->serviceUsers) == 0) return true;
+
+        return $this->serviceUsers->contains('registration_status','new');
+
+    }
+
     /**
      * @return false
      */

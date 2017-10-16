@@ -63,11 +63,30 @@ class ReferNewUserController extends FrontController
                             'email' =>$email,
                             'subject' =>'Join Holm and receive £100',
                             'text' =>$text,
-                            'time_to_send' => Carbon::now(),
+                            'time_to_send' => Carbon::now()->addHour(),
                             'status'=>'new'
                         ]);
             }
         }
-        return redirect()->back();
+        return redirect(route('thankForInvite'));
+    }
+
+    public function show(){
+        //thank you page
+        $this->template = config('settings.frontTheme') . '.templates.purchaserPrivateProfile';
+
+        $this->title = 'Thank you for invite new user';
+
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $this->vars = array_add($this->vars,'header',$header);
+        $this->vars = array_add($this->vars,'footer',$footer);
+        $this->vars = array_add($this->vars,'modals',$modals);
+
+        $this->content = view(config('settings.frontTheme') . '.referUser.thank')->with($this->vars)->render();
+
+        return $this->renderOutput();
     }
 }

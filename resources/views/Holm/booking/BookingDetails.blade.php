@@ -322,7 +322,7 @@
                             <a name="comments"></a>
                             Your Message
                         </h2>
-                        <textarea name="message" class="messageBox__item"  placeholder="Type your message"></textarea>
+                        <textarea name="message" class="messageBox__item doNotCount"  placeholder="Type your message"></textarea>
                         <div class="roundedBtn roundedBtn--center">
                             <button type="submit" class=" roundedBtn__item roundedBtn__item--send
                       roundedBtn__item--smaller">

@@ -93,16 +93,19 @@ From £ 12</span><span class="hourPrice__timing">/hour</span>
     </h2>
 </div>
 
-<div class="profileSide__title {{--hidden--}}">
+
+
+@if(count($reviews))
+
+    <div class="profileSide__title {{--hidden--}}">
     <h2 class="profileTitle">
         reviews
     </h2>
 </div>
 
 
-{{--{{dd($reviews)}}--}}
+    {{--{{dd($reviews)}}--}}
 
-@if(count($reviews))
     @foreach($reviews as $review)
 
         <div class="review {{--hidden--}}">

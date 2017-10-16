@@ -123,6 +123,24 @@ class Booking extends Model
         return round($price, 2);
     }
 
+    public function getCarerPriceAttribute(){
+        $price = 0;
+        $appointments = $this->appointments()->get();
+        foreach ($appointments as $appointment)
+            $price += $appointment->carer_price;
+
+        return round($price, 2);
+    }
+
+    public function getPurchaserPriceAttribute(){
+        $price = 0;
+        $appointments = $this->appointments()->get();
+        foreach ($appointments as $appointment)
+            $price += $appointment->purchaser_price;
+
+        return round($price, 2);
+    }
+
     public function getCarerAmountAttribute(){
         return $this->hours * $this->purchaser_rate;
     }

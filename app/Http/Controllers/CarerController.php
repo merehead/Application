@@ -41,7 +41,13 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars,'footer',$footer);
         $this->vars = array_add($this->vars,'modals',$modals);
 
-        $this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
+
+        $carers = CarersProfile::orderBy('id', 'desc')
+            ->take(3)
+            ->get();
+        $this->vars = array_add($this->vars,'carers',$carers);
+
+        $this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->with($this->vars)->render();
         return $this->renderOutput();
     }
 

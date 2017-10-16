@@ -118,6 +118,7 @@ Route::get('/user-registration-completed/{id}', 'ServiceUserRegistrationControll
 
 Route::get('/invite/refer-users', 'ReferNewUserController@index')->name('inviteReferUsers');
 Route::post('/invite/refer-users', 'ReferNewUserController@create')->name('inviteReferUsersPost');
+Route::get('/invite/thank-you', 'ReferNewUserController@show')->name('thankForInvite');
 
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {

@@ -185,12 +185,15 @@ class BookingsController extends FrontController implements Constants
         $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
         //message for carer
 
+        $text = view(config('settings.frontTheme') . '.emails.new_booking')->with([
+            'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'carer'
+        ])->render();
 
         DB::table('mails')
             ->insert(
                 [
-                    'email' =>'info@holm.care',
-                    'subject' =>$input['topic'],
+                    'email' =>$carerProfile->email,
+                    'subject' =>'New booking on HOLM',
                     'text' =>$text,
                     'time_to_send' => Carbon::now(),
                     'status'=>'new'
@@ -199,7 +202,7 @@ class BookingsController extends FrontController implements Constants
 
 
 
-        try {
+/*        try {
             Mail::send(config('settings.frontTheme') . '.emails.new_booking',
                 ['$purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'carer'],
                 function ($m) use ($carerProfile) {
@@ -213,9 +216,26 @@ class BookingsController extends FrontController implements Constants
                 'action' => 'Try to sent new_booking to carer',
                 'user_id' => $carerProfile->id
             ]);
-        }
+        }*/
+
+
         //message for purchaser
-        try {
+        $text = view(config('settings.frontTheme') . '.emails.new_booking')->with([
+            'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'purchaser'
+        ])->render();
+
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>$purchaserProfile->email,
+                    'subject' =>'New booking on HOLM',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
+
+
+/*        try {
             Mail::send(config('settings.frontTheme') . '.emails.new_booking',
                 ['purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'purchaser'],
                 function ($m) use ($purchaserProfile) {
@@ -229,7 +249,7 @@ class BookingsController extends FrontController implements Constants
                 'action' => 'Try to sent new_booking to purchaser',
                 'user_id' => $purchaserProfile->id
             ]);
-        }
+        }*/
 
         return response(['status' => 'success']);
     }
@@ -298,7 +318,28 @@ class BookingsController extends FrontController implements Constants
             $purchaser = PurchasersProfile::find($booking->purchaser_id);
 
 
-            try {
+            $text = view(config('settings.frontTheme') . '.emails.canceled_booking')->with([
+                'user_like_name' => $purchaser->like_name,
+                'user_name' => $carer->first_name,
+                'service_user_name' => $serviceUser->first_name,
+                'address' => $serviceUser->addresss_line1,
+                'date' => 'date',
+                'time' => 'time',
+                'booking'=>$booking,
+                'sendTo' => 'purchaser'
+            ])->render();
+
+            DB::table('mails')
+                ->insert(
+                    [
+                        'email' =>$purchaser->email,
+                        'subject' =>'Canceled booking',
+                        'text' =>$text,
+                        'time_to_send' => Carbon::now(),
+                        'status'=>'new'
+                    ]);
+
+/*            try {
                 Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
                     ['user_like_name' => $purchaser->like_name,
                         'user_name' => $carer->first_name,
@@ -320,7 +361,7 @@ class BookingsController extends FrontController implements Constants
                     'action' => 'Try to sent Canceled booking',
                     'user_id' => $user->id
                 ]);
-            }
+            }*/
         } else {
             if ($booking->carer_status_id == self::COMPLETED) {
                 $booking->status_id = self::DISPUTE;
@@ -335,7 +376,28 @@ class BookingsController extends FrontController implements Constants
 
                 //dd($booking,$carer,$serviceUser,$purchaser);
 
-                try {
+                $text = view(config('settings.frontTheme') . '.emails.canceled_booking')->with([
+                    'user_like_name' => $carer->like_name,
+                    'user_name' => $purchaser->first_name,
+                    'service_user_name' => $serviceUser->first_name,
+                    'address' => $serviceUser->addresss_line1,
+                    'date' => 'date',
+                    'time' => 'time',
+                    'booking'=>$booking,
+                    'sendTo' => 'carer'
+                ])->render();
+
+                DB::table('mails')
+                    ->insert(
+                        [
+                            'email' =>$user->email,
+                            'subject' =>'Canceled booking',
+                            'text' =>$text,
+                            'time_to_send' => Carbon::now(),
+                            'status'=>'new'
+                        ]);
+
+               /* try {
                     Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
                         ['user_like_name' => $carer->like_name,
                             'user_name' => $purchaser->first_name,
@@ -357,7 +419,7 @@ class BookingsController extends FrontController implements Constants
                         'action' => 'Try to sent Canceled booking',
                         'user_id' => $user->id
                     ]);
-                }
+                }*/
             }
 
         }

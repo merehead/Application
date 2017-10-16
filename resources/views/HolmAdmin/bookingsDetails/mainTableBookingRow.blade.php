@@ -59,9 +59,9 @@
                 <td class=" ">
                    <span>{{$booking->date_end}}</span>
                 </td>
-                <td class=" ">
+{{--                <td class=" ">
                     <span>frequency->name</span>
-                </td>
+                </td>--}}
                 <td class=" ">
                     <div class="profStatus profStatus--left">
                        <span class="profStatus__item profStatus__item--{{$booking->bookingStatus->css_name}}">{{$booking->bookingStatus->name}}</span>
