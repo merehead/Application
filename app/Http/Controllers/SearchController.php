@@ -92,7 +92,7 @@ class SearchController extends FrontController
 
             $where .= 'left join review r on cp.id=r.carer_id';
 
-        $where .=' where registration_progress=20';
+        $where .=' where registration_progress=20 and profiles_status_id=2 ';
         if ($request->get('gender'))
             $where .= " and cp.gender in ('" . implode("','",array_keys($request->get('gender'))) . "')";
 
