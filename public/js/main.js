@@ -1494,6 +1494,15 @@ $(document).ready(function () {
         return false;
     });
 
+    $(document).on('click','#confirm-terms',function(){
+        if ($(this).is(':checked')) {
+            $('#book-carer').prop('disabled',false);
+        }
+        else{
+            $('#book-carer').prop('disabled',true);
+
+        }
+    });
     if ($("#checkL12").is(':checked')) {
         $(".language_additional").show();
     } else {

@@ -123,7 +123,7 @@
                             </h2>
                             <div class="messageInputs datetime ">
                                 <div class="messageInputs__field messageDate">
-                                    <input  onchange="calculate_price()" type="text" name="bookings[0][appointments][0][date_start]"
+                                    <input  onchange="calculate_price()" type="text" name="bookings[0][appointments][0][date_start]" required
                                            class="messageInput datepicker datepicker_message" placeholder="06.06.2017 ">
 
                                     <a href="#" class="messageIco centeredLink">
@@ -133,7 +133,7 @@
                                 <label class="checkBox_item correct2" for="date_end">Start</label>
 
                                 <div class="messageInputs__field messageTime ">
-                                    <input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_from"
+                                    <input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_from" required
                                            name="bookings[0][appointments][0][time_from]" placeholder="1:30 PM"
                                            value="">
                                     <a href="#" class="messageIco centeredLink">
@@ -151,7 +151,7 @@
 
                                 <label class="checkBox_item correct2" for="date_end">End</label>
                                 <div class="messageInputs__field messageTime ">
-                                    <input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_bed"
+                                    <input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_bed" required
                                            name="bookings[0][appointments][0][time_to]" placeholder="3:30 PM"
                                            value="">
                                     <a href="#" class="messageIco centeredLink">
@@ -194,7 +194,7 @@
                                     </a>
                                 </div>
                                 <div class="checkBox_item nhide">
-                                    <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single"
+                                    <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single" required
                                            class="customCheckbox periodicity Single"
                                            id="boxD3">
                                     <label for="boxD3">Single</label>
@@ -217,7 +217,9 @@
                 <div class="message__footer">
                     <div class="messageTotal">
                         <div class="bookBtn">
-                            <button type="submit"
+                            <input type="checkbox" class="customCheckbox" name="confirm-terms" id="confirm-terms" required>
+                            <label for="confirm-terms">I accept Holm’s <a href="{{route('TermsPage')}}" target="_blank">Terms & Conditions</a> for this booking</label>
+                            <button type="submit" disabled id="book-carer"
                                     class="bookBtn__item bookBtn__item--big centeredLink">
                                 book carer
                             </button>
