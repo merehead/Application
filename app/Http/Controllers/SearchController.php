@@ -176,7 +176,7 @@ class SearchController extends FrontController
         }
     }
     private function isExsistPostCode($postCode){
-        $sql = "select count(*) as ctn from postcodes p where p.name = left('".$postCode."', LENGTH(p.name)) and left('".$postCode."', LENGTH(p.name))='".$postCode."'";
+        $sql = "select count(*) as ctn from postcodes p where p.name = LEFT('".$postCode."', POSITION(' ' IN '".$postCode."'))";
         $carerResult = DB::select($sql);//dd($carerResult[0]->ctn>0);
         return $carerResult[0]->ctn>0;
     }
