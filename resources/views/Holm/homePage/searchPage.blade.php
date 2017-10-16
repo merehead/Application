@@ -117,7 +117,7 @@
             </div>
             <div class="col-sm-8 col-md-9">
                 <div class="filterHead filterHead--xs-column filterBox">
-                    <a href="#" class="sortLinkXs">search by <span><i class="fa fa-angle-down"></i></span></a>
+                    <a href="#" class="sortLinkXs">sort by <span><i class="fa fa-angle-down"></i></span></a>
                     <div class="sortFilters hiddenSort hiddenSort--visible">
                         <div class="sortFilters__item">
                             {!! Form::text('postCode',(isset($requestSearch['postCode'])?$requestSearch['postCode']:''),['class'=>'sortField disable','placeholder'=>'POST CODE','maxlength'=>16,'onkeydown'=>"if(event.keyCode==13){carerSearchAjax();}"]) !!}
@@ -136,7 +136,7 @@
                 <div class="resultHeader Paginator">
                     <p class="resultHeader__info">Showing {{$page*$perPage}} of {{$carerResultCount}} CARERs</p>
                     <div class="sortLink">
-                        SEARCH BY &nbsp; <a href="#" class="sortLink__item sort-rating"> <span> </span> rating
+                        SORT BY &nbsp; <a href="#" class="sortLink__item sort-rating"> <span> </span> rating
                         </a>
                         <p> &nbsp; - &nbsp; </p>
                         <a href="#" class="sortLink__item sort-id">
