@@ -381,8 +381,15 @@ $(document).ready(function () {
 
     $('#add-login-popup').on('click', function (){
         $('#login-popup').modal('hide');
-        $('#login').modal('show');
-        $("body").addClass("modal-open");
+
+
+        $('#login').modal().on('show',function(){
+            $('body').css('overflow', 'hidden');
+        });
+
+
+
+        //$("body").addClass("modal-open");
     });
 
     $('#add-signin-popup').on('click', function (){

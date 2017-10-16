@@ -55,11 +55,13 @@ From £ 12</span><span class="hourPrice__timing">/hour</span>
             </a>
         </div>
 
-        {{--      <div class="bookBtn">
-                  <button disabled class="bookBtn__item  centeredLink" data-toggle="modal" data-target="#login-popup">
-                      book carer
-                  </button>
-              </div>--}}
+
+        <div class="ityuio">
+            <a href="#" class="yluyl  yli" data-toggle="modal" data-target="#login-popup">
+                book carer
+            </a>
+        </div>
+
 
     @endif
     <div id="login-popup" class="modal fade" role="dialog">
@@ -74,7 +76,7 @@ From £ 12</span><span class="hourPrice__timing">/hour</span>
 
                 <div class="who-you-are">
                     <p class="login-text login-text--header">
-                        if not logged in - press button
+                        Please log in or sign up before proceeding with the booking
                     </p>
                     <div class="who-you-are__box">
                         <a id="add-login-popup" href="#" class="who-you-are__item">
@@ -84,9 +86,6 @@ From £ 12</span><span class="hourPrice__timing">/hour</span>
                             signup
                         </a>
                     </div>
-                    <p class="login-text login-text--footer">
-                        Please log in or sign up before proceeding with the booking
-                    </p>
 
                 </div>
 
