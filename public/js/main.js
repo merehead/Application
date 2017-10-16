@@ -1722,6 +1722,8 @@ $(document).ready(function () {
         e.preventDefault();
         is_data_changed = true;
         $('input[name="is_data_changed"]').val(1);
+        $('#post_code_profile').autocomplete({serviceUrl:'/address/'});
+        $('#post_code_profile').autocomplete('clear');
         if (is_data_changed) {
             $('#datepicker_when_start').attr('readonly',false)
                 .datepicker({ dateFormat: "dd/mm/yy",
@@ -1761,7 +1763,7 @@ $(document).ready(function () {
 
         $('input[name="postcode"]:not(.disable),input[name="postCode"]:not(.disable),input[name="address_line1"]:not(.disable)').autocomplete({
                 serviceUrl: '/address/',
-                params: {query: $('input[name="town"]').val() + ' ' + $(this).val()},
+                params: {query: ($(this).prop('readonly')==true)?'':$('input[name="town"]').val() + ' ' + $(this).val()},
                 minChars: 1,
                 dataType: 'json',
                 onSelect: function (suggestion) {
@@ -1850,6 +1852,8 @@ $(document).ready(function () {
 
         $carer_profile.find('button.btn-success').on('click', function (e) {
             e.preventDefault();
+            $('#post_code_profile').autocomplete({serviceUrl:'/noaddress/'});
+            $('#post_code_profile').autocomplete('clear');
             is_data_changed = false;
             $('input[name="is_data_changed"]').val(0);
             if (is_data_changed) {

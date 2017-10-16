@@ -28,6 +28,13 @@ class CarerController extends FrontController implements Constants
 
     }
 
+    public function getNoAddress(){
+        $response = array();
+        $response['query'] = '';
+        $response['suggestions'] = array();
+        return response(json_encode($response),200);
+    }
+
     public function welcome()
     {
         $this->template = config('settings.frontTheme') . '.templates.ImCarer';
