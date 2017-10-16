@@ -38,7 +38,7 @@
                 <div class="item active">
                     <div class="testimonialsPeople" id="theCarousel_users">
 
-                        @foreach($carers as $carer)
+{{--                        @foreach($carers as $carer)
                             <a href="#" class="peopleBox" data-id="1">
                                 <div class="profilePhoto peopleBox__photo activeImg">
                                     <img src="/img/profile_photos/{{$carer->id}}.png" onerror="this
@@ -51,10 +51,10 @@
                                     </div>
                                 </div>
                             </a>
-                        @endforeach
+                        @endforeach--}}
 
 
-                        {{--<a href="#" class="peopleBox" data-id="1">
+                        <a href="#" class="peopleBox" data-id="1">
                             <div class="profilePhoto peopleBox__photo activeImg">
                                 <img src="/img/Annie_B.png" alt="">
                             </div>
@@ -67,7 +67,7 @@
                         </a>
                         <a href="#" class="peopleBox" data-id="2">
                             <div class="profilePhoto peopleBox__photo">
-                                <img src="/img/John_r.png" alt="">
+                                <img src="/img/John_R.png" alt="">
                             </div>
                             <div class="peopleBox__info">
                                 <h2 class="profileName">JOHN R.</h2>
@@ -86,7 +86,7 @@
                                     Holm helped me find great care and we saved so much. Now we can buy more care for our money.
                                 </div>
                             </div>
-                        </a>--}}
+                        </a>
                     </div>
                 </div>
 

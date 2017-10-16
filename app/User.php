@@ -114,11 +114,9 @@ class User extends Authenticatable
         }
         return false;
     }
+
     public function isReregistrationCompleted()
     {
-
-
-
         if ($this->user_type_id == 3) { //carer
             if ($this->userCarerProfile->registration_status != 'new') {
                 return true;
@@ -130,7 +128,6 @@ class User extends Authenticatable
                 return true;
             }
         }
-
         return false;
     }
 
@@ -173,6 +170,18 @@ class User extends Authenticatable
                 return '/carer/profile/'.$this->id;
                 break;
         }
+    }
+
+
+    public function getAccountStatusAttribute() {
+
+        //check for blocking purchaser account
+
+        if ($this->isPurchaser() && $this->userPurchaserProfile->profiles_status_id==5)
+            return 'blocked';
+
+        return;
+
     }
 
     /*
