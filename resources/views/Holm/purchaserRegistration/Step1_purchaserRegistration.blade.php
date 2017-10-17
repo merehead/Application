@@ -83,7 +83,7 @@
 
             </h2>
             <div class="inputWrap">
-                <input type="text" name="referral_code" {{(!empty($ref_code))? 'value ='.$ref_code : 'value ='.old('referral_code') }}
+                <input type="text" name="referral_code" value="{{(!empty($ref_code))? $ref_code : old('referral_code') }}"
                 class="formInput registrationForm__input" placeholder="">
 
             </div>

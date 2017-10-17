@@ -434,6 +434,7 @@ class ServiceUserRegistration
             'mobile_number' =>
                 array(
                     'required',
+                    'regex:/^0[0-9]{10}$/',
                 ),
             'address_line1' =>
                 array(
