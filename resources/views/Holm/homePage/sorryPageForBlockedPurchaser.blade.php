@@ -1,13 +1,13 @@
-<div class="registration" style="width: 66%;margin-left: 17%">
-    <div class="registration__full">
-        <div class="questionsBox">
-            <span class="regIco">
-              <i class="fa fa-ban" aria-hidden="true"></i>
-            </span>
-            <h2>Sorry </h2>
-        </div>
-        <div class="sorryBox" style="text-align: center">
-            <p class="info-p info-p--roboto">
+<section class="mainSection">
+    <div class="container">
+        <div class="sorry-page">
+        <span class="sorry-page__ico">
+          <i class="fa fa-ban" aria-hidden="true"></i>
+        </span>
+            <h2 class="sorry-page__title">
+                Sorry!
+            </h2>
+            <p class="info-p info-p--roboto ">
                 Your account was blocked by admin.
             </p>
             <p class="info-p info-p--roboto">
@@ -15,5 +15,4 @@
             </p>
         </div>
     </div>
-</div>
-
+</section>

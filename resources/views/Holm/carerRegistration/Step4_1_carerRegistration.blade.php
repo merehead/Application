@@ -1,4 +1,4 @@
-<div class="registration" style="width: 66%;margin-left: 17%">
+<div class="registration" >
     <div class="registration__full">
         <div class="questionsBox">
 

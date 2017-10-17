@@ -109,6 +109,10 @@
             <div class="bookingCard__header bookingCard__header">
                 <h2>in progress</h2>
             </div>
+
+
+
+
             @if($inProgressBookings->count() > 0)
                 @foreach($inProgressBookings as $booking)
                     <div class="bookingCard__body bookInfo">
@@ -148,6 +152,10 @@
             @else
                 <p align="center" class="bookDate">You do not have bookings yet</p>
             @endif
+
+
+
+
             @if($inProgressBookings->count() > 3)
                 <div class="moreBtn moreBtn--book ">
                     <a href="" class="moreBtn__item moreBtn__item--book centeredLink">
