@@ -219,7 +219,7 @@
                         <div class="bookBtn">
                             <input type="checkbox" class="customCheckbox" name="confirm-terms" id="confirm-terms" required>
                             <label for="confirm-terms">I accept Holm’s <a href="{{route('TermsPage')}}" target="_blank">Terms & Conditions</a> for this booking</label>
-                            <button type="submit" disabled id="book-carer"
+                            <button type="submit" disabled id="book-carer" style="margin-top: 12px;"
                                     class="bookBtn__item bookBtn__item--big centeredLink">
                                 book carer
                             </button>
