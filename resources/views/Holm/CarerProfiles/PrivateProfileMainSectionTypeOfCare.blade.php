@@ -8,13 +8,23 @@
     <span>Please <a target="_blank" href="{{route('ContactPage')}}">contact us</a> if you would like to add Dementia Care, Wounds or Medicine management. Only qualified care workers can do so.</span>
 
 </div>
-{!! Form::model($typeCare, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateTypeCare']) !!}
+{!! Form::model($carerProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateTypeCare']) !!}
 {!! Form::hidden('id',$carerProfile->id) !!}
 {!! Form::hidden('stage','carerPrivateTypeCare') !!}
+
 <div class="borderContainer">
-    @foreach(array_chunk($typeCare->all(),4) as $typeCareRow)
+    @foreach($typeServices as $service)
         <div class="profileRow">
-        @foreach($typeCareRow as $typeCare)
+            <div class="profileField profileField--fourth">
+                <div class="checbox_wrap">
+            {!! Form::checkbox('typeService['.$service->id.']', null,($carerProfile->ServicesTypes->contains('id', $service->id)? 1 : null),
+            array('class' =>'checkboxNew','id'=>'checkSr'.$service->id )) !!}
+            <label for="checkSr{{$service->id}}"> <span>{{$service->name}}</span></label>
+                </div>
+            </div>
+
+
+            @foreach($typeCares->splice(0,3) as $typeCare)
                 <div class="profileField profileField--fourth">
                     <div class="checbox_wrap">
                         {!! Form::checkbox('typeCare['.$typeCare->id.']', null,

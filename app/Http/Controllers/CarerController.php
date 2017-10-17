@@ -10,6 +10,7 @@ use App\Interfaces\Constants;
 use App\Language;
 use App\Postcode;
 use App\PurchasersProfile;
+use App\ServiceType;
 use App\ServiceUsersProfile;
 use App\User;
 use App\Document;
@@ -95,8 +96,12 @@ class CarerController extends FrontController implements Constants
             $this->vars = array_add($this->vars, 'carerProfile', $carerProfile);
             $postcodes = Postcode::all()->pluck('name', 'id')->toArray();
             $this->vars = array_add($this->vars, 'postcodes', $postcodes);
-            $typeCare = AssistanceType::all();
-            $this->vars = array_add($this->vars, 'typeCare', $typeCare);
+
+            $typeServices = ServiceType::all();
+            $this->vars = array_add($this->vars, 'typeServices', $typeServices);
+
+            $typeCares = AssistanceType::all();
+            $this->vars = array_add($this->vars, 'typeCares', $typeCares);
             $workingTimes = WorkingTime::all();
             $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
             $languages = Language::all();
@@ -157,6 +162,10 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars, 'typeCare', $typeCare);
         $typeCareAll = AssistanceType::all();
         $this->vars = array_add($this->vars, 'typeCareAll', $typeCareAll);
+
+        /*$typeServices = ServiceType::all();
+        $this->vars = array_add($this->vars, 'typeServices', $typeServices);*/
+
         $workingTimes = $carerProfile->WorkingTimes()->get();
         $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
         $languages = $carerProfile->Languages()->get();
@@ -258,9 +267,6 @@ class CarerController extends FrontController implements Constants
     public function update(Request $request)
     {
 
-
-        $depart = '';
-        //dd($request->all());
 
         $input = $request->all();
 
@@ -402,6 +408,10 @@ class CarerController extends FrontController implements Constants
 
             if (isset($input['typeCare'])) {
                 $carerProfiles->AssistantsTypes()->sync(array_keys($input['typeCare']));
+            }
+
+            if (isset($input['typeService'])) {
+                $carerProfiles->ServicesTypes()->sync(array_keys($input['typeService']));
             }
 
             unset($carerProfiles);
