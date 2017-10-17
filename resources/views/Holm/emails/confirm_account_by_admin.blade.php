@@ -78,7 +78,7 @@
                             @endif
                             @if($user->isPurchaser())
                                 purchaser
-                            @endif account at  <a href="{{route('mainHomePage')}}"> HOLM </a>  was confirmed and is now active.
+                            @endif account at  <a href="{{route('mainHomePage')}}">HOLM</a>  was confirmed and is now active.
                             You are now free to use all our services.<br />
                             <br />
                             We hope you will enjoy using Holm!

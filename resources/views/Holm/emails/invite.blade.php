@@ -66,7 +66,7 @@
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-                            {!! $user->first_name !!} thought you’d really benefit from using Holm, and has invited you to join us.
+                            {!! $user->first_name !!} {!! $user->family_name !!} thought you’d really benefit from using Holm, and has invited you to join us.
 <br/><br/>
                             Use their code <b>{{$user->own_referral_code}}</b> when registering at <a href="{{route('mainHomePage')}}">Holm</a>
                             and you will each receive a £100 bonus* whether you’re a professional carer, or buying care.

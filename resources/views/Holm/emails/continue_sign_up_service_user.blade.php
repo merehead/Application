@@ -67,7 +67,7 @@
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
 
-                            It looks like you haven’t completed your registration at <a href="{{route('mainHomePage')}}"> HOLM </a>  yet.
+                            It looks like you haven’t completed your registration at <a href="{{route('mainHomePage')}}">HOLM</a>  yet.
                             You won’t be able to book a carer until it has been completed.
                                                     </p>
 

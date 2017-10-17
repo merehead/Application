@@ -66,7 +66,7 @@
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-                            It looks like you haven’t completed your registration at <a href="{{route('mainHomePage')}}"> HOLM </a>  yet.
+                            It looks like you haven’t completed your registration at <a href="{{route('mainHomePage')}}">HOLM</a> yet.
                             Your profile isn’t visible until then, and no one will be able to book you.
                             <br />
 

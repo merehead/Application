@@ -421,6 +421,10 @@ class CarerController extends FrontController implements Constants
 
             $depart = "#carerAvailability";
 
+            if (isset($input['times'])) {
+                $carerProfiles->times = $input['times'];
+            }
+
             if (isset($input['work_hours'])) {
                 $carerProfiles->work_hours = $input['work_hours'];
             }
