@@ -144,8 +144,8 @@
         </div>
     </div>
 
-{{--    <div class="profileMap" style="width:100%;height:450px">
+    <div class="profileMap" style="width:100%;height:450px;display:none;">
         <div id="map_canvas" style="clear:both; height:450px;"></div>
-    </div>--}}
+    </div>
 </div>
 {!! Form::close()!!}

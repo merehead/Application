@@ -4,16 +4,16 @@
 --}}
 <section class="mainSection">
 
-    {{--<script>--}}
-        {{--$(document).ready(function () {--}}
-            {{--var geocoder = new google.maps.Geocoder();--}}
-            {{--map = new google.maps.Map(document.getElementById('map_canvas'), {--}}
-                {{--zoom: 17,--}}
-                {{--center: {lat: -34.397, lng: 150.644}--}}
-            {{--});--}}
-            {{--geocodeAddress(geocoder, map);--}}
-        {{--});--}}
-    {{--</script>--}}
+    <script>
+        $(document).ready(function () {
+            var geocoder = new google.maps.Geocoder();
+            map = new google.maps.Map(document.getElementById('map_canvas'), {
+                zoom: 17,
+                center: {lat: -34.397, lng: 150.644}
+            });
+            geocodeAddress(geocoder, map);
+        });
+    </script>
     <div class="container carer-profile">
         @include(config('settings.frontTheme').'.purchaserProfiles/PrivateProfileMainSectionHeader')
         @include(config('settings.frontTheme').'.purchaserProfiles/PrivateProfileMainSectionGeneral')
