@@ -85,7 +85,9 @@
     </div>
 
 
-    <div class="profileRow">
+    <div class="profileRow keeping_safe_at_night_depend" {!!
+    ($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night)
+        )? 'style="display:none"' : '' !!}>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Needs help going to the toilet at night</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile toilet_at_night_selector'];
@@ -98,7 +100,10 @@
     </div>
 
 
-    <div class="profileRow toilet_at_night_depend" {!!  ($serviceUsersProfile->toilet_at_night == 'No' || is_null($serviceUsersProfile->toilet_at_night) )? 'style="display:none"' : ''!!}>
+    <div class="profileRow   toilet_at_night_depend" {!!
+    ($serviceUsersProfile->toilet_at_night == 'No' || is_null($serviceUsersProfile->toilet_at_night)
+    || $serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night)
+    )? 'style="display:none"' : '' !!}>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">NEEDS someone to help at night?</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];

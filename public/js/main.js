@@ -661,9 +661,12 @@ $(document).ready(function () {
     $(".keeping_safe_at_night_selector").on('change', function () {
         if ($(".keeping_safe_at_night_selector").val() != 'No') {
             $(".keeping_safe_at_night_depend").slideDown();
-
+            if($(".toilet_at_night_selector").val() != 'No'){
+                $(".toilet_at_night_depend").slideDown();
+            }
         } else {
             $(".keeping_safe_at_night_depend").slideUp();
+            $(".toilet_at_night_depend").slideUp();
         }
     });
 
