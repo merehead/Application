@@ -26,7 +26,7 @@
                     </div>
                     <div class="testimonialSlider__item item " id="testimonialSlider__item3">
                         <p>
-                            I’m not always filling out paperwork. It’s feels great!
+                            I’m not always filling out paperwork. It feels great!
                         </p>
                     </div>
                 </div>
