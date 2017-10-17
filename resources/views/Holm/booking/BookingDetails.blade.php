@@ -449,10 +449,10 @@
     }
 
     function codeAddress() {
-      var address = '{{$carerProfile->address_line1}}';
+      var address = '{{$carerProfile->town}} {{$carerProfile->address_line1}}';
 
       if({{$user->user_type_id}} !== 1){
-        address = '{{$serviceUserProfile->address_line1}}';
+        address = '{{$serviceUserProfile->town}} {{$serviceUserProfile->address_line1}}';
       }
 
       geocoder.geocode( { 'address': address}, function(results, status) {
