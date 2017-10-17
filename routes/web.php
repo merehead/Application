@@ -41,6 +41,7 @@ Route::get('/welcome-carer', 'CarerController@welcome')->name('welcomeCarer');
 
 Route::get('/carer/profile/{user_id}', 'CarerController@profile')->name('carerPublicProfile'); //synonym for
 Route::get('/address/', 'CarerController@getAddress')->name('carerGetAddress'); //synonym for
+Route::get('/noaddress/', 'CarerController@getNoAddress')->name('carerGetNoAddress'); //synonym for
 Route::get('/carer/review/{user_id}', 'CarerController@review')->name('carerReview'); //synonym for
 Route::get('/carer/appointment/{user_id}', 'CarerController@appointment')->name('carerAppointment'); //synonym for
 // ImCarerPage

@@ -117,7 +117,7 @@
             </div>
             <div class="col-sm-8 col-md-9">
                 <div class="filterHead filterHead--xs-column filterBox">
-                    <a href="#" class="sortLinkXs">search by <span><i class="fa fa-angle-down"></i></span></a>
+                    <a href="#" class="sortLinkXs">sort by <span><i class="fa fa-angle-down"></i></span></a>
                     <div class="sortFilters hiddenSort hiddenSort--visible">
                         <div class="sortFilters__item">
                             {!! Form::text('postCode',(isset($requestSearch['postCode'])?$requestSearch['postCode']:''),['class'=>'sortField disable','placeholder'=>'POST CODE','maxlength'=>16,'onkeydown'=>"if(event.keyCode==13){carerSearchAjax();}"]) !!}
@@ -134,9 +134,9 @@
                 </div>
 
                 <div class="resultHeader Paginator">
-                    <p class="resultHeader__info">Showing {{$page*$perPage}} of {{$carerResultCount}} CARERs</p>
+                    <p class="resultHeader__info">Showing {{($page*$perPage)<$countAll?$page*$perPage:$countAll}} of {{$countAll}} CARERS</p>
                     <div class="sortLink">
-                        SEARCH BY &nbsp; <a href="#" class="sortLink__item sort-rating"> <span> </span> rating
+                        SORT BY &nbsp; <a href="#" class="sortLink__item sort-rating"> <span> </span> rating
                         </a>
                         <p> &nbsp; - &nbsp; </p>
                         <a href="#" class="sortLink__item sort-id">
@@ -212,9 +212,10 @@
                     {{--</a>--}}
                     {{--<span class="sortLink__separate"></span>--}}
                 {{--@endfor--}}
-                @if($carerResultCount>5)
+                @if($countAll>5)
                     <input type="hidden" id="id-carer" name="id" value="{{$carerResult[count($carerResult)-1]->id}}">
                     <input type="hidden" name="load-more" id="load-more" value="0">
+                    <input type="hidden" name="page" id="page" value="{{$page}}">
                     <input type="hidden" name="load-more-count" id="load-count" value="{{$load_more_count}}">
                 <div class="moreBtn moreBtn--book ">
                     <a href="" class="moreBtn__item moreBtn__item--book centeredLink moreLink">

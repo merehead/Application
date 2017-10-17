@@ -4,6 +4,9 @@
 
         <tbody>
 
+
+        {{dd($carers)}}
+
         @foreach($carers as $user)
             @include(config('settings.theme').'.carerPayouts.mainTableRow')
         @endforeach

@@ -42,7 +42,7 @@ class CarerPayoutController extends AdminController implements Constants
 
         //$users = User::where('user_type_id','3')->get();
 
-        $carers = CarersProfile::all();
+        $carers = CarersProfile::all()->take(20);
         $this->vars = array_add($this->vars,'carers',$carers);
 
         $appointmentStatus = AppointmentStatus::all()->pluck('name','id')->toArray();

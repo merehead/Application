@@ -104,7 +104,7 @@
                 </h2>
                 <?php if (isset($atrr)) unset($atrr); $atrr = ['class'=>'profileField__select','id'=>'type_car_work'];
                 if (is_null($carerProfile->have_car)) $atrr['placeholder'] = 'Please select';?>
-                {!! Form::select('have_car',['Yes'=>'Car for work','No'=>'Do not have a car'],
+                {!! Form::select('have_car',['Yes'=>'Have a car for work','No'=>'Do not have a car'],
                 null,$atrr) !!}
             </div>
 
@@ -116,7 +116,7 @@
                                 class="ordinaryTitle__text ">Transport clients</span></h2>
                     <?php if (isset($atrr)) unset($atrr); $atrr = ['class'=>'profileField__select','id'=>'profile_use_car'];
                     if (is_null($carerProfile->use_car)) $atrr['placeholder'] = 'Please select';?>
-                    {!! Form::select('use_car',['Yes'=>'Transport clients','No'=>'Can not transport clients'],
+                    {!! Form::select('use_car',['Yes'=>'Can transport clients','No'=>'Can not transport clients'],
                     null,$atrr) !!}
                 </div>
             @endif
@@ -187,7 +187,7 @@
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
-                 Car insurance Number
+                 Car insurance policy
                 </span>
                 </h2>
                 {!! Form::text('car_insurance_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Car insurance number','readonly','data-edit'=>'false']) !!}

@@ -1,4 +1,4 @@
-<div class="registration">
+<div class="registration" >
     <div class="registration__full">
         <div class="questionsBox">
 
@@ -7,7 +7,7 @@
             </span>
             <h2>Sorry </h2>
         </div>
-        <div class="sorryBox">
+        <div class="sorryBox" style="text-align: center">
             <p class="info-p info-p--roboto">
                 Sorry, Holm is not yet available in your area.<br /><br />
                 Please use <a href="{{route('ContactPage')}}">the contact form</a>

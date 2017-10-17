@@ -75,10 +75,11 @@ function calculate_price() {
 
 function carerSearchAjax(){
     var form = $('#carerSearchForm');
-    //$(form).submit();
     var token = $(form).find('input[name=_token]').val();
-    if($('#load-more').val()==0)
+    if($('#load-more').val()==0){
         $('.carer-result').empty();
+        $('#load-count').val(5);
+    }
     $('#loader-search').show();
     $('.error-text').hide();
     $('.moreBtn__item').hide();
@@ -101,6 +102,7 @@ function carerSearchAjax(){
                 if(response.id==0)$('.moreBtn__item').hide();
                 $('#load-more').val(0);
                 $('#id-carer').val(response.id);
+                $('#page').val(response.page);
             }else{
                 $('.carer-result').append(response.html);
                 $('.Paginator').html(response.htmlHeader);
@@ -376,6 +378,36 @@ function scale(block) {
         }
     }
 }
+$(document).ready(function () {
+
+
+/*    $('#login').modal().on('shown', function(){
+        $('body').css('overflow', 'hidden');
+    }).on('hidden', function(){
+        $('body').css('overflow', 'auto');
+    })*/
+
+
+    $('#add-login-popup').on('click', function (){
+
+        //$('#login-popup').modal('hide');
+
+        $('#login-popup').modal('hide');
+
+        $('#login').modal('show');
+
+
+
+    });
+
+    $('#add-signin-popup').on('click', function (){
+        $('#login-popup').modal('hide');
+
+        $('#signUpdiv').modal('show');
+
+    });
+
+});
 // -- Document events ---------------
 $(document).ready(function () {
 
@@ -1458,7 +1490,7 @@ $(document).ready(function () {
             change: function() {
                 $(this).change();
             },
-            timeFormat: 'g:i A',
+            timeFormat: 'h:mm p',
             interval: 30,
             //maxTime: '6:00pm',_step48
             //defaultTime: '18',
@@ -1470,6 +1502,15 @@ $(document).ready(function () {
         return false;
     });
 
+    $(document).on('click','#confirm-terms',function(){
+        if ($(this).is(':checked')) {
+            $('#book-carer').prop('disabled',false);
+        }
+        else{
+            $('#book-carer').prop('disabled',true);
+
+        }
+    });
     if ($("#checkL12").is(':checked')) {
         $(".language_additional").show();
     } else {
@@ -1548,6 +1589,7 @@ $(document).ready(function () {
     $('.moreLink').on('click', function (e) {
         $('#load-more').val(1);
         $('#load-count').val(parseInt($('#load-count').val())+5);
+        $('#page').val(parseInt($('#page').val())+1);
         carerSearchAjax();
     });
 
@@ -1680,6 +1722,8 @@ $(document).ready(function () {
         e.preventDefault();
         is_data_changed = true;
         $('input[name="is_data_changed"]').val(1);
+        $('#post_code_profile').autocomplete({serviceUrl:'/address/'});
+        $('#post_code_profile').autocomplete('clear');
         if (is_data_changed) {
             $('#datepicker_when_start').attr('readonly',false)
                 .datepicker({ dateFormat: "dd/mm/yy",
@@ -1719,7 +1763,7 @@ $(document).ready(function () {
 
         $('input[name="postcode"]:not(.disable),input[name="postCode"]:not(.disable),input[name="address_line1"]:not(.disable)').autocomplete({
                 serviceUrl: '/address/',
-                params: {query: $('input[name="town"]').val() + ' ' + $(this).val()},
+                params: {query: ($(this).prop('readonly')==true)?'':$('input[name="town"]').val() + ' ' + $(this).val()},
                 minChars: 1,
                 dataType: 'json',
                 onSelect: function (suggestion) {
@@ -1808,6 +1852,8 @@ $(document).ready(function () {
 
         $carer_profile.find('button.btn-success').on('click', function (e) {
             e.preventDefault();
+            $('#post_code_profile').autocomplete({serviceUrl:'/noaddress/'});
+            $('#post_code_profile').autocomplete('clear');
             is_data_changed = false;
             $('input[name="is_data_changed"]').val(0);
             if (is_data_changed) {
