@@ -662,3 +662,6 @@ label.correct2 {
 .close {
     opacity: 0.9;
 }
+.footer{
+  position: relative!important;
+}
