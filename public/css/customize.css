@@ -346,10 +346,12 @@ select#workingTimes {
 body > section > div > div.invite {
     margin-bottom: 0px;
 }
-
+.peopleBox:focus .peopleBox__photo, .peopleBox:hover .peopleBox__photo{
+  filter: grayscale(100%);
+}
 .activeImg {
-    filter: none;
-    -webkit-filter: none;
+    filter: none!important;
+    -webkit-filter: none!important;
 }
 
 a.blogFilter__item.active {
