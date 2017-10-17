@@ -39,6 +39,10 @@ class SearchController extends FrontController
 
         if ($user && $user->isPurchaser() && $user->account_status == 'blocked') {
 
+            $this->template = config('settings.frontTheme') . '.templates.blockedUserSorryTemplate';
+
+
+
             $content = view(config('settings.frontTheme') . '.homePage.sorryPageForBlockedPurchaser')->render();
             $this->vars = array_add($this->vars, 'content', $content);
 
