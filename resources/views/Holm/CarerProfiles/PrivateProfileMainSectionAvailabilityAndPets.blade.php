@@ -40,27 +40,22 @@
             <div class="checkRow checkRow--margin-bottom">
 
                 @foreach($workingTimes as $step=>$workingTime)
+                        @if($step!=0)
                     <div class="checkBox_item">
-
-                        @if($step==0)
-                 {{--           {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
-                            array('class' => 'customCheckbox '.$workingTime->css_name,'id'=>'boxG'.$workingTime->id)) !!}
-                            <label for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
---}}
-                        @else
 
                         {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
                         array('class' => 'customCheckbox '.$workingTime->css_name,'id'=>'boxG'.$workingTime->id)) !!}
+
                         <label for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
-
-                        @endif
                     </div>
+                    @endif
                 @endforeach
-
                     <?php $workingTime = $workingTimes->shift()?>
+                    <div class="checkBox_item">
                     {!! Form::checkbox('workingTime['.$workingTime->id.']', null,($carerProfile->WorkingTimes->contains('id', $workingTime->id)? 1 : null),
                                                 array('class' => 'customCheckbox '.$workingTime->css_name,'id'=>'boxG'.$workingTime->id)) !!}
                     <label id="boxG1" for="boxG{{$workingTime->id}}">{{$workingTime->name}}</label>
+                    </div>
             </div>
 
             <div class="profileField profileField--half">
