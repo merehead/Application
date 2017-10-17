@@ -409,8 +409,8 @@
     });
 
     function DistanceMatrixService() {
-      var origin1 = '{{$carerProfile->address_line1}}';
-      var destinationA = '{{$serviceUserProfile->address_line1}}';
+      var origin1 = '{{$carerProfile->town}} {{$carerProfile->address_line1}}';
+      var destinationA = '{{$serviceUserProfile->town}} {{$serviceUserProfile->address_line1}}';
 
       console.log(origin1, destinationA)
 
