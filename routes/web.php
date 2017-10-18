@@ -1,5 +1,5 @@
 <?php
-use App\PaymentServices\StripeService;
+use App\Helpers\Facades\PaymentTools;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,7 +10,6 @@ use App\PaymentServices\StripeService;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 
 Route::get('customer-registration/{step_token?}', 'Registration\CustomerRegistrationController@index');
 Route::post('customer-registration/ajax', 'Registration\CustomerRegistrationController@ajax');
@@ -38,6 +37,7 @@ Route::post('/search/page/{page}', 'SearchController@index')->name('searchPagePa
 Route::get('/terms', 'TermsController@index')->name('TermsPage');
 
 Route::get('/welcome-carer', 'CarerController@welcome')->name('welcomeCarer');
+Route::get('/carer-settings/booking/{status?}', 'CarerController@bookingFilter')->name('carerBooking'); //synonym for ImCarerPage
 Route::get('/carer-settings/{id?}', 'CarerController@index')->name('carerSettings'); //synonym for ImCarerPage
 
 Route::get('/carer/profile/{user_id}', 'CarerController@profile')->name('carerPublicProfile'); //synonym for
@@ -50,7 +50,7 @@ Route::get('/carer/appointment/{user_id}', 'CarerController@appointment')->name(
 //Route::get('/carer-settings/booking/{status}', 'CarerController@bookingFilter')->name('carerBookingStatus'); //synonym for ImCarerPage
 
 Route::get('/carer-settings/profile/{user_id}', 'CarerController@profile')->name('carerPublicProfile2'); //synonym for ImCarerPage
-Route::get('/carer-settings/booking/{status?}', 'CarerController@bookingFilter')->name('carerBooking'); //synonym for ImCarerPage
+
 
 
 
@@ -154,3 +154,9 @@ Route::get('/test_document_upload', function (){
 Route::get('/appan', function (){
     return view('resources/views/Holm/purchaserProfiles/Booking/NewAnAppointment');
 });
+
+Route::get('/test', function (){
+//    $res = PaymentTools::createCreditCardToken();
+//    dd();
+});
+
