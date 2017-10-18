@@ -179,6 +179,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         JildertMiedema\LaravelPlupload\LaravelPluploadServiceProvider::class,
+
+        App\Providers\PaymentToolsServiceProvider::class,
     ],
 
     /*
@@ -231,6 +233,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
 
         'Plupload' => JildertMiedema\LaravelPlupload\Facades\Plupload::class,
+        'PaymentTools' => \App\Helpers\Facades\PaymentTools::class,
     ],
 
 ];

@@ -156,7 +156,8 @@ Route::get('/appan', function (){
 });
 
 Route::get('/test', function (){
-//    $res = PaymentTools::createCreditCardToken();
-//    dd();
+    //tok_1BEJYUDBFNDzp4kirVyNFpIL
+    $res = PaymentTools::createRefund(490050, 'ch_1BEJZQDBFNDzp4kirioiQsOx', 'refund for purchaser 1 for appointment 12');
+    dd($res);
 });
 
