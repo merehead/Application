@@ -155,9 +155,12 @@ Route::get('/appan', function (){
     return view('resources/views/Holm/purchaserProfiles/Booking/NewAnAppointment');
 });
 
-Route::get('/test', function (){
-    //tok_1BEJYUDBFNDzp4kirVyNFpIL
-    $res = PaymentTools::createRefund(490050, 'ch_1BEJZQDBFNDzp4kirioiQsOx', 'refund for purchaser 1 for appointment 12');
-    dd($res);
+Route::get('/test_stripe', function (){
+
+//    $res = PaymentTools::createCreditCardToken(['card_number' => '4000 0000 0000 0077','exp_month' => '12','exp_year' => '20','cvc' => '123']);
+//    $res = PaymentTools::createCharge(200000, $res, 4);
+//    $res = PaymentTools::createTransfer('acct_1BEMdvAij8rTvtXk', 20000, 'Payment to carer 2');
+
+//    dd($res);
 });
 
