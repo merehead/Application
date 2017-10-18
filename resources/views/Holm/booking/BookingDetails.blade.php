@@ -409,10 +409,10 @@
     });
 
     function DistanceMatrixService() {
-      var origin1 = '{{$carerProfile->town}} {{$carerProfile->address_line1}}';
-      var destinationA = '{{$serviceUserProfile->town}} {{$serviceUserProfile->address_line1}}';
+      var origin1 = 'England {{$carerProfile->town}} {{$carerProfile->address_line1}}';
+      var destinationA = 'England {{$serviceUserProfile->town}} {{$serviceUserProfile->address_line1}}';
 
-      console.log(origin1, destinationA)
+      console.log({'carerProfile': origin1, 'serviceUserProfile': destinationA})
 
       var service = new google.maps.DistanceMatrixService();
       service.getDistanceMatrix(
@@ -420,15 +420,17 @@
           origins: [origin1],
           destinations: [destinationA],
           travelMode: 'DRIVING',
+          unitSystem: google.maps.UnitSystem.IMPERIAL,
         }, callback);
 
       function callback(response, status) {
         console.log(response.rows[0].elements[0].status)
         if(response.rows[0].elements[0].status === 'OK'){
           // convert km to miles
-          var convert = parseInt(response.rows[0].elements[0].distance.text)*0.62137;
+          // var convert = parseInt(response.rows[0].elements[0].distance.text)*0.62137;
 
-          $('#distance').html(convert.toFixed(3) + ' (miles)');
+          // $('#distance').html(convert.toFixed(3) + ' (miles)');
+          $('#distance').html(response.rows[0].elements[0].distance.text);
           $('#duration').html(response.rows[0].elements[0].duration.text);
         }
         if(response.rows[0].elements[0].status === 'NOT_FOUND' || response.rows[0].elements[0].status === 'ZERO_RESULTS'){
