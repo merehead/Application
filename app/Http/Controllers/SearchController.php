@@ -105,9 +105,13 @@ class SearchController extends FrontController
         }
 
         if ($request->get('postCode')&&!empty($request->get('postCode'))){
-            $postCode = $request->get('postCode');
-            if(strpos(' ',$postCode)===false) $postCode.=' ';
-            $where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('".$postCode."', POSITION(' ' IN '".$postCode."')) and  p.name = LEFT(cp.postcode, POSITION(' ' IN '".$postCode."')))>0";
+            $postCode = trim($request->get('postCode'));
+            if(strpos($postCode,' ')===false) {
+                $postCode .= ' ';
+                $where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('" . $postCode . "', POSITION(' ' IN '" . $postCode . "')) and  p.name = LEFT(cp.postcode, POSITION(' ' IN '" . $postCode . "')))>0";
+            }else{
+                $where .= " AND cp.postcode='" . $postCode."'";
+            }
         }
         if ($request->get('load-more',0)==1)
             $page = $request->get('page');
