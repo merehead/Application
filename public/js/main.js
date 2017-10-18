@@ -1284,6 +1284,18 @@ $(document).ready(function () {
     $(document).on('change','.datepicker_message',function(){
         var datepickerBegin = $(this).parent().parent().find('.datepicker_message[name*="start"]').datepicker("getDate");
         var datepickerEnd = $(this).parent().parent().find('.datepicker_message[name*="end"]').datepicker("getDate");
+        var form = $(this).parent().parent();
+        var timestart = $(form).find('.timepicker_message')[0];
+        var now = new Date();
+        var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+        if(datepickerBegin-today==0){
+            $(timestart).timepicker().destroy();
+            $(timestart).timepicker({minTime:getTime(),startTime:getTime(),scrollbar:true});
+        }else{
+            $(timestart).timepicker().destroy();
+            $(timestart).timepicker({minTime:null,startTime:null,scrollbar:true});
+        }
 
         var form = $(this).parent().parent().parent().parent().parent();
         $(form).find('.weekly').attr('disabled',false);
@@ -1358,6 +1370,14 @@ $(document).ready(function () {
             $(datetime).parent().show();
             $(label).show();
             $(datetime).removeClass("hasDatepicker").removeAttr('id');
+            var inDay = new Date();
+            var form = $(this).parent().parent();
+            var in90Day = new Date();
+            var datestart = $(datetime).attr('name').substring(0,$(datetime).attr('name').length - 10)+'[date_start]';
+            var datestartDate = $('input[name="'+datestart+'"]').datepicker( "getDate" );
+
+            inDay.setDate(datestartDate.getDate()+1);
+            in90Day.setDate(datestartDate.getDate()+90);
             $(datetime).datepicker({
                 beforeShow: function (input, inst) {
                     inst.dpDiv.css({"z-index": "2000!important;"});
@@ -1367,8 +1387,8 @@ $(document).ready(function () {
                 changeYear: true,
                 dateFormat: "dd/mm/yy",
                 showAnim: "slideDown",
-                minDate: "+0D",
-                maxDate: "+90D",
+                minDate: inDay,
+                maxDate: in90Day,
                 yearRange: "0:+2"
             });
         }
@@ -1724,6 +1744,7 @@ $(document).ready(function () {
     $carer_profile.find('a.btn-edit').on('click', function (e) {
         e.preventDefault();
         is_data_changed = true;
+        
         $('input[name="is_data_changed"]').val(1);
         $('#post_code_profile').autocomplete({serviceUrl:'/address/'});
         $('#post_code_profile').autocomplete('clear');
