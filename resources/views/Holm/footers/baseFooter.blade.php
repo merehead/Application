@@ -12,9 +12,9 @@
             <a href="{{route('FaqPage')}}" class="footerNav__item">
                 Frequently Asked Questions
             </a>
-            <a href="{{route('BlogPage')}}" class="footerNav__item">
+           {{-- <a href="{{route('BlogPage')}}" class="footerNav__item">
                 blog
-            </a>
+            </a>--}}
         </div>
         <div class="footerContainer">
             <a href="{{route('mainHomePage')}}" class=" themeLogo themeLogo--dark">

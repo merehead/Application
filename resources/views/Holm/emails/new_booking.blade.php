@@ -51,13 +51,27 @@
         <td style="padding:40px ;">
             <table cellpadding="0" cellspacing="0" border="0" style="overflow-x: auto;border: 1px solid rgb(225, 225, 225);box-shadow: 0px 0px 26.73px 0.27px rgba(0, 0, 0, 0.11);border-collapse: collapse;   margin: 0; " width="100%" class="t-content">
                 <tr>
-                    <td style="padding: 20px 15px 30px 15px;  " valign="middle">
+
+
+
+                    <?php
+
+                    //$patchToPurchaserAvatar = getcwd().'/img/profile_photos/'.$purchaserProfile->id.'.png';
+                    $patchToSrvUserAvatar = getcwd().'/img/service_user_profile_photos/'.$serviceUser->id.'.png';
+                    if(file_exists($patchToSrvUserAvatar)) {
+                        $img_src = asset('/img/service_user_profile_photos/'.$serviceUser->id.'.png');
+                    } else {
+                        $img_src = asset('/img/no_photo.png');
+                    }
+
+                    ?>
+
+                        <td style="padding: 20px 15px 30px 15px;  " valign="middle">
                         <div class="column" style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;">
                             <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;">
                                 <tr>
                                     <td align="center" style="text-align:left; ">
-                                        <img src="{{asset('/img/service_user_profile_photos/'.$serviceUser->id.'.png')}}"
-                                             onerror="this.src='{{asset('/img/no_photo.png')}}'" alt="avatar"
+                                        <img src="{{$img_src}}" alt=""
                                              class="user"
                                              style="width: 70px;
                             display: block;
@@ -68,6 +82,7 @@
                                 </tr>
                             </table>
                         </div>
+
                         <div class="column" style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;;">
                             <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;">
                                 <tr>
