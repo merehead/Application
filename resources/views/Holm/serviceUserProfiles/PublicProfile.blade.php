@@ -679,7 +679,9 @@
                                         <p class="userOption userOption--language">    {{$language->carer_language}}</p>
                                     @else<?php $other = true;?>
                                     @endif
-
+                                        @if($loop->iteration%3==0)
+                                    </div> <div class="serviceColumn serviceColumn--language ">
+                                @endif
                                 @endforeach
 
                                 @if($other)
