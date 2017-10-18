@@ -89,7 +89,7 @@
                     text-transform: uppercase;
                     font-weight: 700;
                     text-decoration: none;">
-                            Holm.com
+                            Holm.care
                         </a>
                     </td>
                     <td style="padding: 30px 40px; background: #fff; " valign="top" class="">
