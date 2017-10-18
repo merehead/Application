@@ -62,14 +62,14 @@
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; font-family: 'Roboto', sans-serif; line-height: 1.5; "  valign="top" class="">
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
-{{--
-                            Hello [user_first_name]!
---}}
-                            Hello!
+                            Dear {{$like_name}}!
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-                            It looks like you haven’t completed your registration at <a href="{{route('mainHomePage')}}"> HOLM </a>  yet. No one can book you until then.<br>
+                            It looks like you haven’t completed your registration at <a href="{{route('mainHomePage')}}"> HOLM </a>  yet.
+                            Your profile isn’t visible until then, and no one will be able to book you.
+                            <br />
+
                             You will be able to continue sign up until {{$regTime}}.
                         </p>
 
@@ -78,7 +78,7 @@
                   color: #7bb7dc;
                   font-weight: 700;
                   text-decoration: underline;">
-                            Please click here to complete your signing up.
+                            Please click here to complete your registration.
                         </a>
                     </td>
                 </tr>
@@ -95,10 +95,10 @@
                    text-transform: uppercase;
                    font-size: 14px;
                  margin-bottom:0;">
-                            best wishes <br / >
-                            the holm team
+                            Best wishes <br />
+                            The Holm Team
                         </p>
-                        <a href="#" class=""
+                        <a href="{{route('mainHomePage')}}" class=""
                            style="
                     color: #373c4d;
                     text-transform: uppercase;

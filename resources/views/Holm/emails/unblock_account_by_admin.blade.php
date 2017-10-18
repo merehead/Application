@@ -36,7 +36,7 @@
        style="margin-top: 30px;
       border-collapse: collapse;
       -webkit-box-shadow: 0px 0px 101px 0px rgba(31, 31, 33, 0.15);
-      box-shadow: 0px 0px 101px 0px rgba(31, 31, 33, 0.15); width: 100%; max-width: 940px;  background: url('img/letter_bg.png') no-repeat bottom center;"
+      box-shadow: 0px 0px 101px 0px rgba(31, 31, 33, 0.15); width: 100%; max-width: 940px;"
        bgcolor="#ffffff"
        class="container">
     <tr>
@@ -48,7 +48,7 @@
 
                     </td>
                     <td style="padding-left: 30px;">
-                        <img src="{{asset('img/l3.png')}}" alt="" class=""  style="width:  100% ; float: right; "  >
+                        <img src="{{asset('img/l4.png')}}" alt="" class=""  style="width:  100% ; float: right; "  >
                     </td>
                 </tr>
 
@@ -58,42 +58,28 @@
     <tr>
         <td   valign="top" align="left" bgcolor="#ffffff"  style="font-family: 'Roboto', sans-serif;">
             <table cellpadding="0" cellspacing="0" border="0"  style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"  class="t-content">
-
                 <tr>
-                    <td style="padding: 30px 40px; background: #f9f9f9; font-family: 'Roboto', sans-serif; line-height: 1.5; "  valign="top" class="">
-                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
-                            Dear {{$like_name}}!
-                        </h1>
-
+                    <td style="padding: 30px 40px; background: #f9f9f9; "  valign="top" class="">
+                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">Dear {{$like_name}}!</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-
-                            It looks like you haven’t completed your registration at <a href="{{route('mainHomePage')}}"> HOLM </a>  yet.
-                            You won’t be able to book a carer until it has been completed.
-                                                    </p>
-
-                        <a href="{{route('PurchaserRegistration')}}" class=""
-                           style="text-transform: uppercase;
-                  color: #7bb7dc;
-                  font-weight: 700;
-                  text-decoration: underline;">
-                            Please click here to complete your registration.
-                        </a>
+                            Great news! We’ve unblocked your account and you’re now able to use Holm once again.
+                        </p>
                     </td>
                 </tr>
             </table>
         </td>
     </tr>
     <tr>
-        <td   valign="top" align="left" bgcolor="#ffffff"  style="font-family: 'Roboto', sans-serif;">
-            <table cellpadding="0" cellspacing="0" border="0"  style="    margin: 0; " width="100%"  class="t-content">
+        <td valign="top" align="left" bgcolor="#ffffff" style="font-family: 'Roboto', sans-serif;">
+            <table cellpadding="0" cellspacing="0" border="0" style="    margin: 0; " width="100%" class="t-content">
 
                 <tr>
-                    <td style="padding: 30px 40px; background: #fff; "  valign="top" class="">
+                    <td style="padding: 30px 40px; background: #fff; " valign="top" class="">
                         <p style="
                    text-transform: uppercase;
                    font-size: 14px;
                  margin-bottom:0;">
-                            Best wishes <br />
+                            Best wishes <br/>
                             The Holm Team
                         </p>
                         <a href="{{route('mainHomePage')}}" class=""
@@ -105,20 +91,22 @@
                             Holm.com
                         </a>
                     </td>
-                    <td style="padding: 30px 40px; background: #fff; "  valign="top" class="">
+                    <td style="padding: 30px 40px; background: #fff; " valign="top" class="">
                         <ul style="float: right;">
-                            <li  style="list-style: none; display: inline-block;">
-                                <a href="https://www.facebook.com/HolmCareUK/" style="margin-left: 10px; color: #a5a7af; ">
+                            <li style="list-style: none; display: inline-block;">
+                                <a href="https://www.facebook.com/HolmCareUK/"
+                                   style="margin-left: 10px; color: #a5a7af; ">
                                     <img src="{{asset('img/s1.png')}}" alt="">
                                 </a>
                             </li>
-                            <li  style="list-style: none;display: inline-block;">
+                            <li style="list-style: none;display: inline-block;">
                                 <a href="https://twitter.com/holmcare" style="margin-left: 10px; color: #a5a7af;">
                                     <img src="{{asset('img/s2.png')}}" alt="">
                                 </a>
                             </li>
                             <li style="list-style: none;display: inline-block;">
-                                <a href="https://plus.google.com/communities/102900900688938220709" style="margin-left: 10px; color: #a5a7af;">
+                                <a href="https://plus.google.com/communities/102900900688938220709"
+                                   style="margin-left: 10px; color: #a5a7af;">
                                     <img src="{{asset('img/s3.png')}}" alt="">
                                 </a>
                             </li>
@@ -127,11 +115,6 @@
                                                                 <img src="{{asset('img/s4.png')}}" alt="">
                                                             </a>
                                                         </li>--}}
-                            <li style="list-style: none;display: inline-block;">
-                                <a href="{{route('PurchaserRegistration')}}" style="margin-left: 10px; color: #a5a7af; ">
-                                    <img src="{{asset('img/s5.png')}}" alt="">
-                                </a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -140,6 +123,10 @@
     </tr>
 
 </table>
+
+
+
+
 
 </body>
 </html>

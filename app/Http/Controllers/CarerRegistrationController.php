@@ -162,10 +162,15 @@ class CarerRegistrationController extends FrontController
 
         $this->vars = array_add($this->vars, 'signUpUntil', $user->created_at->addWeek()->format('d/m/Y h:i A'));
 
+        $carerProfile = CarersProfile::findOrFail($user->id);
 
         try {
             Mail::send(config('settings.frontTheme') . '.emails.continue_sign_up_carer',
-                ['user' => $user, 'regTime' => $user->created_at->addWeek()->format('d/m/Y h:i A')],
+                [
+                    'user' => $user,
+                    'regTime' => $user->created_at->addWeek()->format('d/m/Y h:i A'),
+                    'like_name' => $carerProfile->like_name,
+                ],
                 function ($m) use ($user) {
                     $m->to($user->email)->subject('Registration on HOLM');
                 });
@@ -200,7 +205,8 @@ class CarerRegistrationController extends FrontController
 
         try {
             Mail::send(config('settings.frontTheme') . '.emails.complete_sign_up_carer',
-                ['user' => $user],
+                ['user' => $user,
+                    'like_name'=>$carerProfile->like_name],
                 function ($m) use ($user) {
                     $m->to($user->email)->subject('Welcome on HOLM');
                 });

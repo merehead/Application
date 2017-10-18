@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Booking;
+use App\PaymentServices\StripeService;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;

@@ -23,6 +23,7 @@ class AppointmentCompletedEvent
      */
     public function __construct(Appointment $appointment)
     {
+        
         //Analyze for bonuses;
         $booking = $appointment->booking()->first();
         $users = [];

@@ -1,5 +1,5 @@
 <?php
-
+use App\PaymentServices\StripeService;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,7 +38,6 @@ Route::post('/search/page/{page}', 'SearchController@index')->name('searchPagePa
 Route::get('/terms', 'TermsController@index')->name('TermsPage');
 
 Route::get('/welcome-carer', 'CarerController@welcome')->name('welcomeCarer');
-Route::get('/carer-settings/booking/{status?}', 'CarerController@bookingFilter')->name('carerBooking'); //synonym for ImCarerPage
 Route::get('/carer-settings/{id?}', 'CarerController@index')->name('carerSettings'); //synonym for ImCarerPage
 
 Route::get('/carer/profile/{user_id}', 'CarerController@profile')->name('carerPublicProfile'); //synonym for
@@ -50,6 +49,7 @@ Route::get('/carer/appointment/{user_id}', 'CarerController@appointment')->name(
 //Route::get('/carer-settings/booking/{status}', 'CarerController@bookingFilter')->name('carerBookingStatus'); //synonym for ImCarerPage
 
 Route::get('/carer-settings/profile/{user_id}', 'CarerController@profile')->name('carerPublicProfile2'); //synonym for ImCarerPage
+Route::get('/carer-settings/booking/{status?}', 'CarerController@bookingFilter')->name('carerBooking'); //synonym for ImCarerPage
 
 
 
@@ -64,7 +64,6 @@ Route::post('carer-registration','CarerRegistrationController@update')->name('Ca
 Route::get('/purchaser-settings/booking/{status?}', 'PurchaserController@bookingFilter')->name('purchaserBookingStatus'); //synonym for ImCarerPage
 Route::get('/purchaser-settings/{id?}', 'PurchaserController@index')->name('purchaserSettings');
 Route::post('/purchaser-settings','PurchaserController@update')->name('purchaserSettingsPost');
-
 
 Route::get('/purchaser-registration/','PurchaserRegistrationController@index')->name('PurchaserRegistration');
 Route::post('/purchaser-registration','PurchaserRegistrationController@update')->name('PurchaserRegistrationPost');

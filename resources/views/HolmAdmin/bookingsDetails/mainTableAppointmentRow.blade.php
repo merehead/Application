@@ -17,10 +17,10 @@
 
     </td>
     <td class="">
-        {{$appointment->amount_for_purchaser}}
+        {{$appointment->hours*13}}
     </td>
     <td class="">
-        {{$appointment->amount_for_carer}}
+        {{$appointment->hours*10}}
     </td>
     <td class=" ">
         <div class="profStatus profStatus--left">
