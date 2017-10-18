@@ -128,12 +128,12 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                             Postcode <span>*</span>
                         </h2>
                         <div class="inputWrap">
-                            {!! Form::text('postcode',null,['class'=>'formInput personalForm__input','placeholder'=>'Your postcode','maxlength'=>"12"]) !!}
+                            {!! Form::text('postcode',null,['class'=>'formInput personalForm__input',
+                            'data-country'=>($purchasersProfile->purchasing_care_for == 'Myself')?"Manchester,United Kingdom":'',
+                            'placeholder'=>'Your postcode','maxlength'=>"12"]) !!}
                         </div>
                         @if ($errors->has('postcode'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('postcode') }}</strong>
-                                    </span>
+                            <span class="help-block"><strong>{{ $errors->first('postcode') }}</strong></span>
                         @endif
                     </div>
                         <div class="formField personalActive">

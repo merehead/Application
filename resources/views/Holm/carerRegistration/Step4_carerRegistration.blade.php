@@ -149,7 +149,7 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                             Postcode <span>*</span>
                         </h2>
                         <div class="inputWrap">
-                            {!! Form::text('postcode',null,['class'=>'formInput personalForm__input','placeholder'=>'Your postcode','maxlength'=>'10']) !!}
+                            {!! Form::text('postcode',null,['class'=>'formInput personalForm__input','placeholder'=>'Your postcode','data-country'=>'Manchester,United Kingdom','maxlength'=>'10']) !!}
                         </div>
                         @if ($errors->has('postcode'))
                             <span class="help-block">

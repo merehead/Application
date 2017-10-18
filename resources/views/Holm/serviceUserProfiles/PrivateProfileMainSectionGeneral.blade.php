@@ -126,7 +126,7 @@
               </span>
             </h2>
 
-            {!! Form::text('postcode',null,['class'=>'profileField__input','id'=>'post_code_profile','placeholder'=>'Postcode','maxlength'=>"120"]) !!}
+            {!! Form::text('postcode',null,['class'=>'profileField__input','id'=>'post_code_profile','data-country'=>'Manchester,United Kingdom','placeholder'=>'Postcode','maxlength'=>"120"]) !!}
             @if ($errors->has('postcode'))
                 <span class="help-block"><strong>{{ $errors->first('postcode') }}</strong></span>
             @endif
