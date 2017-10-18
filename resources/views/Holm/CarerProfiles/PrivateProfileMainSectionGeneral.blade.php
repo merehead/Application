@@ -89,7 +89,7 @@
         </div>
     </div>
 
-    <div class="profileMap" style="width:100%;height:450px">
+    <div class="profileMap" style="width:100%;height:450px;display:none;">
         <div id="map_canvas" style="clear:both; height:450px;"></div>
         {{--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d317715.7119257097!2d-0.38180351472723606!3d51.528735197655706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2z0JvQvtC90LTQvtC9LCDQktC10LvQuNC60L7QsdGA0LjRgtCw0L3QuNGP!5e0!3m2!1sru!2sru!4v1498824096837"--}}
                 {{--width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>--}}

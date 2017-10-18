@@ -98,7 +98,11 @@
     </div>
 
 </div>
-
+<input type="hidden" name="address_line1" value="{{$carerProfile->address_line1}}">
+<input type="hidden" name="town" value="{{$carerProfile->town}}">
+<div class="profileMap" style="width:100%;height:450px;">
+    <div id="map_canvas" style="clear:both; height:450px;"></div>
+</div>
 <div class="profileExtraInfo">
     <h2 class="profileTitle">
         About

@@ -1819,9 +1819,9 @@ $(document).ready(function () {
     //------------Google Address search -----------------------
     if ($.isFunction($.fn.autocomplete)) {
 
-        $('input[name="postcode"]:not(.disable),input[name="postCode"]:not(.disable),input[name="address_line1"]:not(.disable)').autocomplete({
+        $('input[name="address_line1"]:not(.disable)').autocomplete({
                 serviceUrl: '/address/',
-                params: {query: ($(this).prop('readonly')==true)?'':$('input[name="town"]').val() + ' ' + $(this).val()},
+                params: {query: ($(this).prop('readonly')==true)?'':$(this).attr('data-country') + ' ' + $(this).val()},
                 minChars: 1,
                 dataType: 'json',
                 onSelect: function (suggestion) {
