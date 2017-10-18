@@ -18,3 +18,4 @@ yarn-error.log
 .env
 .htaccess
 .lock
+dump.sql

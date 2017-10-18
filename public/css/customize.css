@@ -349,6 +349,9 @@ body > section > div > div.invite {
 .peopleBox:focus .peopleBox__photo, .peopleBox:hover .peopleBox__photo{
   filter: grayscale(100%);
 }
+.peopleBox, .peopleBox:hover ,.peopleBox, .peopleBox:focus{
+  text-decoration: none;
+}
 .activeImg {
     filter: none!important;
     -webkit-filter: none!important;
@@ -661,4 +664,7 @@ label.correct2 {
 
 .close {
     opacity: 0.9;
+}
+.footer{
+  position: relative!important;
 }

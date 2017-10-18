@@ -83,7 +83,8 @@
 
             </h2>
             <div class="inputWrap">
-                <input type="text" name="referral_code" {{(!empty($ref_code))? 'value ='.$ref_code : '' }}  class="formInput registrationForm__input" placeholder="">
+                <input type="text" name="referral_code" value="{{(!empty($ref_code))? $ref_code : old('referral_code') }}"
+                class="formInput registrationForm__input" placeholder="">
 
             </div>
             @if ($errors->has('referral_code'))

@@ -104,10 +104,10 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
 
                         <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
-                                Mobile number <span>*</span>
+                                Phone number <span>*</span>
                             </h2>
                             <div class="inputWrap">
-                                {!! Form::text('mobile_number',null,['class'=>'formInput personalForm__input digitFilter','placeholder'=>'Your mobile number','maxlength'=>"11"]) !!}
+                                {!! Form::text('mobile_number',null,['class'=>'formInput personalForm__input digitFilter','placeholder'=>'Phone number','maxlength'=>"11"]) !!}
                             </div>
                             @if ($errors->has('mobile_number'))
                                 <span class="help-block">
@@ -129,7 +129,7 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                                 Postcode <span>*</span>
                             </h2>
                             <div class="inputWrap">
-                                {!! Form::text('postcode',null,['class'=>'formInput personalForm__input','placeholder'=>'Your postcode','maxlength'=>"12"]) !!}
+                                {!! Form::text('postcode',null,['class'=>'formInput personalForm__input','data-country'=>'Manchester,United Kingdom','placeholder'=>'Your postcode','maxlength'=>"12"]) !!}
                             </div>
                             @if ($errors->has('postcode'))
                                 <span class="help-block">

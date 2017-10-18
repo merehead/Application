@@ -67,7 +67,7 @@
                 Post code <span class="requireIco">*</span>
               </span>
             </h2>
-            {!! Form::text('postcode',null,['class'=>'profileField__input','id'=>'post_code_profile','maxlength'=>'10']) !!}
+            {!! Form::text('postcode',null,['class'=>'profileField__input','id'=>'post_code_profile','data-country'=>'Manchester,United Kingdom','maxlength'=>'10']) !!}
         </div>
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
@@ -234,11 +234,11 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
                 <div class="profileField profileField--full-width">
                     <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                  Phone
+                  Phone number
                 </span>
                     </h2>
 
-                    {!! Form::text('Persons['.$number.'][phone]',$carerReference->phone,['class'=>'profileField__input digitFilter','maxlength'=>'16']) !!}
+                    {!! Form::text('Persons['.$number.'][phone]',$carerReference->phone,['class'=>'profileField__input digitFilter','placeholder'=>'07000000000', 'maxlength'=>'16']) !!}
                 </div>
                 <div class="profileField profileField--full-width">
                     <h2 class="profileField__title ordinaryTitle">

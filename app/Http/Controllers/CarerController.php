@@ -268,7 +268,11 @@ class CarerController extends FrontController implements Constants
     {
 
 
+
         $input = $request->all();
+
+        //dd($input['Persons'][0]['phone'],$input['Persons'][1]['phone']);
+
 
         $carerProfiles = CarersProfile::findOrFail($input['id']);
 
@@ -280,6 +284,16 @@ class CarerController extends FrontController implements Constants
                         'required',
                         'string',
                         'max:128'
+                    ),
+                'Persons.0.phone' =>
+                    array(
+                        'required',
+                        'regex:/^0[0-9]{10}$/',
+                    ),
+                'Persons.1.phone' =>
+                    array(
+                        'required',
+                        'regex:/^0[0-9]{10}$/',
                     ),
                 'mobile_number' =>
                     array(
@@ -420,6 +434,10 @@ class CarerController extends FrontController implements Constants
         if ($input['stage'] == 'carerPrivateAvailability') {
 
             $depart = "#carerAvailability";
+
+            if (isset($input['times'])) {
+                $carerProfiles->times = $input['times'];
+            }
 
             if (isset($input['work_hours'])) {
                 $carerProfiles->work_hours = $input['work_hours'];

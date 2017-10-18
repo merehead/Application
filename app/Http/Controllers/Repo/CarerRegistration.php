@@ -198,7 +198,7 @@ class CarerRegistration
         $this->validate($request,[
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'referral_code'=>'string|nullable|max:128',
+            'referral_code'=>'string|nullable|max:10|exists:users,own_referral_code',
         ]);
         $referral_code = 0;
         (isset($request['referral_code']))? $referral_code = $request['referral_code'] : $referral_code = 0;
@@ -640,7 +640,7 @@ class CarerRegistration
             'phone' =>
                 array(
                     'required',
-                    'regex:/^07[0-9]{9}$/',
+                    'regex:/^0[0-9]{10}$/',
                 ),
             'email' =>
                 array(

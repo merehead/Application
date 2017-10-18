@@ -61,12 +61,12 @@
 
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; font-family: 'Roboto', sans-serif; line-height: 1.5; "  valign="top" class="">
-                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
+                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 600; font-size: 18px; color: #272c2b;  text-transform: uppercase;">
                             Hi!
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-                            {!! $user->first_name !!} thought you’d really benefit from using Holm, and has invited you to join us.
+                            {!! $user->first_name !!} {!! $user->family_name !!} thought you’d really benefit from using Holm, and has invited you to join us.
 <br/><br/>
                             Use their code <b>{{$user->own_referral_code}}</b> when registering at <a href="{{route('mainHomePage')}}">Holm</a>
                             and you will each receive a £100 bonus* whether you’re a professional carer, or buying care.
@@ -166,7 +166,7 @@
                     text-transform: uppercase;
                     font-weight: 700;
                     text-decoration: none;">
-                            Holm.com
+                            Holm.care
                         </a>
                     </td>
                     <td style="padding: 30px 40px; background: #fff; "  valign="top" class="">
@@ -181,16 +181,7 @@
                                     <img src="{{asset('img/s2.png')}}" alt="">
                                 </a>
                             </li>
-                            <li style="list-style: none;display: inline-block;">
-                                <a href="https://plus.google.com/communities/102900900688938220709" style="margin-left: 10px; color: #a5a7af;">
-                                    <img src="{{asset('img/s3.png')}}" alt="">
-                                </a>
-                            </li>
-{{--                            <li style="list-style: none;display: inline-block;">
-                                <a href="#" style="margin-left: 10px; color: #a5a7af;">
-                                    <img src="{{asset('img/s4.png')}}" alt="">
-                                </a>
-                            </li>--}}
+
                             <li style="list-style: none;display: inline-block;">
                                 <a href="{{route('CarerRegistration')}}" style="margin-left: 10px; color: #a5a7af; ">
                                     <img src="{{asset('img/s5.png')}}" alt="">

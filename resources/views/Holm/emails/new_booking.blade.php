@@ -29,7 +29,7 @@
             <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%" class="t-content">
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; " valign="top" class="">
-                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">Dear {{( $sendTo == 'carer') ? $carer->like_name : $purchaser->like_name}}!</h1>
+                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 600; font-size: 18px; color: #272c2b;  text-transform: uppercase;">Dear {{( $sendTo == 'carer') ? $carer->like_name : $purchaser->like_name}}!</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             @if($sendTo == 'carer')
                                 <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{$serviceUser->first_name}}</a>
@@ -51,13 +51,27 @@
         <td style="padding:40px ;">
             <table cellpadding="0" cellspacing="0" border="0" style="overflow-x: auto;border: 1px solid rgb(225, 225, 225);box-shadow: 0px 0px 26.73px 0.27px rgba(0, 0, 0, 0.11);border-collapse: collapse;   margin: 0; " width="100%" class="t-content">
                 <tr>
-                    <td style="padding: 20px 15px 30px 15px;  " valign="middle">
+
+
+
+                    <?php
+
+                    //$patchToPurchaserAvatar = getcwd().'/img/profile_photos/'.$purchaserProfile->id.'.png';
+                    $patchToSrvUserAvatar = getcwd().'/img/service_user_profile_photos/'.$serviceUser->id.'.png';
+                    if(file_exists($patchToSrvUserAvatar)) {
+                        $img_src = asset('/img/service_user_profile_photos/'.$serviceUser->id.'.png');
+                    } else {
+                        $img_src = asset('/img/no_photo.png');
+                    }
+
+                    ?>
+
+                        <td style="padding: 20px 15px 30px 15px;  " valign="middle">
                         <div class="column" style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;">
                             <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;">
                                 <tr>
                                     <td align="center" style="text-align:left; ">
-                                        <img src="{{asset('/img/service_user_profile_photos/'.$serviceUser->id.'.png')}}"
-                                             onerror="this.src='{{asset('/img/no_photo.png')}}'" alt="avatar"
+                                        <img src="{{$img_src}}" alt=""
                                              class="user"
                                              style="width: 70px;
                             display: block;
@@ -68,6 +82,7 @@
                                 </tr>
                             </table>
                         </div>
+
                         <div class="column" style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;;">
                             <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;">
                                 <tr>
@@ -166,7 +181,7 @@
                     text-transform: uppercase;
                     font-weight: 700;
                     text-decoration: none;">
-                            Holm.com
+                            Holm.care
                         </a>
                     </td>
                     <td style="padding: 30px 40px; background: #fff; " valign="top" class="">
@@ -182,12 +197,12 @@
                                     <img src="{{asset('img/s2.png')}}" alt="">
                                 </a>
                             </li>
-                            <li style="list-style: none;display: inline-block;">
+                          {{--  <li style="list-style: none;display: inline-block;">
                                 <a href="https://plus.google.com/communities/102900900688938220709"
                                    style="margin-left: 10px; color: #a5a7af;">
                                     <img src="{{asset('img/s3.png')}}" alt="">
                                 </a>
-                            </li>
+                            </li>--}}
                             {{--                            <li style="list-style: none;display: inline-block;">
                                                             <a href="#" style="margin-left: 10px; color: #a5a7af;">
                                                                 <img src="{{asset('img/s4.png')}}" alt="">

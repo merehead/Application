@@ -404,7 +404,9 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
                 'toiled_help_details' => 'nullable|string|max:255',
 
                 'getting_ready_for_bed' => 'nullable|in:"Yes","No","Sometimes"',
+                'helping_toilet_at_night'=> 'nullable|in:"Yes","No","Sometimes"',
             ]);
+
 
 
             $depart = "#nightTime-div";
@@ -419,6 +421,8 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
             if (isset($input['toiled_help_details'])) $serviceUsersProfile->toiled_help_details = $input['toiled_help_details'];else $serviceUsersProfile->toiled_help_details =null;
 
             if (isset($input['getting_ready_for_bed'])) $serviceUsersProfile->getting_ready_for_bed = $input['getting_ready_for_bed'];
+
+            if (isset($input['helping_toilet_at_night'])) $serviceUsersProfile->helping_toilet_at_night = $input['helping_toilet_at_night'];
 
             $serviceUsersProfile->update();
             unset($serviceUsersProfile);

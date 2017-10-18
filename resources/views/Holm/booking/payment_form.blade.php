@@ -164,6 +164,7 @@
     $('#buttonPaymentBonuses').click(function () {
         $.post('{{route('setBookingPaymentMethod', ['booking' => $booking->id])}}', {'payment_method' : 'bonus_wallet'}, function( data ) {
             if(data.status == 'success'){
+                $('.bookPaymentWrap').css('border-top','none');
                 $('.bookPaymentWrap').html(`
               <div class="thank">
                 <h2 class="thank__title">
@@ -196,6 +197,7 @@
             },
             function( data ) {
             if(data.status == 'success'){
+                $('.bookPaymentWrap').css('border-top','none');
                 $('.bookPaymentWrap').html(`
               <div class="thank">
                 <h2 class="thank__title">

@@ -100,7 +100,7 @@ class PurchaserRegistration
 
         $purchaserProfile->registration_progress = $nextStep;
 
-        if ($request->input('step')==5 && $request->input('criminal_conviction')=="No") { // no a criminal backend
+        if ($request->input('step')=='5' && $request->input('criminal_conviction')=="No") { // no a criminal backend
             $purchaserProfile->registration_progress = '5_2';
         }
 
@@ -161,7 +161,7 @@ class PurchaserRegistration
         $this->validate($request,[
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'referral_code'=>'string|nullable|max:128',
+            'referral_code'=>'string|nullable|max:10|exists:users,own_referral_code',
         ]);
 
         $referral_code = 0;
@@ -190,25 +190,6 @@ class PurchaserRegistration
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']],TRUE)) {
             Auth::login($user, true);
         }
-/*            try {
-
-                Mail::send(config('settings.frontTheme') . '.emails.continue_sign_up_service_user',
-                    ['user' => $user, 'password' => $request['password']],
-                    function ($m) use ($request) {
-                        $m->to($request['email'])->subject('Registration on HOLM');
-                    });
-            }
-            catch (Swift_TransportException $STe){
-
-                    $error = MailError::create([
-                        'error_message'=>$STe->getMessage(),
-                        'function'=>__METHOD__,
-                        'action'=>'Try to sent continue_sign_up_service_user',
-                        'user_id'=>$user->id
-                    ]);
-                }*/
-
-
 
         return;
     }
@@ -291,7 +272,7 @@ class PurchaserRegistration
             'postcode' =>
                 array(
                     'required',
-                    'regex:#^([A-Za-z]{1,2}[0-9]{1,2}) [0-9][A-Za-z]{1,2}$#',
+                    'regex:#^([A-Za-z]{1,2}[0-9]{1,2}[A-Za-z]{0,2}) [0-9][A-Za-z]{1,2}$#',
                     //'regex:/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',
                 )
         ]);
@@ -315,7 +296,17 @@ class PurchaserRegistration
         $purchaserProfile->DoB              = $request->input('DoB');
 
         $purchaserProfile->profiles_status_id = 2;
-        $purchaserProfile->registration_status = 'completed';
+        //$purchaserProfile->registration_status = 'completed';
+
+        if ($purchaserProfile->purchasing_care_for=='Someone else' &&
+            preg_match('/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',$purchaserProfile->postcode)!=1
+        )
+        { // postcode acceptable for Manchester
+            $purchaserProfile->registration_status = 'completed';
+        }
+
+
+
 
         $purchaserProfile->update();
         //dd($request->all());
@@ -358,7 +349,7 @@ class PurchaserRegistration
             'mobile_number' =>
                 array(
                     'required',
-                    'regex:/^07[0-9]{9}$/',
+                    'regex:/^0[0-9]{10}$/',
                 ),
             'address_line1' =>
                 array(

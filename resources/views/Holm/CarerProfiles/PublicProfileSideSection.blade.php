@@ -138,10 +138,10 @@ From £ 12</span><span class="hourPrice__timing">/hour</span>
 
     {{--{{dd($reviews)}}--}}
 
-    @foreach($reviews as $review)
+    @foreach($reviews as $k=>$review)
 
         <div class="review {{--hidden--}}">
-            <div class="review__item singleReview">
+            <div class="review__item singleReview" {{($k==0)? 'style=border-top:none;':''}} >
                 <div class="reviewHead">
                     <div class="reviewer">
                         <a href="{{route('ServiceUserProfilePublic',[$review->id])}}"

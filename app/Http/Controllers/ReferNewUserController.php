@@ -63,7 +63,7 @@ class ReferNewUserController extends FrontController
                             'email' =>$email,
                             'subject' =>'Join Holm and receive £100',
                             'text' =>$text,
-                            'time_to_send' => Carbon::now()->addHour(),
+                            'time_to_send' => Carbon::now(),
                             'status'=>'new'
                         ]);
             }

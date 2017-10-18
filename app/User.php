@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -58,15 +59,12 @@ class User extends Authenticatable
         return $this->hasOne('App\PurchasersProfile', 'id', 'id');
     }
 
-    public function bonusAcceptors()
+    public function bonuses()
     {
-        return $this->hasMany('App\Bonuses_record', 'user_acceptor_id', 'id');
+        return $this->hasMany('App\BonusesPayment');
     }
-
-    public function bonusDonors()
-    {
-        return $this->hasMany('App\Bonuses_record', 'user_donor_id', 'id');
-    }
+    
+    
 
     public function blogs()
     {
@@ -158,6 +156,19 @@ class User extends Authenticatable
         }
     }
 
+    public function getFamilyNameAttribute(){
+        switch ($this->user_type_id){
+            case 1:
+                $profile = $this->userPurchaserProfile()->first();
+                return $profile->family_name;
+                break;
+            case 3:
+                $profile = $this->userCarerProfile()->first();
+                return $profile->family_name;
+                break;
+        }
+    }
+
     public function getBonusBalanceAttribute(){
         return 2000;
     }
@@ -173,6 +184,24 @@ class User extends Authenticatable
     }
 
 
+    public function getCompletedAppointmentsHoursAttribute()
+    {
+        if ($this->user_type_id === 3) {
+            $sql = 'SELECT a.id FROM appointments a LEFT JOIN bookings b ON a.booking_id = b.id WHERE a.status_id = 4  AND b.carer_id = ' . $this->id;
+        } else {
+            $sql = 'SELECT a.id FROM appointments a LEFT JOIN bookings b ON a.booking_id = b.id WHERE a.status_id = 4  AND b.purchaser_id = ' . $this->id;
+        }
+        $res = DB::select($sql);
+        $appointments = Appointment::findMany(array_pluck($res, 'id'));
+
+        $hours = 0;
+        foreach ($appointments as $appointment)
+            $hours += $appointment->hours;
+
+        return $hours;
+    }
+
+
     public function getAccountStatusAttribute() {
 
         //check for blocking purchaser account
@@ -181,6 +210,7 @@ class User extends Authenticatable
             return 'blocked';
 
         return;
+
 
     }
 
