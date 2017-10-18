@@ -1,17 +1,11 @@
 <div class="card error-text result {{count($carerResult)>0?"nhide":""}}">
     <div class="card-block">
-        <p class="text-uppercase">No carers found.</p><br>
-        <spanp class="text-left">
-            Recommendations:
-        </spanp><br>
-        <div class="checkBox_item">
-        <ul class="text-left">
-            <li class="list-inline checkBox_item">Make sure all words are spelled correctly.</li>
-            <li class="list-inline checkBox_item">Try using different keywords.</li>
-            <li class="list-inline checkBox_item">Try using more popular keywords.</li>
-            <li class="list-inline checkBox_item">Try reducing the number of words in the query.</li>
-        </ul>
-        </div>
+        <p class="text-uppercase">Sorry</p>
+        <p class="text-left">
+            No Carers meet your exact criteria.
+            Please try again by deselecting the least important requirements,
+            or <a href="{{route('ContactPage')}}">contact us</a> if you need further help
+        </p>
     </div>
 </div>
 
