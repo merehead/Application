@@ -153,6 +153,13 @@ $documents['other_relevant_qualification']->count()>0)
     <div class="profileAdvantages">
         <div class="profileAdvantages__row">
             <div class="advantageColumn">
+                @foreach($carerProfile->ServicesTypes as $item)
+                    <p>
+                        {{$item->name}}
+                    </p>
+                @endforeach
+            </div>
+            <div class="advantageColumn">
                 @foreach($typeCare as $item)
                 <p>
                     {{$item->name}}
@@ -248,13 +255,13 @@ $documents['other_relevant_qualification']->count()>0)
                 @if($carerProfile->have_car=='Yes')
                 <p class="advantage_label">
                     <i class="fa fa-check "></i>
-                    have a car for work
+                    has a car for work
                 </p>
                 @endif
                     @if($carerProfile->driving_licence=='Yes')
                 <p class="advantage_label">
                     <i class="fa fa-check "></i>
-                    have UK/EEA Driving Licence
+                    has a UK/EEA Driving Licence
                 </p>
                     @endif
             </div>

@@ -29,7 +29,7 @@
                     </div>
                     <div class="testimonialSlider__item item " id="testimonialSlider__item3">
                         <p>
-                            I’m not always filling out paperwork. It’s feels great!
+                            I’m not always filling out paperwork. It feels great!
                         </p>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
             <div class="carousel-inner carousel-inner1">
                 <div class="item active">
                     <div class="testimonialsPeople">
-                        <a href="#" class="peopleBox" data-id="1">
+                        <a href="#" class="peopleBox" data-id="4">
                             <div class="profilePhoto peopleBox__photo activeImg">
                                 <img src="/img/Annie_B.png" alt="">
                             </div>
@@ -71,7 +71,7 @@
                             <div class="peopleBox__info">
                                 <h2 class="profileName">Ginger P.</h2>
                                 <div class="people_quote">
-                                    I’m not always filling out paperwork. It’s feels great!
+                                    I’m not always filling out paperwork. It feels great!
                                 </div>
                             </div>
                         </a>

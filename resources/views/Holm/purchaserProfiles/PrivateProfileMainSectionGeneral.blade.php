@@ -129,7 +129,7 @@
                 Mobile Number <span class="requireIco">*</span>
               </span>
             </h2>
-            {!! Form::text('mobile_number',null,['class'=>'profileField__input']) !!}
+            {!! Form::text('mobile_number',null,['class'=>'profileField__input digitFilter' ]) !!}
 
         </div>
 
@@ -144,8 +144,8 @@
         </div>
     </div>
 
-{{--    <div class="profileMap" style="width:100%;height:450px">
+    <div class="profileMap" style="width:100%;height:450px;display:none;">
         <div id="map_canvas" style="clear:both; height:450px;"></div>
-    </div>--}}
+    </div>
 </div>
 {!! Form::close()!!}

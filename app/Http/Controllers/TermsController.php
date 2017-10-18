@@ -15,7 +15,7 @@ class TermsController extends FrontController
 
     public function index(){
 
-        $this->title = 'Holm Care - About Us';
+        $this->title = 'Holm Care -  Terms and Conditions';
 
         $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
         $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();

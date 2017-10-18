@@ -1,5 +1,5 @@
-<div class="registration">
-    <div class="registration__full">
+<div class="registration" >
+    <div class="registration__full" style="text-align: center">
         <div class="questionsBox">
 
             <span class="regIco">
@@ -7,9 +7,12 @@
             </span>
             <h2>Sorry </h2>
         </div>
-        <div class="sorryBox">
+        <div class="sorryBox" style="text-align: center">
             <p class="info-p info-p--roboto">
-                Sorry, Holm is not yet available in your area. Please use <a href="{{route('ContactPage')}}">the contact form</a> to request us to come to your home town. You can also use the form if you think we have made an error.’
+                Sorry, Holm is not yet available in your area.<br /><br />
+                Please use <a href="{{route('ContactPage')}}">the contact form</a>
+                to request us to come to your home town.<br />
+                You can also use the form if you think we have made an error.
             </p>
         </div>
 

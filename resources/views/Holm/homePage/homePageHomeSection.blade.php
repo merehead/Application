@@ -15,7 +15,7 @@
                         {!! Form::model(null, ['method'=>'POST','route'=>'searchPagePost','class'=>'homeForm','id'=>'carerSearchForm']) !!}
                         {!! Form::hidden('stage','carerSearch') !!}
                             {{--<input type="text"   class="homeForm__input" placeholder="enter your postcode">--}}
-                        {!! Form::text('postCode',null,['class'=>'homeForm__input','placeholder'=>'enter your postcode','maxlength'=>16,'onkeydown'=>"if(event.keyCode==13){document.getElementById('carerSearchForm').submit();}"]) !!}
+                        {!! Form::text('postCode',null,['class'=>'homeForm__input disable','placeholder'=>'enter your postcode','maxlength'=>16,'onkeydown'=>"if(event.keyCode==13){document.getElementById('carerSearchForm').submit();}"]) !!}
 
                         <a href="#" type="submit" class="homeForm__btn" onclick="event.preventDefault();document.getElementById('carerSearchForm').submit();">
                   <span>

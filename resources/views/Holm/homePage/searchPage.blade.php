@@ -55,7 +55,7 @@
                                 <div class="checkBox_item">
 
                                     {!! Form::checkbox('typeCare['.$care->id.']', null,((isset($requestSearch['typeCare']))&&in_array($care->id,$requestSearch['typeCare'])? 1 : null),
-                                                array('class' => 'customCheckbox ','id'=>'typeCarebox'.$care->id,'onclick'=>'carerSearchAjax()')) !!}
+                                                array('class' => 'customCheckbox ','id'=>'typeCarebox'.$care->id,'onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
                                     <label for="typeCarebox{{$care->id}}">{{$care->name}}</label>
                                 </div>
                             @endforeach
@@ -71,24 +71,24 @@
                         <div class="filterGroup__box filterGroup__box--active">
                             <div class="checkBox_item">
                                 {!! Form::checkbox('gender[Male]', null,((isset($requestSearch['gender']))&&in_array('Male',$requestSearch['gender'])? 1 : null),
-                                                array('class' => 'customCheckbox ','id'=>'boxgender1','onclick'=>'carerSearchAjax()')) !!}
+                                                array('class' => 'customCheckbox ','id'=>'boxgender1','onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
                                 <label for="boxgender1">male</label>
                             </div>
                             <div class="checkBox_item">
 
                                 {!! Form::checkbox('gender[Female]', null,((isset($requestSearch['gender']))&&in_array('Female',$requestSearch['gender'])? 1 : null),
-                                                array('class' => 'customCheckbox ','id'=>'boxgender2','onclick'=>'carerSearchAjax()')) !!}
+                                                array('class' => 'customCheckbox ','id'=>'boxgender2','onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
                                 <label for="boxgender2">female</label>
                             </div>
                             <div class="checkBox_item">
 
                                 {!! Form::checkbox('have_car', null,((isset($requestSearch['have_car']))? 1 : null),
-                                               array('class' => 'customCheckbox ','id'=>'have_car','onclick'=>'carerSearchAjax()')) !!}
+                                               array('class' => 'customCheckbox ','id'=>'have_car','onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
                                 <label for="have_car">HAS OWN TRANSPORT</label>
                             </div>
                             <div class="checkBox_item">
                                 {!! Form::checkbox('work_with_pets', null,((isset($requestSearch['work_with_pets']))? 1 : null),
-                                               array('class' => 'customCheckbox ','id'=>'work_with_pets','onclick'=>'carerSearchAjax()')) !!}
+                                               array('class' => 'customCheckbox ','id'=>'work_with_pets','onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
                                 <label for="work_with_pets">WORKS WITH PETS</label>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
                                 @foreach($languages as $lang)
                                     <div class="checkBox_item">
                                         {!! Form::checkbox('language['.$lang->id.']', null,((isset($requestSearch['language']))&&in_array($lang->id,$requestSearch['language'])? 1 : null),
-                                               array('class' => 'customCheckbox ','id'=>'languagebox'.$lang->id,'onclick'=>'carerSearchAjax()')) !!}
+                                               array('class' => 'customCheckbox ','id'=>'languagebox'.$lang->id,'onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
 
                                         <label for="languagebox{{$lang->id}}">{{$lang->carer_language}} </label>
                                     </div>
@@ -117,10 +117,10 @@
             </div>
             <div class="col-sm-8 col-md-9">
                 <div class="filterHead filterHead--xs-column filterBox">
-                    <a href="#" class="sortLinkXs">search by <span><i class="fa fa-angle-down"></i></span></a>
+                    <a href="#" class="sortLinkXs">sort by <span><i class="fa fa-angle-down"></i></span></a>
                     <div class="sortFilters hiddenSort hiddenSort--visible">
                         <div class="sortFilters__item">
-                            {!! Form::text('postCode',(isset($requestSearch['postCode'])?$requestSearch['postCode']:''),['class'=>'sortField','placeholder'=>'POST CODE','maxlength'=>16,'onkeydown'=>"if(event.keyCode==13){carerSearchAjax();}"]) !!}
+                            {!! Form::text('postCode',(isset($requestSearch['postCode'])?$requestSearch['postCode']:''),['class'=>'sortField disable','placeholder'=>'POST CODE','maxlength'=>16,'onkeydown'=>"if(event.keyCode==13){carerSearchAjax();}"]) !!}
                             <span class="fieldIco"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
                         </div>
                         <div class="sortFilters__item">
@@ -128,37 +128,35 @@
                             <span class="fieldIco"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                         </div>
                         <div class="sortFilters__item">
-                            {!! Form::select('typeService',[''=>'TYPE OF SERVICE','1'=>'SINGLE / REGULAR VISITS','2'=>'LIVE IN CARE','3'=>'RESPITE CARE'],null,['id'=>'typeService','class'=>'formSelect','onchange'=>'carerSearchAjax()']) !!}
+                            {!! Form::select('typeService',[''=>'TYPE OF SERVICE','1'=>'SINGLE / REGULAR VISITS','2'=>'LIVE IN CARE','3'=>'RESPITE CARE'],null,['id'=>'typeService','class'=>'formSelect','onchange'=>"$('#load-more').val(0);carerSearchAjax()"]) !!}
                         </div>
                     </div>
                 </div>
 
                 <div class="resultHeader Paginator">
-                    <p class="resultHeader__info">Showing {{(($page*$perPage)-$perPage==0)?'1':($page*$perPage)-$perPage}}-{{($carerResultCount<$perPage)?$page*$carerResultCount:$page*$perPage}} of {{$carerResultCount}} CARERs</p>
+                    <p class="resultHeader__info">Showing {{($page*$perPage)<$countAll?$page*$perPage:$countAll}} of {{$countAll}} CARERS</p>
                     <div class="sortLink">
-                        SEARCH BY &nbsp; <a href="#" class="sortLink__item sort-rating"> <span> </span> rating
+                        SORT BY &nbsp; <a href="#" class="sortLink__item sort-rating"> <span> </span> rating
                         </a>
                         <p> &nbsp; - &nbsp; </p>
-                        <!--<span class="sortLink__separate">
-
-                        </span>
-                        -->
                         <a href="#" class="sortLink__item sort-id">
                             MOST RECENT
                         </a>
                     </div>
                 </div>
-                <div class="resultHeader error-text nhide">
-                    <p>No carers found.</p>
-                    <p>
+                <div class="card error-text result {{count($carerResult)>0?"nhide":""}}">
+                    <div class="card-block">
+                    <p class="text-uppercase">No carers found.</p>
+                    <p class="text-left">
                         Recommendations:
                     </p>
-                    <ul class="list-inline">
-                        <li>Make sure all words are spelled correctly.</li>
-                        <li>Try using different keywords.</li>
-                        <li>Try using more popular keywords.</li>
-                        <li>Try reducing the number of words in the query.</li>
-                    </ul>
+                        <ul class="text-left">
+                            <li class="list-inline ">Make sure all words are spelled correctly.</li>
+                            <li class="list-inline ">Try using different keywords.</li>
+                            <li class="list-inline ">Try using more popular keywords.</li>
+                            <li class="list-inline ">Try reducing the number of words in the query.</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="carer-result">
@@ -214,9 +212,11 @@
                     {{--</a>--}}
                     {{--<span class="sortLink__separate"></span>--}}
                 {{--@endfor--}}
-                @if($carerResultCount>5)
+                @if($countAll>5)
                     <input type="hidden" id="id-carer" name="id" value="{{$carerResult[count($carerResult)-1]->id}}">
                     <input type="hidden" name="load-more" id="load-more" value="0">
+                    <input type="hidden" name="page" id="page" value="{{$page}}">
+                    <input type="hidden" name="load-more-count" id="load-count" value="{{$load_more_count}}">
                 <div class="moreBtn moreBtn--book ">
                     <a href="" class="moreBtn__item moreBtn__item--book centeredLink moreLink">
                         Load More

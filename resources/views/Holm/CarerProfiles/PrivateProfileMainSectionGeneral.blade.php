@@ -75,7 +75,7 @@
                 Mobile Number <span class="requireIco">*</span>
               </span>
             </h2>
-            {!! Form::text('mobile_number',null,['class'=>'profileField__input','maxlength'=>'11']) !!}
+            {!! Form::text('mobile_number',null,['class'=>'profileField__input digitFilter','maxlength'=>'11']) !!}
         </div>
 
         <div class="profileField">
@@ -112,7 +112,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','disabled','
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                Restrictions working in the UK </span>
+                 working Restrictions in the UK </span>
             </h2>
 {{--            <select class="profileField__select profileField__select--greyBg">
                 <option value="Yes">Do not have restrictions to work in the uk</option>
@@ -124,7 +124,7 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
         <div class="profileField depend_hiding-work">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                Restrictions working </span>
+                 working Restrictions</span>
             </h2>
         {!! Form::text('work_UK_description',null,['class'=>'profileField__input','disabled','data-edit'=>'false']) !!}
 
@@ -234,11 +234,11 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
                 <div class="profileField profileField--full-width">
                     <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                  Phone
+                  Phone number
                 </span>
                     </h2>
 
-                    {!! Form::text('Persons['.$number.'][phone]',$carerReference->phone,['class'=>'profileField__input','maxlength'=>'16']) !!}
+                    {!! Form::text('Persons['.$number.'][phone]',$carerReference->phone,['class'=>'profileField__input digitFilter','placeholder'=>'07000000000', 'maxlength'=>'16']) !!}
                 </div>
                 <div class="profileField profileField--full-width">
                     <h2 class="profileField__title ordinaryTitle">

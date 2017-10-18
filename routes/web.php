@@ -42,6 +42,7 @@ Route::get('/carer-settings/{id?}', 'CarerController@index')->name('carerSetting
 
 Route::get('/carer/profile/{user_id}', 'CarerController@profile')->name('carerPublicProfile'); //synonym for
 Route::get('/address/', 'CarerController@getAddress')->name('carerGetAddress'); //synonym for
+Route::get('/noaddress/', 'CarerController@getNoAddress')->name('carerGetNoAddress'); //synonym for
 Route::get('/carer/review/{user_id}', 'CarerController@review')->name('carerReview'); //synonym for
 Route::get('/carer/appointment/{user_id}', 'CarerController@appointment')->name('carerAppointment'); //synonym for
 // ImCarerPage
@@ -114,6 +115,10 @@ Route::get('/thank-you-user/{id}', 'ServiceUserRegistrationController@sendContin
 
 Route::get('/user-registration-completed/{id}', 'ServiceUserRegistrationController@sendCompleteRegistration')->name('serviceUserRegistrationComplete'); //mail - completed registration
 //^^^registration mail
+
+Route::get('/invite/refer-users', 'ReferNewUserController@index')->name('inviteReferUsers');
+Route::post('/invite/refer-users', 'ReferNewUserController@create')->name('inviteReferUsersPost');
+Route::get('/invite/thank-you', 'ReferNewUserController@show')->name('thankForInvite');
 
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {

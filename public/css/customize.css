@@ -346,10 +346,15 @@ select#workingTimes {
 body > section > div > div.invite {
     margin-bottom: 0px;
 }
-
+.peopleBox:focus .peopleBox__photo, .peopleBox:hover .peopleBox__photo{
+  filter: grayscale(100%);
+}
+.peopleBox, .peopleBox:hover ,.peopleBox, .peopleBox:focus{
+  text-decoration: none;
+}
 .activeImg {
-    filter: none;
-    -webkit-filter: none;
+    filter: none!important;
+    -webkit-filter: none!important;
 }
 
 a.blogFilter__item.active {
@@ -649,10 +654,17 @@ label.correct2 {
     content: '\2713';
     position: absolute;
     top: 3px;
-    left: 13px;
+    left: 2px;
     font-size: 18px;
     line-height: .8;
     color: #80cb2d;
     -webkit-transition: all .2s;
     transition: all .2s;
+}
+
+.close {
+    opacity: 0.9;
+}
+.footer{
+  position: relative!important;
 }

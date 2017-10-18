@@ -434,6 +434,7 @@ class ServiceUserRegistration
             'mobile_number' =>
                 array(
                     'required',
+                    'regex:/^0[0-9]{10}$/',
                 ),
             'address_line1' =>
                 array(
@@ -1410,6 +1411,9 @@ class ServiceUserRegistration
 
         $serviceUserProfile->multiple_carers  = $request->input('multiple_carers');
         $serviceUserProfile->multiple_carers_details  = $request->input('multiple_carers_details');
+
+        //$serviceUserProfile->profiles_status_id = 2;
+        //$serviceUserProfile->registration_status = 'new';
 
         $serviceUserProfile->update();
 

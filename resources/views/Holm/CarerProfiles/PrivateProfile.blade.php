@@ -43,6 +43,7 @@
         }
         $(document).ready(function(){
             initMap();
+            $('#post_code_profile').autocomplete({serviceUrl:'/noaddress/'});
         });
     </script>
     {{--<link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">--}}

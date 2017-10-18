@@ -40,12 +40,6 @@
         window.open(href, '_blank').focus();
     });
 
-    // change quote
-    $('.peopleBox').on('click', function (e) {
-        e.preventDefault()
-        var quote = $(this).find('.people_quote').text().trim()
-        $('#testimonialSlider__item p').text(quote)
-    });
     var pos = 1;
     $('.peopleBox').on('click', function (e) {
         e.preventDefault();
@@ -53,6 +47,7 @@
         var id = $(this).attr('data-id');
         $('.special-slide').find('.active').removeClass('active');
         $('.profilePhoto').removeClass('activeImg');
+        $(this).find('.profilePhoto').addClass('activeImg')
         $('.special-slide').find('#testimonialSlider__item'+id).addClass('active');
         pos=parseInt(id);
     });

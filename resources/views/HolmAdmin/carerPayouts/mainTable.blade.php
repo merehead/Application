@@ -4,7 +4,10 @@
 
         <tbody>
 
-        @foreach($users as $user)
+
+        {{dd($carers)}}
+
+        @foreach($carers as $user)
             @include(config('settings.theme').'.carerPayouts.mainTableRow')
         @endforeach
 

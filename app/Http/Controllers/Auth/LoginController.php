@@ -56,7 +56,7 @@ class LoginController extends Controller
 
                 $carerProfile =  CarersProfile::findOrFail($user->id);
 
-                if($carerProfile->registration_progress != '20')
+                if($carerProfile->registration_status == 'new')
                     return '/carer-registration';
                 else
                     return'/carer-settings';

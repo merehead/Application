@@ -5,6 +5,7 @@
           </span>
         Profiles managment
     </h2>
+   {{-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>--}}
     {!! Form::open(['method'=>'GET','action'=>'Admin\User\UserController@index','id'=>'user_filter']) !!}
     <div class="panelHead">
         <div class="filterGroup">
@@ -46,4 +47,3 @@
     @include(config('settings.theme').'.profilesManagement.mainTable')
 
 </div>
-

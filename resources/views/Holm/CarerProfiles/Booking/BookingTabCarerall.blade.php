@@ -63,7 +63,7 @@
                     <div class="bookingCard__body bookInfo">
                         <div class="bookInfo__profile">
                             <a href="{{$booking->bookingServiceUser()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
-                                <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" alt="">
+                                <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'" alt="">
                             </a>
                             <div class="bookInfo__text">
                                 <p><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->full_name}}</a> booked you</p>
@@ -109,12 +109,16 @@
             <div class="bookingCard__header bookingCard__header">
                 <h2>in progress</h2>
             </div>
+
+
+
+
             @if($inProgressBookings->count() > 0)
                 @foreach($inProgressBookings as $booking)
                     <div class="bookingCard__body bookInfo">
                         <div class="bookInfo__profile">
                             <a href="{{$booking->bookingServiceUser()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
-                                <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" alt="">
+                                <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'" alt="">
                             </a>
                             <div class="bookInfo__text">
                                 <p><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->full_name}}</a> booked you</p>
@@ -148,6 +152,10 @@
             @else
                 <p align="center" class="bookDate">You do not have bookings yet</p>
             @endif
+
+
+
+
             @if($inProgressBookings->count() > 3)
                 <div class="moreBtn moreBtn--book ">
                     <a href="" class="moreBtn__item moreBtn__item--book centeredLink">
@@ -170,7 +178,7 @@
                     <div class="bookingCard__body bookInfo">
                         <div class="bookInfo__profile">
                             <a href="{{$booking->bookingServiceUser()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
-                                <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" alt="">
+                                <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'" alt="">
                             </a>
                             <div class="bookInfo__text">
                                 <p><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->full_name}}</a> booked you</p>
@@ -210,7 +218,7 @@
                     <div class="bookingCard__body bookInfo">
                         <div class="bookInfo__profile">
                             <a href="{{$booking->bookingServiceUser()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
-                                <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" alt="">
+                                <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'" alt="">
                             </a>
                             <div class="bookInfo__text">
                                 <p><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->full_name}}</a> booked you</p>

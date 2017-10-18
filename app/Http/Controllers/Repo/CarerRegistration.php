@@ -17,6 +17,7 @@ use App\ServiceUsersProfile;
 use App\User;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use SebastianBergmann\CodeCoverage\Exception;
 use Swift_TransportException;
@@ -30,6 +31,16 @@ class CarerRegistration
     public function __construct(CarersProfile $carersProfile) {
         $this->model = $carersProfile;
     }
+
+/*    public function checkReferCode($referCode) {
+
+
+        $rc = DB::select("select `id` from `users` where `own_referral_code` = '".$referCode."'");
+
+        if ($rc) return $referCode;
+
+        return 0;
+    }*/
 
     public function getID()
     {
@@ -187,7 +198,7 @@ class CarerRegistration
         $this->validate($request,[
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'referral_code'=>'string|nullable|max:128',
+            'referral_code'=>'string|nullable|max:10|exists:users,own_referral_code',
         ]);
         $referral_code = 0;
         (isset($request['referral_code']))? $referral_code = $request['referral_code'] : $referral_code = 0;
@@ -305,7 +316,7 @@ class CarerRegistration
             'postcode' =>
                 array(
                     'required',
-                    'regex:#^([A-Za-z]{1,2}[0-9]{1,2}) [0-9][A-Za-z]{1,2}$#'
+                    'regex:#^([A-Za-z]{1,2}[0-9]{1,2}[A-Za-z]{0,1}) [0-9][A-Za-z]{1,2}[0-9]{0,1}$#'
 
 
                     //'regex:/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',
@@ -416,8 +427,21 @@ class CarerRegistration
 
 
         $carerProfile->driving_licence  = $request->input('driving_licence');
-        $carerProfile->have_car  = $request->input('have_car');
-        $carerProfile->use_car  = $request->input('use_car');
+
+        if ($request->input('driving_licence') == 'No') {
+            $carerProfile->have_car  = null;
+            $carerProfile->use_car  = null;
+        } else {
+            $carerProfile->have_car  = $request->input('have_car');
+            $carerProfile->use_car  = $request->input('use_car');
+        }
+
+        if ($request->input('have_car') == 'No' || $request->input('driving_licence') == 'No') {
+            $carerProfile->use_car  = null;
+        } else {
+            $carerProfile->use_car  = $request->input('use_car');
+        }
+
         $carerProfile->DBS_number  = $request->input('DBS_number');
         $carerProfile->car_insurance_number  = $request->input('car_insurance_number');
         if(isset($input['driver_licence_valid_until'])) $carerProfile->driver_licence_valid_until  = $request->input('driver_licence_valid_until');
@@ -616,7 +640,7 @@ class CarerRegistration
             'phone' =>
                 array(
                     'required',
-                    'regex:/^07[0-9]{9}$/',
+                    'regex:/^0[0-9]{10}$/',
                 ),
             'email' =>
                 array(

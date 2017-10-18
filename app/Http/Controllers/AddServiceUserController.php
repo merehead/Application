@@ -24,12 +24,6 @@ class AddServiceUserController extends FrontController
 
     public function create(){
 
-        //dd('userSRv',$this->user);
-
-        //поставить проверку на разрешенные условия создания профиля
-        //и установить нужный шаг
-
-
         $serviceUsersProfile = new ServiceUsersProfile();
         $serviceUsersProfile->purchaser_id = $this->user->id;
         $serviceUsersProfile->registration_progress = '4_2';

@@ -104,10 +104,10 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
 
                         <div class="formField personalActive">
                             <h2 class="formLabel personalForm__label">
-                                Mobile number <span>*</span>
+                                Phone number <span>*</span>
                             </h2>
                             <div class="inputWrap">
-                                {!! Form::text('mobile_number',null,['class'=>'formInput personalForm__input','placeholder'=>'Your mobile number','maxlength'=>"16"]) !!}
+                                {!! Form::text('mobile_number',null,['class'=>'formInput personalForm__input digitFilter','placeholder'=>'Phone number','maxlength'=>"11"]) !!}
                             </div>
                             @if ($errors->has('mobile_number'))
                                 <span class="help-block">

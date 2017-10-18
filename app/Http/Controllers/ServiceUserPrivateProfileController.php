@@ -36,8 +36,6 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
     {
 
 
-        //dd($serviceUserProfile);
-
         $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
         $this->title = 'Holm Care';
 
@@ -99,6 +97,8 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
         }
 
 //dd($this->restrictedAccess($serviceUsersProfile));
+
+
         $this->vars = array_add($this->vars, 'restrictedAccess', $this->restrictedAccess($serviceUsersProfile));
 
         $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
@@ -144,16 +144,24 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
 
     protected function restrictedAccess($serviceUsersProfile){
 
+
         $activeUser = Auth::user();
-//dd($activeUser->id ,$serviceUsersProfile->purchaser_id);
-        //может смотреть сам себя
-        if ($activeUser->id == $serviceUsersProfile->purchaser_id) return false;
 
-        //может смотреть карер у которого есть букинг в сосотянии Прогресс с этим карером
-        $booking = Booking::where('carer_id',$activeUser->id)->where('service_user_id',$serviceUsersProfile->id)->where('status_id','3')->get();
-        if (count($booking)) return false;
+        //current user is the profile owner?
+        if ($activeUser->id == $serviceUsersProfile->purchaser_id) return false; //full access
 
-        return true; //доступ ограничен
+        //can see carer which have booking with this service profile in progress or new statuses(5||1)
+        if ($activeUser->isCarer()) {
+            $booking5 = Booking::where('carer_id', $activeUser->id)
+                ->where('service_user_id', $serviceUsersProfile->id)
+                ->where('status_id', '5')->get();
+            $booking1 = Booking::where('carer_id', $activeUser->id)
+                ->where('service_user_id', $serviceUsersProfile->id)
+                ->where('status_id', '1')->get();
+            if (count($booking5)||count($booking1)) return false; // full access
+        }
+
+        return true; //access restricted
     }
 
 
@@ -396,7 +404,9 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
                 'toiled_help_details' => 'nullable|string|max:255',
 
                 'getting_ready_for_bed' => 'nullable|in:"Yes","No","Sometimes"',
+                'helping_toilet_at_night'=> 'nullable|in:"Yes","No","Sometimes"',
             ]);
+
 
 
             $depart = "#nightTime-div";
@@ -411,6 +421,8 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
             if (isset($input['toiled_help_details'])) $serviceUsersProfile->toiled_help_details = $input['toiled_help_details'];else $serviceUsersProfile->toiled_help_details =null;
 
             if (isset($input['getting_ready_for_bed'])) $serviceUsersProfile->getting_ready_for_bed = $input['getting_ready_for_bed'];
+
+            if (isset($input['helping_toilet_at_night'])) $serviceUsersProfile->helping_toilet_at_night = $input['helping_toilet_at_night'];
 
             $serviceUsersProfile->update();
             unset($serviceUsersProfile);

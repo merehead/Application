@@ -10,7 +10,6 @@
 
 </div>
 
-
 <div class="invite">
     <div class="profilePhoto invite__photo">
         <img class="set_preview_profile_photo" src="/img/profile_photos/{{$purchaserProfile->id}}.png" onerror="this
@@ -19,23 +18,16 @@
     <h2 class="invite__title">
         Invite other users and both get £100 after 20 hours of usage
     </h2>
-    <!--
-    <form class="inviteForm">
-      <div class="inviteForm__field">
-        <input type="text" class="inviteForm__input"  placeholder="FRIEND'S EMAIL">
-      </div>
-      <div class="inviteForm__field">
-       <button class="inviteForm__btn centeredLink">invite</button>
-      </div>
-    </form>
-   -->
+
     <div class="invite-code">
         <p>
             Your referral code is <span>{{$purchaserProfile->own_referral_code}}</span>
         </p>
-        <button type="button" name="button" class="invite-btn ">
+        <a href="{{route('inviteReferUsers')}}"><button type="button" name="button" class="invite-btn ">
             invite
-        </button>
+        </button></a>
+
+
     </div>
 </div>
 

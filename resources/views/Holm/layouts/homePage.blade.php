@@ -39,6 +39,7 @@
         var id = $(this).attr('data-id');
         $('.special-slide').find('.active').removeClass('active');
         $('.profilePhoto').removeClass('activeImg');
+        $(this).find('.profilePhoto').addClass('activeImg')
         $('.special-slide').find('#testimonialSlider__item'+id).addClass('active');
         pos=parseInt(id);
     });

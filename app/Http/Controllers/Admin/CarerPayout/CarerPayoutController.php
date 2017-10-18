@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin\CarerPayout;
 
 use App\Appointment;
+use App\AppointmentStatus;
+use App\CarersProfile;
 use App\Http\Controllers\Admin\AdminController;
+use App\Interfaces\Constants;
 use App\User;
 use Illuminate\Http\Request;
 
 
-class CarerPayoutController extends AdminController
+class CarerPayoutController extends AdminController implements Constants
 {
 
     //private $disputePayout;
@@ -30,19 +33,21 @@ class CarerPayoutController extends AdminController
     {
 
         $filter = FALSE;
+
         $input = $request->all();
 
         if (isset($input['filter'])) {$input['filter'] != 0 ? $filter = ['status_id','=',$input['filter']] : $filter = FALSE;}
 
         $this->title = 'Payout to carers';
 
-        $users = User::where('user_type_id','3')->get();
+        //$users = User::where('user_type_id','3')->get();
 
-        //$user = User::find('1');
+        $carers = CarersProfile::all()->take(20);
+        $this->vars = array_add($this->vars,'carers',$carers);
 
-        //dd($user->userPurchaser);
+        $appointmentStatus = AppointmentStatus::all()->pluck('name','id')->toArray();
+        $this->vars = array_add($this->vars,'appointmentStatus',$appointmentStatus);
 
-        $this->vars = array_add($this->vars,'users',$users);
 
         $this->content = view(config('settings.theme').'.carerPayouts.carerPayouts')->with($this->vars)->render();
 

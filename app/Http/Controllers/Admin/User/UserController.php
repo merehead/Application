@@ -5,11 +5,15 @@ namespace App\Http\Controllers\Admin\User;
 use App\CarersProfile;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Repo\Models\User\AdminUsers;
+use App\MailError;
 use App\PurchasersProfile;
 use App\ServiceUsersProfile;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Swift_TransportException;
 
 //use App\Http\Controllers\Controller;
 
@@ -149,71 +153,66 @@ class UserController extends AdminController
 
                     if ($previous == 5) {
                         $user = User::findOrFail($profile->id);
-                        try {
-                            Mail::send(config('settings.frontTheme') . '.emails.unblock_account_by_admin',
-                                [
-                                    'user' => $user,
-                                    'like_name' => $profile->like_name
-                                ],
-                                function ($m) use ($user) {
-                                    $m->to($user->email)->subject('Unblock account by admin');
-                                });
-                        } catch (Swift_TransportException $STe) {
 
-                            $error = MailError::create([
-                                'error_message' => $STe->getMessage(),
-                                'function' => __METHOD__,
-                                'action' => 'Try to sent accepting massage',
-                                'user_id' => $user->id
-                            ]);
-                        }
+
+                        $text = view(config('settings.frontTheme') . '.emails.unblock_account_by_admin')->with([
+                            'user' => $user,
+                            'like_name'=>$profile->like_name
+                        ])->render();
+
+                        DB::table('mails')
+                            ->insert(
+                                [
+                                    'email' =>$user->email,
+                                    'subject' =>'Unblock account by admin',
+                                    'text' =>$text,
+                                    'time_to_send' => Carbon::now(),
+                                    'status'=>'new'
+                                ]);
+
                     }
                     break;
                 }
                 case 'reject': {
                     $user = User::findOrFail($profile->id);
-                    try {
-                        Mail::send(config('settings.frontTheme') . '.emails.reject_account_by_admin',
-                            [
-                                'user' => $user,
-                                'like_name' => $profile->like_name
-                            ],
-                            function ($m) use ($user) {
-                                $m->to($user->email)->subject('Reject account by admin');
-                            });
-                    } catch (Swift_TransportException $STe) {
 
-                        $error = MailError::create([
-                            'error_message' => $STe->getMessage(),
-                            'function' => __METHOD__,
-                            'action' => 'Try to sent accepting massage',
-                            'user_id' => $user->id
-                        ]);
-                    }
+                    $text = view(config('settings.frontTheme') . '.emails.reject_account_by_admin')->with([
+                        'user' => $user,
+                        'like_name'=>$profile->like_name
+                    ])->render();
+
+                    DB::table('mails')
+                        ->insert(
+                            [
+                                'email' =>$user->email,
+                                'subject' =>'Reject account by admin',
+                                'text' =>$text,
+                                'time_to_send' => Carbon::now(),
+                                'status'=>'new'
+                            ]);
+
                 }
                     break;
                 case 'block':{
                     $user = User::findOrFail($profile->id);
-                    try {
-                        Mail::send(config('settings.frontTheme') . '.emails.block_account_by_admin',
-                            [
-                                'user' => $user,
-                                'like_name'=>$profile->like_name
-                            ],
-                            function ($m) use ($user) {
-                                $m->to($user->email)->subject('Block account by admin');
-                            });
-                    } catch (Swift_TransportException $STe) {
 
-                        $error = MailError::create([
-                            'error_message' => $STe->getMessage(),
-                            'function' => __METHOD__,
-                            'action' => 'Try to sent accepting massage',
-                            'user_id' => $user->id
-                        ]);
-                    }
-                    break;
+                    $text = view(config('settings.frontTheme') . '.emails.block_account_by_admin')->with([
+                        'user' => $user,
+                        'like_name'=>$profile->like_name
+                    ])->render();
+
+                    DB::table('mails')
+                        ->insert(
+                            [
+                                'email' =>$user->email,
+                                'subject' =>'Block account by admin',
+                                'text' =>$text,
+                                'time_to_send' => Carbon::now(),
+                                'status'=>'new'
+                            ]);
+
                 }
+                    break;
 
             }
         } else {
@@ -226,22 +225,23 @@ class UserController extends AdminController
 
             $user = User::findOrFail($profile->id);
 
-            try {
-                Mail::send(config('settings.frontTheme') . '.emails.confirm_account_by_admin',
-                    ['user' => $user,
-                    ],
-                    function ($m) use ($user) {
-                        $m->to($user->email)->subject('HOLM account confirmation');
-                    });
-            } catch (Swift_TransportException $STe) {
 
-                $error = MailError::create([
-                    'error_message' => $STe->getMessage(),
-                    'function' => __METHOD__,
-                    'action' => 'Try to sent accepting massage',
-                    'user_id' => $user->id
-                ]);
-            }
+            $text = view(config('settings.frontTheme') . '.emails.confirm_account_by_admin')->with([
+                'user' => $user,
+
+            ])->render();
+
+            DB::table('mails')
+                ->insert(
+                    [
+                        'email' =>$user->email,
+                        'subject' =>'HOLM account confirmation',
+                        'text' =>$text,
+                        'time_to_send' => Carbon::now(),
+                        'status'=>'new'
+                    ]);
+
+
         }
 
 

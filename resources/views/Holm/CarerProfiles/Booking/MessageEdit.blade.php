@@ -16,7 +16,7 @@
                     <div class="messageGroup">
                         <h2 class="ordinaryTitle ordinaryTitle--smaller">
                             <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                                Person needing care
+                                Please select person needing care
                             </span>
                         </h2>
                         <div class="needCareContainer">
@@ -139,7 +139,7 @@
 
                         <a href="#" class="additionalTime nhide">
                             <i class="fa fa-clock-o" aria-hidden="true"></i>
-                            add additional time
+                            ADD ADDITIONAL APPOINTMENT
                         </a>
 
 

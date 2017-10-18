@@ -10,6 +10,7 @@ use App\Interfaces\Constants;
 use App\Language;
 use App\Postcode;
 use App\PurchasersProfile;
+use App\ServiceType;
 use App\ServiceUsersProfile;
 use App\User;
 use App\Document;
@@ -28,6 +29,13 @@ class CarerController extends FrontController implements Constants
 
     }
 
+    public function getNoAddress(){
+        $response = array();
+        $response['query'] = '';
+        $response['suggestions'] = array();
+        return response(json_encode($response),200);
+    }
+
     public function welcome()
     {
         $this->template = config('settings.frontTheme') . '.templates.ImCarer';
@@ -41,7 +49,13 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars,'footer',$footer);
         $this->vars = array_add($this->vars,'modals',$modals);
 
-        $this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
+
+        $carers = CarersProfile::orderBy('id', 'desc')
+            ->take(3)
+            ->get();
+        $this->vars = array_add($this->vars,'carers',$carers);
+
+        $this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->with($this->vars)->render();
         return $this->renderOutput();
     }
 
@@ -82,8 +96,12 @@ class CarerController extends FrontController implements Constants
             $this->vars = array_add($this->vars, 'carerProfile', $carerProfile);
             $postcodes = Postcode::all()->pluck('name', 'id')->toArray();
             $this->vars = array_add($this->vars, 'postcodes', $postcodes);
-            $typeCare = AssistanceType::all();
-            $this->vars = array_add($this->vars, 'typeCare', $typeCare);
+
+            $typeServices = ServiceType::all();
+            $this->vars = array_add($this->vars, 'typeServices', $typeServices);
+
+            $typeCares = AssistanceType::all();
+            $this->vars = array_add($this->vars, 'typeCares', $typeCares);
             $workingTimes = WorkingTime::all();
             $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
             $languages = Language::all();
@@ -144,6 +162,10 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars, 'typeCare', $typeCare);
         $typeCareAll = AssistanceType::all();
         $this->vars = array_add($this->vars, 'typeCareAll', $typeCareAll);
+
+        /*$typeServices = ServiceType::all();
+        $this->vars = array_add($this->vars, 'typeServices', $typeServices);*/
+
         $workingTimes = $carerProfile->WorkingTimes()->get();
         $this->vars = array_add($this->vars, 'workingTimes', $workingTimes);
         $languages = $carerProfile->Languages()->get();
@@ -246,10 +268,11 @@ class CarerController extends FrontController implements Constants
     {
 
 
-        $depart = '';
-        //dd($request->all());
 
         $input = $request->all();
+
+        //dd($input['Persons'][0]['phone'],$input['Persons'][1]['phone']);
+
 
         $carerProfiles = CarersProfile::findOrFail($input['id']);
 
@@ -261,6 +284,16 @@ class CarerController extends FrontController implements Constants
                         'required',
                         'string',
                         'max:128'
+                    ),
+                'Persons.0.phone' =>
+                    array(
+                        'required',
+                        'regex:/^0[0-9]{10}$/',
+                    ),
+                'Persons.1.phone' =>
+                    array(
+                        'required',
+                        'regex:/^0[0-9]{10}$/',
                     ),
                 'mobile_number' =>
                     array(
@@ -391,12 +424,20 @@ class CarerController extends FrontController implements Constants
                 $carerProfiles->AssistantsTypes()->sync(array_keys($input['typeCare']));
             }
 
+            if (isset($input['typeService'])) {
+                $carerProfiles->ServicesTypes()->sync(array_keys($input['typeService']));
+            }
+
             unset($carerProfiles);
         }
 
         if ($input['stage'] == 'carerPrivateAvailability') {
 
             $depart = "#carerAvailability";
+
+            if (isset($input['times'])) {
+                $carerProfiles->times = $input['times'];
+            }
 
             if (isset($input['work_hours'])) {
                 $carerProfiles->work_hours = $input['work_hours'];

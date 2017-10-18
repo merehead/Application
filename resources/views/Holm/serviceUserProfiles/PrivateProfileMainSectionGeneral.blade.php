@@ -134,10 +134,10 @@
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-               Mobile Number
+               Phone Number
               </span>
             </h2>
-            {!! Form::text('mobile_number',null,['class'=>'profileField__input','placeholder'=>'Mobile number ','maxlength'=>"30"]) !!}
+            {!! Form::text('mobile_number',null,['class'=>'profileField__input','placeholder'=>'Mobile number','maxlength'=>"30"]) !!}
             @if ($errors->has('mobile_number'))
                 <span class="help-block"><strong>{{ $errors->first('mobile_number') }}</strong></span>
             @endif

@@ -2,78 +2,34 @@
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <meta name="viewport" content="width=device-width">
-    <title>
-        Classical
-    </title>
+    <title>New booking</title>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Open+Sans:400,600,700|Roboto:300,400,400i,500,700"
           rel="stylesheet">
-    <style type="text/css">
-
-        a:hover {
-            text-decoration: none !important;
-        }
-
-        a {
-            color: #71bc37;
-            text-decoration: none;
-        }
-
-        @media screen and (max-width: 768px) {
-
-            .logo {
-
-                float: none;
-                display: block;
-            }
-        }
-
-        .title {
-            padding: 15px;
-        }
-    </style>
+    <style type="text/css"> a:hover {  text-decoration: none !important;  }  a {  color: #71bc37;  text-decoration: none;  }  @media screen and (max-width: 768px) {  .logo {  float: none;  display: block;  }  }  .title {  padding: 15px;  }</style>
 </head>
-
-
 <body style="margin: 0; background: #fff;">
-
-<table cellpadding="0" cellspacing="0" border="0" align="center"
-       style="margin-top: 30px;
+<table cellpadding="0" cellspacing="0" border="0" align="center" style="margin-top: 30px;
       border-collapse: collapse;
       -webkit-box-shadow: 0px 0px 101px 0px rgba(31, 31, 33, 0.15);
-      box-shadow: 0px 0px 101px 0px rgba(31, 31, 33, 0.15); width: 100%; max-width: 940px; "
-       bgcolor="#ffffff"
-       class="container">
+      box-shadow: 0px 0px 101px 0px rgba(31, 31, 33, 0.15); width: 100%; max-width: 940px; " bgcolor="#ffffff" class="container">
     <tr>
         <td valign="top" align="left" bgcolor="#ffffff" style="padding-bottom: 40px;">
-            <table cellpadding="0" cellspacing="0" border="0"
-                   style=" border-collapse: collapse;background-size: 100%;   margin: 0; padding: 10px 30px;"
-                   width="100%" class="content">
+            <table cellpadding="0" cellspacing="0" border="0" style=" border-collapse: collapse;background-size: 100%;   margin: 0; padding: 10px 30px;" width="100%" class="content">
                 <tr>
-                    <td style="padding-left: 40px;" align="left" valign="middle">
-                        <img src="{{asset('img/logo.png')}}" alt="" class="logo" style="width: 120px; float: left; ">
-
-                    </td>
-                    <td style="padding-left: 30px;">
-                        <img src="{{asset('img/l6.png')}}" alt="" class="" style="width:  100% ; float: right; ">
-                    </td>
+                    <td style="padding-left: 40px;" align="left" valign="middle"><img src="{{asset('img/logo.png')}}" alt="" class="logo" style="width: 120px; float: left; "></td>
+                    <td style="padding-left: 30px;"><img src="{{asset('img/l6.png')}}" alt="" class="" style="width:  100% ; float: right; "></td>
                 </tr>
-
             </table>
         </td>
     </tr>
     <tr>
         <td valign="top" align="left" bgcolor="#ffffff" style="font-family: 'Roboto', sans-serif;">
-            <table cellpadding="0" cellspacing="0" border="0"
-                   style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"
-                   class="t-content">
-
+            <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%" class="t-content">
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; " valign="top" class="">
-                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
-                            Dear {{( $sendTo == 'carer') ? $carer->like_name : $purchaser->like_name}}!
-                        </h1>
+                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 600; font-size: 18px; color: #272c2b;  text-transform: uppercase;">Dear {{( $sendTo == 'carer') ? $carer->like_name : $purchaser->like_name}}!</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             @if($sendTo == 'carer')
                                 <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{$serviceUser->first_name}}</a>
@@ -81,11 +37,9 @@
                                 for {{\Carbon\Carbon::parse($booking->date_from)->toFormattedDateString()}}.
                                 Please click the button below to accept or reject the booking request.
                                 The booking request is not be confirmed until then, and you will not be paid unless the request is accepted.
-
                             @else
                                 You booked <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{$carer->first_name}}</a>
                                 on {{$booking->date_start}} - {{$booking->date_end}}
-
                             @endif
                         </p>
                     </td>
@@ -94,21 +48,30 @@
         </td>
     </tr>
     <tr>
-
         <td style="padding:40px ;">
-            <table cellpadding="0" cellspacing="0" border="0"
-                   style="overflow-x: auto;border: 1px solid rgb(225, 225, 225);box-shadow: 0px 0px 26.73px 0.27px rgba(0, 0, 0, 0.11);border-collapse: collapse;   margin: 0; "
-                   width="100%" class="t-content">
+            <table cellpadding="0" cellspacing="0" border="0" style="overflow-x: auto;border: 1px solid rgb(225, 225, 225);box-shadow: 0px 0px 26.73px 0.27px rgba(0, 0, 0, 0.11);border-collapse: collapse;   margin: 0; " width="100%" class="t-content">
                 <tr>
-                    <td style="padding: 20px 15px 30px 15px;  " valign="middle">
 
-                        <div class="column"
-                             style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;">
+
+
+                    <?php
+
+                    //$patchToPurchaserAvatar = getcwd().'/img/profile_photos/'.$purchaserProfile->id.'.png';
+                    $patchToSrvUserAvatar = getcwd().'/img/service_user_profile_photos/'.$serviceUser->id.'.png';
+                    if(file_exists($patchToSrvUserAvatar)) {
+                        $img_src = asset('/img/service_user_profile_photos/'.$serviceUser->id.'.png');
+                    } else {
+                        $img_src = asset('/img/no_photo.png');
+                    }
+
+                    ?>
+
+                        <td style="padding: 20px 15px 30px 15px;  " valign="middle">
+                        <div class="column" style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;">
                             <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;">
                                 <tr>
                                     <td align="center" style="text-align:left; ">
-                                        <img src="{{asset('/img/service_user_profile_photos/'.$serviceUser->id.'.png')}}"
-                                             onerror="this.src='{{asset('/img/no_photo.png')}}'" alt="avatar"
+                                        <img src="{{$img_src}}" alt=""
                                              class="user"
                                              style="width: 70px;
                             display: block;
@@ -116,13 +79,11 @@
                             height: 70px;
                             border-radius: 50%;
                             object-fit: cover; -webkit-object-fit: cover;">
-
-
                                 </tr>
                             </table>
                         </div>
-                        <div class="column"
-                             style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;;">
+
+                        <div class="column" style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;;">
                             <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;">
                                 <tr>
                                     <td align="center" style="text-align:left;">
@@ -137,18 +98,11 @@
                                 </tr>
                             </table>
                         </div>
-                        <div class="column"
-                             style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;;">
+                        <div class="column" style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;;">
                             <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;">
                                 <tr>
                                     <td align="center" style="text-align:left;">
-                                        <p style="margin-top: 10px;  font-size: 16px;font-family: 'Roboto', sans-serif;">
-                           <span style="color: #909090;">
-                              {{$booking->appointments()->get()->count()}}
-                               Appointment{{$booking->appointments()->get()->count() > 1 ? 's':''}}
-                            </span>
-
-                                        </p>
+                                        <p style="margin-top: 10px;  font-size: 16px;font-family: 'Roboto', sans-serif;"><span style="color: #909090;">{{$booking->appointments()->get()->count()}} Appointment{{$booking->appointments()->get()->count() > 1 ? 's':''}}</span></p>
                                 </tr>
                             </table>
                         </div>
@@ -162,7 +116,7 @@
                              {{$booking->hours}}h /
                             </span>
                                             <span style=" font-weight: 900;color:#80cb2d;">
-                             £{{$booking->price}}
+                             £{{($sendTo == 'carer')? $booking->carer_price : $booking->purchaser_price}}
                             </span>
                                         </p>
                                 </tr>
@@ -227,7 +181,7 @@
                     text-transform: uppercase;
                     font-weight: 700;
                     text-decoration: none;">
-                            Holm.com
+                            Holm.care
                         </a>
                     </td>
                     <td style="padding: 30px 40px; background: #fff; " valign="top" class="">
@@ -243,12 +197,12 @@
                                     <img src="{{asset('img/s2.png')}}" alt="">
                                 </a>
                             </li>
-                            <li style="list-style: none;display: inline-block;">
+                          {{--  <li style="list-style: none;display: inline-block;">
                                 <a href="https://plus.google.com/communities/102900900688938220709"
                                    style="margin-left: 10px; color: #a5a7af;">
                                     <img src="{{asset('img/s3.png')}}" alt="">
                                 </a>
-                            </li>
+                            </li>--}}
                             {{--                            <li style="list-style: none;display: inline-block;">
                                                             <a href="#" style="margin-left: 10px; color: #a5a7af;">
                                                                 <img src="{{asset('img/s4.png')}}" alt="">

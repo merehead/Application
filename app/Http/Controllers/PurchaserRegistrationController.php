@@ -6,8 +6,10 @@ use App\Http\Controllers\Repo\PurchaserRegistration;
 use App\Postcode;
 use App\PurchasersProfile;
 use App\ServiceUsersProfile;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Swift_TransportException;
 
@@ -25,6 +27,15 @@ class PurchaserRegistrationController extends FrontController
     public function index()
     {
 
+        if (request()->has('ref')){
+
+            $ref_code = $this->checkReferCode(request()->get('ref'));
+
+            if ($ref_code !=0 ) {
+                $this->vars = array_add($this->vars, 'ref_code', $ref_code);
+            }
+        }
+
         $this->title = 'Purchaser Registration';
 
         $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
@@ -37,27 +48,31 @@ class PurchaserRegistrationController extends FrontController
 
         $user = Auth::user();
 
+
+
+
         if (!$user) {
             $step = view(config('settings.frontTheme').'.purchaserRegistration.Step1_purchaserRegistration')->with($this->vars)->render();
             $this->vars = array_add($this->vars,'activeStep',1);
             $this->vars = array_add($this->vars,'activeSubStep',0);
         } else {
+
+
             $purchasersProfile = PurchasersProfile::findOrFail($user->id);
 
-            //dd($this->purchaserProfile->getNextStep());
+
+            if ($purchasersProfile->registration_status == 'completed' && !$purchasersProfile->is_uncompleted_service_user) {
+                return redirect(route('purchaserSettings'));
+            }
 
 
             $this->vars = array_add($this->vars, 'purchasersProfileID', $purchasersProfile->id);
             $this->vars = array_add($this->vars, 'purchasersProfile', $purchasersProfile);
 
             if ($this->purchaserProfile->getNextStep() == 'Step4_purchaserRegistration') {
-                //$postcodes = Postcode::all()->pluck('name', 'id')->toArray();
-                //$this->vars = array_add($this->vars, 'postcodes', $postcodes);
                 $this->vars = array_add($this->vars, 'user', $this->user);
             }
             if ($this->purchaserProfile->getNextStep() == 'Step4_1_purchaserRegistration') {
-
-                //dd('gtehth');
 
                 if (!count($purchasersProfile->serviceUsers)) {
                     $serviceUsersProfile = new ServiceUsersProfile();
@@ -71,7 +86,6 @@ class PurchaserRegistrationController extends FrontController
 
             }
             if ($this->purchaserProfile->getNextStep() == 'Step4_2_purchaserRegistration') {
-
 
                 if (count($purchasersProfile->serviceUsers)){
 
@@ -98,9 +112,6 @@ class PurchaserRegistrationController extends FrontController
 
                 }
 
-                //dd($serviceUsersProfile);
-
-                //$postcodes = Postcode::all()->pluck('name', 'id')->toArray();
                 $this->vars = array_add($this->vars, 'user', $this->user);
                 $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
             }
@@ -112,7 +123,6 @@ class PurchaserRegistrationController extends FrontController
 
         }
 
-
         $this->vars = array_add($this->vars,'step',$step);
 
         $this->content = view(config('settings.frontTheme') . '.purchaserRegistration.purchaserRegistration')->with($this->vars)->render();
@@ -123,7 +133,6 @@ class PurchaserRegistrationController extends FrontController
     public function update(Request $request) {
 
         if ($request->has('stepback')) {
-            //dd($request->all());
 
             $stepback = $request->stepback;
             $purchaserProfiles = PurchasersProfile::findOrFail($request->input('purchasersProfileID'));
@@ -142,7 +151,6 @@ class PurchaserRegistrationController extends FrontController
 
             $this->purchaserProfile->saveStep($request);
         }
-
 
         return redirect('/purchaser-registration');
 
@@ -172,75 +180,23 @@ class PurchaserRegistrationController extends FrontController
 
         $purchaser = PurchasersProfile::findorFail($user->id);
 
-        try {
-            Mail::send(config('settings.frontTheme') . '.emails.continue_sign_up_service_user',
-                ['user' => $user,
-                'like_name'=>$purchaser->like_name],
-                function ($m) use ($user) {
-                    $m->to($user->email)->subject('Registration on HOLM');
-                });
-        } catch (Swift_TransportException $STe) {
+        $text = view(config('settings.frontTheme') . '.emails.continue_sign_up_service_user')->with([
+            'user' => $user,
+            'like_name'=>$purchaser->like_name
+        ])->render();
 
-            $error = MailError::create([
-                'error_message' => $STe->getMessage(),
-                'function' => __METHOD__,
-                'action' => 'Try to sent continue_sign_up_purchaser',
-                'user_id' => $user->id
-            ]);
-        }
-/*
-        try {
-
-            Mail::send(config('settings.frontTheme') . '.emails.continue_sign_up_service_user',
-                ['user' => $user, 'password' => $request['password']],
-                function ($m) use ($request) {
-                    $m->to($request['email'])->subject('Registration on HOLM');
-                });
-        }
-        catch (Swift_TransportException $STe){
-
-            $error = MailError::create([
-                'error_message'=>$STe->getMessage(),
-                'function'=>__METHOD__,
-                'action'=>'Try to sent continue_sign_up_service_user',
-                'user_id'=>$user->id
-            ]);
-        }*/
-
-
-
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>$user->email,
+                    'subject' =>'Registration on HOLM',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
 
         $this->content = view(config('settings.frontTheme') . '.carerRegistration.thankYou')->with($this->vars)->render();
 
         return $this->renderOutput();
     }
-
-/*    public function sendCompleteRegistration()
-    {
-
-        $user = Auth::user();
-
-        if(!$user) {
-            return redirect('/');
-        }
-
-        try {
-            Mail::send(config('settings.frontTheme') . '.emails.complete_sign_up_carer',
-                ['user' => $user],
-                function ($m) use ($user) {
-                    $m->to($user->email)->subject('Welcome on HOLM');
-                });
-        } catch (Swift_TransportException $STe) {
-
-            $error = MailError::create([
-                'error_message' => $STe->getMessage(),
-                'function' => __METHOD__,
-                'action' => 'Try to sent complete_sign_up_carer',
-                'user_id' => $user->id
-            ]);
-        }
-
-
-        return redirect('/carer-settings');
-    }*/
 }

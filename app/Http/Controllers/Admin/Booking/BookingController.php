@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Booking;
 
 
+use App\BookingStatus;
 use App\Http\Controllers\Admin\AdminController;
 
 use App\Http\Controllers\Admin\Repo\Models\Booking\AdminBookings;
@@ -35,7 +36,8 @@ class BookingController extends AdminController
         $bookings = $this->booking->get('*', FALSE, FALSE,  $filter, ['id','desc']);
         $this->vars = array_add($this->vars,'bookings',$bookings);
 
-        //dd($bookings);
+        $bookingStatuses = BookingStatus::all()->pluck('name','id')->toArray();
+        $this->vars = array_add($this->vars,'bookingStatuses',$bookingStatuses);
 
         $this->content = view(config('settings.theme').'.bookingsDetails.bookingsDetails')->with($this->vars)->render();
 

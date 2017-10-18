@@ -61,13 +61,13 @@
 
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; font-family: 'Roboto', sans-serif; line-height: 1.5; "  valign="top" class="">
-                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
+                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 600; font-size: 18px; color: #272c2b;  text-transform: uppercase;">
                         Dear {{$like_name}}!
 
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-                            Thank you for registering with Holm.
+                            Thank you for registering with Holm.<br /> <br />
                             Your account has been created and is now being checked. We will contact you if we need any
                             further information, or would like to discuss matters further.
                             <br /><br />
@@ -98,7 +98,7 @@
                     text-transform: uppercase;
                     font-weight: 700;
                     text-decoration: none;">
-                            Holm.com
+                            Holm.care
                         </a>
                     </td>
                     <td style="padding: 30px 40px; background: #fff; "  valign="top" class="">
@@ -113,11 +113,11 @@
                                     <img src="{{asset('img/s2.png')}}" alt="">
                                 </a>
                             </li>
-                            <li style="list-style: none;display: inline-block;">
+                            {{--<li style="list-style: none;display: inline-block;">
                                 <a href="https://plus.google.com/communities/102900900688938220709" style="margin-left: 10px; color: #a5a7af;">
                                     <img src="{{asset('img/s3.png')}}" alt="">
                                 </a>
-                            </li>
+                            </li>--}}
 {{--                            <li style="list-style: none;display: inline-block;">
                                 <a href="#" style="margin-left: 10px; color: #a5a7af;">
                                     <img src="{{asset('img/s4.png')}}" alt="">

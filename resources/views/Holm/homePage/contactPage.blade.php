@@ -35,7 +35,7 @@
                     <div class="contactForm__column">
                         <h2 class="fieldTitle">Phone Number</h2>
                         <div class="contactForm__field">
-                            <input type="text" name="phone" class="contactForm__item" placeholder="Your phone">
+                            <input type="text" name="phone" class="contactForm__item" placeholder="Your phone" maxlength="11">
                             <span class="contactForm__ico"><i class="fa fa-mobile"></i></span>
                         </div>
                     </div>
@@ -55,6 +55,7 @@
                                 <option value="I would like to change a booking">I would like to change a booking</option>
                                 <option value="I need help with a recent appointment">I need help with a recent appointment</option>
                                 <option value="I would like Holm to come to my town / city">I would like Holm to come to my town / city</option>
+                                <option value="My account was blocked">My account was blocked</option>
                                 <option value="Something else">Something else</option>
                             </select>
                             <span class="contactForm__ico"><i class="fa fa-file"></i></span>

@@ -21,12 +21,15 @@
 
 
     </div>
+
+
+
     <div class="bookingRow">
         <div class="container">
             <div class="orderInfo">
                 @if($user->user_type_id == 1)
                     <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="profilePhoto orderInfo__photo">
-                        <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
+                        <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'"  alt="">
                     </a>
                     <div class="orderInfo__item orderInfo__item--rightPadding">
                         <h2 class="ordinaryTitle">
@@ -52,18 +55,18 @@
                             </h2>
                             <span class="orderOptions__value">{{\Carbon\Carbon::parse($booking->created_at)->format("h:i A")}}</span>
                         </div>
-                        <div class="orderOptions">
+                        <!-- <div class="orderOptions">
                             <h2 class="ordinaryTitle">
                                 <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Distance</span>
                             </h2>
                             <span id="distance" class="orderOptions__value">loading..</span>
-                        </div>
-                        <div class="orderOptions">
+                        </div> -->
+                        <!-- <div class="orderOptions">
                             <h2 class="ordinaryTitle">
                                 <span class="ordinaryTitle__text ordinaryTitle__text--bigger">By car</span>
                             </h2>
                             <span id="duration" class="orderOptions__value">loading..</span>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="orderInfo__map">
                         <div id="map" style="width: 100%;height: 100%;"></div>
@@ -71,7 +74,7 @@
                 </div>
             @else
                 <a href="{{$booking->bookingServiceUser()->first()->profile_link}}" class="profilePhoto orderInfo__photo">
-                    <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" alt="">
+                    <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'"  alt="">
                 </a>
                 <div class="orderInfo__item orderInfo__item--rightPadding">
                     <h2 class="ordinaryTitle">
@@ -101,17 +104,17 @@
                         <h2 class="ordinaryTitle">
                             <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Distance</span>
                         </h2>
-                        <span class="orderOptions__value">12 (miles)</span>
+                        <span id="distance" class="orderOptions__value">loading..</span>
                     </div>
                     <div class="orderOptions">
                         <h2 class="ordinaryTitle">
                             <span class="ordinaryTitle__text ordinaryTitle__text--bigger">By car</span>
                         </h2>
-                        <span class="orderOptions__value">30 (min)</span>
+                        <span id="duration" class="orderOptions__value">loading..</span>
                     </div>
                 </div>
                 <div class="orderInfo__map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d317715.71192633547!2d-0.3818036193070037!3d51.52873519756609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2z0JvQvtC90LTQvtC9LCDQktC10LvQuNC60L7QsdGA0LjRgtCw0L3QuNGP!5e0!3m2!1sru!2sru!4v1497972116028"   frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <div id="map" style="width: 100%;height: 100%;"></div>
                 </div>
         </div>
             @endif
@@ -320,7 +323,7 @@
                             <a name="comments"></a>
                             Your Message
                         </h2>
-                        <textarea name="message" class="messageBox__item"  placeholder="Type your message"></textarea>
+                        <textarea name="message" class="messageBox__item doNotCount"  placeholder="Type your message"></textarea>
                         <div class="roundedBtn roundedBtn--center">
                             <button type="submit" class=" roundedBtn__item roundedBtn__item--send
                       roundedBtn__item--smaller">
@@ -337,11 +340,11 @@
                         <div class="comment">
                             @if($message->sender == 'carer')
                             <a href="Service_user_Public_profile_page.html" class="profilePhoto comment__photo">
-                                <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
+                                <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'" alt="">
                             </a>
                             @elseif($message->sender == 'service_user')
                             <a href="Service_user_Public_profile_page.html" class="profilePhoto comment__photo">
-                                <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" alt="">
+                                <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'"  alt="">
                             </a>
                             @endif
                             <div class="comment__info">
@@ -406,10 +409,10 @@
     });
 
     function DistanceMatrixService() {
-      var origin1 = '{{$carerProfile->address_line1}}';
-      var destinationA = '{{$serviceUserProfile->address_line1}}';
+      var origin1 = 'England {{$carerProfile->town}} {{$carerProfile->address_line1}}';
+      var destinationA = 'England {{$serviceUserProfile->town}} {{$serviceUserProfile->address_line1}}';
 
-      console.log(origin1, destinationA)
+      console.log({'carerProfile': origin1, 'serviceUserProfile': destinationA})
 
       var service = new google.maps.DistanceMatrixService();
       service.getDistanceMatrix(
@@ -417,18 +420,20 @@
           origins: [origin1],
           destinations: [destinationA],
           travelMode: 'DRIVING',
+          unitSystem: google.maps.UnitSystem.IMPERIAL,
         }, callback);
 
       function callback(response, status) {
         console.log(response.rows[0].elements[0].status)
         if(response.rows[0].elements[0].status === 'OK'){
           // convert km to miles
-          var convert = parseInt(response.rows[0].elements[0].distance.text)*0.62137;
+          // var convert = parseInt(response.rows[0].elements[0].distance.text)*0.62137;
 
-          $('#distance').html(convert.toFixed(3) + ' (miles)');
+          // $('#distance').html(convert.toFixed(3) + ' (miles)');
+          $('#distance').html(response.rows[0].elements[0].distance.text);
           $('#duration').html(response.rows[0].elements[0].duration.text);
         }
-        if(response.rows[0].elements[0].status === 'NOT_FOUND'){
+        if(response.rows[0].elements[0].status === 'NOT_FOUND' || response.rows[0].elements[0].status === 'ZERO_RESULTS'){
           $('#distance').html('(not found)');
           $('#duration').html('(not found)');
         }
@@ -446,7 +451,12 @@
     }
 
     function codeAddress() {
-      var address = '{{$carerProfile->address_line1}}';
+      var address = '{{$carerProfile->town}} {{$carerProfile->address_line1}}';
+
+      if({{$user->user_type_id}} !== 1){
+        address = '{{$serviceUserProfile->town}} {{$serviceUserProfile->address_line1}}';
+      }
+
       geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == 'OK') {
           map.setCenter(results[0].geometry.location);
@@ -461,9 +471,11 @@
     }
 
     $(document).ready(function(){
-        DistanceMatrixService();
         initialize();
         codeAddress();
+        if({{$user->user_type_id}} !== 1){
+          DistanceMatrixService();
+        }
     });
 
     $('.changeBookingStatus').click(function () {

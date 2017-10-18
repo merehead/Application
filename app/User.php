@@ -112,23 +112,20 @@ class User extends Authenticatable
         }
         return false;
     }
+
     public function isReregistrationCompleted()
     {
-
-
-
         if ($this->user_type_id == 3) { //carer
-            if ($this->userCarerProfile->registration_progress == '20') {
+            if ($this->userCarerProfile->registration_status != 'new') {
                 return true;
             }
         }
         if ($this->user_type_id == 1) { //purchaser
-            if ($this->userPurchaserProfile->registration_progress == '4_1_2_1') {
+            if ($this->userPurchaserProfile->registration_status != 'new') {
                 //return true;
                 return true;
             }
         }
-
         return false;
     }
 
@@ -142,6 +139,32 @@ class User extends Authenticatable
             case 3:
                 $profile = $this->userCarerProfile()->first();
                 return $profile->first_name.' '.$profile->family_name[0].'.';
+                break;
+        }
+    }
+
+    public function getFirstNameAttribute(){
+        switch ($this->user_type_id){
+            case 1:
+                $profile = $this->userPurchaserProfile()->first();
+                return $profile->first_name;
+                break;
+            case 3:
+                $profile = $this->userCarerProfile()->first();
+                return $profile->first_name;
+                break;
+        }
+    }
+
+    public function getFamilyNameAttribute(){
+        switch ($this->user_type_id){
+            case 1:
+                $profile = $this->userPurchaserProfile()->first();
+                return $profile->family_name;
+                break;
+            case 3:
+                $profile = $this->userCarerProfile()->first();
+                return $profile->family_name;
                 break;
         }
     }
@@ -160,11 +183,13 @@ class User extends Authenticatable
         }
     }
 
-    public function getCompletedAppointmentsHoursAttribute(){
-        if($this->user_type_id === 3){
-            $sql = 'SELECT a.id FROM appointments a LEFT JOIN bookings b ON a.booking_id = b.id WHERE a.status_id = 4  AND b.carer_id = '.$this->id;
+
+    public function getCompletedAppointmentsHoursAttribute()
+    {
+        if ($this->user_type_id === 3) {
+            $sql = 'SELECT a.id FROM appointments a LEFT JOIN bookings b ON a.booking_id = b.id WHERE a.status_id = 4  AND b.carer_id = ' . $this->id;
         } else {
-            $sql = 'SELECT a.id FROM appointments a LEFT JOIN bookings b ON a.booking_id = b.id WHERE a.status_id = 4  AND b.purchaser_id = '.$this->id;
+            $sql = 'SELECT a.id FROM appointments a LEFT JOIN bookings b ON a.booking_id = b.id WHERE a.status_id = 4  AND b.purchaser_id = ' . $this->id;
         }
         $res = DB::select($sql);
         $appointments = Appointment::findMany(array_pluck($res, 'id'));
@@ -174,6 +199,19 @@ class User extends Authenticatable
             $hours += $appointment->hours;
 
         return $hours;
+    }
+
+
+    public function getAccountStatusAttribute() {
+
+        //check for blocking purchaser account
+
+        if ($this->isPurchaser() && $this->userPurchaserProfile->profiles_status_id==5)
+            return 'blocked';
+
+        return;
+
+
     }
 
     /*

@@ -114,7 +114,7 @@ null,['class'=>'profileField__select','readonly','id'=>'criminal_detail','data-e
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
-                 DBS certificate Number
+                 DBS UPDATE SERVICE IDENTIFIER
                 </span>
 
                 </h2>

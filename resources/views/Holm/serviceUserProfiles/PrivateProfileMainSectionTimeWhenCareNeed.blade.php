@@ -1,4 +1,3 @@
-
 <div id="timeWhenCareNeeded-div" class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">TIME  WHEN CARE NEEDED</h2>
@@ -10,7 +9,6 @@
 {!! Form::model($serviceUsersProfile,['method'=>'POST','action'=>['ServiceUserPrivateProfileController@update',$serviceUsersProfile->id],'id'=>'timeWhenCareNeeded']) !!}
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('stage','timeWhenCareNeeded') !!}
-
 <div class="borderContainer">
     <div class="profileRow">
         <div class="profileField">
@@ -20,20 +18,22 @@
               </span>
             </h2>
             <div class="profileField__input-wrap">
-                {{--<input type="text" class="profileField__input" placeholder="06/06/2017">--}}
                 @if($serviceUsersProfile->start_date === "01/01/1970")
                     <input name="start_date" id="datepicker_when_start" class="formInput profileField__input" placeholder="Start date (dd/mm/yyyy)" type="text">
                 @else
                     {!! Form::text('start_date',null,['id'=>'datepicker_when_start','class'=>'formInput profileField__input']) !!}
                 @endif
-                <span class="profileField__input-ico centeredLink"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                <span class="profileField__input-ico centeredLink">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+              </span>
             </div>
         </div>
 
-        <div class="profileField profileField--two-thirds serviceUserTimeNeed">
+        <div class="profileField profileField--two-thirds">
             <div class="checkRow">
                 <div class="checkBox_item">
-                    {!! Form::checkbox('workingTime['.$workingTimes[1]->id.']', null,($serviceUsersProfile->WorkingTimes->contains('id', $workingTimes[1]->id)? 1 : null),
+                    {!! Form::checkbox('workingTime['.$workingTimes[1]->id.']', null,
+                    ($serviceUsersProfile->WorkingTimes->contains('id', $workingTimes[1]->id)? 1 : null),
 array('class' =>  'customCheckbox ccf '.$workingTimes[1]->css_name,'id'=>'checkD'.$workingTimes[1]->id)) !!}
                     <label for="checkD{{$workingTimes[1]->id}}">{{$workingTimes[1]->name}}</label>
                 </div>
@@ -57,11 +57,11 @@ array('class' =>  'customCheckbox ccf '.$workingTimes[0]->css_name,'id'=>'checkD
         </div>
     </div>
 
-    <?php $bottomTime = $workingTimes->splice(4)?>
     <div class="profileRow">
         <div class="profileField profileField--full-width">
-            <div class="checkRow">
 
+            <div class="checkRow">
+                <?php $bottomTime = $workingTimes->splice(4)?>
                 @foreach($bottomTime->sortBy('byDay') as $workingTime)
                     <div class="checbox_wrap checbox_wrap--date">
 
@@ -73,9 +73,10 @@ array('class' =>  'customCheckbox ccf '.$workingTimes[0]->css_name,'id'=>'checkD
                 @endforeach
             </div>
 
+
+
+
         </div>
-
     </div>
-
 </div>
 {!! Form::close()!!}

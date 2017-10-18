@@ -21,6 +21,38 @@ var is_data_changed=false;
 // window.onbeforeunload = function () {
 //     return (is_data_changed ? "Измененные данные не сохранены. Закрыть страницу?" : null);
 // }
+
+function addressFormt(suggestion){
+    if (suggestion.data.terms.length > 3) {
+        if ($(this).attr('name') == 'address_line1') {
+            var post_code = suggestion.data.terms[2].value;
+            var validator = /^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/;
+            if (!validator.test(post_code)) {
+                $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
+                $('input[name="address_line2"]').val(suggestion.data.terms[1].value);
+                $('input[name="town"]').val(suggestion.data.terms[2].value);
+
+            }
+        } else {
+
+            $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
+            $('input[name="town"]').val(suggestion.data.terms[1].value);
+            $('input[name="postcode"]').val(suggestion.data.terms[2].value);
+            $('input[name="postCode"]').val(suggestion.data.terms[2].value);
+        }
+
+    } else {
+        if ($(this).attr('name') == 'address_line1') {
+            $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
+        }
+        else {
+            //$('input[name="address_line1"]').val('');
+            $('input[name="town"]').val(suggestion.data.terms[0].value);
+            $('input[name="postcode"]').val(suggestion.data.terms[1].value);
+            $('input[name="postCode"]').val(suggestion.data.terms[1].value);
+        }
+    }
+}
 function getTime( ) {
     var d = new Date( );
     d.setHours( d.getHours() ); // offset from local time
@@ -75,10 +107,11 @@ function calculate_price() {
 
 function carerSearchAjax(){
     var form = $('#carerSearchForm');
-    //$(form).submit();
     var token = $(form).find('input[name=_token]').val();
-    if($('#load-more').val()==0)
+    if($('#load-more').val()==0){
         $('.carer-result').empty();
+        $('#load-count').val(5);
+    }
     $('#loader-search').show();
     $('.error-text').hide();
     $('.moreBtn__item').hide();
@@ -101,6 +134,11 @@ function carerSearchAjax(){
                 if(response.id==0)$('.moreBtn__item').hide();
                 $('#load-more').val(0);
                 $('#id-carer').val(response.id);
+                $('#page').val(response.page);
+            }else{
+                $('.carer-result').append(response.html);
+                $('.Paginator').html(response.htmlHeader);
+
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -372,6 +410,36 @@ function scale(block) {
         }
     }
 }
+$(document).ready(function () {
+
+
+/*    $('#login').modal().on('shown', function(){
+        $('body').css('overflow', 'hidden');
+    }).on('hidden', function(){
+        $('body').css('overflow', 'auto');
+    })*/
+
+
+    $('#add-login-popup').on('click', function (){
+
+        //$('#login-popup').modal('hide');
+
+        $('#login-popup').modal('hide');
+
+        $('#login').modal('show');
+
+
+
+    });
+
+    $('#add-signin-popup').on('click', function (){
+        $('#login-popup').modal('hide');
+
+        $('#signUpdiv').modal('show');
+
+    });
+
+});
 // -- Document events ---------------
 $(document).ready(function () {
 
@@ -383,31 +451,6 @@ $(document).ready(function () {
         $('body').toggleClass('no-scrolling');
 
     });
-
-//
-//     $('#timepicker1').timepicker({
-//         timeFormat: 'h:mm p',
-//         interval: 30,
-//         //minTime: '10',
-//         //maxTime: '6:00pm',
-//         //defaultTime: '18',
-//         startTime: '18:00',
-//         dynamic: true,
-//         dropdown: true,
-//         scrollbar: true
-//     });
-//
-//     $('#timepicker2').timepicker({
-//         timeFormat: 'h:mm p',
-//         interval: 30,
-// //minTime: '10',
-// //maxTime: '6:00pm',
-// //defaultTime: '18',
-//         startTime: '18:00',
-//         dynamic: true,
-//         dropdown: true,
-//         scrollbar: true
-//     });
 
     $('.onlyNumber').on('keyup', function () {
         $('.error-onlyNumber').remove();
@@ -446,6 +489,24 @@ $(document).ready(function () {
     //         that.value = that.value.replace(/^07[0-9]$/, '07');
     //     }
     // });
+
+    $(".digitFilter").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+            // Allow: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+
 
     // Иван функция уменшает автоматом шрифт у имени пользователя в шапке
     if ($('.profileName').lenght > 0)
@@ -632,9 +693,12 @@ $(document).ready(function () {
     $(".keeping_safe_at_night_selector").on('change', function () {
         if ($(".keeping_safe_at_night_selector").val() != 'No') {
             $(".keeping_safe_at_night_depend").slideDown();
-
+            if($(".toilet_at_night_selector").val() != 'No'){
+                $(".toilet_at_night_depend").slideDown();
+            }
         } else {
             $(".keeping_safe_at_night_depend").slideUp();
+            $(".toilet_at_night_depend").slideUp();
         }
     });
 
@@ -689,6 +753,67 @@ $(document).ready(function () {
             $(uc).hide();
         }
     });
+
+    //step8 carer registration transport
+    if ($('#regCarerSt8_driving_licence').length > 0) {
+        if ($('#regCarerSt8_driving_licence').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_driving_licence').show();
+        } else {
+            $('.dependFrom_regCarerSt8_driving_licence').hide();
+            $('.dependFrom_regCarerSt8_have_car').hide();
+        }
+    }
+    $(document).on('change', '#regCarerSt8_driving_licence', function () {
+        if ($('#regCarerSt8_driving_licence').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_driving_licence').show();
+            if ($('#regCarerSt8_have_car').val() == "Yes") {
+                $('.dependFrom_regCarerSt8_have_car').show();
+            }
+            if ($('#regCarerSt8_use_car').val() == "Yes" && $('#regCarerSt8_have_car').val() == "Yes") {
+                $('.dependFrom_regCarerSt8_use_car').show();
+            }
+        } else {
+            $('.dependFrom_regCarerSt8_driving_licence').hide();
+            $('.dependFrom_regCarerSt8_have_car').hide();
+            $('.dependFrom_regCarerSt8_use_car').hide();
+        }
+    });
+
+    if ($('#regCarerSt8_have_car').length > 0) {
+        if ($('#regCarerSt8_have_car').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_have_car').show();
+        } else {
+            $('.dependFrom_regCarerSt8_have_car').hide();
+
+        }
+    }
+    $(document).on('change', '#regCarerSt8_have_car', function () {
+        if ($('#regCarerSt8_have_car').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_have_car').show();
+            if ($('#regCarerSt8_use_car').val() == "Yes") {
+                $('.dependFrom_regCarerSt8_use_car').show();
+            }
+        } else {
+            $('.dependFrom_regCarerSt8_have_car').hide();
+            $('.dependFrom_regCarerSt8_use_car').hide();
+        }
+    });
+    if ($('#regCarerSt8_use_car').length > 0) {
+        if ($('#regCarerSt8_use_car').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_use_car').show();
+        } else {
+            $('.dependFrom_regCarerSt8_use_car').hide();
+
+        }
+    }
+    $(document).on('change', '#regCarerSt8_use_car', function () {
+        if ($('#regCarerSt8_use_car').val() == "Yes") {
+            $('.dependFrom_regCarerSt8_use_car').show();
+        } else {
+            $('.dependFrom_regCarerSt8_use_car').hide();
+        }
+    });
+    //^^^^^^step8 carer registration transport
 
     $('.text-limit').parent().css('margin-right', 0);
     $('.text-limit').parent().css('position', 'relative');
@@ -1009,7 +1134,7 @@ $(document).ready(function () {
     });
 
 
-    $( "textarea, .countable" ).focus(function() {
+    $( "textarea, .countable" ).not('.doNotCount').focus(function() {
         var maxLenght = $( this ).attr('maxlength');
         var currentLength = $( this ).val().length;
         var symbolsLeft = maxLenght - currentLength;
@@ -1025,6 +1150,40 @@ $(document).ready(function () {
     $("textarea, .countable").focusout(function () {
         $(this).prev("span").remove();
         $(this).next("span").css("top", "12px");
+    });
+
+    $(document).on('click','a.referal-field-btn--add', function (e) {
+        e.preventDefault();
+
+        var n = $( ".referal-row" ).length + 1;
+
+        //alert(n);
+
+        var block = '         <div class="referal-row">\n' +
+            '                    <div class="referal-field">\n' +
+            '                        <div class="inputWrap">\n' +
+            '                            <input type="email" name="email['+
+            n +
+            ']" class="formInput" placeholder="Email addresses" required />\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '                    <a href="#" class="referal-field-btn referal-field-btn--add"">\n' +
+            '                        <i class="fa fa-plus"></i>\n' +
+            '                    </a>\n' +
+            '                    <a href="" class="referal-field-btn referal-field-btn--delete">\n' +
+            '                        <i class="fa fa-minus"></i>\n' +
+            '                    </a>\n' +
+            '                </div>';
+
+        var that = $(this);
+
+        $(that).parent().after(block);//.html('xflbjhilhjtrdlihj');
+
+    });
+    $(document).on('click','a.referal-field-btn--delete', function (e) {
+        e.preventDefault();
+
+        $(this).parent().remove();
     });
 
 //^^^^^^^Иван 20170922 для регистрации профиля пользователя
@@ -1157,6 +1316,18 @@ $(document).ready(function () {
     $(document).on('change','.datepicker_message',function(){
         var datepickerBegin = $(this).parent().parent().find('.datepicker_message[name*="start"]').datepicker("getDate");
         var datepickerEnd = $(this).parent().parent().find('.datepicker_message[name*="end"]').datepicker("getDate");
+        var form = $(this).parent().parent();
+        var timestart = $(form).find('.timepicker_message')[0];
+        var now = new Date();
+        var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+        if(datepickerBegin-today==0){
+            $(timestart).timepicker().destroy();
+            $(timestart).timepicker({minTime:getTime(),startTime:getTime(),scrollbar:true});
+        }else{
+            $(timestart).timepicker().destroy();
+            $(timestart).timepicker({minTime:null,startTime:null,scrollbar:true});
+        }
 
         var form = $(this).parent().parent().parent().parent().parent();
         $(form).find('.weekly').attr('disabled',false);
@@ -1189,6 +1360,14 @@ $(document).ready(function () {
             $(datetime).parent().show();
             $(label).show();
             $(datetime).removeClass("hasDatepicker").removeAttr('id');
+            var datestart = $(datetime).attr('name').substring(0,$(datetime).attr('name').length - 10)+'[date_start]';
+            var datestartDate = $('input[name="'+datestart+'"]').datepicker( "getDate" );
+            var inWeek = new Date();
+            var in90Day = new Date();
+            inWeek.setDate(datestartDate.getDate()+7);
+            in90Day.setDate(datestartDate.getDate()+90);
+
+            console.log(inWeek);
             $(datetime).datepicker({
                 beforeShow: function (input, inst) {
                     inst.dpDiv.css({"z-index": "2000!important;"});
@@ -1198,9 +1377,8 @@ $(document).ready(function () {
                 changeYear: true,
                 dateFormat: "dd/mm/yy",
                 showAnim: "slideDown",
-
-                minDate: "+7D",
-                maxDate: "+90D",
+                minDate: inWeek,
+                maxDate: in90Day,
                 yearRange: "0:+2"
             });
         }
@@ -1224,6 +1402,14 @@ $(document).ready(function () {
             $(datetime).parent().show();
             $(label).show();
             $(datetime).removeClass("hasDatepicker").removeAttr('id');
+            var inDay = new Date();
+            var form = $(this).parent().parent();
+            var in90Day = new Date();
+            var datestart = $(datetime).attr('name').substring(0,$(datetime).attr('name').length - 10)+'[date_start]';
+            var datestartDate = $('input[name="'+datestart+'"]').datepicker( "getDate" );
+
+            inDay.setDate(datestartDate.getDate()+1);
+            in90Day.setDate(datestartDate.getDate()+90);
             $(datetime).datepicker({
                 beforeShow: function (input, inst) {
                     inst.dpDiv.css({"z-index": "2000!important;"});
@@ -1233,8 +1419,8 @@ $(document).ready(function () {
                 changeYear: true,
                 dateFormat: "dd/mm/yy",
                 showAnim: "slideDown",
-                minDate: "+0D",
-                maxDate: "+90D",
+                minDate: inDay,
+                maxDate: in90Day,
                 yearRange: "0:+2"
             });
         }
@@ -1359,7 +1545,7 @@ $(document).ready(function () {
             change: function() {
                 $(this).change();
             },
-            timeFormat: 'g:i A',
+            timeFormat: 'h:mm p',
             interval: 30,
             //maxTime: '6:00pm',_step48
             //defaultTime: '18',
@@ -1371,6 +1557,15 @@ $(document).ready(function () {
         return false;
     });
 
+    $(document).on('click','#confirm-terms',function(){
+        if ($(this).is(':checked')) {
+            $('#book-carer').prop('disabled',false);
+        }
+        else{
+            $('#book-carer').prop('disabled',true);
+
+        }
+    });
     if ($("#checkL12").is(':checked')) {
         $(".language_additional").show();
     } else {
@@ -1448,6 +1643,8 @@ $(document).ready(function () {
 
     $('.moreLink').on('click', function (e) {
         $('#load-more').val(1);
+        $('#load-count').val(parseInt($('#load-count').val())+5);
+        $('#page').val(parseInt($('#page').val())+1);
         carerSearchAjax();
     });
 
@@ -1460,6 +1657,7 @@ $(document).ready(function () {
         }else{
             $('#sort-rating-order').val('asc');
         }
+        $('#load-more').val(0);
         carerSearchAjax();
     });
 
@@ -1472,6 +1670,7 @@ $(document).ready(function () {
         }else{
             $('#sort-id-order').val('asc');
         }
+        $('#load-more').val(0);
         carerSearchAjax();
     });
 
@@ -1509,16 +1708,26 @@ $(document).ready(function () {
     /*-------------- Home/welcome-carer page slider (recalls) ------------*/
     // Carousel
     $('.multi-item-carousel').carousel({
-        interval: 5000
+        // interval: 5000
     });
 
-    // change quote
-    $('.peopleBox').on('click', function (e) {
-        e.preventDefault();
-        var quote = $(this).find('.people_quote').text().trim();
-        $('#testimonialSlider__item p').text(quote)
-    });
+    $('#theCarousel1').on('slide.bs.carousel', function () {
+      var _this = $(this)
+      var data_id = $('#theCarousel_users').children()
+      var peopleBox = $('.peopleBox').children()
+      $(this).removeClass('active')
 
+      peopleBox.removeClass('activeImg')
+
+      setTimeout(function () {
+        current_id = parseInt(_this.find('.active').attr('id').replace(/[^1-9]/g, ''))
+        $.each( data_id, function( key, value ) {
+          if(parseInt($(this).attr('data-id')) === current_id){
+            $(this).children().addClass('activeImg')
+          }
+        });
+      }, 800)
+    })
 
     $(".toggler").click(function (e) {
         e.preventDefault();
@@ -1567,7 +1776,12 @@ $(document).ready(function () {
     $carer_profile.find('a.btn-edit').on('click', function (e) {
         e.preventDefault();
         is_data_changed = true;
+        
         $('input[name="is_data_changed"]').val(1);
+        $('#post_code_profile').autocomplete({serviceUrl:'/address/',onSelect: function (suggestion) {
+            addressFormt(suggestion);
+        }});
+        $('#post_code_profile').autocomplete('clear');
         if (is_data_changed) {
             $('#datepicker_when_start').attr('readonly',false)
                 .datepicker({ dateFormat: "dd/mm/yy",
@@ -1605,41 +1819,13 @@ $(document).ready(function () {
     //------------Google Address search -----------------------
     if ($.isFunction($.fn.autocomplete)) {
 
-        $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').autocomplete({
+        $('input[name="postcode"]:not(.disable),input[name="postCode"]:not(.disable),input[name="address_line1"]:not(.disable)').autocomplete({
                 serviceUrl: '/address/',
-                params: {query: $('input[name="town"]').val() + ' ' + $(this).val()},
+                params: {query: ($(this).prop('readonly')==true)?'':$('input[name="town"]').val() + ' ' + $(this).val()},
                 minChars: 1,
                 dataType: 'json',
                 onSelect: function (suggestion) {
-                    if (suggestion.data.terms.length > 3) {
-                        if ($(this).attr('name') == 'address_line1') {
-                            var post_code = suggestion.data.terms[2].value;
-                            var validator = /^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/;
-                            if (!validator.test(post_code)) {
-                                $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
-                                $('input[name="address_line2"]').val(suggestion.data.terms[1].value);
-                                $('input[name="town"]').val(suggestion.data.terms[2].value);
-
-                            }
-                        } else {
-
-                            $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
-                            $('input[name="town"]').val(suggestion.data.terms[1].value);
-                            $('input[name="postcode"]').val(suggestion.data.terms[2].value);
-                            $('input[name="postCode"]').val(suggestion.data.terms[2].value);
-                        }
-
-                    } else {
-                        if ($(this).attr('name') == 'address_line1') {
-                            $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
-                        }
-                        else {
-                            //$('input[name="address_line1"]').val('');
-                            $('input[name="town"]').val(suggestion.data.terms[0].value);
-                            $('input[name="postcode"]').val(suggestion.data.terms[1].value);
-                            $('input[name="postCode"]').val(suggestion.data.terms[1].value);
-                        }
-                    }
+                    addressFormt(suggestion);
                 }
             }
         );
@@ -1696,6 +1882,8 @@ $(document).ready(function () {
 
         $carer_profile.find('button.btn-success').on('click', function (e) {
             e.preventDefault();
+            $('#post_code_profile').autocomplete({serviceUrl:'/noaddress/'});
+            $('#post_code_profile').autocomplete('clear');
             is_data_changed = false;
             $('input[name="is_data_changed"]').val(0);
             if (is_data_changed) {
@@ -1705,6 +1893,7 @@ $(document).ready(function () {
                 $('#datepicker_when_start').attr('readonly',true)
                     .datepicker("destroy");
             }
+            $('.error-onlyNumber').remove();
             var that = $(this);
             var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
             var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');

@@ -1,6 +1,6 @@
 <thead>
 <tr>
-    <td class="orderNumber">
+{{--    <td class="orderNumber">
                   <span class="td-title td-title--number">
                    №
                   </span>
@@ -9,7 +9,7 @@
                   <span class="td-title td-title--number">
                    id
                   </span>
-    </td>
+    </td>--}}
     <td class=" ordninary-td ordninary-td--wider no-padding-l">
                   <span class="td-title td-title--orange">
                   carer
@@ -33,8 +33,8 @@
 </tr>
 
 <tr class="extra-tr">
-    <td></td>
-    <td></td>
+{{--    <td></td>
+    <td></td>--}}
     <td class="for-inner">
         <table class="innerTable ">
             <tr>
