@@ -118,15 +118,16 @@ class PurchaserRegistration
         if ($request->input('step')=='4' && $purchaserProfile->purchasing_care_for=='Myself' &&
             preg_match('/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',$purchaserProfile->postcode)!=1
         )
-        { // недоступный регион
+        { // unacceptable region
             $purchaserProfile->registration_progress = '4_3';
         }
 
         //dd($request->input('step'));
+        $serviceUsersProfile = $purchaserProfile->serviceUsers->first();
 
         if ($request->input('step')=='4_1'
-            &&  preg_match('/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',$purchaserProfile->postcode)!=1
-        ) { // недоступный регион
+            &&  preg_match('/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',$serviceUsersProfile->postcode)!=1
+        ) { // unacceptable region
             $purchaserProfile->registration_progress = '4_3';
         }
         if ($request->input('step')=='4_1' &&  $purchaserProfile->purchasing_care_for == 'Myself') {
@@ -298,12 +299,15 @@ class PurchaserRegistration
         $purchaserProfile->profiles_status_id = 2;
         //$purchaserProfile->registration_status = 'completed';
 
-        if ($purchaserProfile->purchasing_care_for=='Someone else' &&
+        if ($purchaserProfile->purchasing_care_for=='Myself' &&
             preg_match('/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',$purchaserProfile->postcode)!=1
         )
         { // postcode acceptable for Manchester
             $purchaserProfile->registration_status = 'completed';
         }
+
+        if ($purchaserProfile->purchasing_care_for=='Someone else')
+            $purchaserProfile->registration_status = 'completed';
 
 
 
@@ -376,38 +380,54 @@ class PurchaserRegistration
             'postcode' =>
                 array(
                     'required',
-                    'regex:#^([A-Za-z]{1,2}[0-9]{1,2}) [0-9][A-Za-z]{1,2}$#',
+                    'regex:#^([A-Za-z]{1,2}[0-9]{1,2}[A-Za-z]{0,2}) [0-9][A-Za-z]{1,2}$#',
                     //'regex:/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',
                 )
         ]);
 
         $purchaserProfile = $this->model->findOrFail($request->input('purchasersProfileID'));
-
         $serviceUsersProfile = $purchaserProfile->serviceUsers->first();
 
-        if ($purchaserProfile->purchasing_care_for == 'Myself'){
-            $patchToPurchaserAvatar = getcwd().'/img/profile_photos/'.$purchaserProfile->id.'.png';
-            $patchToSrvUserAvatar = getcwd().'/img/service_user_profile_photos/'.$serviceUsersProfile->id.'.png';
-            if(file_exists($patchToPurchaserAvatar)) copy($patchToPurchaserAvatar, $patchToSrvUserAvatar);
-        }
+        if (
+            preg_match('/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',$request->input('postcode'))!=1
+        ) { // unacceptable region
+            $purchaserProfile->registration_progress = '4_3';
 
-
-        if ($serviceUsersProfile) {
-            $serviceUsersProfile->title = $request->input('title');
-            $serviceUsersProfile->first_name = $request->input('first_name');
-            $serviceUsersProfile->family_name = $request->input('family_name');
-            $serviceUsersProfile->like_name = $request->input('like_name');
-            $serviceUsersProfile->gender = $request->input('gender');
-            $serviceUsersProfile->mobile_number = $request->input('mobile_number');
-            $serviceUsersProfile->address_line1 = $request->input('address_line1');
-            $serviceUsersProfile->address_line2 = $request->input('address_line2');
-            $serviceUsersProfile->address_line1 = $request->input('address_line1');
-            $serviceUsersProfile->town = $request->input('town');
-            $serviceUsersProfile->postcode = strtoupper($request->input('postcode'));
-            $serviceUsersProfile->DoB = $request->input('DoB');
+            $serviceUsersProfile->deleted = 'Yes';
             $serviceUsersProfile->update();
-            //dd($request->all());
         }
+
+        else {
+
+            $serviceUsersProfile = $purchaserProfile->serviceUsers->first();
+
+            if ($purchaserProfile->purchasing_care_for == 'Myself') {
+                $patchToPurchaserAvatar = getcwd() . '/img/profile_photos/' . $purchaserProfile->id . '.png';
+                $patchToSrvUserAvatar = getcwd() . '/img/service_user_profile_photos/' . $serviceUsersProfile->id . '.png';
+                if (file_exists($patchToPurchaserAvatar)) copy($patchToPurchaserAvatar, $patchToSrvUserAvatar);
+            }
+
+
+            if ($serviceUsersProfile) {
+                $serviceUsersProfile->title = $request->input('title');
+                $serviceUsersProfile->first_name = $request->input('first_name');
+                $serviceUsersProfile->family_name = $request->input('family_name');
+                $serviceUsersProfile->like_name = $request->input('like_name');
+                $serviceUsersProfile->gender = $request->input('gender');
+                $serviceUsersProfile->mobile_number = $request->input('mobile_number');
+                $serviceUsersProfile->address_line1 = $request->input('address_line1');
+                $serviceUsersProfile->address_line2 = $request->input('address_line2');
+                $serviceUsersProfile->address_line1 = $request->input('address_line1');
+                $serviceUsersProfile->town = $request->input('town');
+                $serviceUsersProfile->postcode = strtoupper($request->input('postcode'));
+                $serviceUsersProfile->DoB = $request->input('DoB');
+                $serviceUsersProfile->update();
+                //dd($request->all());
+            }
+
+        }
+
+
         return;
     }
 
