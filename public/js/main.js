@@ -21,6 +21,38 @@ var is_data_changed=false;
 // window.onbeforeunload = function () {
 //     return (is_data_changed ? "Измененные данные не сохранены. Закрыть страницу?" : null);
 // }
+
+function addressFormt(suggestion){
+    if (suggestion.data.terms.length > 3) {
+        if ($(this).attr('name') == 'address_line1') {
+            var post_code = suggestion.data.terms[2].value;
+            var validator = /^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/;
+            if (!validator.test(post_code)) {
+                $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
+                $('input[name="address_line2"]').val(suggestion.data.terms[1].value);
+                $('input[name="town"]').val(suggestion.data.terms[2].value);
+
+            }
+        } else {
+
+            $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
+            $('input[name="town"]').val(suggestion.data.terms[1].value);
+            $('input[name="postcode"]').val(suggestion.data.terms[2].value);
+            $('input[name="postCode"]').val(suggestion.data.terms[2].value);
+        }
+
+    } else {
+        if ($(this).attr('name') == 'address_line1') {
+            $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
+        }
+        else {
+            //$('input[name="address_line1"]').val('');
+            $('input[name="town"]').val(suggestion.data.terms[0].value);
+            $('input[name="postcode"]').val(suggestion.data.terms[1].value);
+            $('input[name="postCode"]').val(suggestion.data.terms[1].value);
+        }
+    }
+}
 function getTime( ) {
     var d = new Date( );
     d.setHours( d.getHours() ); // offset from local time
@@ -1746,7 +1778,9 @@ $(document).ready(function () {
         is_data_changed = true;
         
         $('input[name="is_data_changed"]').val(1);
-        $('#post_code_profile').autocomplete({serviceUrl:'/address/'});
+        $('#post_code_profile').autocomplete({serviceUrl:'/address/',onSelect: function (suggestion) {
+            addressFormt(suggestion);
+        }});
         $('#post_code_profile').autocomplete('clear');
         if (is_data_changed) {
             $('#datepicker_when_start').attr('readonly',false)
@@ -1791,35 +1825,7 @@ $(document).ready(function () {
                 minChars: 1,
                 dataType: 'json',
                 onSelect: function (suggestion) {
-                    if (suggestion.data.terms.length > 3) {
-                        if ($(this).attr('name') == 'address_line1') {
-                            var post_code = suggestion.data.terms[2].value;
-                            var validator = /^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/;
-                            if (!validator.test(post_code)) {
-                                $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
-                                $('input[name="address_line2"]').val(suggestion.data.terms[1].value);
-                                $('input[name="town"]').val(suggestion.data.terms[2].value);
-
-                            }
-                        } else {
-
-                            $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
-                            $('input[name="town"]').val(suggestion.data.terms[1].value);
-                            $('input[name="postcode"]').val(suggestion.data.terms[2].value);
-                            $('input[name="postCode"]').val(suggestion.data.terms[2].value);
-                        }
-
-                    } else {
-                        if ($(this).attr('name') == 'address_line1') {
-                            $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
-                        }
-                        else {
-                            //$('input[name="address_line1"]').val('');
-                            $('input[name="town"]').val(suggestion.data.terms[0].value);
-                            $('input[name="postcode"]').val(suggestion.data.terms[1].value);
-                            $('input[name="postCode"]').val(suggestion.data.terms[1].value);
-                        }
-                    }
+                    addressFormt(suggestion);
                 }
             }
         );
