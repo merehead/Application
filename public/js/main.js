@@ -1068,20 +1068,17 @@ $(document).ready(function () {
         });
     //}
     //if($.isFunction('timepicker')) {
-        $('#time_to_night_helping').timepicker({
-            change: function() {
-                $(this).change();
-            },
-            timeFormat: 'h:mm p',
-            interval: 30,
-            //minTime: '10',
-            //maxTime: '6:00pm',
-            //defaultTime: '18',
-            startTime: '18:00',
-            dynamic: true,
-            dropdown: true,
-            scrollbar: true
-        });
+    //     $('#time_to_night_helping:not(.profileField__input--greyBg)').timepicker({
+    //         change: function() {
+    //             $(this).change();
+    //         },
+    //         timeFormat: 'h:mm p',
+    //         interval: 30,
+    //         startTime: '18:00',
+    //         dynamic: true,
+    //         dropdown: true,
+    //         scrollbar: true
+    //     });
     //}
 
     $(".allTime").click(function () {
@@ -1796,7 +1793,17 @@ $(document).ready(function () {
         $(idForm).find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
         $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
         // $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').attr('autocomplete', 'on');
-
+        $('#time_to_night_helping').timepicker({
+            change: function () {
+                $(this).change();
+            },
+            timeFormat: 'h:mm p',
+            interval: 30,
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
         $(idLoadFiles).find('.pickfiles').attr("disabled", false);
         // $('input[name="postcode"],input[name="address_line1"]').autocomplete('enable');
         $(idLoadFiles).find('.pickfiles-change').attr("disabled", false);
@@ -1882,6 +1889,7 @@ $(document).ready(function () {
             e.preventDefault();
             $('#post_code_profile').autocomplete({serviceUrl:'/noaddress/'});
             $('#post_code_profile').autocomplete('clear');
+            $('#time_to_night_helping').timepicker().destroy();
             is_data_changed = false;
             $('input[name="is_data_changed"]').val(0);
             if (is_data_changed) {
