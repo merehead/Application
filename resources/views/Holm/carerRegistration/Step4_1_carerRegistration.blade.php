@@ -1,5 +1,5 @@
 <div class="registration" >
-    <div class="registration__full">
+    <div class="registration__full" style="text-align: center">
         <div class="questionsBox">
 
             <span class="regIco">

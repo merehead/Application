@@ -9,7 +9,9 @@
         </div>
         <div class="sorryBox">
             <p class="info-p info-p--roboto">
-                Sorry, Holm is not yet available in your area. Please use <a href="{{route('ContactPage')}}">the contact form</a> to request us to come to your home town. You can also use the form if you think we have made an error.
+                Sorry, Holm is not yet available in your area.
+                Please use <a href="{{route('ContactPage')}}">the contact form</a> to request us to come
+                to your home town. You can also use the form if you think we have made an error.
             </p>
         </div>
 
