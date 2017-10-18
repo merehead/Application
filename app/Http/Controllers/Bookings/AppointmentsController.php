@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Bookings;
 use App\Appointment;
+use App\Events\AppointmentCompletedEvent;
 use App\Http\Controllers\Controller;
 use App\Interfaces\Constants;
 use Auth;
@@ -44,6 +45,7 @@ class AppointmentsController extends Controller implements Constants
             if($appointment->purchaser_status_id == self::APPOINTMENT_USER_STATUS_COMPLETED){
                 $appointment->carer_status_id = self::APPOINTMENT_USER_STATUS_COMPLETED;
                 $appointment->status_id = self::APPOINTMENT_STATUS_COMPLETED;
+                event(new AppointmentCompletedEvent($appointment));
             } elseif($appointment->purchaser_status_id == self::APPOINTMENT_USER_STATUS_NEW){
                 $appointment->carer_status_id = self::APPOINTMENT_USER_STATUS_COMPLETED;
             } elseif ($appointment->purchaser_status_id == self::APPOINTMENT_USER_STATUS_REJECTED){
@@ -53,6 +55,7 @@ class AppointmentsController extends Controller implements Constants
         } else {
             $appointment->status_id = self::APPOINTMENT_STATUS_COMPLETED;
             $appointment->purchaser_status_id = self::APPOINTMENT_USER_STATUS_COMPLETED;
+            event(new AppointmentCompletedEvent($appointment));
         }
 
         $appointment->save();
