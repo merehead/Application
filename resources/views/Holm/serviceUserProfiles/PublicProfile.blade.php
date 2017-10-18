@@ -21,7 +21,7 @@
             <span class="breadcrumbs__arrow">&gt;</span>
             <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUsers->id])}}"
                class="breadcrumbs__item">
-                {{$serviceUsers->first_name}} {{$serviceUsers->family_name}}
+                {{$serviceUsers->first_name}}&nbsp{{mb_substr($serviceUsers->family_name,0,1)}}.
             </a>
         </div>
         {!! Form::hidden('address_line1',$serviceUsers->address_line1) !!}
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="profileInfo__item">
                                     <h2 class="profileName profileName--big">
-                                        {{$serviceUsers->first_name}} {{$serviceUsers->family_name}}
+                                        {{$serviceUsers->first_name}}&nbsp{{mb_substr($serviceUsers->family_name,0,1)}}.
                                     </h2>
 
                                     <p>
@@ -679,7 +679,9 @@
                                         <p class="userOption userOption--language">    {{$language->carer_language}}</p>
                                     @else<?php $other = true;?>
                                     @endif
-
+                                        @if($loop->iteration%3==0)
+                                    </div> <div class="serviceColumn serviceColumn--language ">
+                                @endif
                                 @endforeach
 
                                 @if($other)

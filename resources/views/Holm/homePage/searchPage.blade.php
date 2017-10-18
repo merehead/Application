@@ -146,16 +146,12 @@
                 </div>
                 <div class="card error-text result {{count($carerResult)>0?"nhide":""}}">
                     <div class="card-block">
-                    <p class="text-uppercase">No carers found.</p>
+                    <p class="text-uppercase">Sorry</p>
                     <p class="text-left">
-                        Recommendations:
+                        No Carers meet your exact criteria.
+                        Please try again by deselecting the least important requirements,
+                        or <a href="{{route('ContactPage')}}">contact us</a> if you need further help
                     </p>
-                        <ul class="text-left">
-                            <li class="list-inline ">Make sure all words are spelled correctly.</li>
-                            <li class="list-inline ">Try using different keywords.</li>
-                            <li class="list-inline ">Try using more popular keywords.</li>
-                            <li class="list-inline ">Try reducing the number of words in the query.</li>
-                        </ul>
                     </div>
                 </div>
 
@@ -168,7 +164,7 @@
                         </a>
                         <div class="result__info">
                             <div class="justifyContainer">
-                                <h2 class="profileName profileName--biger"><a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}"> {{$carerProfile->first_name}} {{$carerProfile->family_name}}</a></h2>
+                                <h2 class="profileName profileName--biger"><a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}"> {{$carerProfile->first_name}}&nbsp{{mb_substr($carerProfile->family_name,0,1)}}.</a></h2>
                                 <p class="hourPrice hourPrice">
                                     <span class="hourPrice__price">From £ 12</span>
                                     <span class="hourPrice__timing">/hour</span>

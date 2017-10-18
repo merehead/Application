@@ -94,7 +94,7 @@ class SearchController extends FrontController
             $where .= " and cp.have_car='Yes'";
 
         if ($request->get('work_with_pets'))
-            $where .= " and cp.work_with_pets='Yes'";
+            $where .= " and cp.work_with_pets!='No'";
 
         if ($request->get('typeCare')) {
             $careSelect = 'select carer_profile_id from (

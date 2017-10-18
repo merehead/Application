@@ -46,7 +46,7 @@
                 </div>
                 <h2 class="profileName">
                   <a href="{{route('carerPublicProfile',[$topCarer->id])}}">
-                  {{$topCarer->first_name}}&nbsp{{mb_substr($topCarer->family_name,0,1)}}
+                  {{$topCarer->first_name}}&nbsp{{mb_substr($topCarer->family_name,0,1)}}.
                   </a>
                 </h2>
                 <p class="popularCard__info">
