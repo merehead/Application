@@ -269,18 +269,6 @@
                     bonus payment is payable after the care worker has completed a minimum of 1 hour of care. The care
                     worker will receive credit added to their account, and that shall be paid out on the following pay
                     run.</p>
-                <p>5.9 Who do Carers work for</p>
-                <p>All Care Workers listed here are self employed work as contractors for their clients.</p>
-                <p>5.10 How much does it cost</p>
-                <p>Great care is priceless. That is why we help keep your costs to a minimum. Unlike most care agencies,
-                    we are transparent about the rates and you don’t have to try and negotiate a better deal.
-                    Our basic rates are £12 per hour 8am-8pm Monday to Saturday; £14.40 per hour 8pm-8am Monday to
-                    Saturday; £18 per hour Sundays and Public Holidays.
-                <p>5.11 I am a Care Worker. How much do I earn</p>
-                    You’ll be earn far more than you normally would through most care agencies. For a start, each
-                    appointment is for a minimum of one hour, giving you lots of time to provide great care. Secondly,
-                    you’ll be able to earn £10 per hour 8am-8pm Monday to Saturday; £12 per hour 8pm-8am Monday to
-                    Saturday; £15 per hour Sundays and Public Holidays.</p>
             </div>
 
 
