@@ -1433,6 +1433,7 @@ $(document).ready(function () {
             success: function (response) {
                 $('#message-booking').remove();
                 $('body').append(response);
+                $('.needCare__item').click();
                 $(".datepicker_message").datepicker({
                     beforeShow: function(input, inst) {
                         inst.dpDiv.css({"z-index":"2000!important;"});
