@@ -29,7 +29,7 @@
             <div class="orderInfo">
                 @if($user->user_type_id == 1)
                     <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="profilePhoto orderInfo__photo">
-                        <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
+                        <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'"  alt="">
                     </a>
                     <div class="orderInfo__item orderInfo__item--rightPadding">
                         <h2 class="ordinaryTitle">
@@ -74,7 +74,7 @@
                 </div>
             @else
                 <a href="{{$booking->bookingServiceUser()->first()->profile_link}}" class="profilePhoto orderInfo__photo">
-                    <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" alt="">
+                    <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'"  alt="">
                 </a>
                 <div class="orderInfo__item orderInfo__item--rightPadding">
                     <h2 class="ordinaryTitle">
@@ -340,11 +340,11 @@
                         <div class="comment">
                             @if($message->sender == 'carer')
                             <a href="Service_user_Public_profile_page.html" class="profilePhoto comment__photo">
-                                <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" alt="">
+                                <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'" alt="">
                             </a>
                             @elseif($message->sender == 'service_user')
                             <a href="Service_user_Public_profile_page.html" class="profilePhoto comment__photo">
-                                <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" alt="">
+                                <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'"  alt="">
                             </a>
                             @endif
                             <div class="comment__info">
