@@ -60,7 +60,7 @@
             <table cellpadding="0" cellspacing="0" border="0"  style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"  class="t-content">
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; "  valign="top" class="">
-                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">Dear {{$like_name}}!</h1>
+                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 600; font-size: 18px; color: #272c2b;  text-transform: uppercase;">Dear {{$like_name}}!</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">We have temporarily blocked your account.
                             Please <a href="{{route('ContactPage')}}">contact us</a> if you would like to discuss this further.</p>
                     </td>
@@ -103,12 +103,12 @@
                                     <img src="{{asset('img/s2.png')}}" alt="">
                                 </a>
                             </li>
-                            <li style="list-style: none;display: inline-block;">
+                           {{-- <li style="list-style: none;display: inline-block;">
                                 <a href="https://plus.google.com/communities/102900900688938220709"
                                    style="margin-left: 10px; color: #a5a7af;">
                                     <img src="{{asset('img/s3.png')}}" alt="">
                                 </a>
-                            </li>
+                            </li>--}}
                             {{--                            <li style="list-style: none;display: inline-block;">
                                                             <a href="#" style="margin-left: 10px; color: #a5a7af;">
                                                                 <img src="{{asset('img/s4.png')}}" alt="">

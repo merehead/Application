@@ -61,7 +61,7 @@
 
                 <tr>
                     <td style="padding: 30px 40px;font-family: 'Roboto', sans-serif; line-height: 1.5; background: #f9f9f9; "  valign="top" class="">
-                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 900; font-size: 24px; color: #272c2b;  text-transform: uppercase;">
+                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 600; font-size: 18px; color: #272c2b;  text-transform: uppercase;">
 
                             @if(session('user'))
                                 Hello  {{session('user')->userName}}!
@@ -125,11 +125,11 @@
                                     <img src="{{asset('img/s2.png')}}" alt="">
                                 </a>
                             </li>
-                            <li style="list-style: none;display: inline-block;">
+                            {{--<li style="list-style: none;display: inline-block;">
                                 <a href="https://plus.google.com/communities/102900900688938220709" style="margin-left: 10px; color: #a5a7af;">
                                     <img src="{{asset('img/s3.png')}}" alt="">
                                 </a>
-                            </li>
+                            </li>--}}
                         </ul>
                     </td>
                 </tr>
