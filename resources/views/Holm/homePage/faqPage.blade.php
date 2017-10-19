@@ -421,7 +421,7 @@
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
                             <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
-                            I can’t find the answer to my question
+                            I can’t find the answer to my question?
                             </span>
                         </h2>
                         <span class="faq__ico"><i class="fa fa-plus toggler"></i></span>
@@ -437,7 +437,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                            <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">Who do Carers work for</span>
+                            <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">Who do Carers work for?</span>
                         </h2>
                         <span class="faq__ico"><i class="fa fa-plus toggler"></i></span>
                     </a>
@@ -448,7 +448,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                            <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">How much does it cost</span>
+                            <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">How much does it cost?</span>
                         </h2>
                         <span class="faq__ico"><i class="fa fa-plus toggler"></i></span>
                     </a>
@@ -462,7 +462,7 @@
                 <div class="faq faq--active">
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
-                            <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">I am a Care Worker. How much do I earn</span>
+                            <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">I am a Care Worker. How much do I earn?</span>
                         </h2>
                         <span class="faq__ico"><i class="fa fa-plus toggler"></i></span>
                     </a>
