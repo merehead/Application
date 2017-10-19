@@ -143,19 +143,7 @@
                     </div>
                 </div>
             </div>
-            {{--@else--}}
-                {{--<div class="thank">--}}
-                    {{--<h2 class="thank__title">--}}
-                        {{--Thank you!--}}
-                    {{--</h2>--}}
-                {{--<span class="successIco">--}}
-                  {{--<i class="fa fa-check" aria-hidden="true"></i>--}}
-                {{--</span>--}}
-                    {{--<p class="info-p">--}}
-                        {{--Your carer has now received your booking request and will respond shortly. If you have not heard back within 24 hours, please do contact us.--}}
-                    {{--</p>--}}
-                {{--</div>--}}
-            {{--@endif--}}
+
         </div>
     </div>
 </section>
@@ -179,6 +167,8 @@
               </div>
             `);
             }
+            var padding = ($(document).height()-$('header').outerHeight()-$('section').outerHeight()-$('footer').outerHeight()-20)/2;
+            $('.thank').css('paddingTop',padding).css('paddingBottom',padding);
         });
     });
 
