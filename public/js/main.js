@@ -483,7 +483,7 @@ $(document).ready(function () {
 
 
     $(document).ready(function(){
-        $(".digitFilter0, .digitFilter0v2, .digitFilter07").bind("cut copy paste click dblclick",function(e) {
+        $(".digitFilter0, .digitFilter0v2, .digitFilter07").bind("cut copy paste click dblclick focus",function(e) {
             e.preventDefault();
         });
     });
