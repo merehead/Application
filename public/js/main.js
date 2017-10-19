@@ -22,9 +22,9 @@ var is_data_changed=false;
 //     return (is_data_changed ? "Измененные данные не сохранены. Закрыть страницу?" : null);
 // }
 
-function addressFormt(suggestion){
-    if (suggestion.data.terms.length > 3) {
-        if ($(this).attr('name') == 'address_line1') {
+function addressFormt(suggestion,$this){
+    if (suggestion.data.terms.length > 4) {
+        if ($($this).attr('name') == 'address_line1') {
             var post_code = suggestion.data.terms[2].value;
             var validator = /^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/;
             if (!validator.test(post_code)) {
@@ -42,14 +42,9 @@ function addressFormt(suggestion){
         }
 
     } else {
-        if ($(this).attr('name') == 'address_line1') {
-            $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
-        }
-        else {
-            //$('input[name="address_line1"]').val('');
-            $('input[name="town"]').val(suggestion.data.terms[0].value);
-            $('input[name="postcode"]').val(suggestion.data.terms[1].value);
-            $('input[name="postCode"]').val(suggestion.data.terms[1].value);
+        if ($($this).attr('name') == 'address_line1') {
+            $('input[name="address_line1"]').val(suggestion.data.structured_formatting.main_text);
+            $('input[name="town"]').val(suggestion.data.structured_formatting.secondary_text);
         }
     }
 }
@@ -506,6 +501,47 @@ $(document).ready(function () {
         }
     });
 
+    $(".digitFilter07").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+            // Allow: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            // let it happen, don't do anything
+            return;
+        }
+        var input =  $(".digitFilter07").val();
+        if(input.length==0 && e.keyCode!=48) {
+            e.preventDefault();
+        }
+        if(input.length==1 && e.keyCode!=55) {
+            e.preventDefault();
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+    $(".digitFilter0").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+            // Allow: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            // let it happen, don't do anything
+            return;
+        }
+        var input =  $(".digitFilter0").val();
+        if(input.length==0 && e.keyCode!=48) {
+            e.preventDefault();
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
 
 
     // Иван функция уменшает автоматом шрифт у имени пользователя в шапке
@@ -1405,7 +1441,7 @@ $(document).ready(function () {
             var datestart = $(datetime).attr('name').substring(0,$(datetime).attr('name').length - 10)+'[date_start]';
             var datestartDate = $('input[name="'+datestart+'"]').datepicker( "getDate" );
 
-            inDay.setDate(datestartDate.getDate()+1);
+            inDay.setDate(datestartDate.getDate()+2);
             in90Day.setDate(datestartDate.getDate()+90);
             $(datetime).datepicker({
                 beforeShow: function (input, inst) {
@@ -1776,9 +1812,13 @@ $(document).ready(function () {
         is_data_changed = true;
         
         $('input[name="is_data_changed"]').val(1);
-        $('#post_code_profile').autocomplete({serviceUrl:'/address/',onSelect: function (suggestion) {
-            addressFormt(suggestion);
-        }});
+        $('input[name="address_line1"]').autocomplete({
+            serviceUrl:'/address/',
+            params: {query: ($(this).prop('readonly')==true)?'':$(this).attr('data-country') + ' ' + $(this).val()},
+            onSelect: function (suggestion) {
+                addressFormt(suggestion,$('#post_code_profile'));
+            }
+        });
         $('#post_code_profile').autocomplete('clear');
         if (is_data_changed) {
             $('#datepicker_when_start').attr('readonly',false)
@@ -1833,7 +1873,7 @@ $(document).ready(function () {
                 minChars: 1,
                 dataType: 'json',
                 onSelect: function (suggestion) {
-                    addressFormt(suggestion);
+                    addressFormt(suggestion, $('input[name="address_line1"]:not(.disable)'));
                 }
             }
         );

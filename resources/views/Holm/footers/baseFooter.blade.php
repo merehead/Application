@@ -42,15 +42,35 @@
         </div>
 
         <div class="footerExtra">
+
+
             <p class="copyright">
                 COPYRIGHT © 2017 Holm. All rights reserved
             </p>
+{{--
+
+
             <a href="{{route('TermsPage')}}" class="footerExtra__terms">
                 Terms and Conditions
             </a >
             <a href="{{route('privacy_policy')}}" class="footerExtra__terms">
                 Privacy Policy
             </a>
+
+
+            --}}
+
+            <div class="footerExtra__terms">
+                <a href="{{route('TermsPage')}}" class="">
+                    Terms and Conditions
+                </a >
+                <a href="{{route('privacy_policy')}}" class="">
+                    privacy policy
+                </a >
+            </div>
+
+
+
             <div class="footerSocial">
                 <a href="https://www.facebook.com/HolmCareUK/" class="footerSocial__item">
                     <i class="fa fa-facebook" aria-hidden="true"></i>

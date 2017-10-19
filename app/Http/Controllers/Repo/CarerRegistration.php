@@ -199,6 +199,8 @@ class CarerRegistration
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'referral_code'=>'string|nullable|max:10|exists:users,own_referral_code',
+            'confirm_terms'=>'required',
+
         ]);
         $referral_code = 0;
         (isset($request['referral_code']))? $referral_code = $request['referral_code'] : $referral_code = 0;

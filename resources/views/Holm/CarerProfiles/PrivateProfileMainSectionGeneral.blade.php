@@ -27,7 +27,7 @@
                 Address Line 1 <span class="requireIco">*</span>
               </span>
             </h2>
-            {!! Form::text('address_line1',null,['class'=>'profileField__input','maxlength'=>'120']) !!}
+            {!! Form::text('address_line1',null,['class'=>'profileField__input','data-country'=>'Manchester,United Kingdom','maxlength'=>'120']) !!}
 
         </div>
 
@@ -75,7 +75,7 @@
                 Mobile Number <span class="requireIco">*</span>
               </span>
             </h2>
-            {!! Form::text('mobile_number',null,['class'=>'profileField__input digitFilter','maxlength'=>'11']) !!}
+            {!! Form::text('mobile_number',null,['class'=>'profileField__input digitFilter07','maxlength'=>'11']) !!}
         </div>
 
         <div class="profileField">
