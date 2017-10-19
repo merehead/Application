@@ -5,7 +5,7 @@ interface PaymentToolsInterface
 {
     public function createCreditCardToken(array $creditCardData) : string;
 
-    public function createCharge(int $amount, string $cardToken) : string;
+    public function createCharge(int $amount, string $cardToken, int $bookingId) : string;
 
     public function createRefund(int $amount, string $chargeId, string $comment) : string;
 

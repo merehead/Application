@@ -4,6 +4,11 @@ namespace App\Helpers;
 
 
 use App\Helpers\Contracts\PaymentToolsInterface;
+use App\StripeCharge;
+use App\StripeConnectedAccount;
+use App\StripeExternalAccount;
+use App\StripeTransfer;
+use App\User;
 use Stripe\Account;
 use Stripe\Balance;
 use Stripe\Charge;
@@ -37,7 +42,7 @@ class StripePaymentTools implements PaymentToolsInterface
         return $res->id;
     }
 
-    public function createCharge(int $amount, string $cardToken) : string
+    public function createCharge(int $amount, string $cardToken, int $bookingId) : string
     {
         $res = $response = Charge::create(array(
             "amount" => $amount,
@@ -45,6 +50,12 @@ class StripePaymentTools implements PaymentToolsInterface
             "source" => $cardToken,
             "description" => "Charging carer"
         ));
+
+        StripeCharge::create([
+            'id' => $res->id,
+            'booking_id' => $bookingId,
+            'amount' => $amount,
+        ]);
 
         return $res->id;
     }
@@ -62,6 +73,7 @@ class StripePaymentTools implements PaymentToolsInterface
 
     public function createConnectedAccount(array $stripeAccountData, int $userId)
     {
+        $carer = User::findOrFail($userId);
         $account = Account::create(
             [
                 "type" => 'custom',
@@ -88,15 +100,18 @@ class StripePaymentTools implements PaymentToolsInterface
                 ]
             ]
         );
+        $account = Account::retrieve('acct_1BEMdvAij8rTvtXk');
 
         //todo get caarer document
-        $documentPath = '../storage/documents/e6b6b2e63a805be2ac105ca68fb81568.jpeg';
+        $documentPath = 'C:\OSPanel\domains\holm\public\img\Annie_B.png';
         $documentId = $this->uploadDocument($documentPath, $account->id);
         $data['legal_entity']['verification']['document'] = $documentId;
-        $this->updateConnectedAccount('acct_1BDwrPHySv5f7qBn', $data);
+        $this->updateConnectedAccount($data, $account->id);
 
-
-        //todo sync carer account with connected account
+        StripeConnectedAccount::create([
+            'id' => $account->id,
+            'carer_id' => $carer->id,
+        ]);
 
         return $account->id;
     }
@@ -187,6 +202,11 @@ class StripePaymentTools implements PaymentToolsInterface
             'default_for_currency' => true,
         ]);
 
+        StripeExternalAccount::create([
+            'id' => $externalAccount->id,
+            'connected_account_id' => $connectedAccountId,
+        ]);
+
         return $externalAccount->id;
     }
 
@@ -216,6 +236,12 @@ class StripePaymentTools implements PaymentToolsInterface
             "currency" => "gbp",
             'destination' => $connectedAccountId,
             'metadata' => ['comment' => $comment],
+        ]);
+
+        StripeTransfer::create([
+            'id' => $res->id,
+            'connected_account_id' => $connectedAccountId,
+            'amount' => $amount,
         ]);
 
 
