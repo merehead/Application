@@ -42,7 +42,7 @@
                               <div class="inputWrap">
                                   <input type="text" class="formInput" id="cardNumber" placeholder="4534 3333 3333 3333 3333">
                     <span class="bookPayment__ico">
-                      <img src="./dist/img/visa.png" alt="">
+                      <img src={{asset("img/visa.png")}} alt="">
                     </span>
                               </div>
                           </div>

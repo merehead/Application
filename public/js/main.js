@@ -465,7 +465,7 @@ $(document).ready(function () {
     //     }
     // });
 
-    $(".digitFilter").keydown(function (e) {
+/*    $(".digitFilter").keydown(function (e) {
         // Allow: backspace, delete, tab, escape, enter and .
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
             // Allow: Ctrl+A, Command+A
@@ -479,7 +479,7 @@ $(document).ready(function () {
         if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
             e.preventDefault();
         }
-    });
+    });*/
 
     $(".digitFilter07").keydown(function (e) {
         // Allow: backspace, delete, tab, escape, enter and .
@@ -494,9 +494,11 @@ $(document).ready(function () {
         var input =  $(".digitFilter07").val();
         if(input.length==0 && e.keyCode!=48) {
             e.preventDefault();
+            return;
         }
         if(input.length==1 && e.keyCode!=55) {
             e.preventDefault();
+            return;
         }
         // Ensure that it is a number and stop the keypress
         if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
@@ -516,6 +518,7 @@ $(document).ready(function () {
         var input =  $(".digitFilter0").val();
         if(input.length==0 && e.keyCode!=48) {
             e.preventDefault();
+            return;
         }
         // Ensure that it is a number and stop the keypress
         if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
