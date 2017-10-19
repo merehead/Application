@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-    protected $fillable = ['name'];
-
-
-    public function appointments()
-    {
-        return $this->hasMany('App\Appointment');
-    }
+    protected $fillable = [
+        'booking_id',
+        'payment_type',
+        'amount',
+        'payment_id',
+        'payment_object',
+    ];
 }

@@ -259,21 +259,30 @@ class BookingsController extends FrontController implements Constants
     public function accept(Booking $booking, StripeService $stripeService)
     {
         $user = Auth::user();
-//        if($booking->status_id == 2){
         if ($booking->payment_method == 'credit_card') {
             $purchase = PaymentTools::createCharge($booking->carer_amount * 100, $booking->card_token, $booking->id);
-//                dd($purchase);
         } else {
 
         }
+
+        //Set prices for appointments
+        $appointments = $booking->appointments()->get();
+        foreach ($appointments as $appointment){
+            $appointment->price_for_purchaser = $appointment->purchaser_price;
+            $appointment->price_for_carer = $appointment->carer_price;
+            $appointment->save();
+        }
+
+        //Messages for workroom
         BookingsMessage::create([
             'booking_id' => $booking->id,
             'type' => 'status_change',
             'new_status' => 'in_progress',
         ]);
+
+        //Set status of booking "in progress"
         $booking->status_id = $booking->carer_status_id = $booking->purchaser_status_id = self::IN_PROGRESS;
         $booking->save();
-//        }
 
         return response(['status' => 'success']);
     }
