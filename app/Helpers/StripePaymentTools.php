@@ -184,7 +184,11 @@ class StripePaymentTools implements PaymentToolsInterface
     public function deleteConnectedAccount(string $connectedAccountId) : bool
     {
         $account = Account::retrieve($connectedAccountId);
+        $stripeConnectedAccount = StripeConnectedAccount::find($account->id);
+
         $account->delete();
+        if($stripeConnectedAccount)
+            $stripeConnectedAccount->delete();
 
         return true;
     }

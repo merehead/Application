@@ -163,6 +163,7 @@ Route::get('/test_stripe', function (){
 //    $res = PaymentTools::createCreditCardToken(['card_number' => '4000 0000 0000 0077','exp_month' => '12','exp_year' => '20','cvc' => '123']);
 //    $res = PaymentTools::createCharge(200000, $res, 4);
 //    $res = PaymentTools::createTransfer('acct_1BEMdvAij8rTvtXk', 20000, 'Payment to carer 2');
+//    $res = PaymentTools::deleteConnectedAccount('acct_1BDwrPHySv5f7qBn');
 
 //    dd($res);
 });
