@@ -11,7 +11,7 @@
         </a>
         <span class="breadcrumbs__arrow">></span>
          <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}" class="breadcrumbs__item">
-             {{$serviceUser->full_name}}
+             {{$serviceUser->first_name}} &nbsp{{mb_substr($serviceUser->family_name,0,1)}}.
          </a>
 
     </div>

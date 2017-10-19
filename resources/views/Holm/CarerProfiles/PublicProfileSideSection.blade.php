@@ -155,7 +155,7 @@ From £ 12</span><span class="hourPrice__timing">/hour</span>
                         <div class="reviewer__info">
                             <h2 class="profileName">
                                 <a href="{{route('ServiceUserProfilePublic',[$review->id])}}"> {{$review->first_name}}
-                                    &nbsp{{mb_substr($review->family_name,0,1)}}</a>
+                                    &nbsp{{mb_substr($review->family_name,0,1)}}.</a>
 
                             </h2>
                             <p class="reviewLocation">
