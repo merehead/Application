@@ -136,7 +136,7 @@
                Phone Number
               </span>
             </h2>
-            {!! Form::text('mobile_number',null,['class'=>'profileField__input','placeholder'=>'Mobile number','maxlength'=>"30"]) !!}
+            {!! Form::text('mobile_number',null,['class'=>'profileField__input digitFilter07','placeholder'=>'Mobile number','maxlength'=>"30"]) !!}
             @if ($errors->has('mobile_number'))
                 <span class="help-block"><strong>{{ $errors->first('mobile_number') }}</strong></span>
             @endif

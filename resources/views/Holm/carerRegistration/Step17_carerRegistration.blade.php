@@ -66,7 +66,7 @@
                 <h2 class="formLabel questionForm__label">
                     Phone number<span>*</span>
                 </h2>
-                {!! Form::text('phone',null,['class'=>'formInput digitFilter','placeholder'=>'Phone number','maxlength'=>"11"]) !!}
+                {!! Form::text('phone',null,['class'=>'formInput digitFilter0','placeholder'=>'Phone number','maxlength'=>"11"]) !!}
                 @if ($errors->has('phone'))
                     <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>

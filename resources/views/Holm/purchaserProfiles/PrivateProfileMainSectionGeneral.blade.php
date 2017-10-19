@@ -129,7 +129,7 @@
                 Mobile Number <span class="requireIco">*</span>
               </span>
             </h2>
-            {!! Form::text('mobile_number',null,['class'=>'profileField__input digitFilter' ]) !!}
+            {!! Form::text('mobile_number',null,['class'=>'profileField__input digitFilter0' ]) !!}
 
         </div>
 
