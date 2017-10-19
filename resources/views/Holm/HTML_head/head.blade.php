@@ -38,8 +38,8 @@
     {{--<script src="{{asset('js/jquery-ui-timepicker-addon.js')}}"></script>--}}
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJaLv-6bVXViUGJ_e_-nR5RZlt9GUuC4M"></script>
-
+    {{--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJaLv-6bVXViUGJ_e_-nR5RZlt9GUuC4M"></script>--}}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJaLv-6bVXViUGJ_e_-nR5RZlt9GUuC4M&libraries=places"></script>
     <script src="{{asset('js/jquery.autocomplete.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
 {{--
