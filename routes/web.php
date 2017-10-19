@@ -147,7 +147,7 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::get('/booking-payout-to-carer/{action}/{bookingId}/{amount}', 'AdminSitePayment\AdminSitePayment@BookingPayoutToCarer')->name('BookingPayoutToCarer');
     Route::get('/bonus-payout-to-carer/{action}/{bonusRecordId}/{amount}', 'AdminSitePayment\AdminSitePayment@BonusPayoutToCarer')->name('BonusPayoutToCarer');
 
-
+    Route::get('/booking-transactions', 'AdminSitePayment\AdminSitePayment@getBookingTransactions')->name('BookingTransactions');
 });
 
 Route::get('/test_document_upload', function (){
