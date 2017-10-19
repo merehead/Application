@@ -2,8 +2,7 @@
 
 namespace App\Providers;
 
-use App\Helpers\SaveEloquentOrm;
-use App\Helpers\SaveFile;
+use App\Helpers\StripePaymentTools;
 use Illuminate\Support\ServiceProvider;
 
 class PaymentToolsServiceProvider extends ServiceProvider
@@ -25,9 +24,8 @@ class PaymentToolsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('savestr', function (){
-            return new SaveEloquentOrm();
-//            return new SaveFile();
+        $this->app->singleton('paymenttools', function (){
+            return new StripePaymentTools();
         });
     }
 }

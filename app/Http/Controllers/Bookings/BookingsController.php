@@ -24,6 +24,7 @@ use SebastianBergmann\Comparator\Book;
 use Auth;
 use Carbon\Carbon;
 use Swift_TransportException;
+use PaymentTools;
 
 class BookingsController extends FrontController implements Constants
 {
@@ -169,13 +170,13 @@ class BookingsController extends FrontController implements Constants
         $booking->payment_method = $request->payment_method;
 
         if ($request->payment_method == 'credit_card') {
-            $cardToken = $stripeService->createCreditCardToken([
+            $cardToken = PaymentTools::createCreditCardToken([
                 'card_number' => $request->card_number,
                 'exp_month' => $request->card_month,
                 'exp_year' => $request->card_year,
                 'cvc' => $request->card_cvc,
             ]);
-            $booking->card_token = $cardToken->id;
+            $booking->card_token = $cardToken;
         }
         $booking->status_id = 2;
         $booking->save();
@@ -260,9 +261,7 @@ class BookingsController extends FrontController implements Constants
         $user = Auth::user();
 //        if($booking->status_id == 2){
         if ($booking->payment_method == 'credit_card') {
-            $purchase = $stripeService->createCharge([
-                'amount' => $booking->carer_amount * 100,
-            ], $booking->card_token);
+            $purchase = PaymentTools::createCharge($booking->carer_amount * 100, $booking->card_token, $booking->id);
 //                dd($purchase);
         } else {
 

@@ -94,6 +94,17 @@
             @endif
         </div>
 
+        <br />
+        <br />
+
+        <div class="formField">
+            <input type="checkbox" class="customCheckbox" name="confirm_terms" id="confirm-terms" required>
+            <label for="confirm-terms">I accept Holm’s <a href="{{route('TermsPage')}}" target="_blank">Terms & Conditions</a> and <a href="{{route('privacy_policy')}}" target="_blank">privacy policy</a> for this booking</label>
+            @if ($errors->has('confirm_terms'))
+                <span class="help-block"><strong>{{ $errors->first('confirm_terms') }}</strong></span>
+            @endif
+        </div>
+
         <input type="hidden" name="step" value='1'>
         <input type="hidden" name="carersProfileID" value='0'>
         {!! Form::close()!!}

@@ -2,11 +2,11 @@
     <div class="container">
         <div class="justifyContainer justifyContainer--smColumn">
             <div class="breadcrumbs">
-                <a href="index.html" class="breadcrumbs__item">
+                <a href="{{route('mainHomePage')}}" class="breadcrumbs__item">
                     Home
                 </a>
                 <span class="breadcrumbs__arrow">></span>
-                <a href="Terms_and_Conditions.html" class="breadcrumbs__item">
+                <a href="{{route('privacy_policy')}}" class="breadcrumbs__item">
                     Privacy Policy
                 </a>
 
@@ -35,9 +35,7 @@
                 </p>
                 <p>
                     You can find out more about Holm and the Terms of Use for using our site at
-                    <a href="">enter
-                        correct web address here for T&Cs</a>
-
+                    <a href="{{route('TermsPage')}}">terms and condition</a>.
                 </p>
             </div>
             <div class="privacy__item">

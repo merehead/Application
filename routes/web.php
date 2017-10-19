@@ -120,6 +120,9 @@ Route::get('/invite/refer-users', 'ReferNewUserController@index')->name('inviteR
 Route::post('/invite/refer-users', 'ReferNewUserController@create')->name('inviteReferUsersPost');
 Route::get('/invite/thank-you', 'ReferNewUserController@show')->name('thankForInvite');
 
+Route::get('/privacy-policy', 'PrivacyPolicyController@index')->name('privacy_policy');
+
+
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
 
@@ -155,8 +158,13 @@ Route::get('/appan', function (){
     return view('resources/views/Holm/purchaserProfiles/Booking/NewAnAppointment');
 });
 
-Route::get('/test', function (){
-//    $res = PaymentTools::createCreditCardToken();
-//    dd();
+Route::get('/test_stripe', function (){
+
+//    $res = PaymentTools::createCreditCardToken(['card_number' => '4000 0000 0000 0077','exp_month' => '12','exp_year' => '20','cvc' => '123']);
+//    $res = PaymentTools::createCharge(200000, $res, 4);
+//    $res = PaymentTools::createTransfer('acct_1BEMdvAij8rTvtXk', 20000, 'Payment to carer 2');
+//    $res = PaymentTools::deleteConnectedAccount('acct_1BDwrPHySv5f7qBn');
+
+//    dd($res);
 });
 

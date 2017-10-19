@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHolidaysTable extends Migration
+class CreateStripeConnectedAccountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateHolidaysTable extends Migration
      */
     public function up()
     {
-        Schema::create('holidays', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->timestamp('date')->nullable()->default(null);
+        Schema::create('stripe_connected_accounts', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->bigInteger('carer_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('carer_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -28,6 +29,6 @@ class CreateHolidaysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('holidays');
+        Schema::dropIfExists('stripe_connected_accounts');
     }
 }
