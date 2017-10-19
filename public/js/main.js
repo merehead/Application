@@ -1799,7 +1799,7 @@ $(document).ready(function () {
                 addressFormt(suggestion,$('#post_code_profile'));
             }
         });
-        $('#post_code_profile').autocomplete('clear');
+        $('input[name="address_line1"]').autocomplete('clear');
         if (is_data_changed) {
             $('#datepicker_when_start').attr('readonly',false)
                 .datepicker({ dateFormat: "dd/mm/yy",
@@ -1912,8 +1912,8 @@ $(document).ready(function () {
 
         $carer_profile.find('button.btn-success').on('click', function (e) {
             e.preventDefault();
-            $('#post_code_profile').autocomplete({serviceUrl:'/noaddress/'});
-            $('#post_code_profile').autocomplete('clear');
+            $('input[name="address_line1"]').autocomplete({serviceUrl:'/noaddress/'});
+            $('input[name="address_line1"]').autocomplete('clear');
             if($('#time_to_night_helping').length){
                 $('#time_to_night_helping').timepicker().destroy();
             }
