@@ -90,7 +90,7 @@ class PurchaserController extends FrontController implements Constants
                 'mobile_number' =>
                     array(
                         'required',
-                        'regex:/^07[0-9]{9}$/',
+                        'regex:/^0[0-9]{10}$/',
                     ),
                 'address_line1' =>
                     array(

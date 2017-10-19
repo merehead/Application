@@ -23,30 +23,10 @@ var is_data_changed=false;
 // }
 
 function addressFormt(suggestion,$this){
-    if (suggestion.data.terms.length > 4) {
-        if ($($this).attr('name') == 'address_line1') {
-            var post_code = suggestion.data.terms[2].value;
-            var validator = /^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/;
-            if (!validator.test(post_code)) {
-                $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
-                $('input[name="address_line2"]').val(suggestion.data.terms[1].value);
-                $('input[name="town"]').val(suggestion.data.terms[2].value);
 
-            }
-        } else {
+    $('input[name="address_line1"]').val(suggestion.data.structured_formatting.main_text);
+    $('input[name="town"]').val(suggestion.data.structured_formatting.secondary_text);
 
-            $('input[name="address_line1"]').val(suggestion.data.terms[0].value);
-            $('input[name="town"]').val(suggestion.data.terms[1].value);
-            $('input[name="postcode"]').val(suggestion.data.terms[2].value);
-            $('input[name="postCode"]').val(suggestion.data.terms[2].value);
-        }
-
-    } else {
-        if ($($this).attr('name') == 'address_line1') {
-            $('input[name="address_line1"]').val(suggestion.data.structured_formatting.main_text);
-            $('input[name="town"]').val(suggestion.data.structured_formatting.secondary_text);
-        }
-    }
 }
 function getTime( ) {
     var d = new Date( );
@@ -485,7 +465,7 @@ $(document).ready(function () {
     //     }
     // });
 
-    $(".digitFilter").keydown(function (e) {
+/*    $(".digitFilter").keydown(function (e) {
         // Allow: backspace, delete, tab, escape, enter and .
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
             // Allow: Ctrl+A, Command+A
@@ -499,7 +479,15 @@ $(document).ready(function () {
         if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
             e.preventDefault();
         }
+    });*/
+
+
+    $(document).ready(function(){
+        $(".digitFilter0, .digitFilter0v2, .digitFilter07").bind("cut copy paste click dblclick focus",function(e) {
+            e.preventDefault();
+        });
     });
+
 
     $(".digitFilter07").keydown(function (e) {
         // Allow: backspace, delete, tab, escape, enter and .
@@ -512,11 +500,13 @@ $(document).ready(function () {
             return;
         }
         var input =  $(".digitFilter07").val();
-        if(input.length==0 && e.keyCode!=48) {
+        if((input.length==0 && e.keyCode!=48)) {
             e.preventDefault();
+            return;
         }
         if(input.length==1 && e.keyCode!=55) {
             e.preventDefault();
+            return;
         }
         // Ensure that it is a number and stop the keypress
         if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
@@ -534,8 +524,38 @@ $(document).ready(function () {
             return;
         }
         var input =  $(".digitFilter0").val();
-        if(input.length==0 && e.keyCode!=48) {
+        if((input.length==0 && e.keyCode!=48)) {
             e.preventDefault();
+            return;
+        }
+        if((input.length>0 && input.substring(0,1)!='0')) {
+            e.preventDefault();
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+    $(".digitFilter0v2").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+            // Allow: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            // let it happen, don't do anything
+            return;
+        }
+        var input =  $(".digitFilter0v2").val();
+        if((input.length==0 && e.keyCode!=48)) {
+            e.preventDefault();
+            return;
+        }
+        if((input.length>0 && input.substring(0,1)!='0')) {
+            e.preventDefault();
+            return;
         }
         // Ensure that it is a number and stop the keypress
         if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
@@ -1819,7 +1839,7 @@ $(document).ready(function () {
                 addressFormt(suggestion,$('#post_code_profile'));
             }
         });
-        $('#post_code_profile').autocomplete('clear');
+        $('input[name="address_line1"]').autocomplete('clear');
         if (is_data_changed) {
             $('#datepicker_when_start').attr('readonly',false)
                 .datepicker({ dateFormat: "dd/mm/yy",
@@ -1836,17 +1856,19 @@ $(document).ready(function () {
         $(idForm).find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
         $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
         // $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').attr('autocomplete', 'on');
-        $('#time_to_night_helping').timepicker({
-            change: function () {
-                $(this).change();
-            },
-            timeFormat: 'h:mm p',
-            interval: 30,
-            startTime: '18:00',
-            dynamic: true,
-            dropdown: true,
-            scrollbar: true
-        });
+        if($('#time_to_night_helping').length){
+            $('#time_to_night_helping').timepicker({
+                change: function () {
+                    $(this).change();
+                },
+                timeFormat: 'h:mm p',
+                interval: 30,
+                startTime: '18:00',
+                dynamic: true,
+                dropdown: true,
+                scrollbar: true
+            });
+        }
         $(idLoadFiles).find('.pickfiles').attr("disabled", false);
         // $('input[name="postcode"],input[name="address_line1"]').autocomplete('enable');
         $(idLoadFiles).find('.pickfiles-change').attr("disabled", false);
@@ -1930,9 +1952,11 @@ $(document).ready(function () {
 
         $carer_profile.find('button.btn-success').on('click', function (e) {
             e.preventDefault();
-            $('#post_code_profile').autocomplete({serviceUrl:'/noaddress/'});
-            $('#post_code_profile').autocomplete('clear');
-            $('#time_to_night_helping').timepicker().destroy();
+            $('input[name="address_line1"]').autocomplete({serviceUrl:'/noaddress/'});
+            $('input[name="address_line1"]').autocomplete('clear');
+            if($('#time_to_night_helping').length){
+                $('#time_to_night_helping').timepicker().destroy();
+            }
             is_data_changed = false;
             $('input[name="is_data_changed"]').val(0);
             if (is_data_changed) {
