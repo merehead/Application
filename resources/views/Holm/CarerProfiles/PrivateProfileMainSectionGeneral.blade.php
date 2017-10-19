@@ -179,14 +179,6 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
 
             {!! Form::textarea('description_yourself',null,['class'=>'formArea','placeholder'=>'Your text','maxlength'=>"600"]) !!}
 
-{{--
-            {!! Form::textarea('description_yourself',null,['class'=>'formArea','maxlength'=>1024,'placeholder'=>'Your text']) !!}
---}}
-
-
-            {{--
-                        <textarea class="profileField__area" placeholder="{{$carerProfile->description_yourself}}"></textarea>
-            --}}
         </div>
     </div>
 
@@ -238,7 +230,11 @@ null,['class'=>'profileField__select  profileField__select--greyBg','id'=>'depen
                 </span>
                     </h2>
 
-                    {!! Form::text('Persons['.$number.'][phone]',$carerReference->phone,['class'=>'profileField__input digitFilter0','placeholder'=>'07000000000', 'maxlength'=>'11']) !!}
+                    <?php
+                        ($number == 0)? $class = 'profileField__input digitFilter0': $class = 'profileField__input digitFilter0v2' ;
+                    ?>
+
+                    {!! Form::text('Persons['.$number.'][phone]',$carerReference->phone,['class'=>$class,'placeholder'=>'07000000000', 'maxlength'=>'11']) !!}
                 </div>
                 <div class="profileField profileField--full-width">
                     <h2 class="profileField__title ordinaryTitle">
