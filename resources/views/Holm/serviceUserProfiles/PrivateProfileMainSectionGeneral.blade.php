@@ -73,8 +73,7 @@
               </span>
             </h2>
 
-
-            {!! Form::text('address_line1',null,['class'=>'profileField__input','placeholder'=>'Address','maxlength'=>"120"]) !!}
+            {!! Form::text('address_line1',null,['class'=>'profileField__input','placeholder'=>'Address','data-country'=>'Manchester,United Kingdom','maxlength'=>"120"]) !!}
             @if ($errors->has('address_line1'))
                 <span class="help-block"><strong>{{ $errors->first('address_line1') }}</strong></span>
             @endif

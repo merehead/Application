@@ -80,7 +80,7 @@
                 Address Line 1 <span class="requireIco">*</span>
               </span>
             </h2>
-            {!! Form::text('address_line1',null,['class'=>'profileField__input']) !!}
+            {!! Form::text('address_line1',null,['class'=>'profileField__input','data-country'=>'']) !!}
 
         </div>
 
