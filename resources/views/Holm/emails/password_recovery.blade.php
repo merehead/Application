@@ -68,7 +68,8 @@
                             @endif
                         </h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0; ">
-                            We received a request to reset your password for your account {{session('email')}}. We are here to help!<br>
+                            We received a request to reset your password for your account {{session('email')}}. We are here to help!
+                            <br>
                             Simply click on the ?? to set a new password.
                             <br>
 

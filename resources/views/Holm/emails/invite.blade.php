@@ -186,11 +186,6 @@
                                     <img src="{{asset('img/s3.png')}}" alt="">
                                 </a>
                             </li>
-                            <li style="list-style: none;display: inline-block;">
-                                <a href="{{route('CarerRegistration')}}" style="margin-left: 10px; color: #a5a7af; ">
-                                    <img src="{{asset('img/s5.png')}}" alt="">
-                                </a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
