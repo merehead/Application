@@ -421,7 +421,7 @@
                     <a href="#" class="faq__link">
                         <h2 class="ordinaryTitle faq__title">
                             <span class="ordinaryTitle__text toggler  ordinaryTitle--medium">
-                            I can’t find the answer to my question?
+                            I can’t find the answer to my question
                             </span>
                         </h2>
                         <span class="faq__ico"><i class="fa fa-plus toggler"></i></span>
