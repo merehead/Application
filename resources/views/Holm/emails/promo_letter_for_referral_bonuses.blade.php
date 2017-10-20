@@ -76,7 +76,7 @@
                             or would benefit from receiving great care, and we’ll give each of you £100!*
                         </p>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-                            You can just tell them your code, or we can email them for you if you press the button below.
+                            You can just tell them your code, or we can email them for you.
                             <a href="{{route('inviteReferUsers')}}">It’s that easy</a>!
                         </p>
                         <a href="{{route('TermsPage')}}" class=""
