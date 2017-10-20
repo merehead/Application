@@ -86,6 +86,20 @@
                   text-decoration: underline;">
                             *Terms & Conditions Apply
                         </a>
+                        <p style=" text-align: center; font-weight: 300; margin: 10px 0;">
+                            <a href="{{route('inviteReferUsers')}}" style="
+                  padding: 10px 40px;
+                  border-radius: 30px;
+                  text-align: center;
+                  background: #80cb2d;
+                  font-family: 'Lato', sans-serif;
+                  font-weight: 900;
+                  color: #fff;
+                  font-size: 14px;
+                  text-transform: uppercase;
+                  text-decoration: none !important;">
+                                Refer</a>
+                        </p>
                     </td>
                 </tr>
             </table>
