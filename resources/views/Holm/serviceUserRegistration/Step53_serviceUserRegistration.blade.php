@@ -1,3 +1,19 @@
+<script>
+    $(document).ready(function() {
+
+        $('#time_to_night_helping').timepicker({
+            change: function () {
+                $(this).change();
+            },
+            timeFormat: 'h:mm p',
+            interval: 30,
+            startTime: '18:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+    });
+</script>
 <div class="registration">
     <div class="registration__column registration__column--with-padding">
         <div class="questionsBox">
