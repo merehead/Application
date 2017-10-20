@@ -1258,11 +1258,20 @@ $(document).ready(function () {
             $(".sometimes_hiding2_step48").hide();
         }
     });
+    if ($("#step48sometimes-if2").val() != 'No') {
+        $(".sometimes_hiding2_step48-1").show();
+        $(".sometimes_hiding2_step48-2").hide();
+    } else {
+        $(".sometimes_hiding2_step48-2").show();
+        $(".sometimes_hiding2_step48-1").hide();
+    }
     $("#step48sometimes-if2").on('change', function () {
         if ($("#step48sometimes-if2").val() != 'No') {
-            $(".sometimes_hiding2_step48").show();
+            $(".sometimes_hiding2_step48-1").show();
+            $(".sometimes_hiding2_step48-2").hide();
         } else {
-            $(".sometimes_hiding2_step48").hide();
+            $(".sometimes_hiding2_step48-2").show();
+            $(".sometimes_hiding2_step48-1").hide();
         }
     });
 //^^^^^^^Иван 20170929 для регистрации профиля пользователя

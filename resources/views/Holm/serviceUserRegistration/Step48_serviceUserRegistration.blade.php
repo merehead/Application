@@ -59,7 +59,7 @@
                         @endif
                     </div>
                 </div>
-            <div class="formField sometimes_hiding2_step48" style="display: none">
+            <div class="formField sometimes_hiding2_step48-1" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Where are the incontinence products stored? <span>*</span>
                     </h2>
@@ -73,7 +73,7 @@
                         @endif
                     </div>
                 </div>
-            <div class="formField sometimes_hiding2_step48" style="display: none">
+            <div class="formField sometimes_hiding2_step48-2" style="display: none">
                     <h2 class="formLabel questionForm__label">
                         Would {{$userNameForSite}} like help in choosing incontinence products?
                     </h2>
