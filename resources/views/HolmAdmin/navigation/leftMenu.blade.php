@@ -41,7 +41,7 @@
             </a>
         </li>
         <li class="adminNav__item">
-            <a href="#" class="adminNav__link">
+            <a href="{{route('BookingTransactions')}}" class="adminNav__link">
                 <span class="adminNav__ico">
                   <i class="fa fa-gbp" aria-hidden="true"></i>
                 </span>

@@ -3,11 +3,14 @@
 namespace App\Helpers;
 
 
+use App\BonusesPayment;
+use App\Booking;
 use App\Helpers\Contracts\PaymentToolsInterface;
 use App\StripeCharge;
 use App\StripeConnectedAccount;
 use App\StripeExternalAccount;
 use App\StripeTransfer;
+use App\Transaction;
 use App\User;
 use Stripe\Account;
 use Stripe\Balance;
@@ -55,6 +58,12 @@ class StripePaymentTools implements PaymentToolsInterface
             'id' => $res->id,
             'booking_id' => $bookingId,
             'amount' => $amount,
+        ]);
+
+        Transaction::create([
+            'booking_id' => $bookingId,
+            'payment_method' => 'stripe',
+            'amount' => $amount/100,
         ]);
 
         return $res->id;
@@ -251,4 +260,15 @@ class StripePaymentTools implements PaymentToolsInterface
 
         return $res->id;
     }
+
+    public function createBonusPayment(int $amount, int $bookingId)
+    {
+        $booking = Booking::find($bookingId);
+        BonusesPayment::create([
+            'user_id' => $booking->purchaser_id,
+            'amount' => -$amount,
+        ]);
+    }
+
+
 }

@@ -11,7 +11,7 @@ use DB;
 
 class Appointment extends Model implements Constants
 {
-    protected $fillable = ['booking_id','date_start','date_end','amount_for_purchaser','amount_for_carer','status_id','carer_status_id','carer_status_date','purchaser_status_id','purchaser_status_date', 'time_from', 'time_to', 'periodicity', 'batch'];
+    protected $fillable = ['booking_id','date_start','date_end','amount_for_purchaser','amount_for_carer','status_id','carer_status_id','carer_status_date','purchaser_status_id','purchaser_status_date', 'time_from', 'time_to', 'periodicity', 'price_for_purchaser', 'price_for_carer', 'batch'];
 
     public function getFormattedDateStartAttribute()
     {
@@ -97,6 +97,8 @@ class Appointment extends Model implements Constants
     }
 
     public function getCarerPriceAttribute(){
+        if($this->price_for_carer)
+            return $this->price_for_carer;
         $price = 0;
         $timeFrom = round($this->time_from);
         $timeTo = round($this->time_to);
@@ -116,6 +118,9 @@ class Appointment extends Model implements Constants
     }
 
     public function getPurchaserPriceAttribute(){
+        if($this->price_for_purchaser)
+            return $this->price_for_purchaser;
+
         $price = 0;
         $timeFrom = round($this->time_from);
         $timeTo = round($this->time_to);
@@ -196,6 +201,6 @@ class Appointment extends Model implements Constants
         $sql = 'SELECT * FROM holidays WHERE  date >= \''.$dt->format("Y-m-d").'\' AND date < \''.$dt->addDays(1)->format("Y-m-d").'\'';
         $res = DB::select($sql);
 
-        return $dt->dayOfWeek == 0  || count($res) > 0;
+        return $dt->dayOfWeek == 1  || count($res) > 0;
     }
 }

@@ -21,5 +21,7 @@ interface PaymentToolsInterface
 
     public function createTransfer(string $connectedAccountId, int $amount, string $comment = '');
 
+    public function createBonusPayment(int $amount, int $bookingId);
+
 
 }

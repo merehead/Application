@@ -147,7 +147,7 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::get('/booking-payout-to-carer/{action}/{bookingId}/{amount}', 'AdminSitePayment\AdminSitePayment@BookingPayoutToCarer')->name('BookingPayoutToCarer');
     Route::get('/bonus-payout-to-carer/{action}/{bonusRecordId}/{amount}', 'AdminSitePayment\AdminSitePayment@BonusPayoutToCarer')->name('BonusPayoutToCarer');
 
-
+    Route::get('/booking-transactions', 'AdminSitePayment\AdminSitePayment@getBookingTransactions')->name('BookingTransactions');
 });
 
 Route::get('/test_document_upload', function (){
@@ -160,8 +160,8 @@ Route::get('/appan', function (){
 
 Route::get('/test_stripe', function (){
 
-//    $res = PaymentTools::createCreditCardToken(['card_number' => '4000 0000 0000 0077','exp_month' => '12','exp_year' => '20','cvc' => '123']);
-//    $res = PaymentTools::createCharge(200000, $res, 4);
+    $res = PaymentTools::createCreditCardToken(['card_number' => '4000 0000 0000 0077','exp_month' => '12','exp_year' => '20','cvc' => '123']);
+    $res = PaymentTools::createCharge(200000, $res, 144);
 //    $res = PaymentTools::createTransfer('acct_1BEMdvAij8rTvtXk', 20000, 'Payment to carer 2');
 //    $res = PaymentTools::deleteConnectedAccount('acct_1BDwrPHySv5f7qBn');
 

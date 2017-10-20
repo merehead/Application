@@ -6,14 +6,22 @@ use App\Appointment;
 use App\Bonuses_record;
 use App\Booking;
 use App\DisputePayment;
+use App\Http\Controllers\Admin\AdminController;
+use App\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Stripe\OAuth;
 use Stripe\Stripe;
 use Stripe\Token;
 
-class AdminSitePayment extends Controller
+class AdminSitePayment extends AdminController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->template = config('settings.theme') . '.templates.adminBase';
+    }
+
     public function DisputePayoutToCarer(Request $request, $appointmentId,$userId,$amount) {
 
 /*        $app = Appointment::find(7);
@@ -133,4 +141,14 @@ class AdminSitePayment extends Controller
         return redirect()->back();
     }
 
+    public function getBookingTransactions(Request $request){
+        $this->title = 'Admin Booking Transactions Management';
+
+        $transactions = Transaction::all();
+        dd($transactions);
+
+        $this->content = view(config('settings.theme') . '.bookingTransactions.bookingTransactions')->with($this->vars)->render();
+
+        return $this->renderOutput();
+    }
 }
