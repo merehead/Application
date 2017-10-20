@@ -61,7 +61,7 @@
 
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; "  valign="top" class="">
-                        <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 600; font-size: 18px; color: #272c2b;  text-transform: uppercase;">
+                        <h1  style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700; font-size: 14px; color: #272c2b;  text-transform: uppercase;">
                             Hello [user_first_name]!
                         </h1>
 
