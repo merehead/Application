@@ -2498,7 +2498,7 @@ $(document).ready(function () {
           document.getElementById('step').submit()
         }
       }
-    })
+    }});
 
     $('.pickfiles_profile_photo').on('change', function () {
 
