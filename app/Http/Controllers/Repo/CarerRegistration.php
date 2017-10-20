@@ -194,7 +194,17 @@ class CarerRegistration
 
     private function saveStep1($request) {
 
-
+        $use_register_code = 0;
+        if($request['referral_code']=='REGISTER'){
+            $this->validate($request,[
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:6|confirmed',
+                'referral_code'=>'string|nullable|max:10',
+                'confirm_terms'=>'required',
+            ]);
+            $use_register_code=1;
+            $request['referral_code']=null;
+        }else
         $this->validate($request,[
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
@@ -204,11 +214,11 @@ class CarerRegistration
         ]);
         $referral_code = 0;
         (isset($request['referral_code']))? $referral_code = $request['referral_code'] : $referral_code = 0;
-
         $user = User::create([
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
             'referral_code' => $referral_code,
+            'use_register_code'=>$use_register_code,
             'user_type_id' => 3,
         ]);
 
@@ -217,7 +227,6 @@ class CarerRegistration
         if ($user) {
 
             $user->own_referral_code = mb_substr($user->id.md5($user->id),0,8);
-
             $user->update();
 
             $carerPrifile = new CarersProfile();

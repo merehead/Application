@@ -20,6 +20,7 @@ class User extends Authenticatable
         'password',
         'user_type_id',
         'referral_code',
+        'use_register_code',
     ];
 
     /**

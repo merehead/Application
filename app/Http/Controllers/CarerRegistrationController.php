@@ -34,11 +34,16 @@ class CarerRegistrationController extends FrontController
     {
 
         if (request()->has('ref')){
+            if(request()->get('ref')=='REGISTER'){
+                $this->vars = array_add($this->vars, 'use_register_code', 1);
+                $this->vars = array_add($this->vars, 'ref_code', request()->get('ref'));
+            }
+            else {
+                $ref_code = $this->checkReferCode(request()->get('ref'));
 
-            $ref_code = $this->checkReferCode(request()->get('ref'));
-
-            if ($ref_code !=0 ) {
-                $this->vars = array_add($this->vars, 'ref_code', $ref_code);
+                if ($ref_code != 0) {
+                    $this->vars = array_add($this->vars, 'ref_code', $ref_code);
+                }
             }
         }
 
