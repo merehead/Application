@@ -125,11 +125,11 @@
                                     <img src="{{asset('img/s2.png')}}" alt="">
                                 </a>
                             </li>
-                            {{--<li style="list-style: none;display: inline-block;">
+                            <li style="list-style: none;display: inline-block;">
                                 <a href="https://plus.google.com/communities/102900900688938220709" style="margin-left: 10px; color: #a5a7af;">
                                     <img src="{{asset('img/s3.png')}}" alt="">
                                 </a>
-                            </li>--}}
+                            </li>
                         </ul>
                     </td>
                 </tr>
