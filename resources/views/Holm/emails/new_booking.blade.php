@@ -57,11 +57,21 @@
                     <?php
 
                     //$patchToPurchaserAvatar = getcwd().'/img/profile_photos/'.$purchaserProfile->id.'.png';
-                    $patchToSrvUserAvatar = getcwd().'/img/service_user_profile_photos/'.$serviceUser->id.'.png';
-                    if(file_exists($patchToSrvUserAvatar)) {
-                        $img_src = asset('/img/service_user_profile_photos/'.$serviceUser->id.'.png');
-                    } else {
-                        $img_src = asset('/img/no_photo.png');
+                    if($sendTo == 'carer'){
+                        $patchToSrvUserAvatar = getcwd().'/img/service_user_profile_photos/'.$serviceUser->id.'.png';
+                        if(file_exists($patchToSrvUserAvatar)) {
+                            $img_src = asset('/img/service_user_profile_photos/'.$serviceUser->id.'.png');
+                        } else {
+                            $img_src = asset('/img/no_photo.png');
+                        }
+                    }
+                    else{
+                        $patchToSrvUserAvatar = getcwd().'/img/profile_photos/'.$carer->id.'.png';
+                        if(file_exists($patchToSrvUserAvatar)) {
+                            $img_src = asset('/img/profile_photos/'.$carer->id.'.png');
+                        } else {
+                            $img_src = asset('/img/no_photo.png');
+                        }
                     }
 
                     ?>
