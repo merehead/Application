@@ -135,6 +135,9 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
         $languages =  $serviceUsersProfile->Languages()->get();
         $this->vars = array_add($this->vars, 'languages', $languages);
 
+        $floor_result =  $serviceUsersProfile->Floor()->find($serviceUsersProfile->floor_id);
+        $this->vars = array_add($this->vars, 'floor', $floor_result);
+
         $serviceUserConditions = $serviceUsersProfile->ServiceUserConditions()->get();
         $this->vars = array_add($this->vars, 'serviceUserConditions', $serviceUserConditions);
         $this->content = view(config('settings.frontTheme') . '.serviceUserProfiles.PublicProfile')->with($this->vars)->render();

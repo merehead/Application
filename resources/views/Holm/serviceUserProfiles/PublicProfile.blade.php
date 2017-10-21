@@ -179,7 +179,7 @@
                                             <span class="serviceValue ">
                                                 yes
                                             </span>
-                                            <span class="serviceValue serviceValue--comment ">
+                                            <span class="serviceValue ">
                                                 {{$serviceUsers->other_behaviour}}
                                             </span>
                                         </div>
@@ -208,7 +208,7 @@
                                 </div>
                                 <div class="serviceColumn">
                                     <span class="serviceValue ">{{$serviceUsers->assistance_with_personal_hygiene}}</span>
-                                    <span class="serviceValue serviceValue--comment ">{{$serviceUsers->assistance_with_personal_hygiene_detail}}</span>
+                                    <span class="serviceValue">{{$serviceUsers->assistance_with_personal_hygiene_detail}}</span>
                                 </div>
                             </div>
                             <div class="serviceRow" {!!  ($serviceUsersProfile->appropriate_clothes == 'No' || is_null($serviceUsersProfile->appropriate_clothes) )? ' style="display:none"' : ''!!}>
@@ -219,7 +219,7 @@
                                 </div>
                                 <div class="serviceColumn ">
                                     <span class="serviceValue ">{{$serviceUsers->appropriate_clothes}}</span>
-                                    <span class="serviceValue serviceValue--comment ">{{$serviceUsers->appropriate_clothes_assistance_detail}}</span>
+                                    <span class="serviceValue ">{{$serviceUsers->appropriate_clothes_assistance_detail}}</span>
                                 </div>
                             </div>
                             {{--                                <div class="serviceRow" {!!  ($serviceUsersProfile->appropriate_clothes == 'No' || is_null($serviceUsersProfile->appropriate_clothes) )? ' style="display:none"' : ''!!}>
@@ -241,7 +241,7 @@
                                     </div>
                                     <div class="serviceColumn"><span
                                                 class="serviceValue ">{{$serviceUsers->assistance_getting_dressed}}</span>
-                                        <span class="serviceValue serviceValue--comment ">{{$serviceUsers->assistance_getting_dressed_detail}}</span>
+                                        <span class="serviceValue ">{{$serviceUsers->assistance_getting_dressed_detail}}</span>
                                     </div>
                                 </div>
                             @endif
@@ -264,7 +264,7 @@
                                 </div>
                                 <div class="serviceColumn"><span
                                             class="serviceValue ">{{$serviceUsers->managing_toilet_needs}}</span>
-                                    <span class="serviceValue serviceValue--comment ">{{$serviceUsers->managing_toilet_needs_detail}}</span>
+                                    <span class="serviceValue ">{{$serviceUsers->managing_toilet_needs_detail}}</span>
                                 </div>
                             </div>
                             <div class="serviceRow" {!!  ($serviceUsersProfile->mobilising_to_toilet == 'No' || is_null($serviceUsersProfile->mobilising_to_toilet) )? ' style="display:none"' : ''!!}>
@@ -275,7 +275,7 @@
                                 </div>
                                 <div class="serviceColumn">
                                     <span class="serviceValue ">{{$serviceUsers->mobilising_to_toilet}}</span>
-                                    <span class="serviceValue serviceValue--comment ">{{$serviceUsers->mobilising_to_toilet_detail}}</span>
+                                    <span class="serviceValue ">{{$serviceUsers->mobilising_to_toilet_detail}}</span>
                                 </div>
                             </div>
                             <div class="serviceRow" {!!  ($serviceUsersProfile->cleaning_themselves == 'No' || is_null($serviceUsersProfile->cleaning_themselves) )? ' style="display:none"' : ''!!}>
@@ -286,7 +286,7 @@
                                 </div>
                                 <div class="serviceColumn"><span
                                             class="serviceValue ">{{$serviceUsers->cleaning_themselves}}</span>
-                                    <span class="serviceValue serviceValue--comment ">{{$serviceUsers->cleaning_themselves_detail}}</span>
+                                    <span class="serviceValue ">{{$serviceUsers->cleaning_themselves_detail}}</span>
                                 </div>
                             </div>
                             <div class="serviceRow" {!!  ($serviceUsersProfile->mobilising_to_toilet == 'No' || is_null($serviceUsersProfile->mobilising_to_toilet) )? ' style="display:none"' : ''!!}>
@@ -297,7 +297,7 @@
                                 </div>
                                 <div class="serviceColumn"><span
                                             class="serviceValue ">{{$serviceUsers->mobilising_to_toilet}}</span>
-                                    <span class="serviceValue serviceValue--comment ">{{$serviceUsers->mobilising_to_toilet_detail}}</span>
+                                    <span class="serviceValue ">{{$serviceUsers->mobilising_to_toilet_detail}}</span>
                                 </div>
                             </div>
                             @if(!$restrictedAccess)
@@ -309,7 +309,7 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->have_incontinence}}</span>
-                                        <span class="serviceValue serviceValue--comment ">{{$serviceUsers->kind_of_incontinence}}</span>
+                                        <span class="serviceValue ">{{$serviceUsers->kind_of_incontinence}}</span>
                                     </div>
                                 </div>
                             @endif
@@ -321,7 +321,7 @@
                                 </div>
                                 <div class="serviceColumn">
                                     <span class="serviceValue ">{{$serviceUsers->choosing_incontinence_products}}</span>
-                                    <span class="serviceValue serviceValue--comment ">{{$serviceUsers->choosing_incontinence_products_detail}}</span>
+                                    <span class="serviceValue ">{{$serviceUsers->choosing_incontinence_products_detail}}</span>
                                 </div>
                             </div>
                             <div class="serviceRow" {!!  ($serviceUsersProfile->incontinence_wear == 'No' || is_null($serviceUsersProfile->incontinence_wear) )? ' style="display:none"' : ''!!}>
@@ -332,7 +332,7 @@
                                 </div>
                                 <div class="serviceColumn">
                                     <span class="serviceValue ">{{$serviceUsers->incontinence_wear}}</span>
-                                    <span class="serviceValue serviceValue--comment ">{{$serviceUsers->incontinence_detail}}</span>
+                                    <span class="serviceValue ">{{$serviceUsers->incontinence_detail}}</span>
                                 </div>
                             </div>
                             @if(!$restrictedAccess)
@@ -343,7 +343,7 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                                        <span class="serviceValue serviceValue--comment">{{$serviceUsers->incontinence_products_stored}}</span>
+                                        <span class="serviceValue ">{{$serviceUsers->incontinence_products_stored}}</span>
                                     </div>
                                 </div>
                             @endif
@@ -365,7 +365,7 @@
                                     </div>
                                     <div class="serviceColumn"><span
                                                 class="serviceValue ">{{$serviceUsers->assistance_in_medication}}</span>
-                                        <span class="serviceValue serviceValue--comment ">{{$serviceUsers->in_medication_detail}}</span>
+                                        <span class="serviceValue ">{{$serviceUsers->in_medication_detail}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -391,7 +391,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->comprehension}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->comprehension_detail}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->comprehension_detail}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -404,7 +404,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->communication}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->common_communication_details}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->common_communication_details}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -417,7 +417,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->speech}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->speech_detail}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->speech_detail}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -430,7 +430,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->vision}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->vision_detail}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->vision_detail}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -444,7 +444,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->hearing}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->hearing_detail}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->hearing_detail}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -465,7 +465,7 @@
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->have_any_allergies}}</span>
 
-                                        <span class="serviceValue serviceValue--comment ">{{$serviceUsers->allergies_detail}}</span>
+                                        <span class="serviceValue ">{{$serviceUsers->allergies_detail}}</span>
 
                                     </div>
                                 </div>
@@ -486,7 +486,7 @@
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->skin_scores}}</span>
 
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->skin_scores_detail}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->skin_scores_detail}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -499,7 +499,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->assistance_with_dressings}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->dressings_detail}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->dressings_detail}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -522,7 +522,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->help_with_mobility}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->common_mobility_details}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->common_mobility_details}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -535,7 +535,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->mobility_home}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->mobility_home_detail}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->mobility_home_detail}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -549,7 +549,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->mobility_bed}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->mobility_bed_detail}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->mobility_bed_detail}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -563,7 +563,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->history_of_falls}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->falls_detail}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->falls_detail}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -577,7 +577,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->mobility_shopping}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->mobility_shopping_detail}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->mobility_shopping_detail}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -600,7 +600,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->assistance_with_eating}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->assistance_with_eating_detail}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->assistance_with_eating_detail}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -613,7 +613,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->prepare_food}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->prepare_food_details}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->prepare_food_details}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -627,7 +627,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->assistance_with_preparing_food}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->assistance_prepare_food_details}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->assistance_prepare_food_details}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -641,7 +641,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->dietary_requirements}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->dietary_requirements_interaction}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->dietary_requirements_interaction}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -655,7 +655,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->special_dietary_requirements}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->special_dietary_requirements_detail}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->special_dietary_requirements_detail}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -721,7 +721,7 @@
                                         </p>
                                     </div>
                                     <div class="serviceColumn">
-                                        <span class="serviceValue serviceValue--comment">{{$serviceUsers->floor_id}}</span>
+                                        <span class="serviceValue ">{{(isset($floor->name)?$floor->name:'')}}</span>
                                     </div>
                                 </div>
 
@@ -758,7 +758,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue  ">{{$serviceUsers->home_safe}}</span>
-                                            <span class="serviceValue serviceValue--comment "></span>
+                                            <span class="serviceValue "></span>
                                         </div>
                                     </div>
 
@@ -772,7 +772,7 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue  ">{{$serviceUsers->assistance_keeping}}</span>
-                                        <span class="serviceValue serviceValue--comment "></span>
+                                        <span class="serviceValue "></span>
                                     </div>
                                 </div>
 
@@ -792,7 +792,7 @@
                                             </div>
                                             <div class="serviceColumn">
                                                 <span class="serviceValue">{{$serviceUsers->anyone_else_live}}</span>
-                                                <span class="serviceValue serviceValue--comment ">{{$serviceUsers->anyone_detail}}</span>
+                                                <span class="serviceValue ">{{$serviceUsers->anyone_detail}}</span>
                                             </div>
                                         </div>
                                     @endif
@@ -806,7 +806,7 @@
                                             </div>
                                             <div class="serviceColumn">
                                                 <span class="serviceValue ">{{$serviceUsers->anyone_friendly}}</span>
-                                                <span class="serviceValue serviceValue--comment "></span>
+                                                <span class="serviceValue "></span>
                                             </div>
                                         </div>
                                     @endif
@@ -829,7 +829,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue">{{$serviceUsers->social_interaction}}</span>
-                                            <span class="serviceValue serviceValue--comment ">{{$serviceUsers->companionship_interaction_details}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->companionship_interaction_details}}</span>
                                         </div>
                                     </div>
                                 @endif
@@ -842,7 +842,7 @@
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->visit_for_companionship}}</span>
-                                        <span class="serviceValue serviceValue--comment ">{{$serviceUsers->companionship_visit_details}}</span>
+                                        <span class="serviceValue ">{{$serviceUsers->companionship_visit_details}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -862,7 +862,7 @@
                                             </p>
                                         </div>
                                         <div class="serviceColumn">
-                                            <span class="serviceValue serviceValue--comment">{{$serviceUsers->carer_enter}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->carer_enter}}</span>
                                         </div>
                                     </div>
 
@@ -883,7 +883,7 @@
                                         </div>
                                         <div class="serviceColumn">
                                             <span class="serviceValue ">{{$serviceUsers->entering_aware}}</span>
-                                            <span class="serviceValue serviceValue--comment">{{$serviceUsers->other_detail}}</span>
+                                            <span class="serviceValue ">{{$serviceUsers->other_detail}}</span>
                                         </div>
                                     </div>
 
@@ -899,10 +899,11 @@
                                         <p class="userOption">
                                             Has pets:
                                         </p>
+                                        <span class="serviceValue ">{{$serviceUsers->pet_detail}}</span>
                                     </div>
                                     <div class="serviceColumn">
                                         <span class="serviceValue ">{{$serviceUsers->own_pets}}</span>
-                                        <span class="serviceValue serviceValue--comment ">{{$serviceUsers->pet_detail}}</span>
+
                                     </div>
                                 </div>
 
@@ -1012,7 +1013,7 @@
                                             </div>
                                             <div class="serviceColumn">
                                                 <span class="serviceValue ">{{$serviceUsers->keeping_safe_at_night}}</span>
-                                                <span class="serviceValue serviceValue--comment ">{{$serviceUsers->keeping_safe_at_night_details}}</span>
+                                                <span class="serviceValue ">{{$serviceUsers->keeping_safe_at_night_details}}</span>
                                             </div>
                                         </div>
                                     @endif
@@ -1039,7 +1040,7 @@
                                             </div>
                                             <div class="serviceColumn">
                                                 <span class="serviceValue ">{{$serviceUsers->toilet_at_night}}</span>
-                                                <span class="serviceValue serviceValue--comment ">{{$serviceUsers->toiled_help_details}}</span>
+                                                <span class="serviceValue ">{{$serviceUsers->toiled_help_details}}</span>
                                             </div>
                                         </div>
                                     @endif
@@ -1064,7 +1065,7 @@
                                                 </div>
                                                 <div class="serviceColumn">
                                                     <span class="serviceValue ">{{$serviceUsers->religious_beliefs}}</span>
-                                                    <span class="serviceValue serviceValue--comment ">{{$serviceUsers->religious_beliefs_details}}</span>
+                                                    <span class="serviceValue ">{{$serviceUsers->religious_beliefs_details}}</span>
                                                 </div>
                                             </div>
                                         @endif
@@ -1077,7 +1078,7 @@
                                                 </div>
                                                 <div class="serviceColumn"><span
                                                             class="serviceValue ">{{$serviceUsers->particular_likes}}</span>
-                                                    <span class="serviceValue serviceValue--comment ">{{$serviceUsers->particular_likes_details}}</span>
+                                                    <span class="serviceValue ">{{$serviceUsers->particular_likes_details}}</span>
                                                 </div>
                                             </div>
                                         @endif
@@ -1090,7 +1091,7 @@
                                                 </div>
                                                 <div class="serviceColumn">
                                                     <span class="serviceValue ">{{$serviceUsers->socialising_with_other}}</span>
-                                                    {{--<span class="serviceValue serviceValue--comment ">{{$serviceUsers->socialising_with_other_details}}</span>--}}
+                                                    {{--<span class="serviceValue ">{{$serviceUsers->socialising_with_other_details}}</span>--}}
                                                 </div>
                                             </div>
                                         @endif
@@ -1104,7 +1105,7 @@
                                                 <div class="serviceColumn">
                                                     <span class="serviceValue ">{{$serviceUsers->interests_hobbies}}</span>
 
-                                                    <span class="serviceValue serviceValue--comment ">{{$serviceUsers->interests_hobbies_details}}</span>
+                                                    <span class="serviceValue ">{{$serviceUsers->interests_hobbies_details}}</span>
                                                 </div>
                                             </div>
                                         @endif
