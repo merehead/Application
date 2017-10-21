@@ -1384,7 +1384,7 @@ $(document).ready(function () {
         var timestart = $(form).find('.timepicker_message')[0];
         var now = new Date();
         var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
+        if(datepickerBegin.length>0)
         if(datepickerBegin-today==0){
             $(timestart).timepicker().destroy();
             $(timestart).timepicker({minTime:getTime(),startTime:getTime(),scrollbar:true});
