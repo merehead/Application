@@ -1,4 +1,4 @@
-<div class="modal fade" id="myModal{{$item->id}}" role="dialog" style="position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
+<div class="modal fade" id="myModal{{$item->id}}" role="dialog" style="position: fixed; top:50%; left:50%;">
     <div class="modal-dialog">
         <div id="popupWrap{{$item->id}}" class="popupWrap">
             <div class="adminPopup ">
