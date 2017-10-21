@@ -133,8 +133,6 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::resource('/dispute-payout','DisputePayout\DisputePayoutController', ['only' => ['index']]);
     Route::resource('/blog','Blog\BlogController');
     #Route::resource('/blog/edit/{idBlog}','Blog\BlogController@edit', ['only' => ['edit']]);
-    Route::resource('/carer-payout','CarerPayout\CarerPayoutController', ['only' => ['index']]);
-    Route::resource('/purchaser-payout','PurchaserPayout\PurchaserPayoutController', ['only' => ['index']]);
 
    // Route::get('/blog/edit/{blogId}', 'Booking\BookingController@edit', ['except' => ['show']]);
 
@@ -148,6 +146,7 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::get('/bonus-payout-to-carer/{action}/{bonusRecordId}/{amount}', 'AdminSitePayment\AdminSitePayment@BonusPayoutToCarer')->name('BonusPayoutToCarer');
 
     Route::get('/booking-transactions', 'AdminSitePayment\AdminSitePayment@getBookingTransactions')->name('BookingTransactions');
+    Route::get('/carer-payout', 'AdminSitePayment\AdminSitePayment@getPayoutsToCarers')->name('PayoutsToCarers');
 });
 
 Route::get('/test_document_upload', function (){

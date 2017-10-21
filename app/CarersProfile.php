@@ -181,6 +181,11 @@ WHERE `carer_id` = ".$this->id." LIMIT 0,4");
         return 'carer';
     }
 
+    public function getFullNameAttribute()
+    {
+        return $this->first_name.' '.$this->family_name;
+    }
+
 }
 
 

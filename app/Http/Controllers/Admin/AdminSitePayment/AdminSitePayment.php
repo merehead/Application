@@ -7,6 +7,7 @@ use App\Bonuses_record;
 use App\Booking;
 use App\DisputePayment;
 use App\Http\Controllers\Admin\AdminController;
+use App\StripeTransfer;
 use App\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -107,22 +108,14 @@ class AdminSitePayment extends AdminController
         return redirect()->back();
     }
 
-    public function BookingPayoutToCarer(Request $request, $action,$bookingId,$amount) {
+    public function getPayoutsToCarers() {
+        $this->title = 'Admin | Booking Payouts To Carers';
+        $transfers = StripeTransfer::all();
+        $this->vars['transfers'] = $transfers;
 
+        $this->content = view(config('settings.theme') . '.carerPayouts\carerPayouts')->with($this->vars)->render();
 
-        $booking = Booking::findOrFail($bookingId);
-
-        switch ($action) {
-            case 'pay' : {$actionId = 8;break;}
-            case 'cancel' : {$actionId = 4;break;}
-            case 'delay' : {$actionId = 9;break;}
-            default : return;
-        }
-
-        $booking->status_id = $actionId;
-        $booking->save();
-
-        return redirect()->back();
+        return $this->renderOutput();
     }
     public function BonusPayoutToCarer(Request $request, $action,$bonusRecordId,$amount) {
 
@@ -142,10 +135,11 @@ class AdminSitePayment extends AdminController
     }
 
     public function getBookingTransactions(Request $request){
-        $this->title = 'Admin Booking Transactions Management';
+        $this->title = 'Admin | Booking Transactions Management';
 
         $transactions = Transaction::all();
-        dd($transactions);
+
+        $this->vars['transactions'] = $transactions;
 
         $this->content = view(config('settings.theme') . '.bookingTransactions.bookingTransactions')->with($this->vars)->render();
 

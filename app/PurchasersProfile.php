@@ -77,4 +77,13 @@ class PurchasersProfile extends Model
     {
         return 'purchaser';
     }
+
+    /**
+     * Accessors
+     */
+    public function getFullNameAttribute()
+    {
+        return $this->first_name.' '.$this->family_name;
+    }
+
 }

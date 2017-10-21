@@ -405,30 +405,6 @@ class BookingsController extends FrontController implements Constants
                             'time_to_send' => Carbon::now(),
                             'status'=>'new'
                         ]);
-
-               /* try {
-                    Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
-                        ['user_like_name' => $carer->like_name,
-                            'user_name' => $purchaser->first_name,
-                            'service_user_name' => $serviceUser->first_name,
-                            'address' => $serviceUser->addresss_line1,
-                            'date' => 'date',
-                            'time' => 'time',
-                            'booking'=>$booking,
-                            'sendTo' => 'carer'
-                        ],
-                        function ($m) use ($user) {
-                            $m->to($user->email)->subject('Canceled booking');
-                        });
-                } catch (Swift_TransportException $STe) {
-
-                    $error = MailError::create([
-                        'error_message' => $STe->getMessage(),
-                        'function' => __METHOD__,
-                        'action' => 'Try to sent Canceled booking',
-                        'user_id' => $user->id
-                    ]);
-                }*/
             }
 
         }
@@ -600,7 +576,6 @@ class BookingsController extends FrontController implements Constants
             foreach ($days as $day) {
                 $booking->appointments()->create([
                     'date_start' => $day,
-                    'date_end' => $day,
                     'time_from' => date("H.i", strtotime($appointment_item['time_from'])),
                     'time_to' => date("H.i", strtotime($appointment_item['time_to'])),
                     'periodicity' => $appointment_item['periodicity'],

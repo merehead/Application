@@ -65,11 +65,6 @@
         <table class="adminTable">
             <thead>
             <tr>
-                <td class="orderNumber">
-                  <span class="td-title td-title--number">
-                   №
-                  </span>
-                </td>
                 <td class=" ordninary-td no-padding-l">
                   <span class="td-title td-title--transaction">
                     transaction id
@@ -115,9 +110,6 @@
             </tr>
 
             <tr class="extra-tr">
-                <td>
-
-                </td>
                 <td>
 
                 </td>
@@ -171,228 +163,87 @@
 
                 </td>
             </tr>
-
-
             </thead>
 
             <tbody>
 
-            <tr>
-                <td>
+            @if($transactions->count() > 0)
+                @foreach($transactions as $transaction)
+                    <tr>
+                        <td align="center">
+                          <span>
+                            {{$transaction->id}}
+                          </span>
 
-                </td>
-                <td>
-                  <span>
-                    187657
-                  </span>
+                        </td>
+                        <td>
+                            <span>{{$transaction->created_at->format("H:i")}}</span>
+                            <p>{{$transaction->created_at->format("d/m/Y")}}</p>
+                        </td>
+                        <td class="for-inner">
+                            <table class="innerTable ">
+                                <tbody><tr>
+                                    <td class="idField">
+                                        <span>{{$transaction->booking->bookingPurchaser->id}}</span>
+                                    </td>
+                                    <td class="">
+                                        <a href="#" class="tableLink">{{$transaction->booking->bookingPurchaserProfile->full_name}}</a>
+                                    </td>
 
-                </td>
-                <td>
-                    <span>12: 00</span>
-                    <p>12/08/2017</p>
-                </td>
-                <td class="for-inner">
-                    <table class="innerTable ">
-                        <tbody><tr>
-                            <td class="idField">
-                                <span>1000</span>
-                            </td>
-                            <td class="">
-                                <a href="#" class="tableLink">chris heldon</a>
-                            </td>
+                                </tr>
+                                </tbody></table>
+                        </td>
+                        <td class="for-inner">
+                            <table class="innerTable ">
+                                <tbody><tr>
+                                    <td class="idField">
+                                        <span>{{$transaction->booking->bookingCarer->id}}</span>
+                                    </td>
+                                    <td class="">
+                                        <a href="#" class="tableLink">{{$transaction->booking->bookingCarerProfile->full_name}}</a>
+                                    </td>
 
-                        </tr>
-                        </tbody></table>
-                </td>
-                <td class="for-inner">
-                    <table class="innerTable ">
-                        <tbody><tr>
-                            <td class="idField">
-                                <span>1000</span>
-                            </td>
-                            <td class="">
-                                <a href="#" class="tableLink">chris heldon</a>
-                            </td>
+                                </tr>
+                                </tbody></table>
+                        </td>
+                        <td class="for-inner">
+                            <table class="innerTable ">
+                                <tbody><tr>
+                                    <td class="idField">
+                                        <span>{{$transaction->booking->id}}</span>
+                                    </td>
+                                    <td class="">
+                                        <span>{{$transaction->booking->purchaser_price}}</span>
+                                    </td>
 
-                        </tr>
-                        </tbody></table>
-                </td>
-                <td class="for-inner">
-                    <table class="innerTable ">
-                        <tbody><tr>
-                            <td class="idField">
-                                <span>1000</span>
-                            </td>
-                            <td class="">
-                                <span>10999</span>
-                            </td>
-
-                        </tr>
-                        </tbody></table>
-                </td>
-                <td>
-                  <span>
-                    some type
-                  </span>
-                </td>
-                <td>
-                    <div class="profStatus profStatus--left">
-                        <span class="profStatus__item profStatus__item--complete"> completed</span>
-                        <span class="profStatus__item profStatus__item--progress"> pending</span>
-                        <span class="profStatus__item profStatus__item--canceled">canceled  </span>
-
-
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-
-                </td>
-                <td>
-                  <span>
-                    187657
-                  </span>
-
-                </td>
-                <td>
-                    <span>12: 00</span>
-                    <p>12/08/2017</p>
-                </td>
-                <td class="for-inner">
-                    <table class="innerTable ">
-                        <tbody><tr>
-                            <td class="idField">
-                                <span>1000</span>
-                            </td>
-                            <td class="">
-                                <a href="#" class="tableLink">chris heldon</a>
-                            </td>
-
-                        </tr>
-                        </tbody></table>
-                </td>
-                <td class="for-inner">
-                    <table class="innerTable ">
-                        <tbody><tr>
-                            <td class="idField">
-                                <span>1000</span>
-                            </td>
-                            <td class="">
-                                <a href="#" class="tableLink">chris heldon</a>
-                            </td>
-
-                        </tr>
-                        </tbody></table>
-                </td>
-
-                <td class="for-inner">
-                    <table class="innerTable ">
-                        <tbody><tr>
-                            <td class="idField">
-                                <span>1000</span>
-                            </td>
-                            <td class="">
-                                <span>10999</span>
-                            </td>
-
-                        </tr>
-                        </tbody></table>
-                </td>
-
-                <td>
-                  <span>
-                    some type
-                  </span>
-                </td>
-                <td>
-                    <div class="profStatus profStatus--left">
-                        <span class="profStatus__item profStatus__item--complete"> completed</span>
-                        <span class="profStatus__item profStatus__item--progress"> pending</span>
-                        <span class="profStatus__item profStatus__item--canceled">canceled  </span>
-
-
-                    </div>
-                </td>
-
-
-
-
-            </tr>
-            <tr>
-                <td>
-
-                </td>
-                <td>
-                  <span>
-                    187657
-                  </span>
-
-                </td>
-                <td>
-                    <span>12: 00</span>
-                    <p>12/08/2017</p>
-                </td>
-                <td class="for-inner">
-                    <table class="innerTable ">
-                        <tbody><tr>
-                            <td class="idField">
-                                <span>1000</span>
-                            </td>
-                            <td class="">
-                                <a href="#" class="tableLink">chris heldon</a>
-                            </td>
-
-                        </tr>
-                        </tbody></table>
-                </td>
-                <td class="for-inner">
-                    <table class="innerTable ">
-                        <tbody><tr>
-                            <td class="idField">
-                                <span>1000</span>
-                            </td>
-                            <td class="">
-                                <a href="#" class="tableLink">chris heldon</a>
-                            </td>
-
-                        </tr>
-                        </tbody></table>
-                </td>
-                <td class="for-inner">
-                    <table class="innerTable ">
-                        <tbody><tr>
-                            <td class="idField">
-                                <span>1000</span>
-                            </td>
-                            <td class="">
-                                <span>10999</span>
-                            </td>
-
-                        </tr>
-                        </tbody></table>
-                </td>
-                <td>
-                  <span>
-                    some type
-                  </span>
-                </td>
-                <td>
-                    <div class="profStatus profStatus--left">
-                        <span class="profStatus__item profStatus__item--complete"> completed</span>
-                        <span class="profStatus__item profStatus__item--progress"> pending</span>
-                        <span class="profStatus__item profStatus__item--canceled">canceled  </span>
-
-
-                    </div>
-                </td>
-
-
-
-
-            </tr>
-
-
+                                </tr>
+                                </tbody></table>
+                        </td>
+                        <td>
+                          <span>
+                            @if($transaction->booking->payment_method == 'credit_card')
+                                Credit Card
+                            @elseif($transaction->booking->payment_method == 'bonus_wallet')
+                                Bonuses Wallet
+                            @endif
+                          </span>
+                        </td>
+                        <td>
+                            <div class="profStatus profStatus--left">
+                                <span class="profStatus__item profStatus__item--complete"> completed</span>
+                                {{--<span class="profStatus__item profStatus__item--progress"> pending</span>--}}
+                                {{--<span class="profStatus__item profStatus__item--canceled">canceled  </span>--}}
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            @else
+                <tr>
+                    <td colspan="7" align="center">
+                        -
+                    </td>
+                </tr>
+            @endif
             </tbody>
         </table>
     </div>

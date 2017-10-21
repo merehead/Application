@@ -13,4 +13,11 @@ class Transaction extends Model
         'payment_id',
         'payment_object',
     ];
+
+    /**
+     * Relations
+     */
+    public function booking(){
+        return $this->belongsTo(Booking::class, 'booking_id');
+    }
 }
