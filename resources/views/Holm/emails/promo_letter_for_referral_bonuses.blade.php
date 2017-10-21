@@ -48,7 +48,7 @@
 
                     </td>
                     <td style="padding-left: 30px;">
-                        <img src="{{asset('img/l4.png')}}" alt="" class=""  style="width:  100% ; float: right; "  >
+                        <img src="{{asset('img/l3.png')}}" alt="" class=""  style="width:  100% ; float: right; "  >
                     </td>
                 </tr>
 
@@ -77,7 +77,7 @@
                         </p>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             You can just tell them your code, or we can email them for you.
-                            <a href="{{route('inviteReferUsers')}}">It’s that easy</a>!
+
                         </p>
                         <a href="{{route('TermsPage')}}" class=""
                            style="text-transform: uppercase;
