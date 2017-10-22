@@ -23,10 +23,14 @@ var is_data_changed=false;
 // }
 
 function addressFormt(autocomplete){
-    var suggestion = autocomplete.getPlace();
-    // $('input[name="address_line1"]').val(suggestion.data.structured_formatting.main_text);
-    // $('input[name="town"]').val(suggestion.data.structured_formatting.secondary_text);
-    //console.log(suggestion);
+    var refs = autocomplete.data.refs;
+    $.getJSON('/address?udprn='+refs+'&query='+autocomplete.data.query, function(data) {
+        console.log(data);
+         $('input[name="address_line1"]').val(data[0].number+' '+data[0].street);
+         $('input[name="town"]').val(data[0].posttown);
+         $('input[name="postcode"]').val(data[0].postcode);
+         $('input[name="address_line2"]').val(data[0].dependentlocality);
+    });
 }
 function getTime( ) {
     var d = new Date( );
@@ -1900,107 +1904,53 @@ $(document).ready(function () {
     //------------Google Address search -----------------------
     if ($('input[name="postcode"]').length) {
 
-        // $('input[name="address_line1"]:not(.disable)').autocomplete({
-        //         serviceUrl: '/address/',
-        //         params: {query: ($(this).prop('readonly')==true)?'':$(this).attr('data-country') + ' ' + $(this).val()},
-        //         minChars: 1,
-        //         dataType: 'json',
-        //         onSelect: function (suggestion) {
-        //             addressFormt(suggestion, $('input[name="address_line1"]:not(.disable)'));
-        //         }
+        $('input[name="postcode"]:not(.disable)').autocomplete({
+                serviceUrl: '/address',
+                params: {query: ($(this).prop('readonly')==true)?'':$(this).attr('data-country') + ' ' + $(this).val()},
+                minChars: 2,
+                dataType: 'json',
+                onSelect: function (suggestion) {
+                    addressFormt(suggestion, $('input[name="postcode"]:not(.disable)'));
+                }
+            }
+        );
+        // var input = /** @type {HTMLInputElement} */(document.getElementsByName('postcode')[0]);
+        // var autocomplete = new google.maps.places.Autocomplete(input);
+        // autocomplete.setTypes('addresses');
+        // autocomplete.addListener('place_changed', function() {
+        //     var place = autocomplete.getPlace();
+        //     if (!place.geometry) {
+        //         // User entered the name of a Place that was not suggested and
+        //         // pressed the Enter key, or the Place Details request failed.
+        //         window.alert("No details available for input: '" + place.name + "'");
+        //         return;
         //     }
-        // );
-        var input = /** @type {HTMLInputElement} */(document.getElementsByName('postcode')[0]);
-        var autocomplete = new google.maps.places.Autocomplete(input);
-        autocomplete.setTypes('addresses');
-        autocomplete.addListener('place_changed', function() {
-            var place = autocomplete.getPlace();
-            if (!place.geometry) {
-                // User entered the name of a Place that was not suggested and
-                // pressed the Enter key, or the Place Details request failed.
-                window.alert("No details available for input: '" + place.name + "'");
-                return;
-            }
-            var address = '';
-            if (place.address_components) {
-                address = [
-                    (place.address_components[0] && place.address_components[0].short_name || ''),
-                    (place.address_components[1] && place.address_components[1].short_name || ''),
-                    (place.address_components[2] && place.address_components[2].short_name || '')
-                ].join(' ');
-
-                $.each(place.address_components, function( index, value ) {
-                    console.log(value);
-                    switch(value['types'][0]) {
-                        case "postal_code": //почтовый код
-                                $('input[name="postcode"]').val(value.long_name);
-                            break;
-                        case "postal_town": // город
-                            $('input[name="town"]').val(value.long_name);
-                            break;
-                        case "route":// улица
-                            $('input[name="address_line1"]').val(value.long_name);
-                            break;
-                    }
-                });
-            }
-            console.log(address);
-        });
-        // //autocomplete.addListener('place_changed', addressFormt(autocomplete));
-        // autocomplete.setTypes(['(cities)']);
-        // autocomplete.setComponentRestrictions({'country': 'es'});
+        //     var address = '';
+        //     if (place.address_components) {
+        //         address = [
+        //             (place.address_components[0] && place.address_components[0].short_name || ''),
+        //             (place.address_components[1] && place.address_components[1].short_name || ''),
+        //             (place.address_components[2] && place.address_components[2].short_name || '')
+        //         ].join(' ');
         //
-        // autocomplete.addListener('place_changed', 'place_changed', function() {
-        //     result = autocomplete.getPlace();
-        //     if(typeof result.address_components == 'undefined') {
-        //         // The user pressed enter in the input
-        //         // without selecting a result from the list
-        //         // Let's get the list from the Google API so that
-        //         // we can retrieve the details about the first result
-        //         // and use it (just as if the user had actually selected it)
-        //         autocompleteService = new google.maps.places.AutocompleteService();
-        //         autocompleteService.getPlacePredictions(
-        //             {
-        //                 'input': result.name,
-        //                 'offset': result.name.length,
-        //                 // I repeat the options for my AutoComplete here to get
-        //                 // the same results from this query as I got in the
-        //                 // AutoComplete widget
-        //                 'componentRestrictions': {'country': 'es'},
-        //                 'types': ['(cities)']
-        //             },
-        //             function listentoresult(list, status) {
-        //                 if(list == null || list.length == 0) {
-        //                     // There are no suggestions available.
-        //                     // The user saw an empty list and hit enter.
-        //                     console.log("No results");
-        //                 } else {
-        //                     // Here's the first result that the user saw
-        //                     // in the list. We can use it and it'll be just
-        //                     // as if the user actually selected it
-        //                     // themselves. But first we need to get its details
-        //                     // to receive the result on the same format as we
-        //                     // do in the AutoComplete.
-        //                     placesService = new google.maps.places.PlacesService(document.getElementById('placesAttribution'));
-        //                     placesService.getDetails(
-        //                         {'reference': list[0].reference},
-        //                         function detailsresult(detailsResult, placesServiceStatus) {
-        //                             // Here's the first result in the AutoComplete with the exact
-        //                             // same data format as you get from the AutoComplete.
-        //                             console.log("We selected the first item from the list automatically because the user didn't select anything");
-        //                             console.log(detailsResult);
-        //                         }
-        //                     );
-        //                 }
+        //         $.each(place.address_components, function( index, value ) {
+        //             console.log(value);
+        //             switch(value['types'][0]) {
+        //                 case "postal_code": //почтовый код
+        //                         $('input[name="postcode"]').val(value.long_name);
+        //                     break;
+        //                 case "postal_town": // город
+        //                     $('input[name="town"]').val(value.long_name);
+        //                     break;
+        //                 case "route":// улица
+        //                     $('input[name="address_line1"]').val(value.long_name);
+        //                     break;
         //             }
-        //         );
-        //     } else {
-        //         // The user selected a result from the list, we can
-        //         // proceed and use it right away
-        //         console.log("User selected an item from the list");
-        //         console.log(result);
+        //         });
         //     }
+        //     console.log(address);
         // });
+
     }
 
     // --  Add booking Carer -------

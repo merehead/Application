@@ -583,6 +583,33 @@ class CarerController extends FrontController implements Constants
         return response(json_encode($response),200);
 
     }
+
+    public function address_autocomplete(Request $request){
+
+        $apiKey = 'PCWSC-24HJR-XTT9V-NH82T';
+
+        if($request->has('query')&&!$request->has('udprn')){
+            $url = 'http://ws.postcoder.com/pcw/'.$apiKey.'/autocomplete/v2/uk/'.urlencode($request->get('query')).'?format=json';
+            $data = file_get_contents($url);
+            $items = json_decode($data, true);
+            $response = array();
+            $response['query'] = $request->get('query');
+            foreach ($items['predictions'] as $item) {
+                $item["query"] = $request->get('query');
+                $response['suggestions'][] = array(
+                    "value" => $item['prediction'],
+                    "data" => $item,
+                    "query" => $request->get('query')
+                );
+            }
+        }else{
+            $url = 'http://ws.postcoder.com/pcw/'.$apiKey.'/address/uk/'.urlencode($request->get('query')).'?udprn='.$request->get('udprn');
+            $response = file_get_contents($url);
+        }
+        return response($response,200);
+
+    }
+
     private function getAddressComponents($address){
 
         $arr = [];
