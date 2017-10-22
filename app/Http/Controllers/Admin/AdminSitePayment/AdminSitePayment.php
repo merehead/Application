@@ -176,7 +176,10 @@ class AdminSitePayment extends AdminController
         $connectedAccount = StripeConnectedAccount::where('carer_id', $data->carer_id)->first();
 
         //Transfer money to carer
-        $res = PaymentTools::createTransfer($connectedAccount->id, $booking->id, $data->total*100, 'Payment to carer '.$data->carer_id.' ('.$data->first_name.' '.$data->family_name.') for booking '.$booking->id);
+        $appointments = Appointment::where('booking_id', $booking->id)->where('status_id', 4)->where('payout', 0)->get();
+        $appointmentsIds = implode(',', $appointments->pluck('id')->toArray());
+
+        $res = PaymentTools::createTransfer($connectedAccount->id, $booking->id, $data->total*100, 'Payment to Carer '.$data->first_name.' '.$data->family_name.' ('.$data->carer_id.') for appointments '.$appointmentsIds.' in booking '.$booking->id);
 
         //Mark certain appointments as with poyout
         Appointment::where('booking_id', $booking->id)->where('status_id', 4)->where('payout', 0)->update(['payout' => 1]);
