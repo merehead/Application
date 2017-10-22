@@ -44,9 +44,9 @@
         <table class="adminTable">
             <thead>
                 <tr>
-                    <td class="orderNumber">
-                      <span class="td-title td-title--number">
-                       №
+                    <td class=" ordninary-td no-padding-l">
+                      <span class="td-title td-title--transaction">
+                        transaction id
                       </span>
                     </td>
                     <td class=" ordninary-td ordninary-td--wider no-padding-l">
@@ -94,10 +94,53 @@
                 </tr>
             </thead>
             <tbody>
-            @if($transfers->count() > 0)
+            @if($transfers->count() > 0 || count($potentialPayouts) > 0)
+                @foreach($potentialPayouts as $potentialPayout)
+                    <tr>
+                        <td align="center">
+                            -
+                        </td>
+                        <td class="for-inner">
+                            <table class="innerTable ">
+                                <tbody><tr>
+                                    <td class="idField">
+                                        <span>{{$potentialPayout->carer_id}}</span>
+                                    </td>
+                                    <td class="nameField">
+                                        <a href="#" class="tableLink">{{$potentialPayout->first_name.' '.$potentialPayout->family_name}}</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td class="for-inner">
+                            <table class="innerTable ">
+                                <tbody><tr>
+                                    <td class="">
+                                        <span><i class="fa fa-gbp" aria-hidden="true"></i> {{$potentialPayout->total}}</span>
+                                    </td>
+                                    <td class="nameField">
+                                        <div class="actionsGroup">
+                                            <button data-booking_id="{{$potentialPayout->booking_id}}" class="makePayout actionsBtn actionsBtn--accept">
+                                                payout bookings
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="profStatus profStatus--left">
+                                            <span class="profStatus__item profStatus__item--progress">pending</span>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                @endforeach
                 @foreach($transfers as $transfer)
                 <tr>
-                    <td>
+                    <td  align="center">
                         {{$transfer->id}}
                     </td>
                     <td class="for-inner">
@@ -117,7 +160,7 @@
                         <table class="innerTable ">
                             <tbody><tr>
                                 <td class="">
-                                    <span>{{$transfer->amount/100}}</span>
+                                    <span><i class="fa fa-gbp" aria-hidden="true"></i> {{$transfer->amount/100}}</span>
                                 </td>
                                 <td class="nameField">
                                     <div class="actionsGroup">
@@ -130,7 +173,6 @@
                                 <td>
                                     <div class="profStatus profStatus--left">
                                         <span class="profStatus__item profStatus__item--new">paid</span>
-                                        {{--<span class="profStatus__item profStatus__item--progress">pending</span>--}}
 
                                     </div>
                                 </td>
@@ -151,3 +193,14 @@
         </table>
     </div>
 </div>
+
+<script>
+    $('.makePayout').click(function () {
+        var booking_id = $(this).attr('data-booking_id');
+        $.post('/admin/carer-payout/'+booking_id, function (data) {
+            if(data.status == 'success'){
+                location.reload();
+            }
+        });
+    });
+</script>

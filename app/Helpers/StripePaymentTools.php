@@ -243,7 +243,7 @@ class StripePaymentTools implements PaymentToolsInterface
         return $res->id;
     }
 
-    public function createTransfer(string $connectedAccountId, int $amount, string $comment = ''){
+    public function createTransfer(string $connectedAccountId, int $bookingId, int $amount, string $comment = ''){
         $res = Transfer::create([
             "amount" => $amount,
             "currency" => "gbp",
@@ -254,6 +254,7 @@ class StripePaymentTools implements PaymentToolsInterface
         StripeTransfer::create([
             'id' => $res->id,
             'connected_account_id' => $connectedAccountId,
+            'booking_id' => $bookingId,
             'amount' => $amount,
         ]);
 

@@ -3,17 +3,15 @@
 namespace App\Http\Controllers\Admin\AdminSitePayment;
 
 use App\Appointment;
-use App\Bonuses_record;
 use App\Booking;
 use App\DisputePayment;
 use App\Http\Controllers\Admin\AdminController;
+use App\StripeConnectedAccount;
 use App\StripeTransfer;
 use App\Transaction;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Stripe\OAuth;
-use Stripe\Stripe;
-use Stripe\Token;
+use DB;
+use PaymentTools;
 
 class AdminSitePayment extends AdminController
 {
@@ -111,7 +109,10 @@ class AdminSitePayment extends AdminController
     public function getPayoutsToCarers() {
         $this->title = 'Admin | Booking Payouts To Carers';
         $transfers = StripeTransfer::all();
+        $potentialPayouts = $this->getPotentialPayoutsForCarer();
         $this->vars['transfers'] = $transfers;
+        $this->vars['potentialPayouts'] = $potentialPayouts;
+
 
         $this->content = view(config('settings.theme') . '.carerPayouts\carerPayouts')->with($this->vars)->render();
 
@@ -145,4 +146,43 @@ class AdminSitePayment extends AdminController
 
         return $this->renderOutput();
     }
+
+    private function getPotentialPayoutsForCarer(){
+        $sql = 'SELECT
+                  SUM(a.price_for_carer) as total,  MAX(cp.id) as carer_id, MAX(cp.first_name) as first_name, MAX(cp.family_name) as family_name, a.booking_id
+                FROM appointments a
+                JOIN bookings b ON a.booking_id = b.id
+                JOIN users c ON b.carer_id = c.id
+                JOIN carers_profiles cp ON cp.id = c.id
+                WHERE  a.payout = false AND a.status_id = 4
+                GROUP BY a.booking_id';
+        $res = DB::select($sql);
+        return $res;
+    }
+
+    public function makePayoutToCarer(Booking $booking){
+        $sql = 'SELECT
+                  SUM(a.price_for_carer) as total,  MAX(cp.id) as carer_id, MAX(cp.first_name) as first_name, MAX(cp.family_name) as family_name
+                FROM appointments a
+                JOIN bookings b ON a.booking_id = b.id
+                JOIN users c ON b.carer_id = c.id
+                JOIN carers_profiles cp ON cp.id = c.id
+                WHERE  a.payout = false AND cp.id = '.$booking->carer_id.' AND a.status_id = 4
+                GROUP BY a.booking_id';
+        $res = DB::select($sql);
+        $data = $res[0];
+
+        //Get stripe account of carer
+        $connectedAccount = StripeConnectedAccount::where('carer_id', $data->carer_id)->first();
+
+        //Transfer money to carer
+        $res = PaymentTools::createTransfer($connectedAccount->id, $booking->id, $data->total*100, 'Payment to carer '.$data->carer_id.' ('.$data->first_name.' '.$data->family_name.') for booking '.$booking->id);
+
+        //Mark certain appointments as with poyout
+        Appointment::where('booking_id', $booking->id)->where('status_id', 4)->where('payout', 0)->update(['payout' => 1]);
+
+        return response(['status' => 'success']);
+    }
 }
+
+

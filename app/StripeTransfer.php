@@ -9,6 +9,7 @@ class StripeTransfer extends Model
     public $incrementing = false;
     protected $fillable = [
         'id',
+        'booking_id',
         'connected_account_id',
         'amount',
     ];
