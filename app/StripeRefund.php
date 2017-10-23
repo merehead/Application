@@ -4,11 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Transaction extends Model
+class StripeRefund extends Model
 {
+    public $incrementing = false;
     protected $fillable = [
+        'id',
         'booking_id',
-        'payment_method',
         'amount',
     ];
 
@@ -16,6 +17,6 @@ class Transaction extends Model
      * Relations
      */
     public function booking(){
-        return $this->belongsTo(Booking::class, 'booking_id');
+        return $this->belongsTo(Booking::class);
     }
 }

@@ -1,20 +1,212 @@
 <div class="mainPanel">
-    <h2 class="categoryTitle"><span class="categoryTitle__ico"><i class="fa fa-money" aria-hidden="true"></i></span>payouts
-        to purchasers</h2>
-    {!! Form::open(['method'=>'GET','action'=>'Admin\PurchaserPayout\PurchaserPayoutController@index','id'=>'user_filter']) !!}
-
+    <h2 class="categoryTitle">
+          <span class="categoryTitle__ico">
+            <i class="fa fa-money" aria-hidden="true"></i>
+          </span>
+        payouts to purshasers
+    </h2>
     <div class="panelHead">
         <div class="filterBox">
-            <h2 class="filterBox__title themeTitle">filter by</h2>
-            <div class="formField formField--fixed">
-                {!! Form::select('status_id',[''=>'Any']+$bookingStatus,null,['class'=>'formItem formItem--select']) !!}
+            <div class="formField formField--fix-biger">
+                <div class="fieldWrap">
+                    <input type="search" class="formItem formItem--input formItem--search" placeholder="Search...">
+                    <button class="searchBtn">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
             </div>
-            <a href="#" class="actionsBtn actionsBtn--filter actionsBtn--bigger">filter</a>
+
         </div>
+
+
         <div class="panelHead__group">
-            <a href="#" class="print"><i class="fa fa-print" aria-hidden="true"></i></a>
+            <div class="filterBox">
+                <h2 class="filterBox__title themeTitle">
+                    sort by
+                </h2>
+                <div class="formField formField--fixed">
+                    <select class="formItem formItem--select">
+                        <option value="#">
+                            --Text--
+                        </option>
+                    </select>
+                </div>
+
+            </div>
+            <a href="#" class="actionsBtn actionsBtn--filter actionsBtn--bigger">
+                filter
+            </a>
+            <a href="#" class="print">
+                <i class="fa fa-print" aria-hidden="true"></i>
+            </a>
         </div>
+
     </div>
-    {!! Form::close()!!}
-    @include(config('settings.theme').'.purchaserPayouts.mainTable')
+
+
+    <div class="tableWrap tableWrap--margin-t">
+        <table class="adminTable">
+            <thead>
+            <tr>
+                <td class=" ordninary-td no-padding-l">
+                      <span class="td-title td-title--transaction">
+                        transaction id
+                      </span>
+                </td>
+                <td class=" ordninary-td ordninary-td--wider no-padding-l">
+                  <span class="td-title td-title--green">
+                  purchaser
+                  </span>
+
+                </td>
+                <td class="bigger-td bigger-td--middle">
+                  <span class="td-title td-title--booking ">
+                    booking
+                  </span>
+                </td>
+            </tr>
+            <tr class="extra-tr">
+                <td></td>
+                <td class="for-inner">
+                    <table class="innerTable " style="height: 46px;">
+                        <tbody><tr>
+                            <td class="idField">
+                                <span class="extraTitle">id</span>
+                            </td>
+                            <td class="nameField">
+                                <span class="extraTitle">name</span>
+                            </td>
+
+                        </tr>
+                        </tbody></table>
+                </td>
+                <td class="for-inner">
+                    <table class="innerTable " style="height: 46px;">
+                        <tbody><tr>
+                            <td class="">
+                                <span class="extraTitle">total</span>
+                            </td>
+                            <td class="">
+                                <span class="extraTitle">actions</span>
+                            </td>
+                            <td class="">
+                                <span class="extraTitle">payout status</span>
+                            </td>
+
+                        </tr>
+
+                        </tbody></table>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            @if($refunds->count() > 0 || count($potentialPayouts) > 0)
+                @foreach($potentialPayouts as $potentialPayout)
+                    <tr>
+                        <td align="center">
+                            -
+                        </td>
+                        <td class="for-inner">
+                            <table class="innerTable ">
+                                <tbody><tr>
+                                    <td class="idField">
+                                        <span>{{$potentialPayout->purchaser_id}}</span>
+                                    </td>
+                                    <td class="nameField">
+                                        <a href="#" class="tableLink">{{$potentialPayout->first_name.' '.$potentialPayout->family_name}}</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td class="for-inner">
+                            <table class="innerTable ">
+                                <tbody><tr>
+                                    <td class="">
+                                        <span><i class="fa fa-gbp" aria-hidden="true"></i> {{$potentialPayout->total}}</span>
+                                    </td>
+                                    <td class="nameField">
+                                        <div class="actionsGroup">
+                                            <button data-booking_id="{{$potentialPayout->booking_id}}" class="makePayout actionsBtn actionsBtn--accept">
+                                                payout bookings
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="profStatus profStatus--left">
+                                            <span class="profStatus__item profStatus__item--progress">pending</span>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                @endforeach
+                @foreach($refunds as $refund)
+                    <tr>
+                        <td  align="center">
+                            {{$refund->id}}
+                        </td>
+                        <td class="for-inner">
+                            <table class="innerTable ">
+                                <tbody><tr>
+                                    <td class="idField">
+                                        <span>{{$refund->booking->bookingCarer->id}}</span>
+                                    </td>
+                                    <td class="nameField">
+                                        <a href="#" class="tableLink">{{$refund->booking->bookingCarerProfile->full_name}}</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td class="for-inner">
+                            <table class="innerTable ">
+                                <tbody><tr>
+                                    <td class="">
+                                        <span><i class="fa fa-gbp" aria-hidden="true"></i> {{$refund->amount/100}}</span>
+                                    </td>
+                                    <td class="nameField">
+                                        <div class="actionsGroup">
+                                            {{--<a href="#" class="actionsBtn actionsBtn--accept">--}}
+                                            {{--payout bookings--}}
+                                            {{--</a>--}}
+                                            -
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="profStatus profStatus--left">
+                                            <span class="profStatus__item profStatus__item--new">paid</span>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                @endforeach
+            @else
+                <tr>
+                    <td colspan="7" align="center">
+                        -
+                    </td>
+                </tr>
+            @endif
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<script>
+    $('.makePayout').click(function () {
+        var booking_id = $(this).attr('data-booking_id');
+        $.post('/admin/purchaser-payout/'+booking_id, function (data) {
+            if(data.status == 'success'){
+                location.reload();
+            }
+        });
+    });
+</script>

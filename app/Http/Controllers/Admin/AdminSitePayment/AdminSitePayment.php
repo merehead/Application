@@ -6,7 +6,9 @@ use App\Appointment;
 use App\Booking;
 use App\DisputePayment;
 use App\Http\Controllers\Admin\AdminController;
+use App\StripeCharge;
 use App\StripeConnectedAccount;
+use App\StripeRefund;
 use App\StripeTransfer;
 use App\Transaction;
 use Illuminate\Http\Request;
@@ -114,25 +116,22 @@ class AdminSitePayment extends AdminController
         $this->vars['potentialPayouts'] = $potentialPayouts;
 
 
-        $this->content = view(config('settings.theme') . '.carerPayouts\carerPayouts')->with($this->vars)->render();
+        $this->content = view(config('settings.theme').'.carerPayouts.carerPayouts')->with($this->vars)->render();
 
         return $this->renderOutput();
     }
-    public function BonusPayoutToCarer(Request $request, $action,$bonusRecordId,$amount) {
 
-        $bonusRecord = Bonuses_record::findOrFail($bonusRecordId);
+    public function getPayoutsToPurchasers() {
+        $this->title = 'Admin | Booking Payouts To Purchasers';
+        $refunds = StripeRefund::all();
+        $potentialPayouts = $this->getPotentialPayoutsForPurchasers();
+        $this->vars['refunds'] = $refunds;
+        $this->vars['potentialPayouts'] = $potentialPayouts;
 
-        switch ($action) {
-            case 'pay' : {$action = 'PAID';break;}
-            case 'cancel' : {$action = 'CANCELLED';break;}
-            case 'delay' : {$action = 'DELAYED';break;}
-            default : return;
-        }
 
-        $bonusRecord->payment_status = $action;
-        $bonusRecord->save();
+        $this->content = view(config('settings.theme').'.purchaserPayouts.purchaserPayouts')->with($this->vars)->render();
 
-        return redirect()->back();
+        return $this->renderOutput();
     }
 
     public function getBookingTransactions(Request $request){
@@ -142,9 +141,24 @@ class AdminSitePayment extends AdminController
 
         $this->vars['transactions'] = $transactions;
 
+        $transaction = $transactions[0];
+
         $this->content = view(config('settings.theme') . '.bookingTransactions.bookingTransactions')->with($this->vars)->render();
 
         return $this->renderOutput();
+    }
+
+    private function getPotentialPayoutsForPurchasers(){
+        $sql = 'SELECT
+                  SUM(a.price_for_purchaser) as total,  MAX(pp.id) as purchaser_id, MAX(pp.first_name) as first_name, MAX(pp.family_name) as family_name, a.booking_id
+                FROM appointments a
+                JOIN bookings b ON a.booking_id = b.id
+                JOIN users p ON b.purchaser_id = p.id
+                JOIN purchasers_profiles pp ON pp.id = p.id
+                WHERE  a.payout = false AND a.status_id = 5
+                GROUP BY a.booking_id';
+        $res = DB::select($sql);
+        return $res;
     }
 
     private function getPotentialPayoutsForCarer(){
@@ -158,6 +172,33 @@ class AdminSitePayment extends AdminController
                 GROUP BY a.booking_id';
         $res = DB::select($sql);
         return $res;
+    }
+
+    public function makePayoutToPurchaser(Booking $booking){
+        $sql = 'SELECT
+                  SUM(a.price_for_purchaser) as total,  MAX(pp.id) as purchaser_id, MAX(pp.first_name) as first_name, MAX(pp.family_name) as family_name, a.booking_id
+                FROM appointments a
+                JOIN bookings b ON a.booking_id = b.id
+                JOIN users p ON b.purchaser_id = p.id
+                JOIN purchasers_profiles pp ON pp.id = p.id
+                WHERE  a.payout = false AND pp.id = '.$booking->purchaser_id.' AND a.status_id = 5
+                GROUP BY a.booking_id';
+        $res = DB::select($sql);
+        $data = $res[0];
+
+        //Get stripe account of carer
+        $stripeCherge = StripeCharge::where('booking_id', $booking->id)->first();
+
+        //Transfer money to carer
+        $appointments = Appointment::where('booking_id', $booking->id)->where('status_id', 5)->where('payout', 0)->get();
+        $appointmentsIds = implode(',', $appointments->pluck('id')->toArray());
+
+        $res = PaymentTools::createRefund($data->total*100, $stripeCherge->id, $booking->id, 'Payment to Purchaser '.$data->first_name.' '.$data->family_name.' ('.$data->purchaser_id.') for appointments '.$appointmentsIds.' in booking '.$booking->id);
+
+        //Mark certain appointments as with poyout
+        Appointment::where('booking_id', $booking->id)->where('status_id', 5)->where('payout', 0)->update(['payout' => 1]);
+
+        return response(['status' => 'success']);
     }
 
     public function makePayoutToCarer(Booking $booking){
