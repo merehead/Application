@@ -84,8 +84,8 @@ null,['class'=>'profileField__select','readonly','id'=>'criminal_detail','data-e
             </div>
         </div>
 
-        @if(strtolower($carerProfile->DBS_use)!='no')
-        <div class="profileField">
+
+        <div class="profileField" @if(strtolower($carerProfile->DBS_use)=='no')style="display: none" id="dpsBlock"@endif>
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle">
                 <span class="ordinaryTitle__text ">
@@ -138,7 +138,6 @@ null,['class'=>'profileField__select','readonly','id'=>'criminal_detail','data-e
                 @endif
             </div>
         </div>
-        @endif
     </div>
 </div>
 
