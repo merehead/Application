@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin\AdminSitePayment;
+namespace App\Http\Controllers\Admin;
 
 use App\Appointment;
 use App\Booking;
 use App\DisputePayment;
+use App\DisputePayout;
 use App\Http\Controllers\Admin\AdminController;
 use App\StripeCharge;
 use App\StripeConnectedAccount;

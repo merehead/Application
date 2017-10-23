@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use App\StripeCharge;
 
 class Booking extends Model
 {
@@ -65,7 +66,7 @@ class Booking extends Model
 
     public function transaction()
     {
-        return $this->belongsTo('App\BookingPayment','id','booking_id');
+        return $this->hasOne(StripeCharge::class);
     }
 
 

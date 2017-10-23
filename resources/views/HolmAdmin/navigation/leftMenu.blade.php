@@ -71,7 +71,7 @@
             </a>
         </li>
         <li class="adminNav__item">
-            <a href="{{route('dispute-payout.index')}}" class="adminNav__link">
+            <a href="{{route('getDisputePayouts')}}" class="adminNav__link">
                 <span class="adminNav__ico">
                   <i class="fa fa-check-square" aria-hidden="true"></i>
                 </span>
