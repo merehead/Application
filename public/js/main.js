@@ -1194,11 +1194,13 @@ $(document).ready(function () {
 
 
     $( "textarea, .countable" ).not('.doNotCount').focus(function() {
-        var maxLenght = $( this ).attr('maxlength');
-        var currentLength = $( this ).val().length;
+        var $this = this;
+        $('.help-block').remove();
+        var maxLenght = $( $this ).attr('maxlength');
+        var currentLength = $( $this ).val().length;
         var symbolsLeft = maxLenght - currentLength;
-        $( this ).before('<span class="help-block" style="margin: 0;padding: 0;color: green">Characters remaining ('+currentLength+'/'+maxLenght+')</span>');
-        $(this).next("span").css("top", "28px");
+        $( $this ).before('<span class="help-block" style="margin: 0;padding: 0;color: green">Characters remaining ('+currentLength+'/'+maxLenght+')</span>');
+        $($this).next("span").css("top", "28px");
     });
     $( "textarea, .countable" ).keyup(function() {
         var maxLenght = $( this ).attr('maxlength');
