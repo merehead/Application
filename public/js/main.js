@@ -1849,14 +1849,17 @@ $(document).ready(function () {
         is_data_changed = true;
 
         $('input[name="is_data_changed"]').val(1);
-        // $('input[name="address_line1"]').autocomplete({
-        //     serviceUrl:'/address/',
-        //     params: {query: ($(this).prop('readonly')==true)?'':$(this).attr('data-country') + ' ' + $(this).val()},
-        //     onSelect: function (suggestion) {
-        //         addressFormt(suggestion,$('#post_code_profile'));
-        //     }
-        // });
-        // $('input[name="address_line1"]').autocomplete('clear');
+        $('input[name="postcode"]').autocomplete({
+                serviceUrl: '/address',
+                params: {query: ($(this).prop('readonly')==true)?'':$(this).attr('data-country') + ' ' + $(this).val()},
+                minChars: 2,
+                dataType: 'json',
+                onSelect: function (suggestion) {
+                    addressFormt(suggestion, $('input[name="postcode"]:not(.disable)'));
+                }
+            }
+        );
+        $('input[name="postcode"]').autocomplete('clear');
         if (is_data_changed) {
             $('#datepicker_when_start').attr('readonly',false)
                 .datepicker({ dateFormat: "dd/mm/yy",
