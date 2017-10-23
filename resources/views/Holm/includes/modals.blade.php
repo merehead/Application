@@ -101,7 +101,7 @@
 <div id="findMessage" class="modal fade" role="dialog">
     <div class="login" style="position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
         <div class="login__header">
-            <h2>Message</h2>
+            <h2>We're opening soon!</h2>
             <a href="#" data-dismiss="modal" class="close closeModal">
                 <i class="fa fa-times"></i>
             </a>

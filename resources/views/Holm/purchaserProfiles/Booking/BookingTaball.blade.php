@@ -25,7 +25,7 @@
                 </a>
                 <a href="/purchaser-settings/booking/canceled" class="bookingNav__link centeredLink">
             <span class="bookingNav__text">
-              canceled
+              cancelled
             </span>
                 </a>
             </div>

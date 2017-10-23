@@ -13,7 +13,7 @@
 
             </p>
             <p class="info-p info-p--roboto">
-                If you feel we should reconsider this decision, please do feel free to contact us via info@holm.care
+                If you feel we should reconsider this decision, please do feel free to contact us via <a href="mailto:info@holm.care">info@holm.care</a>
             </p>
         </div>
 

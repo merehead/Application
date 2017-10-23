@@ -23,7 +23,7 @@
                 </a>
                 <a href="/carer-settings/booking/canceled" class="bookingNav__link centeredLink">
             <span class="bookingNav__text">
-              canceled
+              cancelled
             </span>
                 </a>
             </div>
@@ -211,7 +211,7 @@
     @if($status == 'all' || $status == 'canceled')
         <div class="bookingCard bookingCard--complete">
             <div class="bookingCard__header bookingCard__header">
-                <h2>canceled</h2>
+                <h2>cancelled</h2>
             </div>
             @if($canceledBookings->count() > 0)
                 @foreach($canceledBookings as $booking)

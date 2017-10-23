@@ -152,22 +152,24 @@ $documents['other_relevant_qualification']->count()>0)
 @if($typeCare->count()!=0)
 <div class="profileExtraInfo">
     <h2 class="profileTitle">
-        TYPE OF CARE
+        Types of Care Provided
     </h2>
     <div class="profileAdvantages">
         <div class="profileAdvantages__row">
             <div class="advantageColumn">
                 @foreach($carerProfile->ServicesTypes as $item)
-                    <p>
+                    <p class="advantage_label">
+                        <i class="fa fa-check"></i>
                         {{$item->name}}
                     </p>
                 @endforeach
             </div>
             <div class="advantageColumn">
                 @foreach($typeCare as $item)
-                <p>
-                    {{$item->name}}
-                </p>
+                    <p class="advantage_label">
+                        <i class="fa fa-check"></i>
+                        {{$item->name}}
+                    </p>
                 @if($loop->iteration%3==0)
                     </div> <div class="advantageColumn">
                 @endif
@@ -220,13 +222,14 @@ $documents['other_relevant_qualification']->count()>0)
         <div class="profileAdvantages__row">
             <div class="advantageColumn">
                 @foreach($languages as $item)
-                    <h2>
+                    <p class="advantage_label">
+                        <i class="fa fa-check"></i>
                         @if($item->carer_language!='OTHER')
-                        {{$item->carer_language}}
-                            @else
-                            {{$carerProfile->language_additional}}
+                            {{$item->carer_language}}
+                        @else
+                            Language additional:  {{$carerProfile->language_additional}}
                         @endif
-                    </h2>
+                    </p>
                     @if($loop->iteration%3==0)
             </div> <div class="advantageColumn">
                 @endif

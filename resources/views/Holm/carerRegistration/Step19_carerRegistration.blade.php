@@ -19,7 +19,7 @@
 
 
         <p class="info-p info-p--roboto"s>
-            If you have any problems uploading them, you can also email them to info@holm.care. Once we have received and checked all your documents, we will add your profile to the website for clients to book you.
+            If you have any problems uploading them, you can also email them to <a href="mailto:info@holm.care">info@holm.care</a>. Once we have received and checked all your documents, we will add your profile to the website for clients to book you.
         </p>
 
 

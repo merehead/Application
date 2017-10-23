@@ -26,8 +26,8 @@
                 <h2 class="">
                     <span>*</span>You can refer as many people as you like.
                 </h2>
-                <a href="{{route('TermsPage')}}">
-                    Terms & Conditions
+                <a href="{{route('TermsPage')}}" target="_blank">
+                    Terms & Conditions apply
                 </a>
             </div>
             @include(config('settings.frontTheme').'.referUser.inviteForm')
