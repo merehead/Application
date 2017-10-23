@@ -156,6 +156,9 @@ class User extends Authenticatable
                 break;
         }
     }
+    public function getShortFullNameAttribute(){
+        return $this->first_name.' '.mb_substr($this->family_name,0,1);
+    }
 
     public function getFamilyNameAttribute(){
         switch ($this->user_type_id){
