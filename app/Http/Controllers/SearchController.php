@@ -129,18 +129,20 @@ class SearchController extends FrontController
         if(empty($order))$order[]='cp.id asc';
         $start = ($page - 1) * $perPage;
         if($page==1) $start = 0;
-
+        $carerResult=[];
+        $countAllResult=[];
         $sql = 'select cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview 
                   from carers_profiles cp '.$where. ' 
                 group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview 
                 order by '.implode(',',$order)." limit $start,$perPage";
-        $carerResult = DB::select($sql);
+        //$carerResult = DB::select($sql); //раскоментить
 
         $start = (($page*$perPage)-$perPage==0)?'0':($page*$perPage)-$perPage;
-        $countAllResult = DB::select('select cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview 
-                  from carers_profiles cp '.$where. ' 
-                group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview 
-                order by '.implode(',',$order));
+        //раскоментить
+//        $countAllResult = DB::select('select cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview
+//                  from carers_profiles cp '.$where. '
+//                group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview
+//                order by '.implode(',',$order));
         $countAll=count($countAllResult);
 
         //if(count($carerResult)<=5)$start=0;

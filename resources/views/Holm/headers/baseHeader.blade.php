@@ -8,7 +8,7 @@
                 <a href="{{ route('welcomeCarer') }}" class="carerSelf">i am a carer</a>
                 <div class="headerNav_container">
                     <div class="headerNav">
-                        <a href="{{route('searchPage')}}" class="headerNav__link" data-toggle="modal" data-target="#findMessage">find a carer</a>
+                        <a href="{{route('searchPage')}}" class="headerNav__link">find a carer</a>
                         <a href="{{route('AboutPage')}}" class="headerNav__link">about us</a>
                     </div>
                     <div class="headerSocial">
