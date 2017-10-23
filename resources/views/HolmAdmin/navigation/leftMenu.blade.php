@@ -41,7 +41,7 @@
             </a>
         </li>
         <li class="adminNav__item">
-            <a href="{{route('BookingTransactions')}}" class="adminNav__link">
+            <a href="{{route('BookingTransactions')}}" class="adminNav__link {{\Request::route()->getName() == 'BookingTransactions' ? 'active' : ''}}">
                 <span class="adminNav__ico">
                   <i class="fa fa-gbp" aria-hidden="true"></i>
                 </span>
@@ -51,7 +51,7 @@
             </a>
         </li>
         <li class="adminNav__item">
-            <a href="{{route('PayoutsToPurchasers')}}" class="adminNav__link">
+            <a href="{{route('PayoutsToPurchasers')}}" class="adminNav__link {{\Request::route()->getName() == 'PayoutsToPurchasers' ? 'active' : ''}}">
                 <span class="adminNav__ico">
                   <i class="fa fa-money" aria-hidden="true"></i>
                 </span>
@@ -61,7 +61,7 @@
             </a>
         </li>
         <li class="adminNav__item">
-            <a href="{{route('PayoutsToCarers')}}" class="adminNav__link">
+            <a href="{{route('PayoutsToCarers')}}" class="adminNav__link {{\Request::route()->getName() == 'PayoutsToCarers' ? 'active' : ''}}">
                 <span class="adminNav__ico">
                   <i class="fa fa-credit-card" aria-hidden="true"></i>
                 </span>
@@ -71,7 +71,7 @@
             </a>
         </li>
         <li class="adminNav__item">
-            <a href="{{route('getDisputePayouts')}}" class="adminNav__link">
+            <a href="{{route('getDisputePayouts')}}" class="adminNav__link {{\Request::route()->getName() == 'getDisputePayouts' ? 'active' : ''}}">
                 <span class="adminNav__ico">
                   <i class="fa fa-check-square" aria-hidden="true"></i>
                 </span>

@@ -1,0 +1,6 @@
+.adminNav__link.active{
+    background:#80cb2d;
+    color:#Fff;
+    -webkit-transition:all .3s ease;
+    transition:all .3s ease
+}
