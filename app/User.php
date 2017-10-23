@@ -174,7 +174,11 @@ class User extends Authenticatable
     }
 
     public function getBonusBalanceAttribute(){
-        return 2000;
+        if($this->user_type_id = 3){
+            $res = DB::select('SELECT SUM(amount) as amount FROM bonuses_payments WHERE user_id = '.$this->id);
+            return $res[0]->amount;
+        }
+        return 0;
     }
 
     public function getProfileLinkAttribute(){

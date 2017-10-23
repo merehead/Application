@@ -332,7 +332,11 @@
                     </tr>
                     @endforeach
                 @else
-
+                    <tr>
+                        <td colspan="9" align="center">
+                            -
+                        </td>
+                    </tr>
                 @endif
             </tbody>
         </table>

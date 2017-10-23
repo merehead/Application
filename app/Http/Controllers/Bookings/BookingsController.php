@@ -122,9 +122,6 @@ class BookingsController extends FrontController implements Constants
 
     public function view_details(Booking $booking)
     {
-
-//        if(!in_array($booking->status_id, [2, 5, 7]))
-//            return;
         $user = Auth::user();
 
         $this->template = config('settings.frontTheme') . '.templates.purchaserPrivateProfile';
@@ -201,26 +198,6 @@ class BookingsController extends FrontController implements Constants
                     'status'=>'new'
                 ]);
 
-
-
-
-/*        try {
-            Mail::send(config('settings.frontTheme') . '.emails.new_booking',
-                ['$purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'carer'],
-                function ($m) use ($carerProfile) {
-                    $m->to($carerProfile->email)->subject('New booking');
-                });
-        } catch (Swift_TransportException $STe) {
-
-            $error = MailError::create([
-                'error_message' => $STe->getMessage(),
-                'function' => __METHOD__,
-                'action' => 'Try to sent new_booking to carer',
-                'user_id' => $carerProfile->id
-            ]);
-        }*/
-
-
         //message for purchaser
         $text = view(config('settings.frontTheme') . '.emails.new_booking')->with([
             'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'purchaser'
@@ -236,23 +213,6 @@ class BookingsController extends FrontController implements Constants
                     'status'=>'new'
                 ]);
 
-
-/*        try {
-            Mail::send(config('settings.frontTheme') . '.emails.new_booking',
-                ['purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'purchaser'],
-                function ($m) use ($purchaserProfile) {
-                    $m->to($purchaserProfile->email)->subject('New booking');
-                });
-        } catch (Swift_TransportException $STe) {
-
-            $error = MailError::create([
-                'error_message' => $STe->getMessage(),
-                'function' => __METHOD__,
-                'action' => 'Try to sent new_booking to purchaser',
-                'user_id' => $purchaserProfile->id
-            ]);
-        }*/
-
         return response(['status' => 'success']);
     }
 
@@ -262,7 +222,7 @@ class BookingsController extends FrontController implements Constants
         if ($booking->payment_method == 'credit_card') {
             $purchase = PaymentTools::createCharge($booking->carer_amount * 100, $booking->card_token, $booking->id);
         } else {
-
+            PaymentTools::createBonusPayment($booking->carer_amount, $booking->id);
         }
 
         //Set prices for appointments

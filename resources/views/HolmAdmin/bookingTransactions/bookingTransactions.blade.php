@@ -213,7 +213,7 @@
                                         <span>{{$transaction->booking->id}}</span>
                                     </td>
                                     <td class="">
-                                        <span>{{$transaction->booking->purchaser_price}}</span>
+                                        <span><i class="fa fa-gbp" aria-hidden="true"></i> {{$transaction->amount}}</span>
                                     </td>
 
                                 </tr>

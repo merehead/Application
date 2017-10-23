@@ -269,14 +269,21 @@ class StripePaymentTools implements PaymentToolsInterface
         return $res->id;
     }
 
-    public function createBonusPayment(int $amount, int $bookingId)
+    public function createBonusPayment(int $amount, int $bookingId) : bool
     {
         $booking = Booking::find($bookingId);
+
         BonusesPayment::create([
             'user_id' => $booking->purchaser_id,
             'amount' => -$amount,
         ]);
+
+        Transaction::create([
+            'booking_id' => $bookingId,
+            'payment_method' => 'bonus',
+            'amount' => $amount,
+        ]);
+
+        return true;
     }
-
-
 }
