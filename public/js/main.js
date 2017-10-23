@@ -26,7 +26,9 @@ function addressFormt(autocomplete){
     var refs = autocomplete.data.refs;
     $.getJSON('/address?udprn='+refs+'&query='+autocomplete.data.query, function(data) {
         console.log(data);
-         $('input[name="address_line1"]').val(data[0].number+' '+data[0].street);
+        var number = '';
+        if(data[0].number!=undefined)number=data[0].number;
+         $('input[name="address_line1"]').val(number+' '+data[0].street);
          $('input[name="town"]').val(data[0].posttown);
          $('input[name="postcode"]').val(data[0].postcode);
          $('input[name="address_line2"]').val(data[0].dependentlocality);

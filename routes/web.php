@@ -121,6 +121,7 @@ Route::post('/invite/refer-users', 'ReferNewUserController@create')->name('invit
 Route::get('/invite/thank-you', 'ReferNewUserController@show')->name('thankForInvite');
 
 Route::get('/privacy-policy', 'PrivacyPolicyController@index')->name('privacy_policy');
+Route::get('/session-timeout', 'LoginWindowController@index')->name('session_timeout');
 
 
 

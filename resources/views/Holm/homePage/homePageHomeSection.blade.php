@@ -9,7 +9,7 @@
                     Helping you find affordable care quickly and easily
                 </p>
             </div>
-            <div class="row">
+            <div class="row" style="display: none">
                 <div class="col-md-offset-1 col-md-10">
                     <div class="home__search">
                         {!! Form::model(null, ['method'=>'POST','route'=>'searchPagePost','class'=>'homeForm','id'=>'carerSearchForm']) !!}

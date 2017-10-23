@@ -98,5 +98,28 @@
 
     </div>
 </div>
+<div id="findMessage" class="modal fade" role="dialog">
+    <div class="login" style="position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
+        <div class="login__header">
+            <h2>Message</h2>
+            <a href="#" data-dismiss="modal" class="close closeModal">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+        <div class="who-you-are">
+            <div class="who-you-are__box">
+                <span>
+                    <p>Hi!</p>
+                    <p>We’re sorry, but we’re not yet currently taking bookings.
+                    You’ll be able to see the best professional carers on this page once we are ready.
+                    Please feel free to <a href="/contact">contact us</a> and we’ll let you know when you can find a great carer.
+                    </p>
+                    <p>See you soon!</p>
+                    <p>The Holm Team</p>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
 
 
