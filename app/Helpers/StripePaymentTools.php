@@ -9,6 +9,7 @@ use App\Helpers\Contracts\PaymentToolsInterface;
 use App\StripeCharge;
 use App\StripeConnectedAccount;
 use App\StripeExternalAccount;
+use App\StripeRefund;
 use App\StripeTransfer;
 use App\Transaction;
 use App\User;
@@ -69,13 +70,19 @@ class StripePaymentTools implements PaymentToolsInterface
         return $res->id;
     }
 
-    public function createRefund(int $amount, string $chargeId, string $comment) : string
+    public function createRefund(int $amount, string $chargeId, int $bookingId, string $comment) : string
     {
         $ref = Refund::create(array(
             "charge" => $chargeId,
             "amount" => $amount,
             "metadata" => ['comment' => $comment],
         ));
+
+        StripeRefund::create([
+            'id' => $ref->id,
+            'booking_id' => $bookingId,
+            'amount' => $amount,
+        ]);
 
         return $ref->id;
     }

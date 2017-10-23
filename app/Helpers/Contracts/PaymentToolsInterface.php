@@ -7,7 +7,7 @@ interface PaymentToolsInterface
 
     public function createCharge(int $amount, string $cardToken, int $bookingId) : string;
 
-    public function createRefund(int $amount, string $chargeId, string $comment) : string;
+    public function createRefund(int $amount, string $chargeId, int $bookingId, string $comment) : string;
 
     public function createConnectedAccount(array $stripeAccountData, int $userId);
 
