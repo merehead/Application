@@ -7,6 +7,7 @@ use App\Booking;
 use App\DisputePayment;
 use App\DisputePayout;
 use App\Http\Controllers\Admin\AdminController;
+use App\PayoutToPurchaser;
 use App\StripeCharge;
 use App\StripeConnectedAccount;
 use App\StripeRefund;
@@ -39,9 +40,9 @@ class AdminSitePayment extends AdminController
 
     public function getPayoutsToPurchasers() {
         $this->title = 'Admin | Booking Payouts To Purchasers';
-        $refunds = StripeRefund::all();
+        $payoutsToPurchasers = PayoutToPurchaser::all();
         $potentialPayouts = $this->getPotentialPayoutsForPurchasers();
-        $this->vars['refunds'] = $refunds;
+        $this->vars['payoutsToPurchasers'] = $payoutsToPurchasers;
         $this->vars['potentialPayouts'] = $potentialPayouts;
 
 
@@ -95,22 +96,31 @@ class AdminSitePayment extends AdminController
                 JOIN bookings b ON a.booking_id = b.id
                 JOIN users p ON b.purchaser_id = p.id
                 JOIN purchasers_profiles pp ON pp.id = p.id
-                WHERE  a.payout = false AND pp.id = '.$booking->purchaser_id.' AND a.status_id = 5
+                WHERE  a.payout = false AND pp.id = '.$booking->purchaser_id.' AND a.status_id = 5 AND a.booking_id = '.$booking->id.'
                 GROUP BY a.booking_id';
         $res = DB::select($sql);
         $data = $res[0];
 
-        //Get stripe account of carer
-        $stripeCherge = StripeCharge::where('booking_id', $booking->id)->first();
-
-        //Transfer money to carer
         $appointments = Appointment::where('booking_id', $booking->id)->where('status_id', 5)->where('payout', 0)->get();
         $appointmentsIds = implode(',', $appointments->pluck('id')->toArray());
+        $comment = 'Payment to Purchaser '.$data->first_name.' '.$data->family_name.' ('.$data->purchaser_id.') for appointments '.$appointmentsIds.' in booking '.$booking->id;
 
-        $res = PaymentTools::createRefund($data->total*100, $stripeCherge->id, $booking->id, 'Payment to Purchaser '.$data->first_name.' '.$data->family_name.' ('.$data->purchaser_id.') for appointments '.$appointmentsIds.' in booking '.$booking->id);
+        if($booking->payment_method == 'credit_card'){
+            //Get stripe account of carer
+            $stripeCharge = StripeCharge::where('booking_id', $booking->id)->first();
+
+            //Transfer money to carer
+            $res = PaymentTools::createRefund($data->total*100, $stripeCharge->id, $booking->id, $comment);
+        } else {
+            $res = PaymentTools::createBonusRefund($data->total, $booking->id, $comment);
+        }
 
         //Mark certain appointments as with poyout
-        Appointment::where('booking_id', $booking->id)->where('status_id', 5)->where('payout', 0)->update(['payout' => 1]);
+        Appointment::where('booking_id', $booking->id)
+            ->where('booking_id', $booking->id)
+            ->where('status_id', 5)
+            ->where('payout', 0)
+            ->update(['payout' => 1]);
 
         return response(['status' => 'success']);
     }

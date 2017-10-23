@@ -100,7 +100,7 @@
             </tr>
             </thead>
             <tbody>
-            @if($refunds->count() > 0 || count($potentialPayouts) > 0)
+            @if($payoutsToPurchasers->count() > 0 || count($potentialPayouts) > 0)
                 @foreach($potentialPayouts as $potentialPayout)
                     <tr>
                         <td align="center">
@@ -144,19 +144,19 @@
                         </td>
                     </tr>
                 @endforeach
-                @foreach($refunds as $refund)
+                @foreach($payoutsToPurchasers as $payoutsToPurchaser)
                     <tr>
                         <td  align="center">
-                            {{$refund->id}}
+                            {{$payoutsToPurchaser->id}}
                         </td>
                         <td class="for-inner">
                             <table class="innerTable ">
                                 <tbody><tr>
                                     <td class="idField">
-                                        <span>{{$refund->booking->bookingCarer->id}}</span>
+                                        <span>{{$payoutsToPurchaser->booking->bookingCarer->id}}</span>
                                     </td>
                                     <td class="nameField">
-                                        <a href="#" class="tableLink">{{$refund->booking->bookingCarerProfile->full_name}}</a>
+                                        <a href="#" class="tableLink">{{$payoutsToPurchaser->booking->bookingCarerProfile->full_name}}</a>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -166,13 +166,10 @@
                             <table class="innerTable ">
                                 <tbody><tr>
                                     <td class="">
-                                        <span><i class="fa fa-gbp" aria-hidden="true"></i> {{$refund->amount/100}}</span>
+                                        <span><i class="fa fa-gbp" aria-hidden="true"></i> {{$payoutsToPurchaser->amount}}</span>
                                     </td>
                                     <td class="nameField">
                                         <div class="actionsGroup">
-                                            {{--<a href="#" class="actionsBtn actionsBtn--accept">--}}
-                                            {{--payout bookings--}}
-                                            {{--</a>--}}
                                             -
                                         </div>
                                     </td>

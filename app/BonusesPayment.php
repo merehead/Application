@@ -11,6 +11,7 @@ class BonusesPayment extends Model
         'bonus_type_id',
         'amount',
         'referral_donor',
+        'comment',
     ];
     
 }
