@@ -127,30 +127,24 @@ Route::get('/session-timeout', 'LoginWindowController@index')->name('session_tim
 
 Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
 
-    Route::get('/', 'AdminController@index')->name('index');
+    Route::get('/', 'AdminController@adminHomePage')->name('adminHomePage');
 
     Route::resource('/user','User\UserController', ['except' => ['show']]);
     Route::resource('/booking','Booking\BookingController', ['only' => ['index']]);
-    Route::resource('/dispute-payout','DisputePayout\DisputePayoutController', ['only' => ['index']]);
     Route::resource('/blog','Blog\BlogController');
-    #Route::resource('/blog/edit/{idBlog}','Blog\BlogController@edit', ['only' => ['edit']]);
 
-   // Route::get('/blog/edit/{blogId}', 'Booking\BookingController@edit', ['except' => ['show']]);
 
-    Route::get('/dispute-payout-to-carer/{appointmentId}/{userId}/{amount}', 'AdminSitePayment\AdminSitePayment@DisputePayoutToCarer')->name('DisputePayoutToCarer');
-    Route::get('/dispute-payout-to-purchaser/{appointmentId}/{userId}/{amount}', 'AdminSitePayment\AdminSitePayment@DisputePayoutToPurchaser')->name('DisputePayoutToPurchaser');
+    Route::get('/booking-transactions', 'AdminSitePayment@getBookingTransactions')->name('BookingTransactions');
 
-    Route::get('/booking-payout-to-purchaser/{action}/{bookingId}/{amount}', 'AdminSitePayment\AdminSitePayment@BookingPayoutToPurchaser')->name('BookingPayoutToPurchaser');
-    Route::get('/bonus-payout-to-purchaser/{action}/{bonusRecordId}/{amount}', 'AdminSitePayment\AdminSitePayment@BonusPayoutToPurchaser')->name('BonusPayoutToPurchaser');
+    Route::get('/carer-payout', 'AdminSitePayment@getPayoutsToCarers')->name('PayoutsToCarers');
+    Route::post('/carer-payout/{booking}', 'AdminSitePayment@makePayoutToCarer')->name('makePayoutToCarer');
 
-    Route::get('/booking-payout-to-carer/{action}/{bookingId}/{amount}', 'AdminSitePayment\AdminSitePayment@BookingPayoutToCarer')->name('BookingPayoutToCarer');
-    Route::get('/bonus-payout-to-carer/{action}/{bonusRecordId}/{amount}', 'AdminSitePayment\AdminSitePayment@BonusPayoutToCarer')->name('BonusPayoutToCarer');
+    Route::get('/purchaser-payout', 'AdminSitePayment@getPayoutsToPurchasers')->name('PayoutsToPurchasers');
+    Route::post('/purchaser-payout/{booking}', 'AdminSitePayment@makePayoutToPurchaser')->name('makePayoutToPurchaser');
 
-    Route::get('/booking-transactions', 'AdminSitePayment\AdminSitePayment@getBookingTransactions')->name('BookingTransactions');
-    Route::get('/carer-payout', 'AdminSitePayment\AdminSitePayment@getPayoutsToCarers')->name('PayoutsToCarers');
-    Route::post('/carer-payout/{booking}', 'AdminSitePayment\AdminSitePayment@makePayoutToCarer')->name('makePayoutToCarer');
-    Route::get('/purchaser-payout', 'AdminSitePayment\AdminSitePayment@getPayoutsToPurchasers')->name('PayoutsToPurchasers');
-    Route::post('/purchaser-payout/{booking}', 'AdminSitePayment\AdminSitePayment@makePayoutToPurchaser')->name('makePayoutToPurchaser');
+    Route::get('/dispute-payout', 'DisputePayoutsController@index')->name('getDisputePayouts');
+    Route::put('/dispute-payout/{dispute_payout_id}/detailsOfDispute', 'DisputePayoutsController@setDetailsOfDispute')->name('setDetailsOfDispute');
+    Route::put('/dispute-payout/{dispute_payout_id}/detailsOfDisputeResolution', 'DisputePayoutsController@detailsOfDisputeResolution')->name('detailsOfDisputeResolution');
 });
 
 Route::get('/test_document_upload', function (){

@@ -41,7 +41,7 @@ class AdminController extends Controller
 
     }
 
-    public function index(Request $request){
+    public function adminHomePage(Request $request){
 
         $this->template = config('settings.theme').'.templates.adminBase';
         $this->title = 'Admin Home page';

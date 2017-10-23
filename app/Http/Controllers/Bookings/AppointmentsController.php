@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Bookings;
 use App\Appointment;
+use App\DisputePayout;
 use App\Events\AppointmentCompletedEvent;
 use App\Http\Controllers\Controller;
 use App\Interfaces\Constants;
@@ -17,7 +18,6 @@ class AppointmentsController extends Controller implements Constants
             //Carer
             $appointment->status_id = self::APPOINTMENT_STATUS_CANCELLED;
             $appointment->carer_status_id =  self::APPOINTMENT_USER_STATUS_REJECTED;
-            //todo money to service user
         } else {
             //Purchaser
             if($appointment->carer_status_id == self::APPOINTMENT_USER_STATUS_NEW){
@@ -25,8 +25,10 @@ class AppointmentsController extends Controller implements Constants
             } elseif($appointment->carer_status_id == self::APPOINTMENT_USER_STATUS_COMPLETED) {
                 $appointment->status_id = self::APPOINTMENT_STATUS_DISPUTE;
                 $appointment->purchaser_status_id = self::APPOINTMENT_USER_STATUS_REJECTED;
+                DisputePayout::create([
+                    'appointment_id' => $appointment->id,
+                ]);
             } elseif ($appointment->carer_status_id == self::APPOINTMENT_USER_STATUS_REJECTED){
-                //todo money to service user
                 $appointment->status_id = self::APPOINTMENT_STATUS_CANCELLED;
                 $appointment->purchaser_status_id = self::APPOINTMENT_USER_STATUS_REJECTED;
             }
@@ -51,6 +53,9 @@ class AppointmentsController extends Controller implements Constants
             } elseif ($appointment->purchaser_status_id == self::APPOINTMENT_USER_STATUS_REJECTED){
                 $appointment->status_id = self::APPOINTMENT_STATUS_DISPUTE;
                 $appointment->carer_status_id = self::APPOINTMENT_USER_STATUS_COMPLETED;
+                DisputePayout::create([
+                    'appointment_id' => $appointment->id,
+                ]);
             }
         } else {
             $appointment->status_id = self::APPOINTMENT_STATUS_COMPLETED;
