@@ -144,8 +144,10 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::post('/purchaser-payout/{booking}', 'AdminSitePayment@makePayoutToPurchaser')->name('makePayoutToPurchaser');
 
     Route::get('/dispute-payout', 'DisputePayoutsController@index')->name('getDisputePayouts');
-    Route::put('/dispute-payout/{dispute_payout_id}/detailsOfDispute', 'DisputePayoutsController@setDetailsOfDispute')->name('setDetailsOfDispute');
-    Route::put('/dispute-payout/{dispute_payout_id}/detailsOfDisputeResolution', 'DisputePayoutsController@detailsOfDisputeResolution')->name('detailsOfDisputeResolution');
+    Route::put('/dispute-payout/{dispute_payout_id}/detailsOfDispute', 'DisputePayoutsController@setDetailsOfDispute');
+    Route::put('/dispute-payout/{dispute_payout_id}/detailsOfDisputeResolution', 'DisputePayoutsController@detailsOfDisputeResolution');
+    Route::post('/dispute-payout/{dispute_payout_id}/payoutToCarer', 'DisputePayoutsController@payoutToCarer');
+    Route::post('/dispute-payout/{dispute_payout_id}/payoutToPurchaser', 'DisputePayoutsController@payoutToPurchaser');
 });
 
 Route::get('/test_document_upload', function (){

@@ -308,12 +308,16 @@
                         </td>
                         <td>
                             <div class="actionsGroup">
-                                <a href="#" class="actionsBtn actionsBtn--accept actionsBtn--wider">
+                                @if($disputePayout->status == 'pending')
+                                <button data-dispute_payout_id="{{$disputePayout->id}}" class="makePayoutToCarer actionsBtn actionsBtn--accept actionsBtn--wider">
                                     pay out to carer
-                                </a>
-                                <a href="#" class="actionsBtn actionsBtn--view actionsBtn--wider">
+                                </button>
+                                <button data-dispute_payout_id="{{$disputePayout->id}}" class="makePayoutToPurchaser actionsBtn actionsBtn--view actionsBtn--wider">
                                     pay out to purchaser
-                                </a>
+                                </button>
+                                @else
+                                -
+                                @endif
                             </div>
 
                         </td>
@@ -353,5 +357,22 @@
         var dispute_payout_id = $(this).attr('data-dispute_payout_id');
         var text = $(this).val();
         $.ajax({url :'/admin/dispute-payout/' + dispute_payout_id + '/detailsOfDisputeResolution', type: 'PUT', data: {'details_of_dispute_resolution': text}});
+    });
+
+    $('.makePayoutToCarer').click(function () {
+        var dispute_payout_id = $(this).attr('data-dispute_payout_id');
+        $.post('/admin/dispute-payout/' + dispute_payout_id + '/payoutToCarer', function (data) {
+            if(data.status == 'success'){
+                location.reload();
+            }
+        });
+    });
+    $('.makePayoutToPurchaser').click(function () {
+        var dispute_payout_id = $(this).attr('data-dispute_payout_id');
+        $.post('/admin/dispute-payout/' + dispute_payout_id + '/payoutToPurchaser', function (data) {
+            if(data.status == 'success'){
+                location.reload();
+            }
+        });
     });
 </script>
