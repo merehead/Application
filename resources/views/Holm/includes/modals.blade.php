@@ -15,7 +15,7 @@
                 <a href="{{route('CarerRegistration')}}" class="who-you-are__item">
                     A Care Worker?
                 </a>
-                <a href="{{route('PurchaserRegistration')}}" class="who-you-are__item">
+                <a href="{{route('PurchaserRegistration')}}" class="who-you-are__item" data-toggle="modal" data-target="#PurchaserMessage">
                     Buying Care?
                 </a>
             </div>
@@ -115,6 +115,29 @@
                     Please feel free to <a href="/contact">contact us</a> and we’ll let you know when you can find a great carer.
                     </p>
                     <p>See you soon!</p>
+                    <p>The Holm Team</p>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="PurchaserMessage" class="modal fade" role="dialog">
+    <div class="login" style="position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
+        <div class="login__header">
+            <h2>We're opening soon!</h2>
+            <a href="#" data-dismiss="modal" class="close closeModal">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+        <div class="who-you-are">
+            <div class="who-you-are__box">
+                <span>
+                    <p>Sorry.</p>
+                    <p>Our service is not yet available. Please use our <a href="/contact">contact form</a>
+                        and we will let you know when you can register.
+                    </p>
+                    <p>Best wishes</p>
                     <p>The Holm Team</p>
                 </span>
             </div>
