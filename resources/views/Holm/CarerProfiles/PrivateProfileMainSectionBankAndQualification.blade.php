@@ -57,10 +57,11 @@
         <div class="profileField profileField_q">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-               NVQs
+               NVQs999
               </span>
             </h2>
             <div class="addContainer">
+                <span>Certificate 1</span>
               <input disabled class="pickfiles" value=""
                 accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
               <div id="nvq" class="pickfiles_img"></div>

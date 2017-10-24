@@ -2360,7 +2360,7 @@ $(document).ready(function () {
       if(p.length >= 2){
         $(q).append(
           '<div class="profileField profileField_q profileField_h">'+
-            '<div class="addContainer">'+
+            '<span>Certificate '+c+'</span><div class="addContainer">'+
               '<input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
               '<div id="'+input_name.split('-')[0]+'-'+c+'u" class="pickfiles_img"></div>'+
                 '<a class="add add--moreHeight">'+
@@ -2671,13 +2671,13 @@ $(document).ready(function () {
                       ( i2 === 0 ? index[0].toLowerCase().split('_').join(' ') + 's' : '') +
                     '</span>'+
                   '</h2>'+
-                  '<div class="addContainer">'+
+                  '<span>Certificate '+(i2+1)+'</span><div class="addContainer">'+
                     func(index[0], index2, i)+
                     '<a class="add add--moreHeight"></a>'+
                   '</div>'+
                   '<div class="addInfo">'+
                       '<input disabled type="text" placeholder="Name"'+
-                      'value="'+(index2.title !== 'undefined' ? index2.title : "")+'"'+
+                      'value="'+(index2.title !== 'undefined' ? index2.title+', '+index2.type.split('_').join(' '): "")+'"'+
                       'name="'+index[0].toLowerCase()+'-'+i+'" class="addInfo__input profileField__input--greyBg">'+
                   '</div>'+
                 '</div>'
