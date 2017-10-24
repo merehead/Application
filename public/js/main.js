@@ -2803,5 +2803,17 @@ $(document).ready(function () {
       itemSelector: '.grid .userContainer',
       percentPosition: true
     })
-
 });
+
+// -- SPINNER -------
+function showSpinner() {
+  $('body').addClass('overflow-hidden')
+  $('body').append(
+    '<div class="show-spinner"></div>'
+  );
+};
+
+function hideSpinner() {
+  $('body').removeClass('overflow-hidden')
+  $( ".show-spinner" ).remove();
+};

@@ -671,3 +671,18 @@ label.correct2 {
 .payment__item{
     cursor: default;
 }
+
+.show-spinner{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  background-image: url('../img/spinner.gif');
+  background-repeat: no-repeat;
+  background-position: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.overflow-hidden{
+  overflow: hidden;
+}
