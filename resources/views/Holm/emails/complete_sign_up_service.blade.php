@@ -30,7 +30,7 @@
 </head>
 
 
-<body style="margin: 0; background: #fff;">
+<body style="margin: 0; background: #fff; font-size:18px">
 
 <table cellpadding="0" cellspacing="0" border="0" align="center"
        style="margin-top: 30px;
@@ -64,7 +64,7 @@
                         <h1  style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700; font-size: 14px; color: #272c2b;  text-transform: uppercase;">
 {{--
                             Hello [user_first_name]!
---}}                        Dear {{$like_name}}!
+--}}                        Dear {{$like_name}}
 
                         </h1>
 

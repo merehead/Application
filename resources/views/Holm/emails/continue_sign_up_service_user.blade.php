@@ -30,7 +30,7 @@
 </head>
 
 
-<body style="margin: 0; background: #fff;">
+<body style="margin: 0; background: #fff; font-size:18px">
 
 <table cellpadding="0" cellspacing="0" border="0" align="center"
        style="margin-top: 30px;
@@ -62,7 +62,7 @@
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; font-family: 'Roboto', sans-serif; line-height: 1.5; "  valign="top" class="">
                         <h1  style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700; font-size: 14px; color: #272c2b;  text-transform: uppercase;">
-                            Dear {{$like_name}}!
+                            Dear {{$like_name}}
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">

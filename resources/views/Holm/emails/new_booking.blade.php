@@ -9,7 +9,7 @@
           rel="stylesheet">
     <style type="text/css"> a:hover {  text-decoration: none !important;  }  a {  color: #71bc37;  text-decoration: none;  }  @media screen and (max-width: 768px) {  .logo {  float: none;  display: block;  }  }  .title {  padding: 15px;  }</style>
 </head>
-<body style="margin: 0; background: #fff;">
+<body style="margin: 0; background: #fff; font-size:18px">
 <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin-top: 30px;
       border-collapse: collapse;
       -webkit-box-shadow: 0px 0px 101px 0px rgba(31, 31, 33, 0.15);
@@ -29,7 +29,7 @@
             <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%" class="t-content">
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; " valign="top" class="">
-                        <h1  style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700; font-size: 14px; color: #272c2b;  text-transform: uppercase;">Dear {{( $sendTo == 'carer') ? $carer->like_name : $purchaser->like_name}}!</h1>
+                        <h1  style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700; font-size: 14px; color: #272c2b;  text-transform: uppercase;">Dear {{( $sendTo == 'carer') ? $carer->like_name : $purchaser->like_name}}</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             @if($sendTo == 'carer')
                                 <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{$serviceUser->first_name}}</a>

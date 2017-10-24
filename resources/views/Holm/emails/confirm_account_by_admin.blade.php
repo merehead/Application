@@ -30,7 +30,7 @@
 </head>
 
 
-<body style="margin: 0; background: #fff;">
+<body style="margin: 0; background: #fff; font-size:18px">
 
 <table cellpadding="0" cellspacing="0" border="0" align="center"
        style="margin-top: 30px;
@@ -64,10 +64,10 @@
                         <h1  style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700; font-size: 14px; color: #272c2b;  text-transform: uppercase;">
 
                             @if($user->isCarer())
-                                Dear {{$user->userCarerProfile->like_name}}!
+                                Dear {{$user->userCarerProfile->like_name}}
                             @endif
                             @if($user->isPurchaser())
-                                    Dear  {{$user->userPurchaserProfile->like_name}}!
+                                    Dear  {{$user->userPurchaserProfile->like_name}}
                             @endif
                         </h1>
 
