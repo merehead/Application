@@ -173,7 +173,7 @@
               </div>
             `);
             } else {
-
+                showErrorModal({title: 'Error', description: data.message});
             }
             hideSpinner();
             var padding = ($(document).height()-$('header').outerHeight()-$('section').outerHeight()-$('footer').outerHeight()-20)/2;
@@ -212,7 +212,7 @@
               </div>
             `);
             } else {
-
+                showErrorModal({title: 'Error', description: data.message});
             }
             hideSpinner();
         });

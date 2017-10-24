@@ -164,17 +164,25 @@ class BookingsController extends FrontController implements Constants
 
     public function setPaymentMethod(Booking $booking, Request $request, StripeService $stripeService)
     {
-        $booking->payment_method = $request->payment_method;
-
         if ($request->payment_method == 'credit_card') {
-            $cardToken = PaymentTools::createCreditCardToken([
-                'card_number' => $request->card_number,
-                'exp_month' => $request->card_month,
-                'exp_year' => $request->card_year,
-                'cvc' => $request->card_cvc,
-            ]);
+            try {
+                $cardToken = PaymentTools::createCreditCardToken([
+                    'card_number' => $request->card_number,
+                    'exp_month' => $request->card_month,
+                    'exp_year' => $request->card_year,
+                    'cvc' => $request->card_cvc,
+                ]);
+            } catch (\Exception $ex){
+                return response($this->formatResponse('error', $ex->getMessage()));
+            }
             $booking->card_token = $cardToken;
+        } else {
+            if($booking->bookingPurchaser->bonus_balance < $booking->purchaser_price){
+                return response($this->formatResponse('error', 'You have not enough funds on bonuses wallet.'));
+            }
         }
+
+        $booking->payment_method = $request->payment_method;
         $booking->status_id = 2;
         $booking->save();
 
@@ -220,9 +228,17 @@ class BookingsController extends FrontController implements Constants
     {
         $user = Auth::user();
         if ($booking->payment_method == 'credit_card') {
-            $purchase = PaymentTools::createCharge($booking->carer_amount * 100, $booking->card_token, $booking->id);
+            try {
+                $purchase = PaymentTools::createCharge($booking->carer_amount * 100, $booking->card_token, $booking->id);
+            } catch (\Exception $ex) {
+                return response($this->formatResponse('error', $ex->getMessage()));
+            }
         } else {
-            PaymentTools::createBonusPayment($booking->carer_amount, $booking->id);
+            try {
+                PaymentTools::createBonusPayment($booking->carer_amount, $booking->id);
+            } catch (\Exception $ex) {
+                return response($this->formatResponse('error', $ex->getMessage()));
+            }
         }
 
         //Set prices for appointments

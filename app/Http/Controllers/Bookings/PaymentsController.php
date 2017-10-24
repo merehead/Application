@@ -35,8 +35,4 @@ class PaymentsController extends FrontController
 
         return $this->renderOutput();
     }
-
-    public function create(Request $request){
-        
-    }
 }

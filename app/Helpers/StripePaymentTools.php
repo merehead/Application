@@ -33,29 +33,37 @@ class StripePaymentTools implements PaymentToolsInterface
 
     public function createCreditCardToken(array $creditCardData) : string
     {
-        $res = Token::create(
-            array(
-                "card" => array(
-                    "number" => $creditCardData['card_number'],
-                    "exp_month" => $creditCardData['exp_month'],
-                    "exp_year" => $creditCardData['exp_year'],
-                    "cvc" => $creditCardData['cvc'],
-                    "currency" => 'gbp'
+        try {
+            $res = Token::create(
+                array(
+                    "card" => array(
+                        "number" => $creditCardData['card_number'],
+                        "exp_month" => $creditCardData['exp_month'],
+                        "exp_year" => $creditCardData['exp_year'],
+                        "cvc" => $creditCardData['cvc'],
+                        "currency" => 'gbp'
+                    )
                 )
-            )
-        );
+            );
+        } catch (\Exception $ex){
+            throw $ex;
+        }
 
         return $res->id;
     }
 
     public function createCharge(int $amount, string $cardToken, int $bookingId) : string
     {
-        $res = $response = Charge::create(array(
-            "amount" => $amount,
-            "currency" => 'gbp',
-            "source" => $cardToken,
-            "description" => "Charging carer"
-        ));
+        try {
+            $res = $response = Charge::create(array(
+                "amount" => $amount,
+                "currency" => 'gbp',
+                "source" => $cardToken,
+                "description" => "Charging carer"
+            ));
+        } catch (\Exception $ex){
+            throw $ex;
+        }
 
         $balanceTransaction = BalanceTransaction::retrieve($res['balance_transaction']);
 
@@ -77,11 +85,15 @@ class StripePaymentTools implements PaymentToolsInterface
 
     public function createRefund(int $amount, string $chargeId, int $bookingId, string $comment) : string
     {
-        $ref = Refund::create(array(
-            "charge" => $chargeId,
-            "amount" => $amount,
-            "metadata" => ['comment' => $comment],
-        ));
+        try {
+            $ref = Refund::create(array(
+                "charge" => $chargeId,
+                "amount" => $amount,
+                "metadata" => ['comment' => $comment],
+            ));
+        } catch (\Exception $ex){
+            throw $ex;
+        }
 
         StripeRefund::create([
             'id' => $ref->id,
@@ -101,32 +113,36 @@ class StripePaymentTools implements PaymentToolsInterface
     public function createConnectedAccount(array $stripeAccountData, int $userId)
     {
         $carer = User::findOrFail($userId);
-        $account = Account::create(
-            [
-                "type" => 'custom',
-                "country" => 'GB',
-                "email" => $stripeAccountData['email'],
-                "legal_entity" => [
-                    "address" => [
-                        "city" => $stripeAccountData['legal_entity']['address']['city'],
-                        "line1" => $stripeAccountData['legal_entity']['address']['line1'],
-                        "postal_code" => $stripeAccountData['legal_entity']['address']['postal_code'],
+        try {
+            $account = Account::create(
+                [
+                    "type" => 'custom',
+                    "country" => 'GB',
+                    "email" => $stripeAccountData['email'],
+                    "legal_entity" => [
+                        "address" => [
+                            "city" => $stripeAccountData['legal_entity']['address']['city'],
+                            "line1" => $stripeAccountData['legal_entity']['address']['line1'],
+                            "postal_code" => $stripeAccountData['legal_entity']['address']['postal_code'],
+                        ],
+                        "dob" => [
+                            "day" => $stripeAccountData['legal_entity']['dob']['day'],
+                            "month" => $stripeAccountData['legal_entity']['dob']['month'],
+                            "year" => $stripeAccountData['legal_entity']['dob']['year']
+                        ],
+                        "type" => "individual",
+                        "first_name" => $stripeAccountData['legal_entity']['first_name'],
+                        "last_name" => $stripeAccountData['legal_entity']['last_name'],
                     ],
-                    "dob" => [
-                        "day" => $stripeAccountData['legal_entity']['dob']['day'],
-                        "month" => $stripeAccountData['legal_entity']['dob']['month'],
-                        "year" => $stripeAccountData['legal_entity']['dob']['year']
-                    ],
-                    "type" => "individual",
-                    "first_name" => $stripeAccountData['legal_entity']['first_name'],
-                    "last_name" => $stripeAccountData['legal_entity']['last_name'],
-                ],
-                "tos_acceptance" => [
-                    "date" => time(),
-                    "ip" => $_SERVER['REMOTE_ADDR']
+                    "tos_acceptance" => [
+                        "date" => time(),
+                        "ip" => $_SERVER['REMOTE_ADDR']
+                    ]
                 ]
-            ]
-        );
+            );
+        } catch (\Exception $ex){
+            throw $ex;
+        }
         $account = Account::retrieve('acct_1BEMdvAij8rTvtXk');
 
         //todo get caarer document
@@ -262,12 +278,16 @@ class StripePaymentTools implements PaymentToolsInterface
     }
 
     public function createTransfer(string $connectedAccountId, int $bookingId = 0, int $amount, string $comment = ''){
-        $res = Transfer::create([
-            "amount" => $amount,
-            "currency" => "gbp",
-            'destination' => $connectedAccountId,
-            'metadata' => ['comment' => $comment],
-        ]);
+        try {
+            $res = Transfer::create([
+                "amount" => $amount,
+                "currency" => "gbp",
+                'destination' => $connectedAccountId,
+                'metadata' => ['comment' => $comment],
+            ]);
+        } catch (\Exception $ex){
+            throw $ex;
+        }
 
         if($bookingId){
             StripeTransfer::create([
@@ -284,6 +304,10 @@ class StripePaymentTools implements PaymentToolsInterface
     public function createBonusPayment(int $amount, int $bookingId) : bool
     {
         $booking = Booking::find($bookingId);
+
+        if($booking->bookingPurchaser->bonus_balance < $amount){
+            throw new \Exception('Purchaser has not enough funds on bonuses wallet.');
+        }
 
         BonusTransaction::create([
             'user_id' => $booking->purchaser_id,

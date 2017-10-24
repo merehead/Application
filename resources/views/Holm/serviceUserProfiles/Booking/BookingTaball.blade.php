@@ -238,6 +238,8 @@
         $.post('/bookings/'+booking_id+'/'+status, function (data) {
             if(data.status == 'success'){
                 location.reload();
+            } else {
+                showErrorModal({title: 'Error', description: data.message});
             }
             hideSpinner();
         });
