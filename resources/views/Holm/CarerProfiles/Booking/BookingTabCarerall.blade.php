@@ -254,12 +254,14 @@
 
 <script>
     $('.changeBookingStatus').click(function () {
+        showSpinner();
         var booking_id = $(this).attr('data-booking_id');
         var status = $(this).attr('data-status');
         $.post('/bookings/'+booking_id+'/'+status, function (data) {
             if(data.status == 'success'){
                 location.reload();
             }
+            hideSpinner();
         });
     });
 </script>
