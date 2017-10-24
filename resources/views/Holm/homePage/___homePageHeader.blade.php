@@ -2,11 +2,11 @@
     <div class="container">
         <div class="justifyContainer justifyContainer--smColumn">
             <div class="breadcrumbs">
-                <a href="index.html" class="breadcrumbs__item">
+                <a href="/" class="breadcrumbs__item">
                     Home
                 </a>
                 <span class="breadcrumbs__arrow">></span>
-                <a href="Terms_and_Conditions.html" class="breadcrumbs__item">
+                <a href="/terms" class="breadcrumbs__item">
                     Privacy Policy
                 </a>
 

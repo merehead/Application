@@ -49,7 +49,7 @@
 
     <div class="container">
         <div class="breadcrumbs">
-            <a href="\" class="breadcrumbs__item">
+            <a href="/" class="breadcrumbs__item">
                 Home
             </a>
             <span class="breadcrumbs__arrow">></span>
