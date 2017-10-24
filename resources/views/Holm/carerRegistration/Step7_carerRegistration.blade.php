@@ -25,10 +25,9 @@
                         <div class="formField">
                             <div class="addContainer">
                               <div class="addContainer_load-header">
-                                <span class="addContainer_load-header-inner">NVQ</span>
                               </div>
 
-                              <input class="pickfiles"  type="file" />
+                              <input class="pickfiles" type="file" />
                               <span class="pickfiles-delete">X</span>
 
                               <div id="nvq" class="pickfiles_img"></div>
@@ -50,7 +49,6 @@
                         <div class="formField">
                             <div class="addContainer">
                               <div class="addContainer_load-header">
-                                <span class="addContainer_load-header-inner">CARE CERTIFICATE</span>
                               </div>
 
                               <input class="pickfiles"  type="file" />
@@ -78,7 +76,6 @@
 
                             <div class="addContainer ">
                               <div class="addContainer_load-header">
-                                <span class="addContainer_load-header-inner">HEALTH AND SOCIAL</span>
                               </div>
 
                                 <input class="pickfiles"  type="file" />
@@ -103,7 +100,6 @@
                         <div class="formField">
                             <div class="addContainer ">
                               <div class="addContainer_load-header">
-                                <span class="addContainer_load-header-inner">TRAINING CERTIFICATE</span>
                               </div>
 
                               <input class="pickfiles"  type="file" />
@@ -132,7 +128,6 @@
 
                             <div class="addContainer">
                               <div class="addContainer_load-header">
-                                <span class="addContainer_load-header-inner">ADDITIONAL TRAINING COURSE</span>
                               </div>
 
                               <input class="pickfiles"  type="file" />
@@ -157,7 +152,6 @@
                         <div class="formField">
                             <div class="addContainer">
                               <div class="addContainer_load-header">
-                                <span class="addContainer_load-header-inner">OTHER RELEVANT QUALIFICATIONS</span>
                               </div>
 
                               <input class="pickfiles"  type="file" />

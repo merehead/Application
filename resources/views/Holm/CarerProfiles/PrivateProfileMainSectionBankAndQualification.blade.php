@@ -55,13 +55,7 @@
     <div class="profileRow profileRow-nvq">
 
         <div class="profileField profileField_q">
-            <h2 class="profileField__title ordinaryTitle">
-              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-               NVQs999
-              </span>
-            </h2>
             <div class="addContainer">
-                <span>Certificate 1</span>
               <input disabled class="pickfiles" value=""
                 accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
               <div id="nvq" class="pickfiles_img"></div>
@@ -75,7 +69,7 @@
             </div>
         </div>
 
-        <div class="profileField profileField_q">
+        <!-- <div class="profileField profileField_q">
 
           <div class="addContainer">
             <input disabled class="pickfiles" value=""
@@ -89,9 +83,9 @@
           <div class="addInfo">
               <input disabled type="text" name="nvq-1" class="addInfo__input" placeholder="Name" maxlength="25">
           </div>
-        </div>
+        </div> -->
 
-        <div class="profileField profileField_q">
+        <!-- <div class="profileField profileField_q">
 
           <div class="addContainer">
             <input disabled class="pickfiles" value=""
@@ -105,10 +99,10 @@
           <div class="addInfo">
               <input disabled type="text" name="nvq-2" class="addInfo__input" placeholder="Name" maxlength="25">
           </div>
-        </div>
+        </div> -->
     </div>
 
-    <div class="profileRow profileRow-care_certificate">
+    <!-- <div class="profileRow profileRow-care_certificate">
         <div class="profileField profileField_q">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
@@ -368,7 +362,7 @@
               <input disabled type="text" name="other_relevant_qualification-2" class="addInfo__input" placeholder="Name" maxlength="25">
           </div>
         </div>
-    </div>
+    </div> -->
 
 
 </div>

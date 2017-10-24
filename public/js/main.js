@@ -2110,6 +2110,7 @@ $(document).ready(function () {
                       formdata.append('chunks', chunks);
                       formdata.append('title', file.title);
                       formdata.append('type', file.type_value.split('-')[0]);
+                      formdata.append('type', 'nvq');
                       formdata.append('file', fileSend);
                       chunk += 1;
                       axios.post(
@@ -2304,8 +2305,11 @@ $(document).ready(function () {
     $(document).on('change', '.pickfiles, .pickfiles-change', function(e) {
       var _this = $(this)
 
+
+
       var input_val = $(this).parent().parent().find('.addInfo__input').val('')
       var p = $(this).parent().parent().parent().find('.profileField_h')
+      var p_length = $(this).parent().parent().parent().find('.profileField')
       var div2 = $(this).parent().parent().addClass('profileField_h')
 
       $(this).parent().parent().find('.addInfo__input').prop( "disabled", false)
@@ -2358,10 +2362,10 @@ $(document).ready(function () {
       var q = '.profileRow-'+input_name.split('-')[0]
       c += 1
 
-      if(p.length >= 2){
+      if(p.length >= 1){
         $(q).append(
           '<div class="profileField profileField_q profileField_h">'+
-            '<span>Certificate '+c+'</span><div class="addContainer">'+
+            '<span>Certificate '+(p_length.length+1)+'</span><div class="addContainer">'+
               '<input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
               '<div id="'+input_name.split('-')[0]+'-'+c+'u" class="pickfiles_img"></div>'+
                 '<a class="add add--moreHeight">'+
@@ -2394,6 +2398,8 @@ $(document).ready(function () {
 
       $(this).parent().find('.add__comment--smaller').html('')
       $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
+
+
     })
 
     $('.upload_files').on('click', function (e) {
@@ -2661,52 +2667,47 @@ $(document).ready(function () {
 
         newDoc.map(function(index, i) {
           var p = '.' + profileRow+index[0].toLowerCase()
-          var count = 3 - index[1].length
+          // var count = 1 - index[1].length
 
             $(p).html('')
             index[1].map(function(index2, i2) {
               $(p).append(
                 '<div class="profileField profileField_q profileField_h">'+
-                  '<h2 class="profileField__title ordinaryTitle">'+
-                    '<span class="ordinaryTitle__text ordinaryTitle__text--smaller">'+
-                      ( i2 === 0 ? index[0].toLowerCase().split('_').join(' ') + 's' : '') +
-                    '</span>'+
-                  '</h2>'+
                   '<span>Certificate '+(i2+1)+'</span><div class="addContainer">'+
                     func(index[0], index2, i)+
                     '<a class="add add--moreHeight"></a>'+
                   '</div>'+
                   '<div class="addInfo">'+
                       '<input disabled type="text" placeholder="Name"'+
-                      'value="'+(index2.title !== 'undefined' ? index2.title+', '+index2.type.split('_').join(' '): "")+'"'+
+                      'value="'+(index2.title !== 'undefined' ? index2.title : '')+'"'+
                       'name="'+index[0].toLowerCase()+'-'+i+'" class="addInfo__input profileField__input--greyBg">'+
                   '</div>'+
                 '</div>'
               )
             })
-            if(count >= 0){
-              count === 0 ? count += 1 : ''
-              for (var i = 0; i < count; i++) {
-                $(p).append(
-                  '<div class="profileField profileField_q">'+
-                    '<div class="addContainer">'+
-                      '<input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
-                      '<div id="'+index[0].toLowerCase()+i+1+'u'+'" class="pickfiles_img"></div>'+
-                        '<a class="add add--moreHeight">'+
-                            '<i class="fa fa-plus-circle"></i>'+
-                            '<div class="add__comment add__comment--smaller"></div>'+
-                        '</a>'+
-                    '</div>'+
-                    '<div class="addInfo">'+
-                        '<input disabled type="text" name="'+index[0].toLowerCase()+'-'+i+1+'" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">'+
-                    '</div>'+
-                  '</div>'
-                )
-              }
-            }else{
+            // if(count >= 0){
+              // count === 0 ? count += 1 : ''
+              // for (var i = 0; i < count; i++) {
+              //   $(p).append(
+              //     '<div class="profileField profileField_q">'+
+              //       '<span>Certificate '+(count+i+1)+'</span><div class="addContainer">'+
+              //         '<input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
+              //         '<div id="'+index[0].toLowerCase()+i+1+'u'+'" class="pickfiles_img"></div>'+
+              //           '<a class="add add--moreHeight">'+
+              //               '<i class="fa fa-plus-circle"></i>'+
+              //               '<div class="add__comment add__comment--smaller"></div>'+
+              //           '</a>'+
+              //       '</div>'+
+              //       '<div class="addInfo">'+
+              //           '<input disabled type="text" name="'+index[0].toLowerCase()+'-'+i+1+'" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">'+
+              //       '</div>'+
+              //     '</div>'
+              //   )
+              // }
+            // }else{
               $(p).append(
                 '<div class="profileField profileField_q">'+
-                  '<div class="addContainer">'+
+                  '<span>Certificate '+(index[1].length+1)+'</span><div class="addContainer">'+
                     '<input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
                     '<div id="'+index[0].toLowerCase()+i+1+'u'+'" class="pickfiles_img"></div>'+
                       '<a class="add add--moreHeight">'+
@@ -2719,7 +2720,7 @@ $(document).ready(function () {
                   '</div>'+
                 '</div>'
               )
-            }
+            // }
 
 
             newDoc.map(function(index) {
