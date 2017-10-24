@@ -11,5 +11,6 @@ class StripeCharge extends Model
         'id',
         'booking_id',
         'amount',
+        'fee',
     ];
 }

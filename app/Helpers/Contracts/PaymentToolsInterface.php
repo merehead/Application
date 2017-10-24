@@ -23,5 +23,5 @@ interface PaymentToolsInterface
 
     public function createBonusPayment(int $amount, int $bookingId);
 
-
+    public function getBalance();
 }

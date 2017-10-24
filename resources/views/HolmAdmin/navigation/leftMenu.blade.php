@@ -11,7 +11,7 @@
             </a>
         </li>
         <li class="adminNav__item">
-            <a href="#" class="adminNav__link">
+            <a href="{{route('financial')}}" class="adminNav__link {{\Request::route()->getName() == 'financial' ? 'active' : ''}}">
                 <span class="adminNav__ico">
                   <i class="fa fa-gbp" aria-hidden="true"></i>
                 </span>

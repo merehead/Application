@@ -16,6 +16,7 @@ use App\Transaction;
 use App\User;
 use Stripe\Account;
 use Stripe\Balance;
+use Stripe\BalanceTransaction;
 use Stripe\Charge;
 use Stripe\FileUpload;
 use Stripe\Refund;
@@ -56,10 +57,13 @@ class StripePaymentTools implements PaymentToolsInterface
             "description" => "Charging carer"
         ));
 
+        $balanceTransaction = BalanceTransaction::retrieve($res['balance_transaction']);
+
         StripeCharge::create([
             'id' => $res->id,
             'booking_id' => $bookingId,
             'amount' => $amount,
+            'fee' => $balanceTransaction->fee,
         ]);
 
         Transaction::create([
@@ -312,5 +316,14 @@ class StripePaymentTools implements PaymentToolsInterface
         ]);
 
         return true;
+    }
+
+    public function getBalance(){
+        $balances = Balance::retrieve();
+        foreach ($balances->available as $balance){
+            if($balance->currency == 'gbp')
+                return $balance->amount;
+        }
+        return 0;
     }
 }
