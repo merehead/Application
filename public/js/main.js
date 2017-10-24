@@ -2109,8 +2109,7 @@ $(document).ready(function () {
                       formdata.append('chunk', chunk);
                       formdata.append('chunks', chunks);
                       formdata.append('title', file.title);
-                      formdata.append('type', file.type_value.split('-')[0]);
-                      formdata.append('type', 'nvq');
+                      formdata.append('type', file.type_value_unique.split('-')[0]);
                       formdata.append('file', fileSend);
                       chunk += 1;
                       axios.post(
@@ -2198,6 +2197,7 @@ $(document).ready(function () {
             axios.get(
               '/api/document/'+index.id.id+'/'
             ).then(function (response) {
+              console.log(response)
               var res = response.data.data.document
 
               if(wordFileType.indexOf(res.file_name.split('.')[1]) !== -1){
@@ -2305,8 +2305,6 @@ $(document).ready(function () {
     $(document).on('change', '.pickfiles, .pickfiles-change', function(e) {
       var _this = $(this)
 
-
-
       var input_val = $(this).parent().parent().find('.addInfo__input').val('')
       var p = $(this).parent().parent().parent().find('.profileField_h')
       var p_length = $(this).parent().parent().parent().find('.profileField')
@@ -2350,6 +2348,12 @@ $(document).ready(function () {
 
       if(deleteID){
         arrForDeleteIDProfile.push(parseInt(deleteID))
+      }
+
+      if($('#qualifications-page')){
+        file.type_value_unique = 'nvq'
+      }else{
+        file.type_value_unique = input_name
       }
 
       file.type_value = input_name
@@ -2452,7 +2456,7 @@ $(document).ready(function () {
           formdata.append('chunk', chunk)
           formdata.append('chunks', chunks)
           formdata.append('title', file.title)
-          formdata.append('type', file.type_value)
+          formdata.append('type', file.type_value_unique)
           formdata.append('file', fileSend)
           chunk += 1
           axios.post(
