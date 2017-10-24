@@ -130,11 +130,11 @@ $documents['other_relevant_qualification']->count()>0)
             @if(isset($documents[$dt]) && !empty($documents[$dt]->count()))
 
                 <div class="profileAdvantages__row">
-                <div class="advantageColumn">
+                <!-- <div class="advantageColumn">
                     <h2>
                         {{$documents_name[$dt]}}
                     </h2>
-                </div>
+                </div> -->
                 <div class="advantageColumn">
                     @foreach($documents[$dt] as $item)
                         <p  class="advantageColumn">
