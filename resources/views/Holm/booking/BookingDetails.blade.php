@@ -5,11 +5,11 @@
                 Home
             </a>
             <span class="breadcrumbs__arrow">></span>
-            <a href="{{route('purchaserSettings')}}" class="breadcrumbs__item">
+            <a href="@if(Auth::user()->isCarer()){{'/carer-settings'}}@else{{route('purchaserSettings')}}@endif" class="breadcrumbs__item">
                 My profile
             </a>
             <span class="breadcrumbs__arrow">></span>
-            <a href="{{route('purchaserBookingStatus')}}" class="breadcrumbs__item">
+            <a href="@if(Auth::user()->isCarer()){{'/carer-settings/booking'}}@else{{route('purchaserBookingStatus')}}@endif" class="breadcrumbs__item">
                 My Bookings
             </a>
 
