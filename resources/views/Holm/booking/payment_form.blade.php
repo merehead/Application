@@ -155,6 +155,7 @@
 
 <script>
     $('#buttonPaymentBonuses').click(function () {
+        showSpinner();
         $.post('{{route('setBookingPaymentMethod', ['booking' => $booking->id])}}', {'payment_method' : 'bonus_wallet'}, function( data ) {
             if(data.status == 'success'){
                 $('.bookPaymentWrap').css('border-top','none');
@@ -171,13 +172,17 @@
                 </p>
               </div>
             `);
+            } else {
+
             }
+            hideSpinner();
             var padding = ($(document).height()-$('header').outerHeight()-$('section').outerHeight()-$('footer').outerHeight()-20)/2;
             $('.thank').css('paddingTop',padding).css('paddingBottom',padding);
         });
     });
 
     $('#buttonPaymentCard').click(function () {
+        showSpinner();
         var cardNumber = $('#cardNumber').val();
         var cardMonth = $('#cardMonth').val();
         var cardYear = $('#cardYear').val();
@@ -206,7 +211,10 @@
                 </p>
               </div>
             `);
+            } else {
+
             }
+            hideSpinner();
         });
     });
 </script>
