@@ -31,7 +31,8 @@ class AppointmentCompletedEvent
         $users[] = $booking->bookingPurchaser()->first();
         foreach ($users as $user){
             if($user->referral_code !== null){
-                if($user->completed_appointments_hours >= 20){
+                $hours = $user->completed_appointments_hours;
+                if($hours >= 20){
                     $referralUser = User::where('own_referral_code', $user->referral_code)->first();
 
                     if(!$user->bonusPayouts()->where('bonus_type_id', 2)->where('referral_user_id', $referralUser->id)->get()->count()) {
