@@ -49,7 +49,7 @@
         </div>
         <div class="total total--bonus ">
             <div class="total__item totalBox">
-                <p class="totalPrice">£0</p>
+                <p class="totalPrice">£{{$purchaserProfile->user->PaidBonuses}}</p>
                 <p class="totalTitle">
                     Bonus earned from referrals
                 </p>

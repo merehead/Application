@@ -153,10 +153,10 @@
                             <table class="innerTable ">
                                 <tbody><tr>
                                     <td class="idField">
-                                        <span>{{$payoutsToPurchaser->booking->bookingPurchaserProfile->id}}</span>
+                                        <span>{{$payoutsToPurchaser->booking->bookingCarer->id}}</span>
                                     </td>
                                     <td class="nameField">
-                                        <a href="#" class="tableLink">{{$payoutsToPurchaser->booking->bookingPurchaserProfile->full_name}}</a>
+                                        <a href="#" class="tableLink">{{$payoutsToPurchaser->booking->bookingCarerProfile->full_name}}</a>
                                     </td>
                                 </tr>
                                 </tbody>

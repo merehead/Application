@@ -71,7 +71,7 @@
             </a>
         </li>
         <li class="adminNav__item">
-            <a href="{{route('getDisputePayouts')}}" class="adminNav__link {{\Request::route()->getName() == 'getDisputePayouts' ? 'active' : ''}}">
+            <a href="{{route('DisputePayouts')}}" class="adminNav__link {{\Request::route()->getName() == 'DisputePayouts' ? 'active' : ''}}">
                 <span class="adminNav__ico">
                   <i class="fa fa-check-square" aria-hidden="true"></i>
                 </span>
@@ -81,7 +81,7 @@
             </a>
         </li>
         <li class="adminNav__item">
-            <a href="#" class="adminNav__link">
+            <a href="{{route('BonusesCarers')}}" class="adminNav__link {{\Request::route()->getName() == 'BonusesCarers' ? 'active' : ''}}">
                 <span class="adminNav__ico">
                   <i class="fa fa-gift" aria-hidden="true"></i>
                 </span>
@@ -91,7 +91,7 @@
             </a>
         </li>
         <li class="adminNav__item">
-            <a href="#" class="adminNav__link">
+            <a href="{{route('BonusesPurchasers')}}" class="adminNav__link {{\Request::route()->getName() == 'BonusesPurchasers' ? 'active' : ''}}">
                 <span class="adminNav__ico">
                   <i class="fa fa-gift" aria-hidden="true"></i>
                 </span>
