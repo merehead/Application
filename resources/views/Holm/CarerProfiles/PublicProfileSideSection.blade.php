@@ -30,7 +30,8 @@
 <div class="profilePricing">
     <p class="hourPrice hourPrice">
 <span class="hourPrice__price hourPrice__price--big">
-From £ 12</span><span class="hourPrice__timing">/hour</span>
+From £ @if(Auth::check()&& Auth::user()->id==$carerProfile->id)10 @else 12 @endif</span><span
+class="hourPrice__timing">/hour</span>
     </p>
     @if(Auth::check())
         @if (Auth::user()->user_type_id !== 3)
