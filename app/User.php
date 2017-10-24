@@ -86,11 +86,11 @@ class User extends Authenticatable
         switch ($this->user_type_id){
             case 1:
                 $profile = $this->userPurchaserProfile()->first();
-                return $profile->first_name.' '.$profile->family_name[0].'.';
+                return $profile->first_name.' '.$profile->family_name;
                 break;
             case 3:
                 $profile = $this->userCarerProfile()->first();
-                return $profile->first_name.' '.$profile->family_name[0].'.';
+                return $profile->first_name.' '.$profile->family_name;
                 break;
         }
     }
@@ -125,11 +125,13 @@ class User extends Authenticatable
     }
 
     public function getBonusBalanceAttribute(){
-        if($this->user_type_id = 3){
-            $res = DB::select('SELECT SUM(amount) as amount FROM bonus_transactions WHERE user_id = '.$this->id);
-            return $res[0]->amount;
-        }
-        return 0;
+        $res = DB::select('SELECT SUM(amount) as amount FROM bonus_transactions WHERE user_id = '.$this->id);
+        return $res[0]->amount;
+    }
+
+    public function getPaidBonusesAttribute(){
+        $res = DB::select('SELECT SUM(amount) as amount FROM bonus_payouts WHERE payout = 1 AND user_id = '.$this->id);
+        return (int)$res[0]->amount;
     }
 
     public function getProfileLinkAttribute(){

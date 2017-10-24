@@ -13,4 +13,11 @@ class BonusPayout extends Model
         'amount',
         'payout',
     ];
+
+    /**
+     * Relations
+     */
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

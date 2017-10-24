@@ -143,11 +143,16 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::get('/purchaser-payout', 'AdminSitePayment@getPayoutsToPurchasers')->name('PayoutsToPurchasers');
     Route::post('/purchaser-payout/{booking}', 'AdminSitePayment@makePayoutToPurchaser')->name('makePayoutToPurchaser');
 
-    Route::get('/dispute-payout', 'DisputePayoutsController@index')->name('getDisputePayouts');
+    Route::get('/dispute-payout', 'DisputePayoutsController@index')->name('DisputePayouts');
     Route::put('/dispute-payout/{dispute_payout_id}/detailsOfDispute', 'DisputePayoutsController@setDetailsOfDispute');
     Route::put('/dispute-payout/{dispute_payout_id}/detailsOfDisputeResolution', 'DisputePayoutsController@detailsOfDisputeResolution');
     Route::post('/dispute-payout/{dispute_payout_id}/payoutToCarer', 'DisputePayoutsController@payoutToCarer');
     Route::post('/dispute-payout/{dispute_payout_id}/payoutToPurchaser', 'DisputePayoutsController@payoutToPurchaser');
+
+    Route::get('/bonuses-carers', 'BonusController@getBonusesCarer')->name('BonusesCarers');
+    Route::get('/bonuses-purchasers', 'BonusController@getBonusesPurchaser')->name('BonusesPurchasers');
+    Route::post('/payout-bonus/{bonus_id}', 'BonusController@payoutBonus');
+    Route::post('/cancel-bonus/{bonus_id}', 'BonusController@cancelBonus');
 });
 
 Route::get('/test_document_upload', function (){
