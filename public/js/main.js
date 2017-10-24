@@ -395,6 +395,7 @@ function scale(block) {
 }
 $(document).ready(function () {
 
+    $(document).on('click','.payment__item',function(e){e.preventDefault(); return false;})
 
 /*    $('#login').modal().on('shown', function(){
         $('body').css('overflow', 'hidden');
