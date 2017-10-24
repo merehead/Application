@@ -78,7 +78,7 @@
                 </a>
                 <div class="orderInfo__item orderInfo__item--rightPadding">
                     <h2 class="ordinaryTitle">
-                        <span class="ordinaryTitle__text ordinaryTitle__text--bigger"><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->short_full_name}}</a></span>
+                        <span class="ordinaryTitle__text ordinaryTitle__text--bigger"><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->short_full_name}}.</a></span>
                     </h2>
                     <div class="viewProfile">
                         <a href="{{$booking->bookingServiceUser()->first()->profile_link}}" class="viewProfile__item centeredLink">

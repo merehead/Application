@@ -46,7 +46,7 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
 
-            return redirect('/session-timeout')->with('new_token', csrf_token());
+            return redirect('/enter')->with('new_token', csrf_token());
 
         }
 

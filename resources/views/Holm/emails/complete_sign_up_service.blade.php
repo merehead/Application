@@ -71,7 +71,7 @@
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             Thank you for joining Holm.<br /><br />
                             Your account has now been created, and you can check all your details by logging into your
-                            <a href="{{route('purchaserSettings',['id'=>$user->id])}}">profile</a>,
+                            <a href="@if (Auth::check()){{route('purchaserSettings',['id'=>$user->id])}}@else {{route('session_timeout')}}@endif">profile</a>,
                             and can also book the best care workers.
                             <br />
                             We hope you will enjoy Holm!

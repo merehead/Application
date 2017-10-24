@@ -37,7 +37,7 @@ class PurchaserController extends FrontController implements Constants
 
 
         if (!$this->user) {
-            return redirect('/');
+            return redirect('/enter');
             //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
         } else {
 
