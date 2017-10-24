@@ -307,30 +307,6 @@ class BookingsController extends FrontController implements Constants
                         'time_to_send' => Carbon::now(),
                         'status'=>'new'
                     ]);
-
-/*            try {
-                Mail::send(config('settings.frontTheme') . '.emails.canceled_booking',
-                    ['user_like_name' => $purchaser->like_name,
-                        'user_name' => $carer->first_name,
-                        'service_user_name' => $serviceUser->first_name,
-                        'address' => $serviceUser->addresss_line1,
-                        'date' => 'date',
-                        'time' => 'time',
-                        'booking'=>$booking,
-                        'sendTo' => 'purchaser'
-                        ],
-                    function ($m) use ($purchaser) {
-                        $m->to($purchaser->email)->subject('Canceled booking');
-                    });
-            } catch (Swift_TransportException $STe) {
-
-                $error = MailError::create([
-                    'error_message' => $STe->getMessage(),
-                    'function' => __METHOD__,
-                    'action' => 'Try to sent Canceled booking',
-                    'user_id' => $user->id
-                ]);
-            }*/
         } else {
             if ($booking->carer_status_id == self::COMPLETED) {
                 $booking->status_id = self::DISPUTE;

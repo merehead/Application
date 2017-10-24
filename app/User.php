@@ -35,6 +35,9 @@ class User extends Authenticatable
     ];
 
 
+    /**
+     * Relations
+     */
     public function userPurchaser()
     {
         return $this->hasMany('App\Booking', 'purchaser_id', 'id');
@@ -60,12 +63,10 @@ class User extends Authenticatable
         return $this->hasOne('App\PurchasersProfile', 'id', 'id');
     }
 
-    public function bonuses()
+    public function bonusPayouts()
     {
-        return $this->hasMany('App\BonusesPayment');
+        return $this->hasMany(BonusPayout::class, 'user_id');
     }
-    
-    
 
     public function blogs()
     {
@@ -78,6 +79,105 @@ class User extends Authenticatable
     }
 
 
+    /**
+     * Accessors
+     */
+    public function getFullNameAttribute(){
+        switch ($this->user_type_id){
+            case 1:
+                $profile = $this->userPurchaserProfile()->first();
+                return $profile->first_name.' '.$profile->family_name;
+                break;
+            case 3:
+                $profile = $this->userCarerProfile()->first();
+                return $profile->first_name.' '.$profile->family_name;
+                break;
+        }
+    }
+
+    public function getFirstNameAttribute(){
+        switch ($this->user_type_id){
+            case 1:
+                $profile = $this->userPurchaserProfile()->first();
+                return $profile->first_name;
+                break;
+            case 3:
+                $profile = $this->userCarerProfile()->first();
+                return $profile->first_name;
+                break;
+        }
+    }
+    public function getShortFullNameAttribute(){
+        return $this->first_name.' '.mb_substr($this->family_name,0,1);
+    }
+
+    public function getFamilyNameAttribute(){
+        switch ($this->user_type_id){
+            case 1:
+                $profile = $this->userPurchaserProfile()->first();
+                return $profile->family_name;
+                break;
+            case 3:
+                $profile = $this->userCarerProfile()->first();
+                return $profile->family_name;
+                break;
+        }
+    }
+
+    public function getBonusBalanceAttribute(){
+        $res = DB::select('SELECT SUM(amount) as amount FROM bonus_transactions WHERE user_id = '.$this->id);
+        return $res[0]->amount;
+    }
+
+    public function getPaidBonusesAttribute(){
+        $res = DB::select('SELECT SUM(amount) as amount FROM bonus_payouts WHERE payout = 1 AND user_id = '.$this->id);
+        return (int)$res[0]->amount;
+    }
+
+    public function getProfileLinkAttribute(){
+        switch ($this->user_type_id){
+            case 1:
+                break;
+            case 3:
+                return '/carer/profile/'.$this->id;
+                break;
+        }
+    }
+
+
+    public function getCompletedAppointmentsHoursAttribute()
+    {
+        if ($this->user_type_id === 3) {
+            $sql = 'SELECT a.id FROM appointments a LEFT JOIN bookings b ON a.booking_id = b.id WHERE a.status_id = 4  AND b.carer_id = ' . $this->id;
+        } else {
+            $sql = 'SELECT a.id FROM appointments a LEFT JOIN bookings b ON a.booking_id = b.id WHERE a.status_id = 4  AND b.purchaser_id = ' . $this->id;
+        }
+        $res = DB::select($sql);
+        $appointments = Appointment::findMany(array_pluck($res, 'id'));
+
+        $hours = 0;
+        foreach ($appointments as $appointment)
+            $hours += $appointment->hours;
+
+        return $hours;
+    }
+
+
+    public function getAccountStatusAttribute() {
+
+        //check for blocking purchaser account
+
+        if ($this->isPurchaser() && $this->userPurchaserProfile->profiles_status_id==5)
+            return 'blocked';
+
+        return;
+
+
+    }
+
+    /**
+     * Helpers methods
+     */
     public function userName()
     {
         if ($this->user_type_id == 3) {
@@ -130,101 +230,6 @@ class User extends Authenticatable
         return false;
     }
 
-    //Accessors
-    public function getFullNameAttribute(){
-        switch ($this->user_type_id){
-            case 1:
-                $profile = $this->userPurchaserProfile()->first();
-                return $profile->first_name.' '.$profile->family_name[0].'.';
-                break;
-            case 3:
-                $profile = $this->userCarerProfile()->first();
-                return $profile->first_name.' '.$profile->family_name[0].'.';
-                break;
-        }
-    }
-
-    public function getFirstNameAttribute(){
-        switch ($this->user_type_id){
-            case 1:
-                $profile = $this->userPurchaserProfile()->first();
-                return $profile->first_name;
-                break;
-            case 3:
-                $profile = $this->userCarerProfile()->first();
-                return $profile->first_name;
-                break;
-        }
-    }
-    public function getShortFullNameAttribute(){
-        return $this->first_name.' '.mb_substr($this->family_name,0,1);
-    }
-
-    public function getFamilyNameAttribute(){
-        switch ($this->user_type_id){
-            case 1:
-                $profile = $this->userPurchaserProfile()->first();
-                return $profile->family_name;
-                break;
-            case 3:
-                $profile = $this->userCarerProfile()->first();
-                return $profile->family_name;
-                break;
-        }
-    }
-
-    public function getBonusBalanceAttribute(){
-        if($this->user_type_id = 3){
-            $res = DB::select('SELECT SUM(amount) as amount FROM bonuses_payments WHERE user_id = '.$this->id);
-            return $res[0]->amount;
-        }
-        return 0;
-    }
-
-    public function getProfileLinkAttribute(){
-        switch ($this->user_type_id){
-            case 1:
-                break;
-            case 3:
-                return '/carer/profile/'.$this->id;
-                break;
-        }
-    }
-
-
-    public function getCompletedAppointmentsHoursAttribute()
-    {
-        if ($this->user_type_id === 3) {
-            $sql = 'SELECT a.id FROM appointments a LEFT JOIN bookings b ON a.booking_id = b.id WHERE a.status_id = 4  AND b.carer_id = ' . $this->id;
-        } else {
-            $sql = 'SELECT a.id FROM appointments a LEFT JOIN bookings b ON a.booking_id = b.id WHERE a.status_id = 4  AND b.purchaser_id = ' . $this->id;
-        }
-        $res = DB::select($sql);
-        $appointments = Appointment::findMany(array_pluck($res, 'id'));
-
-        $hours = 0;
-        foreach ($appointments as $appointment)
-            $hours += $appointment->hours;
-
-        return $hours;
-    }
-
-
-    public function getAccountStatusAttribute() {
-
-        //check for blocking purchaser account
-
-        if ($this->isPurchaser() && $this->userPurchaserProfile->profiles_status_id==5)
-            return 'blocked';
-
-        return;
-
-
-    }
-
-    /*
-     * Helpers methods
-     */
     public function hasBookingsWith(ServiceUsersProfile $profile){
         return Booking::where('carer_id', $this->id)
             ->where('service_user_id', $profile->id)

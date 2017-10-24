@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 
-use App\BonusesPayment;
+use App\BonusTransaction;
 use App\Booking;
 use App\Helpers\Contracts\PaymentToolsInterface;
 use App\PayoutToPurchaser;
@@ -257,7 +257,7 @@ class StripePaymentTools implements PaymentToolsInterface
         return $res->id;
     }
 
-    public function createTransfer(string $connectedAccountId, int $bookingId, int $amount, string $comment = ''){
+    public function createTransfer(string $connectedAccountId, int $bookingId = 0, int $amount, string $comment = ''){
         $res = Transfer::create([
             "amount" => $amount,
             "currency" => "gbp",
@@ -265,13 +265,14 @@ class StripePaymentTools implements PaymentToolsInterface
             'metadata' => ['comment' => $comment],
         ]);
 
-        StripeTransfer::create([
-            'id' => $res->id,
-            'connected_account_id' => $connectedAccountId,
-            'booking_id' => $bookingId,
-            'amount' => $amount,
-        ]);
-
+        if($bookingId){
+            StripeTransfer::create([
+                'id' => $res->id,
+                'connected_account_id' => $connectedAccountId,
+                'booking_id' => $bookingId,
+                'amount' => $amount,
+            ]);
+        }
 
         return $res->id;
     }
@@ -280,7 +281,7 @@ class StripePaymentTools implements PaymentToolsInterface
     {
         $booking = Booking::find($bookingId);
 
-        BonusesPayment::create([
+        BonusTransaction::create([
             'user_id' => $booking->purchaser_id,
             'amount' => -$amount,
         ]);
@@ -298,7 +299,7 @@ class StripePaymentTools implements PaymentToolsInterface
     {
         $booking = Booking::find($bookingId);
 
-        BonusesPayment::create([
+        BonusTransaction::create([
             'user_id' => $booking->purchaser_id,
             'amount' => $amount,
             'comment' => $comment,

@@ -27,6 +27,10 @@ class PurchasersProfile extends Model
 
     }
 
+    public function user(){
+        return $this->belongsTo(User::class, 'id');
+    }
+
     public function getDoBAttribute($value)
     {
         return date('d/m/Y',strtotime($value));

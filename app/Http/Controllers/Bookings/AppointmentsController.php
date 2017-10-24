@@ -60,10 +60,9 @@ class AppointmentsController extends Controller implements Constants
         } else {
             $appointment->status_id = self::APPOINTMENT_STATUS_COMPLETED;
             $appointment->purchaser_status_id = self::APPOINTMENT_USER_STATUS_COMPLETED;
+            $appointment->save();
             event(new AppointmentCompletedEvent($appointment));
         }
-
-        $appointment->save();
 
         return response(['status' => 'success']);
     }
