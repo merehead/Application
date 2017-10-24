@@ -83,16 +83,6 @@
         <li class="adminNav__item">
             <a href="#" class="adminNav__link">
                 <span class="adminNav__ico">
-                  <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
-                </span>
-                <span class="adminNav__text">
-                  Admin's transactions
-                </span>
-            </a>
-        </li>
-        <li class="adminNav__item">
-            <a href="#" class="adminNav__link">
-                <span class="adminNav__ico">
                   <i class="fa fa-gift" aria-hidden="true"></i>
                 </span>
                 <span class="adminNav__text">
