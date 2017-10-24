@@ -55,18 +55,6 @@
                             </h2>
                             <span class="orderOptions__value">{{\Carbon\Carbon::parse($booking->created_at)->format("h:i A")}}</span>
                         </div>
-                        <!-- <div class="orderOptions">
-                            <h2 class="ordinaryTitle">
-                                <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Distance</span>
-                            </h2>
-                            <span id="distance" class="orderOptions__value">loading..</span>
-                        </div> -->
-                        <!-- <div class="orderOptions">
-                            <h2 class="ordinaryTitle">
-                                <span class="ordinaryTitle__text ordinaryTitle__text--bigger">By car</span>
-                            </h2>
-                            <span id="duration" class="orderOptions__value">loading..</span>
-                        </div> -->
                     </div>
                     <div class="orderInfo__map">
                         <div id="map" style="width: 100%;height: 100%;"></div>
@@ -92,25 +80,13 @@
                         <h2 class="ordinaryTitle">
                             <span class="ordinaryTitle__text ordinaryTitle__text--bigger">DATE</span>
                         </h2>
-                        <span class="orderOptions__value">15 May 2017</span>
+                        <span class="orderOptions__value">{{\Carbon\Carbon::parse($booking->created_at)->toFormattedDateString()}}</span>
                     </div>
                     <div class="orderOptions">
                         <h2 class="ordinaryTitle">
                             <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Time</span>
                         </h2>
-                        <span class="orderOptions__value">12:00 PM - 5:00 PM</span>
-                    </div>
-                    <div class="orderOptions">
-                        <h2 class="ordinaryTitle">
-                            <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Distance</span>
-                        </h2>
-                        <span id="distance" class="orderOptions__value">loading..</span>
-                    </div>
-                    <div class="orderOptions">
-                        <h2 class="ordinaryTitle">
-                            <span class="ordinaryTitle__text ordinaryTitle__text--bigger">By car</span>
-                        </h2>
-                        <span id="duration" class="orderOptions__value">loading..</span>
+                        <span class="orderOptions__value">{{\Carbon\Carbon::parse($booking->created_at)->format("h:i A")}}</span>
                     </div>
                 </div>
                 <div class="orderInfo__map">
