@@ -41,7 +41,7 @@ class AboutController extends FrontController
         $this->vars = array_add($this->vars,'footer',$footer);
         $this->vars = array_add($this->vars,'modals',$modals);
 
-        $this->content = view(config('settings.frontTheme').'.homePage.Jobs')->render();
+        $this->content = view(config('settings.frontTheme').'.homePage.jobs')->render();
 
         return $this->renderOutput();
     }
