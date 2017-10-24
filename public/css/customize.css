@@ -668,3 +668,6 @@ label.correct2 {
 .footer{
   position: relative!important;
 }
+.payment__item{
+    cursor: default;
+}
