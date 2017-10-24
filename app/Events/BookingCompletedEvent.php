@@ -25,15 +25,13 @@ class BookingCompletedEvent
     {
         //Analyze for bonuses;
         $carer = $booking->bookingCarer()->first();
-        if($carer->referral_code === null){
+        if($carer->use_register_code){
            //Create bonus for first booking, if has not yet
-            if(!$carer->bonuses()->where('bonus_type_id', 1)->get()->count()){
-                $carer->bonuses()->create([
+            if(!$carer->bonusPayouts()->where('bonus_type_id', 1)->get()->count()){
+                $carer->bonusPayouts()->create([
                    'bonus_type_id' => 1,
                    'amount' => 50,
                 ]);
-
-                //todo payment to stripe
             }
         }
     }

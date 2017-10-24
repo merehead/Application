@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 
-use App\BonusesPayment;
+use App\BonusTransaction;
 use App\Booking;
 use App\Helpers\Contracts\PaymentToolsInterface;
 use App\PayoutToPurchaser;
@@ -280,7 +280,7 @@ class StripePaymentTools implements PaymentToolsInterface
     {
         $booking = Booking::find($bookingId);
 
-        BonusesPayment::create([
+        BonusTransaction::create([
             'user_id' => $booking->purchaser_id,
             'amount' => -$amount,
         ]);
@@ -298,7 +298,7 @@ class StripePaymentTools implements PaymentToolsInterface
     {
         $booking = Booking::find($bookingId);
 
-        BonusesPayment::create([
+        BonusTransaction::create([
             'user_id' => $booking->purchaser_id,
             'amount' => $amount,
             'comment' => $comment,

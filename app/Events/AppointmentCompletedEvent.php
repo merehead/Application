@@ -34,29 +34,18 @@ class AppointmentCompletedEvent
                 if($user->completed_appointments_hours >= 20){
                     $referralUser = User::where('own_referral_code', $user->referral_code)->first();
 
-                    if(!$user->bonuses()->where('bonus_type_id', 2)->where('referral_donor', $referralUser->id)->get()->count()) {
-                        $user->bonuses()->create([
+                    if(!$user->bonusPayouts()->where('bonus_type_id', 2)->where('referral_user_id', $referralUser->id)->get()->count()) {
+                        $user->bonusPayouts()->create([
                             'bonus_type_id' => 2,
                             'amount' => 100,
-                            'referral_donor' => $referralUser->id,
+                            'referral_user_id' => $referralUser->id,
                         ]);
 
-                        if($user->user_type_id == 3){
-                            //Carer
-                            //todo payment from stripe
-                        }
-                    }
-
-                    if(!$referralUser->bonuses()->where('bonus_type_id', 2)->where('referral_donor', $user->id)->get()->count()) {
-                        $referralUser->bonuses()->create([
+                        $referralUser->bonusPayouts()->create([
                             'bonus_type_id' => 2,
                             'amount' => 100,
-                            'referral_donor' => $user->id,
+                            'referral_user_id' => $user->id,
                         ]);
-                        if($referralUser->user_type_id == 3){
-                            //Carer
-                            //todo payment from stripe
-                        }
                     }
                 }
             }
