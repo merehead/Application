@@ -30,10 +30,10 @@ function addressFormt(autocomplete){
         var subbuildingname = '';
         if(data[0].number!=undefined)number=data[0].number;
         if(data[0].subbuildingname!=undefined)subbuildingname=data[0].subbuildingname+' ';
-         $('input[name="address_line1"]').val(subbuildingname+number+' '+data[0].street);
+         $('input[name="address_line1"]').val(number+' '+data[0].street);
          $('input[name="town"]').val(data[0].posttown);
          $('input[name="postcode"]').val(data[0].postcode);
-         $('input[name="address_line2"]').val(data[0].dependentlocality);
+         $('input[name="address_line2"]').val(data[0].subbuildingname);
     });
 }
 function getTime( ) {

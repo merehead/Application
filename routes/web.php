@@ -131,6 +131,7 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::get('/', 'AdminController@adminHomePage')->name('adminHomePage');
 
     Route::resource('/user','User\UserController', ['except' => ['show']]);
+    Route::get('/user/getCarerImage/{id}','User\UserController@getCarerImage');
     Route::resource('/booking','Booking\BookingController', ['only' => ['index']]);
     Route::resource('/blog','Blog\BlogController');
 
