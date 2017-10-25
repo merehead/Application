@@ -41,6 +41,11 @@
                     view
                 </a>
             @endif
+            @if($item->user_type == 'carer')
+                <a href="#" class="actionsBtn actionsBtn--view" onclick="event.preventDefault();getCarerImage({{$item->id}})">
+                    view
+                </a>
+            @endif
         </div>
     </td>
 

@@ -258,4 +258,21 @@ class UserController extends AdminController
     {
         //
     }
+
+    public function getCarerImage(Request $request,$id){
+
+        $user = User::with('userCarerProfile')->with('documents')->find($id);
+        $userCarerReferences=CarersProfile::with('CarerReferences')->find($id)->CarerReferences;
+
+        $userProfileList = collect();
+        $userProfileList->push($userCarerReferences);
+        $userProfileList->push($user);
+//        dd($userProfileList);
+        $text = $this->content = view(config('settings.theme').'.profilesManagement.CarerAnswers')->with([
+            'user' => $userProfileList,
+        ])->render();
+//        echo $text; die;
+        $data = ['ansver'=>true,'form'=>$text];
+        return response()->json($data);
+    }
 }

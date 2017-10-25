@@ -12,6 +12,9 @@
                 center: {lat: -34.397, lng: 150.644}
             });
             geocodeAddress(geocoder, map);
+            @if(Auth::user()->isAdmin())
+            $('input,select').removeAttr('data-edit');
+            @endif
         });
     </script>
     <div class="container carer-profile">

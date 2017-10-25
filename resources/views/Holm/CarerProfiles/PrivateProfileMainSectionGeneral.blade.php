@@ -84,7 +84,7 @@
                 Email ADDRESS <span class="requireIco">*</span>
               </span>
             </h2>
-            {!! Form::text('user_email',$user->email,['class'=>'profileField__input','data-edit'=>'false']) !!}
+            {!! Form::text('user_email',null,['class'=>'profileField__input','data-edit'=>'false']) !!}
 
         </div>
     </div>

@@ -44,6 +44,9 @@
         $(document).ready(function(){
             initMap();
             $('#post_code_profile').autocomplete({serviceUrl:'/noaddress/'});
+            @if(Auth::user()->isAdmin())
+                $('input,select').removeAttr('data-edit');
+            @endif
         });
     </script>
     {{--<link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">--}}

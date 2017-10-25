@@ -45,6 +45,12 @@
     <link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJaLv-6bVXViUGJ_e_-nR5RZlt9GUuC4M"></script>
     --}}
+     <script>
+    $(document).ready(function(){
+    @if(Auth::user()->isAdmin())
+        $('input,select').removeAttr('data-edit');});
+    @endif
+     </script>
     <div class="container carer-profile">
 
         @include(config('settings.frontTheme').'.serviceUserProfiles/PrivateProfileMainSectionHeader')
