@@ -30,7 +30,7 @@
                         {!! Form::checkbox('typeCare['.$typeCare->id.']', null,
                         ($carerProfile->AssistantsTypes->contains('id', $typeCare->id)? 1 : null),array('class' =>
                         'checkboxNew','id'=>'check'.$typeCare->id,(in_array($typeCare->name,
-                        ['MEDICATION / TREATMENTS','DRESSINGS AND WOUND MANAGEMENT','DEMENTIA CARE']))?'onclick="return false;" data-edit="false"':''
+                        ['MEDICATION / TREATMENTS','DRESSINGS AND WOUND MANAGEMENT','DEMENTIA CARE'])&&!Auth::user()->isAdmin())?'onclick="return false;" data-edit="false"':''
                         )) !!}
                         <label for="check{{$typeCare->id}}"> <span>{{$typeCare->name}}</span></label>
                     </div>
