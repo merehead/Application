@@ -62,7 +62,11 @@ class BonusController extends AdminController
         } elseif($user->user_type_id == 3){
             //Carer
             $stripeConnectedAccount = StripeConnectedAccount::where('carer_id', $user->id)->get()->first();
-            PaymentTools::createTransfer($stripeConnectedAccount->id, 0, $bonusPayout->amount*100, 'Bonus payout');
+            try {
+                PaymentTools::createTransfer($stripeConnectedAccount->id, 0, $bonusPayout->amount * 100, 'Bonus payout');
+            } catch (\Exception $ex) {
+                return response($this->formatResponse('error', $ex->getMessage()));
+            }
         }
 
         $bonusPayout->payout = true;

@@ -196,11 +196,16 @@
 
 <script>
     $('.makePayout').click(function () {
+        showSpinner();
         var booking_id = $(this).attr('data-booking_id');
         $.post('/admin/carer-payout/'+booking_id, function (data) {
             if(data.status == 'success'){
                 location.reload();
+            } else {
+                showErrorModal({title: 'Error', description: data.message});
             }
+
+            hideSpinner();
         });
     });
 </script>

@@ -105,14 +105,16 @@ class AdminSitePayment extends AdminController
         $appointmentsIds = implode(',', $appointments->pluck('id')->toArray());
         $comment = 'Payment to Purchaser '.$data->first_name.' '.$data->family_name.' ('.$data->purchaser_id.') for appointments '.$appointmentsIds.' in booking '.$booking->id;
 
-        if($booking->payment_method == 'credit_card'){
-            //Get stripe account of carer
-            $stripeCharge = StripeCharge::where('booking_id', $booking->id)->first();
-
-            //Transfer money to carer
-            $res = PaymentTools::createRefund($data->total*100, $stripeCharge->id, $booking->id, $comment);
-        } else {
-            $res = PaymentTools::createBonusRefund($data->total, $booking->id, $comment);
+        try {
+            if($booking->payment_method == 'credit_card'){
+                //Get stripe account of carer
+                $stripeCharge = StripeCharge::where('booking_id', $booking->id)->first();
+                $res = PaymentTools::createRefund($data->total*100, $stripeCharge->id, $booking->id, $comment);
+            } else {
+                $res = PaymentTools::createBonusRefund($data->total, $booking->id, $comment);
+            }
+        } catch (\Exception $ex) {
+            return response($this->formatResponse('error', $ex->getMessage()));
         }
 
         //Mark certain appointments as with poyout
@@ -144,8 +146,11 @@ class AdminSitePayment extends AdminController
         $appointments = Appointment::where('booking_id', $booking->id)->where('status_id', 4)->where('payout', 0)->get();
         $appointmentsIds = implode(',', $appointments->pluck('id')->toArray());
 
-        $res = PaymentTools::createTransfer($connectedAccount->id, $booking->id, $data->total*100, 'Payment to Carer '.$data->first_name.' '.$data->family_name.' ('.$data->carer_id.') for appointments '.$appointmentsIds.' in booking '.$booking->id);
-
+        try {
+            $res = PaymentTools::createTransfer($connectedAccount->id, $booking->id, $data->total * 100, 'Payment to Carer ' . $data->first_name . ' ' . $data->family_name . ' (' . $data->carer_id . ') for appointments ' . $appointmentsIds . ' in booking ' . $booking->id);
+        } catch (\Exception $ex) {
+            return response($this->formatResponse('error', $ex->getMessage()));
+        }
         //Mark certain appointments as with poyout
         Appointment::where('booking_id', $booking->id)->where('status_id', 4)->where('payout', 0)->update(['payout' => 1]);
 

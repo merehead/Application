@@ -45,8 +45,11 @@ class DisputePayoutsController extends AdminController
         $booking = $appointment->booking;
         $stripeConnectedAccount = StripeConnectedAccount::where('carer_id', $booking->carer_id)->first();
         $comment = 'Payment to Carer '.$booking->bookingCarerProfile->full_name.' ('.$booking->carer_id.') for appointment '.$appointment->id.' in booking '.$booking->id.' (dispute resolving)';
-        $res = PaymentTools::createTransfer($stripeConnectedAccount->id, $booking->id, $appointment->price_for_carer*100, $comment);
-
+        try {
+            $res = PaymentTools::createTransfer($stripeConnectedAccount->id, $booking->id, $appointment->price_for_carer*100, $comment);
+        } catch (\Exception $ex) {
+            return response($this->formatResponse('error', $ex->getMessage()));
+        }
         $disputePayout->status = 'carer';
         $disputePayout->save();
 
@@ -63,14 +66,18 @@ class DisputePayoutsController extends AdminController
 
         $comment = 'Payment to Purchaser '.$booking->bookingCarerProfile->full_name.' ('.$booking->carer_id.') for appointment '.$appointment->id.' in booking '.$booking->id.' (dispute resolving)';
 
-        if($booking->payment_method == 'credit_card'){
-            //Get stripe account of carer
-            $stripeCharge = StripeCharge::where('booking_id', $booking->id)->first();
+        try {
+            if($booking->payment_method == 'credit_card'){
+                //Get stripe account of carer
+                $stripeCharge = StripeCharge::where('booking_id', $booking->id)->first();
 
-            //Transfer money to carer
-            $res = PaymentTools::createRefund($appointment->price_for_purchaser*100, $stripeCharge->id, $booking->id, $comment);
-        } else {
-            $res = PaymentTools::createBonusRefund($appointment->price_for_purchaser, $booking->id, $comment);
+                //Transfer money to carer
+                $res = PaymentTools::createRefund($appointment->price_for_purchaser*100, $stripeCharge->id, $booking->id, $comment);
+            } else {
+                $res = PaymentTools::createBonusRefund($appointment->price_for_purchaser, $booking->id, $comment);
+            }
+        } catch (\Exception $ex) {
+            return response($this->formatResponse('error', $ex->getMessage()));
         }
 
         $disputePayout->status = 'purchaser';
