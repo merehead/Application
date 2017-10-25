@@ -102,7 +102,7 @@ Route::post('/appointments/{appointment}/reject', 'Bookings\AppointmentsControll
 Route::post('/appointments/{appointment}/completed', 'Bookings\AppointmentsController@completed');
 
 Route::post('/document/upload','DocumentsController@upload')->name('UploadDocument');
-Route::get('/documents/{user?}','DocumentsController@GetDocuments')->name('GetDocuments');
+Route::get('/documents/{user_id?}','DocumentsController@GetDocuments')->name('GetDocuments');
 Route::post('/profile-photo','ProfilePhotosController@uploadUserProfilePhoto');
 Route::post('/service-user-profile-photo','ProfilePhotosController@uploadServiceUserProfilePhoto');
 
