@@ -109,8 +109,8 @@ class AdminUsers extends AdminModel
 
 
         if (empty($profileTypeFilter)) {
-            $profileList = CarersProfile::all(['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id'])
-                ->merge(PurchasersProfile::all(['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id']))
+            $profileList = CarersProfile::all(/*['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id']*/)
+                ->merge(PurchasersProfile::all(/*['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id']*/))
                 ->sortByDesc('id')
                 ->slice(0, 40);
 
@@ -121,13 +121,13 @@ class AdminUsers extends AdminModel
                 if ($user instanceof PurchasersProfile && count($user->serviceUsers)) {
                     foreach ($user->serviceUsers as $serviceUser) {
                         $serviceUserProfile =
-                            ServiceUsersProfile::find($serviceUser->id,
-                                ['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id',
-                                    'visit_for_companionship', 'start_date', 'assistance_with_eating', 'choosing_incontinence_products',
-                                    'consent', 'time_to_bed', 'keeping_safe_at_night', 'multiple_carers', 'we_missed',
-                                    'assistance_in_medication','in_medication_detail','assistance_with_eating_detail',
-                                    'consent_details','keeping_safe_at_night_details','multiple_carers_details','we_missed_details'
-                                ]
+                            ServiceUsersProfile::find($serviceUser->id
+//                                ['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id',
+//                                    'visit_for_companionship', 'start_date', 'assistance_with_eating', 'choosing_incontinence_products',
+//                                    'consent', 'time_to_bed', 'keeping_safe_at_night', 'multiple_carers', 'we_missed',
+//                                    'assistance_in_medication','in_medication_detail','assistance_with_eating_detail',
+//                                    'consent_details','keeping_safe_at_night_details','multiple_carers_details','we_missed_details'
+//                                ]
                             );
 
                         $userProfileList->push($serviceUserProfile);
@@ -136,19 +136,19 @@ class AdminUsers extends AdminModel
             }
         } else {
             switch ($profileTypeFilter) {
-                case 'purchaser' : $userProfileList=PurchasersProfile::all(['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id'])
+                case 'purchaser' : $userProfileList=PurchasersProfile::all(/*['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id']*/)
                     ->sortByDesc('id')
                     ->slice(0, 40); break;
-                case 'carer' : $userProfileList=CarersProfile::all(['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id'])
+                case 'carer' : $userProfileList=CarersProfile::all(/*['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id']*/)
                     ->sortByDesc('id')
                     ->slice(0, 40);break;
                 case 'service' : $userProfileList=
                     ServiceUsersProfile::all(
-                        ['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id',
-                    'visit_for_companionship', 'start_date', 'assistance_with_eating', 'choosing_incontinence_products', 'consent', 'time_to_bed',
-                    'keeping_safe_at_night', 'multiple_carers', 'we_missed','assistance_in_medication','in_medication_detail',
-                            'assistance_with_eating_detail','consent_details','keeping_safe_at_night_details','multiple_carers_details','we_missed_details'
-                    ]
+//                        ['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id',
+//                    'visit_for_companionship', 'start_date', 'assistance_with_eating', 'choosing_incontinence_products', 'consent', 'time_to_bed',
+//                    'keeping_safe_at_night', 'multiple_carers', 'we_missed','assistance_in_medication','in_medication_detail',
+//                            'assistance_with_eating_detail','consent_details','keeping_safe_at_night_details','multiple_carers_details','we_missed_details'
+//                    ]
                     )
                     ->sortByDesc('id')
                     ->slice(0, 40);
