@@ -18,7 +18,7 @@ class CreateBookingsMessagesTable extends Migration
             $table->integer('booking_id')->unsigned();
             $table->enum('sender', ['carer', 'service_user'])->nullable()->default(null);
             $table->enum('type', ['message', 'status_change']);
-            $table->enum('new_status', ['pending', 'in_progress', 'completed'])->nullable()->default(null);
+            $table->enum('new_status', ['pending', 'in_progress', 'completed', 'canceled'])->nullable()->default(null);
             $table->text('text')->nullable()->default(null);
             $table->timestamps();
 
