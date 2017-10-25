@@ -23,7 +23,7 @@
                                 })->first();
                                 if(!empty($document)) $document=$document->toArray(); else $document['id']='';
                                 ?>
-                                <img src="/document/{{$document['id']}}/preview" alt="">
+                                <img src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                                 })->first();
                                 if(!empty($document)) $document=$document->toArray(); else $document['id']='';
                                 ?>
-                                <img src="/document/{{$document['id']}}/preview" alt="">
+                                <img src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                         </div>
                     </div>
@@ -254,10 +254,10 @@
                                 })->first();
                                 if(!empty($document)) $document=$document->toArray(); else $document['id']='';
                                 ?>
-                                <img src="/document/{{$document['id']}}/preview" alt="">
+                                <img src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                             <p class="question-info">
-                                NVQ
+                                {{$document['title']??''}}
                             </p>
                         </div>
                     </div>
@@ -275,10 +275,10 @@
                                 })->first();
                                 if(!empty($document)) $document=$document->toArray(); else $document['id']='';
                                 ?>
-                                <img src="/document/{{$document['id']}}/preview" alt="">
+                                <img src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                             <p class="question-info">
-                                CARE CERTIFICATES
+                                {{$document['title']??''}}
                             </p>
                         </div>
                     </div>
@@ -296,10 +296,10 @@
                                 })->first();
                                 if(!empty($document)) $document=$document->toArray(); else $document['id']='';
                                 ?>
-                                <img src="/document/{{$document['id']}}/preview" alt="">
+                                <img src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                             <p class="question-info">
-                                HEALTH AND SOCIAL
+                                {{$document['title']??''}}
                             </p>
                         </div>
                     </div>
@@ -316,11 +316,10 @@
                                     return $documents->type =='TRAINING_CERTIFICATE';
                                 })->first();if(!empty($document)) $document=$document->toArray(); else $document['id']='';
                                 ?>
-                                <img src="/document/{{$document['id']}}/preview" alt="">
+                                <img src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                             <p class="question-info">
-
-                                TRAINING CERTIFICATES
+                                {{$document['title']??''}}
                             </p>
                         </div>
                     </div>
@@ -337,11 +336,10 @@
                                     return $documents->type =='ADDITIONAL_TRAINING_COURSE';
                                 })->first();if(!empty($document)) $document=$document->toArray(); else $document['id']='';
                                 ?>
-                                <img src="/document/{{$document['id']}}/preview" alt="">
+                                <img src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                             <p class="question-info">
-                                ADDITIONAL TRAINING COURSES
-
+                                {{$document['title']??''}}
                             </p>
                         </div>
                     </div>
@@ -358,10 +356,10 @@
                                     return $documents->type =='OTHER_RELEVANT_QUALIFICATION';
                                 })->first();if(!empty($document)) $document=$document->toArray(); else $document['id']='';
                                 ?>
-                                <img src="/document/{{$document['id']}}/preview" alt="">
+                                <img src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                             <p class="question-info">
-                                OTHER RELEVANT QUALIFICATIONS
+                                {{$document['title']??''}}
                             </p>
                         </div>
                     </div>
@@ -387,7 +385,7 @@
                                     return $documents->type =='DRIVING_LICENCE_PHOTO';
                                 })->first();if(!empty($document)) $document=$document->toArray(); else $document['id']='';
                                 ?>
-                                <img src="/document/{{$document['id']}}/preview" alt="">
+                                <img src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                         </div>
                     </div>
@@ -404,7 +402,7 @@
                                     return $documents->type =='CAR_INSURANCE_PHOTO';
                                 })->first();if(!empty($document)) $document=$document->toArray(); else $document['id']='';
                                 ?>
-                                <img src="/document/{{$document['id']}}/preview" alt="">
+                                <img src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                         </div>
                     </div>
@@ -428,7 +426,7 @@
                                     return $documents->type =='DBS_CERTIFICATE_PHOTO';
                                 })->first();if(!empty($document)) $document=$document->toArray(); else $document['id']='';
                                 ?>
-                                <img src="/document/{{$document['id']}}/preview" alt="">
+                                <img src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                         </div>
                     </div>
