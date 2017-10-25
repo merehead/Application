@@ -105,6 +105,16 @@ class DocumentsController extends Controller
             return ['id' => $document->id];
         });
     }
+
+    public function download(Document $document){
+
+        if(file_exists(storage_path().'/documents/'.$document->file_name)){
+            header("Content-Type: application/octet-stream");
+            header("Content-Transfer-Encoding: Binary");
+            header("Content-disposition: attachment; filename=\"" . basename($document->file_name) . "\"");
+            echo readfile(storage_path().'/documents/'.$document->file_name); // do the double-download-dance (dirty but worky)
+        }
+    }
     
     public function update(Document $document, Request $request){
         if($request->has('title'))
