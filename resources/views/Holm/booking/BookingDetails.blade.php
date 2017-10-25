@@ -328,11 +328,11 @@
                                     <h2 class="profileName">
                                         @if($message->sender == 'carer')
                                             <a href="{{$booking->bookingCarer()->first()->profile_link}}">
-                                                {{$booking->bookingCarer()->first()->full_name}}
+                                                {{$booking->bookingCarer()->first()->short_full_name}}.
                                             </a>
                                         @elseif($message->sender == 'service_user')
                                             <a href="Service_user_Public_profile_page.html">
-                                                {{$booking->bookingServiceUser()->first()->full_name}}
+                                                {{$booking->bookingServiceUser()->first()->short_full_name}}.
                                             </a>
                                         @endif
                                     </h2>
