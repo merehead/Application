@@ -19,8 +19,8 @@ class ReferNewUserController extends FrontController
 
     public function index(){
 
-//        if(!$this->user)
-//            return redirect()->back();
+        if(!$this->user)
+            return redirect()->route('session_timeout');
 
         $this->template = config('settings.frontTheme') . '.templates.purchaserPrivateProfile';
 
