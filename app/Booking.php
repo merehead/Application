@@ -151,7 +151,10 @@ class Booking extends Model
             return $this->appointments()->orderBy('date_start')->get()->first()->date_start;
     }
 
-
+    public function getDateToAttribute(){
+        if($this->appointments()->get()->count())
+            return $this->appointments()->orderByDesc('date_start')->get()->first()->date_start;
+    }
 
     public function getHasActiveAppointmentsAttribute(){
         return $this->appointments()->whereIn('status_id', [1, 2, 3])->get()->count() > 0;

@@ -2352,7 +2352,7 @@ $(document).ready(function () {
         arrForDeleteIDProfile.push(parseInt(deleteID))
       }
 
-      if($('#qualifications-page')){
+      if($('#qualifications-page').length){
         file.type_value_unique = 'nvq'
       }else{
         file.type_value_unique = input_name
@@ -2368,23 +2368,21 @@ $(document).ready(function () {
       var q = '.profileRow-'+input_name.split('-')[0]
       c += 1
 
-      if(p.length >= 1){
-        $(q).append(
-          '<div class="profileField profileField_q profileField_h">'+
-            '<span>Certificate '+(p_length.length+1)+'</span><div class="addContainer">'+
-              '<input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
-              '<div id="'+input_name.split('-')[0]+'-'+c+'u" class="pickfiles_img"></div>'+
-                '<a class="add add--moreHeight">'+
-                    '<i class="fa fa-plus-circle"></i>'+
-                    '<div class="add__comment add__comment--smaller"></div>'+
-                '</a>'+
-            '</div>'+
-            '<div class="addInfo">'+
-                '<input type="text" name="'+input_name.split('-')[0]+'-'+c+'u" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">'+
-            '</div>'+
-          '</div>'
-        )
-      }
+      $(q).append(
+        '<div class="profileField profileField_q profileField_h">'+
+          '<span>Certificate '+(p_length.length+1)+'</span><div class="addContainer">'+
+            '<input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
+            '<div id="'+input_name.split('-')[0]+'-'+c+'u" class="pickfiles_img"></div>'+
+              '<a class="add add--moreHeight">'+
+                  '<i class="fa fa-plus-circle"></i>'+
+                  '<div class="add__comment add__comment--smaller"></div>'+
+              '</a>'+
+          '</div>'+
+          '<div class="addInfo">'+
+              '<input type="text" name="'+input_name.split('-')[0]+'-'+c+'u" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">'+
+          '</div>'+
+        '</div>'
+      )
 
       if($carer_profile.length){
         arrFiles = arrFiles.filter(function(index) {

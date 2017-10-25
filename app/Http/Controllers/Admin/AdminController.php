@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Traits\ResponseFormatter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    use ResponseFormatter;
     protected $user;
     protected $template;
     protected $content = FALSE;

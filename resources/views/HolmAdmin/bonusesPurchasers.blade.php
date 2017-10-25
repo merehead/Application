@@ -185,20 +185,30 @@
 
 <script>
     $('.payoutBonus').click(function () {
+        showSpinner();
         var bonus_id = $(this).attr('data-bonus_id');
         $.post('/admin/payout-bonus/'+bonus_id, function (data) {
             if(data.status == 'success'){
                 location.reload();
+            } else {
+                showErrorModal({title: 'Error', description: data.message});
             }
+
+            hideSpinner();
         });
     });
 
     $('.cancelBonus').click(function () {
+        showSpinner();
         var bonus_id = $(this).attr('data-bonus_id');
         $.post('/admin/cancel-bonus/'+bonus_id, function (data) {
             if(data.status == 'success'){
                 location.reload();
+            } else {
+                showErrorModal({title: 'Error', description: data.message});
             }
+
+            hideSpinner();
         });
     });
 </script>

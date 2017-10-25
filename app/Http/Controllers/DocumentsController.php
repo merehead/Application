@@ -11,9 +11,13 @@ use DB;
 
 class DocumentsController extends Controller
 {
-    public function GetDocuments(){
-        $user = Auth::user();
-//        $user = User::find(92);
+    public function GetDocuments(int $user_id = 0){
+        if($user_id){
+            $user = User::findOrFail($user_id);
+        } else {
+            $user = Auth::user();
+        }
+
         $sql = "SELECT DISTINCT type FROM documents WHERE user_id = $user->id";
         $res = DB::select($sql);
         $types = array_pluck($res, 'type');
@@ -44,11 +48,32 @@ class DocumentsController extends Controller
     }
 
     public function getPreview(Document $document){
-        if (file_exists(storage_path().'/documents/'.$document->file_name)) {
-            header("Content-type: image/jpg");
-            readfile(storage_path().'/documents/'.$document->file_name);
-            exit;
+
+        $arr = explode('.', $document->file_name);
+        $ext = end($arr);
+        switch (strtolower($ext)){
+            case 'jpeg':
+            case 'jpg':
+            case 'png':
+                if (file_exists(storage_path().'/documents/'.$document->file_name)) {
+                    header("Content-type: image/jpg");
+                    readfile(storage_path().'/documents/'.$document->file_name);
+                }
+                break;
+            case 'pdf':
+                header("Content-type: image/jpg");
+                readfile('img/PDF_logo.png');
+                break;
+            case 'doc':
+            case 'docx':
+                header("Content-type: image/jpg");
+                readfile('img/Word-icon_thumb.png');
+                break;
+            default:
+                header("Content-type: image/jpg");
+                readfile('img/document.png');
         }
+        exit;
     }
 
     public function upload(Request $request){
