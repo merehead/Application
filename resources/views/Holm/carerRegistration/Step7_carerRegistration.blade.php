@@ -25,6 +25,7 @@
                         <div class="formField">
                             <div class="addContainer">
                               <div class="addContainer_load-header">
+                                <span>Certificate 1</span>
                               </div>
 
                               <input class="pickfiles" type="file" />
@@ -49,6 +50,7 @@
                         <div class="formField">
                             <div class="addContainer">
                               <div class="addContainer_load-header">
+                                <span>Certificate 2</span>
                               </div>
 
                               <input class="pickfiles"  type="file" />
@@ -74,8 +76,9 @@
                     <div class="addColumn">
                         <div class="formField">
 
-                            <div class="addContainer ">
+                            <div class="addContainer">
                               <div class="addContainer_load-header">
+                                <span>Certificate 3</span>
                               </div>
 
                                 <input class="pickfiles"  type="file" />
@@ -98,8 +101,9 @@
 
                     <div class="addColumn">
                         <div class="formField">
-                            <div class="addContainer ">
+                            <div class="addContainer">
                               <div class="addContainer_load-header">
+                                <span>Certificate 4</span>
                               </div>
 
                               <input class="pickfiles"  type="file" />
@@ -128,6 +132,7 @@
 
                             <div class="addContainer">
                               <div class="addContainer_load-header">
+                                <span>Certificate 5</span>
                               </div>
 
                               <input class="pickfiles"  type="file" />
@@ -152,6 +157,7 @@
                         <div class="formField">
                             <div class="addContainer">
                               <div class="addContainer_load-header">
+                                <span>Certificate 6</span> 
                               </div>
 
                               <input class="pickfiles"  type="file" />
