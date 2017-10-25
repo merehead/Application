@@ -61,7 +61,7 @@
 
                 <tr>
                     <td style="padding: 30px 40px;font-family: 'Roboto', sans-serif; line-height: 1.5; background: #f9f9f9; "  valign="top" class="">
-                        <h1  style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700; font-size: 14px; color: #272c2b;  text-transform: uppercase;">
+                        <h1  style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700;  color: #272c2b;  text-transform: uppercase;">
 
                             @if(session('user'))
                                 Hello  {{session('user')->userName}}
