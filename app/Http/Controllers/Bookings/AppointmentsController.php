@@ -47,15 +47,18 @@ class AppointmentsController extends Controller implements Constants
             if($appointment->purchaser_status_id == self::APPOINTMENT_USER_STATUS_COMPLETED){
                 $appointment->carer_status_id = self::APPOINTMENT_USER_STATUS_COMPLETED;
                 $appointment->status_id = self::APPOINTMENT_STATUS_COMPLETED;
+                $appointment->save();
                 event(new AppointmentCompletedEvent($appointment));
             } elseif($appointment->purchaser_status_id == self::APPOINTMENT_USER_STATUS_NEW){
                 $appointment->carer_status_id = self::APPOINTMENT_USER_STATUS_COMPLETED;
+                $appointment->save();
             } elseif ($appointment->purchaser_status_id == self::APPOINTMENT_USER_STATUS_REJECTED){
                 $appointment->status_id = self::APPOINTMENT_STATUS_DISPUTE;
                 $appointment->carer_status_id = self::APPOINTMENT_USER_STATUS_COMPLETED;
                 DisputePayout::create([
                     'appointment_id' => $appointment->id,
                 ]);
+                $appointment->save();
             }
         } else {
             $appointment->status_id = self::APPOINTMENT_STATUS_COMPLETED;
