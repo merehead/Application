@@ -22,7 +22,9 @@ class ContactController extends FrontController
 
     public function index(){
 
-        $this->title = 'Holm Care - Contact';
+        $this->title = 'Contact us - HOLM CARE';
+        $this->description = '';
+        $this->keywords='';
 
         $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
         $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
