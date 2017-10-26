@@ -23,8 +23,11 @@
                                 })->first();
                                 if(!empty($document)) $document=$document->toArray(); else $document['id']='';
                                 ?>
-                                <img src="/api/document/{{$document['id']}}/preview" alt="">
+                                <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
+                            <p class="question-info">
+                                <a href="/document/{{$document['id']}}/download">Download</a>
+                            </p>
                         </div>
                     </div>
                     <div class="question-row">
@@ -42,7 +45,7 @@
                                 })->first();
                                 if(!empty($document)) $document=$document->toArray(); else $document['id']='';
                                 ?>
-                                <img src="/api/document/{{$document['id']}}/preview" alt="">
+                                <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                         </div>
                     </div>
@@ -242,124 +245,129 @@
                     </div>
                     <div class="question-row">
                         <div class="question-column">
+                            <?PHP
+                            $document = $user[1]->documents->filter(function ($documents) {
+                                return $documents->type =='NVQ';
+                            })->first();
+                            if(!empty($document)) $document=$document->toArray(); else $document['id']='';
+                            ?>
                             <p class="question-info">
-                                certificate №1
+                                {{$document['title']??''}}
                             </p>
                         </div>
                         <div class="question-column">
                             <div class="question-img">
-                                <?PHP
-                                $document = $user[1]->documents->filter(function ($documents) {
-                                    return $documents->type =='NVQ';
-                                })->first();
-                                if(!empty($document)) $document=$document->toArray(); else $document['id']='';
-                                ?>
-                                <img src="/api/document/{{$document['id']}}/preview" alt="">
+
+                                <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                             <p class="question-info">
-                                {{$document['title']??''}}
+
                             </p>
                         </div>
                     </div>
                     <div class="question-row">
                         <div class="question-column">
+                            <?PHP
+                            $document = $user[1]->documents->filter(function ($documents) {
+                                return $documents->type =='CARE_CERTIFICATE';
+                            })->first();
+                            if(!empty($document)) $document=$document->toArray(); else $document['id']='';
+                            ?>
                             <p class="question-info">
-                                certificare №2
+                                {{$document['title']??''}}
                             </p>
                         </div>
                         <div class="question-column">
                             <div class="question-img">
-                                <?PHP
-                                $document = $user[1]->documents->filter(function ($documents) {
-                                    return $documents->type =='CARE_CERTIFICATE';
-                                })->first();
-                                if(!empty($document)) $document=$document->toArray(); else $document['id']='';
-                                ?>
-                                <img src="/api/document/{{$document['id']}}/preview" alt="">
+
+                                <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                             <p class="question-info">
-                                {{$document['title']??''}}
+
                             </p>
                         </div>
                     </div>
                     <div class="question-row">
                         <div class="question-column">
+                            <?PHP
+                            $document = $user[1]->documents->filter(function ($documents) {
+                                return $documents->type =='HEALTH_AND_SOCIAL';
+                            })->first();
+                            if(!empty($document)) $document=$document->toArray(); else $document['id']='';
+                            ?>
                             <p class="question-info">
-                                certificate №3
+                                {{$document['title']??''}}
                             </p>
                         </div>
                         <div class="question-column">
                             <div class="question-img">
-                                <?PHP
-                                $document = $user[1]->documents->filter(function ($documents) {
-                                    return $documents->type =='HEALTH_AND_SOCIAL';
-                                })->first();
-                                if(!empty($document)) $document=$document->toArray(); else $document['id']='';
-                                ?>
-                                <img src="/api/document/{{$document['id']}}/preview" alt="">
+
+                                <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                             <p class="question-info">
-                                {{$document['title']??''}}
+
                             </p>
                         </div>
                     </div>
                     <div class="question-row">
                         <div class="question-column">
+                            <?PHP
+                            $document = $user[1]->documents->filter(function ($documents) {
+                                return $documents->type =='TRAINING_CERTIFICATE';
+                            })->first();if(!empty($document)) $document=$document->toArray(); else $document['id']='';
+                            ?>
                             <p class="question-info">
-                                certificate №3
+                                {{$document['title']??''}}
                             </p>
                         </div>
                         <div class="question-column">
                             <div class="question-img">
-                                <?PHP
-                                $document = $user[1]->documents->filter(function ($documents) {
-                                    return $documents->type =='TRAINING_CERTIFICATE';
-                                })->first();if(!empty($document)) $document=$document->toArray(); else $document['id']='';
-                                ?>
-                                <img src="/api/document/{{$document['id']}}/preview" alt="">
+
+                                <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                             <p class="question-info">
-                                {{$document['title']??''}}
+
                             </p>
                         </div>
                     </div>
                     <div class="question-row">
                         <div class="question-column">
+                            <?PHP
+                            $document = $user[1]->documents->filter(function ($documents) {
+                                return $documents->type =='ADDITIONAL_TRAINING_COURSE';
+                            })->first();if(!empty($document)) $document=$document->toArray(); else $document['id']='';
+                            ?>
                             <p class="question-info">
-                                certificate №5
+                                {{$document['title']??''}}
                             </p>
                         </div>
                         <div class="question-column">
                             <div class="question-img">
-                                <?PHP
-                                $document = $user[1]->documents->filter(function ($documents) {
-                                    return $documents->type =='ADDITIONAL_TRAINING_COURSE';
-                                })->first();if(!empty($document)) $document=$document->toArray(); else $document['id']='';
-                                ?>
-                                <img src="/api/document/{{$document['id']}}/preview" alt="">
+
+                                <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                             <p class="question-info">
-                                {{$document['title']??''}}
+
                             </p>
                         </div>
                     </div>
                     <div class="question-row">
                         <div class="question-column">
+                            <?PHP
+                            $document = $user[1]->documents->filter(function ($documents) {
+                                return $documents->type =='OTHER_RELEVANT_QUALIFICATION';
+                            })->first();if(!empty($document)) $document=$document->toArray(); else $document['id']='';
+                            ?>
                             <p class="question-info">
-                                certificate №6
+                                {{$document['title']??''}}
                             </p>
                         </div>
                         <div class="question-column">
                             <div class="question-img">
-                                <?PHP
-                                $document = $user[1]->documents->filter(function ($documents) {
-                                    return $documents->type =='OTHER_RELEVANT_QUALIFICATION';
-                                })->first();if(!empty($document)) $document=$document->toArray(); else $document['id']='';
-                                ?>
-                                <img src="/api/document/{{$document['id']}}/preview" alt="">
+                                <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                             <p class="question-info">
-                                {{$document['title']??''}}
+
                             </p>
                         </div>
                     </div>
@@ -385,8 +393,12 @@
                                     return $documents->type =='DRIVING_LICENCE_PHOTO';
                                 })->first();if(!empty($document)) $document=$document->toArray(); else $document['id']='';
                                 ?>
-                                <img src="/api/document/{{$document['id']}}/preview" alt="">
+                                <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
+
                             </div>
+                            <p class="question-info">
+                                <a href="/document/{{$document['id']}}/download">Download</a>
+                            </p>
                         </div>
                     </div>
                     <div class="question-row">
@@ -402,7 +414,7 @@
                                     return $documents->type =='CAR_INSURANCE_PHOTO';
                                 })->first();if(!empty($document)) $document=$document->toArray(); else $document['id']='';
                                 ?>
-                                <img src="/api/document/{{$document['id']}}/preview" alt="">
+                                <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                         </div>
                     </div>
@@ -426,7 +438,7 @@
                                     return $documents->type =='DBS_CERTIFICATE_PHOTO';
                                 })->first();if(!empty($document)) $document=$document->toArray(); else $document['id']='';
                                 ?>
-                                <img src="/api/document/{{$document['id']}}/preview" alt="">
+                                <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                         </div>
                     </div>
