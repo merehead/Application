@@ -60,7 +60,7 @@
             @if($status == 'all' || $status == 'pending')
             <div class="bookingCard bookingCard--new">
                 <div class="bookingCard__header bookingCard__header">
-                    <h2>pending</h2>
+                    <h2>apending</h2>
                 </div>
                 @if($newBookings->count() > 0)
                     @foreach($newBookings as $booking)
@@ -89,7 +89,7 @@
                                     </button>
                                 </div>
                                 <div class="roundedBtn">
-                                    <button {{!in_array($booking->purchaser_status_id, [2]) ? 'disabled' : ''}} data-booking_id = "{{$booking->id}}" data-status = "cancel" class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--reject">
+                                    <button data-booking_id = "{{$booking->id}}" data-status = "cancel" class="changeBookingStatus roundedBtn__item roundedBtn__item--smalest roundedBtn__item--reject">
                                         cancel
                                     </button>
                                 </div>

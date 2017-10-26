@@ -85,6 +85,11 @@ class PurchasersProfile extends Model
     /**
      * Accessors
      */
+    public function getShortNameAttribute()
+    {
+        return $this->first_name.' '.$this->family_name[0].'.';
+    }
+
     public function getFullNameAttribute()
     {
         return $this->first_name.' '.$this->family_name;

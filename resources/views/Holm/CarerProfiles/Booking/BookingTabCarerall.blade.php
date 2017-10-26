@@ -56,7 +56,7 @@
     @if($status == 'all' || $status == 'new')
         <div class="bookingCard bookingCard--new">
             <div class="bookingCard__header bookingCard__header">
-                <h2>pending</h2>
+                <h2>new</h2>
             </div>
             @if($newBookings->count() > 0)
                 @foreach($newBookings as $booking)

@@ -82,7 +82,7 @@ class ServiceUsersProfile extends Model
     }
 
     public function getShortFullNameAttribute(){
-       return $this->first_name.' '.mb_substr($this->family_name,0,1);
+       return $this->first_name.' '.$this->family_name[0].'.';
     }
 
     public function getProfileLinkAttribute(){
