@@ -26,7 +26,7 @@
                                 <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
                             <p class="question-info">
-                                <a href="/document/{{$document['id']}}/download">Download</a>
+                                <a target="_blank" href="/document/{{$document['id']}}/download">Download</a>
                             </p>
                         </div>
                     </div>
@@ -397,7 +397,7 @@
 
                             </div>
                             <p class="question-info">
-                                <a href="/document/{{$document['id']}}/download">Download</a>
+                                <a target="_blank" href="/document/{{$document['id']}}/download">Download</a>
                             </p>
                         </div>
                     </div>
