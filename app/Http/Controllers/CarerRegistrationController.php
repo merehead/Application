@@ -194,21 +194,6 @@ class CarerRegistrationController extends FrontController
                 ]);
 
         $this->content = view(config('settings.frontTheme') . '.carerRegistration.thankYou')->with($this->vars)->render();
-
-        //Creation connected accounts in stripe on sign up
-        $data=[];
-        $data["email"] =$user->email;
-        $data["legal_entity"]["address"]["city"] = $carerProfile->town;
-        $data["legal_entity"]["address"]["line1"] = $carerProfile->address_line1;
-        $data["legal_entity"]["address"]["postal_code"] = $carerProfile->postcode;
-
-        $data["legal_entity"]["dob"]['day']=date('d',strtotime($carerProfile->DoB));
-        $data["legal_entity"]["dob"]['month']=date('m',strtotime($carerProfile->DoB));
-        $data["legal_entity"]["dob"]['year']=date('Y',strtotime($carerProfile->DoB));
-        $data["legal_entity"]['first_name']=$carerProfile->first_name;
-        $data["legal_entity"]["last_name"]=$carerProfile->family_name;
-
-        PaymentTools::createConnectedAccount($data, $user->id);
         return $this->renderOutput();
     }
 
@@ -256,6 +241,21 @@ class CarerRegistrationController extends FrontController
                 ]);
 
         $carerProfile->update();
+
+        //Creation connected accounts in stripe on sign up
+        $data=[];
+        $data["email"] =$user->email;
+        $data["legal_entity"]["address"]["city"] = $carerProfile->town;
+        $data["legal_entity"]["address"]["line1"] = $carerProfile->address_line1;
+        $data["legal_entity"]["address"]["postal_code"] = $carerProfile->postcode;
+
+        $data["legal_entity"]["dob"]['day']=date('d',strtotime($carerProfile->DoB));
+        $data["legal_entity"]["dob"]['month']=date('m',strtotime($carerProfile->DoB));
+        $data["legal_entity"]["dob"]['year']=date('Y',strtotime($carerProfile->DoB));
+        $data["legal_entity"]['first_name']=$carerProfile->first_name;
+        $data["legal_entity"]["last_name"]=$carerProfile->family_name;
+
+        PaymentTools::createConnectedAccount($data, $user->id);
 
         return redirect('/carer-settings');
     }
