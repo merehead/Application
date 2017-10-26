@@ -61,7 +61,7 @@ null,['class'=>'profileField__select','readonly','id'=>'criminal_detail','data-e
                      </span></h2>
                 <div class="inputWrap criminal_detail">
 
-                    {!! Form::textarea('criminal_detail',null,['class'=>'formArea','noPlaceholder'=>' Detailed response']) !!}
+                    {!! Form::textarea('criminal_detail',null,['class'=>'formArea','noPlaceholder'=>' Detailed response','data-edit'=>'false']) !!}
 
                 </div>
             </div>
@@ -76,7 +76,7 @@ null,['class'=>'profileField__select','readonly','id'=>'criminal_detail','data-e
                 {!! Form::select('DBS_use',['Yes'=>'Use the new DBS update service','No'=>'Do not use the new DBS update service'],null,['class'=>'profileField__select profileField__select--greyBg','noPlaceholder'=>'Please select']) !!}
 --}}
 
-                {!! Form::select('DBS_use',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select profileField__select--greyBg']) !!}
+                {!! Form::select('DBS_use',['Yes'=>'Yes','No'=>'No'],null,['class'=>'profileField__select profileField__select--greyBg','data-edit'=>'false']) !!}
 
 {{--                <select class="profileField__select profileField__select--greyBg">
                     <option value="Flat">Use the new DBS update service</option>
@@ -118,7 +118,7 @@ null,['class'=>'profileField__select','readonly','id'=>'criminal_detail','data-e
                 </span>
 
                 </h2>
-                {!! Form::text('DBS_identifier',null,['class'=>'profileField__input','placeholder'=>'DBS certificate number','maxlength'=>'20']) !!}
+                {!! Form::text('DBS_identifier',null,['class'=>'profileField__input','placeholder'=>'DBS certificate number','maxlength'=>'20','data-edit'=>'false']) !!}
                 {{--<input type="text" class="profileField__input " noPlaceholder="DBS certificate number">--}}
             </div>
             <div class="profileField profileField--full-width">
@@ -134,7 +134,7 @@ null,['class'=>'profileField__select','readonly','id'=>'criminal_detail','data-e
                            placeholder="Valid until date" type="text">
                 @else
                     {!! Form::text('dbs_date',null,['id'=>'datepicker_date_sertificate',
-                    'class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
+                    'class'=>'profileField__input','placeholder'=>'Valid until date','data-edit'=>'false']) !!}
                 @endif
             </div>
         </div>
