@@ -47,6 +47,9 @@
                                 ?>
                                 <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
+                            <p class="question-info">
+                                <a target="_blank" href="/document/{{$document['id']}}/download">Download</a>
+                            </p>
                         </div>
                     </div>
                     <div class="question-row">
@@ -255,6 +258,9 @@
                                     <div class="question-img">
                                         <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                                     </div>
+                                    <p class="question-info">
+                                        <a target="_blank" href="/document/{{$document['id']}}/download">Download</a>
+                                    </p>
                                 </div>
                             </div>
                         @endif
@@ -305,6 +311,10 @@
                                 ?>
                                 <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
+                            <p class="question-info">
+                                <a target="_blank" href="/document/{{$document['id']}}/download">Download</a>
+                            </p>
+
                         </div>
                     </div>
                     <div class="question-row">
@@ -329,6 +339,9 @@
                                 ?>
                                 <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
+                            <p class="question-info">
+                                <a target="_blank" href="/document/{{$document['id']}}/download">Download</a>
+                            </p>
                         </div>
                     </div>
                     <div class="question-row">
