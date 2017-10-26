@@ -367,7 +367,7 @@
                         </div>
                         <div class="question-column">
                             <p class="question-info">
-                            <?php $criminal=[''=>'','Some'=>'Yes, but they are very old, and for a minor offence.','Yes'=>'Yes','No'=>'No'] ?>
+                            <?php $criminal=[''=>'','some'=>'Yes, but they are very old, and for a minor offence.','yes'=>'Yes','no'=>'No'] ?>
                                 {{$criminal[strtolower($user[1]->userCarerProfile->criminal_conviction)]}}
                             </p>
                         </div>
