@@ -145,11 +145,11 @@ class StripePaymentTools implements PaymentToolsInterface
         }
         $account = Account::retrieve('acct_1BEMdvAij8rTvtXk');
 
-        //todo get caarer document
-        $documentPath = 'C:\OSPanel\domains\holm\public\img\Annie_B.png';
-        $documentId = $this->uploadDocument($documentPath, $account->id);
-        $data['legal_entity']['verification']['document'] = $documentId;
-        $this->updateConnectedAccount($data, $account->id);
+        //todo upload carer document
+//        $documentPath = '';
+//        $documentId = $this->uploadDocument($documentPath, $account->id);
+//        $data['legal_entity']['verification']['document'] = $documentId;
+//        $this->updateConnectedAccount($data, $account->id);
 
         StripeConnectedAccount::create([
             'id' => $account->id,
