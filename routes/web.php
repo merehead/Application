@@ -101,7 +101,7 @@ Route::post('/bookings/{booking}/review', 'Bookings\BookingsController@createRev
 Route::post('/appointments/{appointment}/reject', 'Bookings\AppointmentsController@reject');
 Route::post('/appointments/{appointment}/completed', 'Bookings\AppointmentsController@completed');
 
-Route::post('/document/upload','DocumentsController@upload')->name('UploadDocument');
+Route::post('/document/upload/{user_id?}','DocumentsController@upload')->name('UploadDocument');
 Route::get('/document/{document}/download','DocumentsController@download')->name('DownloadDocument');
 Route::get('/documents/{user_id?}','DocumentsController@GetDocuments')->name('GetDocuments');
 Route::post('/profile-photo','ProfilePhotosController@uploadUserProfilePhoto');

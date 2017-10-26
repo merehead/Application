@@ -77,7 +77,13 @@ class DocumentsController extends Controller
     }
 
     public function upload(Request $request){
-        $user = Auth::user();
+        //todo policy
+
+        if($request->user_id){
+            $user = User::findOrFail($request->user_id);
+        } else {
+            $user = Auth::user();
+        }
 
         return Plupload::receive('file', function ($file) use ($user, $request)
         {
