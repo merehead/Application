@@ -7,6 +7,7 @@ var arrFilesProfilePhoto = [];
 var ProfilePhotoSeviceUser = [];
 var arrForDeleteIDProfile = [];
 var checkUploading = false;
+var carerId = +window.location.href.split('/')[window.location.href.split('/').length-1] // get user id
 //----------------------------------
 var bookings_pos=1;
 var periodicity = 4;
@@ -2115,7 +2116,10 @@ $(document).ready(function () {
                       formdata.append('file', fileSend);
                       chunk += 1;
                       axios.post(
-                          '/document/upload',
+                          !carerId ?
+                            '/document/upload'
+                            :
+                            '/document/upload/'+carerId+'',
                           formdata
                       ).then(function (response) {
                           if (chunk === chunks) {
@@ -2655,7 +2659,10 @@ $(document).ready(function () {
 
     if($carer_profile.length){
       axios.get(
-        '/documents'
+        !carerId ?
+          '/documents'
+          :
+          '/documents/'+carerId+'',
       ).then( function(response) {
         var newDoc = Object.entries(response.data.data.documents)
 
