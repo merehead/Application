@@ -6,7 +6,7 @@
             <a href=""
                class="registeredCarer">
                 <div class="profilePhoto registeredCarer__img">
-                    <img src="./img/no_photo.png" alt="">
+                    <img class="set_preview_profile_photo" src="/img/profile_photos/{{Auth::user()->id}}.png" onerror="this.src='/img/no_photo.png'" alt="">
                 </div>
                 <h2 class="profileName">admin</h2>
                 <span class="registeredCarer__ico">
