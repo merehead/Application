@@ -297,6 +297,12 @@ class BookingsController extends FrontController implements Constants
                     'purchaser_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
                 ]);
 
+            BookingsMessage::create([
+                'booking_id' => $booking->id,
+                'type' => 'status_change',
+                'new_status' => 'canceled',
+            ]);
+
 
             $carer = CarersProfile::find($booking->carer_id);
             $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
