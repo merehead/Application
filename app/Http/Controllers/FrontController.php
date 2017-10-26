@@ -15,6 +15,8 @@ class FrontController extends Controller
     protected $template;
     protected $content = FALSE;
     protected $title;
+    protected $keywords;
+    protected $description;
     protected $vars;
 
     public function __construct() {
@@ -26,6 +28,8 @@ class FrontController extends Controller
 
     public function renderOutput() {
         $this->vars = array_add($this->vars,'title',$this->title);
+        $this->vars = array_add($this->vars,'description',$this->description);
+        $this->vars = array_add($this->vars,'keywords',$this->keywords);
 
 
 

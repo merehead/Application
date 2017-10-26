@@ -24,7 +24,10 @@ class SearchController extends FrontController
     public function index(Request $request, $page = 1)
     {
         $data = [];
-        $this->title = 'Holm Care - Search';
+        $this->title = 'Find a personal carer - HOLM CARE';
+        $this->description = 'Holm offers care at a far more affordable price than care agencies.';
+        $this->keywords='looking to hire a personal assistant';
+
         $input = $request->all();
         $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
         $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
