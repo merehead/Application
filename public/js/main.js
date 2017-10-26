@@ -2083,6 +2083,7 @@ $(document).ready(function () {
 
               if (arrFiles.length > 0) {
                   var fileChunk = 0;
+                  var carerId = +window.location.href.split('/')[window.location.href.split('/').length-1]
                   file = arrFiles[fileChunk];
                   var sliceSize = 524288 ;// 512 kib
                   var chunks = Math.ceil(file.size / sliceSize);
@@ -2115,7 +2116,10 @@ $(document).ready(function () {
                       formdata.append('file', fileSend);
                       chunk += 1;
                       axios.post(
-                          '/document/upload',
+                          !carerId ?
+                            '/document/upload'
+                            :
+                            '/document/upload/'+carerId+'',
                           formdata
                       ).then(function (response) {
                           if (chunk === chunks) {
