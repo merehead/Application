@@ -158,5 +158,12 @@ class MessenteSmsTools implements SmsToolsInterface
 
     public function sendSmsToServiceUser(string $text, ServiceUsersProfile $serviceUsersProfile)
     {
+        if(in_array(substr($serviceUsersProfile->mobile_number, 0, 2), ['+3', '07'])){
+            return $this->send($text, $serviceUsersProfile->mobile_number);
+        } elseif(in_array(substr($serviceUsersProfile->purchaser->mobile_number, 0, 2), ['+3', '07'])) {
+            return $this->send($text, $serviceUsersProfile->purchaser->mobile_number);
+        }
+
+        return false;
     }
 }

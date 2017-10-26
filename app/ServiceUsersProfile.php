@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ServiceUsersProfile extends Model
 {
 
+    public function purchaser()
+    {
+        return $this->belongsTo(PurchasersProfile::class, 'purchaser_id');
+    }
+
     public function ServicesTypes()
     {
         return $this->belongsToMany('App\ServiceType', 'service_user_profile_service_type', 'service_user_profile_id', 'service_type_id');
