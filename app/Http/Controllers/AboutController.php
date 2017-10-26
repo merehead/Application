@@ -15,7 +15,10 @@ class AboutController extends FrontController
 
     public function index(){
 
-        $this->title = 'Holm Care - About Us';
+
+        $this->title = 'About us - HOLM CARE';
+        $this->description = '';
+        $this->keywords='home care assistance, home help for the elderly, personal assistant services';
 
         $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
         $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();

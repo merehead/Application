@@ -18,7 +18,9 @@ class HomePageController extends FrontController
 
     public function index(){
 
-        $this->title = 'Holm Care';
+        $this->title = 'Personal home care online marketplace - HOLM CARE';
+        $this->description = 'Holm is an online marketplace that makes it easy and affordable for people to find personal carers for the elderly in their own homes, not care homes.';
+        $this->keywords='homecare, care assistants, personal carepersonal care, help at home, private carers needed, private care jobs ';
 
         $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
         $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();

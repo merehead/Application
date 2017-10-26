@@ -39,7 +39,10 @@ class CarerController extends FrontController implements Constants
     public function welcome()
     {
         $this->template = config('settings.frontTheme') . '.templates.ImCarer';
-        $this->title = 'Holm Care';
+        $this->title = 'I am a home care worker - HOLM CARE';
+        $this->description = 'Are you a qualified Care Worker? Not joined Holm yet? Join now and receive a £50 bonus just for registering.';
+        $this->keywords='home care worker jobs, private care work, home care worker, personal care assistant career';
+
 
         $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
         $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
@@ -140,7 +143,7 @@ class CarerController extends FrontController implements Constants
         }*/
 
         $this->template = config('settings.frontTheme') . '.templates.carerPrivateProfile';
-        $this->title = 'Holm Care';
+
 
         $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
         $footer = view(config('settings.frontTheme') . '.footers.baseFooter')->render();
@@ -162,6 +165,11 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars, 'typeCare', $typeCare);
         $typeCareAll = AssistanceType::all();
         $this->vars = array_add($this->vars, 'typeCareAll', $typeCareAll);
+
+
+        $this->title = $carerProfile->first_name.' '.$carerProfile->family_name. ' - Home care worker -  HOLM CARE';
+        $this->description = $carerProfile->first_name.' '.$carerProfile->family_name. ' provides nursing care in your own home  on our personal home care online market place';
+        $this->keywords='home care worker, live in personal carer, live in care assistant ';
 
         /*$typeServices = ServiceType::all();
         $this->vars = array_add($this->vars, 'typeServices', $typeServices);*/
