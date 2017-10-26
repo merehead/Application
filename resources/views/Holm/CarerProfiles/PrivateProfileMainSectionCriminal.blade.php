@@ -61,7 +61,7 @@ null,['class'=>'profileField__select','readonly','id'=>'criminal_detail','data-e
                      </span></h2>
                 <div class="inputWrap criminal_detail">
 
-                    {!! Form::textarea('criminal_detail',null,['class'=>'formArea','noPlaceholder'=>' Detailed response','data-edit'=>'false']) !!}
+                    {!! Form::textarea('criminal_detail',null,['class'=>'formArea doNotCount','noPlaceholder'=>' Detailed response','data-edit'=>'false']) !!}
 
                 </div>
             </div>

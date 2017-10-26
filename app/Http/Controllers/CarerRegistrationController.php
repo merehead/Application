@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AssistanceType;
 use App\CarersProfile;
+use App\Helpers\Facades\PaymentTools;
 use App\Http\Controllers\Repo\CarerRegistration;
 use App\Http\Requests\CarerRegistrationRequest;
 use App\Language;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Swift_TransportException;
+use App\Helpers\Contracts;
 
 class CarerRegistrationController extends FrontController
 {
@@ -33,12 +35,11 @@ class CarerRegistrationController extends FrontController
     public function index($stepback = null)
     {
 
-        if (request()->has('ref')){
-            if(request()->get('ref')=='REGISTER'){
+        if (request()->has('ref')) {
+            if (request()->get('ref') == 'REGISTER') {
                 $this->vars = array_add($this->vars, 'use_register_code', 1);
                 $this->vars = array_add($this->vars, 'ref_code', request()->get('ref'));
-            }
-            else {
+            } else {
                 $ref_code = $this->checkReferCode(request()->get('ref'));
 
                 if ($ref_code != 0) {
@@ -157,7 +158,7 @@ class CarerRegistrationController extends FrontController
 
         $user = Auth::user();
 
-        if(!$user) {
+        if (!$user) {
             return redirect('/');
         }
 
@@ -185,15 +186,29 @@ class CarerRegistrationController extends FrontController
         DB::table('mails')
             ->insert(
                 [
-                    'email' =>$user->email,
-                    'subject' =>'Registration on HOLM',
-                    'text' =>$text,
+                    'email' => $user->email,
+                    'subject' => 'Registration on HOLM',
+                    'text' => $text,
                     'time_to_send' => Carbon::now(),
-                    'status'=>'new'
+                    'status' => 'new'
                 ]);
 
         $this->content = view(config('settings.frontTheme') . '.carerRegistration.thankYou')->with($this->vars)->render();
 
+        //Creation connected accounts in stripe on sign up
+        $data=[];
+        $data["email"] =$user->email;
+        $data["legal_entity"]["address"]["city"] = $carerProfile->town;
+        $data["legal_entity"]["address"]["line1"] = $carerProfile->address_line1;
+        $data["legal_entity"]["address"]["postal_code"] = $carerProfile->postcode;
+
+        $data["legal_entity"]["dob"]['day']=date('d',strtotime($carerProfile->DoB));
+        $data["legal_entity"]["dob"]['month']=date('m',strtotime($carerProfile->DoB));
+        $data["legal_entity"]["dob"]['year']=date('Y',strtotime($carerProfile->DoB));
+        $data["legal_entity"]['first_name']=$carerProfile->first_name;
+        $data["legal_entity"]["last_name"]=$carerProfile->family_name;
+
+        PaymentTools::createConnectedAccount($data, $user->id);
         return $this->renderOutput();
     }
 
@@ -202,7 +217,7 @@ class CarerRegistrationController extends FrontController
 
         $user = Auth::user();
 
-        if(!$user) {
+        if (!$user) {
             return redirect('/');
         }
 
@@ -212,17 +227,17 @@ class CarerRegistrationController extends FrontController
 
         $text = view(config('settings.frontTheme') . '.emails.complete_sign_up_carer')->with([
             'user' => $user,
-            'like_name'=>$carerProfile->like_name
+            'like_name' => $carerProfile->like_name
         ])->render();
 
         DB::table('mails')
             ->insert(
                 [
-                    'email' =>$user->email,
-                    'subject' =>'Welcome on HOLM',
-                    'text' =>$text,
+                    'email' => $user->email,
+                    'subject' => 'Welcome on HOLM',
+                    'text' => $text,
                     'time_to_send' => Carbon::now(),
-                    'status'=>'new'
+                    'status' => 'new'
                 ]);
 
 
@@ -233,11 +248,11 @@ class CarerRegistrationController extends FrontController
         DB::table('mails')
             ->insert(
                 [
-                    'email' =>$user->email,
-                    'subject' =>'How would you like an extra £100?',
-                    'text' =>$text,
+                    'email' => $user->email,
+                    'subject' => 'How would you like an extra £100?',
+                    'text' => $text,
                     'time_to_send' => Carbon::now()->addHour(1),
-                    'status'=>'new'
+                    'status' => 'new'
                 ]);
 
         $carerProfile->update();
