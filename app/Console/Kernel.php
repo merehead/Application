@@ -46,12 +46,19 @@ class Kernel extends ConsoleKernel
                         function ($m) use ($mail) {
                             $m->to($mail->email)->subject($mail->subject);
                         });
-//todo add mail error exception
+                    //todo add mail error exception
                     DB::table('mails')->where('id', $mail->id)
                         ->update(['status' => 'sent']);
 
                 }
             }
+        })->everyMinute();
+
+
+
+        //Sending sms about appointments
+        $schedule->call(function () {
+
         })->everyMinute();
     }
 

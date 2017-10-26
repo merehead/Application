@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Bookings;
 
-use App\Appointment;
 use App\Booking;
 use App\BookingOverview;
 use App\BookingsMessage;
@@ -10,21 +9,17 @@ use App\CarersProfile;
 use App\Events\BookingCompletedEvent;
 use App\Http\Requests\BookingCreateRequest;
 use App\Interfaces\Constants;
-use App\MailError;
 use App\PaymentServices\StripeService;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\FrontController;
 use App\PurchasersProfile;
 use App\ServiceUsersProfile;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
-use SebastianBergmann\Comparator\Book;
 use Auth;
 use Carbon\Carbon;
-use Swift_TransportException;
 use PaymentTools;
+use SmsTools;
 
 class BookingsController extends FrontController implements Constants
 {
@@ -32,6 +27,9 @@ class BookingsController extends FrontController implements Constants
     {
 
         $booking = $this->createBooking($request);
+
+        $message = 'Hi. '.$booking->bookingServiceUser->full_name.' would like to book you. Please log into your account to accept or reject the booking request. The Holm Team';
+//        SmsTools::sendSmsToCarer($message, $booking->bookingCarerProfile);
 
         if ($request->ajax()) // This is what i am needing.
         {

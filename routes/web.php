@@ -1,5 +1,6 @@
 <?php
 use App\Helpers\Facades\PaymentTools;
+use App\Helpers\Facades\SmsTools;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -179,3 +180,7 @@ Route::get('/test_stripe', function (){
 //    dd($res);
 });
 
+Route::get('/test_sms', function (){
+//    dd(SmsTools::send('Testing sms', '+380683301894'));
+//    dd(SmsTools::getStatus('api2eff5c175ea2d30a1dc8301a05f66cd7eb380df4a'));
+});
