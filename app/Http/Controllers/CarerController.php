@@ -167,8 +167,8 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars, 'typeCareAll', $typeCareAll);
 
 
-        $this->title = $carerProfile->full_name(). ' - Home care worker -  HOLM CARE';
-        $this->description = $carerProfile->full_name(). ' provides nursing care in your own home  on our personal home care online market place';
+        $this->title = $carerProfile->first_name.' '.$carerProfile->family_name. ' - Home care worker -  HOLM CARE';
+        $this->description = $carerProfile->first_name.' '.$carerProfile->family_name. ' provides nursing care in your own home  on our personal home care online market place';
         $this->keywords='home care worker, live in personal carer, live in care assistant ';
 
         /*$typeServices = ServiceType::all();
