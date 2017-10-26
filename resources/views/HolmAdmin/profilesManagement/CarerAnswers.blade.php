@@ -243,25 +243,21 @@
                             </h2>
                         </div>
                     </div>
-                    <?PHP
-                    $documents[] = $user[1]->documents->filter(function ($documents) {
-                        return $documents->type =='NVQ';
-                    })->first();
-                    //if(!empty($document)) $document=$document->toArray(); else $document['id']='';
-                    ?>
-                    @foreach($documents as $document)
-                    <div class="question-row">
-                        <div class="question-column">
-                            <p class="question-info">
-                                {{$document['title']??''}}
-                            </p>
-                        </div>
-                        <div class="question-column">
-                            <div class="question-img">
-                                <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
+                    @foreach($user[1]->documents as $document)
+                        @if($document->type =='NVQ')
+                            <div class="question-row">
+                                <div class="question-column">
+                                    <p class="question-info">
+                                        {{$document['title']??''}}
+                                    </p>
+                                </div>
+                                <div class="question-column">
+                                    <div class="question-img">
+                                        <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        @endif
                     @endforeach
 
                     <div class="question-row">
