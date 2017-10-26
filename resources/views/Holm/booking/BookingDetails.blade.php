@@ -352,11 +352,11 @@
                         <div class="bookConfirm bookConfirm--with-time bookConfirm--with-border">
                             <h2 class="bookConfirm__title">
                                 <span><i class="fa fa-check"></i></span>
-                                @if($message->new_status == 'pending')
+                                @if(strtolower($message->new_status) == 'pending')
                                     booking awaiting confirmation
-                                @elseif($message->new_status == 'in_progress')
+                                @elseif(strtolower($message->new_status) == 'in_progress')
                                     booking confirmed
-                                @elseif($message->new_status == 'completed')
+                                @elseif(strtolower($message->new_status) == 'completed')
                                     booking completed
                                 @endif
                             </h2>
