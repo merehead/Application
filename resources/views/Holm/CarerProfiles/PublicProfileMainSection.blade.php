@@ -137,9 +137,10 @@ $documents['other_relevant_qualification']->count()>0)
                 </div> -->
                 <div class="advantageColumn">
                     @foreach($documents[$dt] as $item)
-                        <p  class="advantageColumn">
-                            {{$item->title}}
-                        </p>
+                      <p class="advantage_label">
+                          <i class="fa fa-check"></i>
+                          {{$item->title}}
+                      </p>
                     @endforeach
                 </div>
             </div>
