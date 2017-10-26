@@ -9,8 +9,8 @@
                 My profile
             </a>
             <span class="breadcrumbs__arrow">></span>
-            <a href="#" class="breadcrumbs__item">
-                BOB M.
+            <a href="/serviceUser-settings/{{$booking->bookingServiceUser()->first()->id}}" class="breadcrumbs__item">
+                {{$booking->bookingServiceUser()->first()->short_full_name}}
             </a>
             <span class="breadcrumbs__arrow">></span>
             <p class="breadcrumbs__item">
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="reviewText">
-                    <p><a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->full_name}}</a> has completed their appointment on {{$booking->date_start}} - {{$booking->date_end}} with <a href="/serviceUser-settings/{{$booking->bookingServiceUser()->first()->id}}">{{$booking->bookingServiceUser()->first()->full_name}}</a> </p>
+                    <p><a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarerProfile()->first()->short_name}}</a> has completed their appointment on {{$booking->date_start}} - {{$booking->date_end}} with <a href="/serviceUser-settings/{{$booking->bookingServiceUser()->first()->id}}">{{$booking->bookingServiceUser()->first()->short_full_name}}</a> </p>
                     <p>Please leave your ratings and any additional comments. </p>
                     <p>Thank you!</p>
 
@@ -52,7 +52,7 @@
                     </h2>
                     <div class="userRating">
                         <div class="userRating__item">
-                            <h2 class="userRating__title">
+                            <h2 style="margin-right: 20px;" class="userRating__title">
                                 Rating
                             </h2>
                             <p class="userRating__name">
