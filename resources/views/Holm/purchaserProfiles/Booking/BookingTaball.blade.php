@@ -71,7 +71,7 @@
                                 </a>
                                 <div class="bookInfo__text">
                                     <p>
-                                        You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->short_full_name}}.</a>
+                                        You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->short_full_name}}</a>
                                         for <a href="/serviceUser-settings/{{$booking->bookingServiceUser->id}}">{{$booking->bookingServiceUser->short_full_name}}</a>
                                     </p>
                                     <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
