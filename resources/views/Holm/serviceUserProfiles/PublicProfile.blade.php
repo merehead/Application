@@ -121,7 +121,9 @@
                             <div class="serviceColumn serviceColumn--typeCare">
                                 @foreach($serviceUsers->ServicesTypes as $type)
                                     <p class="userOption userOption--less-padding">
+                                        @if($type->name!='MEDICATION / TREATMENTS')
                                         {{$type->name}}
+                                            @endif
                                     </p>
                                 @endforeach
                             </div>
@@ -245,6 +247,7 @@
                                     </div>
                                 </div>
                             @endif
+                            @if(!$restrictedAccess)
                             <div class="serviceRow" {!!  ($serviceUsersProfile->assistance_with_bathing == 'No' || is_null($serviceUsersProfile->assistance_with_bathing) )? ' style="display:none"' : ''!!}>
                                 <div class="serviceColumn serviceColumn--midSize">
                                     <p class="userOption">
@@ -256,6 +259,7 @@
                                     {{--<span class="serviceValue serviceValue--comment ">{{$serviceUsers->assistance_with_bathing}}</span>--}}
                                 </div>
                             </div>
+                            @endif
                             <div class="serviceRow" {!!  ($serviceUsersProfile->managing_toilet_needs == 'No' || is_null($serviceUsersProfile->managing_toilet_needs) )? ' style="display:none"' : ''!!}>
                                 <div class="serviceColumn serviceColumn--midSize">
                                     <p class="userOption">
@@ -969,6 +973,7 @@
                             @endif
                         @endif
                     @endif
+                    @if(!$restrictedAccess)
                     <div class="userBox">
 
                         <div class="row">
@@ -1116,6 +1121,7 @@
                             @endif
                         </div>
                     </div>
+                    @endif
                 </div>
 
             </div>
