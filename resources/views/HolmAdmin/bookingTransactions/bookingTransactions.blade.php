@@ -210,7 +210,7 @@
                             <table class="innerTable ">
                                 <tbody><tr>
                                     <td class="idField">
-                                        <span>{{$transaction->booking->id}}</span>
+                                        <span><a href="{{url('/bookings/'.$transaction->booking->id.'/details')}}" target="_blank">{{$transaction->booking->id}}</a></span>
                                     </td>
                                     <td class="">
                                         <span><i class="fa fa-gbp" aria-hidden="true"></i> {{$transaction->amount}}</span>

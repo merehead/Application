@@ -51,7 +51,7 @@
         <table class="innerTable ">
             <tr>
                 <td class=" ">
-                    <span>{{$booking->id}}</span>
+                    <span><a href="{{url('/bookings/'.$booking->id.'/details')}}" target="_blank">{{$booking->id}}</a></span>
                 </td>
                 <td class=" ">
                     <span>{{$booking->date_start}}</span>
