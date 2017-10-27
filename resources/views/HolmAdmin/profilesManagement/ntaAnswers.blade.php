@@ -7,10 +7,7 @@
                     <a href="#" data-dismiss="modal" class="close closeModal" style="opacity: 0.9">
                         <i class="fa fa-times"></i>
                     </a>
-                                <a href="#" class="closeModal">
 
-                                    <i class="fa fa-times"></i>
-                                </a>
                     <p>NTA anwsers</p>
                 </div>
                 <div class="question-body">

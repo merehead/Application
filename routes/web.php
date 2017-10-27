@@ -133,6 +133,7 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
 
     Route::resource('/user','User\UserController', ['except' => ['show']]);
     Route::get('/user/getCarerImage/{id}','User\UserController@getCarerImage');
+    Route::get('/user/page/{p?}','User\UserController@index')->name('user_pagination');;
     Route::resource('/booking','Booking\BookingController', ['only' => ['index']]);
     Route::resource('/blog','Blog\BlogController');
 
