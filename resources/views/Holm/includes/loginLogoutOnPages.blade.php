@@ -3,43 +3,42 @@
 
         @if(Auth::user()->isAdmin())
 
-            <a href=""
-               class="registeredCarer">
+            <div class="registeredCarer">
                 <div class="profilePhoto registeredCarer__img">
                     <img class="set_preview_profile_photo" src="/img/profile_photos/{{Auth::user()->id}}.png" onerror="this.src='/img/no_photo.png'" alt="">
                 </div>
-                <h2 class="profileName">admin</h2>
+                <a href="" class="profileName">admin</a>
                 <span class="registeredCarer__ico">
                     <i class="fa fa-sign-out" aria-hidden="true"></i>
                   </span>
-            </a>
+            </div>
 
         @else
 
             @if(Auth::user()->isReregistrationCompleted())
 
 
-                <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-settings' }}" class="registeredCarer">
+                <div  class="registeredCarer">
                     <div class="profilePhoto registeredCarer__img">
                         <img class="set_preview_profile_photo" src="/img/profile_photos/{{Auth::user()->id}}.png" onerror="this.src='/img/no_photo.png'" alt="">
                     </div>
-                    <h2 class="profileName">{!! Auth::user()->userName() !!}<span class="registeredCarer__type">
+                    <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-settings' }}" class="profileName">{!! Auth::user()->userName() !!}<span class="registeredCarer__type">
                       <i class="fa {{Auth::user()->isCarer()? ' ' : 'fa-exchange' }} " aria-hidden="true"></i>
                             {{Auth::user()->isCarer()? 'carer' : 'purchaser' }}
                       </span>
-                    </h2>
+                    </a>
                     <span class="registeredCarer__ico">
                     <i class="fa fa-sign-out" aria-hidden="true"></i>
                   </span>
-                </a>
+                </div>
             @else
 
 
 
-                <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-registration' }}"
+                <div
                    class="registeredCarer">
-                    <h2 class="profileName" style="padding-left:45px; font-size: 70%">continue sign up</h2>
-                </a>
+                    <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-registration' }}" class="profileName" style="padding-left:45px; font-size: 70%">continue sign up</a>
+                </div>
 
 
 
