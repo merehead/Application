@@ -14,7 +14,6 @@
                         <a href="{{route('AboutPage')}}" class="headerNav__link">about us</a>
                         <a href="{{route('ContactPage')}}" class="mob-nav-link">contact us</a>
                         <a href="{{route('FaqPage')}}" class="mob-nav-link">Frequently Asked Questions</a>
-                        <a href="{{route('BlogPage')}}" class="mob-nav-link">blog</a>
                         @if (Auth::check())
                             <a href="{{ route('logout') }}" class="mob-nav-link"
                                onclick="event.preventDefault();

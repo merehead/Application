@@ -2811,6 +2811,7 @@ $(document).ready(function () {
       percentPosition: true
     })
     $('div#message-carer form#bookings__form').find('.assistance_types').attr("disabled", false);
+    $('#confirm-terms').attr("disabled", false);
 });
 
 
