@@ -4,14 +4,25 @@
             <a href="/" class="breadcrumbs__item">
                 Home
             </a>
-            <span class="breadcrumbs__arrow">></span>
-            <a href="@if(Auth::user()->isCarer()){{'/carer-settings'}}@else{{route('purchaserSettings')}}@endif" class="breadcrumbs__item">
-                My profile
-            </a>
-            <span class="breadcrumbs__arrow">></span>
-            <a href="@if(Auth::user()->isCarer()){{'/carer-settings/booking'}}@else{{route('purchaserBookingStatus')}}@endif" class="breadcrumbs__item">
-                My Bookings
-            </a>
+            @if(Auth::user()->isCarer()||Auth::user()->isPurchaser())
+                <span class="breadcrumbs__arrow">></span>
+                <a href="@if(Auth::user()->isCarer()){{'/carer-settings/booking'}}@else{{route('purchaserBookingStatus')}}@endif" class="breadcrumbs__item">
+                    My Bookings
+                </a>
+            @else
+                <span class="breadcrumbs__arrow">></span>
+                <a href="'/serviceUser-settings/'{{$booking->bookingServiceUser()->first()->id}}" class="breadcrumbs__item">
+                    My profile
+                </a>
+                <span class="breadcrumbs__arrow">></span>
+                <p class="breadcrumbs__item">
+                    {{$booking->bookingServiceUser()->first()->short_full_name}}
+                </p>
+                <span class="breadcrumbs__arrow">></span>
+                <a href="/serviceUser-settings/booking/{{$booking->bookingServiceUser()->first()->id}}" class="breadcrumbs__item">
+                    My Bookings
+                </a>
+            @endif
 
             <span class="breadcrumbs__arrow">></span>
             <p class="breadcrumbs__item">
