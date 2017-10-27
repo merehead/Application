@@ -2810,7 +2810,9 @@ $(document).ready(function () {
       itemSelector: '.grid .userContainer',
       percentPosition: true
     })
+    $('div#message-carer form#bookings__form').find('.assistance_types').attr("disabled", false);
 });
+
 
 // -- SPINNER -------
 function showSpinner() {

@@ -213,8 +213,8 @@
 
             });
 
-            $carer_profile.find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
-            $carer_profile.find('input[type="text"]').attr("readonly", false).removeClass('profileField__input--greyBg');
+//            $carer_profile.find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
+//            $carer_profile.find('input[type="text"]').attr("readonly", false).removeClass('profileField__input--greyBg');
         });
     </script>
 </div>

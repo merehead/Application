@@ -37,10 +37,11 @@
             });
 
         });
-//        if($carer_profile!=null) {
+//        if($($carer_profile)!='undefinded') {
 //            $carer_profile.find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
 //            $carer_profile.find('input[type="text"]').attr("readonly", false).removeClass('profileField__input--greyBg');
 //        }
+        $('div#message-carer form#bookings__form').find('.assistance_types').attr("disabled", false);
     });
 </script>
 
