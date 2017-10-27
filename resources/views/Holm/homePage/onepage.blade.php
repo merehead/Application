@@ -1,1 +1,6 @@
-<embed src="{{asset('pdf/Holm_A5info_print.pdf')}}" width="100%" height="100%" type='application/pdf'>
+<section class="mainSection ">
+
+    <div class="container">
+<a href="{{asset('pdf/Holm_A5info_print.pdf')}}">Holm_A5info - download</a>
+    </div>
+</section>

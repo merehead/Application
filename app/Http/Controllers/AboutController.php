@@ -34,7 +34,10 @@ class AboutController extends FrontController
     }
 
     public function job(){
-        $this->title = 'Holm Care - Jobs';
+        $this->title = 'JOBS - HOLM CARE';
+        $this->description = '';
+        $this->keywords='home care assistance, home help for the elderly, personal assistant services';
+
 
         $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
         $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
@@ -50,7 +53,10 @@ class AboutController extends FrontController
     }
 
     public function onepage(){
-        $this->title = 'Holm Care - Jobs';
+        $this->title = 'ONEPAGE - HOLM CARE';
+        $this->description = '';
+        $this->keywords='home care assistance, home help for the elderly, personal assistant services';
+
 
         $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
         $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();

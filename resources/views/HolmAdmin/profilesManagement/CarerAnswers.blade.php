@@ -296,6 +296,7 @@
                             </p>
                         </div>
                     </div>
+                    @if($user[1]->userCarerProfile->use_car=='Yes')
                     <div class="question-row">
                         <div class="question-column">
                             <p class="question-info">
@@ -317,6 +318,7 @@
 
                         </div>
                     </div>
+                    @endif
                     <div class="question-row">
                         <div class="question-column">
                             <h2 class="ordinaryTitle">
