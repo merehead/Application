@@ -1485,22 +1485,27 @@ $(document).ready(function () {
             var in90Day = new Date();
             var datestart = $(datetime).attr('name').substring(0,$(datetime).attr('name').length - 10)+'[date_start]';
             var datestartDate = $('input[name="'+datestart+'"]').datepicker( "getDate" );
+            if(datestartDate!=null) {
+                inDay.setDate(datestartDate.getDate() + 2);
+                in90Day.setDate(datestartDate.getDate() + 90);
+                $(datetime).datepicker({
+                    beforeShow: function (input, inst) {
+                        inst.dpDiv.css({"z-index": "2000!important;"});
+                        if ($(input).attr('readonly')) {
+                            return false;
+                        }
+                    },
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: "dd/mm/yy",
+                    showAnim: "slideDown",
+                    minDate: inDay,
+                    maxDate: in90Day,
+                    yearRange: "0:+2"
+                });
+            }else{
 
-            inDay.setDate(datestartDate.getDate()+2);
-            in90Day.setDate(datestartDate.getDate()+90);
-            $(datetime).datepicker({
-                beforeShow: function (input, inst) {
-                    inst.dpDiv.css({"z-index": "2000!important;"});
-                    if ($(input).attr('readonly')) { return false; }
-                },
-                changeMonth: true,
-                changeYear: true,
-                dateFormat: "dd/mm/yy",
-                showAnim: "slideDown",
-                minDate: inDay,
-                maxDate: in90Day,
-                yearRange: "0:+2"
-            });
+            }
         }
     });
 
@@ -2809,8 +2814,10 @@ $(document).ready(function () {
     $('.grid').masonry({
       itemSelector: '.grid .userContainer',
       percentPosition: true
-    })
-    $('div#message-carer form#bookings__form').find('.assistance_types').attr("disabled", false);
+    });
+
+    $('div#message-carer form#bookings__form').find('input').attr("disabled", false).removeClass('profileField__input--greyBg');
+    $('div#message-carer form#bookings__form').find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
     $('#confirm-terms').attr("disabled", false);
 });
 
