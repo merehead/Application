@@ -14,10 +14,21 @@
             <a href="{{route('mainHomePage')}}" class="breadcrumbs__item">
                 Home
             </a>
-            <span class="breadcrumbs__arrow">&gt;</span>
-            <a href="{{route('ServiceUserSetting',['serviceUserProfile'=>$serviceUsers])}}" class="breadcrumbs__item">
-                My profile
-            </a>
+
+
+            @if(Auth::user()->isCarer()||Auth::user()->isPurchaser())
+                <span class="breadcrumbs__arrow">></span>
+                <a href="@if(Auth::user()->isCarer()){{route('carerSettings')}}@else{{route('purchaserSettings')}}@endif" class="breadcrumbs__item">
+                    My profile
+                </a>
+            @else
+                <span class="breadcrumbs__arrow">&gt;</span>
+                <a href="{{route('ServiceUserSetting',['serviceUserProfile'=>$serviceUsers])}}" class="breadcrumbs__item">
+                    My profile
+                </a>
+            @endif
+
+
             <span class="breadcrumbs__arrow">&gt;</span>
             <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUsers->id])}}"
                class="breadcrumbs__item">
