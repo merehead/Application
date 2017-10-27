@@ -48,7 +48,7 @@
                                         <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'" alt="">
                                     </a>
                                     <div class="bookInfo__text">
-                                        <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->short_full_name}}.</a></p>
+                                        <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->short_full_name}}</a></p>
                                         <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                                     </div>
 
@@ -99,7 +99,7 @@
                                         <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'" alt="">
                                     </a>
                                     <div class="bookInfo__text">
-                                        <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->short_full_name}}.</a></p>
+                                        <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->short_full_name}}</a></p>
                                         <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                                     </div>
 
@@ -155,7 +155,7 @@
                                         <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'" alt="">
                                     </a>
                                     <div class="bookInfo__text">
-                                        <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->short_full_name}}.</a></p>
+                                        <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->short_full_name}}</a></p>
                                         <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                                     </div>
 
@@ -199,7 +199,7 @@
                                         <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'" alt="">
                                     </a>
                                     <div class="bookInfo__text">
-                                        <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->short_full_name}}.</a></p>
+                                        <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->short_full_name}}</a></p>
                                         <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                                     </div>
 
