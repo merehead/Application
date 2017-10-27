@@ -369,7 +369,7 @@
     </div>
     <div class="profileRow">
         <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Has any preferences of food? eg. Are there any do's and don'ts? *</span></h2>
+            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Has any preferences of food? eg. Are there any do's and don'ts?</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
             if (is_null($serviceUsersProfile->preferences_of_food)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('preferences_of_food',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,['class'=>'profileField__select serviceUserProfile','placeholder'=>'Please select']) !!}
