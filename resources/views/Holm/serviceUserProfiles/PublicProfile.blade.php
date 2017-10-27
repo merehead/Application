@@ -32,7 +32,7 @@
             <span class="breadcrumbs__arrow">&gt;</span>
             <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUsers->id])}}"
                class="breadcrumbs__item">
-                {{$serviceUsers->first_name}}&nbsp{{mb_substr($serviceUsers->family_name,0,1)}}.
+                {{$serviceUsers->first_name.' '.mb_substr($serviceUsers->family_name,0,1)}}.
             </a>
         </div>
         {!! Form::hidden('address_line1',$serviceUsers->address_line1) !!}

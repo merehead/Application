@@ -713,6 +713,17 @@ $(document).ready(function () {
         }
     });
 
+    $("#depend-ifNo").on('change', function () {
+        if ($(this).val() != "0") {
+            if ($(this).val() == 'No') {
+                $(".depend_hidingNo").show();
+            }
+            if ($(this).val() == 'Yes') {
+                $(".depend_hidingNo").hide();
+            }
+        }
+    });
+
     if ($("#depend-if-work").val() == 'Yes') {
         $(".depend_hiding-work").show();
     } else {
