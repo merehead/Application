@@ -30,5 +30,5 @@
 
 <div class="bookingSwitcher">
     <a href="/serviceUser-settings/{{$serviceUser->id}}" class="bookingSwitcher__link bookingSwitcher__link--active">Profile settings</a>
-    <a href="/serviceUser-settings/booking/{{$serviceUser->id}}" class="bookingSwitcher__link">My bookings</a>
+    <a href="/serviceUser-settings/booking/{{$serviceUser->id}}" class="bookingSwitcher__link">My bookings {!! $newBookings->count() ? '<span>+'.$newBookings->count().'</span>' : '' !!}</a>
 </div>

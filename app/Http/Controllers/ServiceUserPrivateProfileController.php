@@ -53,6 +53,9 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
 
             $serviceUsersProfile = ServiceUsersProfile::findOrFail($serviceUserProfile);
 
+            $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('service_user_id', $serviceUsersProfile->id)->get();
+            $this->vars = array_add($this->vars, 'newBookings', $newBookings);
+
             $this->vars = array_add($this->vars, 'user', $this->user);
 
             $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
