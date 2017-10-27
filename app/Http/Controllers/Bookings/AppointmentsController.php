@@ -7,6 +7,7 @@ use App\Events\AppointmentCompletedEvent;
 use App\Http\Controllers\Controller;
 use App\Interfaces\Constants;
 use Auth;
+use SmsTools;
 
 use Illuminate\Http\Request;
 
@@ -18,6 +19,8 @@ class AppointmentsController extends Controller implements Constants
             //Carer
             $appointment->status_id = self::APPOINTMENT_STATUS_CANCELLED;
             $appointment->carer_status_id =  self::APPOINTMENT_USER_STATUS_REJECTED;
+            $message = 'Sorry. '.$appointment->booking->bookingCarerProfile->full_name.' has cancelled your appointment for  '.$appointment->formatted_date_start.' '.$appointment->formatted_time_from.'. Please check your account for more details. The Holm Team';
+            SmsTools::sendSmsToCarer($message, $appointment->booking->bookingServiceUser);
         } else {
             //Purchaser
             if($appointment->carer_status_id == self::APPOINTMENT_USER_STATUS_NEW){
@@ -32,6 +35,8 @@ class AppointmentsController extends Controller implements Constants
                 $appointment->status_id = self::APPOINTMENT_STATUS_CANCELLED;
                 $appointment->purchaser_status_id = self::APPOINTMENT_USER_STATUS_REJECTED;
             }
+            $message = 'Sorry. '.$appointment->booking->bookingServiceUser->full_name.' has cancelled your appointment for  '.$appointment->formatted_date_start.' '.$appointment->formatted_time_from.'. Please check your account for more details. The Holm Team';
+            SmsTools::sendSmsToCarer($message, $appointment->booking->bookingCarerProfile);
         }
 
         $appointment->save();

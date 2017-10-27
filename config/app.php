@@ -181,6 +181,7 @@ return [
         JildertMiedema\LaravelPlupload\LaravelPluploadServiceProvider::class,
 
         App\Providers\PaymentToolsServiceProvider::class,
+        App\Providers\SmsToolsServiceProvider::class,
     ],
 
     /*
@@ -234,6 +235,7 @@ return [
 
         'Plupload' => JildertMiedema\LaravelPlupload\Facades\Plupload::class,
         'PaymentTools' => \App\Helpers\Facades\PaymentTools::class,
+        'SmsTools' => \App\Helpers\Facades\SmsTools::class,
     ],
 
 ];

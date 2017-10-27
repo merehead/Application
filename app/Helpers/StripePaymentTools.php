@@ -5,6 +5,7 @@ namespace App\Helpers;
 
 use App\BonusTransaction;
 use App\Booking;
+use App\Document;
 use App\Helpers\Contracts\PaymentToolsInterface;
 use App\PayoutToPurchaser;
 use App\StripeCharge;
@@ -113,6 +114,9 @@ class StripePaymentTools implements PaymentToolsInterface
     public function createConnectedAccount(array $stripeAccountData, int $userId)
     {
         $carer = User::findOrFail($userId);
+        $document = Document::where('user_id', $carer->id)->where('type', 'PASSPORT')->first();
+        $documentPath = storage_path().'/documents/'.$document->file_name;
+
         try {
             $account = Account::create(
                 [
@@ -143,13 +147,11 @@ class StripePaymentTools implements PaymentToolsInterface
         } catch (\Exception $ex){
             throw $ex;
         }
-        $account = Account::retrieve('acct_1BEMdvAij8rTvtXk');
 
         //todo upload carer document
-//        $documentPath = '';
-//        $documentId = $this->uploadDocument($documentPath, $account->id);
-//        $data['legal_entity']['verification']['document'] = $documentId;
-//        $this->updateConnectedAccount($data, $account->id);
+        $documentId = $this->uploadDocument($documentPath, $account->id);
+        $data['legal_entity']['verification']['document'] = $documentId;
+        $this->updateConnectedAccount($data, $account->id);
 
         StripeConnectedAccount::create([
             'id' => $account->id,

@@ -2,11 +2,13 @@
 
 namespace App\Console;
 
+use App\Appointment;
 use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use SmsTools;
 
 class Kernel extends ConsoleKernel
 {
@@ -46,17 +48,44 @@ class Kernel extends ConsoleKernel
                         function ($m) use ($mail) {
                             $m->to($mail->email)->subject($mail->subject);
                         });
-//todo add mail error exception
+                    //todo add mail error exception
                     DB::table('mails')->where('id', $mail->id)
                         ->update(['status' => 'sent']);
 
                 }
             }
         })->everyMinute();
+
+        //Sending sms about appointments
+        $schedule->call(function () {
+            $res = DB::select("SELECT id FROM appointments WHERE UNIX_TIMESTAMP(STR_TO_DATE(CONCAT(DATE_FORMAT(date_start, '%Y-%m-%d'), ' ', time_from), \"%Y-%m-%d %H.%i\")) - UNIX_TIMESTAMP(NOW()) <= 3600 AND reminder_sent = 0");
+            if($res){
+                foreach ($res[0] as $appointmentId){
+                    $appointment = Appointment::find($appointmentId);
+                    $carerProfile = $appointment->booking->bookingCarerProfile;
+                    $serviceUserProfile = $appointment->booking->bookingServiceUser;
+                    $purchaserProfile = $appointment->booking->bookingPurchaserProfile;
+
+                    //send to carer
+                    $message = 'Hi, '.$carerProfile->full_name.'. We just wanted to remind you that you have an appointment with '.$serviceUserProfile->full_name.' at '.$appointment->formatted_time_from.' today.';
+                    SmsTools::sendSmsToCarer($message, $carerProfile);
+
+                    if($serviceUserProfile->hasMobile()){
+                        //end to service user
+                        $message = 'Hi, '.$serviceUserProfile->full_name.'. We just wanted to remind you that '.$carerProfile->full_name.' will be visiting you at '.$appointment->formatted_time_from.' today.';
+                        SmsTools::sendSmsToServiceUser($message, $serviceUserProfile);
+                    } else {
+                        //send to purchaser
+                        $message = 'Hi, '.$purchaserProfile->full_name.'. We just wanted to remind you that '.$carerProfile->full_name.' will be visiting '.$serviceUserProfile->full_name.' at '.$appointment->formatted_time_from.' today.';
+                        SmsTools::sendSmsToPurchaser($message, $purchaserProfile);
+                    }
+
+                    $appointment->reminder_sent = true;
+                    $appointment->save();
+                }
+            }
+        })->everyMinute();
     }
-
-
-
 
 
     /**
