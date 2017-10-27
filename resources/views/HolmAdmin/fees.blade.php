@@ -94,7 +94,7 @@
                             <tr>
                                 <td class=" ">
                                     <div class="onoffswitch">
-                                        <input type="radio" name="onoffswitch{{$item->id}}" class="onoffswitch-checkbox"
+                                        <input type="radio" name="onoffswitch{{$item->id}}" class="onoffswitch-checkbox" disabled="disabled"
                                                id="myonoffswitch{{$item->id}}" dd="" @if($item->type_flat==1) checked @endif>
                                         <label class="onoffswitch-label" for="myonoffswitch{{$item->id}}">
                                             <span class="onoffswitch-inner"></span>
@@ -105,7 +105,7 @@
                                 </td>
                                 <td class="">
                                     <div class="onoffswitch">
-                                        <input type="radio" name="onoffswitch{{$item->id}}" class="onoffswitch-checkbox"
+                                        <input type="radio" name="onoffswitch{{$item->id}}" class="onoffswitch-checkbox" disabled="disabled"
                                                id="myonoffswitch2{{$item->id}}" d="" @if($item->type_percent==1) checked @endif>
                                         <label class="onoffswitch-label" for="myonoffswitch2{{$item->id}}">
                                             <span class="onoffswitch-inner"></span>
