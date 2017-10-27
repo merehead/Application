@@ -5,7 +5,7 @@
             <a href="\" class="themeLogo"></a>
             <a href="\" class="xsNav"><span class=""><i class="fa fa-navicon"></i></span></a>
             <div class="collapseBox">
-
+                <div class="collapseBox__item">
                 <a href="{{ route('welcomeCarer') }}" class="carerSelf">i am a carer</a>
 
                 <div class="headerNav_container">
@@ -43,6 +43,7 @@
                        {{-- </div>--}}
                     @endif
 
+                </div>
                 </div>
             </div>
         </div>
