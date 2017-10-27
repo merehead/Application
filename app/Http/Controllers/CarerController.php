@@ -549,6 +549,9 @@ class CarerController extends FrontController implements Constants
             if (isset($input['date_certificate'])) {
                 $carerProfiles->date_certificate = $input['date_certificate'];
             }
+            if (isset($input['criminal_detail'])) {
+                $carerProfiles->criminal_detail = $input['criminal_detail'];
+            }
 
             $carerProfiles->save();
             unset($carerProfiles);
