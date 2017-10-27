@@ -977,10 +977,12 @@ $(document).ready(function () {
         }
 
     });
-
+    if($('.incontinence_wear_switcher').val() != 'No') {
+        $(".depend_from_have_incontinence_incontinence_wear").slideUp();
+    }
     $(document).on('change', '.incontinence_switcher',function () {
 
-        if ($(this).val() != 'No') {
+        if ($(this).val() != 'Yes') {
             $(".depend_from_have_incontinence").slideDown("slow");
 
             if($('.incontinence_wear_switcher').val() != 'No') {
@@ -997,10 +999,10 @@ $(document).ready(function () {
     $(document).on('change', '.incontinence_wear_switcher',function () {
 
         if ($(this).val() != 'No') {
-            $(".depend_from_have_incontinence_incontinence_wear").slideDown("slow");
+            $(".depend_from_have_incontinence_incontinence_wear").slideUp("slow");
         }
         else  {
-            $(".depend_from_have_incontinence_incontinence_wear").slideUp();
+            $(".depend_from_have_incontinence_incontinence_wear").slideDown();
         }
 
     });
