@@ -28,9 +28,6 @@ class BookingsController extends FrontController implements Constants
 
         $booking = $this->createBooking($request);
 
-        $message = 'Hi. '.$booking->bookingServiceUser->full_name.' would like to book you. Please log into your account to accept or reject the booking request. The Holm Team';
-        SmsTools::sendSmsToCarer($message, $booking->bookingCarerProfile);
-
         if ($request->ajax()) // This is what i am needing.
         {
             return 'bookings/' . $booking->id . '/purchase';
@@ -184,12 +181,15 @@ class BookingsController extends FrontController implements Constants
         $booking->status_id = 2;
         $booking->save();
 
-        //$user=Auth::user();
         $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
         $carerProfile = CarersProfile::find($booking->carer_id);
         $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
-        //message for carer
 
+        //sms to carer
+        $message = 'Hi. '.$booking->bookingServiceUser->full_name.' would like to book you. Please log into your account to accept or reject the booking request. The Holm Team';
+        SmsTools::sendSmsToCarer($message, $booking->bookingCarerProfile);
+
+        //message for carer
         $text = view(config('settings.frontTheme') . '.emails.new_booking')->with([
             'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'carer'
         ])->render();
