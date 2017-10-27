@@ -23,4 +23,23 @@ class FeesController extends AdminController
 
         return $this->renderOutput();
     }
+
+    public function update(Request $request){
+        //dd($request->fees['id']);
+        foreach ($request->fees['id'] as $key => $item) {
+            $fees=Fees::find($item);
+            $fees->amount=$request->fees['amount'][$key];
+            $fees->purchaser_rate =$fees->carer_rate+$fees->amount;
+            $fees->save();
+        }
+
+
+        $data = Fees::all();
+        $this->vars['fees']=$data;
+
+
+        $this->content = view(config('settings.theme').'.fees')->with( $this->vars)->render();
+
+        return $this->renderOutput();
+    }
 }
