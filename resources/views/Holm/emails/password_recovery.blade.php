@@ -139,6 +139,6 @@
     </tr>
 
 </table>
-@endcomponent
+
 </body>
 </html>

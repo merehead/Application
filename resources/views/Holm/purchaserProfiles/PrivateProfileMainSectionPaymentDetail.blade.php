@@ -1,4 +1,4 @@
-<div class="borderContainer">
+<!-- <div class="borderContainer">
     <div class="profileCategory">
         <h2 class="profileCategory__title">Payments Details</h2>
         <a href="#" class="btn btn-info btn-edit btn-edit"><span class="fa fa-pencil" data-id="Payment"></span> EDIT</a>
@@ -49,4 +49,4 @@
         </a>
     </div>
     {!! Form::close()!!}
-</div>
+</div> -->
