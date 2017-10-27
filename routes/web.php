@@ -140,6 +140,8 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::get('/financial','FinancialController@index')->name('financial');
     Route::get('/fees','FeesController@index')->name('fees');
     Route::post('/fees','FeesController@update')->name('feespost');
+    Route::get('/holidays','HolidaysController@index')->name('holidays');
+    Route::post('/holidays','HolidaysController@update')->name('holidaysPost');
 
 
     Route::get('/booking-transactions', 'AdminSitePayment@getBookingTransactions')->name('BookingTransactions');
