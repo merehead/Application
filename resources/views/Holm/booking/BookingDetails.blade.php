@@ -33,7 +33,7 @@
                     </a>
                     <div class="orderInfo__item orderInfo__item--rightPadding">
                         <h2 class="ordinaryTitle">
-                            <span class="ordinaryTitle__text ordinaryTitle__text--bigger"><a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->short_full_name}}.</a></span>
+                            <span class="ordinaryTitle__text ordinaryTitle__text--bigger"><a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->short_full_name}}</a></span>
                         </h2>
                         <div class="viewProfile">
                             <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="viewProfile__item centeredLink">
@@ -60,7 +60,7 @@
                 </a>
                 <div class="orderInfo__item orderInfo__item--rightPadding">
                     <h2 class="ordinaryTitle">
-                        <span class="ordinaryTitle__text ordinaryTitle__text--bigger"><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->short_full_name}}.</a></span>
+                        <span class="ordinaryTitle__text ordinaryTitle__text--bigger"><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->short_full_name}}</a></span>
                     </h2>
                     <div class="viewProfile">
                         <a href="{{$booking->bookingServiceUser()->first()->profile_link}}" class="viewProfile__item centeredLink">
@@ -328,11 +328,11 @@
                                     <h2 class="profileName">
                                         @if($message->sender == 'carer')
                                             <a href="{{$booking->bookingCarer()->first()->profile_link}}">
-                                                {{$booking->bookingCarer()->first()->short_full_name}}.
+                                                {{$booking->bookingCarer()->first()->short_full_name}}
                                             </a>
                                         @elseif($message->sender == 'service_user')
                                             <a href="Service_user_Public_profile_page.html">
-                                                {{$booking->bookingServiceUser()->first()->short_full_name}}.
+                                                {{$booking->bookingServiceUser()->first()->short_full_name}}
                                             </a>
                                         @endif
                                     </h2>
