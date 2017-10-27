@@ -25,9 +25,11 @@
                                 ?>
                                 <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
+                            @if($document['id']!='')
                             <p class="question-info">
                                 <a target="_blank" href="/document/{{$document['id']}}/download">Download</a>
                             </p>
+                            @endif
                         </div>
                     </div>
                     <div class="question-row">
@@ -47,9 +49,11 @@
                                 ?>
                                 <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
+                            @if($document['id']!='')
                             <p class="question-info">
                                 <a target="_blank" href="/document/{{$document['id']}}/download">Download</a>
                             </p>
+                                @endif
                         </div>
                     </div>
                     <div class="question-row">
@@ -258,9 +262,11 @@
                                     <div class="question-img">
                                         <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                                     </div>
+                                    @if($document['id']!='')
                                     <p class="question-info">
                                         <a target="_blank" href="/document/{{$document['id']}}/download">Download</a>
                                     </p>
+                                        @endif
                                 </div>
                             </div>
                         @endif
@@ -291,9 +297,11 @@
                                 <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
 
                             </div>
+                            @if($document['id']!='')
                             <p class="question-info">
                                 <a target="_blank" href="/document/{{$document['id']}}/download">Download</a>
                             </p>
+                            @endif
                         </div>
                     </div>
                     @if($user[1]->userCarerProfile->use_car=='Yes')
@@ -312,10 +320,11 @@
                                 ?>
                                 <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
+                            @if($document['id']!='')
                             <p class="question-info">
                                 <a target="_blank" href="/document/{{$document['id']}}/download">Download</a>
                             </p>
-
+                            @endif
                         </div>
                     </div>
                     @endif
@@ -341,9 +350,11 @@
                                 ?>
                                 <img height="182px" src="/api/document/{{$document['id']}}/preview" alt="">
                             </div>
+                            @if($document['id']!='')
                             <p class="question-info">
                                 <a target="_blank" href="/document/{{$document['id']}}/download">Download</a>
                             </p>
+                            @endif
                         </div>
                     </div>
                     <div class="question-row">
