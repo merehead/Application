@@ -50,7 +50,7 @@ function getTime( ) {
         ( m < 10 ? ':0' : ':') + m +
         // optional seconds display
         // ( d.getSeconds() < 10 ? ':0' : ':') + d.getSeconds() +
-        ( h < 12 ? ' AM' : ' PM' )
+        ( d.getHours() < 12 ? ' AM' : ' PM' )
     );
 
 }
