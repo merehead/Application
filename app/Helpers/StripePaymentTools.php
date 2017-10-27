@@ -114,8 +114,6 @@ class StripePaymentTools implements PaymentToolsInterface
     public function createConnectedAccount(array $stripeAccountData, int $userId)
     {
         $carer = User::findOrFail($userId);
-        $document = Document::where('user_id', $carer->id)->where('type', 'PASSPORT')->first();
-        $documentPath = storage_path().'/documents/'.$document->file_name;
 
         try {
             $account = Account::create(
@@ -148,10 +146,14 @@ class StripePaymentTools implements PaymentToolsInterface
             throw $ex;
         }
 
-        //todo upload carer document
-        $documentId = $this->uploadDocument($documentPath, $account->id);
-        $data['legal_entity']['verification']['document'] = $documentId;
-        $this->updateConnectedAccount($data, $account->id);
+        //upload carer document
+        $document = Document::where('user_id', $carer->id)->where('type', 'PASSPORT')->first();
+        if($document){
+            $documentPath = storage_path().'/documents/'.$document->file_name;
+            $documentId = $this->uploadDocument($documentPath, $account->id);
+            $data['legal_entity']['verification']['document'] = $documentId;
+            $this->updateConnectedAccount($data, $account->id);
+        }
 
         StripeConnectedAccount::create([
             'id' => $account->id,
