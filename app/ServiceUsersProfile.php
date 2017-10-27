@@ -163,4 +163,8 @@ class ServiceUsersProfile extends Model
     {
         return 'service';
     }
+
+    public function hasMobile(){
+        return in_array(substr($this->mobile_number, 0, 2), ['+3', '07']);
+    }
 }

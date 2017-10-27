@@ -6,6 +6,7 @@ use App\CarersProfile;
 use App\Exceptions\MessenteException;
 use App\Helpers\Contracts\SmsToolsInterface;
 
+use App\PurchasersProfile;
 use App\ServiceUsersProfile;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -153,17 +154,21 @@ class MessenteSmsTools implements SmsToolsInterface
             return false;
 
         return $this->send($text, $carersProfile->mobile_number);
-
     }
 
     public function sendSmsToServiceUser(string $text, ServiceUsersProfile $serviceUsersProfile)
     {
-        if(in_array(substr($serviceUsersProfile->mobile_number, 0, 2), ['+3', '07'])){
-            return $this->send($text, $serviceUsersProfile->mobile_number);
-        } elseif(in_array(substr($serviceUsersProfile->purchaser->mobile_number, 0, 2), ['+3', '07'])) {
-            return $this->send($text, $serviceUsersProfile->purchaser->mobile_number);
-        }
+        if(!in_array(substr($serviceUsersProfile->mobile_number, 0, 2), ['+3', '07']))
+            return false;
 
-        return false;
+        return $this->send($text, $serviceUsersProfile->mobile_number);
+    }
+
+    public function sendSmsToPurchaser(string $text, PurchasersProfile $purchasersProfile)
+    {
+        if(!in_array(substr($purchasersProfile->mobile_number, 0, 2), ['+3', '07']))
+            return false;
+
+        return $this->send($text, $purchasersProfile->mobile_number);
     }
 }
