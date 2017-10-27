@@ -713,6 +713,12 @@ $(document).ready(function () {
         }
     });
 
+    if ($("#depend-ifNo").val() == 'No') {
+        $(".depend_hidingNo").show();
+    } else {
+        $(".depend_hidingNo").hide();
+    }
+
     $("#depend-ifNo").on('change', function () {
         if ($(this).val() != "0") {
             if ($(this).val() == 'No') {
