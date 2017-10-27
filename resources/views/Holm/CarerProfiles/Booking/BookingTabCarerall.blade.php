@@ -66,7 +66,7 @@
                                 <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'" alt="">
                             </a>
                             <div class="bookInfo__text">
-                                <p><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->short_full_name}}.</a> booked you</p>
+                                <p><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->short_full_name}}</a> booked you</p>
                                 <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                             </div>
 
@@ -121,7 +121,7 @@
                                 <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'" alt="">
                             </a>
                             <div class="bookInfo__text">
-                                <p><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->short_full_name}}.</a> booked you</p>
+                                <p><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->short_full_name}}</a> booked you</p>
                                 <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                             </div>
 
@@ -181,7 +181,7 @@
                                 <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'" alt="">
                             </a>
                             <div class="bookInfo__text">
-                                <p><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->short_full_name}}.</a> booked you</p>
+                                <p><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->short_full_name}}</a> booked you</p>
                                 <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                             </div>
 
@@ -221,7 +221,7 @@
                                 <img src="{{asset('img/service_user_profile_photos/'.$booking->bookingServiceUser()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'" alt="">
                             </a>
                             <div class="bookInfo__text">
-                                <p><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->short_full_name}}.</a> booked you</p>
+                                <p><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->short_full_name}}</a> booked you</p>
                                 <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
                             </div>
 

@@ -108,7 +108,7 @@ class User extends Authenticatable
         }
     }
     public function getShortFullNameAttribute(){
-        return $this->first_name.' '.mb_substr($this->family_name,0,1);
+        return $this->first_name.' '.mb_substr($this->family_name,0,1).'.';
     }
 
     public function getFamilyNameAttribute(){
