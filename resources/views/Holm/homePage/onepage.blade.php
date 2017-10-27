@@ -1,0 +1,1 @@
+<embed src="{{asset('pdf/Holm_A5info_print.pdf')}}" width="100%" height="100%" type='application/pdf'>

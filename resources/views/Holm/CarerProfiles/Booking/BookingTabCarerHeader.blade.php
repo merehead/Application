@@ -5,15 +5,10 @@
         <a href="{{route('mainHomePage')}}" class="breadcrumbs__item">
             Home
         </a>
-        <span class="breadcrumbs__arrow">&gt;</span>
-        <a href="{{route('carerSettings')}}" class="breadcrumbs__item">
-            MY Profile
-        </a>
-        <!-- <span class="breadcrumbs__arrow">></span>
-         <a href="#" class="breadcrumbs__item">
+         <span class="breadcrumbs__arrow">></span>
+         <a href="{{route('carerBooking')}}" class="breadcrumbs__item">
            My Bookings
          </a>
--->
 
     </div>
     <div class="bookingGroup">

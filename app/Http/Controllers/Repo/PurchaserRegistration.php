@@ -300,9 +300,7 @@ class PurchaserRegistration
         $purchaserProfile->profiles_status_id = 2;
         //$purchaserProfile->registration_status = 'completed';
 
-        if ($purchaserProfile->purchasing_care_for=='Myself' &&
-            preg_match('/^(([Bb][Ll][0-9])|([Mm][0-9]{1,2})|([Oo][Ll][0-9]{1,2})|([Ss][Kk][0-9]{1,2})|([Ww][AaNn][0-9]{1,2})) {0,}([0-9][A-Za-z]{2})$/',$purchaserProfile->postcode)!=1
-        )
+        if ($purchaserProfile->purchasing_care_for=='Myself')
         { // postcode acceptable for Manchester
             $purchaserProfile->registration_status = 'completed';
         }
@@ -310,11 +308,7 @@ class PurchaserRegistration
         if ($purchaserProfile->purchasing_care_for=='Someone else')
             $purchaserProfile->registration_status = 'completed';
 
-
-
-
         $purchaserProfile->update();
-        //dd($request->all());
 
         return;
     }

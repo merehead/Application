@@ -60,7 +60,7 @@
             <table cellpadding="0" cellspacing="0" border="0"  style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"  class="t-content">
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; "  valign="top" class="">
-                        <h1  style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700;  color: #272c2b;  text-transform: uppercase;">Dear {{$like_name}}</h1>
+                        <h1  style=" font-size: 16px;display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700;  color: #272c2b;  text-transform: uppercase;">Dear {{$like_name}}</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             We’re afraid that we’ve not been able to accept your application to join Holm.
                             This might be for a variety of reasons. Please <a href="{{route('ContactPage')}}">contact us</a> if you think we have made a mistake.

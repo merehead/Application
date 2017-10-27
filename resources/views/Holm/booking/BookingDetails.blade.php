@@ -4,14 +4,25 @@
             <a href="/" class="breadcrumbs__item">
                 Home
             </a>
-            <span class="breadcrumbs__arrow">></span>
-            <a href="@if(Auth::user()->isCarer()){{'/carer-settings'}}@else{{route('purchaserSettings')}}@endif" class="breadcrumbs__item">
-                My profile
-            </a>
-            <span class="breadcrumbs__arrow">></span>
-            <a href="@if(Auth::user()->isCarer()){{'/carer-settings/booking'}}@else{{route('purchaserBookingStatus')}}@endif" class="breadcrumbs__item">
-                My Bookings
-            </a>
+            @if(Auth::user()->isCarer()||Auth::user()->isPurchaser())
+                <span class="breadcrumbs__arrow">></span>
+                <a href="@if(Auth::user()->isCarer()){{'/carer-settings/booking'}}@else{{route('purchaserBookingStatus')}}@endif" class="breadcrumbs__item">
+                    My Bookings
+                </a>
+            @else
+                <span class="breadcrumbs__arrow">></span>
+                <a href="'/serviceUser-settings/'{{$booking->bookingServiceUser()->first()->id}}" class="breadcrumbs__item">
+                    My profile
+                </a>
+                <span class="breadcrumbs__arrow">></span>
+                <p class="breadcrumbs__item">
+                    {{$booking->bookingServiceUser()->first()->short_full_name}}
+                </p>
+                <span class="breadcrumbs__arrow">></span>
+                <a href="/serviceUser-settings/booking/{{$booking->bookingServiceUser()->first()->id}}" class="breadcrumbs__item">
+                    My Bookings
+                </a>
+            @endif
 
             <span class="breadcrumbs__arrow">></span>
             <p class="breadcrumbs__item">
@@ -33,7 +44,7 @@
                     </a>
                     <div class="orderInfo__item orderInfo__item--rightPadding">
                         <h2 class="ordinaryTitle">
-                            <span class="ordinaryTitle__text ordinaryTitle__text--bigger"><a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->short_full_name}}.</a></span>
+                            <span class="ordinaryTitle__text ordinaryTitle__text--bigger"><a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->short_full_name}}</a></span>
                         </h2>
                         <div class="viewProfile">
                             <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="viewProfile__item centeredLink">
@@ -60,7 +71,7 @@
                 </a>
                 <div class="orderInfo__item orderInfo__item--rightPadding">
                     <h2 class="ordinaryTitle">
-                        <span class="ordinaryTitle__text ordinaryTitle__text--bigger"><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->short_full_name}}.</a></span>
+                        <span class="ordinaryTitle__text ordinaryTitle__text--bigger"><a href="{{$booking->bookingServiceUser()->first()->profile_link}}">{{$booking->bookingServiceUser()->first()->short_full_name}}</a></span>
                     </h2>
                     <div class="viewProfile">
                         <a href="{{$booking->bookingServiceUser()->first()->profile_link}}" class="viewProfile__item centeredLink">
@@ -328,11 +339,11 @@
                                     <h2 class="profileName">
                                         @if($message->sender == 'carer')
                                             <a href="{{$booking->bookingCarer()->first()->profile_link}}">
-                                                {{$booking->bookingCarer()->first()->short_full_name}}.
+                                                {{$booking->bookingCarer()->first()->short_full_name}}
                                             </a>
                                         @elseif($message->sender == 'service_user')
                                             <a href="Service_user_Public_profile_page.html">
-                                                {{$booking->bookingServiceUser()->first()->short_full_name}}.
+                                                {{$booking->bookingServiceUser()->first()->short_full_name}}
                                             </a>
                                         @endif
                                     </h2>

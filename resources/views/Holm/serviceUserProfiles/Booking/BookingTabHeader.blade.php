@@ -7,7 +7,7 @@
         </a>
         <span class="breadcrumbs__arrow">&gt;</span>
         <a href="/serviceUser-settings/booking/{{$serviceUser->id}}" class="breadcrumbs__item">
-            MY Profile
+            MY BOOKINGS
         </a>
         <span class="breadcrumbs__arrow">></span>
          <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}" class="breadcrumbs__item">
