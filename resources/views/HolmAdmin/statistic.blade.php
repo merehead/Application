@@ -396,35 +396,39 @@
 
                     </thead>
                     <tbody>
-                    <tr class="statisticRow">
-                        <td>
-                      <span>
-                       1
-                      </span>
-                        </td>
-                        <td class="for-inner">
-                            <table class="innerTable " style="height: 97px;">
-                                <tbody><tr>
-                                    <td class="idField">
-                                        <span>1000</span>
-                                    </td>
-                                    <td class="">
-                                        <a href="#" class="tableLink">chris heldon</a>
-                                    </td>
-                                </tr>
-                                </tbody></table>
-                        </td>
-                        <td class="textCenter">
-                      <span>
-                        1000
-                      </span>
-                        </td>
-                        <td class="textCenter">
-                      <span>
-                        1000
-                      </span>
-                        </td>
-                    </tr>
+                    @php($i = 1)
+                    @foreach($mostActiveCarers as $item)
+                        <tr class="statisticRow">
+                            <td>
+                          <span>
+                           {{$i}}
+                          </span>
+                            </td>
+                            <td class="for-inner">
+                                <table class="innerTable " style="height: 97px;">
+                                    <tbody><tr>
+                                        <td class="idField">
+                                            <span> {{$item->id}}</span>
+                                        </td>
+                                        <td class="">
+                                            <a href="#" class="tableLink"> {{$item->first_name.' '.$item->family_name}}</a>
+                                        </td>
+                                    </tr>
+                                    </tbody></table>
+                            </td>
+                            <td class="textCenter">
+                          <span>
+                            {{$item->appointments_per_last_week}}
+                          </span>
+                            </td>
+                            <td class="textCenter">
+                          <span>
+                            {{$item->appointments_per_last_month}}
+                          </span>
+                            </td>
+                        </tr>
+                        @php(++$i)
+                    @endforeach
 
                     </tbody>
                 </table>
@@ -1125,27 +1129,27 @@
                         </td>
                         <td class="textCenter">
                       <span>
-                      35
+                      {{$ageStatistic['service_users']->{'19'} }}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                        11
+                        {{$ageStatistic['service_users']->{'20_39'} }}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                        11
+                        {{$ageStatistic['service_users']->{'40_59'} }}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                         789
+                         {{$ageStatistic['service_users']->{'60_79'} }}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                         2
+                         {{$ageStatistic['service_users']->{'80'} }}
                       </span>
                         </td>
 
@@ -1158,27 +1162,27 @@
                         </td>
                         <td class="textCenter">
                       <span>
-                      35
+                      {{$ageStatistic['purchasers']->{'19'} }}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                        11
+                        {{$ageStatistic['purchasers']->{'20_39'} }}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                        11
+                        {{$ageStatistic['purchasers']->{'40_59'} }}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                         789
+                         {{$ageStatistic['purchasers']->{'60_79'} }}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                         2
+                         {{$ageStatistic['purchasers']->{'80'} }}
                       </span>
                         </td>
 
@@ -1191,32 +1195,31 @@
                         </td>
                         <td class="textCenter">
                       <span>
-                      35
+                      {{$ageStatistic['carers']->{'19'} }}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                        11
+                        {{$ageStatistic['carers']->{'20_39'} }}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                        11
+                        {{$ageStatistic['carers']->{'40_59'} }}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                         789
+                         {{$ageStatistic['carers']->{'60_79'} }}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                         2
+                         {{$ageStatistic['carers']->{'80'} }}
                       </span>
                         </td>
 
                     </tr>
-
                     </tbody>
                 </table>
 
