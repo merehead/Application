@@ -35,8 +35,10 @@ class UserController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request,$page = 1)
     {
+
+        $perPage = 9;
 
         $this->title = 'Admin Profiles Management';
         $profileType = $this->siteUsers->getProfileType();
@@ -46,15 +48,26 @@ class UserController extends AdminController
 
         $request->has('profileType')? $profileTypeFilter = $request->get('profileType') : $profileTypeFilter = null;
         $request->has('statusType')? $statusTypeFilter  = $request->get('statusType') : $statusTypeFilter = null;
+        $start = ($page - 1) * $perPage;
+        if($page==1) $start = 0;
         $userList = $this->siteUsers->getUserList($profileTypeFilter,$statusTypeFilter);
+        $count = count($userList);
+        if($count>0)
+        $pages = floor($count/$perPage);
+        else
+            $pages=0;
 
+        $userList = $userList->slice($start,$perPage);
         $this->vars = array_add($this->vars, 'profileType', $profileType);
+        $this->vars = array_add($this->vars, 'count', $count);
+        $this->vars = array_add($this->vars, 'curr_page', $page);
+        $this->vars = array_add($this->vars, 'pages', $pages);
         $this->vars = array_add($this->vars, 'statusType', $statusType);
         $this->vars = array_add($this->vars, 'totals', $totals);
         $this->vars = array_add($this->vars, 'totalsByUserType', $totalsByUserType);
         $this->vars = array_add($this->vars, 'userList', $userList);
-
-        //dd($this->vars);
+        $pagination = view(config('settings.theme') . '.pagination')->with($this->vars)->render();
+        $this->vars = array_add($this->vars, 'pagination', $pagination);
 
         $this->content = view(config('settings.theme') . '.profilesManagement.profilesManagement')->with($this->vars)->render();
 

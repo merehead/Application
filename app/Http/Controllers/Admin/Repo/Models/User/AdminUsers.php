@@ -111,8 +111,7 @@ class AdminUsers extends AdminModel
         if (empty($profileTypeFilter)) {
             $profileList = CarersProfile::all(/*['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id']*/)
                 ->merge(PurchasersProfile::all(/*['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id']*/))
-                ->sortByDesc('id')
-                ->slice(0, 40);
+                ->sortByDesc('id');
 
             $userProfileList = collect();
 

@@ -133,12 +133,21 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
 
     Route::resource('/user','User\UserController', ['except' => ['show']]);
     Route::get('/user/getCarerImage/{id}','User\UserController@getCarerImage');
+    Route::get('/user/page/{p?}','User\UserController@index')->name('user_pagination');;
     Route::resource('/booking','Booking\BookingController', ['only' => ['index']]);
     Route::resource('/blog','Blog\BlogController');
 
     Route::get('/financial','FinancialController@index')->name('financial');
     Route::get('/fees','FeesController@index')->name('fees');
     Route::post('/fees','FeesController@update')->name('feespost');
+    Route::get('/holidays','HolidaysController@index')->name('holidays');
+    Route::post('/holidays','HolidaysController@update')->name('holidaysPost');
+
+    Route::get('/settings','SettingsController@index')->name('settingsAdmin');
+    Route::post('/settings','SettingsController@update')->name('settingsAdminPost');
+
+    Route::get('/carer-wages','CarerWagesController@index')->name('CarerWages');
+    Route::post('/carer-wages','CarerWagesController@update')->name('CarerWagesPost');
 
 
     Route::get('/booking-transactions', 'AdminSitePayment@getBookingTransactions')->name('BookingTransactions');

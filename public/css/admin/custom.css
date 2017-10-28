@@ -30,3 +30,8 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
+a.pagination__item.act{
+    background:#80cb2d;color:#fff;-webkit-transition:all .3s ease;transition:all .3s ease;
+    background-color: none;
+    border-color: none;
+}

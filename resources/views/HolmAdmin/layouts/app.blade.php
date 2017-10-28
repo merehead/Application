@@ -14,8 +14,11 @@
     <link rel="stylesheet" href="{{asset('css/admin/main2.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/admin/main4.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/admin/custom.css')}}">
+    <link rel="stylesheet" href="{{asset('css/cupertino/jquery-ui.min.css')}}">
     <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap-notify.min.js')}}"></script>
     <script src="{{asset('js/admin/main.js')}}"></script>
 </head>
 <body>

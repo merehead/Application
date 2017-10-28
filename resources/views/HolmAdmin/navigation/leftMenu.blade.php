@@ -111,7 +111,7 @@
             </a>
         </li>
         <li class="adminNav__item">
-            <a href="#" class="adminNav__link">
+            <a href="{{route('CarerWages')}}" class="adminNav__link">
                 <span class="adminNav__ico">
                   <i class="fa fa-address-card" aria-hidden="true"></i>
                 </span>
@@ -128,6 +128,28 @@
                 </span>
                 <span class="adminNav__text">
                    Blog
+                </span>
+            </a>
+        </li>
+
+        <li class="adminNav__item">
+            <a href="{{route('holidays')}}" class="adminNav__link">
+                <span class="adminNav__ico">
+                  <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                </span>
+                <span class="adminNav__text">
+                   Holidays
+                </span>
+            </a>
+        </li>
+
+        <li class="adminNav__item">
+            <a href="{{route('settingsAdmin')}}" class="adminNav__link">
+                <span class="adminNav__ico">
+                  <i class="fa fa-cog" aria-hidden="true"></i>
+                </span>
+                <span class="adminNav__text">
+                   Admin Settings
                 </span>
             </a>
         </li>
