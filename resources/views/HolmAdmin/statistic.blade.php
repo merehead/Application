@@ -759,17 +759,18 @@
 
                         <td class="textCenter">
                       <span>
-                        123
+                        {{(int)$transactionsStatistic['week']->last}}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                          130
+                          {{(int)$transactionsStatistic['week']->current}}
                       </span>
                         </td>
                         <td class="textCenter">
-                      <span class="negativeValue">
-                        - 2
+                      <span class="{{$transactionsStatistic['week']->current - $transactionsStatistic['week']->last < 0 ? 'negativeValue' : 'positiveValue'}}">
+                        {{$transactionsStatistic['week']->current - $transactionsStatistic['week']->last < 0 ? '-' : '+'}}
+                        {{$transactionsStatistic['week']->current - $transactionsStatistic['week']->last}}
                       </span>
                         </td>
                     </tr>
@@ -782,17 +783,18 @@
 
                         <td class="textCenter">
                       <span>
-                      347
+                        {{(int)$transactionsStatistic['month']->last}}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                          130
+                          {{(int)$transactionsStatistic['month']->current}}
                       </span>
                         </td>
                         <td class="textCenter">
-                      <span class="positiveValue">
-                        + 41
+                      <span class="{{$transactionsStatistic['month']->current - $transactionsStatistic['month']->last < 0 ? 'negativeValue' : 'positiveValue'}}">
+                        {{$transactionsStatistic['month']->current - $transactionsStatistic['month']->last < 0 ? '-' : '+'}}
+                          {{$transactionsStatistic['month']->current - $transactionsStatistic['month']->last}}
                       </span>
                         </td>
                     </tr>

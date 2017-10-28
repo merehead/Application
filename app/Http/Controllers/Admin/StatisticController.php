@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,7 @@ class StatisticController extends AdminController
     }
 
     public function index(){
+        //Bookings
         $bookingsStatistic = DB::select('SELECT
               SUM(a.price) as price,
               COUNT(a.price) as amount,
@@ -33,6 +35,7 @@ class StatisticController extends AdminController
             WHERE b.status_id  IN (2, 5, 7)');
         $this->vars['bookingsStatisticTotal'] = $bookingsStatisticTotal;
 
+        //User types
         $usersStatistic['purchasers_amount'] = DB::select("SELECT COUNT(p.id) as count
             FROM  purchasers_profiles p WHERE p.registration_status = 'completed'")[0]->count;
         $usersStatistic['carers_amount'] = DB::select("SELECT COUNT(p.id) as count
@@ -47,6 +50,7 @@ class StatisticController extends AdminController
              FROM service_users_profiles p WHERE  p.registration_status != 'completed'")[0]->count;
         $this->vars['usersStatistic'] = $usersStatistic;
 
+        //Most active carers
         $mostActiveCarers = DB::select('SELECT u.id, p.first_name, p.family_name,
                               (
                                 SELECT COUNT(a.id)
@@ -66,6 +70,8 @@ class StatisticController extends AdminController
                               JOIN carers_profiles p ON p.id = u.id
                             ORDER BY appointments_per_last_week DESC LIMIT 5');
         $this->vars['mostActiveCarers'] = $mostActiveCarers;
+
+        //Most active purchasers
         $mostActivePurchasers = DB::select('SELECT u.id, p.first_name, p.family_name,
                           (
                             SELECT COUNT(a.id)
@@ -86,6 +92,37 @@ class StatisticController extends AdminController
                         ORDER BY appointments_per_last_week DESC LIMIT 5;');
         $this->vars['mostActivePurchasers'] = $mostActivePurchasers;
 
+
+        //Transactions
+        $date = Carbon::now();
+        $nextSunday = $date->endOfWeek();
+        $transactionsStatistic['week'] = DB::select('SELECT
+                      (
+                        SELECT SUM(t.amount)
+                        FROM transactions t
+                        WHERE UNIX_TIMESTAMP(t.created_at)  BETWEEN  '.$nextSunday->timestamp.' - 1209600 AND '.$nextSunday->timestamp.' - 604800
+                      ) as `last`,
+                      (
+                        SELECT SUM(t.amount)
+                        FROM transactions t
+                        WHERE UNIX_TIMESTAMP(t.created_at) > '.$nextSunday->timestamp.' - 604800
+                      ) as `current`')[0];
+        $endOfMonth = $date->endOfMonth();
+        $transactionsStatistic['month'] = DB::select('SELECT
+                      (
+                        SELECT SUM(t.amount)
+                        FROM transactions t
+                        WHERE UNIX_TIMESTAMP(t.created_at)  BETWEEN  '.$endOfMonth->timestamp.' - 5184000 AND '.$endOfMonth->timestamp.' - 2592000
+                      ) as `last`,
+                      (
+                        SELECT SUM(t.amount)
+                        FROM transactions t
+                        WHERE UNIX_TIMESTAMP(t.created_at) > '.$nextSunday->timestamp.' - 2592000
+                      ) as `current`')[0];
+        $this->vars['transactionsStatistic'] = $transactionsStatistic;
+
+
+        //Age
         $ageStatistic['purchasers'] = DB::select('SELECT
           (SELECT COUNT(id) FROM purchasers_profiles WHERE YEAR(NOW()) - YEAR(DoB) <= 19) as `19`,
           (SELECT COUNT(id) FROM purchasers_profiles WHERE YEAR(NOW()) - YEAR(DoB) BETWEEN 20 AND 39) as 20_39,
@@ -106,6 +143,7 @@ class StatisticController extends AdminController
           (SELECT COUNT(id) FROM carers_profiles WHERE YEAR(NOW()) - YEAR(DoB)  >= 80) as `80`')[0];
         $this->vars['ageStatistic'] = $ageStatistic;
 
+        //Gender
         $genderStatistic['purchasers'] = DB::select('SELECT
           (SELECT COUNT(id) FROM purchasers_profiles WHERE LOWER(gender) = \'male\') as male,
           (SELECT COUNT(id) FROM purchasers_profiles WHERE LOWER(gender) = \'female\') as female')[0];
