@@ -584,6 +584,11 @@ button:disabled:hover {
 
 div.ui-timepicker-container {
     z-index: 2000 !important;
+    padding: 10px;
+    box-shadow: 0 4px 10px #ccc;
+}
+.ui-widget.ui-widget-content{
+  border: none!important; 
 }
 
 .bookings-more {
