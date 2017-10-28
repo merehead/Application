@@ -32,7 +32,7 @@ class CarerWagesController extends AdminController
         //dd($request->all());
         $id = $request->get('carer_id');
         $rate = $request->get('hour_rate');
-        $wages->findOrNew($id);
+        $wages=$wages->firstOrNew(['carer_id'=>$id]);
         $wages->carer_id=$id;
         $wages->hour_rate=$rate;
         $wages->save();

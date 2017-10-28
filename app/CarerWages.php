@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CarerWages extends Model
 {
 
+    protected $fillable=['carer_id','hour_rate'];
 
     public function CarersProfile()
     {
