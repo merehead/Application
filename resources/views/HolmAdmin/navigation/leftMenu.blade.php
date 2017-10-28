@@ -1,7 +1,7 @@
 <nav class="adminNav">
     <ul class="adminNav__list">
         <li class="adminNav__item">
-            <a href="#" class="adminNav__link">
+            <a href="{{route('statistic')}}" class="adminNav__link {{\Request::route()->getName() == 'statistic' ? 'active' : ''}}">
                 <span class="adminNav__ico">
                   <i class="fa fa-bar-chart" aria-hidden="true"></i>
                 </span>
