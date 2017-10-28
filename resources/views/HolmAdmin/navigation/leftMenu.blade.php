@@ -111,7 +111,7 @@
             </a>
         </li>
         <li class="adminNav__item">
-            <a href="#" class="adminNav__link">
+            <a href="{{route('CarerWages')}}" class="adminNav__link">
                 <span class="adminNav__ico">
                   <i class="fa fa-address-card" aria-hidden="true"></i>
                 </span>

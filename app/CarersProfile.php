@@ -38,6 +38,11 @@ class CarersProfile extends Model
         return $this->belongsToMany('App\CarerReference', 'carer_profile_reference', 'carer_profile_id', 'reference_id');
     }
 
+    public function CarerWages()
+    {
+        return $this->belongsTo('App\CarerWages', 'carer_wages', 'id', 'carer_id');
+    }
+
     public function profileStatus(){
         return $this->belongsTo('App\UserStatus','profiles_status_id','id');
     }
