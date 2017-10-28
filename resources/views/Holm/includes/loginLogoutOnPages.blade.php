@@ -86,16 +86,24 @@
 
             @endif
 
-            <div class="dropdownLogout">
-                <a href="{{ route('logout') }}" class="dropdownLogout__item"
-                   onclick="event.preventDefault();
+                @if(Auth::user()->isAdmin())
+                <div class="dropdownLogout">
+                    <a href="{{ url('/admin') }}" class="dropdownLogout__item">
+                        Admin Panel
+                    </a>
+                </div>
+                @endif
+
+                <div class="dropdownLogout">
+                    <a href="{{ route('logout') }}" class="dropdownLogout__item"
+                       onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                    Logout
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
-            </div>
+                        Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                </div>
 
         </div>
 

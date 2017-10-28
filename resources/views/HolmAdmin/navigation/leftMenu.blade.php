@@ -122,17 +122,6 @@
         </li>
 
         <li class="adminNav__item">
-            <a href="{{route('blog.index')}}" class="adminNav__link">
-                <span class="adminNav__ico">
-                  <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-                </span>
-                <span class="adminNav__text">
-                   Blog
-                </span>
-            </a>
-        </li>
-
-        <li class="adminNav__item">
             <a href="{{route('holidays')}}" class="adminNav__link">
                 <span class="adminNav__ico">
                   <i class="fa fa-birthday-cake" aria-hidden="true"></i>
