@@ -92,11 +92,10 @@ class StatisticController extends AdminController
                         ORDER BY appointments_per_last_week DESC LIMIT 5;');
         $this->vars['mostActivePurchasers'] = $mostActivePurchasers;
 
-
-        //Transactions
+        //Income
         $date = Carbon::now();
         $nextSunday = $date->endOfWeek();
-        $transactionsStatistic['week'] = DB::select('SELECT
+        $incomeStatistic['week'] = DB::select('SELECT
                       (
                         SELECT SUM(t.amount)
                         FROM transactions t
@@ -108,7 +107,7 @@ class StatisticController extends AdminController
                         WHERE UNIX_TIMESTAMP(t.created_at) > '.$nextSunday->timestamp.' - 604800
                       ) as `current`')[0];
         $endOfMonth = $date->endOfMonth();
-        $transactionsStatistic['month'] = DB::select('SELECT
+        $incomeStatistic['month'] = DB::select('SELECT
                       (
                         SELECT SUM(t.amount)
                         FROM transactions t
@@ -119,7 +118,91 @@ class StatisticController extends AdminController
                         FROM transactions t
                         WHERE UNIX_TIMESTAMP(t.created_at) > '.$nextSunday->timestamp.' - 2592000
                       ) as `current`')[0];
+        $this->vars['incomeStatistic'] = $incomeStatistic;
+
+        //Transactions amount
+        $date = Carbon::now();
+        $nextSunday = $date->endOfWeek();
+        $transactionsStatistic['week'] = DB::select('SELECT
+                      (
+                        SELECT COUNT(t.id)
+                        FROM transactions t
+                        WHERE UNIX_TIMESTAMP(t.created_at)  BETWEEN  '.$nextSunday->timestamp.' - 1209600 AND '.$nextSunday->timestamp.' - 604800
+                      ) as `last`,
+                      (
+                        SELECT COUNT(t.id)
+                        FROM transactions t
+                        WHERE UNIX_TIMESTAMP(t.created_at) > '.$nextSunday->timestamp.' - 604800
+                      ) as `current`')[0];
+        $endOfMonth = $date->endOfMonth();
+        $transactionsStatistic['month'] = DB::select('SELECT
+                      (
+                        SELECT COUNT(t.id)
+                        FROM transactions t
+                        WHERE UNIX_TIMESTAMP(t.created_at)  BETWEEN  '.$endOfMonth->timestamp.' - 5184000 AND '.$endOfMonth->timestamp.' - 2592000
+                      ) as `last`,
+                      (
+                        SELECT COUNT(t.id)
+                        FROM transactions t
+                        WHERE UNIX_TIMESTAMP(t.created_at) > '.$nextSunday->timestamp.' - 2592000
+                      ) as `current`')[0];
         $this->vars['transactionsStatistic'] = $transactionsStatistic;
+
+        //New carers
+        $date = Carbon::now();
+        $nextSunday = $date->endOfWeek();
+        $newCarersStatistic['week'] = DB::select('SELECT
+                      (
+                        SELECT COUNT(t.id)
+                        FROM carers_profiles t
+                        WHERE UNIX_TIMESTAMP(t.created_at)  BETWEEN  '.$nextSunday->timestamp.' - 1209600 AND '.$nextSunday->timestamp.' - 604800
+                      ) as `last`,
+                      (
+                        SELECT COUNT(t.id)
+                        FROM carers_profiles t
+                        WHERE UNIX_TIMESTAMP(t.created_at) > '.$nextSunday->timestamp.' - 604800
+                      ) as `current`')[0];
+        $endOfMonth = $date->endOfMonth();
+        $newCarersStatistic['month'] = DB::select('SELECT
+                      (
+                        SELECT COUNT(t.id)
+                        FROM carers_profiles t
+                        WHERE UNIX_TIMESTAMP(t.created_at)  BETWEEN  '.$endOfMonth->timestamp.' - 5184000 AND '.$endOfMonth->timestamp.' - 2592000
+                      ) as `last`,
+                      (
+                        SELECT COUNT(t.id)
+                        FROM carers_profiles t
+                        WHERE UNIX_TIMESTAMP(t.created_at) > '.$nextSunday->timestamp.' - 2592000
+                      ) as `current`')[0];
+        $this->vars['newCarersStatistic'] = $newCarersStatistic;
+
+        //New purchasers
+        $date = Carbon::now();
+        $nextSunday = $date->endOfWeek();
+        $newPurchaserStatistic['week'] = DB::select('SELECT
+                      (
+                        SELECT COUNT(t.id)
+                        FROM purchasers_profiles t
+                        WHERE UNIX_TIMESTAMP(t.created_at)  BETWEEN  '.$nextSunday->timestamp.' - 1209600 AND '.$nextSunday->timestamp.' - 604800
+                      ) as `last`,
+                      (
+                        SELECT COUNT(t.id)
+                        FROM purchasers_profiles t
+                        WHERE UNIX_TIMESTAMP(t.created_at) > '.$nextSunday->timestamp.' - 604800
+                      ) as `current`')[0];
+        $endOfMonth = $date->endOfMonth();
+        $newPurchaserStatistic['month'] = DB::select('SELECT
+                      (
+                        SELECT COUNT(t.id)
+                        FROM purchasers_profiles t
+                        WHERE UNIX_TIMESTAMP(t.created_at)  BETWEEN  '.$endOfMonth->timestamp.' - 5184000 AND '.$endOfMonth->timestamp.' - 2592000
+                      ) as `last`,
+                      (
+                        SELECT COUNT(t.id)
+                        FROM purchasers_profiles t
+                        WHERE UNIX_TIMESTAMP(t.created_at) > '.$nextSunday->timestamp.' - 2592000
+                      ) as `current`')[0];
+        $this->vars['newPurchaserStatistic'] = $newPurchaserStatistic;
 
 
         //Age

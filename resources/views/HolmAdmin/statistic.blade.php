@@ -485,17 +485,18 @@
 
                         <td class="textCenter">
                       <span>
-                        123
+                        {{(int)$incomeStatistic['week']->last}}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                         130
+                          {{(int)$incomeStatistic['week']->current}}
                       </span>
                         </td>
                         <td class="textCenter">
-                      <span class="negativeValue">
-                        - 2
+                      <span class="{{$incomeStatistic['week']->current - $incomeStatistic['week']->last < 0 ? 'negativeValue' : 'positiveValue'}}">
+                        {{$incomeStatistic['week']->current - $incomeStatistic['week']->last < 0 ? '' : '+'}}
+                          {{$incomeStatistic['week']->current - $incomeStatistic['week']->last}}
                       </span>
                         </td>
                     </tr>
@@ -508,203 +509,18 @@
 
                         <td class="textCenter">
                       <span>
-                      347
+                        {{(int)$incomeStatistic['month']->last}}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                          130
+                          {{(int)$incomeStatistic['month']->current}}
                       </span>
                         </td>
                         <td class="textCenter">
-                      <span class="positiveValue">
-                        + 41
-                      </span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-        <div class="statisticBox">
-            <div class="tableWrap">
-                <div class="statisticHead">
-                    <h2 class="statisticHead__title">
-                  <span class="statisticHead__ico">
-                    <i class="fa fa-briefcase" aria-hidden="true"></i>
-                  </span>
-                        New carers
-                    </h2>
-
-                </div>
-                <table class="statisticTable">
-                    <thead>
-                    <tr>
-                        <td class=" ">
-                      <span class="ordinaryTitle td-stat td-stat--start">
-                      PERIOD
-                      </span>
-                        </td>
-                        <td class=" ">
-                      <span class="ordinaryTitle td-stat ">
-                      PREVIOUS
-                      </span>
-                        </td>
-                        <td class=" ">
-                      <span class="ordinaryTitle td-stat ">
-                      CURRENT
-                      </span>
-                        </td>
-                        <td class=" ">
-                      <span class="ordinaryTitle td-stat ">
-                      GROWTH,  (IN %)
-                      </span>
-                        </td>
-
-
-
-
-
-                    </tr>
-
-
-                    </thead>
-                    <tbody>
-                    <tr class="statisticRow">
-                        <td>
-                      <span>
-                       week
-                      </span>
-                        </td>
-
-                        <td class="textCenter">
-                      <span>
-                        123
-                      </span>
-                        </td>
-                        <td class="textCenter">
-                      <span>
-                          130
-                      </span>
-                        </td>
-                        <td class="textCenter">
-                      <span class="negativeValue">
-                        - 2
-                      </span>
-                        </td>
-                    </tr>
-                    <tr class="statisticRow">
-                        <td>
-                      <span>
-                       month
-                      </span>
-                        </td>
-
-                        <td class="textCenter">
-                      <span>
-                      347
-                      </span>
-                        </td>
-                        <td class="textCenter">
-                      <span>
-                          130
-                      </span>
-                        </td>
-                        <td class="textCenter">
-                      <span class="positiveValue">
-                        + 41
-                      </span>
-                        </td>
-                    </tr>
-
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-    </div>
-    <div class="statisticGroup">
-        <div class="statisticBox">
-            <div class="tableWrap">
-                <div class="statisticHead">
-                    <h2 class="statisticHead__title">
-                  <span class="statisticHead__ico">
-                    <i class="fa fa-briefcase" aria-hidden="true"></i>
-                  </span>
-                        NUMBER OF ACTIVE CARERS
-                    </h2>
-
-                </div>
-                <table class="statisticTable">
-                    <thead>
-                    <tr>
-                        <td class=" ">
-                      <span class="ordinaryTitle td-stat td-stat--start">
-                      PERIOD
-                      </span>
-                        </td>
-                        <td class=" ">
-                      <span class="ordinaryTitle td-stat ">
-                      PREVIOUS,  £
-                      </span>
-                        </td>
-                        <td class=" ">
-                      <span class="ordinaryTitle td-stat ">
-                      CURRENT,  £
-                      </span>
-                        </td>
-                        <td class=" ">
-                      <span class="ordinaryTitle td-stat ">
-                        GROWTH,  (IN %)
-                      </span>
-                        </td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="statisticRow">
-                        <td>
-                      <span>
-                       week
-                      </span>
-                        </td>
-
-                        <td class="textCenter">
-                      <span>
-                        123
-                      </span>
-                        </td>
-                        <td class="textCenter">
-                      <span>
-                          130
-                      </span>
-                        </td>
-                        <td class="textCenter">
-                      <span class="negativeValue">
-                        - 2
-                      </span>
-                        </td>
-                    </tr>
-                    <tr class="statisticRow">
-                        <td>
-                      <span>
-                       month
-                      </span>
-                        </td>
-
-                        <td class="textCenter">
-                      <span>
-                      347
-                      </span>
-                        </td>
-                        <td class="textCenter">
-                      <span>
-                          130
-                      </span>
-                        </td>
-                        <td class="textCenter">
-                      <span class="positiveValue">
-                        + 41
+                      <span class="{{$incomeStatistic['month']->current - $incomeStatistic['month']->last < 0 ? 'negativeValue' : 'positiveValue'}}">
+                        {{$incomeStatistic['month']->current - $incomeStatistic['month']->last < 0 ? '' : '+'}}
+                          {{$incomeStatistic['month']->current - $incomeStatistic['month']->last}}
                       </span>
                         </td>
                     </tr>
@@ -744,7 +560,7 @@
                         </td>
                         <td class=" ">
                       <span class="ordinaryTitle td-stat ">
-                        GROWTH, £
+                        GROWTH
                       </span>
                         </td>
                     </tr>
@@ -769,8 +585,103 @@
                         </td>
                         <td class="textCenter">
                       <span class="{{$transactionsStatistic['week']->current - $transactionsStatistic['week']->last < 0 ? 'negativeValue' : 'positiveValue'}}">
-                        {{$transactionsStatistic['week']->current - $transactionsStatistic['week']->last < 0 ? '-' : '+'}}
-                        {{$transactionsStatistic['week']->current - $transactionsStatistic['week']->last}}
+                        {{$transactionsStatistic['week']->current - $transactionsStatistic['week']->last < 0 ? '' : '+'}}
+                          {{$transactionsStatistic['week']->current - $transactionsStatistic['week']->last}}
+                      </span>
+                        </td>
+                    </tr>
+                    <tr class="statisticRow">
+                        <td>
+                      <span>
+                       month
+                      </span>
+                        </td>
+
+                        <td class="textCenter">
+                      <span>
+                        {{(int)$transactionsStatistic['month']->last}}
+                      </span>
+                        </td>
+                        <td class="textCenter">
+                      <span>
+                          {{(int)$transactionsStatistic['month']->current}}
+                      </span>
+                        </td>
+                        <td class="textCenter">
+                      <span class="{{$transactionsStatistic['month']->current - $transactionsStatistic['month']->last < 0 ? 'negativeValue' : 'positiveValue'}}">
+                        {{$transactionsStatistic['month']->current - $transactionsStatistic['month']->last < 0 ? '' : '+'}}
+                          {{$transactionsStatistic['month']->current - $transactionsStatistic['month']->last}}
+                      </span>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="statisticGroup">
+
+    </div>
+    <div class="statisticGroup">
+        <div class="statisticBox">
+            <div class="tableWrap">
+                <div class="statisticHead">
+                    <h2 class="statisticHead__title">
+                  <span class="statisticHead__ico">
+                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                  </span>
+                        NEW PURCHASERS
+                    </h2>
+                </div>
+                <table class="statisticTable">
+                    <thead>
+                    <tr>
+                        <td class=" ">
+                      <span class="ordinaryTitle td-stat td-stat--start">
+                      PERIOD
+                      </span>
+                        </td>
+                        <td class=" ">
+                      <span class="ordinaryTitle td-stat ">
+                      PREVIOUS
+                      </span>
+                        </td>
+                        <td class=" ">
+                      <span class="ordinaryTitle td-stat ">
+                      CURRENT
+                      </span>
+                        </td>
+                        <td class=" ">
+                      <span class="ordinaryTitle td-stat ">
+                        GROWTH
+                      </span>
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="statisticRow">
+                        <td>
+                      <span>
+                       week
+                      </span>
+                        </td>
+
+                        <td class="textCenter">
+                      <span>
+                        {{(int)$newPurchaserStatistic['week']->last}}
+                      </span>
+                        </td>
+                        <td class="textCenter">
+                      <span>
+                          {{(int)$newPurchaserStatistic['week']->current}}
+                      </span>
+                        </td>
+                        <td class="textCenter">
+                      <span class="{{$newPurchaserStatistic['week']->current - $newPurchaserStatistic['week']->last < 0 ? 'negativeValue' : 'positiveValue'}}">
+                        {{$newPurchaserStatistic['week']->current - $newPurchaserStatistic['week']->last < 0 ? '-' : '+'}}
+                          {{$newPurchaserStatistic['week']->current - $newPurchaserStatistic['week']->last}}
                       </span>
                         </td>
                     </tr>
@@ -798,100 +709,8 @@
                       </span>
                         </td>
                     </tr>
-
                     </tbody>
                 </table>
-
-            </div>
-        </div>
-    </div>
-    <div class="statisticGroup">
-        <div class="statisticBox">
-            <div class="tableWrap">
-                <div class="statisticHead">
-                    <h2 class="statisticHead__title">
-                  <span class="statisticHead__ico">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                  </span>
-                        NEW PURCHASERS
-                    </h2>
-
-                </div>
-                <table class="statisticTable">
-                    <thead>
-                    <tr>
-                        <td class=" ">
-                      <span class="ordinaryTitle td-stat td-stat--start">
-                      PERIOD
-                      </span>
-                        </td>
-                        <td class=" ">
-                      <span class="ordinaryTitle td-stat ">
-                      PREVIOUS,  £
-                      </span>
-                        </td>
-                        <td class=" ">
-                      <span class="ordinaryTitle td-stat ">
-                      CURRENT,  £
-                      </span>
-                        </td>
-                        <td class=" ">
-                      <span class="ordinaryTitle td-stat ">
-                        GROWTH,  (IN %)
-                      </span>
-                        </td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="statisticRow">
-                        <td>
-                      <span>
-                       week
-                      </span>
-                        </td>
-
-                        <td class="textCenter">
-                      <span>
-                        123
-                      </span>
-                        </td>
-                        <td class="textCenter">
-                      <span>
-                       130
-                      </span>
-                        </td>
-                        <td class="textCenter">
-                      <span class="negativeValue">
-                        - 2
-                      </span>
-                        </td>
-                    </tr>
-                    <tr class="statisticRow">
-                        <td>
-                      <span>
-                       month
-                      </span>
-                        </td>
-
-                        <td class="textCenter">
-                      <span>
-                      347
-                      </span>
-                        </td>
-                        <td class="textCenter">
-                      <span>
-                         130
-                      </span>
-                        </td>
-                        <td class="textCenter">
-                      <span class="positiveValue">
-                        + 41
-                      </span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-
             </div>
         </div>
         <div class="statisticBox">
@@ -899,11 +718,10 @@
                 <div class="statisticHead">
                     <h2 class="statisticHead__title">
                   <span class="statisticHead__ico">
-                    <i class="fa fa-list-ul" aria-hidden="true"></i>
+                    <i class="fa fa-briefcase" aria-hidden="true"></i>
                   </span>
-                        NUMBER OF ACTIVE Purchasers
+                        New carers
                     </h2>
-
                 </div>
                 <table class="statisticTable">
                     <thead>
@@ -925,7 +743,7 @@
                         </td>
                         <td class=" ">
                       <span class="ordinaryTitle td-stat ">
-                        GROWTH,  (IN %)
+                      GROWTH
                       </span>
                         </td>
                     </tr>
@@ -940,17 +758,18 @@
 
                         <td class="textCenter">
                       <span>
-                        123
+                        {{(int)$newCarersStatistic['week']->last}}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                         130
+                          {{(int)$newCarersStatistic['week']->current}}
                       </span>
                         </td>
                         <td class="textCenter">
-                      <span class="negativeValue">
-                        - 2
+                      <span class="{{$newCarersStatistic['week']->current - $newCarersStatistic['week']->last < 0 ? 'negativeValue' : 'positiveValue'}}">
+                        {{$newCarersStatistic['week']->current - $newCarersStatistic['week']->last < 0 ? '' : '+'}}
+                          {{$newCarersStatistic['week']->current - $newCarersStatistic['week']->last}}
                       </span>
                         </td>
                     </tr>
@@ -963,24 +782,24 @@
 
                         <td class="textCenter">
                       <span>
-                      347
+                        {{(int)$newCarersStatistic['month']->last}}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                       130
+                          {{(int)$newCarersStatistic['month']->current}}
                       </span>
                         </td>
                         <td class="textCenter">
-                      <span class="positiveValue">
-                        + 41
+                      <span class="{{$newCarersStatistic['month']->current - $newCarersStatistic['month']->last < 0 ? 'negativeValue' : 'positiveValue'}}">
+                        {{$newCarersStatistic['month']->current - $newCarersStatistic['month']->last < 0 ? '' : '+'}}
+                          {{$newCarersStatistic['month']->current - $newCarersStatistic['month']->last}}
                       </span>
                         </td>
                     </tr>
 
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
