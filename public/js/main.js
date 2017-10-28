@@ -1133,7 +1133,7 @@ $(document).ready(function () {
                 $(this).change();
             },
             timeFormat: 'h:mm p',
-            interval: 30,
+            interval: 60,
             //minTime: '10',
             //maxTime: '6:00pm',_step48
             //defaultTime: '18',
@@ -1147,7 +1147,7 @@ $(document).ready(function () {
                 $(this).change();
             },
             timeFormat: 'h:mm p',
-            interval: 30,
+            interval: 60,
             minTime: getTime(),
             //maxTime: '6:00pm',_step48
             //defaultTime: '18',
