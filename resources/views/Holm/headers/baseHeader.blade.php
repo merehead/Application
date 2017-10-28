@@ -7,24 +7,24 @@
             <div class="collapseBox">
                 <div class="collapseBox__item">
                 <a href="{{ route('welcomeCarer') }}" class="carerSelf">i am a carer</a>
-
+                @if (Auth::check())
+                  <a href="{{ route('logout') }}" class="mob-nav-link"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    Logout
+                  </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                @endif
                 <div class="headerNav_container">
                     <div class="headerNav">
                         <a href="{{route('searchPage')}}" class="headerNav__link">find a carer</a>
                         <a href="{{route('AboutPage')}}" class="headerNav__link">about us</a>
                         <a href="{{route('ContactPage')}}" class="mob-nav-link">contact us</a>
                         <a href="{{route('FaqPage')}}" class="mob-nav-link">Frequently Asked Questions</a>
-                        @if (Auth::check())
-                            <a href="{{ route('logout') }}" class="mob-nav-link"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        @endif
                     </div>
+
                     <div class="headerSocial">
                         <a href="https://www.facebook.com/HolmCareUK/" class="centeredLink headerSocial__link headerSocial__link--facebook">
                             <i class="fa fa-facebook"></i>

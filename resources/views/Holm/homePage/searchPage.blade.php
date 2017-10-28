@@ -6,7 +6,7 @@
             changeYear: true,
             dateFormat: "dd/mm/yy",
             showAnim: "slideDown",
-
+            minDate: "+0D",
             maxDate: "+20Y",
             yearRange: "0:+10"
         });
