@@ -128,7 +128,7 @@
                             <div class="fieldWrap">
                                 <form method="post" id="wages{{$carer->id}}" action="{{route('CarerWagesPost')}}">
                                     {{ csrf_field() }}
-                                <input type="text" value="{{isset($carer->CarerWages->hour_rate)?:10}}" class="formItem
+                                <input type="text" value="{{$carer->wage}}" class="formItem
                                 formItem--input" placeholder="13"  name="hour_rate">
                                 <input type="hidden" name="carer_id" value="{{$carer->id}}">
                                 </form>

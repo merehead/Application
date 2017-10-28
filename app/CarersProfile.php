@@ -38,9 +38,14 @@ class CarersProfile extends Model
         return $this->belongsToMany('App\CarerReference', 'carer_profile_reference', 'carer_profile_id', 'reference_id');
     }
 
-    public function CarerWages()
+    public function CarerWages() //todo why belongsTo?
     {
         return $this->belongsTo('App\CarerWages', 'carer_wages', 'id', 'carer_id');
+    }
+
+    public function CarerWage() //todo why belongsTo?
+    {
+        return $this->hasOne(CarerWages::class, 'carer_id');
     }
 
     public function profileStatus(){
@@ -196,6 +201,11 @@ WHERE `carer_id` = ".$this->id." LIMIT 0,4");
         return $this->first_name.' '.$this->family_name;
     }
 
+    public function getWageAttribute(){
+        if($this->CarerWage)
+            return $this->CarerWage->hour_rate;
+        return 10;
+    }
 }
 
 
