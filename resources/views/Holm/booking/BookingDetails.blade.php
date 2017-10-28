@@ -61,11 +61,9 @@
                             <span class="orderOptions__value">{{\Carbon\Carbon::parse($booking->date_from)->toFormattedDateString()}} - {{\Carbon\Carbon::parse($booking->date_to)->toFormattedDateString()}}</span>
                         </div>
                     </div>
-                    @if($user->user_type_id !== 4)
                         <div class="orderInfo__map">
                             <div id="map" style="width: 100%;height: 100%;"></div>
                         </div>
-                    @endif
                 </div>
             @else
                 <a href="{{$booking->bookingServiceUser()->first()->profile_link}}" class="profilePhoto orderInfo__photo">
@@ -248,16 +246,10 @@
                 <span class="ordinaryTitle__text ordinaryTitle__text--smaller">Appointments:</span>
             </h2>
             <div class="sliderContainer ">
-                <!-- <a href="" class="sliderArrow sliderArrow--left centeredLink">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                <a href="" class="sliderArrow sliderArrow--right centeredLink">
-                    <i class="fa fa-angle-right"></i>
-                </a> -->
                 <div class="appointmentSliderBox">
                     <div class="appointmentSlider owl-carousel">
                         @php($i = 1)
-                        @foreach($booking->appointments()->get() as $appointment)
+                        @foreach($booking->appointments as $appointment)
                             @if(in_array($appointment->status_id, [1, 2, 3]))
                                 @if($appointment->is_past)
                                     @php($class = 'progress')
@@ -448,9 +440,10 @@
     function codeAddress() {
       var address = '{{$carerProfile->town}} {{$carerProfile->address_line1}}';
 
-      if({{$user->user_type_id}} !== 1){
+      if({{$user->user_type_id}} !== 1 && {{$user->user_type_id}} !== 4){
         address = '{{$serviceUserProfile->town}} {{$serviceUserProfile->address_line1}}';
       }
+
 
       geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == 'OK') {
