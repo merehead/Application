@@ -143,6 +143,9 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::get('/holidays','HolidaysController@index')->name('holidays');
     Route::post('/holidays','HolidaysController@update')->name('holidaysPost');
 
+    Route::get('/settings','SettingsController@index')->name('settingsAdmin');
+    Route::post('/settings','SettingsController@update')->name('settingsAdminPost');
+
     Route::get('/carer-wages','CarerWagesController@index')->name('CarerWages');
     Route::post('/carer-wages','CarerWagesController@update')->name('CarerWagesPost');
 
