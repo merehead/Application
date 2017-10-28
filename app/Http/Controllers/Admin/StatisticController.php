@@ -238,6 +238,10 @@ class StatisticController extends AdminController
           (SELECT COUNT(id) FROM carers_profiles WHERE LOWER(gender) = \'female\') as female')[0];
         $this->vars['genderStatistic'] = $genderStatistic;
 
+        //chart
+        $dataForTransactionsChart = DB::select('SELECT COUNT(id) as amount, DATE_FORMAT(created_at, \'%M, %Y\') as month FROM transactions GROUP BY month ORDER BY month');
+        $this->vars['dataForTransactionsChart'] = $dataForTransactionsChart;
+
         $this->content = view(config('settings.theme').'.statistic')->with($this->vars)->render();
 
         return $this->renderOutput();
