@@ -1029,12 +1029,12 @@
                         </td>
                         <td class="textCenter">
                       <span>
-                      35
+                        {{$genderStatistic['service_users']->male}}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                        11
+                        {{$genderStatistic['service_users']->female}}
                       </span>
                         </td>
 
@@ -1048,12 +1048,12 @@
 
                         <td class="textCenter">
                       <span>
-                      189
+                          {{$genderStatistic['purchasers']->male}}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                        111
+                          {{$genderStatistic['purchasers']->female}}
                       </span>
                         </td>
 
@@ -1064,18 +1064,16 @@
                        Carer
                       </span>
                         </td>
-
                         <td class="textCenter">
                       <span>
-                      189
+                          {{$genderStatistic['carers']->male}}
                       </span>
                         </td>
                         <td class="textCenter">
                       <span>
-                        11111
+                        {{$genderStatistic['carers']->female}}
                       </span>
                         </td>
-
                     </tr>
                     </tbody>
                 </table>

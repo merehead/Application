@@ -104,10 +104,18 @@ class StatisticController extends AdminController
           (SELECT COUNT(id) FROM carers_profiles WHERE YEAR(NOW()) - YEAR(DoB) BETWEEN 40 AND 59) as 40_59,
           (SELECT COUNT(id) FROM carers_profiles WHERE YEAR(NOW()) - YEAR(DoB) BETWEEN 60 AND 79) as 60_79,
           (SELECT COUNT(id) FROM carers_profiles WHERE YEAR(NOW()) - YEAR(DoB)  >= 80) as `80`')[0];
-
-
-
         $this->vars['ageStatistic'] = $ageStatistic;
+
+        $genderStatistic['purchasers'] = DB::select('SELECT
+          (SELECT COUNT(id) FROM purchasers_profiles WHERE LOWER(gender) = \'male\') as male,
+          (SELECT COUNT(id) FROM purchasers_profiles WHERE LOWER(gender) = \'female\') as female')[0];
+        $genderStatistic['service_users'] = DB::select('SELECT
+          (SELECT COUNT(id) FROM service_users_profiles WHERE LOWER(gender) = \'male\') as male,
+          (SELECT COUNT(id) FROM service_users_profiles WHERE LOWER(gender) = \'female\') as female')[0];
+        $genderStatistic['carers'] = DB::select('SELECT
+          (SELECT COUNT(id) FROM carers_profiles WHERE LOWER(gender) = \'male\') as male,
+          (SELECT COUNT(id) FROM carers_profiles WHERE LOWER(gender) = \'female\') as female')[0];
+        $this->vars['genderStatistic'] = $genderStatistic;
 
         $this->content = view(config('settings.theme').'.statistic')->with($this->vars)->render();
 
