@@ -192,7 +192,7 @@ class PurchaserController extends FrontController implements Constants
             $inProgressBookings = Booking::whereIn('status_id', [self::CONFIRMED, self::IN_PROGRESS, self::DISPUTE])->where('purchaser_id', $user->id)->get();
             $inProgressAmount = 0;
             foreach ($inProgressBookings as $booking){
-                $inProgressAmount += ($booking->hours * $booking->hour_price);
+                $inProgressAmount += $booking->purchaser_price;
             }
 
             $this->vars = array_add($this->vars, 'inProgressBookings', $inProgressBookings);
@@ -201,7 +201,7 @@ class PurchaserController extends FrontController implements Constants
             $completedBookings = Booking::where('status_id', 7)->where('purchaser_id', $user->id)->get();
             $completedAmount = 0;
             foreach ($completedBookings as $booking){
-                $completedAmount += ($booking->hours * $booking->hour_price);
+                $completedAmount += $booking->purchaser_price;
             }
             $this->vars = array_add($this->vars, 'completedBookings', $completedBookings);
             $this->vars = array_add($this->vars, 'completedAmount', $completedAmount);

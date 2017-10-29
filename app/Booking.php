@@ -16,11 +16,6 @@ class Booking extends Model
             return date('d/m/Y', strtotime($this->appointments()->orderBy('date_start')->get()->first()->date_start));
     }
 
-/*    public function getDateFromAttribute(){
-        if($this->appointments()->get()->count())
-            return $this->appointments()->orderBy('date_start')->get()->first()->date_start;
-    }*/
-
     public function getDateEndAttribute()
     {
         if($this->appointments()->get()->count())
@@ -107,14 +102,6 @@ class Booking extends Model
         return $hours;
     }
 
-    public function getHourPriceAttribute(){
-        $user = Auth::user();
-        if($user->user_type_id == 3)
-            return 10;
-        else
-            return 13;
-    }
-
     public function getPriceAttribute(){
         $price = 0;
         $appointments = $this->appointments()->get();
@@ -140,10 +127,6 @@ class Booking extends Model
             $price += $appointment->purchaser_price;
 
         return round($price, 2);
-    }
-
-    public function getCarerAmountAttribute(){
-        return $this->hours * $this->purchaser_rate;
     }
 
     public function getDateFromAttribute(){

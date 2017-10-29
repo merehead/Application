@@ -201,10 +201,47 @@ WHERE `carer_id` = ".$this->id." LIMIT 0,4");
         return $this->first_name.' '.$this->family_name;
     }
 
+    //Wages (carer gets)
     public function getWageAttribute(){
         if($this->CarerWage)
             return $this->CarerWage->hour_rate;
         return 10;
+    }
+    public function getNightWageAttribute(){
+        if($this->CarerWage)
+            return $this->CarerWage->hour_rate * 1.2;
+        return 10 * 1.2;
+    }
+    public function getHolidayWageAttribute(){
+        if($this->CarerWage)
+            return $this->CarerWage->hour_rate * 1.5;
+        return 10 * 1.2;
+    }
+
+    //prices (purchaser pay)
+    public function getPriceAttribute(){
+        $fee = Fees::find(1);
+        if($fee){
+            return $fee->carer_rate + $fee->amount;
+        }
+
+        return 12;
+    }
+    public function getNightPriceAttribute(){
+        $fee = Fees::find(2);
+        if($fee){
+            return $fee->carer_rate + $fee->amount;
+        }
+
+        return 14.4;
+    }
+    public function getHolidayPriceAttribute(){
+        $fee = Fees::find(3);
+        if($fee){
+            return $fee->carer_rate + $fee->amount;
+        }
+
+        return 18;
     }
 }
 
