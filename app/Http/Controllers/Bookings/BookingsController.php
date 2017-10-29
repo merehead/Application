@@ -224,16 +224,15 @@ class BookingsController extends FrontController implements Constants
 
     public function accept(Booking $booking, StripeService $stripeService)
     {
-        $user = Auth::user();
         if ($booking->payment_method == 'credit_card') {
             try {
-                $purchase = PaymentTools::createCharge($booking->carer_amount * 100, $booking->card_token, $booking->id);
+                $purchase = PaymentTools::createCharge($booking->purchaser_price * 100, $booking->card_token, $booking->id);
             } catch (\Exception $ex) {
                 return response($this->formatResponse('error', $ex->getMessage()));
             }
         } else {
             try {
-                PaymentTools::createBonusPayment($booking->carer_amount, $booking->id);
+                PaymentTools::createBonusPayment($booking->purchaser_price, $booking->id);
             } catch (\Exception $ex) {
                 return response($this->formatResponse('error', $ex->getMessage()));
             }

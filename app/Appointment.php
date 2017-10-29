@@ -13,32 +13,21 @@ class Appointment extends Model implements Constants
 {
     protected $fillable = ['booking_id','date_start','date_end','amount_for_purchaser','amount_for_carer','status_id','carer_status_id','carer_status_date','purchaser_status_id','purchaser_status_date', 'time_from', 'time_to', 'periodicity', 'price_for_purchaser', 'price_for_carer', 'batch', 'payout', 'reminder_sent'];
 
-    public function getFormattedDateStartAttribute()
-    {
-        return date('d/m/Y', strtotime($this->date_start));
-    }
-
-//    public function getDateEndAttribute($value)
-//    {
-//        return date('d/m/Y',strtotime($value));
-//    }
-
-    //relation
+    /**
+     * Relations
+     */
     public function booking()
     {
         return $this->belongsTo('App\Booking');
     }
-
     public function disputePayment()
     {
         return $this->belongsTo('App\DisputePayment','id','appointment_id');
     }
-
     public function transaction()
     {
         return $this->belongsTo('App\AppointmentPayment','id','appointment_id');
     }
-
     public function appointmentStatus ()
     {
         return $this->belongsTo('App\AppointmentStatus','status_id','id');
@@ -52,26 +41,24 @@ class Appointment extends Model implements Constants
         return $this->belongsTo('App\AppointmentUserStatus','purchaser_status_id','id');
     }
 
-    //Accessors
+    /**
+     * Accessors
+     */
+    public function getFormattedDateStartAttribute()
+    {
+        return date('d/m/Y', strtotime($this->date_start));
+    }
+
     public function getHoursAttribute(){
         $timeFrom = (float)$this->time_from;
         $timeTo = (float)$this->time_to;
 
         $hours = 0;
 
-        switch($this->periodicity){
-            case 'daily':
-            case 'weekly':
-            case 'single':
-//                $dateStart = Carbon::createFromFormat('d/m/Y', $this->date_start);
-//                $dateEnd = Carbon::createFromFormat('d/m/Y', $this->date_end);
-//                $days = $dateEnd->diffInDays($dateStart);
-                if($timeTo > $timeFrom){
-                    $hours = round($timeTo) - round($timeFrom);
-                } else {
-                    $hours = 24 - round($timeFrom) + round($timeTo);
-                }
-                break;
+        if($timeTo > $timeFrom){
+            $hours = round($timeTo) - round($timeFrom);
+        } else {
+            $hours = 24 - round($timeFrom) + round($timeTo);
         }
 
         return $hours;
@@ -141,42 +128,47 @@ class Appointment extends Model implements Constants
 
     private function getHourPrice(int $hour, $date) : float {
         $user = Auth::user();
-        $userType = ($user && $user->user_type_id == 3 ? 'CARER' : 'PURCHASER');
-        if ($this->isDayHoliday($date)) {
-            return constant('self::'.$userType.'_RATE_HOLIDAYS');
-        } elseif($this->isHourNight($hour)){
-            return constant('self::'.$userType.'_RATE_NIGHT');
+        $carerProfile = $this->booking->bookingCarerProfile;
+        if($user && $user->user_type_id == 3){
+            if ($this->isDayHoliday($date)) {
+                return $carerProfile->holiday_wage;
+            } elseif($this->isHourNight($hour)){
+                return $carerProfile->holiday_wage;
+            } else {
+                return $carerProfile->wage;
+            }
         } else {
-            return constant('self::'.$userType.'_RATE_DAY');
+            if ($this->isDayHoliday($date)) {
+                return $carerProfile->holiday_price;
+            } elseif($this->isHourNight($hour)){
+                return $carerProfile->holiday_price;
+            } else {
+               return $carerProfile->price;
+            }
         }
     }
 
     private function getCarerHourPrice(int $hour, $date) : float {
-
+        $carerProfile = $this->booking->bookingCarerProfile;
         if ($this->isDayHoliday($date)) {
-            return constant('self::CARER_RATE_HOLIDAYS');
+            return $carerProfile->holiday_wage;
         } elseif($this->isHourNight($hour)){
-            return constant('self::CARER_RATE_NIGHT');
+            return $carerProfile->holiday_wage;
         } else {
-            return constant('self::CARER_RATE_DAY');
+            return $carerProfile->wage;
         }
     }
 
     private function getPurchaserHourPrice(int $hour, $date) : float {
-
+        $carerProfile = $this->booking->bookingCarerProfile;
         if ($this->isDayHoliday($date)) {
-            return constant('self::PURCHASER_RATE_HOLIDAYS');
+            return $carerProfile->holiday_price;
         } elseif($this->isHourNight($hour)){
-            return constant('self::PURCHASER_RATE_NIGHT');
+            return $carerProfile->holiday_price;
         } else {
-            return constant('self::PURCHASER_RATE_DAY');
+            return $carerProfile->price;
         }
     }
-
-
-
-
-
 
 
     public function getIsPastAttribute(){
