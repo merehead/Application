@@ -8,6 +8,6 @@
 
 return [
     'theme' => 'HolmAdmin',
-    'AdminUserPagination' =>'25',
+    'AdminUserPagination' =>'5',
     'frontTheme' => 'Holm',
 ];

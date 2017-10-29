@@ -13,30 +13,10 @@
             <div class="settingContainer">
                 <div class="settingCard">
                     <div class="settingCard__head">
-                        <h2>General</h2>
-                    </div>
-
-                    <div class="settingProfile">
-                        <a href="#" class="settingProfile__img">
-                            <img src="/img/admin/nik.png" alt="">
-                            {{--<span class="addIco">--}}
-                            {{--<i class="fa fa-plus-circle" aria-hidden="true"></i>--}}
-
-                            {{--</span>--}}
-                        </a>
-                        <div class="settingProfile__info">
-                            <div class="formField">
-                                <h2 class="fieldLabel">First name</h2>
-                                <div class="fieldWrap">
-                                    <input type="text" name="first_name" value="NIK SETH"
-                                           class="formItem formItem--without-ico" placeholder="Nik">
-                                </div>
-                            </div>
-
-                        </div>
+                        <h2>Change password</h2>
                     </div>
                     <div class="passWrap">
-                        <div class="passBox">
+                        <div class="passBox" style="margin-top: 20px;">
                             <div class="fieldRow">
                                 <div class="formField formField--half">
                                     <h2 class="fieldLabel">Change password</h2>
@@ -58,8 +38,8 @@
 
                 </div>
             </div>
-            <div class="settingBtn">
-                <a href="#" class="actionsBtn actionsBtn--accept actionsBtn--big"
+            <div style="padding-top: 50px;">
+                <a href="#" class="actionsBtn actionsBtn--accept actionsBtn--big  actionsBtn--no-centered"
                    onclick="event.preventDefault();saveGeneral();">
                     save
                 </a>
@@ -88,13 +68,13 @@
                 <thead>
                 <tr>
 
-                    <td class=" ordninary-td  ordninary-td--big ">
+                    <td class=" ordninary-td  ordninary-td--small ">
                     <span class="td-title td-title--fees-name">
-                      name
+                      id
                     </span>
 
                     </td>
-                    <td class="  ordninary-td ordninary-td--big   ">
+                    <td class="  ordninary-td ordninary-td--big" width="800px">
                     <span class="td-title td-title--email">
                       email
                     </span>
@@ -109,34 +89,7 @@
                     </td>
                 </tr>
 
-                <tr class="extra-tr">
-                    <td class="for-inner">
-                        <table class="innerTable ">
-                            <tbody>
-                            <tr>
-                                <td class="idField ">
-                                    <span class="extraTitle">id</span>
-                                </td>
-                                <td class="">
-                                    <span class="extraTitle">name</span>
-                                </td>
 
-
-                            </tr>
-
-                            </tbody>
-                        </table>
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>
-                </tr>
 
 
                 </thead>
@@ -144,8 +97,6 @@
                 <tbody>
                 @foreach($users as $user)
                     <tr>
-
-
                         <td class="for-inner">
                             <table class="innerTable ">
                                 <tbody>
@@ -153,16 +104,10 @@
                                     <td class=" ">
                                         <span>{{$user->id}}</span>
                                     </td>
-                                    <td class="">
-                                        <a href="#" class="tableLink">
-                                            {{$user->first_name.' '.$user->family_name}}
-                                        </a>
-                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </td>
-
                         <td>
                     <span>
                       {{$user->email}}

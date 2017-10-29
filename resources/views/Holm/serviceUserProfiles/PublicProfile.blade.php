@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="profileInfo__item">
                                     <h2 class="profileName profileName--big">
-                                        {{$serviceUsers->first_name}}&nbsp{{mb_substr($serviceUsers->family_name,0,1)}}.
+                                        {{$serviceUsers->first_name}} {{mb_substr($serviceUsers->family_name,0,1)}}.
                                     </h2>
 
                                     <p>

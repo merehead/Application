@@ -136,7 +136,7 @@
                 <div class="resultHeader Paginator">
                     <p class="resultHeader__info">Showing {{($page*$perPage)<$countAll?$page*$perPage:$countAll}} of {{$countAll}} CARERS</p>
                     <div class="sortLink">
-                        SORT BY &nbsp; <a href="#" class="sortLink__item sort-rating"> <span> </span> rating
+                        SORT BY <a href="#" class="sortLink__item sort-rating"> <span> </span> rating
                         </a>
                         <p> &nbsp; - &nbsp; </p>
                         <a href="#" class="sortLink__item sort-id">
@@ -171,7 +171,7 @@
                         </a>
                         <div class="result__info">
                             <div class="justifyContainer">
-                                <h2 class="profileName profileName--biger"><a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}"> {{$carerProfile->first_name}}&nbsp{{mb_substr($carerProfile->family_name,0,1)}}.</a></h2>
+                                <h2 class="profileName profileName--biger"><a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}"> {{$carerProfile->first_name}} {{mb_substr($carerProfile->family_name,0,1)}}.</a></h2>
                                 <p class="hourPrice hourPrice">
                                     <span class="hourPrice__price">From £ 12</span>
                                     <span class="hourPrice__timing">/hour</span>

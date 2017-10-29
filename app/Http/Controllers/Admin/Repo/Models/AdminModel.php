@@ -36,6 +36,7 @@ abstract class AdminModel
             return $builder->paginate(Config::get('settings.AdminUserPagination'));
         }
         return $builder->get();
+
         //return $this->check($builder->get());
     }
 

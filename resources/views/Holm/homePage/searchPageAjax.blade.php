@@ -24,7 +24,7 @@
         </a>
         <div class="result__info">
             <div class="justifyContainer">
-                <h2 class="profileName profileName--biger"><a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}"> {{$carerProfile->first_name}}&nbsp{{mb_substr($carerProfile->family_name,0,1)}}.</a></h2>
+                <h2 class="profileName profileName--biger"><a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}"> {{$carerProfile->first_name}} {{mb_substr($carerProfile->family_name,0,1)}}.</a></h2>
                 <p class="hourPrice hourPrice">
                     <span class="hourPrice__price">From £ 12</span>
                     <span class="hourPrice__timing">/hour</span>
