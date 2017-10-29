@@ -13,23 +13,17 @@
                 </div>
                 <div class="settingProfile">
                     <a href="#" class="settingProfile__img">
-                        <img src="./dist/img/nik.png" alt="">
-                        <span class="addIco">
-                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        <img src="/img/admin/nik.png" alt="">
+                        {{--<span class="addIco">--}}
+                    {{--<i class="fa fa-plus-circle" aria-hidden="true"></i>--}}
 
-                  </span>
+                  {{--</span>--}}
                     </a>
                     <div class="settingProfile__info">
                         <div class="formField">
                             <h2 class="fieldLabel">First name</h2>
                             <div class="fieldWrap">
-                                <input type="text" class="formItem formItem--without-ico" placeholder="Nik">
-                            </div>
-                        </div>
-                        <div class="formField">
-                            <h2 class="fieldLabel">Last name</h2>
-                            <div class="fieldWrap">
-                                <input type="text" class="formItem formItem--without-ico" placeholder="Seth">
+                                <input type="text" name="" value="NIK SETH" class="formItem formItem--without-ico" placeholder="Nik">
                             </div>
                         </div>
 
@@ -55,52 +49,10 @@
                 </div>
 
             </div>
-            <div class="settingCard">
-                <div class="settingCard__head settingCard__head--payment">
-                    <h2>General</h2>
-                </div>
-                <div class="settingPayment">
-                    <div class="fieldRow">
-                        <div class="formField formField--full ">
-                            <h2 class="fieldLabel">card owners name</h2>
-                            <div class="fieldWrap">
-                                <input type="text" class="formItem formItem--without-ico" placeholder=" Nil Seth">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="fieldRow">
-                        <div class="formField  formField--full">
-                            <h2 class="fieldLabel">card number</h2>
-                            <div class="fieldWrap">
-                                <input type="text" class="formItem formItem--pay-ico" placeholder=" Nil Seth">
-                                <span class="payIco">
-                        <img src="./dist/img/visa.png" alt="">
-                      </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="fieldRow">
-                        <div class="formField formField--half ">
-                            <h2 class="fieldLabel">valid until</h2>
-                            <div class="fieldWrap">
-                                <input type="text" class="formItem formItem--without-ico" placeholder=" 05/07/2018">
-                            </div>
-                        </div>
-                        <div class="formField formField--half ">
-                            <h2 class="fieldLabel">cvc code</h2>
-                            <div class="fieldWrap">
-                                <input type="text" class="formItem formItem--without-ico" placeholder=" 345">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
         </div>
 
         <div class="settingBtn">
-            <a href="#" class="actionsBtn actionsBtn--accept actionsBtn--big actionsBtn--no-centered">
+            <a href="#" class="actionsBtn actionsBtn--accept actionsBtn--big">
                 save
             </a>
         </div>
@@ -224,3 +176,8 @@
 
 
 </div>
+<script>
+    $(document).on('ready',function(){
+
+    })
+</script>

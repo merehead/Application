@@ -81,6 +81,10 @@
                                             <span class="location__value">{{$serviceUsers->address_line1}}</span>
                                         </p>
                                         <p class="location">
+                                            <span class="location__title">Address Line 2</span>
+                                            <span class="location__value">{{$serviceUsers->address_line2}}</span>
+                                        </p>
+                                        <p class="location">
                                             <span class="location__title">I like to be called</span>
                                             <span class="location__value">{{$serviceUsers->like_name}}</span>
                                         </p>

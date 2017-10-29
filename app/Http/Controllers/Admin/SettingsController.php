@@ -25,18 +25,20 @@ class SettingsController extends AdminController
     }
 
     public function update(Request $request){
+        $input = $request->all();
+        switch ($input['type']){
+            case 'password':
+                $user_id = $input['id'];
+                $obj_user = User::find($user_id)->first();
+                $obj_user->password = Hash::make($input['newPassword']);
+                $obj_user->save();
 
-        foreach ($request->holiday['id'] as $key => $item) {
-            $holidays=Holiday::find($item);
-            $holidays->date=$request->holiday['date'][$key];
-
-            $holidays->save();
+                return response()->json(["result"=>true]);
+                break;
         }
+        if($input['type']){
 
-
-        $data = Holiday::all();
-        $this->vars['holiday']=$data;
-        $this->content = view(config('settings.theme').'.holidays')->with( $this->vars)->render();
+        }
 
         return $this->renderOutput();
     }
