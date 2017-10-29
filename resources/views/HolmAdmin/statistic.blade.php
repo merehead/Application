@@ -9,24 +9,10 @@
 
     <div class="panelHead">
         <div class="panelHead__group">
-            <div class="filterBox">
-                <h2 class="filterBox__title themeTitle">
-                    select date or period
-                </h2>
-                <div class="formField formField--fixed">
-                    <div class="fieldWrap">
-                        <input type="text" class="formItem  formItem--date-ico " name="daterange" value="10/10/2017 - 10/31/2017">
-                        <span class="dateIco">
-                      <i class="fa fa-calendar"></i>
-                    </span>
-                    </div>
-                </div>
-            </div>
 
         </div>
-
         <div class="panelHead__group">
-            <a href="#" class="print">
+            <a href="javascript: window.print()" class="print">
                 <i class="fa fa-print" aria-hidden="true"></i>
             </a>
         </div>
@@ -680,7 +666,7 @@
                         </td>
                         <td class="textCenter">
                       <span class="{{$newPurchaserStatistic['week']->current - $newPurchaserStatistic['week']->last < 0 ? 'negativeValue' : 'positiveValue'}}">
-                        {{$newPurchaserStatistic['week']->current - $newPurchaserStatistic['week']->last < 0 ? '-' : '+'}}
+                        {{$newPurchaserStatistic['week']->current - $newPurchaserStatistic['week']->last < 0 ? '' : '+'}}
                           {{$newPurchaserStatistic['week']->current - $newPurchaserStatistic['week']->last}}
                       </span>
                         </td>
@@ -704,7 +690,7 @@
                         </td>
                         <td class="textCenter">
                       <span class="{{$transactionsStatistic['month']->current - $transactionsStatistic['month']->last < 0 ? 'negativeValue' : 'positiveValue'}}">
-                        {{$transactionsStatistic['month']->current - $transactionsStatistic['month']->last < 0 ? '-' : '+'}}
+                        {{$transactionsStatistic['month']->current - $transactionsStatistic['month']->last < 0 ? '' : '+'}}
                           {{$transactionsStatistic['month']->current - $transactionsStatistic['month']->last}}
                       </span>
                         </td>
