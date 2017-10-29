@@ -159,6 +159,7 @@ class Appointment extends Model implements Constants
         }
     }
 
+
     private function getPurchaserHourPrice(int $hour, $date) : float {
         $carerProfile = $this->booking->bookingCarerProfile;
         if ($this->isDayHoliday($date)) {
