@@ -396,8 +396,8 @@
     });
 
     function DistanceMatrixService() {
-      var origin1 = 'England {{$carerProfile->town}} {{$carerProfile->address_line1}}';
-      var destinationA = 'England {{$serviceUserProfile->town}} {{$serviceUserProfile->address_line1}}';
+      var origin1 = 'England {{$carerProfile->postcode}}';
+      var destinationA = 'England {{$serviceUserProfile->postcode}}';
 
       console.log({'carerProfile': origin1, 'serviceUserProfile': destinationA})
 
@@ -438,10 +438,10 @@
     }
 
     function codeAddress() {
-      var address = '{{$carerProfile->town}} {{$carerProfile->address_line1}}';
+      var address = '{{$carerProfile->postcode}}';
 
       if({{$user->user_type_id}} !== 1 && {{$user->user_type_id}} !== 4){
-        address = '{{$serviceUserProfile->town}} {{$serviceUserProfile->address_line1}}';
+        address = '{{$serviceUserProfile->postcode}}';
       }
 
 
