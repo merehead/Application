@@ -14,6 +14,7 @@ use App\StripeRefund;
 use App\StripeTransfer;
 use App\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use DB;
 use PaymentTools;
 
@@ -51,10 +52,11 @@ class AdminSitePayment extends AdminController
         return $this->renderOutput();
     }
 
-    public function getBookingTransactions(Request $request){
+    public function getBookingTransactions(Request $request,Transaction $transaction){
         $this->title = 'Admin | Booking Transactions Management';
+        $model = $transaction;
 
-        $transactions = Transaction::all();
+        $transactions = $model->select('*')->paginate(Config::get('settings.AdminUserPagination'));
 
         $this->vars['transactions'] = $transactions;
 
