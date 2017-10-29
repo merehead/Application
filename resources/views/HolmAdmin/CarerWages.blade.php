@@ -153,6 +153,7 @@
                 </tbody>
             </table>
         </div>
+        {!! $carers->appends( Request::query() )->render('HolmAdmin.pagination') !!}
     </div>
 </div>
 
