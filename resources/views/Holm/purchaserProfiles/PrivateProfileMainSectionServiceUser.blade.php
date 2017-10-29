@@ -29,7 +29,7 @@
                                     : route('ServiceUserSetting',['id'=>$serviceUser->id])}}"
                                        target="blank">
                                         @if(strlen($serviceUser->first_name))
-                                            {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
+                                            {!! $serviceUser->first_name.' '.mb_substr($serviceUser->family_name,0,1).'.' !!}
                                         @else
                                             New
                                         @endif

@@ -71,7 +71,7 @@
                                         <img id="pf-{{$serviceUser->id}}" class="profile_photo_service_user" src="/img/service_user_profile_photos/{{$serviceUser->id}}.png" onerror="this.src='/img/no_photo.png'" alt="">
                                     </div>
                                     <h2 class="profileName">
-                                        {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
+                                        {!! $serviceUser->first_name.' '.mb_substr($serviceUser->family_name,0,1).'.' !!}
                                     </h2>
                                     <span class="dropdownUser__ico"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
                                 </a>

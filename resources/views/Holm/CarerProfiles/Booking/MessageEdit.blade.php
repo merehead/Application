@@ -27,7 +27,7 @@
 
                                     <a href="#"
                                            class="needCare__item centeredLink btn btn-default">
-                                        {!! $serviceUsers->first_name.'&nbsp'.mb_substr($serviceUsers->family_name,0,1).'.' !!}
+                                        {!! $serviceUsers->first_name.' '.mb_substr($serviceUsers->family_name,0,1).'.' !!}
                                         <input type="radio" id="q{{$serviceUsers->id}}"
                                                name="service_user_id" data-town="{{$serviceUsers->town}}"
                                                data_address_line1="{{$serviceUsers->address_line1}}"

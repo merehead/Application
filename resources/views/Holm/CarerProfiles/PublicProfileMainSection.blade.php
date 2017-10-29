@@ -8,7 +8,7 @@
         <div class="profileInfo__item">
             <h2 class="profileName profileName--big">
                 <a href="#">
-                    {{$carerProfile->first_name}} &nbsp{{mb_substr($carerProfile->family_name,0,1)}}.</a>
+                    {{$carerProfile->first_name}} {{mb_substr($carerProfile->family_name,0,1)}}.</a>
             </h2>
             <div class="userRating">
                 <div class="avarageRate">
