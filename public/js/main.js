@@ -29,11 +29,19 @@ function addressFormt(autocomplete){
         console.log(data);
         var number = '';
         var subbuildingname = '';
+        var buildingname = '';
+        var organisation = '';
         if(data[0].number!=undefined)number=data[0].number;
-        if(data[0].subbuildingname!=undefined){
-            subbuildingname=data[0].subbuildingname+' ';
+        if(data[0].buildingname!=undefined)buildingname= data[0].buildingname;
+        if(data[0].organisation!=undefined)organisation=data[0].organisation+', ';
+
+        if(organisation!==''){
+            $('input[name="address_line1"]').val(organisation+''+buildingname);
             $('input[name="address_line2"]').val(number+' '+data[0].street);
+        }else if(data[0].subbuildingname!=undefined){
+            subbuildingname=data[0].subbuildingname+' ';
             $('input[name="address_line1"]').val(data[0].subbuildingname);
+            $('input[name="address_line2"]').val(number+' '+data[0].street);
         }else{
             $('input[name="address_line1"]').val(number+' '+data[0].street);
 
