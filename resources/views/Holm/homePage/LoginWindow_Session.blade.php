@@ -54,7 +54,7 @@
                     Password
                 </h2>
                 <div class="inputWrap">
-                    <input type="text" class="formInput " name="password" placeholder="******">
+                    <input type="password" class="formInput " name="password" placeholder="******">
                 </div>
                 @if ($errors->has('password'))
                     <span class="help-block">
