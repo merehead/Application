@@ -88,7 +88,7 @@ Route::put('/bookings/{booking}','Bookings\BookingsController@update');
 Route::post('/bookings/calculate_price','Bookings\BookingsController@calculateBookingPrice');
 Route::get('/bookings/{booking}/modal_edit', 'Bookings\BookingsController@getModalEditBooking');
 Route::get('/bookings/{booking}/details', 'Bookings\BookingsController@view_details')->name('viewBookingDetails');
-Route::get('/bookings/{booking}/purchase', 'Bookings\PaymentsController@payment_form');
+
 Route::post('/bookings/{booking}/message','Bookings\BookingsController@create_message');
 Route::post('/bookings/{booking}/setPaymentMethod','Bookings\BookingsController@setPaymentMethod')->name('setBookingPaymentMethod');
 Route::post('/bookings/{booking}/accept', 'Bookings\BookingsController@accept');
@@ -124,6 +124,13 @@ Route::get('/invite/thank-you', 'ReferNewUserController@show')->name('thankForIn
 
 Route::get('/privacy-policy', 'PrivacyPolicyController@index')->name('privacy_policy');
 Route::get('/enter', 'LoginWindowController@index')->name('session_timeout');
+
+
+Route::group(['middleware' => ['auth']], function () {
+    //todo все роуты, на которые не могут заходить не залогиненные должны быть в этой группе
+    //todo а не дублировать проверку на каждой странице
+    Route::get('/bookings/{booking}/purchase', 'Bookings\PaymentsController@payment_form');
+});
 
 
 

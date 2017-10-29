@@ -13,7 +13,7 @@ class PaymentsController extends FrontController
 {
     public function payment_form(Request $request, Booking $booking){
         if($booking->status_id != 1)
-            return;
+            return redirect()->route('mainHomePage');
         $this->template = config('settings.frontTheme') . '.templates.bookings';
         $this->title = 'Payment';
 
