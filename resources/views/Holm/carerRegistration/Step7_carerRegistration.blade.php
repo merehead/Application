@@ -18,7 +18,7 @@
         <div class="personal">
             <form class="questionForm">
                 <h2 class=" formLabel questionForm__label">
-                Please give full title of each qualification, including eg. NVQ etc.
+                    Please give full description of each qualification, including type eg NVQ, Care Certificate etc, and level / grade.
                 </h2>
                 <div class="addRow">
                     <div class="addColumn">
