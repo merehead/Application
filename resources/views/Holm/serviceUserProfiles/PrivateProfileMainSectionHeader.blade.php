@@ -9,7 +9,7 @@
         </a>
         <span class="breadcrumbs__arrow">></span>
         <a href="" class="breadcrumbs__item">
-            {!! $serviceUsersProfile->first_name.'&nbsp'.mb_substr($serviceUsersProfile->family_name,0,1).'.' !!}
+            {!! $serviceUsersProfile->first_name.' '.mb_substr($serviceUsersProfile->family_name,0,1).'.' !!}
         </a>
 
     </div>
@@ -26,6 +26,6 @@
 
 <div class="bookingSwitcher">
     <a href="{{route('purchaserSettings')}}" class="bookingSwitcher__link">Profile settings</a>
-    <a href="/serviceUser-settings/booking/{{$serviceUsersProfile->id}}" class="bookingSwitcher__link bookingSwitcher__link--active">My bookings {!! $newBookings->count() ? '<span>+'.$newBookings->count().'</span>' : '' !!}</a>
+    <a href="{{route('ServiceUserBookingStatus',['status'=>'all','serviceUserProfile'=>$serviceUsersProfile->id])}}" class="bookingSwitcher__link bookingSwitcher__link--active">My bookings {!! $newBookings->count() ? '<span>+'.$newBookings->count().'</span>' : '' !!}</a>
 </div>
 

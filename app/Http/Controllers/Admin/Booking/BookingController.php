@@ -33,7 +33,7 @@ class BookingController extends AdminController
 
         $this->title = 'Admin Bookings Details';
 
-        $bookings = $this->booking->get('*', FALSE, FALSE,  $filter, ['id','desc']);
+        $bookings = $this->booking->get('*', FALSE, true,  $filter, ['id','desc']);
         $this->vars = array_add($this->vars,'bookings',$bookings);
 
         $bookingStatuses = BookingStatus::all()->pluck('name','id')->toArray();
