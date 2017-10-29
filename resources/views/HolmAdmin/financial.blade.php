@@ -7,30 +7,14 @@
     </h2>
 
     <div class="panelHead">
-        <div class="filterGroup filterGroup--no-margin-xs">
-            <div class="filterBox">
-                <h2 class="filterBox__title themeTitle">
-                    select period
-
-
-                </h2>
-                <div class="formField  formField--fixed">
-                    <div class="fieldWrap">
-                        <input type="text" class="formItem  formItem--date-ico " name="daterange" value="10/10/2017 - 10/31/2017">
-                  <span class="dateIco">
-                    <i class="fa fa-calendar"></i>
-                  </span>
-                    </div>
-                </div>
-
-            </div>
-
+        <div class="panelHead__group">
 
         </div>
-
-
-
-
+        <div class="panelHead__group">
+            <a href="javascript: window.print()" class="print">
+                <i class="fa fa-print" aria-hidden="true"></i>
+            </a>
+        </div>
     </div>
     <div class="financialsContainer">
         <div class="financialsCard">
