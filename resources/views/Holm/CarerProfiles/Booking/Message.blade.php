@@ -84,7 +84,7 @@
                                     ? route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUser->id])
                                     : route('ServiceUserSetting',['id'=>$serviceUser->id])}}"
                                                            class="needCare__item centeredLink btn btn-default">
-                                                            {!! $serviceUser->first_name.'&nbsp'.mb_substr($serviceUser->family_name,0,1).'.' !!}
+                                                            {!! $serviceUser->first_name.' '.mb_substr($serviceUser->family_name,0,1).'.' !!}
                                                             <input type="radio" id="q{{$serviceUser->id}}"
                                                                    name="service_user_id" data-town="{{$serviceUser->town}}"
                                                                    data_address_line1="{{$serviceUser->address_line1}}"
