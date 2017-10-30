@@ -48,7 +48,8 @@ class PurchasersProfile extends Model
     public function getOwnReferralCodeAttribute()
     {
         $res = DB::select("select own_referral_code from users where id = ".$this->id);
-
+        $data='';
+        if(isset($res[0]->own_referral_code))
         $data = $res[0]->own_referral_code;
 
         return $data;
