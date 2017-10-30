@@ -36,7 +36,7 @@
                     <h2 class="formLabel questionForm__label">
                         Please write a short sentence about yourself which sums you up. This will be the first thing clients see. <span>*</span>
                     </h2>
-                    {!! Form::text('sentence_yourself',null,['class'=>'formInput countable','placeholder'=>'Details','maxlength'=>"160"]) !!}
+                    {!! Form::textarea('sentence_yourself',null,['class'=>'formArea','placeholder'=>'Details','maxlength'=>"160"]) !!}
                     @if ($errors->has('sentence_yourself'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('sentence_yourself') }}</strong>
