@@ -49,8 +49,8 @@ class HomePageController extends FrontController
     public function getTopCarers(){
 
         return DB::select("SELECT cp.id, cp.first_name,cp.family_name,cp.sentence_yourself 
-FROM `carers_profiles` as cp
-WHERE 	registration_progress=20 LIMIT 0,12");
+                          FROM `carers_profiles` as cp
+                        WHERE registration_progress=20 and profiles_status_id=2  LIMIT 0,12");
 
     }
 
