@@ -147,7 +147,12 @@
                                 <div class="serviceColumn serviceColumn--typeCare">
                                     @foreach ($chunk as $item)
                                         <p class="userOption userOption--less-padding">
+                                            @if($type->name!='MEDICATION / TREATMENTS'&&!$restrictedAccess)
                                             {{$item->name}}
+                                            @endif
+                                                @if($type->name=='MEDICATION / TREATMENTS'&&$restrictedAccess)
+                                                    {{$item->name}}
+                                                @endif
                                         </p>
                                     @endforeach
                                 </div>
