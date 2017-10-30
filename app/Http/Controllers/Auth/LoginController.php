@@ -53,6 +53,11 @@ class LoginController extends Controller
             return '/invite/refer-users';
         }
 
+        if( Cookie::get('CarerRegistration')) {
+            Cookie::forget('refer');
+            return '/carer-registration/';
+        }
+
         $user = Auth::user();
 
         switch ($user->user_type_id) {

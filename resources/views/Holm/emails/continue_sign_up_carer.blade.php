@@ -73,8 +73,7 @@
                             You will be able to continue sign up until {{$regTime}}.
                         </p>
 
-                        <a href="{{route('CarerRegistration')}}" class=""
-                           style="text-transform: uppercase;
+                        <a href="{{route('CarerRegistration')}}?refer=continue" class=""  style="text-transform: uppercase;
                   color: #7bb7dc;
                   font-weight: 700;
                   text-decoration: underline;">
