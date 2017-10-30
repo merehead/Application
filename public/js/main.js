@@ -1926,7 +1926,7 @@ $(document).ready(function () {
         var idLoadFiles = '#' + $(that).find('span').attr('data-id');
         $(idForm).find('select').attr("disabled", false).removeClass('profileField__select--greyBg');
         $(idForm).find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
-        // $(idForm).find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
+         $(idForm).find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
         // $(idForm).find('input').attr("disabled", false).removeClass('profileField__input--greyBg');
         $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
         // $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').attr('autocomplete', 'on');
