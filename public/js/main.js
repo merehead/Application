@@ -38,6 +38,10 @@ function addressFormt(autocomplete){
         if(organisation!==''){
             $('input[name="address_line1"]').val(organisation+''+buildingname);
             $('input[name="address_line2"]').val(number+' '+data[0].street);
+        }else if(data[0].buildingname!=undefined) {
+            subbuildingname = data[0].subbuildingname + ' ';
+            $('input[name="address_line1"]').val(data[0].subbuildingname+', '+data[0].buildingname);
+            $('input[name="address_line2"]').val(number + ' ' + data[0].street);
         }else if(data[0].subbuildingname!=undefined){
             subbuildingname=data[0].subbuildingname+' ';
             $('input[name="address_line1"]').val(data[0].subbuildingname);
