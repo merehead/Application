@@ -160,7 +160,7 @@ WHERE `carer_id` = ".$this->id." LIMIT 0,4");
     {
         $res = DB::select("select email from users where id = ".$this->id);
 
-        $data = $res[0]->email;
+        $data = $res[0]->email??'';
 
         return $data;
     }
@@ -169,7 +169,7 @@ WHERE `carer_id` = ".$this->id." LIMIT 0,4");
     {
         $res = DB::select("select own_referral_code from users where id = ".$this->id);
 
-        $data = $res[0]->own_referral_code;
+        $data = $res[0]->own_referral_code??'';
 
         return $data;
     }
