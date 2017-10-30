@@ -136,11 +136,11 @@ class AdminUsers extends AdminModel
         } else {
             switch ($profileTypeFilter) {
                 case 'purchaser' : $userProfileList=PurchasersProfile::all(/*['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id']*/)
-                    ->sortByDesc('id')
-                    ->slice(0, 40); break;
+                    ->sortByDesc('id');
+                     break;
                 case 'carer' : $userProfileList=CarersProfile::all(/*['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id']*/)
-                    ->sortByDesc('id')
-                    ->slice(0, 40);break;
+                    ->sortByDesc('id');
+                    break;
                 case 'service' : $userProfileList=
                     ServiceUsersProfile::all(
 //                        ['id', 'first_name', 'family_name', 'registration_status', 'profiles_status_id',
@@ -149,8 +149,7 @@ class AdminUsers extends AdminModel
 //                            'assistance_with_eating_detail','consent_details','keeping_safe_at_night_details','multiple_carers_details','we_missed_details'
 //                    ]
                     )
-                    ->sortByDesc('id')
-                    ->slice(0, 40);
+                    ->sortByDesc('id');
             }
         }
 
