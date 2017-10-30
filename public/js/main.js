@@ -1897,6 +1897,7 @@ $(document).ready(function () {
     // -- Edit Carer Profile -------
     $carer_profile.find('a.btn-edit').on('click', function (e) {
         e.preventDefault();
+        var that = $(this);
         is_data_changed = true;
 
         $('input[name="is_data_changed"]').val(1);
@@ -1919,12 +1920,13 @@ $(document).ready(function () {
                 maxDate: "+20Y",
                 yearRange: "0:+10" });
         }
-        var that = $(this);
+
         var idForm = 'form#' + $(that).find('span').attr('data-id');
         var idLoadFiles = '#' + $(that).find('span').attr('data-id');
         $(idForm).find('select').attr("disabled", false).removeClass('profileField__select--greyBg');
         $(idForm).find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
         $(idForm).find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
+        $(idForm).find('input').attr("disabled", false).removeClass('profileField__input--greyBg');
         $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
         // $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').attr('autocomplete', 'on');
         if($('#time_to_night_helping').length){
