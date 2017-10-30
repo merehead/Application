@@ -175,7 +175,7 @@ class MessenteSmsTools implements SmsToolsInterface
     private function convertNubmer(string $number) : string
     {
         if(substr($number, 0, 2) == '07'){
-            return '+44'.substr('07123121', 1);
+            return '+44'.substr($number, 1);
         } else {
             return $number;
         }
