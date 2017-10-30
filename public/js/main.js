@@ -1926,8 +1926,8 @@ $(document).ready(function () {
         var idLoadFiles = '#' + $(that).find('span').attr('data-id');
         $(idForm).find('select').attr("disabled", false).removeClass('profileField__select--greyBg');
         $(idForm).find('input[type="checkbox"]').attr("disabled", false).removeClass('profileField__select--greyBg');
-        $(idForm).find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
-        $(idForm).find('input').attr("disabled", false).removeClass('profileField__input--greyBg');
+        // $(idForm).find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
+        // $(idForm).find('input').attr("disabled", false).removeClass('profileField__input--greyBg');
         $(idForm).find('textarea').attr("readonly", false).removeClass('profileField__input--greyBg');
         // $('input[name="postcode"],input[name="postCode"],input[name="address_line1"]').attr('autocomplete', 'on');
         if($('#time_to_night_helping').length){
@@ -1948,7 +1948,11 @@ $(document).ready(function () {
         $(idLoadFiles).find('.pickfiles-change').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo_service_user--change').attr("disabled", false);
-        $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", false);
+        if(!carerId){
+          $(idLoadFiles).find('.pickfiles-delete').attr("style", 'display: block');
+        }
+        $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", false).removeClass('profileField__input--greyBg');
+        $(idLoadFiles).find('.addInfo__input-ford').attr("readonly", false).removeClass('profileField__input--greyBg');
         // $(idLoadFiles).find('.addInfo__input').attr("disabled", false);
         // $(idLoadFiles).find('.addInfo__input').attr("readonly", false);
         $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: block');
@@ -2087,7 +2091,7 @@ $(document).ready(function () {
             var idForm = 'form#' + $(that).parent().find('a>span').attr('data-id');
             var idLoadFiles = '#' + $(that).parent().find('a>span').attr('data-id');
 
-            if(idLoadFiles === '#carerPrivateAvailability'){
+            if(idLoadFiles === '#carerQUALIFICATIONS'){
               $.each($('.addInfo__input-required'), function (input, index) {
                 if($(this).val().length <= 0){
                   $(this).addClass('addInfo__input-required_error')
@@ -2317,7 +2321,7 @@ $(document).ready(function () {
       _this.attr('id', '')
     }
 
-    $('.pickfiles-delete').on('click', function () {
+    $(document).on('click', '.pickfiles-delete', function () {
       var input_name = $(this).parent().find('.pickfiles_img').attr('id')
       var input_value = $(this).parent().parent().find('.addInfo__input')
       var deleteID = $(this).attr('id')
@@ -2338,6 +2342,11 @@ $(document).ready(function () {
                 return index
               }
             })
+            if(_this.parent().closest('#carerPrivateAvailability').length){
+              _this.parent().closest('.profileField').remove()
+            }else{
+              _this.parent().find('.pickfiles_img').remove()
+            }
             localStorage.setItem('files_id', JSON.stringify(newGetls))
           }
         })
@@ -2746,6 +2755,7 @@ $(document).ready(function () {
               $(p).append(
                 '<div class="profileField profileField_q profileField_h">'+
                   '<span>Certificate '+(i2+1)+'</span><div class="addContainer">'+
+                  '<div class="pickfiles-delete" id="'+index2.id+'">x</div>'+ //eqweqwe
                     func(index[0], index2, i)+
                     '<a class="add add--moreHeight"></a>'+
                   '</div>'+
