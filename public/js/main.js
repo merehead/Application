@@ -1948,7 +1948,7 @@ $(document).ready(function () {
         $(idLoadFiles).find('.pickfiles-change').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo_service_user--change').attr("disabled", false);
-        if(!carerId){
+        if(carerId){
           $(idLoadFiles).find('.pickfiles-delete').attr("style", 'display: block');
         }
         $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", false).removeClass('profileField__input--greyBg');
