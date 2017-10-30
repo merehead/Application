@@ -150,25 +150,34 @@ class MessenteSmsTools implements SmsToolsInterface
 
     public function sendSmsToCarer(string $text, CarersProfile $carersProfile)
     {
-        if(!in_array(substr($carersProfile->mobile_number, 0, 2), ['+3', '07']))
+        if(!in_array(substr($this->convertNubmer($carersProfile->mobile_number), 0, 3), ['+39', '+44']))
             return false;
 
-        return $this->send($text, $carersProfile->mobile_number);
+        return $this->send($text, $this->convertNubmer($carersProfile->mobile_number));
     }
 
     public function sendSmsToServiceUser(string $text, ServiceUsersProfile $serviceUsersProfile)
     {
-        if(!in_array(substr($serviceUsersProfile->mobile_number, 0, 2), ['+3', '07']))
+        if(!in_array(substr($this->convertNubmer($serviceUsersProfile->mobile_number), 0, 3), ['+39', '+44']))
             return false;
 
-        return $this->send($text, $serviceUsersProfile->mobile_number);
+        return $this->send($text, $this->convertNubmer($serviceUsersProfile->mobile_number));
     }
 
     public function sendSmsToPurchaser(string $text, PurchasersProfile $purchasersProfile)
     {
-        if(!in_array(substr($purchasersProfile->mobile_number, 0, 2), ['+3', '07']))
+        if(!in_array(substr($this->convertNubmer($purchasersProfile->mobile_number), 0, 3), ['+39', '+44']))
             return false;
 
-        return $this->send($text, $purchasersProfile->mobile_number);
+        return $this->send($text, $this->convertNubmer($purchasersProfile->mobile_number));
+    }
+    
+    private function convertNubmer(string $number) : string
+    {
+        if(substr($number, 0, 2) == '07'){
+            return '+44'.substr($number, 1);
+        } else {
+            return $number;
+        }
     }
 }
