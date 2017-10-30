@@ -73,3 +73,8 @@ function hideErrorModal() {
   $('body').removeClass('overflow-hidden')
   $('.error-popup-container').remove()
 };
+
+$(document).on('click', '.print', function(event) {
+    event.preventDefault()
+    window.print()
+})

