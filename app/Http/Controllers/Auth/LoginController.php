@@ -38,6 +38,8 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         $this->performLogout($request);
+        if(strpos($request->headers->get('referer'),'leave_review')!==false)
+            return redirect()->route('mainHomePage');
         return redirect()->back();
     }
 
