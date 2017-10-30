@@ -136,9 +136,9 @@
                             <div class="serviceColumn serviceColumn--typeCare">
                                 @foreach($serviceUsers->ServicesTypes as $type)
                                     <p class="userOption userOption--less-padding">
-                                        @if($type->name!='MEDICATION / TREATMENTS')
+
                                         {{$type->name}}
-                                            @endif
+
                                     </p>
                                 @endforeach
                             </div>
@@ -147,12 +147,12 @@
                                 <div class="serviceColumn serviceColumn--typeCare">
                                     @foreach ($chunk as $item)
                                         <p class="userOption userOption--less-padding">
-                                            @if($type->name!='MEDICATION / TREATMENTS'&&!$restrictedAccess)
+                                            @if($item->name!='MEDICATION / TREATMENTS'&&$restrictedAccess)
                                             {{$item->name}}
                                             @endif
-                                                @if($type->name=='MEDICATION / TREATMENTS'&&$restrictedAccess)
-                                                    {{$item->name}}
-                                                @endif
+                                            @if($item->name=='MEDICATION / TREATMENTS'&&!$restrictedAccess)
+                                                {{$item->name}}
+                                            @endif
                                         </p>
                                     @endforeach
                                 </div>
