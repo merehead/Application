@@ -706,7 +706,7 @@
                                 @if($other)
                                     <p class="userOption userOption--language">
 
-                                        {{$serviceUsers->other_languages}}
+                                        {{$language->carer_language}}:   {{$serviceUsers->other_languages}}
                                     </p>
                                 @endif
                             </div>
