@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class LoginController extends Controller
 {
@@ -47,6 +48,10 @@ class LoginController extends Controller
         // 2 - service user ???
         // 3 - carer
         // 4 - admin
+        if( Cookie::get('invite')) {
+            Cookie::forget('invite');
+            return '/invite/refer-users';
+        }
 
         $user = Auth::user();
 
@@ -63,6 +68,7 @@ class LoginController extends Controller
             }
             //case 4 : return '/admin';
         }
+
 
         return '/';
     }
