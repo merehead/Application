@@ -8,6 +8,7 @@ var ProfilePhotoSeviceUser = [];
 var arrForDeleteIDProfile = [];
 var checkUploading = false;
 var carerId = +window.location.href.split('/')[window.location.href.split('/').length-1] // get user id
+var $img = $('img')
 //----------------------------------
 var bookings_pos=1;
 var periodicity = 4;
@@ -2242,7 +2243,6 @@ $(document).ready(function () {
             axios.get(
               '/api/document/'+index.id.id+'/'
             ).then(function (response) {
-              console.log(response)
               var res = response.data.data.document
 
               if(wordFileType.indexOf(res.file_name.split('.')[1]) !== -1){
@@ -2250,7 +2250,8 @@ $(document).ready(function () {
               }else if(pdfFileType.indexOf(res.file_name.split('.')[1]) !== -1){
                 $('#'+index.type_value+'').attr('style', 'background-image: url(/img/PDF_logo.png)')
               }else{
-                $('#'+index.type_value+'').attr('style', 'background-image: url(/api/document/'+index.id.id+'/preview)')
+                // $('#'+index.type_value+'').attr('style', 'background-image: url(/api/document/'+index.id.id+'/preview)')
+                $('#'+index.type_value+'').attr('src', '/api/document/'+index.id.id+'/preview')
               }
 
               $('#'+index.type_value+'').parent().children('.add').find('.add__comment--smaller').html('<div class="file-name">'+res.file_name+'</div>')
@@ -2262,6 +2263,11 @@ $(document).ready(function () {
                 $('#'+index.type_value+'').parent().parent().find('.addInfo__input').val(res.title)
               }
             })
+
+            // $.each($img, function (i, val) {
+            //   console.log(val);
+            //   imageOrientation(val)
+            // })
           }
         })
       }
@@ -2365,10 +2371,12 @@ $(document).ready(function () {
 
       file = $(this)[0].files[0]
 
+      // adImageOrientation(file, $(this).parent().find('.pickfiles_img'))
+
       var reader  = new FileReader()
       reader.addEventListener("load", function() {
         file = reader.result
-        _this.parent().find('.pickfiles_img').attr('style', 'background-image: url('+file+')')
+        _this.parent().find('.pickfiles_img').attr('src', file)
       })
 
       if (fileTypes.indexOf(file.type) !== -1) {
@@ -2409,13 +2417,13 @@ $(document).ready(function () {
       }
 
       var q = '.profileRow-'+input_name.split('-')[0]
-      c += 1
+      c += 1;
 
       $(q).append(
         '<div class="profileField profileField_q profileField_h">'+
           '<span>Certificate '+(p_length.length+1)+'</span><div class="addContainer">'+
             '<input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
-            '<div id="'+input_name.split('-')[0]+'-'+c+'u" class="pickfiles_img"></div>'+
+            '<img id="'+input_name.split('-')[0]+'-'+c+'u" class="pickfiles_img"/>'+
               '<a class="add add--moreHeight">'+
                   '<i class="fa fa-plus-circle"></i>'+
                   '<div class="add__comment add__comment--smaller"></div>'+
@@ -2575,6 +2583,8 @@ $(document).ready(function () {
 
       arrFilesProfilePhoto = []
 
+      // adImageOrientation(file, $('.pickfiles_img'))
+
       var input_val = $(this).parent().parent().find('.addInfo__input').val('')
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
       var this_name = $(this).attr('name')
@@ -2586,7 +2596,7 @@ $(document).ready(function () {
       reader.addEventListener("load", function() {
 
         if (fileTypes.indexOf(file.type) !== -1) {
-          _this.parent().find('.pickfiles_img').attr('style', 'background-image: url('+reader.result+')')
+          _this.parent().find('.pickfiles_img').attr('src', reader.result)
         }else{
           if(wordFileType.indexOf(file.type) !== -1){
             _this.parent().find('.pickfiles_img').attr('style', 'background-image: url(/img/Word-icon_thumb.png)')
@@ -2647,25 +2657,30 @@ $(document).ready(function () {
       arrFilesProfilePhoto = []
       var file = $(this)[0].files[0]
 
+      // adImageOrientation(file, $('#profile_photo'))
+
       var reader  = new FileReader()
       reader.addEventListener("load", function() {
 
-
-      $('#profile_photo').attr('src', reader.result)
-      $('.set_preview_profile_photo').attr('src', reader.result)
+        $('#profile_photo').attr('src', reader.result)
+        $('.set_preview_profile_photo').attr('src', reader.result)
 
         file_profile_photo.image = reader.result
         arrFilesProfilePhoto.push(file_profile_photo)
 
       }, false)
+
       reader.readAsDataURL(file)
     })
+
     $('.pickfiles_profile_photo_service_user--change').on('change', function () {
       var _this = $(this)
       var serviceUserId = $(this).attr('name')
 
       ProfilePhotoSeviceUser = []
       var file = $(this)[0].files[0]
+
+      // adImageOrientation(file, $('.profile_photo_service_user'))
 
       var reader  = new FileReader()
       reader.addEventListener("load", function() {
@@ -2711,7 +2726,8 @@ $(document).ready(function () {
           }else if(pdfFileType.indexOf(index2.file_name.split('.')[1]) !== -1){
             return "<div id="+index[0].toLowerCase()+i+" class='pickfiles_img' style='background-image: url(/img/PDF_logo.png)'></div>"
           }else{
-            return "<div id="+index[0].toLowerCase()+i+" class='pickfiles_img' style='background-image: url(/api/document/"+index2.id+"/preview)'></div>"
+            // return "<div id="+index[0].toLowerCase()+i+" class='pickfiles_img' style='background-image: url(/api/document/"+index2.id+"/preview)'></div>"
+            return "<img id="+index[0].toLowerCase()+i+" class='pickfiles_img' src='/api/document/"+index2.id+"/preview'/>"
           }
         }
 
@@ -2759,7 +2775,7 @@ $(document).ready(function () {
                 '<div class="profileField profileField_q">'+
                   '<span>Certificate '+(index[1].length+1)+'</span><div class="addContainer">'+
                     '<input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
-                    '<div id="'+index[0].toLowerCase()+i+1+'u'+'" class="pickfiles_img"></div>'+
+                    '<img id="'+index[0].toLowerCase()+i+1+'u'+'" class="pickfiles_img"/>'+
                       '<a class="add add--moreHeight">'+
                           '<i class="fa fa-plus-circle"></i>'+
                           '<div class="add__comment add__comment--smaller"></div>'+
@@ -2793,7 +2809,8 @@ $(document).ready(function () {
               }else if(pdfFileType.indexOf(index.type_file_name) !== -1){
                 $('#'+index.type_value+'').attr('style', 'background-image: url(/img/PDF_logo.png)')
               }else{
-              $('#'+index.type_value+'').attr('style', 'background-image: url(/api/document/'+index.id+'/preview)')
+              // $('#'+index.type_value+'').attr('style', 'background-image: url(/api/document/'+index.id+'/preview)')
+              $('#'+index.type_value+'').attr('src', '/api/document/'+index.id+'/preview')
               }
               $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
               $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id)
@@ -2802,9 +2819,10 @@ $(document).ready(function () {
               $('#'+index.type_value+'').parent().parent().find('.addInfo__input').attr( "readonly", false )
               $('#'+index.type_value+'').parent().parent().find('.addInfo__input').val(index.title)
             })
-
         })
       })
+
+      // imageOrientation($img)
     }
 
 
@@ -2853,6 +2871,48 @@ $(document).ready(function () {
     $('div#message-carer form#bookings__form').find('input').attr("disabled", false).removeClass('profileField__input--greyBg');
     $('div#message-carer form#bookings__form').find('input').attr("readonly", false).removeClass('profileField__input--greyBg');
     $('#confirm-terms').attr("disabled", false);
+
+
+    function adImageOrientation(image, div) {
+      var arrClass = [ 'flip', 'rotate-180', 'flip-and-rotate-180', 'flip-and-rotate-270',
+        'rotate-90', 'flip-and-rotate-90', 'rotate-270' ]
+
+      EXIF.getData(image, function() {
+        orientation = EXIF.getTag(this, "Orientation");
+        console.log('Exif=', EXIF.getTag(this, "Orientation"));
+
+        arrClass.map(function (value) {
+            div.removeClass(value)
+        })
+
+        switch(orientation) {
+          case 2: div.addClass('flip'); break;
+          case 3: div.addClass('rotate-180'); break;
+          case 4: div.addClass('flip-and-rotate-180'); break;
+          case 5: div.addClass('flip-and-rotate-270'); break;
+          case 6: div.addClass('rotate-90'); break;
+          case 7: div.addClass('flip-and-rotate-90'); break;
+          case 8: div.addClass('rotate-270'); break;
+        }
+      });
+    }
+
+    function imageOrientation(image) {
+
+      EXIF.getData(image, function() {
+        orientation = EXIF.getTag(this, "Orientation");
+        switch(orientation) {
+          case 2: div.addClass('flip'); break;
+          case 3: div.addClass('rotate-180'); break;
+          case 4: div.addClass('flip-and-rotate-180'); break;
+          case 5: div.addClass('flip-and-rotate-270'); break;
+          case 6: div.addClass('rotate-90'); break;
+          case 7: div.addClass('flip-and-rotate-90'); break;
+          case 8: div.addClass('rotate-270'); break;
+        }
+      });
+    }
+
 });
 
 

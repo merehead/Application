@@ -45,17 +45,17 @@
 
                           <div class="pickfiles_img"></div>
 
-                          <div id="profile_photo" class="pickfiles_img"
+                          <img id="profile_photo" class="pickfiles_img"
 
                             @if(empty($purchasersProfileID))
                               name='img/service_user_profile_photos/{{$serviceUserProfile->id}}.png'
-                              style="background-image: url('img/service_user_profile_photos/{{$serviceUserProfile->id}}.png')"
+                              src="img/service_user_profile_photos/{{$serviceUserProfile->id}}.png"
                             @else
                               name='img/service_user_profile_photos/{{$purchasersProfile->serviceUsers->first()->id}}.png'
-                              style="background-image: url('img/service_user_profile_photos/{{$purchasersProfile->serviceUsers->first()->id}}.png')"
+                              src="img/service_user_profile_photos/{{$purchasersProfile->serviceUsers->first()->id}}.png"
                             @endif>
 
-                          </div>
+                          />
 
                           <!-- <img id="profile_photo" class="pickfiles_img" onerror="this.src='/img/no_photo.png'"
 
