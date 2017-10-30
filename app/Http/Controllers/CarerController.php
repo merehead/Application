@@ -92,7 +92,7 @@ class CarerController extends FrontController implements Constants
 
             }
 
-            if ($carerProfile->registration_progress != '20') {
+            if ($carerProfile->registration_progress != '20' && Auth::user()->user_type_id!=4) {
                 return redirect()->action('CarerRegistrationController@index');
             }
             $this->vars = array_add($this->vars, 'user', $this->user);
