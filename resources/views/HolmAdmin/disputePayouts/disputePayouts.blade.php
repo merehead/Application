@@ -8,26 +8,25 @@
     <div class="panelHead">
         <div class="filterGroup">
             <div class="filterBox">
-                <div class="formField formField--fix-biger">
-                    <div class="fieldWrap">
-                        <input type="search" class="formItem formItem--input formItem--search" placeholder="Search...">
-                        <button class="searchBtn">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
+
             </div>
         </div>
 
         <div class="panelHead__group">
             <div class="filterBox">
                 <h2 class="filterBox__title themeTitle">
-                    sort by
+                   FILTER BY
                 </h2>
                 <div class="formField formField--fixed">
                     <select class="formItem formItem--select">
                         <option value="#">
-                            --Text--
+                            ALL
+                        </option>
+                        <option value="#">
+                            PAID TO CARER
+                        </option>
+                        <option value="#">
+                            PAID TO PURCHASER
                         </option>
                     </select>
                 </div>
