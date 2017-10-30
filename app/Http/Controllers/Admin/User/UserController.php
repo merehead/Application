@@ -39,7 +39,7 @@ class UserController extends AdminController
     {
 
         $perPage = 9;
-
+        $page = $request->get('page',1);
         $this->title = 'Admin Profiles Management';
         $profileType = $this->siteUsers->getProfileType();
         $statusType = $this->siteUsers->getStatusType();
@@ -53,12 +53,16 @@ class UserController extends AdminController
         $userList = $this->siteUsers->getUserList($profileTypeFilter,$statusTypeFilter);
         $count = count($userList);
         if($count>0)
-        $pages = floor($count/$perPage);
+            $pages = ceil($count/$perPage);
         else
             $pages=0;
+        $nextPage=$page+1;
+        $previousPage = $page-1;
 
-        //$userList = $userList->slice($start,$perPage);
+        $userList = $userList->slice($start,$perPage);
         $this->vars = array_add($this->vars, 'profileType', $profileType);
+        $this->vars = array_add($this->vars, 'nextPage', $nextPage);
+        $this->vars = array_add($this->vars, 'previousPage', $previousPage);
         $this->vars = array_add($this->vars, 'count', $count);
         $this->vars = array_add($this->vars, 'curr_page', $page);
         $this->vars = array_add($this->vars, 'pages', $pages);
@@ -66,8 +70,11 @@ class UserController extends AdminController
         $this->vars = array_add($this->vars, 'totals', $totals);
         $this->vars = array_add($this->vars, 'totalsByUserType', $totalsByUserType);
         $this->vars = array_add($this->vars, 'userList', $userList);
-        //$pagination = view(config('settings.theme') . '.pagination')->with($this->vars)->render();
-       // $this->vars = array_add($this->vars, 'pagination', $pagination);
+        $this->vars = array_add($this->vars, 'link', '/admin/user');
+        $this->vars = array_add($this->vars, 'request', $request);
+
+        $pagination = view(config('settings.theme') . '.pagination2')->with($this->vars)->render();
+        $this->vars = array_add($this->vars, 'pagination', $pagination);
 
         $this->content = view(config('settings.theme') . '.profilesManagement.profilesManagement')->with($this->vars)->render();
 
