@@ -26,7 +26,7 @@ class SearchController extends FrontController
         $data = [];
         $this->title = 'Find a personal carer - HOLM CARE';
         $this->description = 'Holm offers care at a far more affordable price than care agencies.';
-        $this->keywords='looking to hire a personal assistant';
+        $this->keywords = 'looking to hire a personal assistant';
 
         $input = $request->all();
         $header = view(config('settings.frontTheme') . '.headers.baseHeader')->render();
@@ -45,14 +45,13 @@ class SearchController extends FrontController
             $this->template = config('settings.frontTheme') . '.templates.blockedUserSorryTemplate';
 
 
-
             $content = view(config('settings.frontTheme') . '.homePage.sorryPageForBlockedPurchaser')->render();
             $this->vars = array_add($this->vars, 'content', $content);
 
             return $this->renderOutput();
         }
 
-        $load_more_count=$request->get('load-more-count',5);
+        $load_more_count = $request->get('load-more-count', 5);
         $languages = Language::all();
         $this->vars = array_add($this->vars, 'languages', $languages);
         $typeCare = AssistanceType::all();
@@ -74,24 +73,24 @@ class SearchController extends FrontController
             $where .= 'inner join carer_profile_service_type ct on ct.carer_profile_id = cp.id and ct.service_type_id in (' . $request->get('typeService') . ')';
         }
 
-        $working_times[1]=[5,6,7];
-        $working_times[2]=[8,9,10];
-        $working_times[3]=[11,12,13];
-        $working_times[4]=[14,15,16];
-        $working_times[5]=[17,18,19];
-        $working_times[6]=[20,21,22];
-        $working_times[0]=[22,24,25];
-        if($request->get('findDate')){
-            $date=$request->get('findDate');
-            $date=explode("/", $date);
-            $dayofweek =  date("w", mktime(0, 0, 0, $date[1], $date[0], $date[2]));
-            $where .= 'inner join carer_profile_working_time cw on cw.carer_profile_id = cp.id and cw.working_times_id in ('.implode(',',$working_times[$dayofweek]).')';
+        $working_times[1] = [5, 6, 7];
+        $working_times[2] = [8, 9, 10];
+        $working_times[3] = [11, 12, 13];
+        $working_times[4] = [14, 15, 16];
+        $working_times[5] = [17, 18, 19];
+        $working_times[6] = [20, 21, 22];
+        $working_times[0] = [22, 24, 25];
+        if ($request->get('findDate')) {
+            $date = $request->get('findDate');
+            $date = explode("/", $date);
+            $dayofweek = date("w", mktime(0, 0, 0, $date[1], $date[0], $date[2]));
+            $where .= 'inner join carer_profile_working_time cw on cw.carer_profile_id = cp.id and cw.working_times_id in (' . implode(',', $working_times[$dayofweek]) . ')';
         }
         $where .= 'left join review r on cp.id=r.carer_id';
-        $where .=' where registration_progress=20 and profiles_status_id=2 ';
+        $where .= ' where registration_progress=20 and profiles_status_id=2 ';
 
         if ($request->get('gender'))
-            $where .= " and cp.gender in ('" . implode("','",array_keys($request->get('gender'))) . "')";
+            $where .= " and cp.gender in ('" . implode("','", array_keys($request->get('gender'))) . "')";
 
         if ($request->get('have_car'))
             $where .= " and cp.have_car='Yes'";
@@ -101,51 +100,54 @@ class SearchController extends FrontController
 
         if ($request->get('typeCare')) {
             $careSelect = 'select carer_profile_id from (
-                              select carer_profile_id,assistance_types_id from carer_profile_assistance_type cs where assistance_types_id in ('.implode(',',array_keys($request->get('typeCare'))).')) as tb
+                              select carer_profile_id,assistance_types_id from carer_profile_assistance_type cs where assistance_types_id in (' . implode(',', array_keys($request->get('typeCare'))) . ')) as tb
                             group by carer_profile_id
-                           having count(*)='.count(array_keys($request->get('typeCare')));
+                           having count(*)=' . count(array_keys($request->get('typeCare')));
 
             $careResult = DB::select($careSelect);
-            $carerId=[];
-            foreach ($careResult as $result)$carerId[]=$result->carer_profile_id;
-            $where .= ' and cp.id in ('.implode(',',array_values($carerId)).') ';
+            $carerId = [];
+            foreach ($careResult as $result) $carerId[] = $result->carer_profile_id;
+            $where .= ' and cp.id in (' . implode(',', array_values($carerId)) . ') ';
         }
 
-        if ($request->get('postCode')&&!empty($request->get('postCode'))){
+        if ($request->get('postCode') && !empty($request->get('postCode'))) {
             $postCode = trim($request->get('postCode'));
-            if(strpos($postCode,' ')===false) {
+            if (strpos($postCode, ' ') === false) {
                 $postCode .= ' ';
                 $where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('" . $postCode . "', POSITION(' ' IN '" . $postCode . "')) and  p.name = LEFT(cp.postcode, POSITION(' ' IN '" . $postCode . "')))>0";
-            }else{
-                $where .= " AND cp.postcode='" . $postCode."'";
+            } else {
+                $where .= " AND cp.postcode='" . $postCode . "'";
             }
         }
-        if ($request->get('load-more',0)==1)
+        if ($request->get('load-more', 0) == 1)
             $page = $request->get('page');
 
-        $order=[];
-        if ($request->get('sort-rating',0)==1)
-            $order[]='avg_total '.$request->get('sort-rating-order','asc');
-        if ($request->get('sort-id',0)==1)
-                $order[]='cp.id '.$request->get('sort-id-order','desc');
+        $order = [];
+        if ($request->get('sort-rating', 0) == 1)
+            $order[] = 'avg_total ' . $request->get('sort-rating-order', 'asc');
+        if ($request->get('sort-id', 0) == 1)
+            $order[] = 'cp.id ' . $request->get('sort-id-order', 'desc');
 
-        if(empty($order))$order[]='cp.id asc';
+        if (empty($order)) $order[] = 'cp.id asc';
         $start = ($page - 1) * $perPage;
-        if($page==1) $start = 0;
-        $carerResult=[];
-        $countAllResult=[];
+        if ($page == 1) $start = 0;
+        $carerResult = [];
+        $countAllResult = [];
         $sql = 'select cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview 
-                  from carers_profiles cp '.$where. ' 
+                  from carers_profiles cp ' . $where . ' 
                 group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview 
-                order by '.implode(',',$order)." limit $start,$perPage";
-        //$carerResult = DB::select($sql); //раскоментить
-
-        $start = (($page*$perPage)-$perPage==0)?'0':($page*$perPage)-$perPage;
+                order by ' . implode(',', $order) . " limit $start,$perPage";
+        if (Auth::check() && Auth::user()->isAdmin()) {
+            $carerResult = DB::select($sql); //раскоментить
+        }
+        $start = (($page * $perPage) - $perPage == 0) ? '0' : ($page * $perPage) - $perPage;
         //раскоментить
-//        $countAllResult = DB::select('select cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview
-//                  from carers_profiles cp '.$where. '
-//                group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview
-//                order by '.implode(',',$order));
+        if (Auth::check() && Auth::user()->isAdmin()){
+        $countAllResult = DB::select('select cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview
+                  from carers_profiles cp ' . $where . '
+                group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview
+                order by ' . implode(',', $order));
+        }
         $countAll=count($countAllResult);
 
         //if(count($carerResult)<=5)$start=0;

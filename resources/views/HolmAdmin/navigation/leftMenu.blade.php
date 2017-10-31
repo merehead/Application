@@ -31,6 +31,16 @@
             </a>
         </li>
         <li class="adminNav__item">
+            <a href="{{route('PostCodes')}}" class="adminNav__link">
+                <span class="adminNav__ico">
+                  <i class="fa fa-telegram" aria-hidden="true"></i>
+                </span>
+                <span class="adminNav__text">
+                  Post Codes
+                </span>
+            </a>
+        </li>
+        <li class="adminNav__item">
             <a href="{{route('booking.index')}}" class="adminNav__link">
                 <span class="adminNav__ico">
                   <i class="fa fa-id-card" aria-hidden="true"></i>
