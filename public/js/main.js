@@ -2195,6 +2195,7 @@ $(document).ready(function () {
                                       ajaxForm($(idForm), that);
                                   }
                               }
+                              $('#'+response.data.result.type+'').parent().find('.pickfiles-delete').attr('id', ''+response.data.result.id+'');
                           } else {
                               loop()
                           }
