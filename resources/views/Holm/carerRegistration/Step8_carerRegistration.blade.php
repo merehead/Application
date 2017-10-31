@@ -38,7 +38,7 @@
                 <div class="inputWrap addContainer">
                     <input class="pickfiles" type="file"/>
                     <span class="pickfiles-delete">X</span>
-                    <div id="driving_licence_photo" class="pickfiles_img"></div>
+                    <img id="driving_licence_photo" class="pickfiles_img"/>
                     <a href="#" class="add add--moreHeight"><i class="fa fa-plus-circle"></i>
                         <div class="add__comment add__comment--smaller"><p>Choose a File or Drag Here</p><span>Size limit: 10 MB</span></div></a>
                 </div>
@@ -70,7 +70,7 @@
                 <div class="inputWrap addContainer">
                     <input class="pickfiles" type="file"/>
                     <span class="pickfiles-delete">X</span>
-                    <div id="car_insurance_photo" class="pickfiles_img"></div>
+                    <img id="car_insurance_photo" class="pickfiles_img"/>
                     <a href="#" class="add add--moreHeight">
                         <i class="fa fa-plus-circle"></i>
                         <div class="add__comment add__comment--smaller">

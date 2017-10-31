@@ -43,7 +43,7 @@
                             <input name="{{$purchasersProfile->serviceUsers->first()->id}}" class="pickfiles_profile_photo" accept=".jpg,.jpeg,.png" type="file" />
                           @endif
 
-                          <div class="pickfiles_img"></div>
+                          <img class="pickfiles_img"/>
 
                           <img id="profile_photo" class="pickfiles_img"
 

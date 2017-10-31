@@ -165,7 +165,7 @@
                 <div class="carer-result">
                 @foreach($carerResult as $carerProfile)
                     <div class="result">
-                        <a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}" class="profilePhoto  profilePhoto2">
+                        <a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}" class="profilePhoto profilePhoto2">
                             <img id="profile_photo" class="set_preview_profile_photo" src="/img/profile_photos/{{$carerProfile->id}}.png"
                                  onerror="this.src='/img/no_photo.png'" alt="avatar">
                         </a>

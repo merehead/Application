@@ -45,7 +45,7 @@
                   <input class="pickfiles" type="file" />
                   <span class="pickfiles-delete">X</span>
 
-                  <div id="dbs_certificate_photo" class="pickfiles_img"></div>
+                  <img id="dbs_certificate_photo" class="pickfiles_img"/>
                     <a href="#" class="add add--moreHeight">
                         <i class="fa fa-plus-circle"></i>
                         <div class="add__comment add__comment--smaller">
