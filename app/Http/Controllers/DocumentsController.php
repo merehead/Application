@@ -108,7 +108,7 @@ class DocumentsController extends Controller
 
             $file->move(storage_path() . '/documents/', $fileName);
 
-            return ['id' => $document->id];
+            return ['id' => $document->id, 'type' => $request->type];
         });
     }
 
