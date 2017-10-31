@@ -2,11 +2,6 @@
     <table class="adminTable">
         <thead>
         <tr>
-            <td class="orderNumber">
-                  <span class="td-title td-title--number">
-                   №
-                  </span>
-            </td>
             <td class="bigger-td no-padding-l">
                   <span class="td-title td-title--mint">
                   user
@@ -28,11 +23,9 @@
                     ACTIONS
                   </span>
             </td>
-
         </tr>
 
         <tr class="extra-tr">
-            <td></td>
             <td class="for-inner">
                 <table class="innerTable">
                     <tr>
@@ -44,6 +37,12 @@
                         </td>
                         <td>
                             <span class="extraTitle">user type</span>
+                        </td>
+                        <td>
+                            <span class="extraTitle">referral code</span>
+                        </td>
+                        <td>
+                            <span class="extraTitle">completed hours</span>
                         </td>
                     </tr>
 

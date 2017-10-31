@@ -1,7 +1,4 @@
 <tr>
-    <td>
-
-    </td>
     <td class="for-inner">
         <table class="innerTable">
             <tr>
@@ -22,6 +19,26 @@
                 </td>
                 <td>
                     <span>{{$item->user_type}}</span>
+                </td>
+                <td>
+                    <span>
+                        @if(in_array($item->user_type, ['carer', 'purchaser']) && (!empty($item->user->referral_code) || $item->user->use_register_code))
+                            @if($item->user->use_register_code)
+                                REGISTER
+                            @else
+                                {{$item->user->referral_code}}
+                            @endif
+                        @else
+                        -
+                        @endif
+                    </span>
+                </td>
+                <td>
+                    @if(in_array($item->user_type, ['carer', 'purchaser']))
+                        {{$item->user->completed_appointments_hours}}
+                    @else
+                        -
+                    @endif
                 </td>
             </tr>
 

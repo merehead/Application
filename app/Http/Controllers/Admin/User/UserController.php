@@ -61,6 +61,8 @@ class UserController extends AdminController
 
         $userList = $userList->slice($start,$perPage);
         $this->vars = array_add($this->vars, 'profileType', $profileType);
+        $this->vars = array_add($this->vars, 'profileTypeFilter', $profileTypeFilter);
+        $this->vars = array_add($this->vars, 'statusTypeFilter', $statusTypeFilter);
         $this->vars = array_add($this->vars, 'nextPage', $nextPage);
         $this->vars = array_add($this->vars, 'previousPage', $previousPage);
         $this->vars = array_add($this->vars, 'count', $count);
