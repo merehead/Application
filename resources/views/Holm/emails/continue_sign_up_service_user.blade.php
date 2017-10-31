@@ -71,7 +71,7 @@
                             You won’t be able to book a carer until it has been completed.
                                                     </p>
 
-                        <a href="{{route('PurchaserRegistration')}}" class=""
+                        <a href="{{route('PurchaserRegistration')}}?refer=continue" class=""
                            style="text-transform: uppercase;
                   color: #7bb7dc;
                   font-weight: 700;

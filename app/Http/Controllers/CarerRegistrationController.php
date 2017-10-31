@@ -14,6 +14,7 @@ use App\WorkingTime;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Swift_TransportException;
@@ -65,6 +66,12 @@ class CarerRegistrationController extends FrontController
 
 
         if (!$user) {
+
+            if(request()->has('refer')){
+                $cookie = Cookie::make('CarerRegistration', 1,2);
+                return redirect()->route('session_timeout')->withCookie($cookie);
+            }
+
             $step = view(config('settings.frontTheme') . '.carerRegistration.Step1_carerRegistration')->with($this->vars)->render();
             $this->vars = array_add($this->vars, 'activeStep', 1);
         } else {

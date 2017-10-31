@@ -52,6 +52,10 @@ class PurchaserRegistrationController extends FrontController
 
 
         if (!$user) {
+            if(request()->has('refer')){
+                $cookie = Cookie::make('PurchaserRegistratiol', 1,2);
+                return redirect()->route('session_timeout')->withCookie($cookie);
+            }
             $step = view(config('settings.frontTheme').'.purchaserRegistration.Step1_purchaserRegistration')->with($this->vars)->render();
             $this->vars = array_add($this->vars,'activeStep',1);
             $this->vars = array_add($this->vars,'activeSubStep',0);

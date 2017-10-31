@@ -31,7 +31,7 @@
                               <input class="pickfiles" type="file" />
                               <span class="pickfiles-delete">X</span>
 
-                              <div id="nvq" class="pickfiles_img"></div>
+                              <img id="nvq" class="pickfiles_img" />
                                 <a class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -56,7 +56,7 @@
                               <input class="pickfiles"  type="file" />
                               <span class="pickfiles-delete">X</span>
 
-                              <div id="care_certificate" class="pickfiles_img"></div>
+                              <img id="care_certificate" class="pickfiles_img"/>
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -84,7 +84,7 @@
                                 <input class="pickfiles"  type="file" />
                                 <span class="pickfiles-delete">X</span>
 
-                                <div id="health_and_social" class="pickfiles_img"></div>
+                                <img id="health_and_social" class="pickfiles_img"/>
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -109,7 +109,7 @@
                               <input class="pickfiles"  type="file" />
                               <span class="pickfiles-delete">X</span>
 
-                              <div id="training_certificate" class="pickfiles_img"></div>
+                              <img id="training_certificate" class="pickfiles_img"/>
                               <a href="#" class="add add--moreHeight">
                                   <i class="fa fa-plus-circle"></i>
                                   <div class="add__comment add__comment--smaller">
@@ -138,7 +138,7 @@
                               <input class="pickfiles"  type="file" />
                               <span class="pickfiles-delete">X</span>
 
-                              <div id="additional_training_course" class="pickfiles_img"></div>
+                              <img id="additional_training_course" class="pickfiles_img"/>
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">
@@ -157,13 +157,13 @@
                         <div class="formField">
                             <div class="addContainer">
                               <div class="addContainer_load-header">
-                                <span>Certificate 6</span> 
+                                <span>Certificate 6</span>
                               </div>
 
                               <input class="pickfiles"  type="file" />
                               <span class="pickfiles-delete">X</span>
 
-                              <div id="other_relevant_qualification" class="pickfiles_img"></div>
+                              <img id="other_relevant_qualification" class="pickfiles_img"/>
                                 <a href="#" class="add add--moreHeight">
                                     <i class="fa fa-plus-circle"></i>
                                     <div class="add__comment add__comment--smaller">

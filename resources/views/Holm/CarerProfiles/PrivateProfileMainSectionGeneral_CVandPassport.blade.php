@@ -8,7 +8,7 @@
         <div class="addContainer">
           <input disabled class="pickfiles"  type="file" />
           <span class="pickfiles-delete">X</span>
-          <div id="additional_documents_cv" class="pickfiles_img"></div>
+          <img id="additional_documents_cv" class="pickfiles_img"/>
             <a class="add add--moreHeight">
                 <i class="fa fa-plus-circle"></i>
                 <div class="add__comment add__comment--smaller"></div>
@@ -27,7 +27,7 @@
         <div class="addContainer">
           <input disabled class="pickfiles" accept=".jpg,.jpeg,.png" type="file" />
           <span class="pickfiles-delete">X</span>
-          <div id="passport" class="pickfiles_img"></div>
+          <img id="passport" class="pickfiles_img"/>
             <a class="add add--moreHeight">
                 <i class="fa fa-plus-circle"></i>
                 <div class="add__comment add__comment--smaller"></div>

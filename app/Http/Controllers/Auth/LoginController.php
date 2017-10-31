@@ -38,6 +38,8 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         $this->performLogout($request);
+        if(strpos($request->headers->get('referer'),'leave_review')!==false)
+            return redirect()->route('mainHomePage');
         return redirect()->back();
     }
 
@@ -51,6 +53,11 @@ class LoginController extends Controller
         if( Cookie::get('invite')) {
             Cookie::forget('invite');
             return '/invite/refer-users';
+        }
+
+        if( Cookie::get('CarerRegistration')) {
+            Cookie::forget('refer');
+            return '/carer-registration/';
         }
 
         $user = Auth::user();

@@ -93,6 +93,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJaLv-6bVXViUGJ_e_-nR5RZlt9GUuC4M&libraries=places"></script>
 <script src="{{asset('js/jquery.autocomplete.js')}}"></script>
+<script src="{{asset('js/exif.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92065832-1"></script>
