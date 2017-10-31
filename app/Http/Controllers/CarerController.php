@@ -220,6 +220,10 @@ class CarerController extends FrontController implements Constants
 
         //todo костыль на логаут
         if (!Auth::check()) {
+            if(request()->has('refer')){
+                $cookie = Cookie::make('bookingFilter', 1,2);
+                return redirect()->route('session_timeout')->withCookie($cookie);
+            }
             return \redirect('/');
             //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
         }

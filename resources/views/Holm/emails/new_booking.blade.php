@@ -147,7 +147,7 @@
                        class="t-content">
                     <tr>
                         <td style="padding: 30px 10px; background: #f9f9f9; " valign="top" class="">
-                            <a href="{{route('carerBooking',['status'=>'new'])}}" class=""
+                            <a href="{{route('carerBooking',['status'=>'new'])}}?refer=booking" class=""
                                style="
                     display: block;
                     width: 240px;

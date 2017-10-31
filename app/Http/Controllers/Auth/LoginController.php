@@ -54,6 +54,11 @@ class LoginController extends Controller
             Cookie::forget('invite');
             return '/invite/refer-users';
         }
+        if( Cookie::get('bookingFilter')) {
+            Cookie::forget('bookingFilter');
+            return '/carer-settings/booking/new/';
+        }
+
 
         if( Cookie::get('CarerRegistration')) {
             Cookie::forget('refer');
