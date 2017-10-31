@@ -822,20 +822,6 @@ $(document).ready(function () {
             //$(".car-block").hide();
             $('#profile_use_car').parent().hide();
         }
-        $('#driving_license').on('change', function () {
-            if ($('#driving_license').val() == "Yes") {
-                $('.hiding_profile').show();
-            } else {
-                $('.hiding_profile').hide();
-            }
-            if ($("#type_car_work").val() == 'Yes') {
-                //$(".car-block").show();
-                $('#profile_use_car').parent().show();
-            } else {
-                //$(".car-block").hide();
-                $('#profile_use_car').parent().hide();
-            }
-        });
     }
 
     if ($('#register_have_car').length > 0) {
@@ -1962,7 +1948,7 @@ $(document).ready(function () {
         $(idLoadFiles).find('.pickfiles-change').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo_service_user--change').attr("disabled", false);
-        if(carerId){
+        if(!carerId){
           $(idLoadFiles).find('.pickfiles-delete').attr("style", 'display: block');
         }
         $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", false).removeClass('profileField__input--greyBg');
@@ -2198,8 +2184,18 @@ $(document).ready(function () {
                               } else {
                                   $('.pickfiles').val('');
                                   arrFiles = [];
-                                  ajaxForm($(idForm), that);
+                                  if (arrForDeleteIDProfile.length > 0) {
+                                      axios.delete(
+                                          '/api/document/' + arrForDeleteIDProfile + '/'
+                                      ).then(function(response) {
+                                          console.log(response)
+                                      })
+                                      ajaxForm($(idForm), that);
+                                  } else {
+                                      ajaxForm($(idForm), that);
+                                  }
                               }
+
 
                               if(idLoadFiles === '#carerQUALIFICATIONS') {
                                 $.each($('.profileField_active'), function (index, val) {
