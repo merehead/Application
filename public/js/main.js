@@ -2184,18 +2184,22 @@ $(document).ready(function () {
                               } else {
                                   $('.pickfiles').val('');
                                   arrFiles = [];
-                                  if (arrForDeleteIDProfile.length > 0) {
-                                      axios.delete(
-                                          '/api/document/' + arrForDeleteIDProfile + '/'
-                                      ).then(function(response) {
-                                          console.log(response)
-                                  })
-                                      ajaxForm($(idForm), that);
-                                  } else {
-                                      ajaxForm($(idForm), that);
-                                  }
+                                  ajaxForm($(idForm), that);
                               }
-                              $('#'+response.data.result.type+'').parent().find('.pickfiles-delete').attr('id', ''+response.data.result.id+'');
+
+                              if(idLoadFiles === '#carerQUALIFICATIONS') {
+                                $.each($('.profileField_active'), function (index, val) {
+                                  if(!$(this).find('.pickfiles-delete').length){
+                                    console.log(index, response.data.result.id);
+                                    $(this).find('.addContainer .pickfiles').remove()
+                                    $(this).find('.addContainer').append('<div class="pickfiles-delete" id="'+response.data.result.id+'">x</div>')
+                                    return false
+                                  }
+                                })
+                              }else{
+                                $('#'+response.data.result.type+'').parent().find('.pickfiles-delete').attr('id', ''+response.data.result.id+'');
+                              }
+
                           } else {
                               loop()
                           }
@@ -2380,10 +2384,12 @@ $(document).ready(function () {
       var p_length = $(this).parent().parent().parent().find('.profileField')
       var div2 = $(this).parent().parent().addClass('profileField_h')
 
+      $(this).closest('.profileField').addClass('profileField_active')
       $(this).parent().parent().find('.addInfo__input').prop( "disabled", false)
       $(this).parent().parent().find('.addInfo__input').attr( "readonly", false )
       $(this).parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
       $(this).parent().parent().find('.addInfo__input').addClass('addInfo__input-required')
+      $(this).parent().find('.pickfiles_img').attr('style', 'display: block')
       $(this).parent().find('.pickfiles_img').attr('style', 'display: block')
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
       var pickfiles_img_id = $(this).parent().find('.pickfiles_img').attr('id')
@@ -2757,7 +2763,7 @@ $(document).ready(function () {
             $(p).html('')
             index[1].map(function(index2, i2) {
               $(p).append(
-                '<div class="profileField profileField_q profileField_h">'+
+                '<div class="profileField profileField_active profileField_q profileField_h">'+
                   '<span>Certificate '+(i2+1)+'</span><div class="addContainer">'+
                   '<div class="pickfiles-delete" id="'+index2.id+'">x</div>'+ //eqweqwe
                     func(index[0], index2, i)+

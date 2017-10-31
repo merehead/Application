@@ -217,6 +217,7 @@ select#workingTimes {
 .pickfiles-delete,
 .pickfiles-delete_profile_photo {
     position: absolute;
+    top: 5px;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
