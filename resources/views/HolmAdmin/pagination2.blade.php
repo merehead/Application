@@ -5,7 +5,7 @@ if(isset($statusTypeFilter)&&!empty($statusTypeFilter)) $search.='&statusType='.
 ?>
 <div class="paginationContainer">
     <div class="pagination">
-        <a href="{{($previousPage>1)?$link.'?page='.$previousPage.$search:'#'}}" class="paginationArrow paginationArrow--left">
+        <a href="{{($previousPage>=1)?$link.'?page='.$previousPage.$search:'#'}}" class="paginationArrow paginationArrow--left">
             <span><i class="fa fa-angle-left"></i></span>
         </a>
         @for($page=1; $page<=$pages; $page++)
