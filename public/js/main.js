@@ -2345,7 +2345,7 @@ $(document).ready(function () {
             if(_this.parent().closest('#carerPrivateAvailability').length){
               _this.parent().closest('.profileField').remove()
             }else{
-              _this.parent().find('.pickfiles_img').remove()
+              _this.parent().find('.pickfiles_img').attr('style', 'display: none')
             }
             localStorage.setItem('files_id', JSON.stringify(newGetls))
           }
@@ -2358,7 +2358,7 @@ $(document).ready(function () {
             return index
           }
         })
-        console.log(arrFiles)
+        $(this).parent().find('.pickfiles_img').attr('style', 'display: none')
       }
     })
 
@@ -2380,6 +2380,7 @@ $(document).ready(function () {
       $(this).parent().parent().find('.addInfo__input').attr( "readonly", false )
       $(this).parent().find('.fa-plus-circle').attr('style', 'opacity: 0')
       $(this).parent().parent().find('.addInfo__input').addClass('addInfo__input-required')
+      $(this).parent().find('.pickfiles_img').attr('style', 'display: block')
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
       var pickfiles_img_id = $(this).parent().find('.pickfiles_img').attr('id')
       var deleteID = $(this).parent().find('.pickfiles-delete').attr('id')
