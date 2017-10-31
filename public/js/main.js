@@ -1948,7 +1948,7 @@ $(document).ready(function () {
         $(idLoadFiles).find('.pickfiles-change').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo_service_user--change').attr("disabled", false);
-        if(carerId){
+        if(!carerId){
           $(idLoadFiles).find('.pickfiles-delete').attr("style", 'display: block');
         }
         $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", false).removeClass('profileField__input--greyBg');
@@ -2748,7 +2748,6 @@ $(document).ready(function () {
 
         newDoc.map(function(index, i) {
           var p = '.' + profileRow+index[0].toLowerCase()
-          // var count = 1 - index[1].length
 
             $(p).html('')
             index[1].map(function(index2, i2) {
@@ -2767,43 +2766,21 @@ $(document).ready(function () {
                 '</div>'
               )
             })
-            // if(count >= 0){
-              // count === 0 ? count += 1 : ''
-              // for (var i = 0; i < count; i++) {
-              //   $(p).append(
-              //     '<div class="profileField profileField_q">'+
-              //       '<span>Certificate '+(count+i+1)+'</span><div class="addContainer">'+
-              //         '<input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
-              //         '<div id="'+index[0].toLowerCase()+i+1+'u'+'" class="pickfiles_img"></div>'+
-              //           '<a class="add add--moreHeight">'+
-              //               '<i class="fa fa-plus-circle"></i>'+
-              //               '<div class="add__comment add__comment--smaller"></div>'+
-              //           '</a>'+
-              //       '</div>'+
-              //       '<div class="addInfo">'+
-              //           '<input disabled type="text" name="'+index[0].toLowerCase()+'-'+i+1+'" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">'+
-              //       '</div>'+
-              //     '</div>'
-              //   )
-              // }
-            // }else{
-              $(p).append(
-                '<div class="profileField profileField_q">'+
-                  '<span>Certificate '+(index[1].length+1)+'</span><div class="addContainer">'+
-                    '<input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
-                    '<img id="'+index[0].toLowerCase()+i+1+'u'+'" class="pickfiles_img"/>'+
-                      '<a class="add add--moreHeight">'+
-                          '<i class="fa fa-plus-circle"></i>'+
-                          '<div class="add__comment add__comment--smaller"></div>'+
-                      '</a>'+
-                  '</div>'+
-                  '<div class="addInfo">'+
-                      '<input disabled type="text" name="'+index[0].toLowerCase()+'-'+i+1+'" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">'+
-                  '</div>'+
-                '</div>'
-              )
-            // }
-
+            $(p).append(
+              '<div class="profileField profileField_q">'+
+                '<span>Certificate '+(index[1].length+1)+'</span><div class="addContainer">'+
+                  '<input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
+                  '<img id="'+index[0].toLowerCase()+i+1+'u'+'" class="pickfiles_img"/>'+
+                    '<a class="add add--moreHeight">'+
+                        '<i class="fa fa-plus-circle"></i>'+
+                        '<div class="add__comment add__comment--smaller"></div>'+
+                    '</a>'+
+                '</div>'+
+                '<div class="addInfo">'+
+                    '<input disabled type="text" name="'+index[0].toLowerCase()+'-'+i+1+'" class="addInfo__input profileField__input--greyBg addInfo__input-ford" placeholder="Name">'+
+                '</div>'+
+              '</div>'
+            )
 
             newDoc.map(function(index) {
               var c = 0
@@ -2830,7 +2807,7 @@ $(document).ready(function () {
               }
               $('#'+index.type_value+'').parent().children('.add').find('.fa-plus-circle').attr('style', 'opacity: 0')
               $('#'+index.type_value+'').parent().find('.pickfiles-delete').attr('id', index.id)
-              $('#'+index.type_value+'').parent().find('.pickfiles-change').remove()
+              // $('#'+index.type_value+'').parent().find('.pickfiles-change').remove()
               $('#'+index.type_value+'').parent().parent().find('.addInfo__input').attr( "disabled", false )
               $('#'+index.type_value+'').parent().parent().find('.addInfo__input').attr( "readonly", false )
               $('#'+index.type_value+'').parent().parent().find('.addInfo__input').val(index.title)
