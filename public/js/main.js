@@ -2458,7 +2458,7 @@ $(document).ready(function () {
       $(q).append(
         '<div class="profileField profileField_q profileField_h">'+
           '<span>Certificate '+(p_length.length+1)+'</span><div class="addContainer">'+
-            '<input class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
+            '<input class="pickfiles" accept="" type="file" />'+
             '<img id="'+input_name.split('-')[0]+'-'+c+'u" class="pickfiles_img"/>'+
               '<a class="add add--moreHeight">'+
                   '<i class="fa fa-plus-circle"></i>'+
@@ -2790,7 +2790,7 @@ $(document).ready(function () {
             $(p).append(
               '<div class="profileField profileField_q">'+
                 '<span>Certificate '+(index[1].length+1)+'</span><div class="addContainer">'+
-                  '<input disabled class="pickfiles" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />'+
+                  '<input disabled class="pickfiles" accept="" type="file" />'+
                   '<img id="'+index[0].toLowerCase()+i+1+'u'+'" class="pickfiles_img"/>'+
                     '<a class="add add--moreHeight">'+
                         '<i class="fa fa-plus-circle"></i>'+

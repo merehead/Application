@@ -127,7 +127,7 @@
                 <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ">UK\EEA Driving licence photo</span></h2>
 
                 <div class="addContainer">
-                    <input disabled class="pickfiles-change" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file"/>
+                    <input disabled class="pickfiles-change" accept="" type="file"/>
                     <span class="pickfiles-delete">X</span>
                     <img id="driving_licence_photo" class="pickfiles_img"/>
                     <a class="add add--moreHeight">
@@ -171,7 +171,7 @@
                 </span>
                 </h2>
                 <div class="addContainer">
-                    <input disabled class="pickfiles-change" accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file"/>
+                    <input disabled class="pickfiles-change" accept="" type="file"/>
                     <span class="pickfiles-delete">X</span>
                     <img id="car_insurance_photo" class="pickfiles_img"/>
                     <a class="add add--moreHeight">

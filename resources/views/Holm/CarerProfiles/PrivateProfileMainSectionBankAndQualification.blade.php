@@ -57,7 +57,7 @@
             <span>Certificate 1</span>
             <div class="addContainer">
               <input disabled class="pickfiles" value=""
-                accept="application/pdf,.jpg,.jpeg,.png,.doc,.docx" type="file" />
+                accept="" type="file" />
               <img id="nvq" class="pickfiles_img"/>
                 <a class="add add--moreHeight">
                     <i class="fa fa-plus-circle"></i>
