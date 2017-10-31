@@ -16,6 +16,7 @@ use App\User;
 use App\Document;
 use App\WorkingTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Auth;
