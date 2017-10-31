@@ -2344,6 +2344,9 @@ $(document).ready(function () {
             })
             if(_this.parent().closest('#carerPrivateAvailability').length){
               _this.parent().closest('.profileField').remove()
+              $.each($('.profileField_q'), function (i, val) {
+                $(this).find('span').text('Certificate '+(i+1)+'')
+              })
             }else{
               _this.parent().find('.pickfiles_img').attr('style', 'display: none')
             }
