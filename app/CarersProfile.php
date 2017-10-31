@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class CarersProfile extends Model
 {
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id');
+    }
+
     public function Postcode()
     {
         return $this->belongsTo('App\Postcode');
