@@ -87,7 +87,8 @@ class DocumentsController extends Controller
 
         return Plupload::receive('file', function ($file) use ($user, $request)
         {
-            $fileName = md5(uniqid()).'.'.$file->extension();
+            $ext = $file->extension();
+            $fileName = md5(uniqid()).'.'.$ext;
             if($request->has('id')){
                 $document = Document::find($request->id);
                 if(!$document)
@@ -106,13 +107,14 @@ class DocumentsController extends Controller
                 ]);
             }
 
-            if(in_array($file->extension(), ['png', 'jpg', 'jpeg'])){
-                $image = new \Imagick($fileName);
-                $this->autoRotateImage($fileName);
-                $image->writeImage($fileName);
-            }
 
             $file->move(storage_path() . '/documents/', $fileName);
+
+            if(in_array($ext, ['png', 'jpg', 'jpeg'])){
+                $image = new \Imagick(storage_path().'/documents/'.$fileName);
+                $this->autoRotateImage($image);
+                $image->writeImage(storage_path().'/documents/'.$fileName);
+            }
 
             return ['id' => $document->id, 'type' => $request->type];
         });
