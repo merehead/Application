@@ -58,7 +58,6 @@
             <div class="addContainer">
               <input disabled class="pickfiles" value=""
                 accept="" type="file" />
-              <div class="pickfiles-delete">x</div>
               <img id="nvq" class="pickfiles_img"/>
                 <a class="add add--moreHeight">
                     <i class="fa fa-plus-circle"></i>

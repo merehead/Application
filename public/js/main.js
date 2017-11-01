@@ -1948,7 +1948,7 @@ $(document).ready(function () {
         $(idLoadFiles).find('.pickfiles-change').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo--change').attr("disabled", false);
         $(idLoadFiles).find('.pickfiles_profile_photo_service_user--change').attr("disabled", false);
-        if(carerId){
+        if(!carerId){
           $(idLoadFiles).find('.pickfiles-delete').attr("style", 'display: block');
         }
         $(idLoadFiles).find('.addInfo__input-ford').attr("disabled", false).removeClass('profileField__input--greyBg');
@@ -2206,7 +2206,6 @@ $(document).ready(function () {
                               if(idLoadFiles === '#carerQUALIFICATIONS') {
                                 $.each($('.profileField_active'), function (index, val) {
                                   if(!$(this).find('.pickfiles-delete-loaded').length){
-                                    console.log(index, response.data.result.id);
                                     $(this).find('.addContainer .pickfiles').remove()
                                     $(this).find('.pickfiles-delete').addClass('pickfiles-delete-loaded').attr('id', response.data.result.id)
                                     return false
@@ -2365,6 +2364,9 @@ $(document).ready(function () {
             })
             if(_this.parent().closest('#carerPrivateAvailability').length){
               _this.parent().closest('.profileField').remove()
+              $.each($('.profileField_q'), function (i, val) {
+                $(this).find('span').text('Certificate '+(i+1)+'')
+              })
             }else{
               _this.parent().find('.pickfiles_img').attr('style', 'display: none')
             }
@@ -2381,11 +2383,10 @@ $(document).ready(function () {
         })
         _this.parent().closest('.profileField').remove()
         $(this).parent().find('.pickfiles_img').attr('style', 'display: none')
+        $.each($('.profileField_q'), function (i, val) {
+          $(this).find('span').text('Certificate '+(i+1)+'')
+        })
       }
-
-      $.each($('.profileField_q'), function (i, val) {
-        $(this).find('span').text('Certificate '+(i+1)+'')
-      })
     })
 
     $('.pickfiles-delete_profile_photo').on('click', function() {
