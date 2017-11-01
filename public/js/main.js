@@ -2069,7 +2069,13 @@ $(document).ready(function () {
                 $('#dpsBlock').show();
             else
                 $('#dpsBlock').hide();
-        })
+        });
+        $(document).on('change','select[name="DBS"]',function (e) {
+            if($(this).val()=='Yes')
+                $('#dpsBlock').show();
+            else
+                $('#dpsBlock').hide();
+        });
         $carer_profile.find('button.btn-success').on('click', function (e) {
             e.preventDefault();
             $('input[name="address_line1"]').autocomplete({serviceUrl:'/noaddress/'});
