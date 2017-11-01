@@ -35,3 +35,6 @@ a.pagination__item.act{
     background-color: none;
     border-color: none;
 }
+img{
+  image-orientation: from-image;
+}
