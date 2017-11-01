@@ -10,8 +10,8 @@ use Auth;
 class ProfilePhotosController extends Controller
 {
     public function uploadUserProfilePhoto(Request $request){
-//        $user = Auth::user();
-        $user = User::find(1);
+        $user = Auth::user();
+//        $user = User::find(1);
         $base64 = $request->image;
         $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64));
         file_put_contents('img/profile_photos/'.$user->id.'.png', $data);
