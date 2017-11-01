@@ -2427,6 +2427,7 @@ $(document).ready(function () {
       var reader  = new FileReader()
       reader.addEventListener("load", function() {
         file = reader.result
+        console.log(file)
         _this.parent().find('.pickfiles_img').attr('src', file)
       })
 
@@ -2505,7 +2506,7 @@ $(document).ready(function () {
       $(this).parent().find('.add__comment--smaller').html('')
       $(this).parent().find('.pickfiles-delete').attr('style', 'display: block')
 
-
+      adImageOrientation(file, $(this).parent().find('.pickfiles_img'))
     })
 
     $('.upload_files').on('click', function (e) {
