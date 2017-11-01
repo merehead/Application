@@ -107,9 +107,9 @@ class DocumentsController extends Controller
             }
 
             if(in_array($file->extension(), ['png', 'jpg', 'jpeg'])){
-                $image = new \Imagick($fileName);
-                $this->autoRotateImage($fileName);
-                $image->writeImage($fileName);
+                $image = new \Imagick(storage_path().'/documents/'.$fileName);
+                $this->autoRotateImage(storage_path().'/documents/'.$fileName);
+                $image->writeImage(storage_path().'/documents/'.$fileName);
             }
 
             $file->move(storage_path() . '/documents/', $fileName);
