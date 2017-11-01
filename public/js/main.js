@@ -36,6 +36,7 @@ function addressFormt(autocomplete){
         $('input[name="address_line2"]').val('');
         $('input[name="town"]').val('');
         $('input[name="postcode"]').val('');
+
         if(data[0].number!=undefined)number=data[0].number;
         if(data[0].buildingname!=undefined)buildingname= data[0].buildingname;
         if(data[0].organisation!=undefined)organisation=data[0].organisation+', ';
