@@ -25,7 +25,7 @@
               </span>
         </h2>
         <div class="addContainer">
-          <input disabled class="pickfiles" accept=".jpg,.jpeg,.png" type="file" />
+          <input disabled class="pickfiles" accept="" type="file" />
           <span class="pickfiles-delete">X</span>
           <img id="passport" class="pickfiles_img"/>
             <a class="add add--moreHeight">
