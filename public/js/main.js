@@ -2199,10 +2199,10 @@ $(document).ready(function () {
 
                               if(idLoadFiles === '#carerQUALIFICATIONS') {
                                 $.each($('.profileField_active'), function (index, val) {
-                                  if(!$(this).find('.pickfiles-delete').length){
+                                  if(!$(this).find('.pickfiles-delete-loaded').length){
                                     console.log(index, response.data.result.id);
                                     $(this).find('.addContainer .pickfiles').remove()
-                                    $(this).find('.addContainer').append('<div class="pickfiles-delete" id="'+response.data.result.id+'">x</div>')
+                                    $(this).find('.pickfiles-delete').addClass('pickfiles-delete-loaded').attr('id', response.data.result.id)
                                     return false
                                   }
                                 })
@@ -2359,9 +2359,6 @@ $(document).ready(function () {
             })
             if(_this.parent().closest('#carerPrivateAvailability').length){
               _this.parent().closest('.profileField').remove()
-              $.each($('.profileField_q'), function (i, val) {
-                $(this).find('span').text('Certificate '+(i+1)+'')
-              })
             }else{
               _this.parent().find('.pickfiles_img').attr('style', 'display: none')
             }
@@ -2376,8 +2373,13 @@ $(document).ready(function () {
             return index
           }
         })
+        _this.parent().closest('.profileField').remove()
         $(this).parent().find('.pickfiles_img').attr('style', 'display: none')
       }
+
+      $.each($('.profileField_q'), function (i, val) {
+        $(this).find('span').text('Certificate '+(i+1)+'')
+      })
     })
 
     $('.pickfiles-delete_profile_photo').on('click', function() {
@@ -2401,6 +2403,7 @@ $(document).ready(function () {
       $(this).parent().parent().find('.addInfo__input').addClass('addInfo__input-required')
       $(this).parent().find('.pickfiles_img').attr('style', 'display: block')
       $(this).parent().find('.pickfiles_img').attr('style', 'display: block')
+      $(this).parent().append('<div class="pickfiles-delete">x</div>')
       var input_name = $(this).parent().parent().find('.addInfo__input').attr('name')
       var pickfiles_img_id = $(this).parent().find('.pickfiles_img').attr('id')
       var deleteID = $(this).parent().find('.pickfiles-delete').attr('id')
@@ -2775,7 +2778,7 @@ $(document).ready(function () {
               $(p).append(
                 '<div class="profileField profileField_active profileField_q profileField_h">'+
                   '<span>Certificate '+(i2+1)+'</span><div class="addContainer">'+
-                  '<div class="pickfiles-delete" id="'+index2.id+'">x</div>'+ //eqweqwe
+                  '<div class="pickfiles-delete pickfiles-delete-loaded" id="'+index2.id+'">x</div>'+ //eqweqwe
                     func(index[0], index2, i)+
                     '<a class="add add--moreHeight"></a>'+
                   '</div>'+
