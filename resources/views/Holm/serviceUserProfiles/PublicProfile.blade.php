@@ -44,9 +44,11 @@
                         <div class="carer">
                             <div class="profileInfo">
                                 <div class="profilePhoto profilePhoto2 ">
-                                    <img id="profile_photo"
-                                         src="/img/service_user_profile_photos/{{$serviceUsers->id}}.png"
-                                         onerror="this.src='/img/no_photo.png'" alt="avatar">
+
+                                     <img id="profile_photo" alt="avatar"
+                                       @if (file_exists(public_path('img/service_user_profile_photos/' . $serviceUsers->id . '.png')))
+                                         src="img/service_user_profile_photos/{{$serviceUsers->id}}.png"
+                                       @endif />
 
                                 </div>
                                 <div class="profileInfo__item">

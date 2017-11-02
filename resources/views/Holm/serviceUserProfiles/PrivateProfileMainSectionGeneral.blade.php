@@ -17,7 +17,10 @@
             <div class="profilePhoto profilePhoto--change">
 
               <input disabled name="{{$serviceUsersProfile->id}}" class="pickfiles_profile_photo_service_user--change" accept=".jpg,.jpeg,.png" type="file" />
-              <img class="profile_photo_service_user" id="profile_photo" src="/img/service_user_profile_photos/{{$serviceUsersProfile->id}}.png" onerror="this.src='/img/no_photo.png'" alt="avatar">
+              <img class="profile_photo_service_user"  alt="avatar" id="profile_photo"
+                @if (file_exists(public_path('img/service_user_profile_photos/' . $serviceUsersProfile->id . '.png')))
+                  src="img/service_user_profile_photos/{{$serviceUsersProfile->id}}.png"
+                @endif />
 
                 <a href="#" class="profilePhoto__ico">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
