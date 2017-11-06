@@ -137,17 +137,17 @@ class SearchController extends FrontController
                   from carers_profiles cp ' . $where . ' 
                 group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview 
                 order by ' . implode(',', $order) . " limit $start,$perPage";
-        if (Auth::check() && Auth::user()->isAdmin()) {
+        //if (Auth::check() && Auth::user()->isAdmin()) {
             $carerResult = DB::select($sql); //раскоментить
-        }
+        //}
         $start = (($page * $perPage) - $perPage == 0) ? '0' : ($page * $perPage) - $perPage;
         //раскоментить
-        if (Auth::check() && Auth::user()->isAdmin()){
+        //if (Auth::check() && Auth::user()->isAdmin()){
         $countAllResult = DB::select('select cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview
                   from carers_profiles cp ' . $where . '
                 group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview
                 order by ' . implode(',', $order));
-        }
+        //}
         $countAll=count($countAllResult);
 
         //if(count($carerResult)<=5)$start=0;
