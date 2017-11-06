@@ -54,11 +54,20 @@ class AdminSitePayment extends AdminController
 
     public function getBookingTransactions(Request $request,Transaction $transaction){
         $this->title = 'Admin | Booking Transactions Management';
+        $input = $request->all();
         $model = $transaction;
-
-        $transactions = $model->select('*')->paginate(Config::get('settings.AdminUserPagination'));
+        $transactions = $model->select('*');
+        var_dump($input['search']);
+        if(isset($input['TransactionsSort'])){
+            $transactions->where('payment_method','=',$input['TransactionsSort']);
+        }elseif(isset($input['search'])){
+            $transactions->where('name','like',$input['search']);
+        }
+        echo $transactions->toSql();
+        $transactions = $transactions->paginate(10);
 
         $this->vars['transactions'] = $transactions;
+        $this->vars['TransactionsSort'] = $request->get('TransactionsSort',null);
 
         $this->content = view(config('settings.theme') . '.bookingTransactions.bookingTransactions')->with($this->vars)->render();
 

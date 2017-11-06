@@ -115,8 +115,10 @@ function calculate_price() {
 };
 
 function carerSearchAjax(){
-    $('#findMessage').modal();
-    return false;
+    if(!is_admin) {
+        $('#findMessage').modal();
+        return false;
+    }
     var form = $('#carerSearchForm');
     var token = $(form).find('input[name=_token]').val();
     if($('#load-more').val()==0){

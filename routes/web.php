@@ -160,6 +160,7 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
 
 
     Route::get('/booking-transactions', 'AdminSitePayment@getBookingTransactions')->name('BookingTransactions');
+    Route::post('/booking-transactions', 'AdminSitePayment@getBookingTransactions')->name('BookingTransactionsPost');
 
     Route::get('/carer-payout', 'AdminSitePayment@getPayoutsToCarers')->name('PayoutsToCarers');
     Route::post('/carer-payout/{booking}', 'AdminSitePayment@makePayoutToCarer')->name('makePayoutToCarer');

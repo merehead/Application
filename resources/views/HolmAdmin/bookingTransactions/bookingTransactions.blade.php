@@ -1,3 +1,6 @@
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 <div class="mainPanel">
     <h2 class="categoryTitle">
           <span class="categoryTitle__ico">
@@ -5,12 +8,13 @@
           </span>
         Bookings transactions
     </h2>
-
+    <form method="post" action="{{route('BookingTransactionsPost')}}" id="transaction_filter">
     <div class="panelHead">
         <div class="filterBox">
             <div class="formField formField--fix-biger">
                 <div class="fieldWrap">
-                    <input type="search" class="formItem formItem--input formItem--search" placeholder="Search...">
+                    <?php echo Form::text('search',null,['class'=>'formItem formItem--input formItem--search','placeholder'=>'Search...','name'=>'search']); ?>
+                    {{--<input type="search" name="search" class="formItem formItem--input formItem--search" placeholder="Search...">--}}
                     <button class="searchBtn">
                         <i class="fa fa-search"></i>
                     </button>
@@ -24,7 +28,8 @@
             <div class="filterBox">
                 <div class="formField formField--fixed">
                     <div class="fieldWrap">
-                        <input type="text" class="formItem formItem--input formItem--search" name="daterange" value="10/10/2017 - 10/31/2017">
+                        <?php echo Form::text('daterange',null,['class'=>'formItem formItem--input formItem--search daterange','placeholder'=>'Date transaction','name'=>'daterange']); ?>
+                        {{--<input type="text" class="formItem formItem--input formItem--search daterange" name="daterange" value="10/10/2017 - 10/31/2017">--}}
                         <button class="searchBtn">
                             <i class="fa fa-calendar"></i>
                         </button>
@@ -38,18 +43,14 @@
         <div class="panelHead__group">
             <div class="filterBox">
                 <h2 class="filterBox__title themeTitle">
-                    sort by
+                    find by
                 </h2>
                 <div class="formField formField--fixed">
-                    <select class="formItem formItem--select">
-                        <option value="#">
-                            --Text--
-                        </option>
-                    </select>
+                    <?php echo Form::select('TransactionsSort',[''=>'Any','bonus'=>'Bonuses Wallet','stripe'=>'Credit Card'],null,['class'=>'formItem formItem--select','name'=>'TransactionsSort']); ?>
                 </div>
 
             </div>
-            <a href="#" class="actionsBtn actionsBtn--filter actionsBtn--bigger">
+            <a onclick="event.preventDefault();document.getElementById('transaction_filter').submit();" href="#" class="actionsBtn actionsBtn--filter actionsBtn--bigger">
                 filter
             </a>
             <a href="#" class="print">
@@ -58,7 +59,7 @@
         </div>
 
     </div>
-
+    </form>
 
 
     <div class="tableWrap tableWrap--margin-t">
@@ -250,3 +251,6 @@
     {{--{{$transactions->render('HolmAdmin.pagination')}}--}}
     {!! $transactions->appends( Request::query() )->render('HolmAdmin.pagination') !!}
 </div>
+<script type="text/javascript">
+    $('.daterange').daterangepicker();
+</script>

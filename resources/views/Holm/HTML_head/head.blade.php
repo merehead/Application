@@ -19,5 +19,6 @@
     <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/carousel/carousel.css')}}">
     <link rel="stylesheet" href="{{asset('css/jquery.timepicker.min.css')}}">
+    <script>var is_admin = {{(Auth::check())? Auth::user()->isAdmin():0 }} ; </script>
     <script src="{{asset('js/jquery.min.js')}}"></script>
 </head>
