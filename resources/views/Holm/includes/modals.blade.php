@@ -15,7 +15,8 @@
                 <a href="{{route('CarerRegistration')}}" class="who-you-are__item">
                     A Care Worker?
                 </a>
-                <a href="{{route('PurchaserRegistration')}}" class="who-you-are__item" data-toggle="modal" data-target="#PurchaserMessage">
+                <a href="{{route('PurchaserRegistration')}}" class="who-you-are__item">
+                    {{--/*data-toggle="modal" data-target="#PurchaserMessage"*/--}}
                     Buying Care?
                 </a>
             </div>
