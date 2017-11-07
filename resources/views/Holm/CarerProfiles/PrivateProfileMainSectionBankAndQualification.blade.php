@@ -8,8 +8,8 @@
     </div>
 </div>
 
-{!! Form::model($user, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateBank']) !!}
-{!! Form::hidden('id',null) !!}
+{!! Form::model($carerProfile, ['method'=>'POST','route'=>'ImCarerPrivatePage','id'=>'carerPrivateBank']) !!}
+{!! Form::hidden('id',$carerProfile->id) !!}
 {!! Form::hidden('stage','bank') !!}
 <div class="borderContainer">
     <div class="profileRow">
