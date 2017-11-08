@@ -27,7 +27,7 @@
     <div class="profileRow">
         <div class="profileField profileField--full-width">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">PLEASE, GIVE DETAILS </span></h2>
-            {!! Form::text('other_behaviour',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"200"]) !!}
+            {!! Form::textarea('other_behaviour',null,['class'=>'profileField__area','placeholder'=>'Type details','maxlength'=>"200"]) !!}
             @if ($errors->has('other_behaviour'))
                 <span class="help-block"><strong>{{ $errors->first('other_behaviour') }}</strong></span>
             @endif
@@ -59,7 +59,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->have_dementia == 'No' || is_null($serviceUsersProfile->have_dementia) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('dementia_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::textarea('dementia_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('dementia_detail'))
                 <span class="help-block"><strong>{{ $errors->first('dementia_detail') }}</strong></span>
             @endif
@@ -80,7 +80,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->comprehension == 'No' || is_null($serviceUsersProfile->comprehension) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('comprehension_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::textarea('comprehension_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('comprehension_detail'))
                 <span class="help-block"><strong>{{ $errors->first('comprehension_detail') }}</strong></span>
             @endif
@@ -116,7 +116,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->speech == 'No' || is_null($serviceUsersProfile->speech) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('speech_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::textarea('speech_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('speech_detail'))
                 <span class="help-block"><strong>{{ $errors->first('speech_detail') }}</strong></span>
             @endif
@@ -134,7 +134,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->vision == 'No' || is_null($serviceUsersProfile->vision) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('vision_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::textarea('vision_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('vision_detail'))
                 <span class="help-block"><strong>{{ $errors->first('vision_detail') }}</strong></span>
             @endif
@@ -152,7 +152,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->hearing == 'No' || is_null($serviceUsersProfile->hearing) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('hearing_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::textarea('hearing_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('hearing_detail'))
                 <span class="help-block"><strong>{{ $errors->first('hearing_detail') }}</strong></span>
             @endif
@@ -194,7 +194,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->have_any_allergies == 'No' || is_null($serviceUsersProfile->have_any_allergies) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('allergies_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::text('allergies_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('allergies_detail'))
                 <span class="help-block"><strong>{{ $errors->first('allergies_detail') }}</strong></span>
             @endif
@@ -215,7 +215,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->skin_scores == 'No' || is_null($serviceUsersProfile->skin_scores) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('skin_scores_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::text('skin_scores_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('skin_scores_detail'))
                 <span class="help-block"><strong>{{ $errors->first('skin_scores_detail') }}</strong></span>
             @endif
@@ -233,7 +233,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_with_dressings == 'No' || is_null($serviceUsersProfile->assistance_with_dressings) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('dressings_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::text('dressings_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('dressings_detail'))
                 <span class="help-block"><strong>{{ $errors->first('dressings_detail') }}</strong></span>
             @endif
@@ -267,7 +267,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->mobility_home == 'No' || is_null($serviceUsersProfile->mobility_home) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('mobility_home_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::textarea('mobility_home_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('mobility_home_detail'))
                 <span class="help-block"><strong>{{ $errors->first('mobility_home_detail') }}</strong></span>
             @endif
@@ -285,7 +285,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->mobility_bed == 'No' || is_null($serviceUsersProfile->mobility_bed) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('mobility_bed_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::textarea('mobility_bed_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('mobility_bed_detail'))
                 <span class="help-block"><strong>{{ $errors->first('mobility_bed_detail') }}</strong></span>
             @endif
@@ -303,7 +303,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->history_of_falls == 'No' || is_null($serviceUsersProfile->history_of_falls) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('falls_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::textarea('falls_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('falls_detail'))
                 <span class="help-block"><strong>{{ $errors->first('falls_detail') }}</strong></span>
             @endif
@@ -321,7 +321,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->mobility_shopping == 'No' || is_null($serviceUsersProfile->mobility_shopping) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('mobility_shopping_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::textarea('mobility_shopping_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('mobility_shopping_detail'))
                 <span class="help-block"><strong>{{ $errors->first('mobility_shopping_detail') }}</strong></span>
             @endif
@@ -343,7 +343,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_with_eating == 'No' || is_null($serviceUsersProfile->assistance_with_eating) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('assistance_with_eating_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::textarea('assistance_with_eating_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('assistance_with_eating_detail'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_with_eating_detail') }}</strong></span>
             @endif
@@ -379,7 +379,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->preferences_of_food == 'No' || is_null($serviceUsersProfile->preferences_of_food) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('preferences_of_food_requirements',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::textarea('preferences_of_food_requirements',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('preferences_of_food_requirements'))
                 <span class="help-block"><strong>{{ $errors->first('preferences_of_food_requirements') }}</strong></span>
             @endif
@@ -422,7 +422,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('dietary_requirements_interaction',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::textarea('dietary_requirements_interaction',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('dietary_requirements_interaction'))
                 <span class="help-block"><strong>{{ $errors->first('dietary_requirements_interaction') }}</strong></span>
             @endif
@@ -440,7 +440,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->special_dietary_requirements == 'No' || is_null($serviceUsersProfile->special_dietary_requirements) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('special_dietary_requirements_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::textarea('special_dietary_requirements_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('special_dietary_requirements_detail'))
                 <span class="help-block"><strong>{{ $errors->first('special_dietary_requirements_detail') }}</strong></span>
             @endif
@@ -493,7 +493,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->assistance_getting_dressed == 'No' || is_null($serviceUsersProfile->assistance_getting_dressed) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('assistance_getting_dressed_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::textarea('assistance_getting_dressed_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('assistance_getting_dressed_detail'))
                 <span class="help-block"><strong>{{ $errors->first('assistance_getting_dressed_detail') }}</strong></span>
             @endif
@@ -571,7 +571,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->have_incontinence == 'No' || is_null($serviceUsersProfile->have_incontinence) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('kind_of_incontinence',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::textarea('kind_of_incontinence',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('kind_of_incontinence'))
                 <span class="help-block"><strong>{{ $errors->first('kind_of_incontinence') }}</strong></span>
             @endif

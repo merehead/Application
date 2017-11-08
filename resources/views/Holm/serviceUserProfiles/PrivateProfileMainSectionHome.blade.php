@@ -122,7 +122,8 @@
     <div class="profileRow depend_from_entering_aware" {!!  ($serviceUsersProfile->entering_aware == 'No' || is_null($serviceUsersProfile->entering_aware) )? ' style="display:none"' : ''!!}>
         <div class="profileField profileField--full-width ">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">PLEASE, GIVE DETAILS </span></h2>
-            {!! Form::textarea('other_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::textarea('other_detail',null,['class'=>'profileField__area','placeholder'=>'Type details',
+            'maxlength'=>"250"]) !!}
             @if ($errors->has('other_detail'))
                 <span class="help-block"><strong>{{ $errors->first('other_detail') }}</strong></span>
             @endif
@@ -177,7 +178,7 @@
         </div>
         <div class="profileField serviceUserProfilePetHide profileField--two-thirds"{!!  ($serviceUsersProfile->own_pets == 'No' || is_null($serviceUsersProfile->own_pets) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details</span></h2>
-            {!! Form::text('pet_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"200"]) !!}
+            {!! Form::textarea('pet_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"200"]) !!}
             @if ($errors->has('pet_detail'))
                 <span class="help-block"><strong>{{ $errors->first('pet_detail') }}</strong></span>
             @endif

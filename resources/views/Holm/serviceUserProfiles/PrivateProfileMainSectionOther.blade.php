@@ -32,7 +32,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('religious_beliefs_details',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::textarea('religious_beliefs_details',null,['class'=>'profileField__area','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('religious_beliefs_details'))
                 <span class="help-block"><strong>{{ $errors->first('religious_beliefs_details') }}</strong></span>
             @endif
@@ -59,7 +59,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('particular_likes_details',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::textarea('particular_likes_details',null,['class'=>'profileField__area','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('particular_likes_details'))
                 <span class="help-block"><strong>{{ $errors->first('particular_likes_details') }}</strong></span>
             @endif
@@ -86,7 +86,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('multiple_carers_details',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::textarea('multiple_carers_details',null,['class'=>'profileField__area','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('multiple_carers_details'))
                 <span class="help-block"><strong>{{ $errors->first('multiple_carers_details') }}</strong></span>
             @endif
@@ -138,7 +138,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('interests_hobbies_details',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::textarea('interests_hobbies_details',null,['class'=>'profileField__area','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('interests_hobbies_details'))
                 <span class="help-block"><strong>{{ $errors->first('interests_hobbies_details') }}</strong></span>
             @endif
@@ -164,7 +164,7 @@
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
                 Please, give details  </span>
             </h2>
-            {!! Form::text('we_missed_details',null,['class'=>'profileField__input','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::textarea('we_missed_details',null,['class'=>'profileField__area','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('we_missed_details'))
                 <span class="help-block"><strong>{{ $errors->first('we_missed_details') }}</strong></span>
             @endif

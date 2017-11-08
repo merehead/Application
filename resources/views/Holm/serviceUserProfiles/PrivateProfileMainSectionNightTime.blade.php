@@ -62,7 +62,7 @@
         </div>
         <div class="profileField  profileField--two-thirds"{!!  ($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night) )? 'style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::text('keeping_safe_at_night_details',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
+            {!! Form::textarea('keeping_safe_at_night_details',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('keeping_safe_at_night_details'))
                 <span class="help-block"><strong>{{ $errors->first('keeping_safe_at_night_details') }}</strong></span>
             @endif
