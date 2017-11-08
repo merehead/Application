@@ -48,6 +48,16 @@
                     </p>
                     <span class="subLabel">city</span>
                 </div>
+                @if(isset($carerProfile->distance))
+                    <div class="result__distance">
+                        <p class="location">
+                                    <span class="location__value location__value--autoWidth">
+                                       {{$carerProfile->distance}}
+                                    </span>
+                        </p>
+                        <span class="subLabel">distance</span>
+                    </div>
+                @endif
                 <div class="result__rate">
                     <div class="profileRating ">
                         @for($i = 1; $i <= 5; $i++)
