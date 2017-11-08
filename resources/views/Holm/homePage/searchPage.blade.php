@@ -178,7 +178,9 @@
                             <div class="justifyContainer">
                                 <h2 class="profileName profileName--biger"><a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}"> {{$carerProfile->first_name}} {{mb_substr($carerProfile->family_name,0,1)}}.</a></h2>
                                 <p class="hourPrice hourPrice">
-                                    <span class="hourPrice__price">From £ 12</span>
+                                     <span class="hourPrice__price">From £  {{Auth::check() && Auth::user()->id == $carerProfile->id ?
+                     \App\CarersProfile::find($carerProfile->id)->first()->wage :
+                     \App\CarersProfile::find($carerProfile->id)->first()->price}}</span>
                                     <span class="hourPrice__timing">/hour</span>
                                 </p>
                             </div>
