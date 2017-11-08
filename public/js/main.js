@@ -1676,7 +1676,7 @@ $(document).ready(function () {
                 $(this).change();
             },
             timeFormat: 'h:mm p',
-            interval: 30,
+            interval: 60,
             //maxTime: '6:00pm',_step48
             //defaultTime: '18',
             startTime: getTime(),
