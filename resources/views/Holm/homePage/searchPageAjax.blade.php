@@ -21,8 +21,10 @@
         <a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}" class="profilePhoto  profilePhoto2">
             <img id="profile_photo" class="set_preview_profile_photo"
                  @if (file_exists(public_path('img/profile_photos/' . $carerProfile->id . '.png')))
-                  src="img/profile_photos/{{$carerProfile->id}}.png"
-                @endif />
+                 src="img/profile_photos/{{$carerProfile->id}}.png"
+                 @else
+                 src="/img/no_photo.png"
+                    @endif />
         </a>
         <div class="result__info">
             <div class="justifyContainer">

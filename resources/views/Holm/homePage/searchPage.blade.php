@@ -169,6 +169,8 @@
                             <img id="profile_photo" class="set_preview_profile_photo"
                                  @if (file_exists(public_path('img/profile_photos/' . $carerProfile->id . '.png')))
                                    src="img/profile_photos/{{$carerProfile->id}}.png"
+                                 @else
+                                 src="/img/no_photo.png"
                                  @endif />
 
                         </a>
