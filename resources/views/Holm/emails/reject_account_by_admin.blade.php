@@ -40,7 +40,7 @@
        bgcolor="#ffffff"
        class="container">
     <tr>
-        <td   valign="top" align="left" bgcolor="#ffffff" style="padding-bottom: 40px;" >
+        <td   valign="top" align="left" bgcolor="#ffffff" style="color:#272c2b;padding-bottom: 40px;" >
             <table cellpadding="0" cellspacing="0" border="0"  style=" border-collapse: collapse;background-size: 100%;   margin: 0; padding: 10px 30px;" width="100%" class="content">
                 <tr>
                     <td style="padding-left: 40px;" align="left"  valign="middle">
@@ -56,10 +56,10 @@
         </td>
     </tr>
     <tr>
-        <td   valign="top" align="left" bgcolor="#ffffff"  style="font-family: 'Roboto', sans-serif;">
+        <td   valign="top" align="left" bgcolor="#ffffff"  style="color:#272c2b;font-family: 'Roboto', sans-serif;">
             <table cellpadding="0" cellspacing="0" border="0"  style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"  class="t-content">
                 <tr>
-                    <td style="padding: 30px 40px; background: #f9f9f9; "  valign="top" class="">
+                    <td style="color:#272c2b;padding: 30px 40px; background: #f9f9f9; "  valign="top" class="">
                         <h1  style=" font-size: 16px;display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700;  color: #272c2b;  text-transform: uppercase;">Dear {{$like_name}}</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             We’re afraid that we’ve not been able to accept your application to join Holm.
@@ -75,7 +75,7 @@
             <table cellpadding="0" cellspacing="0" border="0" style="    margin: 0; " width="100%" class="t-content">
 
                 <tr>
-                    <td style="padding: 30px 40px; background: #fff; " valign="top" class="">
+                    <td style="color:#272c2b;padding: 30px 40px; background: #fff; " valign="top" class="">
                         <p style="
                    text-transform: uppercase;
                    font-size: 14px;
@@ -92,7 +92,7 @@
                             Holm.care
                         </a>
                     </td>
-                    <td style="padding: 30px 40px; background: #fff; " valign="top" class="">
+                    <td style="color:#272c2b;padding: 30px 40px; background: #fff; " valign="top" class="">
                         <ul style="float: right;">
                             <li style="list-style: none; display: inline-block;">
                                 <a href="https://www.facebook.com/HolmCareUK/"
@@ -124,10 +124,5 @@
     </tr>
 
 </table>
-
-
-
-
-
 </body>
 </html>

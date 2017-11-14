@@ -25,7 +25,7 @@
         </td>
     </tr>
     <tr>
-        <td valign="top" align="left" bgcolor="#ffffff" style="font-family: 'Roboto', sans-serif;">
+        <td valign="top" align="left" bgcolor="#ffffff" style="color:#272c2b;font-family: 'Roboto', sans-serif;">
             <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%" class="t-content">
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; " valign="top" class="">
@@ -48,7 +48,7 @@
         </td>
     </tr>
     <tr>
-        <td style="padding:40px ;">
+        <td style="color:#272c2b;padding:40px ;">
             <table cellpadding="0" cellspacing="0" border="0" style="overflow-x: auto;border: 1px solid rgb(225, 225, 225);box-shadow: 0px 0px 26.73px 0.27px rgba(0, 0, 0, 0.11);border-collapse: collapse;   margin: 0; " width="100%" class="t-content">
                 <tr>
 
@@ -146,7 +146,7 @@
                        style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"
                        class="t-content">
                     <tr>
-                        <td style="padding: 30px 10px; background: #f9f9f9; " valign="top" class="">
+                        <td style="color:#272c2b;padding: 30px 10px; background: #f9f9f9; " valign="top" class="">
                             <a href="{{route('carerBooking',['status'=>'new'])}}?refer=booking" class=""
                                style="
                     display: block;
@@ -177,7 +177,7 @@
             <table cellpadding="0" cellspacing="0" border="0" style="    margin: 0; " width="100%" class="t-content">
 
                 <tr>
-                    <td style="padding: 30px 40px; background: #fff; " valign="top" class="">
+                    <td style="color:#272c2b;padding: 30px 40px; background: #fff; " valign="top" class="">
                         <p style="
                    text-transform: uppercase;
                    font-size: 14px;
@@ -194,7 +194,7 @@
                             Holm.care
                         </a>
                     </td>
-                    <td style="padding: 30px 40px; background: #fff; " valign="top" class="">
+                    <td style="color:#272c2b;padding: 30px 40px; background: #fff; " valign="top" class="">
                         <ul style="float: right;">
                             <li style="list-style: none; display: inline-block;">
                                 <a href="https://www.facebook.com/HolmCareUK/"

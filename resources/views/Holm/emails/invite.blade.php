@@ -40,7 +40,7 @@
        bgcolor="#ffffff"
        class="container">
     <tr>
-        <td   valign="top" align="left" bgcolor="#ffffff" style="padding-bottom: 40px;" >
+        <td   valign="top" align="left" bgcolor="#ffffff" style="color:#272c2b;padding-bottom: 40px;" >
             <table cellpadding="0" cellspacing="0" border="0"  style=" border-collapse: collapse;background-size: 100%;   margin: 0; padding: 10px 30px;" width="100%" class="content">
                 <tr>
                     <td style="padding-left: 40px;" align="left"  valign="middle">
@@ -56,7 +56,7 @@
         </td>
     </tr>
     <tr>
-        <td   valign="top" align="left" bgcolor="#ffffff"  style="font-family: 'Roboto', sans-serif;">
+        <td   valign="top" align="left" bgcolor="#ffffff"  style="color:#272c2b;font-family: 'Roboto', sans-serif;">
             <table cellpadding="0" cellspacing="0" border="0"  style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"  class="t-content">
 
                 <tr>
@@ -79,7 +79,7 @@
         </td>
     </tr>
     <tr>
-        <td   valign="top" align="left" bgcolor="#ffffff"  style="font-family: 'Roboto', sans-serif;">
+        <td   valign="top" align="left" bgcolor="#ffffff"  style="color:#272c2b;font-family: 'Roboto', sans-serif;">
             <table align="center" cellpadding="0" cellspacing="0" border="0"  style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"  class="t-content">
 
                 <tr>
@@ -97,7 +97,7 @@
         <td   valign="top" align="left" bgcolor="#ffffff"  >
             <table cellpadding="0" cellspacing="0" border="0"  style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"  class="t-content">
                 <tr>
-                    <td style="padding: 30px 10px; background: #f9f9f9; "  valign="top" class="">
+                    <td style="color:#272c2b;padding: 30px 10px; background: #f9f9f9; "  valign="top" class="">
                         <a href="{{route('CarerRegistration',['ref'=>$user->own_referral_code])}}" class=""
                            style="
                     display: block;
@@ -118,7 +118,7 @@
                             Join as a care worker
                         </a>
                     </td>
-                    <td style="padding: 30px 10px; background: #f9f9f9; "  valign="top" class="">
+                    <td style="color:#272c2b;padding: 30px 10px; background: #f9f9f9; "  valign="top" class="">
                         <a href="{{route('PurchaserRegistration',['ref'=>$user->own_referral_code])}}" class=""
                            style="
                     display: block;
@@ -148,7 +148,7 @@
 
     <tr>
     <tr>
-        <td   valign="top" align="left" bgcolor="#ffffff"  style="font-family: 'Roboto', sans-serif;">
+        <td   valign="top" align="left" bgcolor="#ffffff"  style="color:#272c2b;font-family: 'Roboto', sans-serif;">
             <table cellpadding="0" cellspacing="0" border="0"  style="    margin: 0; " width="100%"  class="t-content">
 
                 <tr>

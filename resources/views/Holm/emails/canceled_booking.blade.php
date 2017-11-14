@@ -69,7 +69,7 @@
                    style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"
                    class="t-content">
                 <tr>
-                    <td style="padding: 30px 40px; background: #f9f9f9; " valign="top" class="">
+                    <td style="padding: 30px 40px; color:#272c2b;background: #f9f9f9; " valign="top" class="">
                         <h1  style="display: inline-block;font-family: 'Lato', sans-serif;  font-size: 16px;margin-bottom: 20px; font-weight: 700;  color: #272c2b;  text-transform: uppercase;">
                             Dear {{$user_like_name}}</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">{{$user_name}} has cancelled
@@ -111,7 +111,7 @@
                              style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;;">
                             <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;">
                                 <tr>
-                                    <td align="center" style="text-align:left;">
+                                    <td align="center" style="text-align:left;color:#272c2b;">
                                         @if($sendTo == 'carer')
                                             <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
                                                 <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$booking->service_user_id])}}"
@@ -130,7 +130,7 @@
                              style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;;">
                             <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;">
                                 <tr>
-                                    <td align="center" style="text-align:left;">
+                                    <td align="center" style="text-align:left;color:#272c2b;">
                                         <p style="margin-top: 10px;  font-size: 16px;font-family: 'Roboto', sans-serif;">
                            <span style="color: #909090;">
                               {{$booking->appointments()->get()->count()}}
@@ -145,7 +145,7 @@
                              style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;;">
                             <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;">
                                 <tr>
-                                    <td align="center" style="text-align:left;">
+                                    <td align="center" style="text-align:left;color:#272c2b;">
                                         <p style="margin-top: 10px;font-size: 25px;font-family: 'Lato', sans-serif;">
                             <span style="font-weight: 700;">
                              {{$booking->hours}}h /
@@ -167,7 +167,7 @@
         <td   valign="top" align="left" bgcolor="#ffffff"  style="font-family: 'Roboto', sans-serif;">
             <table cellpadding="0" cellspacing="0" border="0"  style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%"  class="t-content">
                 <tr>
-                    <td style="padding: 30px 40px; background: #f9f9f9; "  valign="top" class="">
+                    <td style="padding: 30px 40px; background: #f9f9f9; color:#272c2b;"  valign="top" class="">
                         @if($sendTo == 'carer')
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">Please <a href="{{route('ContactPage')}}">contact us</a> if you have any concerns.</p>
                             @else
@@ -179,7 +179,7 @@
         </td>
     </tr>
     <tr>
-        <td valign="top" align="left" bgcolor="#ffffff" style="font-family: 'Roboto', sans-serif;">
+        <td valign="top" align="left" bgcolor="#ffffff" style="font-family: 'Roboto', sans-serif;color:#272c2b;">
             <table cellpadding="0" cellspacing="0" border="0" style="    margin: 0; " width="100%" class="t-content">
 
                 <tr>
