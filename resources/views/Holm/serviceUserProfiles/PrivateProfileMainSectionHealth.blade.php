@@ -303,7 +303,7 @@
         </div>
         <div class="profileField profileField--two-thirds"{!!  ($serviceUsersProfile->history_of_falls == 'No' || is_null($serviceUsersProfile->history_of_falls) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Please, give details  </span></h2>
-            {!! Form::textarea('falls_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
+            {!! Form::textarea('falls_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"500"]) !!}
             @if ($errors->has('falls_detail'))
                 <span class="help-block"><strong>{{ $errors->first('falls_detail') }}</strong></span>
             @endif
