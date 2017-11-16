@@ -110,6 +110,9 @@
                     text-decoration: none;">
                             Holm.care
                         </a>
+
+                        If you do not wish to receive promotional emails from Holm, <a href="{{route('unsubscribe',['id'=>$user->id])}}" class="">unsubscribe here</a>.
+                        You will continue to receive all other emails.
                     </td>
                     <td style="padding: 30px 40px; background: #fff; "  valign="top" class="">
                         <ul style="float: right;">
