@@ -143,7 +143,7 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::get('/user/page/{p?}','User\UserController@index')->name('user_pagination');;
     Route::resource('/booking','Booking\BookingController', ['only' => ['index']]);
     Route::resource('/blog','Blog\BlogController');
-    Route::get('/user/review_management','ReviewManagementController@index');
+    Route::get('/user/review_management','ReviewManagementController@index')->name('ReviewManagement');
 
     Route::get('/financial','FinancialController@index')->name('financial');
     Route::get('/statistic','StatisticController@index')->name('statistic');

@@ -31,12 +31,12 @@
             </a>
         </li>
         <li class="adminNav__item">
-            <a href="{{route('user.index')}}" class="adminNav__link">
+            <a href="{{route('ReviewManagement')}}" class="adminNav__link">
                 <span class="adminNav__ico">
-                  <i class="fa fa-user" aria-hidden="true"></i>
+                  <i class="fa fa-comment" aria-hidden="true"></i>
                 </span>
                 <span class="adminNav__text">
-                  REVIEWS MANAGAMENT
+                   Reviews managament
                 </span>
             </a>
         </li>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use Illuminate\Http\Request;
-use PaymentTools;
+use App\BookingOverview;
 use DB;
 
 
@@ -19,8 +19,8 @@ class ReviewManagementController extends AdminController
 
     public function index(){
 
-        $data = Holiday::all();
-        $this->vars['holiday']=$data;
+        $data = BookingOverview::all();
+        $this->vars['reviews']=$data;
         $this->content = view(config('settings.theme').'.review_management')->with( $this->vars)->render();
 
         return $this->renderOutput();
