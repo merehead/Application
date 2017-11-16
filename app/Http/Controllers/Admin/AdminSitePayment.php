@@ -61,14 +61,16 @@ class AdminSitePayment extends AdminController
         if(isset($input['TransactionsSort'])){
             $transactions->where('payment_method','=',$input['TransactionsSort']);
         }elseif(isset($input['search'])){
-            $transactions->where('name','like',$input['search']);
+            //$transactions->with('booking')->with('bookingCarerProfile')->with('bookingPurchaserProfile')
+            //->where('first_name','like',"'".$input['search']."'");
+//            $transactions->orWhere('purchasers_name','like',"'".$input['search']."'");
         }elseif(isset($input['daterange'])){
             $date = explode(' - ',$input['daterange']);
             $transactions->where('created_at','<=',date('Y-m-d',strtotime($date[0])))
                 ->where('created_at','>=',date('Y-m-d',strtotime($date[1])));
         }
 
-        $transactions = $transactions->paginate(10);
+        $transactions = $transactions->get();//->paginate(10);
 
         $this->vars['transactions'] = $transactions;
         $this->vars['TransactionsSort'] = $request->get('TransactionsSort',null);
