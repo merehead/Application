@@ -26,4 +26,9 @@ class HomeController extends Controller
         //return view('home');
         return redirect('/admin');
     }
+
+    public function  unsubscribe($id){
+
+        return redirect('/');
+    }
 }
