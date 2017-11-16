@@ -57,13 +57,17 @@ class AdminSitePayment extends AdminController
         $input = $request->all();
         $model = $transaction;
         $transactions = $model->select('*');
-        var_dump($input['search']);
+        //var_dump($input['search']);
         if(isset($input['TransactionsSort'])){
             $transactions->where('payment_method','=',$input['TransactionsSort']);
         }elseif(isset($input['search'])){
             $transactions->where('name','like',$input['search']);
+        }elseif(isset($input['daterange'])){
+            $date = explode(' - ',$input['daterange']);
+            $transactions->where('created_at','<=',date('Y-m-d',strtotime($date[0])))
+                ->where('created_at','>=',date('Y-m-d',strtotime($date[1])));
         }
-        echo $transactions->toSql();
+
         $transactions = $transactions->paginate(10);
 
         $this->vars['transactions'] = $transactions;

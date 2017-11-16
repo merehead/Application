@@ -185,10 +185,10 @@
                             <table class="innerTable ">
                                 <tbody><tr>
                                     <td class="idField">
-                                        <span>{{$transaction->booking->bookingPurchaser->id}}</span>
+                                        <span>{{isset($transaction->booking->bookingPurchaser->id)??''}}</span>
                                     </td>
                                     <td class="">
-                                        <a href="#" class="tableLink">{{$transaction->booking->bookingPurchaserProfile->full_name}}</a>
+                                        <a href="#" class="tableLink">{{isset($transaction->booking->bookingPurchaserProfile->full_name)??''}}</a>
                                     </td>
 
                                 </tr>
@@ -198,10 +198,10 @@
                             <table class="innerTable ">
                                 <tbody><tr>
                                     <td class="idField">
-                                        <span>{{$transaction->booking->bookingCarer->id}}</span>
+                                        <span>{{isset($transaction->booking->bookingCarer->id)??''}}</span>
                                     </td>
                                     <td class="">
-                                        <a href="#" class="tableLink">{{$transaction->booking->bookingCarerProfile->full_name}}</a>
+                                        <a href="#" class="tableLink">{{isset($transaction->booking->bookingCarerProfile->full_name)??''}}</a>
                                     </td>
 
                                 </tr>
