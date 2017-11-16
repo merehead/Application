@@ -136,7 +136,7 @@
                 <div class="resultHeader Paginator">
                     <p class="resultHeader__info">Showing {{($page*$perPage)<$countAll?$page*$perPage:$countAll}} of {{$countAll}} CARERS</p>
                     <div class="sortLink">
-                        SORT BY <a href="#" class="sortLink__item sort-rating"> <span> </span> rating
+                        SORT BY &nbsp;<a href="#" class="sortLink__item sort-rating"> <span> </span> Rating
                         </a>
                         <p> &nbsp; - &nbsp; </p>
                         <a href="#" class="sortLink__item sort-id">
