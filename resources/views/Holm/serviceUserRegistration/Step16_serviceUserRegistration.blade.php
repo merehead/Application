@@ -7,7 +7,7 @@
         </div>
         <div class="sorryBox">
             <p class="info-p info-p--roboto">
-                We are now going to ask some questions about {{$serviceUserProfile->like_name}}'s health.
+                We are now going to ask some questions about {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'are you':$serviceUserProfile->like_name."'s"}}  health.
 
                 We apologise once again if the questions feel invasive, but they are essential to provide excellent care.
 

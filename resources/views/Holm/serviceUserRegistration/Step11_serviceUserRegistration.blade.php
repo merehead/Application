@@ -13,7 +13,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Can {{$serviceUserProfile->like_name}} keep the home safe and clean by themself? <span>*</span>
+                        Can {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':$serviceUserProfile->like_name}}   keep the home safe and clean by themself? <span>*</span>
 
                     </h2>
                     <div class="inputWrap">
@@ -33,7 +33,7 @@
 
             <div class="formField sometimesNo_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
-                        Does {{$serviceUserProfile->like_name}} require assistance keeping the home safe and clean?
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$serviceUserProfile->like_name}}  require assistance keeping the home safe and clean?
                     </h2>
                     <div class="inputWrap">
                         <?php

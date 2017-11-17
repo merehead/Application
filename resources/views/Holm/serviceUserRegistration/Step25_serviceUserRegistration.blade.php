@@ -14,7 +14,7 @@
 
             <div class="formField">
                 <h2 class="formLabel questionForm__label">
-                    Does {{$userNameForSite}} have serious impediments seeing? <span>*</span></h2>
+                    {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  have serious impediments seeing? <span>*</span></h2>
                 <div class="inputWrap">
                     <?php
                     if (isset($atrr)) unset($atrr);

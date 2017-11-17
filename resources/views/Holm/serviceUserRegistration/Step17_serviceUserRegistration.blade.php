@@ -1,7 +1,7 @@
 <div class="registration">
     <div class="registration__column registration__column--with-padding">
         <div class="questionsBox">
-            <h2>{{$userNameForSite}}'s Health</h2>
+            <h2>{{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Your':$userNameForSite."'s"}} Health</h2>
             <div class="questionsBox__img">
                 <img src="{{asset('/img/Signup_P_step17.jpg')}}" alt="">
             </div>
@@ -14,7 +14,7 @@
 
             <div class="formField">
                 <h2 class="formLabel questionForm__label">
-                    Does {{$userNameForSite}} have any of the following conditions?
+                    {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}} have any of the following conditions?
                 </h2>
                 <div class="inputWrap">
 

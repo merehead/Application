@@ -12,7 +12,7 @@
             {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does {{$userNameForSite}} have any difficulties understanding or communicating with others? - eg serious hearing, seeing, speaking, comprehension or language impediments. <span>*</span>             </h2>
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  have any difficulties understanding or communicating with others? - eg serious hearing, seeing, speaking, comprehension or language impediments. <span>*</span>             </h2>
                     <div class="inputWrap">
                         <?php
                         if (isset($atrr)) unset($atrr);

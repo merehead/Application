@@ -14,7 +14,7 @@
 
             <div class="formField">
                 <h2 class="formLabel questionForm__label">
-                    Does {{$userNameForSite}} need help moving around home? <span>*</span>
+                    {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  need help moving around home? <span>*</span>
                 </h2>
                 <div class="inputWrap">
                     <div class="inputWrap">
