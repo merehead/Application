@@ -13,7 +13,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        What kind of building does {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'do you':$serviceUserProfile->like_name}} live in? <span>*</span>
+                        What kind of building {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'do you':'does '.$serviceUserProfile->like_name}} live in? <span>*</span>
                     </h2>
 
                     <div class="checkBox_item">

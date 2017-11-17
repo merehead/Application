@@ -8,7 +8,7 @@
             <i class="fa fa-check" aria-hidden="true"></i>
           </span>
             <p class="info-p thank__text">
-                You will need to fill in a care and health questionnaire about {{$purchasersProfile->serviceUsers->first()->like_name}} before booking a carer.
+                You will need to fill in a care and health questionnaire about {{($purchasersProfile->purchasing_care_for=='Myself')?'yourself':$purchasersProfile->serviceUsers->first()->like_name}} before booking a carer.
                 You can do that later, or you can press 'Next step' and do that now.
 
             </p>

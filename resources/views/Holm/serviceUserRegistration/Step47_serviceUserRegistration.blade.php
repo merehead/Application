@@ -14,7 +14,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  need any assistance managing their toilet needs? <span>*</span>
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  need any assistance managing {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'your':'their'}} toilet needs? <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php
@@ -31,7 +31,7 @@
                 </div>
             <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
-                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  need help mobilising themselves to the toilet? <span>*</span>
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  need help mobilising {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'yourself':'themselves'}} to the toilet? <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php
@@ -50,7 +50,7 @@
                 </div>
             <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
-                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}} need help cleaning themselves when using the toilet? <span>*</span>
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}} need help cleaning {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'yourself':'themselves'}} when using the toilet? <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php
