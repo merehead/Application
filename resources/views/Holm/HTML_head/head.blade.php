@@ -25,4 +25,6 @@
         <script>var is_admin = 0; </script>
     @endif
     <script src="{{asset('js/jquery.min.js')}}"></script>
+    <script src="{{asset('js/checkCookie.js')}}"></script>
+
 </head>

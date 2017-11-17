@@ -1,5 +1,6 @@
 
 
+
 <footer class="footer">
     <div class="container">
         <div class="footerNav">
@@ -85,6 +86,23 @@
         </div>
     </div>
 </footer>
+<div class="cookie-box" id='id_cookie'>
+    <div class="container">
+        <div class="cookie">
+            <p class="cookie__text">
+                This site uses cookies. By continuing to browse the site, you are agreeing to our <a href="#">Use of Cookies.</a>
+            </p>
+            <div class="cookie__group">
+                <button class="cookie-btn">
+                    accept
+                </button>
+                <button class="cookie-btn cookie-btn--refuse">
+                    refuse
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.0/masonry.pkgd.min.js"></script>
 <script src="{{asset('js/jquery-ui.min.js')}}"></script>
