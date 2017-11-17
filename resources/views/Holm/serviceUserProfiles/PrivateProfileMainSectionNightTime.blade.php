@@ -25,7 +25,7 @@
 
     <div class="profileRow getting_dressed_for_bed_depend" {!!  ($serviceUsersProfile->getting_dressed_for_bed != 'Yes' || is_null($serviceUsersProfile->getting_dressed_for_bed) )? ' style="display:none"' : ''!!}>
         <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle "><span class="ordinaryTitle__text ordinaryTitle__text--smaller">NEEDS help getting ready for bed?</span></h2>
+            <h2 class="profileField__title ordinaryTitle "><span class="ordinaryTitle__text ordinaryTitle__text--smaller">{{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Need':'Needs'}}  help getting ready for bed?</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
             if (is_null($serviceUsersProfile->getting_ready_for_bed)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('getting_ready_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
@@ -37,7 +37,7 @@
 
     <div class="profileRow getting_dressed_for_bed_depend" {!!  ($serviceUsersProfile->getting_dressed_for_bed != 'Yes' || is_null($serviceUsersProfile->getting_dressed_for_bed) )? ' style="display:none"' : ''!!}>
         <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">What time would they like someone to come and help?<span class="requireIco">*</span></span></h2>
+            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">What time would {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':'they'}}  like someone to come and help?<span class="requireIco">*</span></span></h2>
             <div class="profileField__input-wrap">
                 @if(empty($serviceUsersProfile->time_to_bed))
                     <input name="time_to_bed" id="time_to_bed" class="profileField__input" placeholder="Time" type="text">
@@ -52,7 +52,7 @@
     </div>
     <div class="profileRow" >
         <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Needs assistance keeping safe at night</span></h2>
+            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">{{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Need':'Needs'}} assistance keeping safe at night</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile keeping_safe_at_night_selector'];
             if (is_null($serviceUsersProfile->keeping_safe_at_night)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('keeping_safe_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
@@ -71,7 +71,7 @@
 
     <div class="profileRow keeping_safe_at_night_depend" {!!  ($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night) )? 'style="display:none"' : ''!!}>
         <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">What time would they like someone to help?<span class="requireIco">*</span></span></h2>
+            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">What time would {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':'they'}} like someone to help?<span class="requireIco">*</span></span></h2>
             <div class="profileField__input-wrap">
                 @if(empty($serviceUsersProfile->time_to_night_helping))
 
@@ -89,7 +89,7 @@
     ($serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night)
         )? 'style="display:none"' : '' !!}>
         <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Needs help going to the toilet at night</span></h2>
+            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">{{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Need':'Needs'}} help going to the toilet at night</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile toilet_at_night_selector'];
             if (is_null($serviceUsersProfile->toilet_at_night)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('toilet_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
@@ -105,7 +105,7 @@
     || $serviceUsersProfile->keeping_safe_at_night == 'No' || is_null($serviceUsersProfile->keeping_safe_at_night)
     )? 'style="display:none"' : '' !!}>
         <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">NEEDS someone to help at night?</span></h2>
+            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">{{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Need':'Needs'}} someone to help at night?</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
             if (is_null($serviceUsersProfile->helping_toilet_at_night)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('helping_toilet_at_night',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
