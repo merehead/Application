@@ -191,6 +191,15 @@ class ServiceUserRegistrationController extends FrontController
                     'time_to_send' => Carbon::now(),
                     'status'=>'new'
                 ]);
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>'z.mustafaieva@gmail.com',
+                    'subject' =>'You have a new user',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
 
         $this->content = view(config('settings.frontTheme') . '.carerRegistration.thankYou')->with($this->vars)->render();
 

@@ -216,6 +216,15 @@ class PurchaserRegistrationController extends FrontController
                     'time_to_send' => Carbon::now(),
                     'status'=>'new'
                 ]);
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>'z.mustafaieva@gmail.com',
+                    'subject' =>'You have a new user',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
         return $this->renderOutput();
     }
 }
