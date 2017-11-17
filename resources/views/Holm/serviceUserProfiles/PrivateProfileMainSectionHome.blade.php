@@ -201,7 +201,8 @@
     <h2 class="fieldCategory">Companionship</h2>
     <div class="profileRow">
         <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Has regular social interaction with friends / family</span></h2>
+            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text
+            ordinaryTitle__text--smaller">{{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Have':'Has'}} regular social interaction with friends / family</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
             if (is_null($serviceUsersProfile->anyone_else_live)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('social_interaction',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}

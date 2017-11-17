@@ -26,7 +26,13 @@
                           <img class="pickfiles_img"/>
 
                           <img id="profile_photo" class="pickfiles_img" name='img/profile_photos/{{$purchasersProfile->id}}.png'
-                            src="img/profile_photos/{{$purchasersProfile->id}}.png"/>
+
+                               @if (file_exists(public_path('/img/profile_photos/' . $purchasersProfile->id . '.png')))
+                               src="/img/profile_photos/{{$purchasersProfile->id}}.png"
+                               @else
+
+                                  @endif
+                          />
 
                           <a href="#" class="add add--moreHeight">
                               <i class="fa fa-plus-circle"></i>

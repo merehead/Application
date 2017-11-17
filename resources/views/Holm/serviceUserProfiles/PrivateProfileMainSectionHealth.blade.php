@@ -163,7 +163,7 @@
     <h2 class="fieldCategory">Medication</h2>
     <div class="profileRow">
         <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Requires assistance in taking medication / treatments</span></h2>
+            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">{{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Require':'Requires'}} assistance in taking medication / treatments</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
             if (is_null($serviceUsersProfile->assistance_in_medication)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('assistance_in_medication',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
@@ -527,7 +527,8 @@
     </div>
     <div class="profileRow">
         <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">{{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Need':'Needs'}}   assistance managing their toilet needs</span></h2>
+            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text
+            ordinaryTitle__text--smaller">{{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Need':'Needs'}} assistance managing {{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'yours':'their'}} toilet needs</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile toilet_switcher'];
             if (is_null($serviceUsersProfile->managing_toilet_needs)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('managing_toilet_needs',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}

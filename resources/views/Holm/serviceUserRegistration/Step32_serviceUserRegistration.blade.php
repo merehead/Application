@@ -2,7 +2,9 @@
     <div class="registration__column registration__column--with-padding">
         <div class="questionsBox">
             <h2>Health and Wellbeing</h2>
-            <h3>We need to understand some matters about {{$userNameForSite}}’s health and wellbeing.</h3>
+            <h3>We need to understand some matters about {{
+            ($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'your':$userNameForSite.'’s '}} health and
+                wellbeing.</h3>
             <div class="questionsBox__img">
                 <img src="{{asset('/img/Signup_P_step32.jpg')}}" alt="">
             </div>

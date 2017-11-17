@@ -127,9 +127,9 @@
                     </div>
                 </div>
 
-                <div class="userAbout" {!!  (is_null($serviceUsers->one_line_about) )? ' style="display:none"' : ''!!}>
-                    <p>{{$serviceUsers->one_line_about}}</p>
-                </div>
+                {{--<div class="userAbout" {!!  (is_null($serviceUsers->one_line_about) )? ' style="display:none"' : ''!!}>--}}
+                    {{--<p>{{$serviceUsers->one_line_about}}</p>--}}
+                {{--</div>--}}
 
                 <div class="userBox">
                     <h2 class="profileTitle">

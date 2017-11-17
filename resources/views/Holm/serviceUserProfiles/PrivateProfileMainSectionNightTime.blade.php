@@ -13,7 +13,8 @@
 
     <div class="profileRow">
         <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle "><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Has problems getting dressed for bed</span></h2>
+            <h2 class="profileField__title ordinaryTitle "><span class="ordinaryTitle__text
+            ordinaryTitle__text--smaller">{{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Have':'Has'}} problems getting dressed for bed</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile getting_dressed_for_bed_selector'];
             if (is_null($serviceUsersProfile->getting_dressed_for_bed)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('getting_dressed_for_bed',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}

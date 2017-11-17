@@ -13,7 +13,10 @@
 
             <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Can {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':$userNameForSite}}  prepare food for themselves? <span>*</span>
+                        Can {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')
+                        ?'you':$userNameForSite}}  prepare food for {{
+                        ($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'yourself':'themselves'}}?
+                        <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php

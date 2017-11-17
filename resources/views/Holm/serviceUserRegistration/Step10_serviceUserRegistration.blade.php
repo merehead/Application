@@ -16,7 +16,10 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Can {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':$serviceUserProfile->like_name}}  move around home safely by themselves? <span>*</span>
+                        Can {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')
+                        ?'you':$serviceUserProfile->like_name}}  move around home safely by {{
+                        ($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'yourself':'themselves'}}?
+                        <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php
