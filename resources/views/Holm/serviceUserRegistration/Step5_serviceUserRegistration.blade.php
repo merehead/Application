@@ -7,7 +7,6 @@
             </div>
         </div>
     </div>
-    {{$serviceUserProfile->purchaser->purchasing_care_for=='Myself'}}
     <div class="registration__column  registration__column--bg">
         <div class="personal">
 

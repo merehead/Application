@@ -13,7 +13,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Can {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':$serviceUserProfile->like_name}}   keep the home safe and clean by themself? <span>*</span>
+                        Can {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':$serviceUserProfile->like_name}} keep the home safe and clean by {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'yourself':'themself'}}? <span>*</span>
 
                     </h2>
                     <div class="inputWrap">
