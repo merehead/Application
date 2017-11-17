@@ -7,7 +7,7 @@ function loadpage()
         setcookie("ckeck_cookie", 1);
         // Извлекаем cookie
         var cookie = getcookie("ckeck_cookie");
-        if(cookie != "1")
+        if(cookie!= null && cookie != "1")
         {
             $('#id_cookie').show();
         }
@@ -30,7 +30,7 @@ function getcookie(name)
 {
     var re = new RegExp(name + "=([\\d])", "i");
     arr = re.exec(document.cookie);
-    return arr[1];
+    return arr!=null?arr[1]:null;
 }
 $(document).ready(function () {
     loadpage();

@@ -18,8 +18,10 @@
 
               <input disabled name="{{$serviceUsersProfile->id}}" class="pickfiles_profile_photo_service_user--change" accept=".jpg,.jpeg,.png" type="file" />
               <img class="profile_photo_service_user"  alt="avatar" id="profile_photo"
-                @if (file_exists(public_path('img/service_user_profile_photos/' . $serviceUsersProfile->id . '.png')))
-                  src="img/service_user_profile_photos/{{$serviceUsersProfile->id}}.png"
+                @if (file_exists(public_path('/img/service_user_profile_photos/' . $serviceUsersProfile->id . '.png')))
+                  src="/img/service_user_profile_photos/{{$serviceUsersProfile->id}}.png"
+                   @else
+                   src="/img/no_photo.png"
                 @endif />
 
                 <a href="#" class="profilePhoto__ico">
