@@ -136,7 +136,8 @@ class SearchController extends FrontController
             }
             if (strpos($postCode, ' ') === false) {
                 $postCode .= ' ';
-                $where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('" . $postCode . "', POSITION(' ' IN '" . $postCode . "')) and  p.name = LEFT(cp.postcode, POSITION(' ' IN '" . $postCode . "')))>0";
+                //$where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('" . $postCode . "', POSITION
+                //(' ' IN '" . $postCode . "')) and  p.name = LEFT(cp.postcode, POSITION(' ' IN '" . $postCode . "')))>0";
             } else {
                 $where .= " AND cp.postcode='" . $postCode . "'";
             }
