@@ -90,7 +90,7 @@
     <div class="container">
         <div class="cookie">
             <p class="cookie__text">
-                This site uses cookies. By continuing to browse the site, you are agreeing to our <a href="#">Use of Cookies.</a>
+                This site uses cookies. By continuing to browse the site, you are agreeing to our <a href="{{route('privacy_policy')}}">Use of Cookies.</a>
             </p>
             <div class="cookie__group">
                 <button class="cookie-btn">
