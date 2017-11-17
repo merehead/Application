@@ -176,6 +176,31 @@ class ServiceUserRegistrationController extends FrontController
                     'status'=>'new'
                 ]);
 
+        $text = view(config('settings.frontTheme') . '.emails.new_user')->with([
+            'user' => $user,
+            'like_name' => $serviceProfile->like_name,
+            'type' => 'service user'
+        ])->render();
+
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>'nik@holm.care',
+                    'subject' =>'You have a new user',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>'z.mustafaieva@gmail.com',
+                    'subject' =>'You have a new user',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
+
         $this->content = view(config('settings.frontTheme') . '.carerRegistration.thankYou')->with($this->vars)->render();
 
         return $this->renderOutput();

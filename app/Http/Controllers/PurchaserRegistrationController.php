@@ -201,6 +201,30 @@ class PurchaserRegistrationController extends FrontController
 
         $this->content = view(config('settings.frontTheme') . '.carerRegistration.thankYou')->with($this->vars)->render();
 
+        $text = view(config('settings.frontTheme') . '.emails.new_user')->with([
+            'user' => $user,
+            'like_name' => $purchaser->like_name,
+            'type' => 'purchaser'
+        ])->render();
+
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>'nik@holm.care',
+                    'subject' =>'You have a new user',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>'z.mustafaieva@gmail.com',
+                    'subject' =>'You have a new user',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
         return $this->renderOutput();
     }
 }

@@ -34,4 +34,9 @@ function getcookie(name)
 }
 $(document).ready(function () {
     loadpage();
+    $('.cookie-btn').on('click',function (e) {
+        e.preventDefault();
+        $('#id_cookie').hide();
+        return false;
+    })
 });
