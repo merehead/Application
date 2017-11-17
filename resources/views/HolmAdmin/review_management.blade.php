@@ -29,6 +29,11 @@
                     Comment
                   </span>
                 </td>
+                <td class=" orderNumber   ">
+                  <span class="td-title td-title--comment">
+                    Accept
+                  </span>
+                </td>
                 <td class=" ordninary-td   no-padding-l">
                   <span class="td-title td-title--light-blue">
                     actions
@@ -53,6 +58,8 @@
                         </tr>
                         </tbody>
                     </table>
+                </td>
+                <td>
                 </td>
                 <td>
                 </td>
@@ -94,16 +101,31 @@
                     </span>
                     </td>
                     <td>
+                        <span>
+                            {{$review->accept}}
+                        </span>
+                    </td>
+                    <td>
                         <div class="actionsGroup">
-                            <a href="#" class="actionsBtn actionsBtn--accept ">
-                                confirm
-                            </a>
-                            <a href="#" class="actionsBtn actionsBtn--edit ">
+                            <form method="post" action="{{route('ReviewManagement')}}">
+                                <input name="id" type="hidden" value="{{$review->id}}">
+                                <input name="method" type="hidden" value="confirm">
+                                <button name="confirm" class="actionsBtn actionsBtn--accept ">
+                                    confirm
+                                </button>
+                            </form>
+                            <a href="{{route('ReviewManagementEdit',['id'=>$review->id])}}"
+                               class="actionsBtn actionsBtn--edit">
                                 edit
                             </a>
-                            <a href="#" class="actionsBtn actionsBtn--delete ">
-                                delete
-                            </a>
+                            </form>
+                            <form method="post" action="{{route('ReviewManagement')}}">
+                                <input name="id" type="hidden" value="{{$review->id}}">
+                                <input name="method" type="hidden" value="delete">
+                                <button name="delete" class="actionsBtn actionsBtn--delete ">
+                                    delete
+                                </button>
+                            </form>
                         </div>
                     </td>
                 </tr>

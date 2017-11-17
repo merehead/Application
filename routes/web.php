@@ -145,6 +145,9 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::resource('/booking','Booking\BookingController', ['only' => ['index']]);
     Route::resource('/blog','Blog\BlogController');
     Route::get('/user/review_management','ReviewManagementController@index')->name('ReviewManagement');
+    Route::post('/user/review_management','ReviewManagementController@index')->name('ReviewManagement');
+    Route::get('/user/review_management/{id}','ReviewManagementController@edit')->name('ReviewManagementEdit');
+    Route::post('/user/review_management/{id}','ReviewManagementController@edit')->name('ReviewManagementEdit');
 
     Route::get('/financial','FinancialController@index')->name('financial');
     Route::get('/statistic','StatisticController@index')->name('statistic');

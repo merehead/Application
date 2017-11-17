@@ -157,7 +157,7 @@ class CarersProfile extends Model
 FROM `bookings`
 INNER JOIN `booking_overviews` ON `booking_id`= `bookings`.`id`
 INNER JOIN `service_users_profiles` as sup ON `bookings`.`service_user_id`= sup.`id`
-WHERE `carer_id` = ".$this->id." LIMIT 0,4");
+WHERE `carer_id` = ".$this->id." and accept = 1 LIMIT 0,4");
 
     }
 
