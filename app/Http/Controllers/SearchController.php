@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\PostCodes;
 use App\PurchasersProfile;
 use App\ServiceUsersProfile;
 use Illuminate\Http\Request;
@@ -122,6 +123,17 @@ class SearchController extends FrontController
 
         if ($request->get('postCode') && !empty($request->get('postCode'))) {
             $postCode = trim($request->get('postCode'));
+            if(strlen($postCode)>4){
+
+                $code = PostCodes::where('code', '=' ,$postCode)->first();
+                if(isset($code->code)){
+                    $code->amount=$code->amount+1;
+                    $code->save();
+                }else{
+                    $data=['code'=>$postCode,'amount'=>1,'frequency'=>0];
+                    PostCodes::create($data);
+                }
+            }
             if (strpos($postCode, ' ') === false) {
                 $postCode .= ' ';
                 $where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('" . $postCode . "', POSITION(' ' IN '" . $postCode . "')) and  p.name = LEFT(cp.postcode, POSITION(' ' IN '" . $postCode . "')))>0";

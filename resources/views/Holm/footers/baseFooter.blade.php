@@ -86,7 +86,7 @@
         </div>
     </div>
 </footer>
-<div class="cookie-box" id='id_cookie'>
+<div class="cookie-box" id='id_cookie' style="display:none;">
     <div class="container">
         <div class="cookie">
             <p class="cookie__text">
