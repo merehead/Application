@@ -29,11 +29,7 @@
                     Comment
                   </span>
                 </td>
-                <td class=" orderNumber   ">
-                  <span class="td-title td-title--comment">
-                    Accept
-                  </span>
-                </td>
+
                 <td class=" ordninary-td   no-padding-l">
                   <span class="td-title td-title--light-blue">
                     actions
@@ -61,8 +57,7 @@
                 </td>
                 <td>
                 </td>
-                <td>
-                </td>
+
                 <td>
                 </td>
             </tr>
@@ -100,11 +95,7 @@
                         {{$review->comment}}
                     </span>
                     </td>
-                    <td>
-                        <span>
-                            {{$review->accept}}
-                        </span>
-                    </td>
+
                     <td>
                         <div class="actionsGroup">
                             <form method="post" action="{{route('ReviewManagement')}}">

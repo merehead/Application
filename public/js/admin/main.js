@@ -19,6 +19,24 @@ $(document).ready(function(){
  	});
 
 
+    // -- PROFILE RATING -------
+
+    $('.profileRating__item').on('click', function() {
+        var reviewForm = $('form.reviewForm');
+        var raiting = $('.profileRating').children();
+
+        var value = $(this).attr('id').split('_')[0];
+        var id = $(this).attr('id').split('_')[1];
+
+        reviewForm.find("input[name='"+value+"']").val(id);
+
+        raiting.removeClass('active');
+        $.each(raiting, function(i, elem) {
+            if(i < id){
+                $(this).addClass('active')
+            }
+        });
+    });
 
 
 
