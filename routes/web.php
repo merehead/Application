@@ -206,7 +206,8 @@ Route::get('/test_stripe', function (){
 });
 
 Route::get('/test_sms', function (){
-    dd(SmsTools::send('Testing sms', '+380683301894'));
+    $carer = \App\CarersProfile::find(2);
+    dd(SmsTools::sendSmsToCarer('Testing sms', $carer));
 //    dd(SmsTools::getStatus('api2eff5c175ea2d30a1dc8301a05f66cd7eb380df4a'));
 //    $res = \Illuminate\Support\Facades\DB::select("SELECT id FROM appointments WHERE UNIX_TIMESTAMP(STR_TO_DATE(CONCAT(DATE_FORMAT(date_start, '%Y-%m-%d'), ' ', time_from), \"%Y-%m-%d %H.%i\")) - UNIX_TIMESTAMP(NOW()) <= 3600 AND reminder_sent = 0");
 //    if($res){
