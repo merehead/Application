@@ -213,7 +213,7 @@
     </div>
     <div class="profileRow">
         <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Would {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':$userNameForSite}} like someone to visit regularly for companionship?</span></h2>
+            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Would {{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'you':$userNameForSite}} like someone to visit regularly for companionship?</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
             if (is_null($serviceUsersProfile->anyone_else_live)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('visit_for_companionship',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
