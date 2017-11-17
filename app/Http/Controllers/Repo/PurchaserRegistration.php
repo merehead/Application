@@ -18,6 +18,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Swift_TransportException;
+use Illuminate\Support\Facades\Cookie;
 
 class PurchaserRegistration
 {
@@ -132,6 +133,7 @@ class PurchaserRegistration
         }
         if ($request->input('step')=='4_1' &&  $purchaserProfile->purchasing_care_for == 'Myself') {
             $purchaserProfile->registration_progress = '4_1_2_1';
+
         }
 
             $purchaserProfile->update();

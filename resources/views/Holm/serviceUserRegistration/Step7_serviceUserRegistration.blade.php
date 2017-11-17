@@ -13,7 +13,7 @@
             {!! Form::model($serviceUserProfile,['method'=>'POST','action'=>['ServiceUserRegistrationController@update',$serviceUserProfileID],'id'=>'step','class'=>'questionForm']) !!}
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        When would {{$serviceUserProfile->like_name}} like someone to start? (Must be a minimum of 3 days notice)
+                        When would {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':$serviceUserProfile->like_name}}  like someone to start? (Must be a minimum of 3 days notice)
                         <span>*</span>
                     </h2>
 

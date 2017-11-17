@@ -17,7 +17,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        When would {{$serviceUserProfile->like_name}} like someone to help?  <span>*</span>
+                        When would {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':$serviceUserProfile->like_name}} like someone to help?  <span>*</span>
                     </h2>
                     <div class="registrationCheckboxes registrationCheckboxes--single">
                         <div class="checkBox_item">
