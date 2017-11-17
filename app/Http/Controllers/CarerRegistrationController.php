@@ -232,6 +232,21 @@ class CarerRegistrationController extends FrontController
                     'status' => 'new'
                 ]);
 
+        $text = view(config('settings.frontTheme') . '.emails.new_user')->with([
+            'user' => $user,
+            'like_name' => $carerProfile->like_name,
+            'type' => 'carer'
+        ])->render();
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>'nik@holm.care',
+                    'subject' =>'You have a new user',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
+
 
         $text = view(config('settings.frontTheme') . '.emails.promo_letter_for_referral_bonuses')->with([
             'user' => $user,
