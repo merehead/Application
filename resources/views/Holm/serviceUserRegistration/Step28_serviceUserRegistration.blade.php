@@ -13,7 +13,7 @@
 
             <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does {{$userNameForSite}} sometimes have problems understanding other people? <span>*</span>       </h2>
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  sometimes have problems understanding other people? <span>*</span>       </h2>
                     <div class="inputWrap">
                         <?php if (isset($atrr)) unset($atrr);
                         $atrr = ['id' => 'sometimes-if', 'class' => 'formSelect'];

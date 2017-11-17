@@ -13,7 +13,7 @@
 
             <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does {{$userNameForSite}} have incontinence? <span>*</span>
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}} have incontinence? <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php
@@ -44,7 +44,7 @@
                 </div>
             <div class="formField sometimes_hiding_step48" style="display: none">
                     <h2 class="formLabel questionForm__label">
-                        Does {{$userNameForSite}} have their own supply of incontinence wear? <span>*</span>
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  have   {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'your':'their'}} own supply of incontinence wear? <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php
@@ -75,7 +75,7 @@
                 </div>
             <div class="formField sometimes_hiding2_step48-2" style="display: none">
                     <h2 class="formLabel questionForm__label">
-                        Would {{$userNameForSite}} like help in choosing incontinence products?
+                        Would   {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':$userNameForSite}}  like help in choosing incontinence products?
                     </h2>
                     <div class="inputWrap">
                         <?php

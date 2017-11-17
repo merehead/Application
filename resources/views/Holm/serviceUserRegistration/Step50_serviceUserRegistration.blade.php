@@ -14,7 +14,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does {{$userNameForSite}} demonstrate any of the following? - (we will contact you later for
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  demonstrate any of the following? - (we will contact you later for
                         further details). <span>*</span>
                     </h2>
 

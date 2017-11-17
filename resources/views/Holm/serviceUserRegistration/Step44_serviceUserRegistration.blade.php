@@ -14,7 +14,7 @@
 
             <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does {{$userNameForSite}} need assistance in choosing appropriate clothes? - eg choosing warm clothes in the winter. <span>*</span>
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  need assistance in choosing appropriate clothes? - eg choosing warm clothes in the winter. <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php

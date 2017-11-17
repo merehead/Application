@@ -15,7 +15,7 @@
 
             <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        What long term health conditions does {{$userNameForSite}} have? - (There is no need to give long descriptions. We will ask for more information at a later date.)
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you have any other long term health conditions':'What long term health conditions does  '.$userNameForSite.' have'}} ? - (There is no need to give long descriptions. We will ask for more information at a later date.)
                     </h2>
 
                     <div class="inputWrap">
@@ -29,7 +29,7 @@
                 </div>
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does {{$userNameForSite}} have any allergies to food / medication / anything else? <span>*</span>
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  have any allergies to food / medication / anything else? <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php

@@ -17,7 +17,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        What languages does {{$userNameForSite}} speak? <span>*</span>
+                        What languages {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'does '.$userNameForSite}}  speak? <span>*</span>
                     </h2>
                     <div class="inputWrap">
 

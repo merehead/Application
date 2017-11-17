@@ -29,7 +29,7 @@
 
             <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does {{$userNameForSite}} need assistance keeping safe at night? <span>*</span>
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  need assistance keeping safe at night? <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php
@@ -62,7 +62,7 @@
 
             <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
-                        What time would {{$userNameForSite}} like someone to help?
+                        What time would   {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':$userNameForSite}}  like someone to help?
                     </h2>
 
 

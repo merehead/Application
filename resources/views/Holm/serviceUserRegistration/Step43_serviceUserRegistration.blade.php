@@ -13,7 +13,7 @@
 
             <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does {{$userNameForSite}} require any assistance in getting dressed / bathing or toileting? <span>*</span>
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  require any assistance in getting dressed / bathing or toileting? <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php

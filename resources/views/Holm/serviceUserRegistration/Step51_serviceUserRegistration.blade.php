@@ -13,7 +13,7 @@
 
             <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does {{$userNameForSite}} have a doctor's note or court order saying that they are not able to give consent? <span>*</span>
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  have a doctor's note or court order saying that   {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':'they'}} are not able to give consent? <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php

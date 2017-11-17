@@ -13,7 +13,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does {{$userNameForSite}} have regular social interaction with friends / family?
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  have regular social interaction with friends / family?
                     </h2>
                     <div class="inputWrap">
                         <?php
@@ -32,7 +32,7 @@
                 </div>
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Would {{$userNameForSite}} like someone to visit regularly for companionship?
+                        Would {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':$userNameForSite}}  like someone to visit regularly for companionship?
                     </h2>
                     <div class="inputWrap">
                         <?php
