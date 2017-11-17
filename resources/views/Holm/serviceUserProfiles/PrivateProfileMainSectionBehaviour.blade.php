@@ -107,7 +107,7 @@ array('class' => 'checkboxNew','id'=>'behaviour'.$behaviour[8]->id)) !!}
     <div class="profileRow depend_from_have_incontinence">
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span
-                        class="ordinaryTitle__text ordinaryTitle__text--smaller">{{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Have':'Has'}} a doctor's note or court order saying that {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':'they'}}  are not able to give consent </span>
+                        class="ordinaryTitle__text ordinaryTitle__text--smaller">{{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Have':'Has'}} a doctor's note or court order saying that {{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'you':'they'}}  are not able to give consent </span>
             </h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile consent_switcher'];
             if (is_null($serviceUsersProfile->consent)) $atrr['placeholder'] = 'Please select';?>
