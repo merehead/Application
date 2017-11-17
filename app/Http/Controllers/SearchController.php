@@ -270,7 +270,7 @@ class SearchController extends FrontController
             $result = json_decode(file_get_contents($url), true);
             if ($result['status'] == "OK") {
                 $distance = (isset($result['rows'][0]['elements'][0]['distance']['text']))
-                    ? $result['rows'][0]['elements'][0]['distance']['text'] : 0;
+                    ? substr($result['rows'][0]['elements'][0]['distance']['text'],0,-2) : 0;
             }
         }
         return $distance;
