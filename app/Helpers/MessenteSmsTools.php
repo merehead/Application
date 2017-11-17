@@ -91,6 +91,9 @@ class MessenteSmsTools implements SmsToolsInterface
      */
     public function send(string $text, string $to) : string
     {
+
+        $to = $this->convertNubmer($to);
+
         $parameters = [
             'username' => $this->username,
             'password' => $this->password,
@@ -150,7 +153,7 @@ class MessenteSmsTools implements SmsToolsInterface
 
     public function sendSmsToCarer(string $text, CarersProfile $carersProfile)
     {
-        if(!in_array(substr($this->convertNubmer($carersProfile->mobile_number), 0, 3), ['+39', '+44']))
+        if(!in_array(substr($this->convertNubmer($carersProfile->mobile_number), 0, 3), ['+38', '+44']))
             return false;
 
         return $this->send($text, $this->convertNubmer($carersProfile->mobile_number));
@@ -158,7 +161,7 @@ class MessenteSmsTools implements SmsToolsInterface
 
     public function sendSmsToServiceUser(string $text, ServiceUsersProfile $serviceUsersProfile)
     {
-        if(!in_array(substr($this->convertNubmer($serviceUsersProfile->mobile_number), 0, 3), ['+39', '+44']))
+        if(!in_array(substr($this->convertNubmer($serviceUsersProfile->mobile_number), 0, 3), ['+38', '+44']))
             return false;
 
         return $this->send($text, $this->convertNubmer($serviceUsersProfile->mobile_number));
@@ -166,7 +169,7 @@ class MessenteSmsTools implements SmsToolsInterface
 
     public function sendSmsToPurchaser(string $text, PurchasersProfile $purchasersProfile)
     {
-        if(!in_array(substr($this->convertNubmer($purchasersProfile->mobile_number), 0, 3), ['+39', '+44']))
+        if(!in_array(substr($this->convertNubmer($purchasersProfile->mobile_number), 0, 3), ['+38', '+44']))
             return false;
 
         return $this->send($text, $this->convertNubmer($purchasersProfile->mobile_number));
