@@ -45,11 +45,6 @@
                       amount
                     </span>
                     </td>
-                    <td class=" ordninary-td    ordninary-td--big  ">
-                    <span class="td-title td-title--frequency">
-                      frequency
-                    </span>
-                    </td>
                 </tr>
                 </thead>
                 <tbody>
@@ -64,9 +59,6 @@
                     </td>
                     <td>
                         <span>{{$code->amount}}</span>
-                    </td>
-                    <td>
-                        <span>{{$code->frequency}}</span>
                     </td>
                 </tr>
                     @endforeach
