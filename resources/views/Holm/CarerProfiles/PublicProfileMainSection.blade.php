@@ -3,8 +3,8 @@
 
         <a href="#" class="profilePhoto profilePhoto2 invite__photo ">
             <img id="profile_photo" alt="avatar"
-              @if (file_exists(public_path('img/profile_photos/' . $carerProfile->id . '.png')))
-                src="img/profile_photos/{{$carerProfile->id}}.png"
+              @if (file_exists(public_path('/img/profile_photos/' . $carerProfile->id . '.png')))
+                src="/img/profile_photos/{{$carerProfile->id}}.png"
                  @else
                 src="/img/no_photo.png"
               @endif />

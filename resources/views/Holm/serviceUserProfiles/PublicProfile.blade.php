@@ -46,8 +46,8 @@
                                 <div class="profilePhoto profilePhoto2 ">
 
                                      <img id="profile_photo" alt="avatar"
-                                       @if (file_exists(public_path('img/service_user_profile_photos/' . $serviceUsers->id . '.png')))
-                                         src="img/service_user_profile_photos/{{$serviceUsers->id}}.png"
+                                       @if (file_exists(public_path('/img/service_user_profile_photos/' . $serviceUsers->id . '.png')))
+                                         src="/img/service_user_profile_photos/{{$serviceUsers->id}}.png"
                                           @else
                                           src="/img/no_photo.png"
                                        @endif />
