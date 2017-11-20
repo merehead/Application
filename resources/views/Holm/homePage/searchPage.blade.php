@@ -29,6 +29,7 @@
         {!! Form::hidden('stage','carerSearch') !!}
         <input type="hidden" name="sort-rating" id="sort-rating" value="0">
         <input type="hidden" name="sort-rating-order" id="sort-rating-order" value="asc">
+        <input type="hidden" name="sort-distance-order" id="sort-distance-order" value="asc">
 
         <input type="hidden" name="sort-id" id="sort-id" value="0">
         <input type="hidden" name="sort-id-order" id="sort-id-order" value="asc">
@@ -141,6 +142,10 @@
                         <p> &nbsp; - &nbsp; </p>
                         <a href="#" class="sortLink__item sort-id">
                             MOST RECENT
+                        </a>
+                        <p> &nbsp; - &nbsp; </p>
+                        <a href="#" class="sortLink__item sort-distance">
+                            Distance
                         </a>
                     </div>
                 </div>

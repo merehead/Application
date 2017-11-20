@@ -1791,6 +1791,19 @@ $(document).ready(function () {
         carerSearchAjax();
     });
 
+    $(document).on('click','.sort-distance', function (e) {
+        e.preventDefault();
+        $('#sort-rating').val(1);
+        $('#sort-id').val(0);
+        if($('#sort-distance-order').val()=='asc'){
+            $('#sort-distance-order').val('desc');
+        }else{
+            $('#sort-distance-order').val('asc');
+        }
+        $('#load-more').val(0);
+        carerSearchAjax();
+    });
+
     $(document).on('click','.sort-id', function (e) {
         e.preventDefault();
         $('#sort-id').val(1);

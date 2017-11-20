@@ -7,4 +7,8 @@
         <a href="#" class="sortLink__item sort-id">
             MOST RECENT
         </a>
+        <p> &nbsp; - &nbsp; </p>
+        <a href="#" class="sortLink__item sort-distance">
+            Distance
+        </a>
     </div>

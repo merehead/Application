@@ -171,7 +171,9 @@ class SearchController extends FrontController
         $carerResult = DB::select($sql); //раскоментить
         //}
         if (Auth::check() && Auth::user()->user_type_id != 4) {
-            $carerResult = $this->sortByDistanseToCarer($carerResult);
+                $order_distance = $request->get('sort-distance-order', 'asc');
+
+            $carerResult = $this->sortByDistanseToCarer($carerResult,$order_distance);
         }
 
         $start = (($page * $perPage) - $perPage == 0) ? '0' : ($page * $perPage) - $perPage;
@@ -230,7 +232,7 @@ class SearchController extends FrontController
      * @param $carerResult
      * @return mixed
      */
-    private function sortByDistanseToCarer($carerResult)
+    private function sortByDistanseToCarer($carerResult,$order_distance)
     {
         foreach ($carerResult as $key => $item) {
             switch (Auth::user()->user_type_id) {
@@ -251,9 +253,15 @@ class SearchController extends FrontController
             $distance = $this->getDistance($from, $to);
             $item->distance = $distance;
         }
-        usort($carerResult, function ($a, $b) {
-            return strcmp($a->distance, $b->distance);
-        });
+        if($order_distance=='asc')
+            usort($carerResult, function ($a, $b) {
+                return strcmp($a->distance, $b->distance);
+            });
+        elseif($order_distance=='desc')
+            uasort($carerResult, function ($a, $b) {
+                return strcmp($b->distance, $a->distance);
+            });
+
         return $carerResult;
     }
 
