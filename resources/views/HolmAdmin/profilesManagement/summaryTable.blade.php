@@ -49,4 +49,5 @@
         @endforeach
         </tbody>
     </table>
+    $totalsByUserType
 </div>
