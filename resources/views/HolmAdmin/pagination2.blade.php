@@ -3,7 +3,8 @@ $search = '';
 if(isset($profileTypeFilter)&&!empty($profileTypeFilter)) $search.='&profileType='.$profileTypeFilter;
 if(isset($statusTypeFilter)&&!empty($statusTypeFilter)) $search.='&statusType='.$statusTypeFilter;
 ?>
-@if(count($pages)>0)
+
+@if($pages>1)
 <div class="paginationContainer">
     <div class="pagination">
         <a href="{{($previousPage>=1)?$link.'?page='.$previousPage.$search:'#'}}" class="paginationArrow paginationArrow--left">
@@ -17,4 +18,4 @@ if(isset($statusTypeFilter)&&!empty($statusTypeFilter)) $search.='&statusType='.
         </a>
     </div>
 </div>
-    @endif
+@endif
