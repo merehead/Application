@@ -58,7 +58,7 @@
         </div>
         <div class="profileField depend_from_home_safe" {!!  ($serviceUsersProfile->home_safe == 'Yes' || is_null($serviceUsersProfile->home_safe) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span
-                        class="ordinaryTitle__text ordinaryTitle__text--smaller">{{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Requires':'Requires'}} assistance keeping the home safe and clean</span>
+                        class="ordinaryTitle__text ordinaryTitle__text--smaller">{{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Require':'Requires'}} assistance keeping the home safe and clean</span>
             </h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select'];
             if (is_null($serviceUsersProfile->assistance_keeping)) $atrr['placeholder'] = 'Please select';?>
@@ -83,7 +83,7 @@
         </div>
         <div class="profileField depend_from_move_available" {!!  ($serviceUsersProfile->move_available == 'Yes' || is_null($serviceUsersProfile->move_available) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span
-                        class="ordinaryTitle__text ordinaryTitle__text--smaller">{{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Requires':'Requires'}} assistance moving around home</span>
+                        class="ordinaryTitle__text ordinaryTitle__text--smaller">{{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Require':'Requires'}} assistance moving around home</span>
             </h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select move_available_switcher'];
             if (is_null($serviceUsersProfile->move_available)) $atrr['placeholder'] = 'Please select';?>
