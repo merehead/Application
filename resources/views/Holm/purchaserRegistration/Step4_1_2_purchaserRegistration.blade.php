@@ -49,12 +49,16 @@
 
                             @if(empty($purchasersProfileID))
                               name='img/service_user_profile_photos/{{$serviceUserProfile->id}}.png'
-                              src="img/service_user_profile_photos/{{$serviceUserProfile->id}}.png"
+                               @if (file_exists(public_path('/img/service_user_profile_photos/' . $serviceUserProfile->id . '.png')))
+                               src="/img/service_user_profile_photos/{{$serviceUserProfile->id}}.png"
+                               @endif
                             @else
                               name='img/service_user_profile_photos/{{$purchasersProfile->serviceUsers->first()->id}}.png'
-                              src="img/service_user_profile_photos/{{$purchasersProfile->serviceUsers->first()->id}}.png"
-                            @endif>
+                               @if (file_exists(public_path('/img/service_user_profile_photos/' . $purchasersProfile->serviceUsers->first()->id . '.png')))
+                               src="/img/service_user_profile_photos/{{$purchasersProfile->serviceUsers->first()->id}}.png"
+                                  @endif
 
+                            @endif
                           />
 
                           <!-- <img id="profile_photo" class="pickfiles_img" onerror="this.src='/img/no_photo.png'"

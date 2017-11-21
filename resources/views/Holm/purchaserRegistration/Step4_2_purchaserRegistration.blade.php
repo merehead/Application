@@ -29,9 +29,7 @@
 
                                @if (file_exists(public_path('/img/profile_photos/' . $purchasersProfile->id . '.png')))
                                src="/img/profile_photos/{{$purchasersProfile->id}}.png"
-                               @else
-
-                                  @endif
+                               @endif
                           />
 
                           <a href="#" class="add add--moreHeight">
