@@ -54,5 +54,7 @@
                 </tbody>
             </table>
         </div>
+        {{$PostCodes->render('HolmAdmin.pagination')}}
+        {{--{{$transactions->render('HolmAdmin.pagination')}}--}}
     </div>
 </div>
