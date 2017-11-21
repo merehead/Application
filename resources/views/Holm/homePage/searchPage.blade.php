@@ -143,10 +143,12 @@
                         <a href="#" class="sortLink__item sort-id">
                             MOST RECENT
                         </a>
+                        @if(Auth::check())
                         <p> &nbsp; - &nbsp; </p>
                         <a href="#" class="sortLink__item sort-distance">
                             Distance
                         </a>
+                            @endif
                     </div>
                 </div>
                 <div class="card error-text result {{count($carerResult)>0?"nhide":""}}">
