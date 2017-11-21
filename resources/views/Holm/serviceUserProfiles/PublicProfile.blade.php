@@ -990,11 +990,8 @@
                                                 <span class="ordinaryTitle__text">Able togive consent</span>
                                             </h2>
                                             <h2 class="ordinaryTitle">
-                                                <span class="ordinaryTitle__text">Do you doctor's note or court order saying that they are not able to give consent</span>
+                                                <span class="ordinaryTitle__text">{{$serviceUsers->consent_details}}</span>
                                             </h2>
-                                            <p>
-                                                {{$serviceUsers->consent_details}}
-                                            </p>
                                         </div>
                                     @endif
                                 </div>
