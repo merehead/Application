@@ -10,6 +10,14 @@
     <div class="panelHead">
         <div class="filterGroup">
             <div class="filterBox">
+                <div class="formField formField--fix-biger">
+                    <div class="fieldWrap">
+
+                        {!! Form::text('userName',null,['class'=>'formItem formItem--input formItem--search','maxlength'=>'60']) !!}
+                    </div>
+                </div>
+            </div>
+            <div class="filterBox">
                 <h2 class="filterBox__title themeTitle">
                     Type of profile:
                 </h2>

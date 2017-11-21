@@ -48,9 +48,10 @@ class UserController extends AdminController
 
         $request->has('profileType')? $profileTypeFilter = $request->get('profileType') : $profileTypeFilter = null;
         $request->has('statusType')? $statusTypeFilter  = $request->get('statusType') : $statusTypeFilter = null;
+        $request->has('userName')? $userNameFilter = $request->get('userName') : $userNameFilter = null;
         $start = ($page - 1) * $perPage;
         if($page==1) $start = 0;
-        $userList = $this->siteUsers->getUserList($profileTypeFilter,$statusTypeFilter);
+        $userList = $this->siteUsers->getUserList($profileTypeFilter,$statusTypeFilter,$userNameFilter);
         $count = count($userList);
         if($count>0)
             $pages = ceil($count/$perPage);

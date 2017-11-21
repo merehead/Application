@@ -105,7 +105,7 @@ class AdminUsers extends AdminModel
     }
 
     // выборка профилей пользователей из всех таблиц профилей для админки Профиля менеджеров
-    public function getUserList($profileTypeFilter,$statusTypeFilter){
+    public function getUserList($profileTypeFilter,$statusTypeFilter,$userNameFilter){
 
 
         if (empty($profileTypeFilter)) {
@@ -155,6 +155,11 @@ class AdminUsers extends AdminModel
 
         if (!empty($statusTypeFilter))
             $userProfileList = $userProfileList->where('profiles_status_id',$statusTypeFilter);
+        if (!empty($userNameFilter))
+            $userProfileList = $userProfileList->filter(function($item)use($userNameFilter){
+                if(strpos(strtolower($item->first_name),strtolower($userNameFilter))!==false)
+               return true;
+            });
 
         return $userProfileList;
     }

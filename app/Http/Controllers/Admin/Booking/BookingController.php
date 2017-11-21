@@ -30,6 +30,7 @@ class BookingController extends AdminController
         $filter = FALSE;
         //$orderDirection = 'desc';
         if (isset($input['filter'])) {$input['filter'] != 0 ? $filter = ['status_id','=',$input['filter']] : $filter = FALSE;}
+        if (isset($input['userName'])) $filter = ['first_name','=',$input['userName']]; else $filter = FALSE;
 
         $this->title = 'Admin Bookings Details';
 
