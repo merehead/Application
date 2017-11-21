@@ -9,12 +9,14 @@
         <div class="filterGroup">
             <div class="filterBox">
                 <div class="formField formField--fix-biger">
+                    <form action="{{route('PostCodesPost')}}" method="post">
                     <div class="fieldWrap">
-                        <input type="search" class="formItem formItem--input formItem--search" placeholder="Search...">
-                        <button class="searchBtn">
+                        <input type="search" name="codes" class="formItem formItem--input formItem--search" placeholder="Search...">
+                        <button class="searchBtn" type="submit">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

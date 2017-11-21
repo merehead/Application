@@ -16,9 +16,12 @@ class PostCodesController extends AdminController
         $this->template = config('settings.theme') . '.templates.adminBase';
     }
 
-    public function index(){
+    public function index(Request $request){
         $postcode = new PostCodes;
-        $data = $postcode->select('*')->orderByDesc('amount')->paginate(Config::get('settings.AdminUserPagination'));
+        if(!empty($request->get('codes')))
+            $data = $postcode->select('*')->where('code','=',$request->get('codes'))->orderByDesc('amount')->paginate(Config::get('settings.AdminUserPagination'));
+        else
+            $data = $postcode->select('*')->orderByDesc('amount')->paginate(Config::get('settings.AdminUserPagination'));
         $this->vars['PostCodes']=$data;
         $this->content = view(config('settings.theme').'.postCodes')->with( $this->vars)->render();
 

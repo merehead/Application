@@ -52,9 +52,11 @@ function addressFormt(autocomplete){
             subbuildingname=data[0].subbuildingname+' ';
             $('input[name="address_line1"]').val(data[0].subbuildingname);
             $('input[name="address_line2"]').val(number+' '+data[0].street);
-        }else{
+        }else if(data[0].street!=undefined){
             $('input[name="address_line1"]').val(number+' '+data[0].street);
-
+        }
+        else if(data[0].premise!=undefined){
+            $('input[name="address_line1"]').val(number+' '+data[0].premise);
         }
 
          $('input[name="town"]').val(data[0].posttown);

@@ -153,6 +153,7 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::get('/statistic','StatisticController@index')->name('statistic');
     Route::get('/fees','FeesController@index')->name('fees');
     Route::get('/post-codes','PostCodesController@index')->name('PostCodes');
+    Route::post('/post-codes','PostCodesController@index')->name('PostCodesPost');
     Route::post('/fees','FeesController@update')->name('feespost');
     Route::get('/holidays','HolidaysController@index')->name('holidays');
     Route::post('/holidays','HolidaysController@update')->name('holidaysPost');
