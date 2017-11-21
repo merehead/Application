@@ -37,6 +37,7 @@
         </div>
         {!! Form::hidden('address_line1',$serviceUsers->address_line1) !!}
         {!! Form::hidden('town',$serviceUsers->town) !!}
+        {!! Form::hidden('postcode',$serviceUsers->postcode) !!}
         <div class="profileWrap">
             <div class="row">
                 <div class="col-md-8">

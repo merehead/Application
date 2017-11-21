@@ -177,6 +177,7 @@ function initMap() {
 function geocodeAddress(geocoder, resultsMap) {
     var addr = ($('input[name="address_line1"]').val()!='не указан')?$('input[name="address_line1"]').val():'';
     var address = $('input[name="town"]').val()+' '+ addr;
+    var step = 1;
     geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
             resultsMap.setCenter(results[0].geometry.location);
@@ -186,10 +187,29 @@ function geocodeAddress(geocoder, resultsMap) {
                 position: results[0].geometry.location
             });
         } else {
-            $('.fieldCategory').after('<div class="alert alert-warning alert-dismissable fade in">\n' +
-                '    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
-                '    <strong>Warning!</strong> You entered an incorrect address. Please enter your real address.\n' +
-                '  </div>')
+            if(step==1){
+                address=$('input[name="postcode"]').val();
+                if(address!=undefined) {
+                    geocoder.geocode({'address': address}, function (results, status) {
+                            if (status === 'OK') {
+                                resultsMap.setCenter(results[0].geometry.location);
+                                if (marker) marker.setMap(null);
+                                marker = new google.maps.Marker({
+                                    map: resultsMap,
+                                    position: results[0].geometry.location
+                                });
+                            }
+                        }
+                    );
+                }
+                step= step+1;
+            }
+            else {
+                $('.fieldCategory').after('<div class="alert alert-warning alert-dismissable fade in">\n' +
+                    '    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
+                    '    <strong>Warning!</strong> You entered an incorrect address. Please enter your real address.\n' +
+                    '  </div>')
+            }
             //alert('Geocode was not successful for the following reason: ' + status);
         }
     });
