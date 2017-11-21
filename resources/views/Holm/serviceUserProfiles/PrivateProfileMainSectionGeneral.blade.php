@@ -185,7 +185,7 @@
 
         <div class="profileField profileField--full-width">
 
-            {!! Form::text('one_line_about',null,['class'=>'profileField__input','placeholder'=>($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'One line about the you':'One line about the persone','maxlength'=>"250"]) !!}
+            {!! Form::text('one_line_about',null,['class'=>'profileField__input','placeholder'=>($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'One line about yourself':'One line about the persone','maxlength'=>"250"]) !!}
             @if ($errors->has('one_line_about'))
                 <span class="help-block"><strong>{{ $errors->first('one_line_about') }}</strong></span>
             @endif
