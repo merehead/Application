@@ -13,7 +13,7 @@
 
             <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Are you at':'Does '.$userNameForSite.'have a' }} risk of developing sores on the skin? - Please answer yes if there is a history of sores or if there is a high risk of developing them, if not looked after correctly. <span>*</span>
+                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Are you at':'Does '.$userNameForSite.' have a' }} risk of developing sores on the skin? - Please answer yes if there is a history of sores or if there is a high risk of developing them, if not looked after correctly. <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php
