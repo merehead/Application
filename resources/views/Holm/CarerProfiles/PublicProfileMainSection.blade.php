@@ -170,14 +170,14 @@ $documents['other_relevant_qualification']->count()>0)
                 @endforeach
             </div>
             <div class="advantageColumn">
+                <?php $i=1; ?>
                 @foreach($typeCare as $item)
+
                     <p class="advantage_label">
                         <i class="fa fa-check"></i>
                         {{$item->name}}
                     </p>
-                @if($loop->iteration%3==0)
-                    </div> <div class="advantageColumn">
-                @endif
+                <?php $i++; ?>
                 @endforeach
             </div>
         </div>
