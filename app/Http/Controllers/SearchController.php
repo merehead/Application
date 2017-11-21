@@ -258,7 +258,7 @@ class SearchController extends FrontController
                 return strcmp($a->distance, $b->distance);
             });
         elseif($order_distance=='desc')
-            uasort($carerResult, function ($a, $b) {
+            usort($carerResult, function ($a, $b) {
                 return strcmp($b->distance, $a->distance);
             });
 
