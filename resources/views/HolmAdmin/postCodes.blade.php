@@ -27,13 +27,6 @@
             <table class="adminTable">
                 <thead>
                 <tr>
-                    <td class="orderNumber">
-                    <span class="td-title td-title--number">
-                     №
-                    </span>
-                    </td>
-
-
                     <td class=" ordninary-td ordninary-td--big ">
                     <span class="td-title td-title--codes">
                     postcodes
@@ -50,10 +43,6 @@
                 <tbody>
                 @foreach($PostCodes as $code)
                 <tr>
-                    <td>
-                        <span>{{$code->id}}</span>
-                    </td>
-
                     <td class="">
                         <span>{{$code->code}}</span>
                     </td>

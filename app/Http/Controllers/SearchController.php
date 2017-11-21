@@ -123,7 +123,7 @@ class SearchController extends FrontController
 
         if ($request->get('postCode') && !empty($request->get('postCode'))) {
             $postCode = trim($request->get('postCode'));
-            if(strlen($postCode)>4){
+            if(strlen($postCode)>1){
 
                 $code = PostCodes::where('code', '=' ,$postCode)->first();
                 if(isset($code->code)){
