@@ -34,7 +34,7 @@
                     </h2>
 
                     <div class="inputWrap">
-                        {!! Form::textarea('kind_of_incontinence',null,['class'=>'formArea ','placeholder'=>'Detail','maxlength'=>"250"]) !!}
+                        {!! Form::textarea('kind_of_incontinence',null,['class'=>'formArea','placeholder'=>'Detail','maxlength'=>"250",'style'=>'resize:none;overflow-x: hidden;']) !!}
                         @if ($errors->has('kind_of_incontinence'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('kind_of_incontinence') }}</strong>

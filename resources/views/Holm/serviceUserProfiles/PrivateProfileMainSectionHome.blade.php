@@ -146,7 +146,7 @@
         <div class="inhabitantsDepend profileField profileField--two-thirds"{!!  $serviceUsersProfile->anyone_else_live == 'No' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">please give their name and relationship to {{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'you':$userNameForSite}}</span></h2>
-            {!! Form::text('anyone_detail',null,['class'=>'profileField__input ','placeholder'=>'Type details','maxlength'=>"200"]) !!}
+            {!! Form::text('anyone_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"200"]) !!}
             @if ($errors->has('anyone_detail'))
                 <span class="help-block"><strong>{{ $errors->first('anyone_detail') }}</strong></span>
             @endif
