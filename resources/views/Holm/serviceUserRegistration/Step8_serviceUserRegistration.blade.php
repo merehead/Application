@@ -9,7 +9,7 @@
 
             <p class="info-p info-p--roboto">
                 Your answers will help the Carer better understand {{(App\ServiceUsersProfile::find($serviceUserProfileID)->purchaser->purchasing_care_for=='Myself')?'your':$userNameForSite."'s'"}} needs, in order to provide better care.</br> </br>
-                You will only need to answer these questions once{{(App\ServiceUsersProfile::find($serviceUserProfileID)->purchaser->purchasing_care_for=='Myself')?'':" about".$userNameForSite}}. You can edit {{(App\ServiceUsersProfile::find($serviceUserProfileID)->purchaser->purchasing_care_for=='Myself')?'your':"their "}} details in {{(App\ServiceUsersProfile::find($serviceUserProfileID)->purchaser->purchasing_care_for=='Myself')?'your':"their "}} private profile page if you need to later.
+                You will only need to answer these questions once{{(App\ServiceUsersProfile::find($serviceUserProfileID)->purchaser->purchasing_care_for=='Myself')?'':" about ".$userNameForSite}}. You can edit {{(App\ServiceUsersProfile::find($serviceUserProfileID)->purchaser->purchasing_care_for=='Myself')?'your':"their "}} details in {{(App\ServiceUsersProfile::find($serviceUserProfileID)->purchaser->purchasing_care_for=='Myself')?'your':"their "}} private profile page if you need to later.
             </p>
         </div>
 
