@@ -7,7 +7,7 @@ function loadpage()
         setcookie("ckeck_cookie", 1);
         // Извлекаем cookie
         var cookie = getcookie("ckeck_cookie");
-        if(cookie!= null && cookie != "1")
+        if(cookie== null || cookie != "1")
         {
             $('#id_cookie').show();
         }
