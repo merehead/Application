@@ -154,7 +154,7 @@ class PurchaserController extends FrontController implements Constants
     }
 
 
-    public function bookingFilter($status = 'all')
+    public function bookingFilter($status = 'all',Request $request)
     {
         $user = Auth::user();
 
@@ -185,30 +185,66 @@ class PurchaserController extends FrontController implements Constants
             $this->vars = array_add($this->vars, 'serviceUsers', $serviceUsers);
 
             $this->vars = array_add($this->vars, 'status', $status);
+            $page = $request->get('page',1);
+            $perPage = 5;
+            $start = ($page - 1) * $perPage;
+            if ($page == 1) {
+                $start = 0;
+            }
+            $this->vars = array_add($this->vars, 'page', $page);
 
-            $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('purchaser_id', $user->id)->get();
+
+            $newBookingsAll = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('purchaser_id', $user->id)->get();
+            $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('purchaser_id', $user->id)->skip($start)->take($perPage)->get();
             $this->vars = array_add($this->vars, 'newBookings', $newBookings);
-
-            $inProgressBookings = Booking::whereIn('status_id', [self::CONFIRMED, self::IN_PROGRESS, self::DISPUTE])->where('purchaser_id', $user->id)->get();
+            $this->vars = array_add($this->vars, 'newBookingsAll', $newBookingsAll);
+            if($request->ajax()&&$status=='new'){
+                $this->content = view(config('settings.frontTheme') . '.purchaserProfiles.Booking.BookingRowNewAjax')->with($this->vars)->render();
+                return response()->json(["result" => true,'content'=>$this->content,'hideLoadMore'=>$newBookingsAll->count()<=($perPage*$page),'countAll'=>$newBookingsAll->count()]);
+            }
+            // ---------------  In progress booking --------------------------------
+            $inProgressBookingsAll = Booking::whereIn('status_id', [self::CONFIRMED, self::IN_PROGRESS, self::DISPUTE])->where('purchaser_id', $user->id)->get();
+            $inProgressBookings = Booking::whereIn('status_id', [self::CONFIRMED, self::IN_PROGRESS, self::DISPUTE])->where('purchaser_id', $user->id)->skip($start)->take($perPage)->get();
             $inProgressAmount = 0;
             foreach ($inProgressBookings as $booking){
                 $inProgressAmount += $booking->purchaser_price;
             }
 
+            $this->vars = array_add($this->vars, 'inProgressBookingsAll', $inProgressBookingsAll);
             $this->vars = array_add($this->vars, 'inProgressBookings', $inProgressBookings);
             $this->vars = array_add($this->vars, 'inProgressAmount', $inProgressAmount);
+            if($request->ajax()&&$status=='progress'){
+                $this->content = view(config('settings.frontTheme') . '.purchaserProfiles.Booking.BookingRowInProgressAjax')->with($this->vars)->render();
+                return response()->json(["result" => true,'content'=>$this->content,'hideLoadMore'=>$inProgressBookingsAll->count()<=($perPage*$page),'countAll'=>$inProgressBookingsAll->count()]);
+            }
+            // ---------------------------------------------------------------------
 
-            $completedBookings = Booking::where('status_id', 7)->where('purchaser_id', $user->id)->get();
+            // --------------- Completed booking --------------------------------
+            $completedBookingsAll = Booking::where('status_id', 7)->where('purchaser_id', $user->id)->get();
+            $completedBookings = Booking::where('status_id', 7)->where('purchaser_id', $user->id)->skip($start)->take($perPage)->get();
             $completedAmount = 0;
             foreach ($completedBookings as $booking){
                 $completedAmount += $booking->purchaser_price;
             }
+            $this->vars = array_add($this->vars, 'completedBookingsAll', $completedBookingsAll);
             $this->vars = array_add($this->vars, 'completedBookings', $completedBookings);
             $this->vars = array_add($this->vars, 'completedAmount', $completedAmount);
 
-            $canceledBookings = Booking::where('status_id', 4)->where('purchaser_id', $user->id)->get();
-            $this->vars = array_add($this->vars, 'canceledBookings', $canceledBookings);
+            if($request->ajax()&&$status=='completed'){
+                $this->content = view(config('settings.frontTheme') . '.purchaserProfiles.Booking.BookingRowCompletedAjax')->with($this->vars)->render();
+                return response()->json(["result" => true,'content'=>$this->content,'hideLoadMore'=>$completedBookingsAll->count()<=($perPage*$page),'countAll'=>$completedBookingsAll->count()]);
+            }
+            // -------------------------------------------------------------------
 
+            // --------------- Canceled booking --------------------------------
+            $canceledBookingsAll = Booking::where('status_id', 4)->where('purchaser_id', $user->id)->get();
+            $canceledBookings = Booking::where('status_id', 4)->where('purchaser_id', $user->id)->skip($start)->take($perPage)->get();
+            $this->vars = array_add($this->vars, 'canceledBookings', $canceledBookings);
+            $this->vars = array_add($this->vars, 'canceledBookingsAll', $canceledBookingsAll);
+            if($request->ajax()&&$status=='canceled'){
+                $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingRowCanceledAjax')->with($this->vars)->render();
+                return response()->json(["result" => true,'content'=>$this->content,'hideLoadMore'=>$canceledBookingsAll->count()<=($perPage*$page),'countAll'=>$canceledBookingsAll->count()]);
+            }
             $this->content = view(config('settings.frontTheme') . '.purchaserProfiles.Booking.BookingTaball')->with($this->vars)->render();
 
         }

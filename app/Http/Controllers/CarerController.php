@@ -16,6 +16,7 @@ use App\User;
 use App\Document;
 use App\WorkingTime;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
@@ -216,7 +217,7 @@ class CarerController extends FrontController implements Constants
         return $this->renderOutput();
     }
 
-    public function bookingFilter($status = 'all')
+    public function bookingFilter($status = 'all',Request $request)
     {
 
         //todo костыль на логаут
@@ -244,35 +245,67 @@ class CarerController extends FrontController implements Constants
         $carerProfile = CarersProfile::findOrFail($user->id);
         $this->vars = array_add($this->vars,'carerProfile',$carerProfile);
 
-
-
         $this->vars = array_add($this->vars, 'status', $status);
-
-        $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('carer_id', $user->id)->get();
+        $page = $request->get('page',1);
+        $perPage = 5;
+        $start = ($page - 1) * $perPage;
+        if ($page == 1) {
+            $start = 0;
+        }
+        $this->vars = array_add($this->vars, 'page', $page);
+        $newBookingsAll = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('carer_id', $user->id)->get();
+        $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('carer_id', $user->id)->skip($start)->take($perPage)->get();
         $this->vars = array_add($this->vars, 'newBookings', $newBookings);
+        $this->vars = array_add($this->vars, 'newBookingsAll', $newBookingsAll);
 
-        $inProgressBookings = Booking::whereIn('status_id', [self::CONFIRMED, self::IN_PROGRESS, self::DISPUTE])->where('carer_id', $user->id)->get();
+        if($request->ajax()&&$status=='new'){
+            $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingRowNewAjax')->with($this->vars)->render();
+            return response()->json(["result" => true,'content'=>$this->content,'hideLoadMore'=>$newBookingsAll->count()<=($perPage*$page),'countAll'=>$newBookingsAll->count()]);
+        }
+        // ---------------  In progress booking --------------------------------
+        $inProgressBookingsAll = Booking::whereIn('status_id', [self::CONFIRMED, self::IN_PROGRESS, self::DISPUTE])->where('carer_id', $user->id)->get();
+        $inProgressBookings = Booking::whereIn('status_id', [self::CONFIRMED, self::IN_PROGRESS, self::DISPUTE])->where('carer_id', $user->id)->skip($start)->take($perPage)->get();
         $inProgressAmount = 0;
         foreach ($inProgressBookings as $booking){
             $inProgressAmount += $booking->carer_price;
         }
-
+        $this->vars = array_add($this->vars, 'inProgressBookingsAll', $inProgressBookingsAll);
         $this->vars = array_add($this->vars, 'inProgressBookings', $inProgressBookings);
         $this->vars = array_add($this->vars, 'inProgressAmount', $inProgressAmount);
+        if($request->ajax()&&$status=='progress'){
+            $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingRowInProgressAjax')->with($this->vars)->render();
+            return response()->json(["result" => true,'content'=>$this->content,'hideLoadMore'=>$inProgressBookingsAll->count()<=($perPage*$page),'countAll'=>$inProgressBookingsAll->count()]);
+        }
+        // ---------------------------------------------------------------------
 
-        $completedBookings = Booking::where('status_id', 7)->where('carer_id', $user->id)->get();
+        // --------------- Completed booking --------------------------------
+        $completedBookingsAll = Booking::where('status_id', 7)->where('carer_id', $user->id)->get();
+        $completedBookings = Booking::where('status_id', 7)->where('carer_id', $user->id)->skip($start)->take($perPage)->get();
         $completedAmount = 0;
         foreach ($completedBookings as $booking){
             $completedAmount += $booking->carer_price;
         }
+        $this->vars = array_add($this->vars, 'completedBookingsAll', $completedBookingsAll);
         $this->vars = array_add($this->vars, 'completedBookings', $completedBookings);
         $this->vars = array_add($this->vars, 'completedAmount', $completedAmount);
+        if($request->ajax()&&$status=='completed'){
+            $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingRowCompletedAjax')->with($this->vars)->render();
+            return response()->json(["result" => true,'content'=>$this->content,'hideLoadMore'=>$completedBookingsAll->count()<=($perPage*$page),'countAll'=>$completedBookingsAll->count()]);
+        }
+        // -------------------------------------------------------------------
 
-        $canceledBookings = Booking::where('status_id', 4)->where('carer_id', $user->id)->get();
+        // --------------- Canceled booking --------------------------------
+        $canceledBookingsAll = Booking::where('status_id', 4)->where('carer_id', $user->id)->get();
+        $canceledBookings = Booking::where('status_id', 4)->where('carer_id', $user->id)->skip($start)->take($perPage)->get();
+        $this->vars = array_add($this->vars, 'canceledBookingsAll', $canceledBookingsAll);
         $this->vars = array_add($this->vars, 'canceledBookings', $canceledBookings);
-
+        if($request->ajax()&&$status=='canceled'){
+            $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingRowCanceledAjax')->with($this->vars)->render();
+            return response()->json(["result" => true,'content'=>$this->content,'hideLoadMore'=>$canceledBookingsAll->count()<=($perPage*$page),'countAll'=>$canceledBookingsAll->count()]);
+        }
         $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingTabCarerall')->with($this->vars)->render();
 
+        // -----------------------------------------------------------------
 
         return $this->renderOutput();
     }

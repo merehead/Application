@@ -104,6 +104,14 @@
                             </div>
                         </div>
                     @endforeach
+                    @if($newBookingsAll->count() >= 5)
+                        <div class="moreBtn moreBtn--book ">
+                            <input type="hidden" name="page" value="{{$page}}">
+                            <a href="" id="moreBtnNewBookings" class="moreBtn__item moreBtn__item--book centeredLink">
+                                Load More
+                            </a>
+                        </div>
+                    @endif
                 @else
                     <p align="center" class="bookDate">You do not have bookings yet</p>
                 @endif
@@ -158,9 +166,10 @@
                 @else
                     <p align="center" class="bookDate">You do not have bookings yet</p>
                 @endif
-                @if($inProgressBookings->count() > 3)
+                @if($inProgressBookingsAll->count() > 5)
                     <div class="moreBtn moreBtn--book ">
-                        <a href="" class="moreBtn__item moreBtn__item--book centeredLink">
+                        <input type="hidden" name="page" value="{{$page}}">
+                        <a href="" id="moreBtnInProgressBookings" class="moreBtn__item moreBtn__item--book centeredLink">
                             Load More
                         </a>
                     </div>
@@ -207,9 +216,10 @@
                     @else
                         <p align="center" class="bookDate">You do not have bookings yet</p>
                     @endif
-                    @if($completedBookings->count() > 3)
+                    @if($completedBookingsAll->count() > 5)
                         <div class="moreBtn moreBtn--book ">
-                            <a href="" class="moreBtn__item moreBtn__item--book centeredLink">
+                            <input type="hidden" name="page" value="{{$page}}">
+                            <a href="" id="moreBtnCompletedBookings" class="moreBtn__item moreBtn__item--book centeredLink">
                                 Load More
                             </a>
                         </div>
@@ -249,9 +259,10 @@
                     @else
                         <p align="center" class="bookDate">You do not have bookings yet</p>
                     @endif
-                    @if($completedBookings->count() > 3)
+                    @if($canceledBookingsAll->count() > 5)
                         <div class="moreBtn moreBtn--book ">
-                            <a href="" class="moreBtn__item moreBtn__item--book centeredLink">
+                            <input type="hidden" name="page" value="{{$page}}">
+                            <a href="" id="moreBtnCanceledBookings" class="moreBtn__item moreBtn__item--book centeredLink">
                                 Load More
                             </a>
                         </div>
@@ -278,4 +289,55 @@
         });
     });
 
+
+    $('#moreBtnNewBookings').on('click', function(e){
+        showSpinner();
+        var page = parseInt($('#moreBtnNewBookings').parent().find('input[name="page"]').val())+1;
+        $('#moreBtnNewBookings').parent().find('input[name="page"]').val(page);
+        $.get('/purchaser-settings/booking/new?page='+page, function (data) {
+            if(data.result==true){
+                $('#moreBtnNewBookings').parent().before(data.content);
+            }
+            if(data.hideLoadMore) $('#moreBtnNewBookings').hide();
+            hideSpinner();
+        });
+    });
+
+    $('#moreBtnInProgressBookings').on('click', function(e){
+        showSpinner();
+        var page = parseInt($('#moreBtnInProgressBookings').parent().find('input[name="page"]').val())+1;
+        $('#moreBtnInProgressBookings').parent().find('input[name="page"]').val(page);
+        $.get('/purchaser-settings/booking/progress?page='+page, function (data) {
+            if(data.result==true){
+                $('#moreBtnInProgressBookings').parent().before(data.content);
+            }
+            if(data.hideLoadMore) $('#moreBtnInProgressBookings').hide();
+            hideSpinner();
+        });
+    });
+
+    $('#moreBtnCompletedBookings').on('click', function(e){
+        showSpinner();
+        var page = parseInt($('#moreBtnCompletedBookings').parent().find('input[name="page"]').val())+1;
+        $('#moreBtnCompletedBookings').parent().find('input[name="page"]').val(page);
+        $.get('/purchaser-settings/booking/completed?page='+page, function (data) {
+            if(data.result==true){
+                $('#moreBtnCompletedBookings').parent().before(data.content);
+            }
+            if(data.hideLoadMore) $('#moreBtnCompletedBookings').hide();
+            hideSpinner();
+        });
+    });
+    $('#moreBtnCanceledBookings').on('click', function(e){
+        showSpinner();
+        var page = parseInt($('#moreBtnCanceledBookings').parent().find('input[name="page"]').val())+1;
+        $('#moreBtnCanceledBookings').parent().find('input[name="page"]').val(page);
+        $.get('/purchaser-settings/booking/canceled?page='+page, function (data) {
+            if(data.result==true){
+                $('#moreBtnCanceledBookings').parent().before(data.content);
+            }
+            if(data.hideLoadMore) $('#moreBtnCanceledBookings').hide();
+            hideSpinner();
+        });
+    });
 </script>

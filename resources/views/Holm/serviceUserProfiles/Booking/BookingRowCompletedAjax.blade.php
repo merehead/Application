@@ -1,0 +1,25 @@
+@foreach($completedBookings as $booking)
+    <div class="bookingCard__body bookInfo">
+        <div class="bookInfo__profile">
+            <a href="{{$booking->bookingCarer()->first()->profile_link}}" class="profilePhoto bookInfo__photo">
+                <img src="{{asset('img/profile_photos/'.$booking->bookingCarer()->first()->id.'.png')}}" onerror="this.src='/img/no_photo.png'" alt="">
+            </a>
+            <div class="bookInfo__text">
+                <p>You booked <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarer()->first()->short_full_name}}</a></p>
+                <a href="{{url('bookings/'.$booking->id.'/details')}}" class="">view details</a>
+            </div>
+
+        </div>
+        <div class="bookInfo__date">
+            <span class="bookDate">{{$booking->appointments()->get()->count()}} Appointment{{$booking->appointments()->get()->count() > 1 ? 's':''}}</span>
+            <p class="hourPrice">
+                {{$booking->hours}}h / <span>£{{$booking->price}}</span>
+            </p>
+            <div class="roundedBtn">
+                <button {{$booking->overviews()->get()->count() ? 'disabled' : ''}} onclick="location.replace('{{url('/bookings/'.$booking->id.'/leave_review')}}')" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--forReview">
+                    leave review
+                </button>
+            </div>
+        </div>
+    </div>
+@endforeach
