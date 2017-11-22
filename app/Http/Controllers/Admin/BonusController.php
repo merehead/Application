@@ -20,22 +20,32 @@ class BonusController extends AdminController
         $this->template = config('settings.theme') . '.templates.adminBase';
     }
 
-    public function getBonusesCarer() {
-        $res = DB::table('bonus_payouts')
-            ->join('users', 'bonus_payouts.user_id', '=', 'users.id')
-            ->select('bonus_payouts.id')
-            ->where('users.user_type_id', 3)
-            ->get();
+    public function getBonusesCarer(Request $request) {
+
+            $res = DB::table('bonus_payouts')
+                ->join('users', 'bonus_payouts.user_id', '=', 'users.id')
+                ->select('bonus_payouts.id')
+                ->where('users.user_type_id', 3)
+                ->get();
 
         $res = $res->pluck('id')->toArray();
 
-        $this->vars['bonusPayouts'] = BonusPayout::find($res);
+        $bonusPayouts = BonusPayout::find($res);
+        $userName = $request->get('userName',false);
+        if($userName){
+            $bonusPayouts = $bonusPayouts->filter(function($item)use($userName){
+                if(strpos(strtolower($item->user->full_name),strtolower($userName))!==false)
+                    return true;
+            });
+        }
+        $this->vars['bonusPayouts']=$bonusPayouts;
+
         $this->content = view(config('settings.theme').'.bonusesCarers')->with($this->vars)->render();
 
         return $this->renderOutput();
     }
 
-    public function getBonusesPurchaser() {
+    public function getBonusesPurchaser(Request $request) {
         $res = DB::table('bonus_payouts')
             ->join('users', 'bonus_payouts.user_id', '=', 'users.id')
             ->select('bonus_payouts.id')
@@ -44,7 +54,17 @@ class BonusController extends AdminController
 
         $res = $res->pluck('id')->toArray();
 
-        $this->vars['bonusPayouts'] = BonusPayout::find($res);
+        $bonusPayouts = BonusPayout::find($res);
+        $userName = $request->get('userName',false);
+        if($userName){
+            //dd($userName);
+            $bonusPayouts = $bonusPayouts->filter(function($item)use($userName){
+                dd($item);
+                if(strpos(strtolower($item->user->full_name),strtolower($userName))!==false)
+                    return true;
+            });
+        }
+        $this->vars['bonusPayouts'] = $bonusPayouts;
         $this->content = view(config('settings.theme').'.bonusesPurchasers')->with($this->vars)->render();
 
         return $this->renderOutput();

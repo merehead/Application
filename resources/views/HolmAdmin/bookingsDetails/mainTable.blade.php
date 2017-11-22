@@ -10,4 +10,4 @@
         </tbody>
     </table>
 </div>
-{{$bookings->render('HolmAdmin.pagination')}}
+{{$pagination}}

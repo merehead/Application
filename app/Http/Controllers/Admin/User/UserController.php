@@ -38,8 +38,6 @@ class UserController extends AdminController
     public function index(Request $request,$page = 1)
     {
 
-        $perPage = 9;
-        $page = $request->get('page',1);
         $this->title = 'Admin Profiles Management';
         $profileType = $this->siteUsers->getProfileType();
         $statusType = $this->siteUsers->getStatusType();
@@ -49,9 +47,12 @@ class UserController extends AdminController
         $request->has('profileType')? $profileTypeFilter = $request->get('profileType') : $profileTypeFilter = null;
         $request->has('statusType')? $statusTypeFilter  = $request->get('statusType') : $statusTypeFilter = null;
         $request->has('userName')? $userNameFilter = $request->get('userName') : $userNameFilter = null;
+
+        $userList = $this->siteUsers->getUserList($profileTypeFilter,$statusTypeFilter,$userNameFilter);
+        $page = $request->get('page',1);
+        $perPage = 9;
         $start = ($page - 1) * $perPage;
         if($page==1) $start = 0;
-        $userList = $this->siteUsers->getUserList($profileTypeFilter,$statusTypeFilter,$userNameFilter);
         $count = count($userList);
         if($count>0)
             $pages = ceil($count/$perPage);

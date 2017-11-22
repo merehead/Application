@@ -26,10 +26,11 @@ class AdminSitePayment extends AdminController
         $this->template = config('settings.theme') . '.templates.adminBase';
     }
 
-    public function getPayoutsToCarers() {
+    public function getPayoutsToCarers(Request $request) {
         $this->title = 'Admin | Booking Payouts To Carers';
         $transfers = StripeTransfer::all();
-        $potentialPayouts = $this->getPotentialPayoutsForCarer();
+        $userName = $request->get('userName',false);
+        $potentialPayouts = $this->getPotentialPayoutsForCarer($userName);
         $this->vars['transfers'] = $transfers;
         $this->vars['potentialPayouts'] = $potentialPayouts;
 
@@ -39,10 +40,18 @@ class AdminSitePayment extends AdminController
         return $this->renderOutput();
     }
 
-    public function getPayoutsToPurchasers() {
+    public function getPayoutsToPurchasers(Request $request) {
         $this->title = 'Admin | Booking Payouts To Purchasers';
+        $userName = $request->get('userName',false);
         $payoutsToPurchasers = PayoutToPurchaser::all();
-        $potentialPayouts = $this->getPotentialPayoutsForPurchasers();
+        if($userName)
+        $payoutsToPurchasers = $payoutsToPurchasers->filter(function($item)use($userName){
+            if(strpos(strtolower($item->booking->bookingCarerProfile->full_name),strtolower($userName))!==false)
+                return true;
+        });
+
+
+        $potentialPayouts = $this->getPotentialPayoutsForPurchasers($userName);
         $this->vars['payoutsToPurchasers'] = $payoutsToPurchasers;
         $this->vars['potentialPayouts'] = $potentialPayouts;
 
@@ -80,27 +89,32 @@ class AdminSitePayment extends AdminController
         return $this->renderOutput();
     }
 
-    private function getPotentialPayoutsForPurchasers(){
+    private function getPotentialPayoutsForPurchasers($userName){
+        $where ='';
+        if($userName) $where =" and first_name ='".$userName."'";
+
         $sql = 'SELECT
                   SUM(a.price_for_purchaser) as total,  MAX(pp.id) as purchaser_id, MAX(pp.first_name) as first_name, MAX(pp.family_name) as family_name, a.booking_id
                 FROM appointments a
                 JOIN bookings b ON a.booking_id = b.id
                 JOIN users p ON b.purchaser_id = p.id
                 JOIN purchasers_profiles pp ON pp.id = p.id
-                WHERE  a.payout = false AND a.status_id = 5
+                WHERE  a.payout = false AND a.status_id = 5'.$where.'
                 GROUP BY a.booking_id';
         $res = DB::select($sql);
         return $res;
     }
 
-    private function getPotentialPayoutsForCarer(){
+    private function getPotentialPayoutsForCarer($userName=false){
+        $where ='';
+        if($userName) $where =" and first_name ='".$userName."'";
         $sql = 'SELECT
                   SUM(a.price_for_carer) as total,  MAX(cp.id) as carer_id, MAX(cp.first_name) as first_name, MAX(cp.family_name) as family_name, a.booking_id
                 FROM appointments a
                 JOIN bookings b ON a.booking_id = b.id
                 JOIN users c ON b.carer_id = c.id
                 JOIN carers_profiles cp ON cp.id = c.id
-                WHERE  a.payout = false AND a.status_id = 4
+                WHERE  a.payout = false AND a.status_id = 4 '.$where.'
                 GROUP BY a.booking_id';
         $res = DB::select($sql);
         return $res;

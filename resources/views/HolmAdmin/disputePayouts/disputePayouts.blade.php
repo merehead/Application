@@ -6,12 +6,17 @@
         dispute payouts
     </h2>
     <div class="panelHead">
+        {!! Form::open(['method'=>'GET','route'=>'DisputePayouts']) !!}
         <div class="filterGroup">
             <div class="filterBox">
-
+                <div class="formField  formField--fix-biger">
+                    <div class="fieldWrap">
+                        {!! Form::text('userName',null,['class'=>'formItem formItem--input formItem--search','maxlength'=>'60','placeholder'=>'Name']) !!}
+                    </div>
+                </div>
             </div>
         </div>
-
+        {!! Form::close()!!}
         <div class="panelHead__group">
             <div class="filterBox">
                 <h2 class="filterBox__title themeTitle">

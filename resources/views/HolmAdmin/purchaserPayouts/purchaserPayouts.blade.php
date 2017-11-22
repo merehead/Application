@@ -6,9 +6,17 @@
         payouts to purshasers
     </h2>
     <div class="panelHead">
+        {!! Form::open(['method'=>'GET','route'=>'PayoutsToPurchasers']) !!}
         <div class="filterBox">
+            <div class="formField formField--search">
+                <div class="fieldWrap">
+                    {!! Form::text('userName',null,['class'=>'formItem formItem--input formItem--search','maxlength'=>'60','placeholder'=>'Name']) !!}
+                </div>
 
+            </div>
+            {!! Form::submit('filter',['class'=>'actionsBtn actionsBtn--filter actionsBtn--bigger']) !!}
         </div>
+        {!! Form::close()!!}
         <div class="panelHead__group">
             <a href="#" class="print">
                 <i class="fa fa-print" aria-hidden="true"></i>

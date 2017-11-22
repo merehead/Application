@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Booking;
 
 
 use App\BookingStatus;
+use App\Booking;
+use App\User;
 use App\Http\Controllers\Admin\AdminController;
 
 use App\Http\Controllers\Admin\Repo\Models\Booking\AdminBookings;
@@ -34,7 +36,40 @@ class BookingController extends AdminController
 
         $this->title = 'Admin Bookings Details';
 
-        $bookings = $this->booking->get('*', FALSE, true,  $filter, ['id','desc']);
+//        $bookings = $this->booking->get('*', FALSE, true,  $filter, ['id','desc']);
+        $bookings = Booking::with('bookingServiceUser')->with('bookingCarerProfile')->with('bookingPurchaserProfile')->get();
+
+            $userName =(isset($input['userName']))? $input['userName']:false;
+            if (!empty($userName))
+            $bookings = $bookings->filter(function($item)use($userName){
+
+                if(strpos(strtolower($item->bookingServiceUser->first_name),strtolower($userName))!==false
+                ||strpos(strtolower($item->bookingCarerProfile->first_name),strtolower($userName))!==false
+                    ||strpos(strtolower($item->bookingPurchaserProfile->first_name),strtolower($userName))!==false)
+                    return true;
+            });
+
+        $page = $request->get('page',1);
+        $perPage = 9;
+        $start = ($page - 1) * $perPage;
+        if($page==1) $start = 0;
+        $count = count($bookings);
+        if($count>0)
+            $pages = ceil($count/$perPage);
+        else
+            $pages=0;
+        $nextPage=$page+1;
+        $previousPage = $page-1;
+        // --------- pagination -----------
+        $bookings = $bookings->slice($start,$perPage);
+        $this->vars = array_add($this->vars, 'nextPage', $nextPage);
+        $this->vars = array_add($this->vars, 'previousPage', $previousPage);
+        $this->vars = array_add($this->vars, 'count', $count);
+        $this->vars = array_add($this->vars, 'curr_page', $page);
+        $this->vars = array_add($this->vars, 'pages', $pages);
+        $pagination = view(config('settings.theme') . '.pagination2')->with($this->vars)->render();
+        $this->vars = array_add($this->vars, 'pagination', $pagination);
+        // --------------------------------
         $this->vars = array_add($this->vars,'bookings',$bookings);
 
         $bookingStatuses = BookingStatus::all()->pluck('name','id')->toArray();
