@@ -267,7 +267,7 @@ class CarerRegistrationController extends FrontController
                     'email' => $user->email,
                     'subject' => 'How would you like an extra £100?',
                     'text' => $text,
-                    'time_to_send' => Carbon::now()->addHour(1),
+                    'time_to_send' => Carbon::now()->addHour(48),
                     'status' => 'new'
                 ]);
 
