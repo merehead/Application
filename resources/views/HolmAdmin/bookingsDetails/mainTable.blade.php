@@ -10,4 +10,4 @@
         </tbody>
     </table>
 </div>
-{{$pagination}}
+{!! $pagination !!}
