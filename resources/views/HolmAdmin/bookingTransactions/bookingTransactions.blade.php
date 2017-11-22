@@ -13,11 +13,7 @@
         <div class="filterBox">
             <div class="formField formField--fix-biger">
                 <div class="fieldWrap">
-                    <?php echo Form::text('search',null,['class'=>'formItem formItem--input formItem--search','placeholder'=>'Search...','name'=>'search']); ?>
-                    {{--<input type="search" name="search" class="formItem formItem--input formItem--search" placeholder="Search...">--}}
-                    <button class="searchBtn">
-                        <i class="fa fa-search"></i>
-                    </button>
+
                 </div>
             </div>
 
