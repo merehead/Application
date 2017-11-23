@@ -1511,7 +1511,7 @@ $(document).ready(function () {
             var inWeek = new Date();
             var in90Day = new Date();
             inWeek.setDate(datestartDate.getDate()+7);
-            in90Day.setDate(datestartDate.getDate()+76);
+            in90Day.setDate(datestartDate.getDate()+75);
 
             console.log(inWeek);
             $(datetime).datepicker({
@@ -1555,7 +1555,7 @@ $(document).ready(function () {
             var datestartDate = $('input[name="'+datestart+'"]').datepicker( "getDate" );
             if(datestartDate!=null) {
                 inDay.setDate(datestartDate.getDate() + 2);
-                in90Day.setDate(datestartDate.getDate() + 76);
+                in90Day.setDate(datestartDate.getDate() + 75);
                 $(datetime).datepicker({
                     beforeShow: function (input, inst) {
                         inst.dpDiv.css({"z-index": "2000!important;"});
