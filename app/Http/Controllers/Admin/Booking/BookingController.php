@@ -67,7 +67,9 @@ class BookingController extends AdminController
         $this->vars = array_add($this->vars, 'count', $count);
         $this->vars = array_add($this->vars, 'curr_page', $page);
         $this->vars = array_add($this->vars, 'pages', $pages);
+
         $this->vars = array_add($this->vars, 'link', '/admin/booking');
+        $this->vars = array_add($this->vars, 'queryString', $request->getQueryString());
         $pagination = view(config('settings.theme') . '.pagination2')->with($this->vars)->render();
         $this->vars = array_add($this->vars, 'pagination', $pagination);
         // --------------------------------

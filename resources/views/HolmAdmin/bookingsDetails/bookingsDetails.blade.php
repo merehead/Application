@@ -12,11 +12,10 @@
                     <div class="filterBox">
                         <div class="formField formField--fix-biger">
                             <div class="fieldWrap">
-
-                                {!! Form::text('userName',null,['class'=>'formItem formItem--input formItem--search','maxlength'=>'60','placeholder'=>'Name']) !!}
+                                {!! Form::text('userName',null,['class'=>'formItem formItem--input formItem--search','maxlength'=>'60','placeholder'=>'Search name']) !!}
                             </div>
                         </div>
-                        &nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
                         <h2 class="filterBox__title themeTitle">
                             filter by
                         </h2>
