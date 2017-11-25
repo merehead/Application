@@ -184,7 +184,7 @@
                                     <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single"
                                            class="customCheckbox periodicity Single" onclick="calculate_price()"
                                            id="boxD3">
-                                    <label for="boxD3">Single</label>
+                                    <label for="boxD3">Once</label>
                                 </div>
                                 <br>
                                 <label class="checkBox_item ordinaryTitle correct nhide" for="date_end">Continue until</label>
