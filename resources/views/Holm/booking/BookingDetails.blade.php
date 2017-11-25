@@ -129,7 +129,22 @@
             </div>
 
         </div>
-
+        <div class="bookStatus">
+            <p class="">
+                Current booking status
+            </p>
+            <span>
+            @if($booking->status_id == 2)
+                    BOOKING AWAITING CONFIRMATION
+                @elseif($booking->status_id == 4)
+                    BOOKING CANCELLED
+                @elseif($booking->status_id == 5)
+                    BOOKING CONFIRMED
+                @elseif($booking->status_id == 7)
+                    BOOKING COMPLETED
+                @endif
+        </span>
+        </div>
         <div class="innerContainer">
             <div class="orderConfirm">
                 <div class="orderConfirm__btns">
@@ -213,22 +228,7 @@
 
             </div>
         </div>
-        <div class="bookStatus">
-            <p class="">
-                Current booking status
-            </p>
-        <span>
-            @if($booking->status_id == 2)
-                BOOKING AWAITING CONFIRMATION
-            @elseif($booking->status_id == 4)
-                BOOKING CANCELLED
-            @elseif($booking->status_id == 5)
-                BOOKING CONFIRMED
-            @elseif($booking->status_id == 7)
-                BOOKING COMPLETED
-            @endif
-        </span>
-        </div>
+
         <div class="bookConfirm">
             <p class="bookConfirm__info ">
                 Please      <a href="{{route('ContactPage')}}" > Contact us   </a>
