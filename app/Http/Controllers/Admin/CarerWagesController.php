@@ -23,7 +23,7 @@ class CarerWagesController extends AdminController
 
         //$data = CarersProfile::with('CarerWages')->get();
         $model = $wages;
-        $data = $model::with('CarerWages')->select('*')->paginate(Config::get('settings.AdminUserPagination'));
+        $data = $model::with('CarerWages')->select('*')->where('profiles_status_id','=',2)->paginate(Config::get('settings.AdminUserPagination'));
 
         $this->vars['carers'] = $data;
         $this->content = view(config('settings.theme') . '.CarerWages')->with($this->vars)->render();
