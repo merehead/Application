@@ -155,7 +155,7 @@
                         <div class="bookBtn">
                             <button type="submit"
                                     class="bookBtn__item bookBtn__item--big centeredLink">
-                                book carer
+                                Submit Alternative Times
                             </button>
                         </div>
                         <div class="total">
