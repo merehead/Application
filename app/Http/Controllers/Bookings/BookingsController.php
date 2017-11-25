@@ -173,7 +173,7 @@ class BookingsController extends FrontController implements Constants
             $booking->card_token = $cardToken;
         } else {
             if($booking->bookingPurchaser->bonus_balance < $booking->purchaser_price){
-                return response($this->formatResponse('error', 'You have not enough funds on bonuses wallet.'));
+                return response($this->formatResponse('error', 'You do not have enough credits in your bonus wallet.'));
             }
         }
 
