@@ -38,8 +38,9 @@
                                 Please click the button below to accept or reject the booking request.
                                 The booking request is not be confirmed until then, and you will not be paid unless the request is accepted.
                             @else
-                                You booked <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{$carer->first_name}}</a>
-                                on {{$booking->date_start}} - {{$booking->date_end}}
+                                You have requested <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{$carer->first_name}}</a>
+                                for {{$booking->date_start}} to {{$booking->date_end}}
+                                You can check your booking details by going to your <a href="{{route('ServiceUserBookingStatus',['serviceUserProfile'=>$booking->service_user_id])}}">bookings page</a> or <a href="{{route('viewBookingDetails',['booking'=>$booking->id])}}">the details of that actual booking</a>
                             @endif
                         </p>
                     </td>
