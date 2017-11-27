@@ -92,7 +92,7 @@ class AdminSitePayment extends AdminController
 
     private function getPotentialPayoutsForPurchasers($userName){
         $where ='';
-        if($userName) $where =" and first_name ='".$userName."'";
+        if($userName) $where =" and concat(first_name,' ',family_name) like '%".$userName."%'";
 
         $sql = 'SELECT
                   SUM(a.price_for_purchaser) as total,  MAX(pp.id) as purchaser_id, MAX(pp.first_name) as first_name, MAX(pp.family_name) as family_name, a.booking_id
@@ -108,7 +108,7 @@ class AdminSitePayment extends AdminController
 
     private function getPotentialPayoutsForCarer($userName=false){
         $where ='';
-        if($userName) $where =" and first_name ='".$userName."'";
+        if($userName) $where =" and concat(first_name,' ',family_name) like '%".$userName."%'";
         $sql = 'SELECT
                   SUM(a.price_for_carer) as total,  MAX(cp.id) as carer_id, MAX(cp.first_name) as first_name, MAX(cp.family_name) as family_name, a.booking_id
                 FROM appointments a
