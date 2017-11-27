@@ -118,7 +118,7 @@
                                     <input type="radio" name="bookings[0][appointments][{{$loop->index}}][periodicity]" value="Single"
                                            class="customCheckbox periodicity Single"   @if($user->user_type_id==3)onclick="return false;" disabled="disabled" @endif
                                            id="boxD{{$loop->index+3}}" {{($appointment->periodicity=='single')?'checked':''}}>
-                                    <label for="boxD{{$loop->index+3}}">Single</label>
+                                    <label for="boxD{{$loop->index+3}}">Once</label>
                                 </div>
                                 <br>
                                 @if($user->user_type_id==3)
