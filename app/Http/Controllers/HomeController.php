@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -29,6 +30,11 @@ class HomeController extends Controller
 
     public function  unsubscribe($id){
 
+        $user = User::find($id);
+        if(isset($user->email)){
+            $user->subscribe=0;
+            $user->save();
+        }
         return redirect('/');
     }
 }
