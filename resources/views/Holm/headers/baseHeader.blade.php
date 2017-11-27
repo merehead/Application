@@ -6,7 +6,7 @@
             <a href="\" class="xsNav"><span class=""><i class="fa fa-navicon"></i></span></a>
             <div class="collapseBox">
                 <div class="collapseBox__item">
-                    @if(Auth::user()->isAdmin())
+                    @if(Auth::check() && Auth::user()->isAdmin())
                     <a href="{{ url('/admin') }}" class="mob-nav-link">
                         Admin Panel
                     </a>
