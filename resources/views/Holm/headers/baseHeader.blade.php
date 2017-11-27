@@ -6,6 +6,11 @@
             <a href="\" class="xsNav"><span class=""><i class="fa fa-navicon"></i></span></a>
             <div class="collapseBox">
                 <div class="collapseBox__item">
+                    @if(Auth::user()->isAdmin())
+                    <a href="{{ url('/admin') }}" class="mob-nav-link">
+                        Admin Panel
+                    </a>
+                    @endif
                 <a href="{{ route('welcomeCarer') }}" class="carerSelf">i am a carer</a>
                 @if (Auth::check())
                   <a href="{{ route('logout') }}" class="mob-nav-link"
