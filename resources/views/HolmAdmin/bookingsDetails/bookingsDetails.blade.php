@@ -10,7 +10,7 @@
                 <div class="panelHead__group">
                     {!! Form::open(['method'=>'GET','route'=>'booking.index']) !!}
                     <div class="filterBox">
-                        <div class="formField formField--fix-biger">
+                        <div class="formField formField--fix-biger"style="margin-right: 10px">
                             <div class="fieldWrap">
                                 {!! Form::text('userName',null,['class'=>'formItem formItem--input formItem--search','maxlength'=>'60','placeholder'=>'Search name']) !!}
                             </div>
