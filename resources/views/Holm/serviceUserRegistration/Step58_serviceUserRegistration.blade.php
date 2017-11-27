@@ -13,7 +13,7 @@
 
             <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}} like socialising with other people / groups? <span>*</span>
+                        {{($serviceUserProfile->care_for=='Myself')?'Do you':'Does '.$userNameForSite}} like socialising with other people / groups? <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php

@@ -27,7 +27,7 @@ class AddServiceUserController extends FrontController
         $serviceUsersProfile = new ServiceUsersProfile();
         $serviceUsersProfile->purchaser_id = $this->user->id;
         $serviceUsersProfile->registration_progress = '4_2';
-
+        $serviceUsersProfile->care_for = 'Someone else';
         $serviceUsersProfile->save();
 
         return redirect('/service-registration/'.$serviceUsersProfile->id);

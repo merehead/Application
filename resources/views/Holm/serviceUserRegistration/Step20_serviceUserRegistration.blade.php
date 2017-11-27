@@ -13,7 +13,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}} have a history of falls? - i.e. {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'fall':'falls'}} more than once a week, or  {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'have':'has'}} been in hospital as a consequence of a fall.  <span>*</span>
+                        {{($serviceUserProfile->care_for=='Myself')?'Do you':'Does '.$userNameForSite}} have a history of falls? - i.e. {{($serviceUserProfile->care_for=='Myself')?'fall':'falls'}} more than once a week, or  {{($serviceUserProfile->care_for=='Myself')?'have':'has'}} been in hospital as a consequence of a fall.  <span>*</span>
 
                     </h2>
                     <div class="inputWrap">

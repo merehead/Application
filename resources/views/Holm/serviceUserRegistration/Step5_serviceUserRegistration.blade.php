@@ -14,7 +14,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        What kind of care is {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'are you':$serviceUserProfile->like_name}} looking to purchase? <span>*</span>
+                        What kind of care is {{($serviceUserProfile->care_for=='Myself')?'are you':$serviceUserProfile->like_name}} looking to purchase? <span>*</span>
                     </h2>
 
                     @foreach($serviceTypes as $serviceType)

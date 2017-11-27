@@ -13,7 +13,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}} require any help with mobility eg. Getting in and out of bed, moving around home, or going to nearby shops, or {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'have':'has'}} a history of falls?  <span>*</span>
+                        {{($serviceUserProfile->care_for=='Myself')?'Do you':'Does '.$userNameForSite}} require any help with mobility eg. Getting in and out of bed, moving around home, or going to nearby shops, or {{($serviceUserProfile->care_for=='Myself')?'have':'has'}} a history of falls?  <span>*</span>
 
                     </h2>
                     <div class="inputWrap">

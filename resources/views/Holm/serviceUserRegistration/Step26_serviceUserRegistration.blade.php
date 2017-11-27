@@ -13,7 +13,7 @@
 
             <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  have serious impediments hearing? <span>*</span>         </h2>
+                        {{($serviceUserProfile->care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  have serious impediments hearing? <span>*</span>         </h2>
                     <div class="inputWrap">
                         <?php
                         if (isset($atrr)) unset($atrr);

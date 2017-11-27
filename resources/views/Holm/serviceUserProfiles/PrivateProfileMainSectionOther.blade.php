@@ -14,7 +14,7 @@
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-              {{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Have':'Has'}} political, religious or other beliefs
+              {{($serviceUsersProfile->care_for=='Myself')?'Have':'Has'}} political, religious or other beliefs
               </span>
             </h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
@@ -44,7 +44,7 @@
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-              {{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Have':'Has'}} particular likes or dislikes
+              {{($serviceUsersProfile->care_for=='Myself')?'Have':'Has'}} particular likes or dislikes
               </span>
             </h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
@@ -70,7 +70,7 @@
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-              {{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Need':'Needs'}} the assistance of more than one person at a time to achieve any particular task
+              {{($serviceUsersProfile->care_for=='Myself')?'Need':'Needs'}} the assistance of more than one person at a time to achieve any particular task
               </span>
             </h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
@@ -97,7 +97,7 @@
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-              {{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Like':'Likes'}} socialising with other people / groups
+              {{($serviceUsersProfile->care_for=='Myself')?'Like':'Likes'}} socialising with other people / groups
               </span>
             </h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
@@ -123,7 +123,7 @@
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle">
               <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-              {{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Have':'Has'}} interests or hobbies which {{$userNameForSite}} enjoy
+              {{($serviceUsersProfile->care_for=='Myself')?'Have':'Has'}} interests or hobbies which {{$userNameForSite}} enjoy
               </span>
             </h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];

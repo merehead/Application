@@ -17,7 +17,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        What kind of assistance {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'are you':'is '.$serviceUserProfile->like_name}} looking to purchase? (you can select as many as you like)<span>*</span>
+                        What kind of assistance {{($serviceUserProfile->care_for=='Myself')?'are you':'is '.$serviceUserProfile->like_name}} looking to purchase? (you can select as many as you like)<span>*</span>
                     </h2>
                     @foreach($assistanceTypes as $assistanceType)
                         <div class="checkBox_item">

@@ -13,7 +13,7 @@
 
             <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}} need the assistance of more than one person at a time to achieve any particular task? - eg bathing, dressing etc. <span>*</span>
+                        {{($serviceUserProfile->care_for=='Myself')?'Do you':'Does '.$userNameForSite}} need the assistance of more than one person at a time to achieve any particular task? - eg bathing, dressing etc. <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php

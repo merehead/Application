@@ -98,8 +98,10 @@ class PurchaserRegistrationController extends FrontController
                 else {
                     $serviceUsersProfile = new ServiceUsersProfile();
                     $serviceUsersProfile->purchaser_id = $purchasersProfile->id;
+                    $serviceUsersProfile->care_for = 'Someone else';
                     if ($purchasersProfile->purchasing_care_for == 'Myself') {
                         $serviceUsersProfile->title = $purchasersProfile->title;
+                        $serviceUsersProfile->care_for = 'Myself';
                         $serviceUsersProfile->first_name = $purchasersProfile->first_name;
                         $serviceUsersProfile->family_name = $purchasersProfile->family_name;
                         $serviceUsersProfile->like_name = $purchasersProfile->like_name;

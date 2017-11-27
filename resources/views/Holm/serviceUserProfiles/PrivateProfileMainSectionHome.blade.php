@@ -47,7 +47,7 @@
     <div class="profileRow">
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span
-                        class="ordinaryTitle__text ordinaryTitle__text--smaller">Can keep the home safe and clean by {{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'yourself':'themself'}}</span>
+                        class="ordinaryTitle__text ordinaryTitle__text--smaller">Can keep the home safe and clean by {{($serviceUsersProfile->care_for=='Myself')?'yourself':'themself'}}</span>
             </h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select assistance_keeping_switcher'];
             if (is_null($serviceUsersProfile->home_safe)) $atrr['placeholder'] = 'Please select';?>
@@ -58,7 +58,7 @@
         </div>
         <div class="profileField depend_from_home_safe" {!!  ($serviceUsersProfile->home_safe == 'Yes' || is_null($serviceUsersProfile->home_safe) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span
-                        class="ordinaryTitle__text ordinaryTitle__text--smaller">{{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Require':'Requires'}} assistance keeping the home safe and clean</span>
+                        class="ordinaryTitle__text ordinaryTitle__text--smaller">{{($serviceUsersProfile->care_for=='Myself')?'Require':'Requires'}} assistance keeping the home safe and clean</span>
             </h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select'];
             if (is_null($serviceUsersProfile->assistance_keeping)) $atrr['placeholder'] = 'Please select';?>
@@ -72,7 +72,7 @@
     <div class="profileRow " >
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span
-                        class="ordinaryTitle__text ordinaryTitle__text--smaller">Can move around home safely by {{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'yourself':'themself'}}</span>
+                        class="ordinaryTitle__text ordinaryTitle__text--smaller">Can move around home safely by {{($serviceUsersProfile->care_for=='Myself')?'yourself':'themself'}}</span>
             </h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select  move_available_switcher'];
             if (is_null($serviceUsersProfile->assistance_moving)) $atrr['placeholder'] = 'Please select';?>
@@ -83,7 +83,7 @@
         </div>
         <div class="profileField depend_from_move_available" {!!  ($serviceUsersProfile->move_available == 'Yes' || is_null($serviceUsersProfile->move_available) )? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle"><span
-                        class="ordinaryTitle__text ordinaryTitle__text--smaller">{{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Require':'Requires'}} assistance moving around home</span>
+                        class="ordinaryTitle__text ordinaryTitle__text--smaller">{{($serviceUsersProfile->care_for=='Myself')?'Require':'Requires'}} assistance moving around home</span>
             </h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select move_available_switcher'];
             if (is_null($serviceUsersProfile->move_available)) $atrr['placeholder'] = 'Please select';?>
@@ -98,7 +98,7 @@
     <h2 class="fieldCategory">Entry</h2>
     <div class="profileRow">
         <div class="profileField profileField--full-width">
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">How should the carer enter {{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'your':'the '.$userNameForSite.'’s'}} home?</span></h2>
+            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">How should the carer enter {{($serviceUsersProfile->care_for=='Myself')?'your':'the '.$userNameForSite.'’s'}} home?</span></h2>
             {!! Form::textarea('carer_enter',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"250"]) !!}
             @if ($errors->has('carer_enter'))
                 <span class="help-block"><strong>{{ $errors->first('carer_enter') }}</strong></span>
@@ -135,7 +135,7 @@
     <h2 class="fieldCategory">Other inhabitants</h2>
     <div class="profileRow">
         <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Somebody lives with {{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'you':$userNameForSite}}</span></h2>
+            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Somebody lives with {{($serviceUsersProfile->care_for=='Myself')?'you':$userNameForSite}}</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfileInhabitants'];
             if (is_null($serviceUsersProfile->anyone_else_live)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('anyone_else_live',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}
@@ -145,7 +145,7 @@
         </div>
         <div class="inhabitantsDepend profileField profileField--two-thirds"{!!  $serviceUsersProfile->anyone_else_live == 'No' ? ' style="display:none"' : ''!!}>
             <h2 class="profileField__title ordinaryTitle">
-              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">please give their name and relationship to {{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'you':$userNameForSite}}</span></h2>
+              <span class="ordinaryTitle__text ordinaryTitle__text--smaller">please give their name and relationship to {{($serviceUsersProfile->care_for=='Myself')?'you':$userNameForSite}}</span></h2>
             {!! Form::text('anyone_detail',null,['class'=>'profileField__area ','placeholder'=>'Type details','maxlength'=>"200"]) !!}
             @if ($errors->has('anyone_detail'))
                 <span class="help-block"><strong>{{ $errors->first('anyone_detail') }}</strong></span>
@@ -202,7 +202,7 @@
     <div class="profileRow">
         <div class="profileField">
             <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text
-            ordinaryTitle__text--smaller">{{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'Have':'Has'}} regular social interaction with friends / family</span></h2>
+            ordinaryTitle__text--smaller">{{($serviceUsersProfile->care_for=='Myself')?'Have':'Has'}} regular social interaction with friends / family</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
             if (is_null($serviceUsersProfile->anyone_else_live)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('social_interaction',['Yes'=>'Yes','No'=>'No'],null,$atrr) !!}
@@ -214,7 +214,7 @@
     </div>
     <div class="profileRow">
         <div class="profileField">
-            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Would {{($serviceUsersProfile->purchaser->purchasing_care_for=='Myself')?'you':$userNameForSite}} like someone to visit regularly for companionship?</span></h2>
+            <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ordinaryTitle__text--smaller">Would {{($serviceUsersProfile->care_for=='Myself')?'you':$userNameForSite}} like someone to visit regularly for companionship?</span></h2>
             <?php if (isset($atrr)) unset($atrr); $atrr = ['class' => 'profileField__select serviceUserProfile'];
             if (is_null($serviceUsersProfile->anyone_else_live)) $atrr['placeholder'] = 'Please select';?>
             {!! Form::select('visit_for_companionship',['Yes'=>'Yes','No'=>'No','Sometimes'=>'Sometimes'],null,$atrr) !!}

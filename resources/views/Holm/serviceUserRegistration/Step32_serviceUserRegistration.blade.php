@@ -3,7 +3,7 @@
         <div class="questionsBox">
             <h2>Health and Wellbeing</h2>
             <h3>We need to understand some matters about {{
-            ($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'your':$userNameForSite.'’s '}} health and
+            ($serviceUserProfile->care_for=='Myself')?'your':$userNameForSite.'’s '}} health and
                 wellbeing.</h3>
             <div class="questionsBox__img">
                 <img src="{{asset('/img/Signup_P_step32.jpg')}}" alt="">
@@ -17,7 +17,7 @@
 
             <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you have any other long term health conditions':'What long term health conditions does  '.$userNameForSite.' have'}} ? - (There is no need to give long descriptions. We will ask for more information at a later date.)
+                        {{($serviceUserProfile->care_for=='Myself')?'Do you have any other long term health conditions':'What long term health conditions does  '.$userNameForSite.' have'}} ? - (There is no need to give long descriptions. We will ask for more information at a later date.)
                     </h2>
 
                     <div class="inputWrap">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  have any allergies to food / medication / anything else? <span>*</span>
+                        {{($serviceUserProfile->care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  have any allergies to food / medication / anything else? <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php

@@ -14,7 +14,7 @@
 
             <div class="formField">
                 <h2 class="formLabel questionForm__label">
-                    {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  have any interests or hobbies which   {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':'they'}} enjoy? <span>*</span>
+                    {{($serviceUserProfile->care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  have any interests or hobbies which   {{($serviceUserProfile->care_for=='Myself')?'you':'they'}} enjoy? <span>*</span>
                 </h2>
                 <div class="inputWrap">
                     <?php

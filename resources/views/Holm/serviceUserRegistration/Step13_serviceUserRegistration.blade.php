@@ -19,7 +19,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Does anyone else live with {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':$serviceUserProfile->like_name}} ?  <span>*</span>
+                        Does anyone else live with {{($serviceUserProfile->care_for=='Myself')?'you':$serviceUserProfile->like_name}} ?  <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php
@@ -40,7 +40,7 @@
 
             <div class="formField sometimes_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
-                        Please give their name and relationship to {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':$serviceUserProfile->like_name}}.<span>*</span>
+                        Please give their name and relationship to {{($serviceUserProfile->care_for=='Myself')?'you':$serviceUserProfile->like_name}}.<span>*</span>
                     </h2>
                     <div class="inputWrap">
                         {!! Form::text('anyone_detail',null,['class'=>'formInput ','placeholder'=>'Details','maxlength'=>"200"]) !!}

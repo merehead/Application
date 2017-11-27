@@ -16,9 +16,9 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        Can {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')
+                        Can {{($serviceUserProfile->care_for=='Myself')
                         ?'you':$serviceUserProfile->like_name}}  move around home safely by {{
-                        ($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'yourself':'themselves'}}?
+                        ($serviceUserProfile->care_for=='Myself')?'yourself':'themselves'}}?
                         <span>*</span>
                     </h2>
                     <div class="inputWrap">
@@ -38,7 +38,7 @@
 
             <div class="formField sometimesNo_hiding" style="display: none">
                     <h2 class="formLabel questionForm__label">
-                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$serviceUserProfile->like_name}} require assistance moving around home?
+                        {{($serviceUserProfile->care_for=='Myself')?'Do you':'Does '.$serviceUserProfile->like_name}} require assistance moving around home?
                     </h2>
                     <div class="inputWrap">
                         <?php

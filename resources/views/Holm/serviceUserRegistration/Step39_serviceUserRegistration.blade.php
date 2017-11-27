@@ -13,7 +13,7 @@
 
             <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  have any other special dietary requirements? - eg fluid control, thickened foods, fortified diet, weight monitored, at risk of choking? <span>*</span>
+                        {{($serviceUserProfile->care_for=='Myself')?'Do you':'Does '.$userNameForSite}}  have any other special dietary requirements? - eg fluid control, thickened foods, fortified diet, weight monitored, at risk of choking? <span>*</span>
                     </h2>
                     <div class="inputWrap">
                         <?php

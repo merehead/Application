@@ -25,7 +25,7 @@
 
                 <div class="formField">
                     <h2 class="formLabel questionForm__label">
-                        How should the carer enter {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'your':$serviceUserProfile->like_name."’s"}}  home? Eg knock/ring and {{($serviceUserProfile->purchaser->purchasing_care_for=='Myself')?'you':$serviceUserProfile->like_name}}  will allow them in, need to collect keys from another location, keys kept in a safe place outside the home.
+                        How should the carer enter {{($serviceUserProfile->care_for=='Myself')?'your':$serviceUserProfile->like_name."’s"}}  home? Eg knock/ring and {{($serviceUserProfile->care_for=='Myself')?'you':$serviceUserProfile->like_name}}  will allow them in, need to collect keys from another location, keys kept in a safe place outside the home.
                     </h2>
 
                     <div class="inputWrap">
