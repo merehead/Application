@@ -46,7 +46,7 @@ class AdminSitePayment extends AdminController
         $payoutsToPurchasers = PayoutToPurchaser::all();
         if($userName)
         $payoutsToPurchasers = $payoutsToPurchasers->filter(function($item)use($userName){
-            if(strpos(strtolower($item->booking->bookingCarerProfile->full_name),strtolower($userName))!==false)
+            if(strpos(strtoupper($item->booking->bookingCarerProfile->full_name),strtoupper($userName))!==false)
                 return true;
         });
 
