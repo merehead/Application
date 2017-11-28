@@ -62,18 +62,35 @@ class BookingsController extends FrontController implements Constants
             //Generating appointments
             $this->createAppointments($booking, $booking_item['appointments']);
         }
-
+        $sendTo='';
         if ($user->user_type_id == 3) {
             //carer
             $booking->carer_status_id = 1;
             $booking->purchaser_status_id = 2;
+            $sendTo='carer';
         } else {
             $booking->carer_status_id = 2;
             $booking->purchaser_status_id = 1;
         }
 
         $booking->save();
+        // send new email with alternative time booking
+        $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
+        $carerProfile = CarersProfile::find($booking->carer_id);
+        $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
+        $text = view(config('settings.frontTheme') . '.emails.alternative_time')->with([
+            'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => $sendTo
+        ])->render();
 
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>'nik@holm.care',
+                    'subject' =>'You have a new alternative time',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
         //todo отправить почту базируясь на $user->user_type_id (либо кереру, либо пурчасеру)
 
         return response(['status' => 'success']);
@@ -461,7 +478,7 @@ class BookingsController extends FrontController implements Constants
         DB::table('mails')
             ->insert(
                 [
-                    'email' =>'anton.shelehvost@gmail.com',//'nik@holm.care',
+                    'email' =>'nik@holm.care',
                     'subject' =>'You have a new review moderation',
                     'text' =>$text,
                     'time_to_send' => Carbon::now(),
