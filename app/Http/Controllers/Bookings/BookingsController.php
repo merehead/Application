@@ -506,6 +506,15 @@ class BookingsController extends FrontController implements Constants
                     'time_to_send' => Carbon::now(),
                     'status' => 'new'
                 ]);
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' => 'z.mustafaieva@gmail.com',
+                    'subject' => 'You have a new review moderation',
+                    'text' => $text,
+                    'time_to_send' => Carbon::now(),
+                    'status' => 'new'
+                ]);
         return redirect()->back();
     }
 
