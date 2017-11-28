@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -28,10 +27,7 @@
         }
     </style>
 </head>
-
-
 <body style="margin: 0; background: #fff; font-size:18px">
-
 <table cellpadding="0" cellspacing="0" border="0" align="center"
        style="margin-top: 30px;
       border-collapse: collapse;
@@ -89,19 +85,19 @@
         </td>
     </tr>
     <tr>
-        <td   valign="top" align="left" bgcolor="#ffffff"  style="font-family: 'Roboto', sans-serif;">
-            <table cellpadding="0" cellspacing="0" border="0"  style="    margin: 0; " width="100%"  class="t-content">
+        <td valign="top" align="left" bgcolor="#ffffff" style="font-family: 'Roboto', sans-serif;">
+            <table cellpadding="0" cellspacing="0" border="0" style="    margin: 0; " width="100%" class="t-content">
 
                 <tr>
-                    <td style="color:#272c2b;padding: 30px 40px; background: #fff; "  valign="top" class="">
+                    <td style="color:#272c2b;padding: 30px 40px; background: #fff; " valign="top" class="">
                         <p style="
                    text-transform: uppercase;
                    font-size: 14px;
                  margin-bottom:0;">
                             best wishes <br />
-                            the holm team
+                            The Holm Team
                         </p>
-                        <a href="#" class=""
+                        <a href="{{route('mainHomePage')}}" class=""
                            style="
                     color: #373c4d;
                     text-transform: uppercase;
@@ -110,28 +106,49 @@
                             Holm.care
                         </a>
                     </td>
-                    <td style="color:#272c2b;padding: 30px 40px; background: #fff; "  valign="top" class="">
+
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="left" bgcolor="#ffffff" style="font-family: 'Roboto', sans-serif;">
+            <table cellpadding="0" cellspacing="0" border="0" style="    margin: 0; " width="100%" class="t-content">
+
+                <tr>
+                    <td style="padding:  0 40px 30px 40px; background: #fff; " valign="top" class="">
+                        <p style="max-width: 600px;font-size: 15px; color: #373f3e;line-height: 1.6;">
+                            If you do not wish to receive promotional emails from Holm,
+                            <a href="{{route('unsubscribe',['id'=>$user->id])}}" class="">unsubscribe here</a>
+                            <a href="#" style="
+                       color: #7bb7dc;
+                       text-decoration: underline;
+                       font-size:15px;">
+                                here.
+                            </a>
+                            You will continue to receive all other emails
+                        </p>
+
+                    </td>
+                    <td style="color:#272c2b;padding: 30px 40px; background: #fff; " valign="top" class="">
                         <ul style="float: right;">
-                            <li  style="list-style: none; display: inline-block;">
-                                <a href="https://www.facebook.com/HolmCareUK/" style="margin-left: 10px; color: #a5a7af; ">
+                            <li style="list-style: none; display: inline-block;">
+                                <a href="https://www.facebook.com/HolmCareUK/"
+                                   style="margin-left: 10px; color: #a5a7af; ">
                                     <img src="{{asset('img/s1.png')}}" alt="">
                                 </a>
                             </li>
-                            <li  style="list-style: none;display: inline-block;">
+                            <li style="list-style: none;display: inline-block;">
                                 <a href="https://twitter.com/holmcare" style="margin-left: 10px; color: #a5a7af;">
                                     <img src="{{asset('img/s2.png')}}" alt="">
                                 </a>
                             </li>
                             <li style="list-style: none;display: inline-block;">
-                                <a href="https://plus.google.com/communities/102900900688938220709" style="margin-left: 10px; color: #a5a7af;">
+                                <a href="https://plus.google.com/communities/102900900688938220709"
+                                   style="margin-left: 10px; color: #a5a7af;">
                                     <img src="{{asset('img/s3.png')}}" alt="">
                                 </a>
                             </li>
-                            {{--                            <li style="list-style: none;display: inline-block;">
-                                                            <a href="#" style="margin-left: 10px; color: #a5a7af;">
-                                                                <img src="{{asset('img/s4.png')}}" alt="">
-                                                            </a>
-                                                        </li>--}}
                         </ul>
                     </td>
                 </tr>
