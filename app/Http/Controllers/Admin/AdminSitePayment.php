@@ -32,8 +32,35 @@ class AdminSitePayment extends AdminController
         $userName = $request->get('userName',false);
         $potentialPayouts = $this->getPotentialPayoutsForCarer($userName);
         $this->vars['transfers'] = $transfers;
-        $this->vars['potentialPayouts'] = $potentialPayouts;
 
+        $page = $request->get('page', 1);
+        $perPage = 5;
+        $start = ($page - 1) * $perPage;
+        if ($page == 1) $start = 0;
+        $count = count($potentialPayouts);
+        if ($count > 0)
+            $pages = ceil($count / $perPage);
+        else
+            $pages = 0;
+        $nextPage = $page + 1;
+        $previousPage = $page - 1;
+        // --------- pagination -----------
+        $potentialPayouts = array_slice($potentialPayouts, $start, $perPage);
+        $this->vars = array_add($this->vars, 'nextPage', $nextPage);
+        $this->vars = array_add($this->vars, 'previousPage', $previousPage);
+        $this->vars = array_add($this->vars, 'count', $count);
+        $this->vars = array_add($this->vars, 'curr_page', $page);
+        $this->vars = array_add($this->vars, 'pages', $pages);
+
+        $this->vars = array_add($this->vars, 'link', '/admin/carer-payout');
+        $query = $request->all();
+        if(key_exists('page',$query)) unset($query['page']);
+        //dd($query,http_build_query($query));
+        $this->vars = array_add($this->vars, 'queryString', http_build_query($query));
+        $pagination = view(config('settings.theme') . '.pagination2')->with($this->vars)->render();
+        $this->vars = array_add($this->vars, 'pagination', $pagination);
+        $this->vars['pagination'] = $pagination;
+        $this->vars['potentialPayouts'] = $potentialPayouts;
 
         $this->content = view(config('settings.theme').'.carerPayouts.carerPayouts')->with($this->vars)->render();
 

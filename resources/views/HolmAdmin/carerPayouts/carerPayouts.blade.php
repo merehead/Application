@@ -176,6 +176,7 @@
             </tbody>
         </table>
     </div>
+    {!! $pagination !!}
 </div>
 
 <script>
