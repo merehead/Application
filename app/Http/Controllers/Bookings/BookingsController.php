@@ -14,6 +14,7 @@ use App\Http\Controllers\FrontController;
 use App\PurchasersProfile;
 use App\ServiceUsersProfile;
 use App\User;
+use App\Exceptions\MessenteException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -201,10 +202,6 @@ class BookingsController extends FrontController implements Constants
         $carerProfile = CarersProfile::find($booking->carer_id);
         $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
 
-        //sms to carer
-        $message = 'Hi. ' . $booking->bookingServiceUser->full_name . ' would like to book you. Please log into your account to accept or reject the booking request. The Holm Team';
-        SmsTools::sendSmsToCarer($message, $booking->bookingCarerProfile);
-
         //message for carer
         $text = view(config('settings.frontTheme') . '.emails.new_booking')->with([
             'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'carer'
@@ -235,6 +232,14 @@ class BookingsController extends FrontController implements Constants
                     'status' => 'new'
                 ]);
 
+        //sms to carer
+        $message = 'Hi. ' . $booking->bookingServiceUser->full_name . ' would like to book you. Please log into your account to accept or reject the booking request. The Holm Team';
+        try {
+
+        SmsTools::sendSmsToCarer($message, $booking->bookingCarerProfile);
+        }catch(MessenteException $e){
+            //todo need logged
+        }
         return response(['status' => 'success']);
     }
 

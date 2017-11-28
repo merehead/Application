@@ -40,7 +40,7 @@
                             @else
                                 You have requested <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{$carer->first_name}}</a>
                                 for {{$booking->date_start}} to {{$booking->date_end}}
-                                You can check your booking details by going to your <a href="{{route('ServiceUserBookingStatus',['serviceUserProfile'=>$booking->service_user_id])}}">bookings page</a> or <a href="{{route('viewBookingDetails',['booking'=>$booking->id])}}">the details of that actual booking</a>
+                                You can check your booking details by going to your <a href="{{route('ServiceUserBookingStatus',['serviceUserProfile'=>$booking->service_user_id])}}">bookings page</a>.
                             @endif
                         </p>
                     </td>

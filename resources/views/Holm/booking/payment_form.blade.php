@@ -212,7 +212,7 @@
               </div>
             `);
             } else {
-                showErrorModal({title: 'Error', description: data.message});
+                showErrorModal({title: 'Payment Error', description: data.message});
             }
             hideSpinner();
         });
