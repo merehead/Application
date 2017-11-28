@@ -451,7 +451,22 @@ class BookingsController extends FrontController implements Constants
             'performance' => $request->performance,
             'comment' => $request->comment,
         ]);
+        $server_users = ServiceUsersProfile::find($booking->service_user_id);
+        $carer_users = CarersProfile::find($booking->carer_id);
+        $text = view(config('settings.frontTheme') . '.emails.new_review')->with([
+            'server_users' => $server_users,
+            'carer_users' => $carer_users,
+        ])->render();
 
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' =>'anton.shelehvost@gmail.com',//'nik@holm.care',
+                    'subject' =>'You have a new review moderation',
+                    'text' =>$text,
+                    'time_to_send' => Carbon::now(),
+                    'status'=>'new'
+                ]);
         return redirect()->back();
     }
 
