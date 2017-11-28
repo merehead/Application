@@ -245,7 +245,7 @@
             </tbody>
         </table>
     </div>
-    {{--{{$transactions->render('HolmAdmin.pagination')}}--}}
+    {{$transactions->render('HolmAdmin.pagination')}}
     {{--{!! $transactions->appends( Request::query() )->render('HolmAdmin.pagination') !!}--}}
 </div>
 <script type="text/javascript">

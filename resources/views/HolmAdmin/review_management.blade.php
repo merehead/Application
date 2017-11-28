@@ -9,11 +9,6 @@
         <table class="adminTable">
             <thead>
             <tr>
-                <td class="orderNumber">
-                  <span class="td-title td-title--number">
-                   №
-                  </span>
-                </td>
                 <td class=" ordninary-td ordninary-td--small no-padding-l">
                   <span class="td-title td-title--time">
                     date
@@ -65,11 +60,6 @@
             <tbody>
             @foreach($reviews as $review)
                 <tr>
-                    <td>
-                  <span>
-                    {{$review->id}}
-                  </span>
-                    </td>
                     <td>
                         <p>{{$review->created_at}}</p>
                     </td>
@@ -124,4 +114,6 @@
             </tbody>
         </table>
     </div>
+    {{$reviews->render('HolmAdmin.pagination')}}
+
 </div>

@@ -53,7 +53,7 @@ class ReviewManagementController extends AdminController
             }
 
         }
-        $data = BookingOverview::where('accept','=',0)->get();
+        $data = BookingOverview::where('accept','=',0)->paginate(10);
         $this->vars['reviews']=$data;
         $this->content = view(config('settings.theme').'.review_management')->with( $this->vars)->render();
 

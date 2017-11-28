@@ -80,7 +80,7 @@ class AdminSitePayment extends AdminController
                 ->where('created_at','>=',date('Y-m-d',strtotime($date[1])));
         }
 
-        $transactions = $transactions->get();//->paginate(10);
+        $transactions = $transactions->paginate(10);
 
         $this->vars['transactions'] = $transactions;
         $this->vars['TransactionsSort'] = $request->get('TransactionsSort',null);
