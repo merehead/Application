@@ -13,7 +13,7 @@
                 <div class="formField formField--fix-biger">
                     <div class="fieldWrap">
 
-                        {!! Form::text('userName',null,['class'=>'formItem formItem--input formItem--search','maxlength'=>'60']) !!}
+                        {!! Form::text('userName',null,['class'=>'formItem formItem--input formItem--search','maxlength'=>'60','placeholder'=>'Search name']) !!}
                     </div>
                 </div>
             </div>
