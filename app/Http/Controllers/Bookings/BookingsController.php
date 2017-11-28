@@ -75,7 +75,8 @@ class BookingsController extends FrontController implements Constants
 
         $booking->save();
         // отправить почту базируясь на $user->user_type_id (либо кереру, либо пурчасеру)
-
+        $purchaser = User::find($booking->purchaser_id);
+        $carer_users = User::find($booking->carer_id);
         $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
         $carerProfile = CarersProfile::find($booking->carer_id);
         $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
@@ -86,7 +87,7 @@ class BookingsController extends FrontController implements Constants
         DB::table('mails')
             ->insert(
                 [
-                    'email' => 'nik@holm.care',
+                    'email' => ($user->user_type_id == 3 ? $purchaser->email : $carer_users->email),
                     'subject' => 'You have a new alternative time',
                     'text' => $text,
                     'time_to_send' => Carbon::now(),
