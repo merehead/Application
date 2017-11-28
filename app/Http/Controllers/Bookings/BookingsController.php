@@ -62,19 +62,20 @@ class BookingsController extends FrontController implements Constants
             //Generating appointments
             $this->createAppointments($booking, $booking_item['appointments']);
         }
-        $sendTo='';
+        $sendTo = '';
         if ($user->user_type_id == 3) {
             //carer
             $booking->carer_status_id = 1;
             $booking->purchaser_status_id = 2;
-            $sendTo='carer';
+            $sendTo = 'carer';
         } else {
             $booking->carer_status_id = 2;
             $booking->purchaser_status_id = 1;
         }
 
         $booking->save();
-        // send new email with alternative time booking
+        // отправить почту базируясь на $user->user_type_id (либо кереру, либо пурчасеру)
+
         $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
         $carerProfile = CarersProfile::find($booking->carer_id);
         $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
@@ -85,13 +86,12 @@ class BookingsController extends FrontController implements Constants
         DB::table('mails')
             ->insert(
                 [
-                    'email' =>'nik@holm.care',
-                    'subject' =>'You have a new alternative time',
-                    'text' =>$text,
+                    'email' => 'nik@holm.care',
+                    'subject' => 'You have a new alternative time',
+                    'text' => $text,
                     'time_to_send' => Carbon::now(),
-                    'status'=>'new'
+                    'status' => 'new'
                 ]);
-        //todo отправить почту базируясь на $user->user_type_id (либо кереру, либо пурчасеру)
 
         return response(['status' => 'success']);
     }
@@ -111,16 +111,14 @@ class BookingsController extends FrontController implements Constants
         }, $appointments);
 
         $user = Auth::user();
-       $this->vars = array_add($this->vars,'user',$user);
-       $this->vars = array_add($this->vars,'appointments',$appointments);
-       $this->vars = array_add($this->vars,'assistance_types',$booking->assistance_types);
-       $this->vars = array_add($this->vars,'serviceUsers',$booking->bookingServiceUser);
-       $this->vars = array_add($this->vars,'booking',$booking);
-       $content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.MessageEdit')->with($this->vars)->render();
-       return  $content;
-       //todo букинги тут $booking. апоинтменты тут
-
-
+        $this->vars = array_add($this->vars, 'user', $user);
+        $this->vars = array_add($this->vars, 'appointments', $appointments);
+        $this->vars = array_add($this->vars, 'assistance_types', $booking->assistance_types);
+        $this->vars = array_add($this->vars, 'serviceUsers', $booking->bookingServiceUser);
+        $this->vars = array_add($this->vars, 'booking', $booking);
+        $content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.MessageEdit')->with($this->vars)->render();
+        return $content;
+        //todo букинги тут $booking. апоинтменты тут
 
 
         $this->vars = array_add($this->vars, 'appointments', $appointments);
@@ -184,12 +182,12 @@ class BookingsController extends FrontController implements Constants
                     'exp_year' => $request->card_year,
                     'cvc' => $request->card_cvc,
                 ]);
-            } catch (\Exception $ex){
+            } catch (\Exception $ex) {
                 return response($this->formatResponse('error', $ex->getMessage()));
             }
             $booking->card_token = $cardToken;
         } else {
-            if($booking->bookingPurchaser->bonus_balance < $booking->purchaser_price){
+            if ($booking->bookingPurchaser->bonus_balance < $booking->purchaser_price) {
                 return response($this->formatResponse('error', 'You do not have enough credits in your bonus wallet.'));
             }
         }
@@ -203,7 +201,7 @@ class BookingsController extends FrontController implements Constants
         $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
 
         //sms to carer
-        $message = 'Hi. '.$booking->bookingServiceUser->full_name.' would like to book you. Please log into your account to accept or reject the booking request. The Holm Team';
+        $message = 'Hi. ' . $booking->bookingServiceUser->full_name . ' would like to book you. Please log into your account to accept or reject the booking request. The Holm Team';
         SmsTools::sendSmsToCarer($message, $booking->bookingCarerProfile);
 
         //message for carer
@@ -214,11 +212,11 @@ class BookingsController extends FrontController implements Constants
         DB::table('mails')
             ->insert(
                 [
-                    'email' =>$carerProfile->email,
-                    'subject' =>'New booking on HOLM',
-                    'text' =>$text,
+                    'email' => $carerProfile->email,
+                    'subject' => 'New booking on HOLM',
+                    'text' => $text,
                     'time_to_send' => Carbon::now(),
-                    'status'=>'new'
+                    'status' => 'new'
                 ]);
 
         //message for purchaser
@@ -229,11 +227,11 @@ class BookingsController extends FrontController implements Constants
         DB::table('mails')
             ->insert(
                 [
-                    'email' =>$purchaserProfile->email,
-                    'subject' =>'New booking on HOLM',
-                    'text' =>$text,
+                    'email' => $purchaserProfile->email,
+                    'subject' => 'New booking on HOLM',
+                    'text' => $text,
                     'time_to_send' => Carbon::now(),
-                    'status'=>'new'
+                    'status' => 'new'
                 ]);
 
         return response(['status' => 'success']);
@@ -257,7 +255,7 @@ class BookingsController extends FrontController implements Constants
 
         //Set prices for appointments
         $appointments = $booking->appointments()->get();
-        foreach ($appointments as $appointment){
+        foreach ($appointments as $appointment) {
             $appointment->price_for_purchaser = $appointment->purchaser_price;
             $appointment->price_for_carer = $appointment->carer_price;
             $appointment->save();
@@ -425,12 +423,36 @@ class BookingsController extends FrontController implements Constants
     {
         $user = Auth::user();
         $sender = ($user->user_type_id == 3 ? 'carer' : 'service_user');
+        $server = ServiceUsersProfile::find($booking->service_user_id);
+        $carer = CarersProfile::find($booking->carer_id);
+        $purchaser = User::find($booking->purchaser_id);
+        $carer_users = User::find($booking->carer_id);
+
         $BookingsMessage = BookingsMessage::create([
             'booking_id' => $booking->id,
             'sender' => $sender,
             'type' => 'message',
             'text' => $request->message,
         ]);
+
+
+        $text = view(config('settings.frontTheme') . '.emails.new_message')->with([
+            'server_users' => $server,
+            'carer' => $carer,
+            'booking' => $booking,
+            'text' => $request->message,
+            'sender' => $sender
+        ])->render();
+
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' => ($user->user_type_id == 3 ? $purchaser->email : $carer_users->email),
+                    'subject' => 'You have a new message in your booking',
+                    'text' => $text,
+                    'time_to_send' => Carbon::now(),
+                    'status' => 'new'
+                ]);
 
         return redirect(url('/bookings/' . $booking->id . '/details#comments'));
     }
@@ -478,11 +500,11 @@ class BookingsController extends FrontController implements Constants
         DB::table('mails')
             ->insert(
                 [
-                    'email' =>'nik@holm.care',
-                    'subject' =>'You have a new review moderation',
-                    'text' =>$text,
+                    'email' => 'nik@holm.care',
+                    'subject' => 'You have a new review moderation',
+                    'text' => $text,
                     'time_to_send' => Carbon::now(),
-                    'status'=>'new'
+                    'status' => 'new'
                 ]);
         return redirect()->back();
     }
