@@ -173,7 +173,7 @@
                     <td style="padding:  0 40px 30px 40px; background: #fff; " valign="top" class="">
                         <p style="max-width: 600px;font-size: 15px; color: #373f3e;line-height: 1.6;">
                             If you do not wish to receive promotional emails from Holm,
-                            <a href="{{route('unsubscribe',['id'=>$user->id])}}" class="">unsubscribe here</a>
+                            <a href="{{route('unsubscribe',['id'=>Auth::user()->id])}}" class="">unsubscribe here</a>
                             <a href="#" style="
                        color: #7bb7dc;
                        text-decoration: underline;
