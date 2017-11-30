@@ -39,7 +39,7 @@
     Hi, Nik!
 </h1>
 <p>
-    You have a new review for moderation from {{$server_users->short_full_name}} for {{$carer_users->short_name}}.
+    You have a new review for moderation from {{$server_users->short_full_name}} for {{$carer_users->short_name}}
 </p>
 <p>
     Have a nice day!
