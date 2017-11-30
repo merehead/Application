@@ -76,7 +76,7 @@
                                     @if(!empty($carerProfile) && Auth::check()&&isset(Auth::user()->userPurchaserProfile->serviceUsers))
                                         @foreach(Auth::user()->userPurchaserProfile->serviceUsers as $serviceUser)
                                             @php(++$i)
-                                                @if(!$serviceUser->isDeleted())
+                                                @if(!$serviceUser->isDeleted() && $serviceUser->registration_progress=='61')
 
                                                     @if(strlen($serviceUser->first_name)>0)
 
