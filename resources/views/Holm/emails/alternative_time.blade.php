@@ -34,9 +34,8 @@
                             @if($sendTo == 'carer')
                                 <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{$serviceUser->first_name}}</a>
                                 offered an alternative time. Please click the button below to accept or reject the alternative time request.
-                                Please click the button below to accept or reject the alternative time request.
                             @else
-                                <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{$carer->first_name}}</a> offered an alternative time. Please click the button below to accept or reject the alternative time request.
+                                <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{$carer->first_name}}</a> offered an alternative time.
                                 Please click the button below to accept or reject the alternative time request.
                             @endif
                         </p>
