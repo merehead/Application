@@ -6,6 +6,7 @@ use App\CarersProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 class HomePageController extends FrontController
 {
@@ -52,6 +53,35 @@ class HomePageController extends FrontController
                           FROM `carers_profiles` as cp
                         WHERE registration_progress=20 and profiles_status_id=2  LIMIT 0,12");
 
+    }
+
+    public function  unsubscribe($id){
+
+        $user = User::find($id);
+        if(isset($user->email)){
+            $user->subscribe=0;
+            $user->save();
+        }
+
+        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+        $vars = array();
+        $vars = array_add($vars,'title','Holm');
+        $vars = array_add($vars,'description','');
+        $vars = array_add($vars,'keywords','');
+        $vars = array_add($vars,'keywords','');
+        $vars = array_add($vars,'header',$header);
+        $vars = array_add($vars,'footer',$footer);
+        $vars = array_add($vars,'modals',$modals);
+
+
+
+        $content = view(config('settings.frontTheme').'.homePage.ThankYouUnsubscribe')->render();
+        $vars = array_add($vars,'content',$content);
+
+        return view(config('settings.frontTheme').'.templates.homePage')->with($vars);
     }
 
 }

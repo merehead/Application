@@ -124,7 +124,7 @@ Route::get('/invite/thank-you', 'ReferNewUserController@show')->name('thankForIn
 
 Route::get('/privacy-policy', 'PrivacyPolicyController@index')->name('privacy_policy');
 Route::get('/enter', 'LoginWindowController@index')->name('session_timeout');
-Route::get('/unsubscribe/{id}', 'HomeController@unsubscribe')->name('unsubscribe');
+Route::get('/unsubscribe/{id}', 'HomePageController@unsubscribe')->name('unsubscribe');
 
 
 Route::group(['middleware' => ['auth']], function () {
