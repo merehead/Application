@@ -173,6 +173,10 @@ class PurchaserController extends FrontController implements Constants
         //dd();
 
         if (!$this->user) {
+            if(request()->has('refer')){
+                $cookie = Cookie::make('bookingFilterPurchaser', 1,2);
+                return redirect()->route('session_timeout')->withCookie($cookie);
+            }
             return redirect('/');
             //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
         } else {

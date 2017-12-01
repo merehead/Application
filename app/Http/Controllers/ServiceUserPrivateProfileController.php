@@ -751,9 +751,9 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
     {
         $user = Auth::user();
     
-        if (!$user)
+        if (!$user) {
             return redirect('/');
-
+        }
         $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
         $this->title = 'Holm Care';
 

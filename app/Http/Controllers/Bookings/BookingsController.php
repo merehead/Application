@@ -16,6 +16,7 @@ use App\ServiceUsersProfile;
 use App\User;
 use App\Exceptions\MessenteException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use Carbon\Carbon;
@@ -134,6 +135,15 @@ class BookingsController extends FrontController implements Constants
 
     public function view_details(Booking $booking)
     {
+        //todo костыль на логаут
+        if (!Auth::check()) {
+            if(request()->has('refer')){
+                $cookie = Cookie::make('bookingView', request()->get('refer'),2);
+                return redirect()->route('session_timeout')->withCookie($cookie);
+            }
+            return redirect('/');
+        }
+
         $user = Auth::user();
 
         $this->template = config('settings.frontTheme') . '.templates.purchaserPrivateProfile';
@@ -147,13 +157,8 @@ class BookingsController extends FrontController implements Constants
         $this->vars = array_add($this->vars, 'footer', $footer);
         $this->vars = array_add($this->vars, 'modals', $modals);
 
-        //todo костыль на логаут
-        if (!Auth::check()) {
-            return \redirect('/');
-            //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
-        }
         if (!$this->user) {
-            return;
+            return redirect('/');
         } else {
             $this->vars = array_add($this->vars, 'user', $this->user);
             $this->vars = array_add($this->vars, 'booking', $booking);
