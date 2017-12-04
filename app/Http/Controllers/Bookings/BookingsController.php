@@ -89,7 +89,7 @@ class BookingsController extends FrontController implements Constants
         DB::table('mails')
             ->insert(
                 [
-                    'email' => ($user->user_type_id == 3 ? $purchaser->email : $carer_users->email),
+                    'email' => ($user->user_type_id == 3 ? $carer_users->email:$purchaser->email),
                     'subject' => 'You have a new alternative time',
                     'text' => $text,
                     'time_to_send' => Carbon::now(),
