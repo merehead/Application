@@ -242,7 +242,16 @@ class CarerController extends FrontController implements Constants
         $this->vars = array_add($this->vars,'header',$header);
         $this->vars = array_add($this->vars,'footer',$footer);
         $this->vars = array_add($this->vars,'modals',$modals);
-        $carerProfile = CarersProfile::findOrFail($user->id);
+        $carerProfile = CarersProfile::find($user->id);
+
+        if(!isset($carerProfile->id)){
+            if(request()->has('refer')){
+                Auth::logout();
+                $cookie = Cookie::make('bookingFilter', 1,2);
+                return redirect()->route('session_timeout')->withCookie($cookie);
+            }
+        }
+
         $this->vars = array_add($this->vars,'carerProfile',$carerProfile);
 
         $this->vars = array_add($this->vars, 'status', $status);
