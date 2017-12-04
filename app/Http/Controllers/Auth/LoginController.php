@@ -58,6 +58,15 @@ class LoginController extends Controller
             Cookie::forget('bookingFilter');
             return '/carer-settings/booking/new/';
         }
+        if( Cookie::get('bookingFilterCanceled')) {
+            Cookie::forget('bookingFilterCanceled');
+            return '/carer-settings/booking/canceled/';
+        }
+        if( Cookie::get('purchaserbookingFilterCanceled')) {
+            Cookie::forget('purchaserbookingFilterCanceled');
+            return '/purchaser-settings/booking/canceled/';
+        }
+
         if( Cookie::get('bookingFilterPurchaser')) {
             Cookie::forget('bookingFilter');
             return '/purchaser-settings/booking/new/';

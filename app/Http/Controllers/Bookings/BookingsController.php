@@ -300,6 +300,36 @@ class BookingsController extends FrontController implements Constants
             ]);
         $booking->save();
 
+        $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
+        $carerProfile = CarersProfile::find($booking->carer_id);
+        $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
+
+        $email = Auth::user()->email;
+
+        if(Auth::user()->isCarer()){
+            $email = $serviceUser;
+            dd($serviceUser);
+            $text = view(config('settings.frontTheme') . '.emails.reject_booking')->with([
+                'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'purchaser'
+            ])->render();
+        }
+        if(Auth::user()->isPurchaser()){
+            //message for purchaser
+            $email = User::find()->fist($booking->carer_id)->email;
+            $text = view(config('settings.frontTheme') . '.emails.reject_booking')->with([
+                'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'purchaser'
+            ])->render();
+        }
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' => $email,
+                    'subject' => 'Rejected booking on HOLM',
+                    'text' => $text,
+                    'time_to_send' => Carbon::now(),
+                    'status' => 'new'
+                ]);
+
         return response(['status' => 'success']);
     }
 

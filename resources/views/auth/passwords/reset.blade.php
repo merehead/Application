@@ -54,9 +54,7 @@
                                         <span class="inputIco registrationForm__ico">
                   <i class="fa fa-lock" aria-hidden="true"></i>
                   </span>
-                                        <span class="inputIco registrationForm__ico registrationForm__ico--right">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                  </span>
+
 
                                     </div>
                                     @if ($errors->has('email'))
@@ -81,7 +79,7 @@
                   <i class="fa fa-lock" aria-hidden="true"></i>
                   </span>
                                         <span class="inputIco registrationForm__ico registrationForm__ico--right">
-                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <i class="fa " aria-hidden="true"></i>
                   </span>
 
                                     </div>
@@ -109,7 +107,7 @@
                   <i class="fa fa-lock" aria-hidden="true"></i>
                   </span>
                                         <span class="inputIco registrationForm__ico registrationForm__ico--right">
-                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <i class="fa " aria-hidden="true"></i>
                   </span>
 
                                     </div>
