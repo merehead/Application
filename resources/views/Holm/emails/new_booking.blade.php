@@ -137,8 +137,6 @@
                 </tr>
             </table>
         </td>
-
-
     </tr>
     @if($sendTo == 'carer')
         <tr>

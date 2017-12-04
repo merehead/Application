@@ -226,7 +226,7 @@ class CarerController extends FrontController implements Constants
                 $cookie = Cookie::make('bookingFilter', 1,2);
                 return redirect()->route('session_timeout')->withCookie($cookie);
             }
-            return \redirect('/');
+            return redirect('/');
             //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
         }
 
@@ -250,6 +250,7 @@ class CarerController extends FrontController implements Constants
                 $cookie = Cookie::make('bookingFilter', 1,2);
                 return redirect()->route('session_timeout')->withCookie($cookie);
             }
+            return redirect('/');
         }
 
         $this->vars = array_add($this->vars,'carerProfile',$carerProfile);

@@ -308,7 +308,6 @@ class BookingsController extends FrontController implements Constants
 
         if(Auth::user()->isCarer()){
             $email = $serviceUser;
-            dd($serviceUser);
             $text = view(config('settings.frontTheme') . '.emails.reject_booking')->with([
                 'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'purchaser'
             ])->render();
