@@ -16,6 +16,7 @@ use App\WorkingTime;
 use Illuminate\Http\Request;
 
 
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 
@@ -92,15 +93,20 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
 
     public function profile(ServiceUsersProfile $serviceUsersProfile)
     {
+
+        if (!Auth::check()) {
+            if (request()->has('referUserProfilePublic')) {
+                $cookie = Cookie::make('referUserProfilePublic', request()->get('referUserProfilePublic'), 2);
+                return redirect()->route('session_timeout')->withCookie($cookie);
+            }
+        }
+
         $activeUser = Auth::user();
         if(!$activeUser) return redirect('/');
 
         if (!$activeUser->can('see', $serviceUsersProfile)){
             return redirect('/');
         }
-
-//dd($this->restrictedAccess($serviceUsersProfile));
-
 
         $this->vars = array_add($this->vars, 'restrictedAccess', $this->restrictedAccess($serviceUsersProfile));
 

@@ -71,6 +71,11 @@ class LoginController extends Controller
             Cookie::forget('bookingFilter');
             return '/purchaser-settings/booking/new/';
         }
+        if( Cookie::get('referUserProfilePublic')) {
+            $url = Cookie::get('referUserProfilePublic');
+            Cookie::forget('referUserProfilePublic');
+            return $url;
+        }
 
         if( Cookie::get('bookingView')) {
             $id = Cookie::get('bookingView');

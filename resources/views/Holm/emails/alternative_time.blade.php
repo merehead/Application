@@ -91,7 +91,7 @@
                                     <td align="center" style="text-align:left;">
                                         @if($sendTo == 'carer')
                                             <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
-                                                <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}" style=" color: #6178fc;">
+                                                <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}?referUserProfilePublic={{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}" style=" color: #6178fc;">
                                                     {{$serviceUser->first_name}}</a><span style="display: block;">Booked you</span></p>
                                         @else
                                             <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
