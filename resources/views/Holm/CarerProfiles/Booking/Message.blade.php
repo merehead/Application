@@ -123,7 +123,7 @@
                                 select date and time
                              </span>
                             </h2>
-                            <div class="messageInputs datetime ">
+                            <div class="messageInputs datetime">
                                 <div class="messageInputs__field messageDate">
                                     <input  onchange="calculate_price()" type="text" name="bookings[0][appointments][0][date_start]" required
                                            class="messageInput datepicker datepicker_message" placeholder="06.06.2017 ">
@@ -134,14 +134,21 @@
                                 </div>
                                 <label class="checkBox_item correct2" for="date_end">Start</label>
 
-                                <div class="messageInputs__field messageTime ">
-                                    <input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_from" required
-                                           name="bookings[0][appointments][0][time_from]" placeholder="1:30 PM"
-                                           value="">
-                                    <a href="#" class="messageIco centeredLink">
-                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                    </a>
+                                <div class="picker-box">
+                                    <div class="field-wrap">
+                                        <input type="text" class="date-field" placeholder="6:55 pm">
+                                        <span class="date-ico"><i class="fa fa-clock-o"></i></span>
+                                    </div>
                                 </div>
+
+                                {{--<div class="messageInputs__field messageTime ">--}}
+                                    {{--<input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_from" required--}}
+                                           {{--name="bookings[0][appointments][0][time_from]" placeholder="1:30 PM"--}}
+                                           {{--value="">--}}
+                                    {{--<a href="#" class="messageIco centeredLink">--}}
+                                        {{--<i class="fa fa-clock-o" aria-hidden="true"></i>--}}
+                                    {{--</a>--}}
+                                {{--</div>--}}
 
 
                                 {{--                            <div class="messageInputs__field messageTime ">
@@ -150,16 +157,22 @@
                                                                     <i class="fa fa-clock-o" aria-hidden="true"></i>
                                                                 </a>
                                                             </div>--}}
-
                                 <label class="checkBox_item correct2" for="date_end">End</label>
-                                <div class="messageInputs__field messageTime ">
-                                    <input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_bed" required
-                                           name="bookings[0][appointments][0][time_to]" placeholder="3:30 PM"
-                                           value="">
-                                    <a href="#" class="messageIco centeredLink">
-                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                    </a>
+                                <div class="picker-box">
+                                    <div class="field-wrap">
+                                        <input type="text" class="date-field" placeholder="6:55 pm">
+                                        <span class="date-ico"><i class="fa fa-clock-o"></i></span>
+                                    </div>
                                 </div>
+                                {{--<div class="messageInputs__field messageTime ">--}}
+                                    {{--<input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_bed" required--}}
+                                           {{--name="bookings[0][appointments][0][time_to]" placeholder="3:30 PM"--}}
+                                           {{--value="">--}}
+                                    {{--<a href="#" class="messageIco centeredLink">--}}
+                                        {{--<i class="fa fa-clock-o" aria-hidden="true"></i>--}}
+                                    {{--</a>--}}
+                                {{--</div>--}}
+
                                 <i class="fa fa-close checkBox_item delete nhide" data-id="d0" aria-hidden="true"></i>
                             </div>
                         </div>
@@ -238,8 +251,43 @@
 
                     </div>
                 </div>
+                <div class="date-drop" style="display: none">
+                    <div class="date-drop__item">
+                        <div class="date-drop__body">
+                            <div class="date-select">
+                                <span class="date-select__ico">
+                                  <i class="fa fa-caret-down"></i>
+                                </span>
+                                <select class="date-select__item">
+                                    <option value="">6</option>
+                                </select>
+                            </div>
+                            <span class="date-separator"> : </span>
+                            <div class="date-select">
+                                <span class="date-select__ico"><i class="fa fa-caret-down"></i></span>
+                                <select class="date-select__item">
+                                    <option value="">50</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="date-drop__footer">
+                            <div class="date-choise">
+                                <span>AM</span>
+                                <div class="date-check">
+                                    <input type="checkbox" class="checkbox-date" id="checkbox">
+                                    <label for="checkbox"></label>
+                                </div>
+                                <span>PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
 
 </div>
+
+<script>
+
+</script>
