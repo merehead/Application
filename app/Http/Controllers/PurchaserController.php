@@ -172,7 +172,7 @@ class PurchaserController extends FrontController implements Constants
 
         //dd();
 
-        if (!$this->user) {
+        if (!Auth::check()) {
             if(request()->has('refer')){
                 $cookie = Cookie::make('bookingFilterPurchaser', 1,2);
                 return redirect()->route('session_timeout')->withCookie($cookie);
