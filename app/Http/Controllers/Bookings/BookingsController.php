@@ -335,7 +335,7 @@ class BookingsController extends FrontController implements Constants
 
     public function cancel(Booking $booking)
     {
-        /*$user = Auth::user();
+        $user = Auth::user();
         if ($user->user_type_id == 3) {
             //Carer
             $booking->status_id = self::CANCELLED;
@@ -420,7 +420,7 @@ class BookingsController extends FrontController implements Constants
 
         $booking->save();
 
-        return response(['status' => 'success']);*/
+        return response(['status' => 'success']);
     }
 
     public function completed(Booking $booking)
