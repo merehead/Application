@@ -50,9 +50,18 @@
         <div class="col-md-3">
             <div class="roundedBtn roundedBtn--peopleCare">
                 @if($uncompliteUser == 0)
-                <a href="{{route('ServiceUserCreate')}}" class="roundedBtn__item roundedBtn__item--accept">
-                    ADD SERVICE USER
-                </a>
+
+                    <div class="service-drop">
+                        <a href="{{route('ServiceUserCreate')}}" class="roundedBtn__item roundedBtn__item--accept">
+                            ADD SERVICE USER
+                        </a>
+                        <ul class="service-drop__item">
+
+                            <li><a href="{{route('ServiceUserCreate',['type'=>'Myself'])}}">Myself</a></li>
+                            <li><a href="{{route('ServiceUserCreate')}}">Someone else</a></li>
+
+                        </ul>
+                    </div>
                 @else
                     <a href="{{route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUser->id])}}" class="roundedBtn__item roundedBtn__item--accept">
                         <span style="font-size: 80%">CONTINUE REGISTRATION</span>
