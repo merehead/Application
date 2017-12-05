@@ -284,6 +284,27 @@ class BookingsController extends FrontController implements Constants
         $booking->status_id = $booking->carer_status_id = $booking->purchaser_status_id = self::IN_PROGRESS;
         $booking->save();
 
+        $purchaser = User::find($booking->purchaser_id);
+        $carer_users = User::find($booking->carer_id);
+        $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
+        $carerProfile = CarersProfile::find($booking->carer_id);
+        $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
+
+        $text = view(config('settings.frontTheme') . '.emails.conform_booking')->with([
+            'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => (Auth::user()->user_type_id == 3 ? 'purchaser':'carer'),
+            'first_appointment_day'=>$booking->appointments()->get()->first()->date_start, 'date', 'time'
+        ])->render();
+
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' => (Auth::user()->user_type_id == 3 ? $purchaser->email:$carer_users->email),
+                    'subject' => 'Booking confirmed',
+                    'text' => $text,
+                    'time_to_send' => Carbon::now(),
+                    'status' => 'new'
+                ]);
+
         return response(['status' => 'success']);
     }
 
