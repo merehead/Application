@@ -43,6 +43,8 @@ class PurchaserController extends FrontController implements Constants
 
             $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('purchaser_id', $this->user->id)->get();
             $this->vars = array_add($this->vars, 'newBookings', $newBookings);
+            $inProgressBookings = Booking::whereIn('status_id', [self::APPOINTMENT_STATUS_IN_PROGRESS])->where('purchaser_id', $this->user->id)->get();
+            $this->vars = array_add($this->vars, 'inProgressBookings', $inProgressBookings);
 
             if(!empty($id) && Auth::user()->user_type_id==4){ //админ
                 $purchaserProfile = PurchasersProfile::findOrFail($id);

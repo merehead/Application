@@ -35,9 +35,11 @@
                                         @endif
                                     </a>
                                 </h2>
+                                @if(!$inProgressBookings->contains('service_user_id',$serviceUser->id))
                                 <a href="{{route('ServiceUserProfileDelete', ['serviceUserProfile' => $serviceUser->id])}}" class="peopleCare__delete">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </a>
+                                    @endif
                             </div>
 
                         </div>
