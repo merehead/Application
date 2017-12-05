@@ -204,7 +204,7 @@
                         </td>
                     @else
                         <td style="color:#272c2b;padding: 30px 10px; background: #f9f9f9; " valign="top" class="">
-                            <a href="{{route('purchaserBookingStatus',['status'=>'new'])}}?refer=booking" class=""
+                            <a href="{{route('purchaserBookingStatus',['status'=>'pending'])}}?refer=booking" class=""
                                style="
                     display: block;
                     width: 240px;

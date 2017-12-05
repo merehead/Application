@@ -39,7 +39,7 @@
     Hi, Nik!
 </h1>
 <p>
-    You have a new review for moderation from {{$server_users->short_full_name}} for {{$carer_users->short_name}}
+    You have a new review for moderation from <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$server_users->id])}}?referUserProfilePublic={{$server_users->id}}">{{$server_users->short_full_name}}</a> for <a href="{{route('carerPublicProfile',['user_id'=>$carer_users->id])}}">{{$carer_users->short_name}}</a>
 </p>
 <p>
     Have a nice day!
