@@ -571,8 +571,11 @@ $(document).ready(function () {
             $('.seconds').append(new Option(second, second));
         }
         var start_time = $(that).parent();
+        var current_time = new Date();
         var time = toDate($(that).val().substring(0, 5),"h:m");
         var hours = time.getHours();
+        if(hours==0)
+            hours=current_time.getHours()+1;
         var minutes = time.getMinutes();
         if(hours<10)hours='0'+hours;
         if(minutes<10)minutes='0'+minutes;

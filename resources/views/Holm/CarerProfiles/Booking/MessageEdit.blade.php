@@ -78,23 +78,38 @@
                             </div>
                             <label class="checkBox_item correct2" for="date_end">Start</label>
 
-                            <div class="messageInputs__field messageTime ">
-                                <input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_from"
-                                        name="bookings[0][appointments][{{$loop->index}}][time_from]" placeholder="1:30 PM"
-                                        value="{{$appointment->time_from}}">
-                                <a href="#" class="messageIco centeredLink">
-                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                </a>
+                            {{--<div class="messageInputs__field messageTime ">--}}
+                                {{--<input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_from"--}}
+                                        {{--name="bookings[0][appointments][{{$loop->index}}][time_from]" placeholder="1:30 PM"--}}
+                                        {{--value="{{$appointment->time_from}}">--}}
+                                {{--<a href="#" class="messageIco centeredLink">--}}
+                                    {{--<i class="fa fa-clock-o" aria-hidden="true"></i>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+
+                            <div class="picker-box">
+                                <div class="field-wrap">
+                                    <input type="text" name="bookings[0][appointments][{{$loop->index}}][time_from]" value="{{$appointment->time_from}}" class="date-field mypicker start" placeholder="" >
+                                    <span class="date-ico"><i class="fa fa-clock-o"></i></span>
+                                </div>
                             </div>
+
                             <label class="checkBox_item correct2" for="date_end">End</label>
-                            <div class="messageInputs__field messageTime ">
-                                <input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_bed"
-                                        name="bookings[0][appointments][{{$loop->index}}][time_to]" placeholder="3:30 PM"
-                                        value="{{$appointment->time_to}}">
-                                <a href="#" class="messageIco centeredLink">
-                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                </a>
+                            {{--<div class="messageInputs__field messageTime ">--}}
+                                {{--<input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_bed"--}}
+                                        {{--name="bookings[0][appointments][{{$loop->index}}][time_to]" placeholder="3:30 PM"--}}
+                                        {{--value="{{$appointment->time_to}}">--}}
+                                {{--<a href="#" class="messageIco centeredLink">--}}
+                                    {{--<i class="fa fa-clock-o" aria-hidden="true"></i>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                            <div class="picker-box">
+                                <div class="field-wrap">
+                                    <input type="text" value="{{$appointment->time_to}}" name="bookings[0][appointments][{{$loop->index}}][time_to]" class="date-field mypicker end" placeholder="">
+                                    <span class="date-ico"><i class="fa fa-clock-o"></i></span>
+                                </div>
                             </div>
+
                             <i class="fa fa-close checkBox_item delete nhide" data-id="d0" aria-hidden="true"></i>
                         </div>
                         <div class="messageGroup ">
