@@ -592,7 +592,10 @@ $(document).ready(function () {
         }
         if($(that).hasClass('end')) {
             minutes = start_time.getMinutes();
+            if(minutes<10)
+                minutes='0'+minutes;
             var time = ($('.checkbox-date').is(':checked'))?'PM':'AM';
+            $('.seconds').val(minutes);
             setTime(that,hours,minutes,time);
         }
 

@@ -178,7 +178,7 @@
                                 <label class="checkBox_item ordinaryTitle correct nhide" for="date_end">Continue until</label>
                                 <div class="messageInputs__field messageDate correct3 nhide">
                                     <input  onchange="calculate_price()" type="text" class="messageInput datepicker datepicker_message" id="date_end" onchange="calculate_price()"
-                                           name="bookings[0][appointments][0][date_end]" placeholder=" 08.08.2017">
+                                           name="bookings[0][appointments][0][date_end]" placeholder="">
                                     <a href="#" class="messageIco centeredLink">
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                     </a>
