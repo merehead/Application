@@ -469,6 +469,7 @@ $(document).ready(function () {
         if(!$(that).hasClass('active_picker'))
         $('.date-drop').remove();
     });
+
     $(window).click(function(e){
         console.log(e);
         if($(e.target).parent()[0].className.indexOf('date')<0 && $('.date-drop').length>0){
@@ -577,26 +578,38 @@ $(document).ready(function () {
         start_time = toDate($(start_time).find('input.start').val().substring(0, 5),"h:m");
         var current_time = new Date();
         var time = toDate($(that).val().substring(0, 5),"h:m");
+        var minutes = time.getMinutes();
         var hours = time.getHours();
         if(hours==0) {
             if($(that).hasClass('end')) {
                 hours = start_time.getHours() + 1;
+                minutes = start_time.getMinutes();
             } else {
                 hours = current_time.getHours() + 1;
             }
             if(hours>12)
                 hours=hours-12;
         }
+        if($(that).hasClass('end')) {
+            minutes = start_time.getMinutes();
+            var time = ($('.checkbox-date').is(':checked'))?'PM':'AM';
+            setTime(that,hours,minutes,time);
+        }
 
-        var minutes = time.getMinutes();
+
         if(hours<10)
             hours='0'+hours;
         if(minutes<10)
             minutes='0'+minutes;
         $('.hour').val(hours);
         $('.seconds').val(minutes);
+        if($(that).hasClass('end'))
+            $('.seconds').find('option').each(function() {
+            if ( $(this).val() != minutes ) {
+                $(this).attr('disabled', true);
+            }else  $(this).attr('disabled', false);
+        });
 
-        console.log(start_time);
         if($(that).val().indexOf('am')>0){
             $('.checkbox-date').attr('checked',false)
         }
