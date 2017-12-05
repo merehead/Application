@@ -1693,11 +1693,14 @@ $(document).ready(function () {
     $(document).on('click','.delete',function(){
         var that = $(this);
         var cur = $(that).attr('data-id');
+        $(that).parent().parent().prev('div').remove();
         $(that).parent().parent().remove();
 
         $('div[data-id="'+cur+'"]').remove();
+        $('.'+cur).remove();
         appointments=appointments-1;
         if(appointments<=1)$('.delete').hide();
+        calculate_price();
     });
 
     $(document).on('click','.Daily',function(){
@@ -1801,14 +1804,14 @@ $(document).ready(function () {
             $(this).parent().parent().find('.delete').attr('data-id','d'+appointments);
             $(this).parent().parent().find('.delete').show();
         });
-        var t=('.assistance_types').length;
+        var t=$('.assistance_types').length;
         $(typeCareAll).find('.assistance_types').each(function(){
            var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf(']')-1);
            var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf(']'), $(this).attr('name').length);
             $(this).attr('name', input_name +  appointments + input_name_p);
-            $(this).attr('id', 'assistance_types2' +  t);
-            $(this).val('2' +  t);
-            $(this).parent().find('label').attr('for','assistance_types2' +  t);
+            $(this).attr('id', 'assistance_types' +  t);
+            $(this).val(t);
+            $(this).parent().find('label').attr('for','assistance_types' +  t);
             t=t+1;
         });
 
@@ -1841,10 +1844,10 @@ $(document).ready(function () {
             $(this).parent().parent().find('.delete').attr('data-id','d'+appointments);
         });
 
-        appointments=appointments+1;
-        $($that).before('<br><h2 class="ordinaryTitle">\n' +
+        $($that).before('<br><h2 class="ordinaryTitle d'+appointments+'">\n' +
             '                                <span class="ordinaryTitle__text">Type of care</span>\n' +
             '                            </h2>');
+        appointments=appointments+1;
         $($that).before(typeCareAll);
         $($that).before(dlast);
         $($that).before(clast);
@@ -1884,6 +1887,7 @@ $(document).ready(function () {
             dropdown: true,
             scrollbar: true
         });
+        calculate_price();
         return false;
     });
 
