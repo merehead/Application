@@ -28,4 +28,3 @@
     <script src="{{asset('js/checkCookie.js')}}"></script>
 
 </head>
-{{URL::to('/')}}
