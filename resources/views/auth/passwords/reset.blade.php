@@ -31,17 +31,6 @@
                         <p class="forgot-p forgot-p--center">
                             Please enter your email and new password
                         </p>
-
-                        @if ($errors->any())
-                            <br>
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
                         <div class="formRow">
                             <div class="formColumn ">
                                 <div class="formField">
