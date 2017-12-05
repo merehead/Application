@@ -221,6 +221,7 @@ function geocodeAddress(geocoder, resultsMap) {
 function confirmPass($this){
     var conf =  $($this).val();
     var pass =  $('input[name="password"]').val();
+    if(conf!='' || pass!='')
     if(conf!=pass){
         $('#password_confirmation').parent().find('span.registrationForm__ico--right').addClass('registrationForm__ico--wrong');
         $('#password_confirmation').parent().find('span.registrationForm__ico--right>i').removeClass('fa-check').addClass("fa-times");

@@ -73,7 +73,8 @@
                                         new password
                                     </h2>
                                     <div class="inputWrap {{ $errors->has('password') ? ' has-error' : '' }}">
-                                        <input minlength="6" name="password" class="formInput registrationForm__input"
+                                        <input autocomplete="false" minlength="6" name="password" class="formInput
+                                        registrationForm__input"
                                                placeholder="*********" type="password">
                                         <span class="inputIco registrationForm__ico">
                   <i class="fa fa-lock" aria-hidden="true"></i>
@@ -99,7 +100,7 @@
                                         repeat password
                                     </h2>
                                     <div class="inputWrap {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                                        <input minlength="6" class="formInput registrationForm__input"
+                                        <input  autocomplete="false"  minlength="6" class="formInput registrationForm__input"
                                                name="password_confirmation"
                                                id="password_confirmation"
                                                placeholder="*********" type="password">
