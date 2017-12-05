@@ -446,7 +446,106 @@ function scale(block) {
         }
     }
 }
+
+function setTime(input, hour, second, period){
+    $(input).val(hour+':'+second+' '+period)
+}
+
 $(document).ready(function () {
+
+    $(document).on('blur','.mypicker',function(e){
+        var that = $(this);
+        if(!$(that).hasClass('active_picker'))
+        $('.date-drop').remove();
+    });
+
+
+    $(document).on('change','.hour',function(e){
+        var hour = $(this).val();
+        var seconds = $('.seconds').val();
+        var input = $(this).parent().parent().parent().parent().prev('div').find('input');
+        var time = ($('.checkbox-date').val()=='on')?'am':'pm';
+        setTime(input,hour,seconds,time);
+    });
+
+    $(document).on('change','.checkbox-date',function(e){
+        var seconds = $('.seconds').val();
+        var hour = $('.hour').val();
+        var input = $(this).parent().parent().parent().parent().parent().prev('div').find('input');
+        var time = ($('.checkbox-date').is(':checked'))?'pm':'am';
+        setTime(input,hour,seconds,time);
+    });
+
+    $(document).on('change','.seconds',function(e){
+        var seconds = $(this).val();
+        var hour = $('.hour').val();
+        var input = $(this).parent().parent().parent().parent().prev('div').find('input');
+        var time = ($('.checkbox-date').is(':checked'))?'pm':'am';
+        setTime(input,hour,seconds,time);
+    });
+
+    $(document).on('focus','.mypicker',function(e){
+        var that = $(this);
+        if(!$(that).hasClass('active_picker')) {
+            $('.date-drop').remove();
+            $('.mypicker').removeClass('active_picker');
+        }
+        $(that).addClass('active_picker');
+        $(that).parent().after('<div class="date-drop">\n' +
+            '      <div class="date-drop__item">\n' +
+            '        <div class="date-drop__body">\n' +
+            '          <div class="date-select">\n' +
+            '            <span class="date-select__ico">\n' +
+            '              <i class="fa fa-caret-down"></i>\n' +
+            '            </span>\n' +
+            '            <select class=" hour date-select__item">\n' +
+            '              <option value="01">01</option>\n' +
+            '              <option value="02">02</option>\n' +
+            '              <option value="03">03</option>\n' +
+            '              <option value="04">04</option>\n' +
+            '              <option value="05">05</option>\n' +
+            '              <option value="06">06</option>\n' +
+            '              <option value="07">07</option>\n' +
+            '              <option value="08">08</option>\n' +
+            '              <option value="09">09</option>\n' +
+            '              <option value="10">10</option>\n' +
+            '              <option value="11">11</option>\n' +
+            '              <option value="12">12</option>\n' +
+            '            </select>\n' +
+            '\n' +
+            '          </div>\n' +
+            '          <span class="date-separator">\n' +
+            '            :\n' +
+            '          </span>\n' +
+            '          <div class="date-select">\n' +
+            '            <span class="date-select__ico">\n' +
+            '              <i class="fa fa-caret-down"></i>\n' +
+            '            </span>\n' +
+            '            <select class="seconds date-select__item">\n' +
+            '              <option value="">50</option>\n' +
+            '            </select>\n' +
+            '\n' +
+            '          </div>\n' +
+            '        </div>\n' +
+            '        <div class="date-drop__footer">\n' +
+            '          <div class="date-choise">\n' +
+            '            <span>AM</span>\n' +
+            '            <div class="date-check">\n' +
+            '              <input type="checkbox" class="checkbox-date" id="checkbox">\n' +
+            '              <label for="checkbox"></label>\n' +
+            '            </div>\n' +
+            '            <span>PM</span>\n' +
+            '          </div>\n' +
+            '        </div>\n' +
+            '      </div>\n' +
+            '    </div>');
+        $('.seconds').empty();
+        var second;
+        for (var i = 1; i <= 59; i++) {
+            if(i<10){second='0'+i;} else {second=i;}
+            $('.seconds').append(new Option(second, second));
+        }
+    });
 
     $(document).on('click','.payment__item',function(e){e.preventDefault(); return false;})
 
