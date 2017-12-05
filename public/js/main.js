@@ -492,7 +492,7 @@ $(document).ready(function () {
         var seconds = $('.seconds').val();
         var hour = $('.hour').val();
         var input = $(this).parent().parent().parent().parent().parent().prev('div').find('input');
-        var time = ($('.checkbox-date').is(':checked'))?'pm':'am';
+        var time = ($('.checkbox-date').is(':checked'))?'PM':'AM';
         setTime(input,hour,seconds,time);
         // $('.date-drop').remove();
         // $('.mypicker').removeClass('active_picker');
@@ -503,7 +503,7 @@ $(document).ready(function () {
         var seconds = $(this).val();
         var hour = $('.hour').val();
         var input = $(this).parent().parent().parent().parent().prev('div').find('input');
-        var time = ($('.checkbox-date').is(':checked'))?'pm':'am';
+        var time = ($('.checkbox-date').is(':checked'))?'PM':'AM';
         setTime(input,hour,seconds,time);
         // $('.date-drop').remove();
         // $('.mypicker').removeClass('active_picker');
@@ -1801,11 +1801,15 @@ $(document).ready(function () {
             $(this).parent().parent().find('.delete').attr('data-id','d'+appointments);
             $(this).parent().parent().find('.delete').show();
         });
-
+        var t=('.assistance_types').length;
         $(typeCareAll).find('.assistance_types').each(function(){
            var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf(']')-1);
            var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf(']'), $(this).attr('name').length);
             $(this).attr('name', input_name +  appointments + input_name_p);
+            $(this).attr('id', 'assistance_types2' +  t);
+            $(this).val('2' +  t);
+            $(this).parent().find('label').attr('for','assistance_types2' +  t);
+            t=t+1;
         });
 
         $(dlast).find('.mypicker').each(function () {
