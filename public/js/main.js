@@ -458,7 +458,10 @@ $(document).ready(function () {
         if(!$(that).hasClass('active_picker'))
         $('.date-drop').remove();
     });
-
+    // $(document).on('click','.message__body',function(e){
+    //     $('.date-drop').remove();
+    //     $('.mypicker').removeClass('active_picker');
+    // });
 
     $(document).on('change','.hour',function(e){
         var hour = $(this).val();
@@ -541,7 +544,7 @@ $(document).ready(function () {
             '    </div>');
         $('.seconds').empty();
         var second;
-        for (var i = 1; i <= 59; i++) {
+        for (var i = 0; i <= 59; i++) {
             if(i<10){second='0'+i;} else {second=i;}
             $('.seconds').append(new Option(second, second));
         }
