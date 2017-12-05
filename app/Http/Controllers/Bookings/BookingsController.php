@@ -326,17 +326,17 @@ class BookingsController extends FrontController implements Constants
         $carerProfile = CarersProfile::find($booking->carer_id);
         $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
 
-        $email = Auth::user()->email;
-
         if(Auth::user()->isCarer()){
-            $email = $serviceUser;
+            $user = User::find($booking->purchaser_id);
+            $email =  $user->email;
             $text = view(config('settings.frontTheme') . '.emails.reject_booking')->with([
                 'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'purchaser'
             ])->render();
         }
         if(Auth::user()->isPurchaser()){
             //message for purchaser
-            $email = User::find()->fist($booking->carer_id)->email;
+            $user = User::find($booking->carer_id);
+            $email = $user->email;
             $text = view(config('settings.frontTheme') . '.emails.reject_booking')->with([
                 'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'purchaser'
             ])->render();
