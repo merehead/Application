@@ -522,6 +522,7 @@ $(document).ready(function () {
             '              <i class="fa fa-caret-down"></i>\n' +
             '            </span>\n' +
             '            <select class=" hour date-select__item">\n' +
+            '              <option value="00">00</option>\n' +
             '              <option value="01">01</option>\n' +
             '              <option value="02">02</option>\n' +
             '              <option value="03">03</option>\n' +
@@ -569,6 +570,7 @@ $(document).ready(function () {
 
             $('.seconds').append(new Option(second, second));
         }
+        var start_time = $(that).parent();
         var time = toDate($(that).val().substring(0, 5),"h:m");
         var hours = time.getHours();
         var minutes = time.getMinutes();
