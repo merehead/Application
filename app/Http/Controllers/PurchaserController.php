@@ -8,7 +8,7 @@ use App\PurchasersProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
-
+use Illuminate\Support\Facades\Cookie;
 use Auth;
 
 class PurchaserController extends FrontController implements Constants

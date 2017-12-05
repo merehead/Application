@@ -72,7 +72,7 @@ class LoginController extends Controller
             return '/purchaser-settings/booking/new/';
         }
         if( Cookie::get('referUserProfilePublic')) {
-            $url = Cookie::get('referUserProfilePublic');
+            $url = route('ServiceUserProfilePublic',['serviceUserProfile'=> Cookie::get('referUserProfilePublic')]);
             Cookie::forget('referUserProfilePublic');
             return $url;
         }
