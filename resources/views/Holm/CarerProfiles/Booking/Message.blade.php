@@ -126,7 +126,7 @@
                             <div class="messageInputs datetime">
                                 <div class="messageInputs__field messageDate">
                                     <input  onchange="calculate_price()" type="text" name="bookings[0][appointments][0][date_start]" required
-                                           class="messageInput datepicker datepicker_message" placeholder="06.06.2017 ">
+                                           class="messageInput datepicker datepicker_message" placeholder="">
 
                                     <a href="#" class="messageIco centeredLink">
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -136,7 +136,7 @@
 
                                 <div class="picker-box">
                                     <div class="field-wrap">
-                                        <input type="text" name="bookings[0][appointments][0][time_from]" class="date-field mypicker" placeholder="6:55 pm" >
+                                        <input type="text" name="bookings[0][appointments][0][time_from]" class="date-field mypicker" placeholder="" >
                                         <span class="date-ico"><i class="fa fa-clock-o"></i></span>
                                     </div>
                                 </div>
@@ -160,7 +160,7 @@
                                 <label class="checkBox_item correct2" for="date_end">End</label>
                                 <div class="picker-box">
                                     <div class="field-wrap">
-                                        <input type="text" name="bookings[0][appointments][0][time_to]" class="date-field mypicker" placeholder="6:55 pm">
+                                        <input type="text" name="bookings[0][appointments][0][time_to]" class="date-field mypicker" placeholder="">
                                         <span class="date-ico"><i class="fa fa-clock-o"></i></span>
                                     </div>
                                 </div>

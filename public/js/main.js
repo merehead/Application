@@ -451,6 +451,17 @@ function setTime(input, hour, second, period){
     $(input).val(hour+':'+second+' '+period)
 }
 
+function toDate(dStr,format) {
+    var now = new Date();
+    if (format == "h:m") {
+        now.setHours(dStr.substr(0,dStr.indexOf(":")));
+        now.setMinutes(dStr.substr(dStr.indexOf(":")+1));
+        now.setSeconds(0);
+        return now;
+    }else
+        return "Invalid Format";
+}
+
 $(document).ready(function () {
 
     $(document).on('blur','.mypicker',function(e){
@@ -544,10 +555,13 @@ $(document).ready(function () {
             '    </div>');
         $('.seconds').empty();
         var second;
-        for (var i = 0; i <= 59; i++) {
-            if(i<10){second='0'+i;} else {second=i;}
+        for (var i = 0; i < 4; i++) {
+            if(i<1){second='00';} else {second=i*15;}
+
             $('.seconds').append(new Option(second, second));
         }
+        var time = toDate($(that).val(),"h:m");
+        console.log(time);
     });
 
     $(document).on('click','.payment__item',function(e){e.preventDefault(); return false;})
