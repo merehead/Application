@@ -1820,7 +1820,7 @@ $(document).ready(function () {
             $(this).parent().parent().find('.delete').attr('data-id','d'+appointments);
             $(this).parent().parent().find('.delete').show();
         });
-        var t=$('.assistance_types').length;
+        var t=$('.assistance_types').length+1;
         $(typeCareAll).find('.assistance_types').each(function(){
            var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf(']')-1);
            var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf(']'), $(this).attr('name').length);
