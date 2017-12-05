@@ -106,7 +106,7 @@
                             <h2 class="ordinaryTitle">
                                 <span class="ordinaryTitle__text">Type of care</span>
                             </h2>
-                            <div class="messageCheckbox">
+                            <div class="messageCheckbox typeCareAll">
                                 @foreach($typeCareAll as $care)
                                     <div class="checkBox_item">
 
@@ -135,44 +135,19 @@
                                 <label class="checkBox_item correct2" for="date_end">Start</label>
 
                                 <div class="picker-box">
-                                    <div class="field-wrap">
+                                    <div class="field-wrap date_marker">
                                         <input type="text" name="bookings[0][appointments][0][time_from]" class="date-field mypicker start" placeholder="" >
                                         <span class="date-ico"><i class="fa fa-clock-o"></i></span>
                                     </div>
                                 </div>
 
-                                {{--<div class="messageInputs__field messageTime ">--}}
-                                    {{--<input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_from" required--}}
-                                           {{--name="bookings[0][appointments][0][time_from]" placeholder="1:30 PM"--}}
-                                           {{--value="">--}}
-                                    {{--<a href="#" class="messageIco centeredLink">--}}
-                                        {{--<i class="fa fa-clock-o" aria-hidden="true"></i>--}}
-                                    {{--</a>--}}
-                                {{--</div>--}}
-
-
-                                {{--                            <div class="messageInputs__field messageTime ">
-                                                                <input name="time_to_bed" id="time_to_bed" class="messageInput" placeholder="555" type="text">
-                                                                <a href="#" class="messageIco centeredLink">
-                                                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                                </a>
-                                                            </div>--}}
                                 <label class="checkBox_item correct2" for="date_end">End</label>
                                 <div class="picker-box">
-                                    <div class="field-wrap">
+                                    <div class="field-wrap date_marker">
                                         <input type="text" name="bookings[0][appointments][0][time_to]" class="date-field mypicker end" placeholder="">
                                         <span class="date-ico"><i class="fa fa-clock-o"></i></span>
                                     </div>
                                 </div>
-                                {{--<div class="messageInputs__field messageTime ">--}}
-                                    {{--<input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_bed" required--}}
-                                           {{--name="bookings[0][appointments][0][time_to]" placeholder="3:30 PM"--}}
-                                           {{--value="">--}}
-                                    {{--<a href="#" class="messageIco centeredLink">--}}
-                                        {{--<i class="fa fa-clock-o" aria-hidden="true"></i>--}}
-                                    {{--</a>--}}
-                                {{--</div>--}}
-
                                 <i class="fa fa-close checkBox_item delete nhide" data-id="d0" aria-hidden="true"></i>
                             </div>
                         </div>

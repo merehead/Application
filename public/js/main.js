@@ -469,19 +469,22 @@ $(document).ready(function () {
         if(!$(that).hasClass('active_picker'))
         $('.date-drop').remove();
     });
-    // $(document).on('click','.message__body',function(e){
-    //     $('.date-drop').remove();
-    //     $('.mypicker').removeClass('active_picker');
-    // });
+    $(window).click(function(e){
+        console.log(e);
+        if($(e.target).parent()[0].className.indexOf('date')<0 && $('.date-drop').length>0){
+             $('.date-drop').remove();
+             $('.mypicker').removeClass('active_picker');
+        }
+    });
 
     $(document).on('change','.hour',function(e){
         var hour = $(this).val();
         var seconds = $('.seconds').val();
         var input = $(this).parent().parent().parent().parent().prev('div').find('input');
-        var time = ($('.checkbox-date').val()=='on')?'am':'pm';
+        var time = ($('.checkbox-date').is(':checked'))?'pm':'am';
         setTime(input,hour,seconds,time);
-        $('.date-drop').remove();
-        $('.mypicker').removeClass('active_picker');
+        // $('.date-drop').remove();
+        // $('.mypicker').removeClass('active_picker');
         calculate_price();
     });
 
@@ -491,8 +494,8 @@ $(document).ready(function () {
         var input = $(this).parent().parent().parent().parent().parent().prev('div').find('input');
         var time = ($('.checkbox-date').is(':checked'))?'pm':'am';
         setTime(input,hour,seconds,time);
-        $('.date-drop').remove();
-        $('.mypicker').removeClass('active_picker');
+        // $('.date-drop').remove();
+        // $('.mypicker').removeClass('active_picker');
         calculate_price();
     });
 
@@ -502,8 +505,8 @@ $(document).ready(function () {
         var input = $(this).parent().parent().parent().parent().prev('div').find('input');
         var time = ($('.checkbox-date').is(':checked'))?'pm':'am';
         setTime(input,hour,seconds,time);
-        $('.date-drop').remove();
-        $('.mypicker').removeClass('active_picker');
+        // $('.date-drop').remove();
+        // $('.mypicker').removeClass('active_picker');
         calculate_price();
     });
 
@@ -570,17 +573,37 @@ $(document).ready(function () {
 
             $('.seconds').append(new Option(second, second));
         }
-        var start_time = $(that).parent();
+        var start_time = $(that).parent().parent().parent().find('.picker-box')[0];
+        start_time = toDate($(start_time).find('input.start').val().substring(0, 5),"h:m");
         var current_time = new Date();
         var time = toDate($(that).val().substring(0, 5),"h:m");
         var hours = time.getHours();
-        if(hours==0)
-            hours=current_time.getHours()+1;
+        if(hours==0) {
+            if($(that).hasClass('end')) {
+                hours = start_time.getHours() + 1;
+            } else {
+                hours = current_time.getHours() + 1;
+            }
+            if(hours>12)
+                hours=hours-12;
+        }
+
         var minutes = time.getMinutes();
-        if(hours<10)hours='0'+hours;
-        if(minutes<10)minutes='0'+minutes;
+        if(hours<10)
+            hours='0'+hours;
+        if(minutes<10)
+            minutes='0'+minutes;
         $('.hour').val(hours);
         $('.seconds').val(minutes);
+
+        console.log(start_time);
+        if($(that).val().indexOf('am')>0){
+            $('.checkbox-date').attr('checked',false)
+        }
+        else
+        {
+            $('.checkbox-date').attr('checked',true)
+        }
 
     });
 
@@ -1767,6 +1790,7 @@ $(document).ready(function () {
         e.preventDefault();
         var $that =$(this);
         var dlast = $('.cdate').last().clone();
+        var typeCareAll = $('.typeCareAll').last().clone();
         var clast = $('.checktime').last().clone();
         $(dlast).find('.error-booking').remove();
         $(clast).find('.error-booking').remove();
@@ -1777,6 +1801,13 @@ $(document).ready(function () {
             $(this).parent().parent().find('.delete').attr('data-id','d'+appointments);
             $(this).parent().parent().find('.delete').show();
         });
+
+        $(typeCareAll).find('.assistance_types').each(function(){
+           var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf(']')-1);
+           var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf(']'), $(this).attr('name').length);
+            $(this).attr('name', input_name +  appointments + input_name_p);
+        });
+
         $(dlast).find('.mypicker').each(function () {
             var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
             var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
@@ -1798,13 +1829,19 @@ $(document).ready(function () {
             $(this).parent().parent().find('.delete').attr('data-id','d'+appointments);
             periodicity++;
         });
+
         $(clast).find('.datepicker').each(function () {
             var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
             var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
             $(this).attr('name', input_name + '[' + appointments + input_name_p);
             $(this).parent().parent().find('.delete').attr('data-id','d'+appointments);
         });
+
         appointments=appointments+1;
+        $($that).before('<br><h2 class="ordinaryTitle">\n' +
+            '                                <span class="ordinaryTitle__text">Type of care</span>\n' +
+            '                            </h2>');
+        $($that).before(typeCareAll);
         $($that).before(dlast);
         $($that).before(clast);
         $('.rtext').last().remove();
