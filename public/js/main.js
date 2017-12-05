@@ -480,6 +480,9 @@ $(document).ready(function () {
         var input = $(this).parent().parent().parent().parent().prev('div').find('input');
         var time = ($('.checkbox-date').val()=='on')?'am':'pm';
         setTime(input,hour,seconds,time);
+        $('.date-drop').remove();
+        $('.mypicker').removeClass('active_picker');
+        calculate_price();
     });
 
     $(document).on('change','.checkbox-date',function(e){
@@ -488,6 +491,9 @@ $(document).ready(function () {
         var input = $(this).parent().parent().parent().parent().parent().prev('div').find('input');
         var time = ($('.checkbox-date').is(':checked'))?'pm':'am';
         setTime(input,hour,seconds,time);
+        $('.date-drop').remove();
+        $('.mypicker').removeClass('active_picker');
+        calculate_price();
     });
 
     $(document).on('change','.seconds',function(e){
@@ -496,6 +502,9 @@ $(document).ready(function () {
         var input = $(this).parent().parent().parent().parent().prev('div').find('input');
         var time = ($('.checkbox-date').is(':checked'))?'pm':'am';
         setTime(input,hour,seconds,time);
+        $('.date-drop').remove();
+        $('.mypicker').removeClass('active_picker');
+        calculate_price();
     });
 
     $(document).on('focus','.mypicker',function(e){
@@ -560,8 +569,14 @@ $(document).ready(function () {
 
             $('.seconds').append(new Option(second, second));
         }
-        var time = toDate($(that).val(),"h:m");
-        console.log(time);
+        var time = toDate($(that).val().substring(0, 5),"h:m");
+        var hours = time.getHours();
+        var minutes = time.getMinutes();
+        if(hours<10)hours='0'+hours;
+        if(minutes<10)minutes='0'+minutes;
+        $('.hour').val(hours);
+        $('.seconds').val(minutes);
+
     });
 
     $(document).on('click','.payment__item',function(e){e.preventDefault(); return false;})
@@ -1757,7 +1772,7 @@ $(document).ready(function () {
             $(this).parent().parent().find('.delete').attr('data-id','d'+appointments);
             $(this).parent().parent().find('.delete').show();
         });
-        $(dlast).find('.timepicker_message').each(function () {
+        $(dlast).find('.mypicker').each(function () {
             var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
             var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
             $(this).attr('name', input_name + '[' +appointments+ input_name_p);
