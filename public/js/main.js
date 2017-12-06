@@ -1810,11 +1810,14 @@ $(document).ready(function () {
         });
         var t=$('.assistance_types').length+1;
         $(typeCareAll).find('.assistance_types').each(function(){
-           var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf(']')-1);
-           var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf(']'), $(this).attr('name').length);
-            $(this).attr('name', input_name +  appointments + input_name_p);
+            //bookings[0][appointments][0][assistance_types][]
+            //bookings[0][appointments][0][date_start]
+            //var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf(']')-1);
+            //var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf(']'), $(this).attr('name').length);
+            var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
+            var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
+            $(this).attr('name', input_name + '[' + appointments + input_name_p);
             $(this).attr('id', 'assistance_types' +  t);
-            $(this).val(t);
             $(this).parent().find('label').attr('for','assistance_types' +  t);
             t=t+1;
         });

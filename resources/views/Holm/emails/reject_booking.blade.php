@@ -60,10 +60,10 @@
                             HELLO {{( $sendTo == 'carer') ? $carer->like_name : $serviceUser->like_name}}</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             @if($sendTo == 'carer')
-                                <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{$serviceUser->like_name}}</a>
+                                <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{ucfirst($serviceUser->like_name)}}</a>
                                 has cancelled the following <a href="{{route('carerBooking',['status'=>'canceled'])}}?bookingFilterCanceled={{$booking->id}}">booking</a>
                             @else
-                                <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{$carer->like_name}}</a>
+                                <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{ucfirst($carer->like_name)}}</a>
                                 has cancelled the following <a href="{{route('purchaserBookingStatus',['status'=>'canceled'])}}?purchaserbookingFilterCanceled={{$booking->id}}">booking</a>
                             @endif
                         </p>

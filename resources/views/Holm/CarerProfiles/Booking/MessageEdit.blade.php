@@ -41,16 +41,16 @@
                         </div>
                     </div>
                     <div class="bookings-more">
+                        @foreach($appointments as $appointment)
                         <div class="messageGroup">
-
                             <h2 class="ordinaryTitle">
                                 <span class="ordinaryTitle__text">Type of care</span>
                             </h2>
                             <div class="messageCheckbox">
-                                @foreach($assistance_types as $care)
+                                @foreach($appointment->assistance_types as $care)
                                     <div class="checkBox_item">
 
-                                        {!! Form::checkbox('bookings[0][assistance_types][]', $care->id, $care->id,
+                                        {!! Form::checkbox('bookings[0][appointments][0][assistance_types][]', $care->id, $care->id,
                                                     array('class' => 'customCheckbox assistance_types','onclick'=>'return false;','id'=>'assistance_types'.$care->id)) !!}
                                         <label for="assistance_types{{$care->id}}">{{$care->name}}</label>
                                     </div>
@@ -64,7 +64,7 @@
                              </span>
                             </h2>
                         </div>
-                        @foreach($appointments as $appointment)
+
                         <div class="messageInputs datetime ">
                             <div class="messageInputs__field messageDate">
                                 <input  onchange="calculate_price()" type="text" name="bookings[0][appointments][{{$loop->index}}][date_start]"

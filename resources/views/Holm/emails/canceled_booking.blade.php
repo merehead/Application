@@ -93,17 +93,20 @@
                             <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;">
                                 <tr>
                                     <td align="center" style="text-align:left; ">
-                                        <img src="{{asset('/img/service_user_profile_photos/'.$booking->service_user_id.'.png')}}"
-                                             onerror="this.src='{{asset('/img/no_photo.png')}}'" alt="avatar"
-                                             class="user"
-                                             style="width: 70px;
+                                        <?php
+                                        $patchToSrvUserAvatar = getcwd() . '/img/service_user_profile_photos/' . $booking->service_user_id. '.png';
+                                        if (file_exists($patchToSrvUserAvatar)) {
+                                        $img_src = asset('/img/service_user_profile_photos/' . $booking->service_user_id . '.png');
+                                        } else {
+                                        $img_src = asset('/img/no_photo.png');
+                                        }
+                                        ?>
+                                        <img src="{{$img_src}}" class="user" style="width: 70px;
                             display: block;
                             marign-top: 10px;
                             height: 70px;
                             border-radius: 50%;
                             object-fit: cover; -webkit-object-fit: cover;">
-
-
                                 </tr>
                             </table>
                         </div>

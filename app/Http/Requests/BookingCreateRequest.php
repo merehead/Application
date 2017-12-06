@@ -48,7 +48,7 @@ class BookingCreateRequest extends FormRequest
         return [
             'carer_id' => 'required',
             'service_user_id' => 'required',
-            'bookings.*.assistance_types' => 'required',
+            'bookings.*.appointments.*.assistance_types' => 'required',
             'bookings.*.appointments.*.date_start' => 'required',
             'bookings.*.appointments.*.time_from' => 'required',
             'bookings.*.appointments.*.time_to' => 'required',
