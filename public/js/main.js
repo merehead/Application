@@ -447,8 +447,15 @@ function scale(block) {
     }
 }
 
-function setTime(input, hour, second, period){
-    $(input).val(hour+':'+second+' '+period)
+function setTime(input, hour, minutes, period){
+    $(input).val(hour+':'+minutes+' '+period)
+    if($(input).hasClass('start')){
+        var input2 = $(input).parent().parent().parent().parent().parent().parent().find('.mypicker.end');
+        hour=parseInt(hour)+1;
+        if(hour<10) hour='0'+parseInt(hour);
+        if(minutes<10) minutes='0'+parseInt(minutes);
+        $(input2).val(hour+':'+minutes+' '+period)
+    }
 }
 
 function toDate(dStr,format) {
