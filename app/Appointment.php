@@ -16,6 +16,10 @@ class Appointment extends Model implements Constants
     /**
      * Relations
      */
+    public function assistance_types()
+    {
+        return $this->belongsToMany('App\AssistanceType', 'appointments_assistance_types');
+    }
     public function booking()
     {
         return $this->belongsTo('App\Booking');

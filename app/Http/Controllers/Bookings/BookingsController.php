@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Bookings;
 
+use App\Appointment;
 use App\Booking;
 use App\BookingOverview;
 use App\BookingsMessage;
@@ -27,7 +28,6 @@ class BookingsController extends FrontController implements Constants
 {
     public function create(BookingCreateRequest $request)
     {
-
         $booking = $this->createBooking($request);
 
         if ($request->ajax()) // This is what i am needing.
@@ -103,21 +103,25 @@ class BookingsController extends FrontController implements Constants
     public function getModalEditBooking(Booking $booking)
     {
 
-        $sql = 'SELECT  min(date_start) as date_start,  max(date_start) as date_end, min(time_from) as time_from, min(time_to) as time_to, min(periodicity) as periodicity
+        $sql = 'SELECT batch, min(date_start) as date_start,  max(date_start) as date_end, min(time_from) as time_from, min(time_to) as time_to, min(periodicity) as periodicity
                 FROM appointments
                 WHERE booking_id = ' . $booking->id . '
                 GROUP BY batch ORDER BY batch';
         $appointments = DB::select($sql);
 
-        array_map(function ($item) {
+        array_map(function ($item) use ($booking) {
+            $originAppointment = Appointment::where('booking_id', $booking->id)->where('batch', $item->batch)->first();
             $item->time_from = Carbon::parse($item->time_from)->format("h:i A");
-            $item->time_to = Carbon::parse($item->time_to)->format("h:i A");;
+            $item->time_to = Carbon::parse($item->time_to)->format("h:i A");
+            $item->assistance_types = $originAppointment->assistance_types;
         }, $appointments);
+
+
 
         $user = Auth::user();
         $this->vars = array_add($this->vars, 'user', $user);
         $this->vars = array_add($this->vars, 'appointments', $appointments);
-        $this->vars = array_add($this->vars, 'assistance_types', $booking->assistance_types);
+//        $this->vars = array_add($this->vars, 'assistance_types', $booking->assistance_types); //todo это теперь лежит внутри $appointments
         $this->vars = array_add($this->vars, 'serviceUsers', $booking->bookingServiceUser);
         $this->vars = array_add($this->vars, 'booking', $booking);
         $content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.MessageEdit')->with($this->vars)->render();
@@ -618,11 +622,6 @@ class BookingsController extends FrontController implements Constants
             //Generating appointments
             $this->createAppointments($booking, $booking_item['appointments']);
 
-
-            //Attaching booking`s assistance_types
-            if (isset($booking_item['assistance_types']))
-                $booking->assistance_types()->attach($booking_item['assistance_types']);
-
             //Booking status for workroom
             BookingsMessage::create([
                 'booking_id' => $booking->id,
@@ -652,7 +651,7 @@ class BookingsController extends FrontController implements Constants
                     break;
             }
             foreach ($days as $day) {
-                $booking->appointments()->create([
+                $appointment = $booking->appointments()->create([
                     'date_start' => $day,
                     'time_from' => date("H.i", strtotime($appointment_item['time_from'])),
                     'time_to' => date("H.i", strtotime($appointment_item['time_to'])),
@@ -662,6 +661,10 @@ class BookingsController extends FrontController implements Constants
                     'purchaser_status_id' => 1,
                     'batch' => $batch,
                 ]);
+
+                //Attaching booking`s assistance_types
+                if (isset($appointment_item['assistance_types']))
+                    $appointment->assistance_types()->attach($appointment_item['assistance_types']);
             }
         }
 
