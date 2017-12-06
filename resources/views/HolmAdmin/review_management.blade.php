@@ -24,6 +24,11 @@
                     Comment
                   </span>
                 </td>
+                <td class=" idField   " style="min-width: 85px;">
+                  <span class="td-title td-title--comment">
+                    booking
+                  </span>
+                </td>
 
                 <td class=" ordninary-td   no-padding-l">
                   <span class="td-title td-title--light-blue">
@@ -34,8 +39,7 @@
             <tr class="extra-tr">
                 <td>
                 </td>
-                <td>
-                </td>
+
                 <td class="for-inner">
                     <table class="innerTable ">
                         <tbody>
@@ -52,7 +56,8 @@
                 </td>
                 <td>
                 </td>
-
+                <td>
+                </td>
                 <td>
                 </td>
             </tr>
@@ -85,7 +90,13 @@
                         {{$review->comment}}
                     </span>
                     </td>
+                    <td>
 
+                       <span>
+                        <a target="_blank" href="{{route('viewBookingDetails',['booking'=>$review->booking->id])}}">
+                             Detail</a>
+                    </span>
+                    </td>
                     <td>
                         <div class="actionsGroup">
                             <form method="post" action="{{route('ReviewManagement')}}">

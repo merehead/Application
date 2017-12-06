@@ -34,6 +34,7 @@ class ReviewManagementController extends AdminController
     }
 
     public function index(Request $request){
+        $this->title = 'Holm Admin | Review Management';
         $input = $request->all();
         if(isset($input['method'])&&$input['id']){
             switch ($input['method']){
