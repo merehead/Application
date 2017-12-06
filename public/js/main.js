@@ -471,7 +471,6 @@ $(document).ready(function () {
     });
 
     $(window).click(function(e){
-        console.log(e);
         if($(e.target).parent()[0].className.indexOf('date')<0 && $('.date-drop').length>0){
              $('.date-drop').remove();
              $('.mypicker').removeClass('active_picker');
@@ -482,10 +481,8 @@ $(document).ready(function () {
         var hour = $(this).val();
         var seconds = $('.seconds').val();
         var input = $(this).parent().parent().parent().parent().prev('div').find('input');
-        var time = ($('.checkbox-date').is(':checked'))?'pm':'am';
+        var time = ($('.checkbox-date').is(':checked'))?'PM':'AM';
         setTime(input,hour,seconds,time);
-        // $('.date-drop').remove();
-        // $('.mypicker').removeClass('active_picker');
         calculate_price();
     });
 
@@ -495,8 +492,6 @@ $(document).ready(function () {
         var input = $(this).parent().parent().parent().parent().parent().prev('div').find('input');
         var time = ($('.checkbox-date').is(':checked'))?'PM':'AM';
         setTime(input,hour,seconds,time);
-        // $('.date-drop').remove();
-        // $('.mypicker').removeClass('active_picker');
         calculate_price();
     });
 
@@ -571,15 +566,16 @@ $(document).ready(function () {
         var second;
         for (var i = 0; i < 4; i++) {
             if(i<1){second='00';} else {second=i*15;}
-
             $('.seconds').append(new Option(second, second));
         }
         var start_time = $(that).parent().parent().parent().find('.picker-box')[0];
-        start_time = toDate($(start_time).find('input.start').val().substring(0, 5),"h:m");
         var current_time = new Date();
         var time = toDate($(that).val().substring(0, 5),"h:m");
         var minutes = time.getMinutes();
         var hours = time.getHours();
+        var timeAMPM = ($('.checkbox-date').is(':checked'))?'PM':'AM';
+        start_time = toDate($(start_time).find('input.start').val().substring(0, 5),"h:m");
+
         if(hours==0) {
             if($(that).hasClass('end')) {
                 hours = start_time.getHours() + 1;
@@ -587,49 +583,32 @@ $(document).ready(function () {
             } else {
                 hours = current_time.getHours() + 1;
             }
-            if(hours>12)
-                hours=hours-12;
-        }
-        if($(that).hasClass('end')) {
+            if(hours>12)  hours=hours-12;
+        }else if($(that).hasClass('end')) {
             minutes = start_time.getMinutes();
-            if(minutes<10)
-                minutes='0'+minutes;
-            var time = ($('.checkbox-date').is(':checked'))?'PM':'AM';
+            if(hours>12) hours=hours-12;
+            //if(hours<10) hours='0'+hours;
+            if(minutes<10) minutes='0'+minutes;
             $('.seconds').val(minutes);
-            setTime(that,hours,minutes,time);
+            setTime(that,hours,minutes,timeAMPM);
         }
 
-
-        if(hours<10)
-            hours='0'+hours;
-        if(minutes<10)
-            minutes='0'+minutes;
+        if(hours<10) hours='0'+parseInt(hours);
+        if(minutes<10) minutes='0'+parseInt(minutes);
         $('.hour').val(hours);
         $('.seconds').val(minutes);
         if($(that).hasClass('end'))
             $('.seconds').find('option').each(function() {
-            if ( $(this).val() != minutes ) {
+            if ( $(this).val() != minutes )
                 $(this).attr('disabled', true);
-            }else  $(this).attr('disabled', false);
+            else  $(this).attr('disabled', false);
         });
+        $('.checkbox-date').attr('checked',$(that).val().indexOf('PM')>0)
 
-        if($(that).val().indexOf('am')>0){
-            $('.checkbox-date').attr('checked',false)
-        }
-        else
-        {
-            $('.checkbox-date').attr('checked',true)
-        }
-
+        setTime(that,hours,minutes,timeAMPM);
     });
 
-    $(document).on('click','.payment__item',function(e){e.preventDefault(); return false;})
-
-/*    $('#login').modal().on('shown', function(){
-        $('body').css('overflow', 'hidden');
-    }).on('hidden', function(){
-        $('body').css('overflow', 'auto');
-    })*/
+    $(document).on('click','.payment__item',function(e){e.preventDefault(); return false;});
 
 
     $('#add-login-popup').on('click', function (){

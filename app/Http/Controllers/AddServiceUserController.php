@@ -22,12 +22,12 @@ class AddServiceUserController extends FrontController
 
 
 
-    public function create(){
+    public function create(Request $request,$type='Someone else'){
 
         $serviceUsersProfile = new ServiceUsersProfile();
         $serviceUsersProfile->purchaser_id = $this->user->id;
         $serviceUsersProfile->registration_progress = '4_2';
-        $serviceUsersProfile->care_for = 'Someone else';
+        $serviceUsersProfile->care_for = $type;
         $serviceUsersProfile->save();
 
         return redirect('/service-registration/'.$serviceUsersProfile->id);

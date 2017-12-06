@@ -73,7 +73,7 @@ Route::post('/purchaser-registration','PurchaserRegistrationController@update')-
 Route::get('/service-registration/{serviceUserProfile}','ServiceUserRegistrationController@index')->name('ServiceUserRegistration');
 Route::post('/service-registration/{serviceUserProfile}','ServiceUserRegistrationController@update')->name('ServiceUserRegistration');
 
-Route::get('/addServiceUser/','AddServiceUserController@create')->name('ServiceUserCreate');
+Route::get('/addServiceUser/{type?}','AddServiceUserController@create')->name('ServiceUserCreate');
 
 Route::get('/serviceUser-settings/{serviceUserProfile}','ServiceUserPrivateProfileController@index')->name('ServiceUserSetting');
 Route::get('/serviceUser/profile/{serviceUsersProfile}','ServiceUserPrivateProfileController@profile')->name('ServiceUserProfilePublic');

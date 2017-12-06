@@ -40,7 +40,7 @@
       border-collapse: collapse;
       font-size: 16px;
       -webkit-box-shadow: 0px 0px 101px 0px rgba(31, 31, 33, 0.15);
-      box-shadow: 0px 0px 101px 0px rgba(31, 31, 33, 0.15); width: 100%; max-width: 940px;  background: url('images/letter_bg.png') no-repeat bottom center;"
+      box-shadow: 0px 0px 101px 0px rgba(31, 31, 33, 0.15); width: 100%; max-width: 940px;  background: url('img/letter_bg.png') no-repeat bottom center;"
        bgcolor="#ffffff"
        class="container">
     <tr>
@@ -50,11 +50,11 @@
                    width="100%" class="content">
                 <tr>
                     <td style="padding-left: 40px;" align="left" valign="middle">
-                        <img src="img/logo.png" alt="" class="logo" style="width: 120px; float: left; ">
+                        <img src="{{asset('img/logo.png')}}" alt="" class="logo" style="width: 120px; float: left; ">
 
                     </td>
                     <td style="padding-left: 30px;">
-                        <img src="img/l1.png" alt="" class="" style="width:  100% ; float: right; ">
+                        <img src="{{asset('img/l1.png')}}" alt="" class="" style="width:  100% ; float: right; ">
                     </td>
                 </tr>
 
