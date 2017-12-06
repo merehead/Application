@@ -39,6 +39,10 @@
                                 <a href="{{route('ServiceUserProfileDelete', ['serviceUserProfile' => $serviceUser->id])}}" class="peopleCare__delete">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </a>
+                                    @else
+                                    <span class="peopleCare__delete">
+                                       &nbsp;&nbsp;
+                                    </span>
                                     @endif
                             </div>
 

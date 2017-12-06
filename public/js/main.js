@@ -583,6 +583,12 @@ $(document).ready(function () {
                 minutes = start_time.getMinutes();
             } else {
                 hours = current_time.getHours() + 1;
+                var dlast = $(that).parent().parent().parent().find('.picker-box')[1];
+                $('.checkbox-date').prop('checked',current_time.getHours()>11);
+                var timeAMPM = ($('.checkbox-date').is(':checked'))?'PM':'AM';
+                if(hours>12) hours=hours-12;
+                if(minutes<10) minutes='0'+minutes;
+                setTime(dlast,hours,minutes,timeAMPM);
             }
             if(hours>12)  hours=hours-12;
             $('.checkbox-date').prop('checked',current_time.getHours()>11);

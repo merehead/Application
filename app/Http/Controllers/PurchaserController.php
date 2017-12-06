@@ -41,9 +41,9 @@ class PurchaserController extends FrontController implements Constants
             //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
         } else {
 
-            $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('purchaser_id', $this->user->id)->get();
+            $newBookings = Booking::whereIn('status_id', [self::NEW])->where('purchaser_id', $this->user->id)->get();
             $this->vars = array_add($this->vars, 'newBookings', $newBookings);
-            $inProgressBookings = Booking::whereIn('status_id', [self::APPOINTMENT_STATUS_IN_PROGRESS])->where('purchaser_id', $this->user->id)->get();
+            $inProgressBookings = Booking::whereIn('status_id', [self::IN_PROGRESS])->where('purchaser_id', $this->user->id)->get();
             $this->vars = array_add($this->vars, 'inProgressBookings', $inProgressBookings);
 
             if(!empty($id) && Auth::user()->user_type_id==4){ //админ
@@ -209,8 +209,8 @@ class PurchaserController extends FrontController implements Constants
                 return response()->json(["result" => true,'content'=>$this->content,'hideLoadMore'=>$newBookingsAll->count()<=($perPage*$page),'countAll'=>$newBookingsAll->count()]);
             }
             // ---------------  In progress booking --------------------------------
-            $inProgressBookingsAll = Booking::whereIn('status_id', [self::CONFIRMED, self::IN_PROGRESS, self::DISPUTE])->where('purchaser_id', $user->id)->get();
-            $inProgressBookings = Booking::whereIn('status_id', [self::CONFIRMED, self::IN_PROGRESS, self::DISPUTE])->where('purchaser_id', $user->id)->skip($start)->take($perPage)->get();
+            $inProgressBookingsAll = Booking::whereIn('status_id', [self::IN_PROGRESS])->where('purchaser_id', $user->id)->get();
+            $inProgressBookings = Booking::whereIn('status_id', [self::IN_PROGRESS])->where('purchaser_id', $user->id)->skip($start)->take($perPage)->get();
             $inProgressAmount = 0;
             foreach ($inProgressBookings as $booking){
                 $inProgressAmount += $booking->purchaser_price;
