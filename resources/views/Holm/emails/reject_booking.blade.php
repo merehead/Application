@@ -67,6 +67,13 @@
                                 has cancelled the following <a href="{{route('purchaserBookingStatus',['status'=>'canceled'])}}?purchaserbookingFilterCanceled={{$booking->id}}">booking</a>
                             @endif
                         </p>
+                        <p style="font-size: 14px;margin-bottom:0;">
+                            @if ($sendTo == 'carer')
+                                Please <a href="{{route('ContactPage')}}">contact us</a> if you have any concerns.
+                            @else
+                                Our sincerest apologies. You can book another carer by searching through our <a href="{{route('searchPage')}}">list of carers</a>.
+                            @endif
+                        </p>
                     </td>
                 </tr>
             </table>
@@ -135,6 +142,7 @@
                                                    style="color: #6178fc; font-weight: 900;">{{$carer->first_name}}</a>
                                             </p>
                                     @endif
+
                                 </tr>
                             </table>
                         </div>
@@ -171,13 +179,7 @@
     </tr>
     <tr>
         <td valign="top" align="left" bgcolor="#ffffff" style="font-family: 'Roboto', sans-serif;">
-            <p style="font-size: 14px;margin-bottom:0;">
-                @if ($sendTo == 'carer')
-                    Please <a href="{{route('ContactPage')}}">contact us</a> if you have any concerns.
-                @else
-                    Our sincerest apologies. You can book another carer by searching through our <a href="{{route('searchPage')}}">list of carers</a>.
-                @endif
-            </p>
+
         </td>
     </tr>
     <tr>
