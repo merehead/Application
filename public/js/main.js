@@ -1810,6 +1810,7 @@ $(document).ready(function () {
             t=t+1;
         });
 
+
         $(dlast).find('.mypicker').each(function () {
             var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
             var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
