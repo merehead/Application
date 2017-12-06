@@ -150,7 +150,9 @@
                              style="width:100%;max-width:200px;display:inline-block;vertical-align:middle;;">
                             <table width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;">
                                 <tr>
-                                    <td align="center" style="text-align:left;"></td>
+                                    <td align="center" style="text-align:left;">
+                                        <p style="margin-top: 10px;  font-size: 16px;font-family: 'Roboto', sans-serif;"><span style="color: #909090;">{{$booking->appointments()->get()->count()}} Appointment{{$booking->appointments()->get()->count() > 1 ? 's':''}}</span></p>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
