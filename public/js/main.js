@@ -573,6 +573,7 @@ $(document).ready(function () {
         var time = toDate($(that).val().substring(0, 5),"h:m");
         var minutes = time.getMinutes();
         var hours = time.getHours();
+        $('.checkbox-date').prop('checked',$(that).val().indexOf('PM')>0);
         var timeAMPM = ($('.checkbox-date').is(':checked'))?'PM':'AM';
         start_time = toDate($(start_time).find('input.start').val().substring(0, 5),"h:m");
 
@@ -584,6 +585,8 @@ $(document).ready(function () {
                 hours = current_time.getHours() + 1;
             }
             if(hours>12)  hours=hours-12;
+            $('.checkbox-date').prop('checked',current_time.getHours()>11);
+            var timeAMPM = ($('.checkbox-date').is(':checked'))?'PM':'AM';
         }else if($(that).hasClass('end')) {
             minutes = start_time.getMinutes();
             if(hours>12) hours=hours-12;
@@ -603,7 +606,7 @@ $(document).ready(function () {
                 $(this).attr('disabled', true);
             else  $(this).attr('disabled', false);
         });
-        $('.checkbox-date').attr('checked',$(that).val().indexOf('PM')>0)
+
 
         setTime(that,hours,minutes,timeAMPM);
     });
