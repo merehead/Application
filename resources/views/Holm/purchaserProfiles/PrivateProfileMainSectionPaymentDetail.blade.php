@@ -7,6 +7,9 @@
             dataType: "application/json",
             success: function (response) {
                 console.log(response)
+                if(response.data.card){
+                    $('div.card-list h2').after(response.data.card)
+                }
             },
             error: function (response) {
                 console.log(response)
@@ -14,10 +17,26 @@
         });
     }
 
+    function deleteCard(form) {
+        $(form).parent().remove();
+        $.ajax({
+            url: $(form).attr('action'),
+            data: $(form).serialize(),
+            type: 'DELETE',
+            dataType: "application/json",
+            success: function (response) {
+
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        });
+    }
     $(document).ready(function(){
-       $('a.addCard').on('click',function(e){
+       $('a.deleteCard').on('click',function(e){
            e.preventDefault();
-            addCard(document.getElementById('addCard'));
+           //$(this).parent().parent().remove();
+            deleteCard(document.getElementById('deleteCard'));
             return false;
         });
     });
@@ -82,22 +101,24 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="card-list">
+                <div class="card-list">
                 <h2 class="formLabel">
                     List of Cards
                 </h2>
-                @foreach(\App\User::find(Auth::user()->id)->credit_cards() as $card)
+                @foreach(\App\User::find(Auth::user()->id)->credit_cards as $card)
 
                 <div class="card-list-box">
                     <p class="card-list__item">
                         xxxx xxxx xxxx {{$card->last_four}}
                     </p>
-                    <div class="payment-control payment-control--for-card ">
-                        <a href="#" class="payment-control__item payment-control__item--delete">
-                            <i class="fa fa-trash"></i>
-                            <span>delete</span>
-                        </a>
-                    </div>
+                    <form id="deleteCard" action="{{route('DeleteCreditCards',['card_id'=>$card->id])}}" method="DELETE">
+                        <div class="payment-control payment-control--for-card ">
+                            <a href="#" class="payment-control__item payment-control__item--delete deleteCard">
+                                <i class="fa fa-trash"></i>
+                                <span>delete</span>
+                            </a>
+                        </div>
+                    </form>
 
                 </div>
                 @endforeach
