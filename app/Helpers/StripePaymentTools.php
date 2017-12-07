@@ -84,6 +84,37 @@ class StripePaymentTools implements PaymentToolsInterface
         return $res->id;
     }
 
+    public function createCustomerCharge(int $amount, string $costumerToken, int $bookingId) : string
+    {
+        try {
+            $res = $response  = Charge::create(array(
+                "amount" => $amount,
+                "currency" => 'gbp',
+                "description" => "Charging carer",
+                "customer" => $costumerToken,
+            ));
+        } catch (\Exception $ex){
+            throw $ex;
+        }
+
+        $balanceTransaction = BalanceTransaction::retrieve($res['balance_transaction']);
+
+        StripeCharge::create([
+            'id' => $res->id,
+            'booking_id' => $bookingId,
+            'amount' => $amount,
+            'fee' => $balanceTransaction->fee,
+        ]);
+
+        Transaction::create([
+            'booking_id' => $bookingId,
+            'payment_method' => 'stripe',
+            'amount' => $amount/100,
+        ]);
+
+        return $res->id;
+    }
+
     public function createRefund(int $amount, string $chargeId, int $bookingId, string $comment) : string
     {
         try {

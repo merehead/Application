@@ -1,11 +1,15 @@
 <?php
 namespace App\Helpers\Contracts;
 
+use App\StripeCostumer;
+
 interface PaymentToolsInterface
 {
     public function createCreditCardToken(array $creditCardData) : string;
 
     public function createCharge(int $amount, string $cardToken, int $bookingId) : string;
+
+    public function createCustomerCharge(int $amount, string $costumerToken, int $bookingId) : string;
 
     public function createRefund(int $amount, string $chargeId, int $bookingId, string $comment) : string;
 

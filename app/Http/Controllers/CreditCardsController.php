@@ -25,6 +25,8 @@ class CreditCardsController extends FrontController
                 ],
             ));
 
+            dd($customer);
+
 
             $stripeCustomer = StripeCostumer::create([
                 'purchaser_id' => $user->id,

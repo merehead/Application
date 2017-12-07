@@ -186,18 +186,14 @@ class BookingsController extends FrontController implements Constants
 
     public function setPaymentMethod(Booking $booking, Request $request, StripeService $stripeService)
     {
+        $user = Auth::user();
+
         if ($request->payment_method == 'credit_card') {
-            try {
-                $cardToken = PaymentTools::createCreditCardToken([
-                    'card_number' => $request->card_number,
-                    'exp_month' => $request->card_month,
-                    'exp_year' => $request->card_year,
-                    'cvc' => $request->card_cvc,
-                ]);
-            } catch (\Exception $ex) {
-                return response($this->formatResponse('error', $ex->getMessage()));
-            }
-            $booking->card_token = $cardToken;
+            $stripeCustomer = $user->credit_cards()->where('id', $request->card_id)->first();
+            if(!$stripeCustomer)
+                return response($this->formatResponse('error', 'card_not_found'));
+
+            $booking->card_token = $stripeCustomer->token;
         } else {
             if ($booking->bookingPurchaser->bonus_balance < $booking->purchaser_price) {
                 return response($this->formatResponse('error', 'You do not have enough credits in your bonus wallet.'));
@@ -257,7 +253,7 @@ class BookingsController extends FrontController implements Constants
     {
         if ($booking->payment_method == 'credit_card') {
             try {
-                $purchase = PaymentTools::createCharge($booking->purchaser_price * 100, $booking->card_token, $booking->id);
+                $purchase = PaymentTools::createCustomerCharge($booking->purchaser_price * 100, $booking->card_token, $booking->id);
             } catch (\Exception $ex) {
                 return response($this->formatResponse('error', $ex->getMessage()));
             }
