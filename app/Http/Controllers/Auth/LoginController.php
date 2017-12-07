@@ -69,7 +69,7 @@ class LoginController extends Controller
 
         if( Cookie::get('bookingFilterPurchaser')) {
             Cookie::forget('bookingFilter');
-            return '/purchaser-settings/booking/new/';
+            return '/purchaser-settings/booking/pending/';
         }
         if( Cookie::get('referUserProfilePublic')) {
             $url = route('ServiceUserProfilePublic',['serviceUserProfile'=> Cookie::get('referUserProfilePublic')]);
