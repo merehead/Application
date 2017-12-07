@@ -54,7 +54,7 @@
                 </p>
                 <p class="hourPrice">
                 <span class="hourPrice__price">
-                 From £ {{(Auth::check()&&Auth::user()->user_type_id==1)? 10 : 12  }}</span><span class="hourPrice__timing">/hour</span>
+                 From £ {{(Auth::check()&&Auth::user()->id==$topCarer->id)? 10 : 12  }}</span><span class="hourPrice__timing">/hour</span>
                 </p>
               </div>
             </div>
