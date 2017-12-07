@@ -37,7 +37,7 @@
     @if(Auth::check())
         @if (Auth::user()->user_type_id !== 3 && $carerProfile->profiles_status_id==2)
             <div class="bookBtn">
-                <a href="#" class="bookBtn__item  centeredLink" data-toggle="modal" data-target="#message-carer">
+                <a href="#" class="bookBtn__item  centeredLink" data-toggle="modal" data-target="{{(\App\User::find(Auth::user()->id)->credit_cards->count()>0)?'#message-carer':'#NeedAddCard'}}" >
                     book carer
                 </a>
             </div>

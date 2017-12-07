@@ -1,20 +1,6 @@
 <script>
     function addCard(form) {
-        $.ajax({
-            url: $(form).attr('action'),
-            data: $(form).serialize(),
-            type: 'POST',
-            dataType: "application/json",
-            success: function (response) {
-                console.log(response)
-                if(response.data.card){
-                    $('div.card-list h2').after(response.data.card)
-                }
-            },
-            error: function (response) {
-                console.log(response)
-            }
-        });
+
     }
 
     function deleteCard(form) {
@@ -33,6 +19,10 @@
         });
     }
     $(document).ready(function(){
+        $('a.btn-edit').on('click',function(){
+            $('a.addCard').show();
+            $('a.deleteCard').show();
+        });
        $('a.deleteCard').on('click',function(e){
            e.preventDefault();
            //$(this).parent().parent().remove();
@@ -41,9 +31,22 @@
         });
         $('a.addCard').on('click',function(e){
             e.preventDefault();
-            //$(this).parent().parent().remove();
-            addCard(document.getElementById('addCard'));
-            return false;
+            var form = document.getElementById('addCard');
+            $.ajax({
+                url: $(form).attr('action'),
+                data: $(form).serialize(),
+                type: 'POST',
+                dataType: "json",
+                success: function (response) {
+                    if(response.data.card){
+                        $('div.card-list h2').after(response.data.card)
+                    }
+                    console.log(response);
+                },
+                error: function (response) {
+                    console.log(response)
+                }
+            });
         });
     });
 </script>
@@ -119,7 +122,7 @@
                     </p>
                     <form id="deleteCard" action="{{route('DeleteCreditCards',['card_id'=>$card->id])}}" method="DELETE">
                         <div class="payment-control payment-control--for-card ">
-                            <a href="#" class="payment-control__item payment-control__item--delete deleteCard">
+                            <a href="#" class="payment-control__item payment-control__item--delete deleteCard" style="display: none">
                                 <i class="fa fa-trash"></i>
                                 <span>delete</span>
                             </a>
@@ -143,10 +146,10 @@
                 <div class="inputWrap">
                     <input type="text"  name="number" class="formInput" placeholder="">
                     <span class="bookPayment__ico bookPayment__ico--first">
-                    <img src="./img/mc.png" alt="">
+                    <img src="/img/mc.png" alt="">
                   </span>
                     <span class="bookPayment__ico">
-                    <img src="./img/visa.png" alt="">
+                    <img src="/img/visa.png" alt="">
                   </span>
                 </div>
             </div>
@@ -179,7 +182,7 @@
                 </div>
             </div>
             <div class="payment-control">
-                <a href="#"  class="payment-control__item addCard">
+                <a href="#"  class="payment-control__item addCard" style="display: none">
                     Save payment details
                 </a>
             </div>

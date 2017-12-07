@@ -146,4 +146,22 @@
     </div>
 </div>
 
+<div id="NeedAddCard" class="modal fade" role="dialog">
+    <div class="login" style="position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
+        <div class="login__header">
+            <h2>We're not ready!</h2>
+            <a href="#" data-dismiss="modal" class="close closeModal">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+        <div class="who-you-are">
+            <div class="who-you-are__box">
+                <span>
+                    <p>Sorry. To book a carer you need to add a payment card. Click <a href="{{route('purchaserSettings')}}">here</a> to add you payment details.</p>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
 

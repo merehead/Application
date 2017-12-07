@@ -32,12 +32,6 @@
                             </div>
                             @endforeach
                         </div>
-                        <div class="paymentCheckbox">
-                            <div class="checkBox_item">
-                                <input type="checkbox" name="checkbox" class="customCheckbox" id="buttonPaymentCard1">
-                                <label for="buttonPaymentCard1"> save payment details?</label>
-                            </div>
-                        </div>
                         <div class="roundedBtn roundedBtn--center">
                             <a href="#" class="roundedBtn__item roundedBtn__item--confirm" id="buttonPaymentCard">
                                 Confirm Payment
