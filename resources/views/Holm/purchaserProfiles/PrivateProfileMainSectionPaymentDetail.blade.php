@@ -42,7 +42,7 @@
         $('a.addCard').on('click',function(e){
             e.preventDefault();
             //$(this).parent().parent().remove();
-            deleteCard(document.getElementById('addCard'));
+            addCard(document.getElementById('addCard'));
             return false;
         });
     });
