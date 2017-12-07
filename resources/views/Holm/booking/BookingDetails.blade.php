@@ -115,7 +115,7 @@
                 </h2>
                 <div class="careRequested">
                     <div class="careRequested__item">
-                    @php($i = 0)
+                    {{--@php($i = 0)--}}
                     {{--@foreach($booking->assistance_types()->get() as $type)--}}
                         {{--@if($i == 2)--}}
                         {{--</div>--}}
@@ -237,69 +237,62 @@
             </p>
         </div>
 
-
-
-
-
-        <div class="appointmentSliderWrap">
-            <h2 class="ordinaryTitle ">
-                <span class="ordinaryTitle__text ordinaryTitle__text--smaller">Appointments:</span>
-            </h2>
-            <div class="sliderContainer ">
-                <div class="appointmentSliderBox">
-                    <div class="appointmentSlider owl-carousel">
-                        @php($i = 1)
-                        @foreach($booking->appointments as $appointment)
-                            @if(in_array($appointment->status_id, [1, 2, 3]))
-                                @if($appointment->is_past)
-                                    @php($class = 'progress')
-                                @else
-                                    @php($class = 'new')
-                                @endif
-                            @else
-                                @php($class = 'done')
+        @php($i = 1)
+        @foreach($booking->appointments as $appointment)
+            @if(in_array($appointment->status_id, [1, 2, 3]))
+                @if($appointment->is_past)
+                    @php($class = 'appointment-status--progress')
+                @else
+                    @php($class = 'appointment-status--coming')
+                @endif
+            @else
+                @php($class = 'appointment-status--completed')
+            @endif
+            <div class="app-item">
+                <div class="appointment-head">
+                    <span class="app-number">#{{$i}}</span>
+                    <h2 class="appointment-status {{$class}}">
+                        {{in_array($appointment->status_id, [4]) ? 'completed' : ''}}
+                        {{in_array($appointment->status_id, [5]) ? 'rejected' : ''}}
+                        {{in_array($appointment->status_id, [3]) ? 'in dispute' : ''}}
+                        @if(in_array($appointment->status_id, [1, 2]))
+                            {{$appointment->is_past ? 'in progress' : 'Upcoming'}}
+                        @endif
+                    </h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="appointment-info">
+                            <p class="appointment-info__item">
+                                <i class="fa fa-calendar"></i>
+                                <span>{{$appointment->formatted_date_start}}</span>
+                            </p>
+                            <p class="appointment-info__item">
+                                <i class="fa fa-clock-o"></i>
+                                <span>{{$appointment->formatted_time_from}} - {{$appointment->formatted_time_to}}</span>
+                            </p>
+                            <p class="appointment-info__services">
+                                <span>{{$appointment->assistance_types_text}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="app-btn">
+                            @if($user->user_type_id !== 4)
+                                @php($field = $user->user_type_id == 1 ? 'purchaser_status_id' : 'carer_status_id')
+                                <button {{$booking->status_id != 5 || !in_array($appointment->{$field}, [1]) || !$appointment->is_past ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "reject"  class="app-btn__item">
+                                    Reject
+                                </button>
+                                <button {{$booking->status_id != 5 || !in_array($appointment->{$field}, [1]) || !$appointment->is_past ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "completed"  class="app-btn__item app-btn__item--complete">
+                                    Completed
+                                </button>
                             @endif
-                            <div class="singleAppointment singleAppointment--{{$class}}">
-                                <div class="singleAppointment__header">
-                                  <span>
-                                    #{{$i}}
-                                  </span>
-                                    <h2>
-                                        {{in_array($appointment->status_id, [4]) ? 'completed' : ''}}
-                                        {{in_array($appointment->status_id, [5]) ? 'rejected' : ''}}
-                                        {{in_array($appointment->status_id, [3]) ? 'in dispute' : ''}}
-                                        @if(in_array($appointment->status_id, [1, 2]))
-                                            {{$appointment->is_past ? 'in progress' : 'new'}}
-                                        @endif
-                                    </h2>
-                                </div>
-                                <div class="singleAppointment__body">
-                                    <p>
-                                        <span>Date: </span> {{$appointment->formatted_date_start}}
-                                    </p>
-                                    <p>
-                                        <span>Time: </span>  {{$appointment->formatted_time_from}} - {{$appointment->formatted_time_to}}
-                                    </p>
-                                    <div class="appointmentBtn">
-                                        @if($user->user_type_id !== 4)
-                                            @php($field = $user->user_type_id == 1 ? 'purchaser_status_id' : 'carer_status_id')
-                                            <button {{$booking->status_id != 5 || !in_array($appointment->{$field}, [1]) || !$appointment->is_past ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "completed"  class="changeAppointmentStatus appointmentBtn__item appointmentBtn__item--compl">
-                                                Completed
-                                            </button>
-                                            <button {{$booking->status_id != 5 || !in_array($appointment->{$field}, [1]) || !$appointment->is_past ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "reject"  class="changeAppointmentStatus appointmentBtn__item appointmentBtn__item--rej">
-                                                Reject
-                                            </button>
-                                            @endif
-                                    </div>
-                                </div>
-                            </div>
-                            @php(++$i)
-                        @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
+            @php(++$i)
+        @endforeach
         <div class="comments">
             @if($user->user_type_id !== 4)
             <div class="comments__forMessage">

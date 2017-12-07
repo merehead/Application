@@ -48,6 +48,11 @@ class Appointment extends Model implements Constants
     /**
      * Accessors
      */
+    public function getAssistanceTypesTextAttribute(){
+
+        return implode(', ', array_pluck($this->assistance_types, 'name'));
+    }
+    
     public function getFormattedDateStartAttribute()
     {
         return date('d/m/Y', strtotime($this->date_start));
