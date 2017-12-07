@@ -22,7 +22,7 @@
         $.ajax({
             url: $(form).attr('action'),
             data: $(form).serialize(),
-            type: 'DELETE',
+            type: 'get',
             dataType: "application/json",
             success: function (response) {
 
