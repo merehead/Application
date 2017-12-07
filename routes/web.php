@@ -107,7 +107,7 @@ Route::get('/documents/{user_id?}','DocumentsController@GetDocuments')->name('Ge
 Route::post('/profile-photo','ProfilePhotosController@uploadUserProfilePhoto');
 Route::post('/service-user-profile-photo','ProfilePhotosController@uploadServiceUserProfilePhoto');
 
-Route::post('/credit_card','CreditCardsController@store');
+Route::post('/credit_card','CreditCardsController@store')->name('CreditCards');
 Route::delete('/credit_card/{card_id}','CreditCardsController@destroy');
 
 
