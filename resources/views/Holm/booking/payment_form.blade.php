@@ -24,58 +24,13 @@
                         </a>
                     </div>
                     <form action="" class="bookPayment__form bookPayment__form-header">
-                        <div class="formField">
-                            <h2 class="formLabel">
-                                Card owner's name
-                            </h2>
-                            <div class="inputWrap">
-                                <input type="text" class="formInput" placeholder="Cris Jones">
+                        <div class="card-list">
+                            @foreach(\App\User::find(Auth::user()->id)->credit_cards as $card)
+                            <div class="card-list__item">
+                                <input type="radio" class="theme-radio" value="{{$card->id}}" id="radio-payment{{$card->id}}" name="card_id">
+                                <label for="radio-payment{{$card->id}}"><span> xxxx xxxxx xxxx {{$card->last_four}}</span></label>
                             </div>
-                        </div>
-                        <div class="bookPayment__field">
-                            <h2 class="formLabel">
-                                Card Number
-                            </h2>
-                            <div class="inputWrap">
-                                <input type="text" class="formInput" id="cardNumber" placeholder="4534 3333 3333 3333 3333">
-                                <span class="bookPayment__ico">
-                        <img src="{{asset("img/visa.png")}}" alt="">
-                      </span>
-                            </div>
-                        </div>
-                        <div class="bookPayment__row bookPayment__row--xs-column">
-                            <div class="bookPayment__halfColumn   bookPayment__halfColumn--xs-full">
-                                <h2 class="formLabel">
-                                    Valid Until
-                                </h2>
-                                <div class="bookPayment__row">
-                                    <div class="bookPayment__halfColumn">
-                                        <div class="formField">
-                                            <div class="inputWrap">
-                                                <input type="text" id="cardMonth" class="formInput" placeholder="MM">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="bookPayment__halfColumn">
-                                        <div class="formField">
-                                            <div class="inputWrap">
-                                                <input type="text" id="cardYear" class="formInput" placeholder="YY">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="bookPayment__halfColumn bookPayment__halfColumn--xs-full">
-                                <div class="formField">
-                                    <h2 class="formLabel">
-                                        cvc code
-                                    </h2>
-                                    <div class="inputWrap">
-                                        <input type="text" id="cardCVC" class="formInput" placeholder="202">
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                         <div class="paymentCheckbox">
                             <div class="checkBox_item">
@@ -183,17 +138,10 @@
 
     $('#buttonPaymentCard').click(function () {
         showSpinner();
-        var cardNumber = $('#cardNumber').val();
-        var cardMonth = $('#cardMonth').val();
-        var cardYear = $('#cardYear').val();
-        var cardCVC = $('#cardCVC').val();
         $.post('{{route('setBookingPaymentMethod', ['booking' => $booking->id])}}',
             {
                 'payment_method': 'credit_card',
-                'card_number': cardNumber,
-                'card_month': cardMonth,
-                'card_year': cardYear,
-                'card_cvc': cardCVC
+                'card_id': $('input[name="card_id"]').val()
             },
             function( data ) {
             if(data.status == 'success'){
