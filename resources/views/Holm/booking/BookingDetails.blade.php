@@ -116,14 +116,14 @@
                 <div class="careRequested">
                     <div class="careRequested__item">
                     @php($i = 0)
-                    @foreach($booking->assistance_types()->get() as $type)
-                        @if($i == 2)
-                        </div>
-                        <div class="careRequested__item">
-                        @endif
-                        <p>{{$type->name}}</p>
-                        @php(++$i)
-                    @endforeach
+                    {{--@foreach($booking->assistance_types()->get() as $type)--}}
+                        {{--@if($i == 2)--}}
+                        {{--</div>--}}
+                        {{--<div class="careRequested__item">--}}
+                        {{--@endif--}}
+                        {{--<p>{{$type->name}}</p>--}}
+                        {{--@php(++$i)--}}
+                    {{--@endforeach--}}
                     </div>
                 </div>
             </div>
