@@ -146,7 +146,7 @@
                 <div class="inputWrap">
                     <input type="text"  name="number" class="formInput" placeholder="">
                     <span class="bookPayment__ico bookPayment__ico--first">
-                    <img src="/img/mc.png" alt="">
+                    <img src="/img/mc2.png" alt="">
                   </span>
                     <span class="bookPayment__ico">
                     <img src="/img/visa.png" alt="">
