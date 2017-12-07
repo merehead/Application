@@ -77,6 +77,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Document::class);
     }
+    
+    public function credit_cards(){
+        return $this->hasMany(StripeCostumer::class, 'purchaser_id');
+    }
 
 
     /**

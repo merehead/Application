@@ -107,6 +107,9 @@ Route::get('/documents/{user_id?}','DocumentsController@GetDocuments')->name('Ge
 Route::post('/profile-photo','ProfilePhotosController@uploadUserProfilePhoto');
 Route::post('/service-user-profile-photo','ProfilePhotosController@uploadServiceUserProfilePhoto');
 
+Route::post('/credit_card','CreditCardsController@store');
+Route::delete('/credit_card/{card_id}','CreditCardsController@destroy');
+
 
 // registration mail
 Route::get('/thank-you-carer', 'CarerRegistrationController@sendContinueRegistration')->name('thankYou'); //mail - continue registration
@@ -195,15 +198,9 @@ Route::get('/appan', function (){
 });
 
 Route::get('/test_stripe', function (){
-
-//    $res = PaymentTools::createCreditCardToken(['card_number' => '4000 0000 0000 0077','exp_month' => '12','exp_year' => '20','cvc' => '123']);//txn_1BGSwgDBFNDzp4kiNU6fZqB6
-//    $res = PaymentTools::createCharge(2000, $res, 191);
-//    $res = PaymentTools::getBalanceTransaction('txn_1BGSwgDBFNDzp4kiNU6fZqB6');
-//    dd($res);
-//    $res = PaymentTools::createTransfer('acct_1BEMdvAij8rTvtXk', 20000, 'Payment to carer 2');
-//    $res = PaymentTools::deleteConnectedAccount('acct_1BDwrPHySv5f7qBn');
-
-//    dd($res);
+    $user = \App\User::find(2);
+    $card = $user->credit_cards()->first();
+    \App\Helpers\Facades\PaymentTools::createCharge(2000, $card->token, 209);
 });
 
 Route::get('/test_sms', function (){
