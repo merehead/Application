@@ -86,7 +86,7 @@
                 <h2 class="formLabel">
                     List of Cards
                 </h2>
-                @foreach(\App\User::find(Auth::user()->id)->credit_cards() as $card)
+                @foreach(Auth::user()->credit_cards()->get() as $card)
 
                 <div class="card-list-box">
                     <p class="card-list__item">
