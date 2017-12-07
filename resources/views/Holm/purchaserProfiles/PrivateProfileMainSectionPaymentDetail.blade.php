@@ -39,6 +39,12 @@
             deleteCard(document.getElementById('deleteCard'));
             return false;
         });
+        $('a.addCard').on('click',function(e){
+            e.preventDefault();
+            //$(this).parent().parent().remove();
+            deleteCard(document.getElementById('addCard'));
+            return false;
+        });
     });
 </script>
 <!-- <div class="borderContainer">
