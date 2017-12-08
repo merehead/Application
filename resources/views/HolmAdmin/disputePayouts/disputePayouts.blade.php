@@ -140,7 +140,7 @@
                                 <span class="extraTitle">id</span>
                             </td>
                             <td class="nameField">
-                                <span class="extraTitle">BOOKING WORKROOM</span>
+                                <span class="extraTitle">Booking details</span>
                             </td>
 
                         </tr>
