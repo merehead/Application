@@ -14,6 +14,7 @@ use App\PaymentServices\StripeService;
 use App\Http\Controllers\FrontController;
 use App\PurchasersProfile;
 use App\ServiceUsersProfile;
+use App\StripeCostumer;
 use App\User;
 use App\Exceptions\MessenteException;
 use Illuminate\Http\Request;
@@ -189,11 +190,42 @@ class BookingsController extends FrontController implements Constants
         $user = Auth::user();
 
         if ($request->payment_method == 'credit_card') {
-            $stripeCustomer = $user->credit_cards()->where('id', $request->card_id)->first();
-            if(!$stripeCustomer)
-                return response($this->formatResponse('error', 'card_not_found'));
+            if($request->card_id){
+                $stripeCustomer = $user->credit_cards()->where('id', $request->card_id)->first();
+                if(!$stripeCustomer)
+                    return response($this->formatResponse('error', 'card_not_found'));
+                $booking->card_token = $stripeCustomer->token;
+            } else {
+                try {
+                    $cardToken = PaymentTools::createCreditCardToken([
+                        'card_number' => $request->card_number,
+                        'exp_month' => $request->card_month,
+                        'exp_year' => $request->card_year,
+                        'cvc' => $request->card_cvc,
+                    ]);
+                    $booking->card_token = $cardToken;
 
-            $booking->card_token = $stripeCustomer->token;
+                    if($request->save_card){
+                        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+                        $customer = \Stripe\Customer::create(array(
+                            'source'   => [
+                                'object' => 'card',
+                                'number' => $request->card_number,
+                                'exp_month' => $request->card_month,
+                                'exp_year' => $request->card_year,
+                                'cvc' => $request->card_cvc,
+                            ]
+                        ));
+                        $stripeCustomer = StripeCostumer::create([
+                            'purchaser_id' => $user->id,
+                            'token' => $customer->id,
+                            'last_four' => substr(str_replace(' ','',$request->number), 12),
+                        ]);
+                    }
+                } catch (\Exception $ex) {
+                    return response($this->formatResponse('error', $ex->getMessage()));
+                }
+            }
         } else {
             if ($booking->bookingPurchaser->bonus_balance < $booking->purchaser_price) {
                 return response($this->formatResponse('error', 'You do not have enough credits in your bonus wallet.'));
@@ -253,7 +285,12 @@ class BookingsController extends FrontController implements Constants
     {
         if ($booking->payment_method == 'credit_card') {
             try {
-                $purchase = PaymentTools::createCustomerCharge($booking->purchaser_price * 100, $booking->card_token, $booking->id);
+                if(substr($booking->card_token, 0, 3) == 'cus'){
+                    $purchase = PaymentTools::createCustomerCharge($booking->purchaser_price * 100, $booking->card_token, $booking->id);
+                } elseif (substr($booking->card_token, 0, 3) == 'tok') {
+                    $purchase = PaymentTools::createCharge($booking->purchaser_price * 100, $booking->card_token, $booking->id);
+                }
+
             } catch (\Exception $ex) {
                 return response($this->formatResponse('error', $ex->getMessage()));
             }

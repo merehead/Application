@@ -171,10 +171,10 @@
                                 <span class="extraTitle">to</span>
                             </td>
                             <td class="">
-                                <span class="extraTitle">ammount carer</span>
+                                <span class="extraTitle">amount carer</span>
                             </td>
                             <td class="">
-                                <span class="extraTitle">ammount purchaser</span>
+                                <span class="extraTitle">amount purchaser</span>
                             </td>
                         </tr>
 
@@ -220,7 +220,7 @@
                                         <span>{{$disputePayout->appointment->booking->bookingPurchaserProfile->id}}</span>
                                     </td>
                                     <td class="nameField">
-                                        <a href="#" class="tableLink">{{$disputePayout->appointment->booking->bookingPurchaserProfile->full_name}}</a>
+                                        <a href="/purchaser-settings/{{$disputePayout->appointment->booking->bookingPurchaserProfile->id}}" class="tableLink">{{$disputePayout->appointment->booking->bookingPurchaserProfile->full_name}}</a>
                                     </td>
                                 </tr>
                                 </tbody></table>
@@ -232,7 +232,7 @@
                                         <span>{{$disputePayout->appointment->booking->bookingCarerProfile->id}}</span>
                                     </td>
                                     <td class="nameField">
-                                        <a href="#" class="tableLink">{{$disputePayout->appointment->booking->bookingCarerProfile->full_name}}</a>
+                                        <a href="/carer/profile/{{$disputePayout->appointment->booking->bookingCarerProfile->id}}" class="tableLink" target="_blank">{{$disputePayout->appointment->booking->bookingCarerProfile->full_name}}</a>
                                     </td>
                                 </tr>
                                 </tbody></table>
@@ -253,7 +253,7 @@
                             <table class="innerTable ">
                                 <tbody><tr>
                                     <td class=" " style="overflow-x: scroll;">
-                                        <span>{{$disputePayout->appointment->booking->transaction->id}}</span>
+                                        <span><a href="https://dashboard.stripe.com/test/payments/{{$disputePayout->appointment->booking->transaction->id}}" target="_blank">{{$disputePayout->appointment->booking->transaction->id}}</a></span>
                                     </td>
                                 </tr>
 
