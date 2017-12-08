@@ -280,12 +280,18 @@
                         <div class="app-btn">
                             @if($user->user_type_id !== 4)
                                 @php($field = $user->user_type_id == 1 ? 'purchaser_status_id' : 'carer_status_id')
-                                <button data-appointment_id="{{$appointment->id}}" {{$booking->status_id != 5 || !in_array($appointment->{$field}, [1]) || !$appointment->is_past ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "reject"  class="changeAppointmentStatus app-btn__item">
-                                    Reject
+                                <button data-appointment_id="{{$appointment->id}}" {{$booking->status_id != 5 || !in_array($appointment->{$field}, [1])  ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "reject"  class="changeAppointmentStatus app-btn__item">
+                                    @if($appointment->cancelable)
+                                        Cancel
+                                    @else
+                                        Reject
+                                    @endif
                                 </button>
+                                @if(!$appointment->cancelable)
                                 <button data-appointment_id="{{$appointment->id}}" {{$booking->status_id != 5 || !in_array($appointment->{$field}, [1]) || !$appointment->is_past ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "completed"  class="changeAppointmentStatus app-btn__item app-btn__item--complete">
                                     Completed
                                 </button>
+                                @endif
                             @endif
                         </div>
                     </div>

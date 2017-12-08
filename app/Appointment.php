@@ -181,6 +181,10 @@ class Appointment extends Model implements Constants
     }
 
 
+    public function getCancelableAttribute(){
+        return (\Carbon\Carbon::parse(date("Y-m-d ", strtotime($this->date_start)).' '.$this->time_from)->diffInHours() > 24 && !$this->is_past);
+    }
+
     public function getIsPastAttribute(){
         return \Carbon\Carbon::parse(date("Y-m-d ", strtotime($this->date_start)).' '.$this->time_from)->isPast();
     }

@@ -23,7 +23,10 @@ class AppointmentsController extends Controller implements Constants
             SmsTools::sendSmsToServiceUser($message, $appointment->booking->bookingServiceUser);
         } else {
             //Purchaser
-            if($appointment->carer_status_id == self::APPOINTMENT_USER_STATUS_NEW){
+            if($appointment->cancelable){
+                $appointment->status_id = self::APPOINTMENT_STATUS_CANCELLED;
+                $appointment->purchaser_status_id = self::APPOINTMENT_USER_STATUS_REJECTED;
+            } elseif($appointment->carer_status_id == self::APPOINTMENT_USER_STATUS_NEW){
                 $appointment->purchaser_status_id = self::APPOINTMENT_USER_STATUS_REJECTED;
             } elseif($appointment->carer_status_id == self::APPOINTMENT_USER_STATUS_COMPLETED) {
                 $appointment->status_id = self::APPOINTMENT_STATUS_DISPUTE;
