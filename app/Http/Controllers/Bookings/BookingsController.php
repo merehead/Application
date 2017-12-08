@@ -14,6 +14,7 @@ use App\PaymentServices\StripeService;
 use App\Http\Controllers\FrontController;
 use App\PurchasersProfile;
 use App\ServiceUsersProfile;
+use App\StripeCostumer;
 use App\User;
 use App\Exceptions\MessenteException;
 use Illuminate\Http\Request;
@@ -203,6 +204,24 @@ class BookingsController extends FrontController implements Constants
                         'cvc' => $request->card_cvc,
                     ]);
                     $booking->card_token = $cardToken;
+
+                    if($request->save_card){
+                        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+                        $customer = \Stripe\Customer::create(array(
+                            'source'   => [
+                                'object' => 'card',
+                                'number' => $request->card_number,
+                                'exp_month' => $request->card_month,
+                                'exp_year' => $request->card_year,
+                                'cvc' => $request->card_cvc,
+                            ]
+                        ));
+                        $stripeCustomer = StripeCostumer::create([
+                            'purchaser_id' => $user->id,
+                            'token' => $customer->id,
+                            'last_four' => substr(str_replace(' ','',$request->number), 12),
+                        ]);
+                    }
                 } catch (\Exception $ex) {
                     return response($this->formatResponse('error', $ex->getMessage()));
                 }
