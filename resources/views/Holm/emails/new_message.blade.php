@@ -77,15 +77,11 @@
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0; font-size: 16px;">
                             @if($sender=='carer')
                                 You have a new message from {{$carer->short_name}} in regards to a
-                                <a href="{{route('viewBookingDetails',['booking'=>$booking])}}?refer={{$booking->id}}">booking</a>
-                                .
+                                <a href="{{route('viewBookingDetails',['booking'=>$booking])}}?refer={{$booking->id}}">booking</a>.
                             @else
                                 You have a new message from {{$server_users->short_full_name}} in regards to a
-                                <a href="{{route('viewBookingDetails',['booking'=>$booking])}}?refer={{$booking->id}}">booking</a>
-                                .
+                                <a href="{{route('viewBookingDetails',['booking'=>$booking])}}?refer={{$booking->id}}">booking</a>.
                             @endif
-
-
                         </p>
                     </td>
                 </tr>

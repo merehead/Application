@@ -191,10 +191,18 @@
 
     $('#buttonPaymentCard').click(function () {
         showSpinner();
+        var cardNumber = $('#cardNumber').val();
+        var cardMonth = $('#cardMonth').val();
+        var cardYear = $('#cardYear').val();
+        var cardCVC = $('#cardCVC').val();
         $.post('{{route('setBookingPaymentMethod', ['booking' => $booking->id])}}',
             {
                 'payment_method': 'credit_card',
                 'card_id': $('input[name="card_id"]').val()
+                'card_number': cardNumber,
+                'card_month': cardMonth,
+                'card_year': cardYear,
+                'card_cvc': cardCVC
             },
             function( data ) {
             if(data.status == 'success'){
