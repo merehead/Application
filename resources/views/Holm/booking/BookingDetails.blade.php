@@ -152,12 +152,12 @@
                         @if($user->user_type_id == 3)
                             @if($booking->status_id == 2)
                                 <div class="roundedBtn">
-                                    <button   {{!in_array($booking->carer_status_id, [2]) ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "accept"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smaller roundedBtn__item--accept">
+                                    <button {{!in_array($booking->carer_status_id, [2]) ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "accept"  class="changeAppointmentStatus roundedBtn__item roundedBtn__item--smaller roundedBtn__item--accept">
                                         accept
                                     </button>
                                 </div>
                                 <div class="roundedBtn">
-                                    <button {{!in_array($booking->carer_status_id, [2]) ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "reject"  class="changeBookingStatus roundedBtn__item roundedBtn__item--smaller roundedBtn__item--reject">
+                                    <button  {{!in_array($booking->carer_status_id, [2]) ? 'disabled' : ''}}  data-booking_id = "{{$booking->id}}" data-status = "reject"  class="changeAppointmentStatus roundedBtn__item roundedBtn__item--smaller roundedBtn__item--reject">
                                         reject
                                     </button>
                                 </div>
@@ -280,10 +280,10 @@
                         <div class="app-btn">
                             @if($user->user_type_id !== 4)
                                 @php($field = $user->user_type_id == 1 ? 'purchaser_status_id' : 'carer_status_id')
-                                <button {{$booking->status_id != 5 || !in_array($appointment->{$field}, [1]) || !$appointment->is_past ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "reject"  class="app-btn__item">
+                                <button data-appointment_id="{{$appointment->id}}" {{$booking->status_id != 5 || !in_array($appointment->{$field}, [1]) || !$appointment->is_past ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "reject"  class="changeAppointmentStatus app-btn__item">
                                     Reject
                                 </button>
-                                <button {{$booking->status_id != 5 || !in_array($appointment->{$field}, [1]) || !$appointment->is_past ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "completed"  class="app-btn__item app-btn__item--complete">
+                                <button data-appointment_id="{{$appointment->id}}" {{$booking->status_id != 5 || !in_array($appointment->{$field}, [1]) || !$appointment->is_past ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "completed"  class="changeAppointmentStatus app-btn__item app-btn__item--complete">
                                     Completed
                                 </button>
                             @endif
