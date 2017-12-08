@@ -447,14 +447,29 @@ function scale(block) {
     }
 }
 
-function setTime(input, hour, minutes, period){
-    $(input).val(hour+':'+minutes+' '+period)
-    if($(input).hasClass('start')){
+function setTime(input, hour, minutes, period) {
+    if (hour < 10) hour = '0' + parseInt(hour);
+    if (minutes < 10) minutes = '0' + parseInt(minutes);
+    $(input).val(hour + ':' + minutes + ' ' + period);
+    $('.hour').val(hour);
+    $('.seconds').val(minutes);
+    if ($(input).hasClass('start')) {
         var input2 = $(input).parent().parent().parent().parent().parent().parent().find('.mypicker.end');
-        hour=parseInt(hour)+1;
-        if(hour<10) hour='0'+parseInt(hour);
-        if(minutes<10) minutes='0'+parseInt(minutes);
-        $(input2).val(hour+':'+minutes+' '+period)
+        //alert(hour + ':' + minutes + ' ' + period);
+        if(hour=='11' && period=='AM'){
+            hour=12;
+            period='PM';
+        }else if(hour=='11' && period=='PM'){
+            hour='00';
+            period='AM';
+        }else {
+            hour = parseInt(hour) + 1;
+            if (hour > 12) hour = hour - 13;
+            if (hour < 10) hour = '0' + parseInt(hour);
+            if (minutes < 10) minutes = '0' + parseInt(minutes);
+        }
+        $(input2).val(hour + ':' + minutes + ' ' + period);
+
     }
 }
 
@@ -584,43 +599,22 @@ $(document).ready(function () {
         var timeAMPM = ($('.checkbox-date').is(':checked'))?'PM':'AM';
         start_time = toDate($(start_time).find('input.start').val().substring(0, 5),"h:m");
 
-        if(hours==0) {
-            if($(that).hasClass('end')) {
-                hours = start_time.getHours() + 1;
-                minutes = start_time.getMinutes();
-            } else {
-                hours = current_time.getHours() + 1;
-                var dlast = $(that).parent().parent().parent().find('.picker-box')[1];
-                $('.checkbox-date').prop('checked',current_time.getHours()>11);
-                var timeAMPM = ($('.checkbox-date').is(':checked'))?'PM':'AM';
-                if(hours>12) hours=hours-12;
-                if(minutes<10) minutes='0'+minutes;
-                setTime(dlast,hours,minutes,timeAMPM);
-            }
-            if(hours>12)  hours=hours-12;
+        if(hours==0 && $(that).hasClass('start')) {
+            var minutes = start_time.getMinutes();
+            hours = current_time.getHours() + 1;
+            if(hours>12) hours=hours-13;
             $('.checkbox-date').prop('checked',current_time.getHours()>11);
             var timeAMPM = ($('.checkbox-date').is(':checked'))?'PM':'AM';
-        }else if($(that).hasClass('end')) {
-            minutes = start_time.getMinutes();
-            if(hours>12) hours=hours-12;
-            //if(hours<10) hours='0'+hours;
-            if(minutes<10) minutes='0'+minutes;
-            $('.seconds').val(minutes);
-            setTime(that,hours,minutes,timeAMPM);
         }
 
-        if(hours<10) hours='0'+parseInt(hours);
-        if(minutes<10) minutes='0'+parseInt(minutes);
         $('.hour').val(hours);
         $('.seconds').val(minutes);
         if($(that).hasClass('end'))
             $('.seconds').find('option').each(function() {
-            if ( $(this).val() != minutes )
-                $(this).attr('disabled', true);
-            else  $(this).attr('disabled', false);
-        });
-
-
+                if ( $(this).val() != minutes )
+                    $(this).attr('disabled', true);
+                else  $(this).attr('disabled', false);
+            });
         setTime(that,hours,minutes,timeAMPM);
     });
 
