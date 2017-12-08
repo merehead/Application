@@ -198,7 +198,8 @@
         $.post('{{route('setBookingPaymentMethod', ['booking' => $booking->id])}}',
             {
                 'payment_method': 'credit_card',
-                'card_id': $('input[name="card_id"]').val()
+                'card_id': $('input[name="card_id"]').val(),
+                'save_card': $('#save_card').val(),
                 'card_number': cardNumber,
                 'card_month': cardMonth,
                 'card_year': cardYear,

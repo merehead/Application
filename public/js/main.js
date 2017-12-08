@@ -1808,6 +1808,7 @@ $(document).ready(function () {
             $(this).attr('name', input_name + '[' + appointments + input_name_p);
             $(this).parent().parent().find('.delete').attr('data-id','d'+appointments);
             $(this).parent().parent().find('.delete').show();
+            $(this).val('');
         });
         var t=$('.assistance_types').length+1;
         $(typeCareAll).find('.assistance_types').each(function(){
@@ -1820,6 +1821,7 @@ $(document).ready(function () {
             $(this).attr('name', input_name + '[' + appointments + input_name_p);
             $(this).attr('id', 'assistance_types' +  t);
             $(this).parent().find('label').attr('for','assistance_types' +  t);
+            $(this).prop('checked',false)
             t=t+1;
         });
 
@@ -1831,6 +1833,7 @@ $(document).ready(function () {
             var input_name1 = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
             var input_name_p1 = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
             $(this).attr('name', input_name1 + '[' + appointments + input_name_p1);
+            $(this).val('');
         });
 
         $(clast).find('.periodicity').each(function () {
@@ -1843,6 +1846,7 @@ $(document).ready(function () {
             $(this).parent().find('label').attr('for', input_name2 +periodicity);
             $(this).parent().parent().attr('data-id','d'+appointments);
             $(this).parent().parent().find('.delete').attr('data-id','d'+appointments);
+            $(this).prop('checked',false)
             periodicity++;
         });
 
