@@ -32,6 +32,57 @@
                             </div>
                             @endforeach
                         </div>
+                        <div class="bookPayment__field">
+                            <h2 class="formLabel">
+                                Card Number
+                            </h2>
+                            <div class="inputWrap">
+                                <input type="text" class="formInput" id="cardNumber" placeholder="4534 3333 3333 3333 3333">
+                                <span class="bookPayment__ico"><img src="{{asset("img/visa.png")}}" alt=""></span>
+                                <span class="bookPayment__ico"><img src="{{asset("img/mc2.png")}}" alt=""></span>
+                            </div>
+                        </div>
+                        <div class="bookPayment__row bookPayment__row--xs-column">
+                            <div class="bookPayment__halfColumn   bookPayment__halfColumn--xs-full">
+                                <h2 class="formLabel">
+                                    Valid Until
+                                </h2>
+                                <div class="bookPayment__row">
+                                    <div class="bookPayment__halfColumn">
+                                        <div class="formField">
+                                            <div class="inputWrap">
+                                                <input type="text" id="cardMonth" class="formInput" placeholder="MM">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bookPayment__halfColumn">
+                                        <div class="formField">
+                                            <div class="inputWrap">
+                                                <input type="text" id="cardYear" class="formInput" placeholder="YY">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="bookPayment__halfColumn bookPayment__halfColumn--xs-full">
+                                <div class="formField">
+                                    <h2 class="formLabel">
+                                        cvc code
+                                    </h2>
+                                    <div class="inputWrap">
+                                        <input type="text" id="cardCVC" class="formInput" placeholder="202">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="paymentCheckbox">
+                            <div class="checkBox_item">
+                                <input type="checkbox" name="checkbox" class="customCheckbox" id="buttonPaymentCard1">
+                                <label for="buttonPaymentCard1"> save payment details?</label>
+                            </div>
+                            <input type="hide" name="save_card" class="customCheckbox" id="save_card">
+                        </div>
                         <div class="roundedBtn roundedBtn--center">
                             <a href="#" class="roundedBtn__item roundedBtn__item--confirm" id="buttonPaymentCard">
                                 Confirm Payment
@@ -103,6 +154,14 @@
 </section>
 
 <script>
+    $('#buttonPaymentCard1').on('click',function(){
+        if (this.checked) {
+            $("#save_card").val(true);
+        } else {
+            $("#save_card").val(false);
+        }
+    });
+
     $('#buttonPaymentBonuses').click(function () {
         showSpinner();
         $.post('{{route('setBookingPaymentMethod', ['booking' => $booking->id])}}', {'payment_method' : 'bonus_wallet'}, function( data ) {
