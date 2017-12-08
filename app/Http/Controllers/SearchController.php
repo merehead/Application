@@ -27,6 +27,7 @@ class SearchController extends FrontController
     public function index(Request $request, $page = 1)
     {
         $data = [];
+        $postCode=null;
         $this->title = 'Find a personal carer - HOLM CARE';
         $this->description = 'Holm offers care at a far more affordable price than care agencies.';
         $this->keywords = 'looking to hire a personal assistant';
@@ -136,11 +137,10 @@ class SearchController extends FrontController
             }
             if (strpos($postCode, ' ') === false) {
                 $postCode .= ' ';
-                //$where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('" . $postCode . "', POSITION
-                //(' ' IN '" . $postCode . "')) and  p.name = LEFT(cp.postcode, POSITION(' ' IN '" . $postCode . "')))>0";
-            } else {
-                $where .= " AND cp.postcode='" . $postCode . "'";
+//                $where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('" . $postCode . "', POSITION(' ' IN '" . $postCode . "')) and  p.name = LEFT(cp.postcode, POSITION(' ' IN '" . $postCode . "')))>0";
+//            } else {
             }
+            $where .= " AND cp.postcode like '" . $postCode . "%'";
         }
         if ($request->get('load-more', 0) == 1) {
             $page = $request->get('page');
@@ -168,12 +168,13 @@ class SearchController extends FrontController
                 group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview,postcode
                 order by ' . implode(',', $order) . " limit $start,$perPage";
         //if (Auth::check() && Auth::user()->isAdmin()) {
+        //echo($sql);
         $carerResult = DB::select($sql); //раскоментить
         //}
         if (Auth::check() && Auth::user()->user_type_id != 4) {
                 $order_distance = $request->get('sort-distance-order', 'asc');
 
-            $carerResult = $this->sortByDistanseToCarer($carerResult,$order_distance);
+            $carerResult = $this->sortByDistanseToCarer($carerResult,$order_distance,$postCode);
         }
 
         $start = (($page * $perPage) - $perPage == 0) ? '0' : ($page * $perPage) - $perPage;
@@ -232,9 +233,11 @@ class SearchController extends FrontController
      * @param $carerResult
      * @return mixed
      */
-    private function sortByDistanseToCarer($carerResult,$order_distance)
+    private function sortByDistanseToCarer($carerResult,$order_distance,$postCode)
     {
         foreach ($carerResult as $key => $item) {
+
+            if(empty($postCode))
             switch (Auth::user()->user_type_id) {
                 case 1:
                     $purchaser = PurchasersProfile::find(Auth::user()->id, ['postcode']);
@@ -248,7 +251,8 @@ class SearchController extends FrontController
                     $carer = CarersProfile::find(Auth::user()->id, ['postcode']);
                     $from = urlencode(trim(($carer->postcode)));
                     break;
-            }
+            }else
+            $from = trim($postCode);
             $to = urlencode(trim($item->postcode));
             $distance = $this->getDistance($from, $to);
             $item->distance = $distance;
@@ -273,12 +277,23 @@ class SearchController extends FrontController
     private function getDistance($from, $to)
     {
         $distance = 0;
-        $url = "http://maps.googleapis.com/maps/api/distancematrix/json?origins=$from&destinations=$to&mode=driving&language=nl-BE&sensor=false&units=imperial";
+        $data = array(
+            'origins'=>$from,
+            'destinations' => $to,
+            'mode' => 'driving',
+            'language' => 'driving',
+            'mode' => 'nl-BE',
+            'sensor' => false,
+            'units' => 'imperial',
+        );
+        $url = "http://maps.googleapis.com/maps/api/distancematrix/json?".http_build_query($data);
         if ($from !== $to && !empty($from) && !empty($to)) {
             $result = json_decode(file_get_contents($url), true);
             if ($result['status'] == "OK") {
                 $distance = (isset($result['rows'][0]['elements'][0]['distance']['text']))
-                    ? substr($result['rows'][0]['elements'][0]['distance']['text'],0,-2) : 0;
+                    ? ($result['rows'][0]['elements'][0]['distance']['text']) : 'NOT FOUND';
+            }else{
+                $distance ='NOT_FOUND';
             }
         }
         return $distance;

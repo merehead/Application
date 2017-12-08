@@ -246,7 +246,7 @@
                     <input type="hidden" name="load-more-count" id="load-count" value="{{$load_more_count}}">
                 <div class="moreBtn moreBtn--book ">
                     <a href="" class="moreBtn__item moreBtn__item--book centeredLink moreLink">
-                        Load More
+                        Show More
                     </a>
                 </div>
                     @endif
