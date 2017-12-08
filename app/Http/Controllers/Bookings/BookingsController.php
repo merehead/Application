@@ -190,7 +190,7 @@ class BookingsController extends FrontController implements Constants
         $user = Auth::user();
 
         if ($request->payment_method == 'credit_card') {
-            if($request->card_id){
+            if($request->card_id && !$request->card_number){
                 $stripeCustomer = $user->credit_cards()->where('id', $request->card_id)->first();
                 if(!$stripeCustomer)
                     return response($this->formatResponse('error', 'card_not_found'));
@@ -219,7 +219,7 @@ class BookingsController extends FrontController implements Constants
                         $stripeCustomer = StripeCostumer::create([
                             'purchaser_id' => $user->id,
                             'token' => $customer->id,
-                            'last_four' => substr(str_replace(' ','',$request->number), 12),
+                            'last_four' => substr(str_replace(' ','',$request->card_number), 12),
                         ]);
                     }
                 } catch (\Exception $ex) {
@@ -235,7 +235,7 @@ class BookingsController extends FrontController implements Constants
         $booking->payment_method = $request->payment_method;
         $booking->status_id = 2;
         $booking->save();
-
+        
         $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
         $carerProfile = CarersProfile::find($booking->carer_id);
         $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
