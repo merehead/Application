@@ -7,6 +7,7 @@ use App\Booking;
 use App\BookingOverview;
 use App\BookingsMessage;
 use App\CarersProfile;
+use App\DisputePayout;
 use App\Events\BookingCompletedEvent;
 use App\Http\Requests\BookingCreateRequest;
 use App\Interfaces\Constants;
@@ -235,7 +236,7 @@ class BookingsController extends FrontController implements Constants
         $booking->payment_method = $request->payment_method;
         $booking->status_id = 2;
         $booking->save();
-        
+
         $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
         $carerProfile = CarersProfile::find($booking->carer_id);
         $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
@@ -394,90 +395,28 @@ class BookingsController extends FrontController implements Constants
 
     public function cancel(Booking $booking)
     {
-        $user = Auth::user();
-        if ($user->user_type_id == 3) {
-            //Carer
-            $booking->status_id = self::CANCELLED;
-            $booking->carer_status_id = self::CANCELLED;
-            $booking->appointments()
-                ->where('status_id', '!=', self::APPOINTMENT_STATUS_COMPLETED)
-                ->update([
-                    'status_id' => self::APPOINTMENT_STATUS_CANCELLED,
-                    'carer_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
-                    'purchaser_status_id' => self::APPOINTMENT_USER_STATUS_REJECTED,
+        $cancelBooking = true;
+        foreach ($booking->appointments as $appointment){
+            if($appointment->cancelable){
+                $appointment->status_id = self::APPOINTMENT_STATUS_CANCELLED;
+                $appointment->save();
+                DisputePayout::create([
+                    'appointment_id' => $appointment->id,
                 ]);
+            } else {
+                $cancelBooking = false;
+            }
+        }
 
+        if($cancelBooking){
+            $booking->status_id = self::CANCELLED;
             BookingsMessage::create([
                 'booking_id' => $booking->id,
                 'type' => 'status_change',
                 'new_status' => 'canceled',
             ]);
-
-
-            $carer = CarersProfile::find($booking->carer_id);
-            $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
-            $purchaser = PurchasersProfile::find($booking->purchaser_id);
-
-
-            $text = view(config('settings.frontTheme') . '.emails.canceled_booking')->with([
-                'user_like_name' => $purchaser->like_name,
-                'user_name' => $carer->first_name,
-                'service_user_name' => $serviceUser->first_name,
-                'address' => $serviceUser->addresss_line1,
-                'date' => 'date',
-                'time' => 'time',
-                'booking'=>$booking,
-                'sendTo' => 'purchaser'
-            ])->render();
-
-            DB::table('mails')
-                ->insert(
-                    [
-                        'email' =>$purchaser->email,
-                        'subject' =>'Canceled booking',
-                        'text' =>$text,
-                        'time_to_send' => Carbon::now(),
-                        'status'=>'new'
-                    ]);
-        } else {
-            if ($booking->carer_status_id == self::COMPLETED) {
-                $booking->status_id = self::DISPUTE;
-                $booking->purchaser_status_id = self::CANCELLED;
-            } else {
-                $booking->status_id = self::CANCELLED;
-                $booking->purchaser_status_id = self::CANCELLED;
-
-                $carer = CarersProfile::find($booking->carer_id);
-                $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
-                $purchaser = PurchasersProfile::find($booking->purchaser_id);
-
-                //dd($booking,$carer,$serviceUser,$purchaser);
-
-                $text = view(config('settings.frontTheme') . '.emails.canceled_booking')->with([
-                    'user_like_name' => $carer->like_name,
-                    'user_name' => $purchaser->first_name,
-                    'service_user_name' => $serviceUser->first_name,
-                    'address' => $serviceUser->addresss_line1,
-                    'date' => 'date',
-                    'time' => 'time',
-                    'booking'=>$booking,
-                    'sendTo' => 'carer'
-                ])->render();
-
-                DB::table('mails')
-                    ->insert(
-                        [
-                            'email' =>$user->email,
-                            'subject' =>'Canceled booking',
-                            'text' =>$text,
-                            'time_to_send' => Carbon::now(),
-                            'status'=>'new'
-                        ]);
-            }
-
+            $booking->save();
         }
-
-        $booking->save();
 
         return response(['status' => 'success']);
     }

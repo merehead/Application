@@ -18,14 +18,14 @@ class AppointmentsController extends Controller implements Constants
         if($user->user_type_id == 3){
             //Carer
             $appointment->status_id = self::APPOINTMENT_STATUS_CANCELLED;
-            $appointment->carer_status_id =  self::APPOINTMENT_USER_STATUS_REJECTED;
+            if(!$appointment->cancelable)
+                $appointment->carer_status_id =  self::APPOINTMENT_USER_STATUS_REJECTED;
             $message = 'Sorry. '.$appointment->booking->bookingCarerProfile->full_name.' has cancelled your appointment for  '.$appointment->formatted_date_start.' '.$appointment->formatted_time_from.'. Please check your account for more details. The Holm Team';
             SmsTools::sendSmsToServiceUser($message, $appointment->booking->bookingServiceUser);
         } else {
             //Purchaser
             if($appointment->cancelable){
                 $appointment->status_id = self::APPOINTMENT_STATUS_CANCELLED;
-                $appointment->purchaser_status_id = self::APPOINTMENT_USER_STATUS_REJECTED;
             } elseif($appointment->carer_status_id == self::APPOINTMENT_USER_STATUS_NEW){
                 $appointment->purchaser_status_id = self::APPOINTMENT_USER_STATUS_REJECTED;
             } elseif($appointment->carer_status_id == self::APPOINTMENT_USER_STATUS_COMPLETED) {
