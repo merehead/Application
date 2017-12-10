@@ -60,7 +60,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $res = DB::select("SELECT a.id FROM appointments a 
                                 JOIN bookings b ON a.booking_id = b.id
-                              WHERE UNIX_TIMESTAMP(STR_TO_DATE(CONCAT(DATE_FORMAT(a.date_start, '%Y-%m-%d'), ' ', a.time_from), \"%Y-%m-%d %H.%i\")) - UNIX_TIMESTAMP(NOW()) <= 3600 AND a.reminder_sent = 0 AND b.status_id = 5");
+                              WHERE UNIX_TIMESTAMP(STR_TO_DATE(CONCAT(DATE_FORMAT(a.date_start, '%Y-%m-%d'), ' ', a.time_from), \"%Y-%m-%d %H.%i\")) - UNIX_TIMESTAMP(NOW()) <= 3600 AND a.reminder_sent = 0 AND b.status_id = 5 AND a.status_id < 3");
             if($res){
                 foreach ($res[0] as $appointmentId){
                     $appointment = Appointment::find($appointmentId);
