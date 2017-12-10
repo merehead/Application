@@ -235,24 +235,23 @@ class SearchController extends FrontController
      */
     private function sortByDistanseToCarer($carerResult,$order_distance,$postCode)
     {
-        foreach ($carerResult as $key => $item) {
 
-            if(empty($postCode))
+        foreach ($carerResult as $key => $item) {
             switch (Auth::user()->user_type_id) {
                 case 1:
-                    $purchaser = PurchasersProfile::find(Auth::user()->id, ['postcode']);
-                    $from = urlencode(trim($purchaser->postcode));
+                    $purchaser = PurchasersProfile::find(Auth::user()->id);
+                    $from = (trim($purchaser->town . ' ' . $purchaser->address_line1));
+
                     break;
                 case 2:
-                    $servise = ServiceUsersProfile::find(Auth::user()->id, ['postcode']);
+                    $servise = ServiceUsersProfile::find(Auth::user()->id);
                     $from = urlencode(trim(($servise->postcode)));
                     break;
                 case 3:
-                    $carer = CarersProfile::find(Auth::user()->id, ['postcode']);
+                    $carer = CarersProfile::find(Auth::user()->id);
                     $from = urlencode(trim(($carer->postcode)));
                     break;
-            }else
-            $from = trim($postCode);
+            }
             $to = urlencode(trim($item->postcode));
             $distance = $this->getDistance($from, $to);
             $item->distance = $distance;
