@@ -1902,6 +1902,8 @@ $(document).ready(function () {
             scrollbar: true
         });
         calculate_price();
+        $('.datepicker_message').last().parent().hide();
+        $('.datepicker_message').last().parent().parent().find('label.correct').hide();
         return false;
     });
 
