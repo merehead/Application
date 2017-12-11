@@ -407,9 +407,6 @@ class BookingsController extends FrontController implements Constants
             if($appointment->cancelable){
                 $appointment->status_id = self::APPOINTMENT_STATUS_CANCELLED;
                 $appointment->save();
-                DisputePayout::create([
-                    'appointment_id' => $appointment->id,
-                ]);
             } else {
                 $cancelBooking = false;
             }
