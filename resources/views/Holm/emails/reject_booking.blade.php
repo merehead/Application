@@ -67,7 +67,7 @@
                                 has cancelled the following <a href="{{route('purchaserBookingStatus',['status'=>'canceled'])}}?purchaserbookingFilterCanceled={{$booking->id}}">booking</a>
                             @endif
                         </p>
-                        <p style="font-size: 14px;margin-bottom:0;">
+                        <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             @if ($sendTo == 'carer')
                                 Please <a href="{{route('ContactPage')}}">contact us</a> if you have any concerns.
                             @else
