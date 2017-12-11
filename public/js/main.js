@@ -455,7 +455,8 @@ function setTime(input, hour, minutes, period) {
     $('.seconds').val(minutes);
     if ($(input).hasClass('start')) {
         //var input2 = $(input).parent().parent().parent().parent().parent().parent().find('.mypicker.end');
-        var input2 = $(input).parent().parent().parent().parent().find('.mypicker.end');
+        //var input2 = $(input).parent().parent().parent().parent().find('.mypicker.end');
+        var input2 = $(input).parent().parent().parent().find('.mypicker.end')
         //alert(hour + ':' + minutes + ' ' + period);
         if(hour=='11' && period=='AM'){
             hour=12;
