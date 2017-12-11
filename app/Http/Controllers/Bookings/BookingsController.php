@@ -360,6 +360,12 @@ class BookingsController extends FrontController implements Constants
             ]);
         $booking->save();
 
+        BookingsMessage::create([
+            'booking_id' => $booking->id,
+            'type' => 'status_change',
+            'new_status' => 'canceled',
+        ]);
+
         $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
         $carerProfile = CarersProfile::find($booking->carer_id);
         $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
