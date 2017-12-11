@@ -73,7 +73,7 @@
                         <h1  style="display: inline-block;font-family: 'Lato', sans-serif;  font-size: 16px;margin-bottom: 20px; font-weight: 700;  color: #272c2b;  text-transform: uppercase;">
                             Dear {{$user_like_name}}</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">{{$user_name}} has cancelled
-                            the following <a href="{{route('viewBookingDetails',[$booking->id])}}">booking</a>:<br/></p>
+                            the following <a href="{{route('viewBookingDetails',[$booking->id])}}?refer={{$booking->id}}">booking</a>:<br/></p>
                     </td>
                 </tr>
             </table>
