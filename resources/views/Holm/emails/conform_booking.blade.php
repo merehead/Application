@@ -34,10 +34,10 @@
                             @if($sendTo == 'carer')
                                 You’re booking with {{$serviceUser->like_name}} has been confirmed.
                                 The first booking will be on {{date('m-d-Y',strtotime($booking->appointments()->get()->first()->date_start))}} {{date('H:i:s',strtotime($booking->appointments()->get()->first()->time_from))}}.
-                                Click <a href="{{route('viewBookingDetails',['booking'=>$booking->id])}}">here</a> to view your appointment booking.
+                                Click <a href="{{route('viewBookingDetails',['booking'=>$booking->id])}}?refer={{$booking->id}}">here</a> to view your appointment booking.
                             @else
                                 You’re booking with {{$carer->first_name}} has been confirmed. The first booking will be on {{date('m-d-Y',strtotime($booking->appointments()->get()->first()->date_start))}} {{date('H:i:s',strtotime($booking->appointments()->get()->first()->time_from))}}.
-                                Click <a href="{{route('viewBookingDetails',['booking'=>$booking->id])}}">here</a> to view your appointment booking.
+                                Click <a href="{{route('viewBookingDetails',['booking'=>$booking->id])}}?refer={{$booking->id}}">here</a> to view your appointment booking.
                             @endif
                         </p>
                     </td>
