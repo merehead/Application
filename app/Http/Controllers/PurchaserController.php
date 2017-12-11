@@ -32,6 +32,8 @@ class PurchaserController extends FrontController implements Constants
         } else {
 
             $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('purchaser_id', $this->user->id)->get();
+            $this->vars = array_add($this->vars, 'bookingCount', $newBookings->count());
+
             $this->vars = array_add($this->vars, 'newBookings', $newBookings);
             $inProgressBookings = Booking::whereIn('status_id', [self::IN_PROGRESS])->where('purchaser_id', $this->user->id)->get();
             $this->vars = array_add($this->vars, 'inProgressBookings', $inProgressBookings);
@@ -203,6 +205,7 @@ class PurchaserController extends FrontController implements Constants
             $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('purchaser_id', $user->id)->skip($start)->take($perPage)->get();
             $this->vars = array_add($this->vars, 'newBookings', $newBookings);
             $this->vars = array_add($this->vars, 'newBookingsAll', $newBookingsAll);
+            $this->vars = array_add($this->vars, 'bookingCount', $newBookingsAll->count());
             if($request->ajax()&&$status=='new'){
                 $this->content = view(config('settings.frontTheme') . '.purchaserProfiles.Booking.BookingRowNewAjax')->with($this->vars)->render();
                 return response()->json(["result" => true,'content'=>$this->content,'hideLoadMore'=>$newBookingsAll->count()<=($perPage*$page),'countAll'=>$newBookingsAll->count()]);
