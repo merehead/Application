@@ -29,10 +29,10 @@
             <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; background-size: 100%;   margin: 0; " width="100%" class="t-content">
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; " valign="top" class="">
-                        <h1  style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700; font-size: 16px; color: #272c2b;  text-transform: uppercase;">HELLO {{( $sendTo == 'carer') ? $carer->like_name : $purchaser->like_name}}</h1>
+                        <h1  style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700; font-size: 16px; color: #272c2b;  text-transform: uppercase;">DEAR {{( $sendTo == 'carer') ? $carer->like_name : $purchaser->like_name}}</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             @if($sendTo == 'carer')
-                                You’re booking with {{$serviceUser->like_name}} has been confirmed.
+                                You’re booking with <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{$serviceUser->like_name}}</a> has been confirmed.
                                 The first booking will be on {{date('m-d-Y',strtotime($booking->appointments()->get()->first()->date_start))}} {{date('H:i:s',strtotime($booking->appointments()->get()->first()->time_from))}}.
                                 Click <a href="{{route('viewBookingDetails',['booking'=>$booking->id])}}?refer={{$booking->id}}">here</a> to view your appointment booking.
                             @else

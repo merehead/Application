@@ -63,7 +63,7 @@
                     <td style="padding: 30px 40px; background: #f9f9f9; font-family: 'Roboto', sans-serif; line-height: 1.5; "  valign="top" class="">
                         <h1  style=" font-size: 16px;display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700; color: #272c2b;  text-transform: uppercase;">
 {{--
-                            Hello [user_first_name]!
+                            DEAR [user_first_name]!
 --}}                        Dear {{$like_name}}
 
                         </h1>
