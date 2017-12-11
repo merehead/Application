@@ -1872,6 +1872,11 @@ $(document).ready(function () {
         $('.datepicker_message').removeClass("hasDatepicker").removeAttr('id');
         $('.timepicker_message').removeClass("hasDatepicker").removeAttr('id');
 
+        var datestartDate = $('input[name="bookings[0][appointments][0][date_start]"]').datepicker( "getDate" );
+        var inWeek = new Date();
+        var in90Day = new Date();
+        inWeek.setDate(datestartDate.getDate()+7);
+        in90Day.setDate(datestartDate.getDate()+75);
 
         $(".datepicker_message").datepicker({
             beforeShow: function(input, inst) {
@@ -1883,7 +1888,7 @@ $(document).ready(function () {
             dateFormat: "dd/mm/yy",
             showAnim: "slideDown",
             minDate: "+0D",
-            maxDate: "+50Y",
+            maxDate: in90Day,
             yearRange: "0:+50"
         });
         $('.timepicker_message').timepicker({
@@ -1907,6 +1912,29 @@ $(document).ready(function () {
         $('.datepicker_message').last().parent().hide();
         $('.datepicker_message').last().parent().parent().find('label.correct').hide();
         return false;
+    });
+
+    $('input[name="bookings[0][appointments][0][date_start]"]').on('change',function() {
+        $('.datepicker_message').removeClass("hasDatepicker").removeAttr('id');
+        var datestartDate = $('input[name="bookings[0][appointments][0][date_start]"]').datepicker( "getDate" );
+        var inWeek = new Date();
+        var in90Day = new Date();
+        inWeek.setDate(datestartDate.getDate()+7);
+        in90Day.setDate(datestartDate.getDate()+75);
+
+        $(".datepicker_message").datepicker({
+            beforeShow: function(input, inst) {
+                inst.dpDiv.css({"z-index":"9999!important"});
+                if ($(input).attr('readonly')) { return false; }
+            },
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            showAnim: "slideDown",
+            minDate: "+0D",
+            maxDate: in90Day,
+            yearRange: "0:+50"
+        });
     });
 
     $(document).on('click','#confirm-terms',function(){
