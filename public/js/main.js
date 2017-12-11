@@ -1673,7 +1673,7 @@ $(document).ready(function () {
             $(label).show();
             $(datetime).removeClass("hasDatepicker").removeAttr('id');
             var datestart = $(datetime).attr('name').substring(0,$(datetime).attr('name').length - 10)+'[date_start]';
-            var datestartDate = $('input[name="'+datestart+'"]').datepicker( "getDate" );
+            var datestartDate = $('input[name="bookings[0][appointments][0][date_start]"]').datepicker( "getDate" );
             var inWeek = new Date();
             var in90Day = new Date();
             inWeek.setDate(datestartDate.getDate()+7);
@@ -1721,7 +1721,9 @@ $(document).ready(function () {
             var form = $(this).parent().parent();
             var in90Day = new Date();
             var datestart = $(datetime).attr('name').substring(0,$(datetime).attr('name').length - 10)+'[date_start]';
-            var datestartDate = $('input[name="'+datestart+'"]').datepicker( "getDate" );
+            //var datestartDate = $('input[name="'+datestart+'"]').datepicker( "getDate" );
+            var datestartDate = $('input[name="bookings[0][appointments][0][date_start]"]').datepicker( "getDate" );
+
             if(datestartDate!=null) {
                 inDay.setDate(datestartDate.getDate() + 2);
                 in90Day.setDate(datestartDate.getDate() + 75);
