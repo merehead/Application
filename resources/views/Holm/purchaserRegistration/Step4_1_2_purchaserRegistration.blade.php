@@ -28,8 +28,10 @@
                                 profile. You can upload a photo later if you don't have one handy. </h2>
                         @else
                             <h2 class=" formLabel questionForm__label">
-                                Please add a photo of {{$serviceUserProfile->like_name}}. This will only be shared with
-                                carers you choose to book and will be visible on {{$serviceUserProfile->like_name}}'s
+                                Please add a photo {{($serviceUserProfile->care_for=='Myself')?' of yourself' :'of '
+                                .$serviceUserProfile->like_name}}. This will only be shared with
+                                carers you choose to book and will be visible on {{($serviceUserProfile->care_for=='Myself')?' of yourself' :'of '
+                                .$serviceUserProfile->like_name."'s"}}
                                 profile. You can upload a photo later if you don't have one handy. </h2>
                         @endif
 
