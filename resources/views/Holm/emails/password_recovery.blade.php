@@ -63,7 +63,7 @@
                         <h1  style=" font-size: 16px;display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700;  color: #272c2b;  text-transform: uppercase;">
 
                             @if(session('user'))
-                                Hello  {{session('user')->userName}}
+                                DEAR  {{session('user')->userName}}
                             @endif
                         </h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0; ">
