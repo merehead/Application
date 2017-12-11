@@ -111,19 +111,42 @@
         <div class="bookingRow bookingRow--moreMargin">
             <div class="bookingRow__content">
                 <h2 class="ordinaryTitle">
-                    <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Type of Care requested:</span>
+                    <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Booking summary:</span>
                 </h2>
-                <div class="careRequested">
-                    <div class="careRequested__item">
-                    {{--@php($i = 0)--}}
-                    {{--@foreach($booking->assistance_types()->get() as $type)--}}
-                        {{--@if($i == 2)--}}
-                        {{--</div>--}}
-                        {{--<div class="careRequested__item">--}}
-                        {{--@endif--}}
-                        {{--<p>{{$type->name}}</p>--}}
-                        {{--@php(++$i)--}}
-                    {{--@endforeach--}}
+                <div class="summary-row">
+                    <div class="summary-info">
+                        <p>Personal care</p>
+                        <span>Dec 21, 2017 - Dec 30, 2017</span>
+                    </div>
+                    <div class="summary-extra">
+                        <p>Daily</p>
+                    </div>
+                    <div class="summary-extra">
+                        <p>1 times</p>
+                    </div>
+                </div>
+                <div class="summary-row">
+                    <div class="summary-info">
+                        <p>Dementia care</p>
+                        <span>Dec 21, 2017 - Dec 30, 2017</span>
+                    </div>
+                    <div class="summary-extra">
+                        <p>Once</p>
+                    </div>
+                    <div class="summary-extra">
+                        <p>1 times</p>
+                    </div>
+                </div>
+                <div class="summary-row">
+                    <div class="summary-info">
+                        <p>Dementia care</p>
+                        <span>Dec 21, 2017 - Dec 30, 2017</span>
+                    </div>
+                    <div class="summary-extra">
+                        <p>Weeckly</p>
+                    </div>
+                    <div class="summary-extra">
+                        <p>3 times</p>
                     </div>
                 </div>
             </div>
