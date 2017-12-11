@@ -57,7 +57,7 @@
                 <tr>
                     <td style="padding: 30px 40px; background: #f9f9f9; " valign="top" class="">
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700; font-size: 16px; color: #272c2b;  text-transform: uppercase;">
-                            HELLO {{( $sendTo == 'carer') ? $carer->like_name : $serviceUser->like_name}}</h1>
+                            DEAR {{( $sendTo == 'carer') ? $carer->like_name : $serviceUser->like_name}}</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             @if($sendTo == 'carer')
                                 <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{ucfirst($serviceUser->like_name)}}</a>
@@ -90,17 +90,18 @@
                     <?php
 
                     //$patchToPurchaserAvatar = getcwd().'/img/profile_photos/'.$purchaserProfile->id.'.png';
-                    if ($sendTo == 'carer') {
-                        $patchToSrvUserAvatar = getcwd() . '/img/service_user_profile_photos/' . $serviceUser->id . '.png';
-                        if (file_exists($patchToSrvUserAvatar)) {
-                            $img_src = asset('/img/service_user_profile_photos/' . $serviceUser->id . '.png');
+                    if($sendTo == 'carer'){
+                        $patchToSrvUserAvatar = getcwd().'/img/service_user_profile_photos/'.$serviceUser->id.'.png';
+                        if(file_exists($patchToSrvUserAvatar)) {
+                            $img_src = asset('/img/service_user_profile_photos/'.$serviceUser->id.'.png');
                         } else {
                             $img_src = asset('/img/no_photo.png');
                         }
-                    } else {
-                        $patchToSrvUserAvatar = getcwd() . '/img/profile_photos/' . $carer->id . '.png';
-                        if (file_exists($patchToSrvUserAvatar)) {
-                            $img_src = asset('/img/profile_photos/' . $carer->id . '.png');
+                    }
+                    else{
+                        $patchToSrvUserAvatar = getcwd().'/img/profile_photos/'.$carer->id.'.png';
+                        if(file_exists($patchToSrvUserAvatar)) {
+                            $img_src = asset('/img/profile_photos/'.$carer->id.'.png');
                         } else {
                             $img_src = asset('/img/no_photo.png');
                         }
@@ -135,7 +136,7 @@
                                             <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
                                                 <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}"
                                                    style=" color: #6178fc;">
-                                                    {{$serviceUser->first_name}}</a></p>
+                                                    {{$serviceUser->like_name}}</a></p>
                                         @else
                                             <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
                                                 <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}"
