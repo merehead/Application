@@ -34,12 +34,12 @@
                             @if($sendTo == 'carer')
                                 <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{$serviceUser->first_name}}</a>
                                 would like to book you
-                                on {{\Carbon\Carbon::parse($booking->date_from)->toFormattedDateString()}}.
+                                on {{$booking->date_start}} - {{$booking->date_end}}.
                                 Please click the button below to accept or reject the booking request.
                                 The booking request is not be confirmed until then, and you will not be paid unless the request is accepted.
                             @else
                                 You booked <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{$carer->first_name}}</a>
-                                on {{$booking->date_start}} - {{$booking->date_end}}
+                                on {{$booking->date_start}} - {{$booking->date_end}}.
                                 You can check your booking details by going to your <a href="{{env('APP_URL')}}/purchaser-settings/booking/pending/?refer=bookingFilterPurchaser">bookings page</a>.
                             @endif
                         </p>
