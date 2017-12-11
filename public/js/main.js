@@ -1663,6 +1663,7 @@ $(document).ready(function () {
             $(form).find('.weekly').attr('disabled',false);
             $(form).find('.Daily').attr('disabled',false);
         }
+        calculate_price();
     });
     $(document).on('click','.Single',function(){
         var that = $(this);
