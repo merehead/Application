@@ -84,4 +84,7 @@ class HomePageController extends FrontController
         return view(config('settings.frontTheme').'.templates.homePage')->with($vars);
     }
 
+    public function activeUser(){
+
+    }
 }

@@ -240,6 +240,10 @@ class SearchController extends FrontController
             switch (Auth::user()->user_type_id) {
                 case 1:
                     $purchaser = PurchasersProfile::find(Auth::user()->id);
+                    if($purchaser->active_user!=null){
+                        $servise =ServiceUsersProfile::find($purchaser->active_user);
+                        $from = urlencode(trim(($servise->postcode)));
+                    }else
                     $from = (trim($purchaser->town . ' ' . $purchaser->address_line1));
 
                     break;
@@ -254,7 +258,7 @@ class SearchController extends FrontController
             }
             $to = urlencode(trim($item->postcode));
             $distance = $this->getDistance($from, $to);
-            $item->distance = $distance;
+            $item->distance = ($distance=='0')?'0 MI':$distance;
         }
         if($order_distance=='asc')
             usort($carerResult, function ($a, $b) {

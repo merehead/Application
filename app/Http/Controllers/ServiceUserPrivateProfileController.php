@@ -40,19 +40,17 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
         $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
         $this->title = 'Holm Care';
 
-        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
-        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
-        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
-
-        $this->vars = array_add($this->vars,'header',$header);
-        $this->vars = array_add($this->vars,'footer',$footer);
-        $this->vars = array_add($this->vars,'modals',$modals);
-
         if (!$this->user) {
             return redirect('/');
         } else {
 
+
+
             $serviceUsersProfile = ServiceUsersProfile::findOrFail($serviceUserProfile);
+
+            $purchaser = PurchasersProfile::find($serviceUsersProfile->purchaser_id);
+            $purchaser->active_user = $serviceUsersProfile->id;
+            $purchaser->save();
 
             $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('service_user_id', $serviceUsersProfile->id)->get();
             $this->vars = array_add($this->vars, 'newBookings', $newBookings);
@@ -83,7 +81,13 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
             $floors = Floor::all()->pluck('name', 'id')->toArray();
             $this->vars = array_add($this->vars, 'floors', $floors);
             $this->content = view(config('settings.frontTheme') . '.serviceUserProfiles.PrivateProfile')->with($this->vars)->render();
+            $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+            $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+            $modals = view(config('settings.frontTheme').'.includes.modals')->render();
 
+            $this->vars = array_add($this->vars,'header',$header);
+            $this->vars = array_add($this->vars,'footer',$footer);
+            $this->vars = array_add($this->vars,'modals',$modals);
 
 
         }

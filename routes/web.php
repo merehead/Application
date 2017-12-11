@@ -18,6 +18,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 //----
 Route::get('/', 'HomePageController@index')->name('mainHomePage');
+Route::post('/update/activeUser', 'HomePageController@activeUser')->name('activeUserHomePage');
 //---- static page ----
 Route::get('/about', 'AboutController@index')->name('AboutPage');
 Route::get('/jobs', 'AboutController@job')->name('JobPage');

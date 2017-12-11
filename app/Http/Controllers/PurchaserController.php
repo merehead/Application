@@ -25,14 +25,6 @@ class PurchaserController extends FrontController implements Constants
         $this->template = config('settings.frontTheme') . '.templates.purchaserPrivateProfile';
         $this->title = 'Holm Care';
 
-        $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
-        $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
-        $modals = view(config('settings.frontTheme').'.includes.modals')->render();
-
-        $this->vars = array_add($this->vars,'header',$header);
-        $this->vars = array_add($this->vars,'footer',$footer);
-        $this->vars = array_add($this->vars,'modals',$modals);
-
 
         if (!$this->user) {
             return redirect('/enter');
@@ -49,6 +41,8 @@ class PurchaserController extends FrontController implements Constants
             } else {
                 $purchaserProfile = PurchasersProfile::findOrFail($this->user->id);
             }
+            $purchaserProfile->active_user=null;
+            $purchaserProfile->save();
 
             $serviceUsers = $purchaserProfile->serviceUsers;
 
@@ -56,6 +50,13 @@ class PurchaserController extends FrontController implements Constants
             $this->vars = array_add($this->vars, 'purchaserProfile', $purchaserProfile);
             $this->vars = array_add($this->vars, 'serviceUsers', $serviceUsers);
 
+            $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
+            $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
+            $modals = view(config('settings.frontTheme').'.includes.modals')->render();
+
+            $this->vars = array_add($this->vars,'header',$header);
+            $this->vars = array_add($this->vars,'footer',$footer);
+            $this->vars = array_add($this->vars,'modals',$modals);
             $this->content = view(config('settings.frontTheme') . '.purchaserProfiles.PrivateProfile')->with($this->vars)->render();
 
         }

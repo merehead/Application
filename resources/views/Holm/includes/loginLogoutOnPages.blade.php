@@ -16,17 +16,42 @@
         @else
 
             @if(Auth::user()->isReregistrationCompleted())
-
-
                 <div  class="registeredCarer">
                     <div class="profilePhoto registeredCarer__img">
                         <img class="set_preview_profile_photo" src="/img/profile_photos/{{Auth::user()->id}}.png" onerror="this.src='/img/no_photo.png'" alt="">
                     </div>
-                    <a href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-settings' }}" class="profileName">{!! Auth::user()->userName() !!}<span class="registeredCarer__type">
+                    @if(Auth::user()->isCarer())
+                    <a data-id="" data-type="" href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-settings'
+                    }}"
+                        class="profileName">{!! Auth::user()->userName() !!}<span class="registeredCarer__type">
                       <i class="fa {{Auth::user()->isCarer()? ' ' : 'fa-exchange' }} " aria-hidden="true"></i>
                             {{Auth::user()->isCarer()? 'carer' : 'purchaser' }}
                       </span>
                     </a>
+                    @endif
+                    @if(!Auth::user()->isCarer() && empty(Auth::user()->userPurchaserProfile->active_user))
+                    <a  data-id="{{Auth::user()->id}}" data-type="purchaser"  href="/{{Auth::user()->isCarer()?
+                    'carer-settings' :
+                    'purchaser-settings' }}"
+                        class="profileName">{!! Auth::user()->userName() !!}<span class="registeredCarer__type">
+                      <i class="fa {{Auth::user()->isCarer()? ' ' : 'fa-exchange' }} " aria-hidden="true"></i>
+                            {{Auth::user()->isCarer()? 'carer' : 'purchaser' }}
+                      </span>
+                    </a>
+                    @else
+                    @if( !empty(\App\PurchasersProfile::find(Auth::user()->id)->active_user) )
+                    <a data-id="{{Auth::user()
+                                     ->userPurchaserProfile->active_user}}" data-type="service_user"  href="{{
+                                     Auth::user()->userPurchaserProfile->serviceUsers()
+                    ->find(Auth::user()
+                    ->userPurchaserProfile->active_user)->registration_progress!='61'
+                                    ? route('ServiceUserRegistration', ['serviceUserProfile' => Auth::user()->userPurchaserProfile->active_user])
+                                    : route('ServiceUserSetting',['id'=>Auth::user()->userPurchaserProfile->active_user])}}" class="profileName">{!!
+                                     Auth::user()->userPurchaserProfile->serviceUsers()->find(Auth::user()
+                                     ->userPurchaserProfile->active_user)->first_name !!} <span class="type-of-user">Service user</span>
+                    </a>
+                        @endif
+                    @endif
                     <span class="registeredCarer__ico">
                     <i class="fa fa-sign-out" aria-hidden="true"></i>
                   </span>
@@ -61,7 +86,8 @@
 
                         @if(!$serviceUser->isDeleted())
 
-                            @if(strlen($serviceUser->first_name)>0)
+                            @if(strlen($serviceUser->first_name)>0 &&
+                            Auth::user()->userPurchaserProfile->active_user!=$serviceUser->id)
 
                                 <a href="{{ $serviceUser->registration_progress!='61'
                                     ? route('ServiceUserRegistration', ['serviceUserProfile' => $serviceUser->id])
@@ -72,6 +98,7 @@
                                     </div>
                                     <h2 class="profileName">
                                         {!! $serviceUser->first_name.' '.mb_substr($serviceUser->family_name,0,1).'.' !!}
+                                        <span class="type-of-user">Service user</span>
                                     </h2>
                                     <span class="dropdownUser__ico"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
                                 </a>
@@ -83,7 +110,22 @@
                     @endforeach
 
                 @endif
-
+                @if( !empty(Auth::user()->userPurchaserProfile->active_user))
+                        <a href="/purchaser-settings"
+                           class="dropdownUser__item">
+                            <div class="profilePhoto dropdownUser__img">
+                                <img id="pf-{{Auth::user()->id}}" class="profile_photo_service_user" src="/img/profile_photos/{{Auth::user()->id}}.png" onerror="this.src='/img/no_photo.png'" alt="">
+                            </div>
+                            <h2 class="profileName">
+                                {!! Auth::user()->userName() !!}
+                                <span class="registeredCarer__type">
+                      <i class="fa {{Auth::user()->isCarer()? ' ' : 'fa-exchange' }} " aria-hidden="true"></i>
+                                    {{Auth::user()->isCarer()? 'carer' : 'purchaser' }}
+                      </span>
+                            </h2>
+                            <span class="dropdownUser__ico"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+                        </a>
+                    @endif
             @endif
 
                 @if(Auth::user()->isAdmin())

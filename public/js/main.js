@@ -488,6 +488,14 @@ function toDate(dStr,format) {
 
 $(document).ready(function () {
 
+    $('.dropdownUser__list>a').on('click',function(e){
+        e.preventDefault();
+        var data = {user:$(this).attr('data-type'),id:$(this).attr('data-id')}
+        $.get($(this).attr('href'));
+        window.location=$(this).attr('href');
+        return true;
+    });
+
     $(document).on('blur','.mypicker',function(e){
         var that = $(this);
         if(!$(that).hasClass('active_picker'))
