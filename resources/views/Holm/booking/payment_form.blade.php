@@ -43,7 +43,8 @@
                             <div class="inputWrap">
                                 <input type="text" class="formInput" id="cardNumber" placeholder="4534 3333 3333 3333 3333">
                                 <span class="bookPayment__ico"><img src="{{asset("img/visa.png")}}" alt=""></span>
-                                <span class="bookPayment__ico"><img src="{{asset("img/mc2.png")}}" alt=""></span>
+                                <span style="right: 42px;" class="bookPayment__ico"><img src="{{asset("img/mc2.png")}}"
+                                                                              alt=""></span>
                             </div>
                         </div>
                         <div class="bookPayment__row bookPayment__row--xs-column">
