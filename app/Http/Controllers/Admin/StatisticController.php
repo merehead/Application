@@ -67,7 +67,7 @@ class StatisticController extends AdminController
                                 WHERE p.id = u.id AND a.status_id = 4  AND UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(a.date_start) <= 2592000
                               ) as appointments_per_last_month
                               FROM users u
-                              JOIN carers_profiles p ON p.id = u.id
+                              JOIN carers_profiles p ON p.id = u.id WHERE u.user_type_id = 3
                             ORDER BY appointments_per_last_week DESC LIMIT 5');
         $this->vars['mostActiveCarers'] = $mostActiveCarers;
 
@@ -88,7 +88,7 @@ class StatisticController extends AdminController
                             WHERE p.id = u.id AND a.status_id = 4  AND UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(a.date_start) <= 2592000
                           ) as appointments_per_last_month
                         FROM users u
-                          JOIN purchasers_profiles p ON p.id = u.id
+                          JOIN purchasers_profiles p ON p.id = u.id  WHERE u.user_type_id = 1
                         ORDER BY appointments_per_last_week DESC LIMIT 5;');
         $this->vars['mostActivePurchasers'] = $mostActivePurchasers;
 

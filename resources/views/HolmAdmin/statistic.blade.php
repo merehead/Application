@@ -222,7 +222,7 @@
                   <span class="statisticHead__ico">
                     <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                   </span>
-                        THE MOST ACTIVE carers
+                        MOST ACTIVE carers
                     </h2>
 
                 </div>
@@ -324,7 +324,7 @@
                   <span class="statisticHead__ico">
                     <i class="fa fa-male" aria-hidden="true"></i>
                   </span>
-                        THE MOST ACTIVE PURCHERS
+                        MOST ACTIVE PURCHASERS
                     </h2>
 
                 </div>
@@ -383,7 +383,7 @@
                     </thead>
                     <tbody>
                     @php($i = 1)
-                    @foreach($mostActiveCarers as $item)
+                    @foreach($mostActivePurchasers as $item)
                         <tr class="statisticRow">
                             <td>
                           <span>
