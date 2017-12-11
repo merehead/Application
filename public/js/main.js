@@ -1679,6 +1679,7 @@ $(document).ready(function () {
             var datetime = $(that).parent().parent().find('.datepicker_message');
             var label = $(that).parent().parent().find('.correct');
             $(datetime).parent().show();
+            $(datetime).val('');
             $(label).show();
             $(datetime).removeClass("hasDatepicker").removeAttr('id');
             var datestart = $(datetime).attr('name').substring(0,$(datetime).attr('name').length - 10)+'[date_start]';
@@ -1725,6 +1726,7 @@ $(document).ready(function () {
             var label = $(that).parent().parent().find('.correct');
             $(datetime).parent().show();
             $(label).show();
+            $(datetime).val('');
             $(datetime).removeClass("hasDatepicker").removeAttr('id');
             var inDay = new Date();
             var form = $(this).parent().parent();
@@ -1833,7 +1835,8 @@ $(document).ready(function () {
             $(this).attr('name', input_name + '[' + appointments + input_name_p);
             $(this).attr('id', 'assistance_types' +  t);
             $(this).parent().find('label').attr('for','assistance_types' +  t);
-            $(this).prop('checked',false)
+            $(this).prop('checked',false);
+            $(this).val('');
             t=t+1;
         });
 
@@ -1867,6 +1870,7 @@ $(document).ready(function () {
             var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
             $(this).attr('name', input_name + '[' + appointments + input_name_p);
             $(this).parent().parent().find('.delete').attr('data-id','d'+appointments);
+            $(this).val('');
         });
 
         $($that).before('<br><h2 class="ordinaryTitle d'+appointments+'">\n' +

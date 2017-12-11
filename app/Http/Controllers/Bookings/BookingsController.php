@@ -113,8 +113,8 @@ class BookingsController extends FrontController implements Constants
 
         array_map(function ($item) use ($booking) {
             $originAppointment = Appointment::where('booking_id', $booking->id)->where('batch', $item->batch)->first();
-            $item->time_from = Carbon::parse($item->time_from)->format("h:i A");
-            $item->time_to = Carbon::parse($item->time_to)->format("h:i A");
+            $item->time_from = Carbon::parse($item->time_from)->format("g:i A");
+            $item->time_to = Carbon::parse($item->time_to)->format("g:i A");
             $item->assistance_types = $originAppointment->assistance_types;
         }, $appointments);
 
