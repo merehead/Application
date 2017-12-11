@@ -17,9 +17,24 @@
 
             @if(Auth::user()->isReregistrationCompleted())
                 <div  class="registeredCarer">
+                    @if(Auth::user()->isCarer())
                     <div class="profilePhoto registeredCarer__img">
-                        <img class="set_preview_profile_photo" src="/img/profile_photos/{{Auth::user()->id}}.png" onerror="this.src='/img/no_photo.png'" alt="">
+                        <img class="set_preview_profile_photo" src="/img/profile_photos/{{Auth::user()->id}}.png"
+                             onerror="this.src='/img/no_photo.png'" alt="">
                     </div>
+                    @endif
+                    @if(!Auth::user()->isCarer()&& empty(Auth::user()->userPurchaserProfile->active_user))
+                        <div class="profilePhoto registeredCarer__img">
+                            <img class="set_preview_profile_photo" src="/img/profile_photos/{{Auth::user()->id}}.png"
+                                 onerror="this.src='/img/no_photo.png'" alt="">
+                        </div>
+                    @endif
+                    @if(!Auth::user()->isCarer()&& !empty(Auth::user()->userPurchaserProfile->active_user))
+                        <div class="profilePhoto registeredCarer__img">
+                            <img class="set_preview_profile_photo" src="/img/service_user_profile_photos/{{Auth::user()->userPurchaserProfile->active_user}}.png"
+                                 onerror="this.src='/img/no_photo.png'" alt="">
+                        </div>
+                    @endif
                     @if(Auth::user()->isCarer())
                     <a data-id="" data-type="" href="/{{Auth::user()->isCarer()? 'carer-settings' : 'purchaser-settings'
                     }}"
