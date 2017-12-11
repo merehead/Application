@@ -94,7 +94,7 @@
                                 </div>
                             </div>
 
-                            <label class="checkBox_item correct2" for="date_end">End {{$appointment->time_to}}</label>
+                            <label class="checkBox_item correct2" for="date_end">End</label>
                             {{--<div class="messageInputs__field messageTime ">--}}
                                 {{--<input  onchange="calculate_price()" type="text" class="messageInput timepicker_message" id="time_to_bed"--}}
                                         {{--name="bookings[0][appointments][{{$loop->index}}][time_to]" placeholder="3:30 PM"--}}
