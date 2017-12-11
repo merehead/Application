@@ -174,6 +174,7 @@ class BookingsController extends FrontController implements Constants
 
             $serviceUserProfile = $booking->bookingServiceUser()->first();
             $this->vars = array_add($this->vars, 'serviceUserProfile', $serviceUserProfile);
+            $summary = array();
 
 
             $carerProfile = $booking->bookingCarer()->first()->userCarerProfile()->first();

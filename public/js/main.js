@@ -465,7 +465,7 @@ function setTime(input, hour, minutes, period) {
             period='AM';
         }else {
             hour = parseInt(hour) + 1;
-            if (hour > 12) hour = hour - 13;
+            if (hour > 12) hour = hour - 12;
             if (hour < 10) hour = '0' + parseInt(hour);
             if (minutes < 10) minutes = '0' + parseInt(minutes);
         }
