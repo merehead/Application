@@ -1836,7 +1836,7 @@ $(document).ready(function () {
             $(this).attr('id', 'assistance_types' +  t);
             $(this).parent().find('label').attr('for','assistance_types' +  t);
             $(this).prop('checked',false);
-            $(this).val('');
+
             t=t+1;
         });
 
