@@ -1,3 +1,9 @@
+<style>
+    .button_disabled {
+        background: #d7d7d7 !important;
+        color: #f8f4f4;
+    }
+</style>
 <section class="mainSection">
     <div class="container">
         <div class="breadcrumbs">
@@ -33,10 +39,10 @@
                             @endforeach
                             <div class="card-list__item">
                                 <input type="radio" class="theme-radio new_card" id="radio-payment0" name="card_id">
-                                <label for="radio-payment0"><span> New card</span></label>
+                                <label for="radio-payment0"><span> NEW CARD</span></label>
                             </div>
                         </div>
-                        <div class="bookPayment__field">
+                        <div class="bookPayment__field carDiv">
                             <h2 class="formLabel">
                                 Card Number
                             </h2>
@@ -47,7 +53,7 @@
                                                                               alt=""></span>
                             </div>
                         </div>
-                        <div class="bookPayment__row bookPayment__row--xs-column">
+                        <div class="bookPayment__row bookPayment__row--xs-column carDiv">
                             <div class="bookPayment__halfColumn   bookPayment__halfColumn--xs-full">
                                 <h2 class="formLabel">
                                     Valid Until
@@ -81,17 +87,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="paymentCheckbox">
+                        <div class="paymentCheckbox carDiv">
                             <div class="checkBox_item">
-                                <input type="checkbox" name="checkbox" class="customCheckbox" id="buttonPaymentCard1">
+                                <input disabled type="checkbox" name="checkbox" class="customCheckbox"
+                                       id="buttonPaymentCard1">
                                 <label for="buttonPaymentCard1"> save payment details?</label>
                             </div>
                             <input type="hide" name="save_card" class="customCheckbox" id="save_card">
                         </div>
                         <div class="roundedBtn roundedBtn--center">
-                            <a href="#" class="roundedBtn__item roundedBtn__item--confirm" id="buttonPaymentCard">
+                            <button disabled href="#"  class="roundedBtn__item roundedBtn__item--confirm"
+                                     id="buttonPaymentCard">
                                 Confirm Payment
-                            </a>
+                            </button>
                         </div>
                     </form>
                     <div class="bonusPay-header" style="display: none">
@@ -115,7 +123,8 @@
 
                         </div>
                         <div class="roundedBtn roundedBtn--center">
-                            <button  class="roundedBtn__item roundedBtn__item--confirm" id="buttonPaymentBonuses">
+                            <button class=" roundedBtn__item roundedBtn__item--confirm"
+                                    id="buttonPaymentBonuses">
                                 Confirm Payment
                             </button>
                         </div>
@@ -160,9 +169,15 @@
 
 <script>
     $('input[type="text"]').attr("readonly", true);
+    $('.carDiv').hide();
 
     $('input[type="radio"]').on("click",function(){
+        $('#buttonPaymentCard').attr('disabled',false);
         $('input[type="text"]').attr("readonly", !$('.new_card').is(':checked'));
+        $('#buttonPaymentCard1').attr("disabled", !$('.new_card').is(':checked'));
+        if(!$('.new_card').is(':checked')){
+            $('.carDiv').hide();
+        }else{ $('.carDiv').show();}
     });
 
     $('#buttonPaymentCard1').on('click',function(){
@@ -204,7 +219,8 @@
 
     });
 
-    $('#buttonPaymentCard').click(function () {
+    $('#buttonPaymentCard').click(function (e) {
+        e.preventDefault();
         showSpinner();
         var cardNumber = $('#cardNumber').val();
         var cardMonth = $('#cardMonth').val();
