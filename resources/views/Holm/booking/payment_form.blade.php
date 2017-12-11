@@ -31,6 +31,10 @@
                                 <label for="radio-payment{{$card->id}}"><span> xxxx xxxxx xxxx {{$card->last_four}}</span></label>
                             </div>
                             @endforeach
+                            <div class="card-list__item">
+                                <input type="radio" class="theme-radio new_card" id="radio-payment0" name="card_id">
+                                <label for="radio-payment0"><span> New card</span></label>
+                            </div>
                         </div>
                         <div class="bookPayment__field">
                             <h2 class="formLabel">
@@ -154,6 +158,12 @@
 </section>
 
 <script>
+    $('input[type="text"]').attr("readonly", true);
+
+    $('input[type="radio"]').on("click",function(){
+        $('input[type="text"]').attr("readonly", !$('.new_card').is(':checked'));
+    });
+
     $('#buttonPaymentCard1').on('click',function(){
         if (this.checked) {
             $("#save_card").val(true);
@@ -189,22 +199,33 @@
         });
     });
 
+    $('.new_card').on('click',function(){
+
+    });
+
     $('#buttonPaymentCard').click(function () {
         showSpinner();
         var cardNumber = $('#cardNumber').val();
         var cardMonth = $('#cardMonth').val();
         var cardYear = $('#cardYear').val();
         var cardCVC = $('#cardCVC').val();
+        var data = {};
+        if(!$('.new_card').is(':checked'))
+        data = {
+            'card_id': $('input[name="card_id"]').val(),
+            'payment_method': 'credit_card'
+            };
+        else
+        data = {
+            'payment_method': 'credit_card',
+            'save_card': $('#save_card').val(),
+            'card_number': cardNumber,
+            'card_month': cardMonth,
+            'card_year': cardYear,
+            'card_cvc': cardCVC};
+
         $.post('{{route('setBookingPaymentMethod', ['booking' => $booking->id])}}',
-            {
-                'payment_method': 'credit_card',
-                'card_id': $('input[name="card_id"]').val(),
-                'save_card': $('#save_card').val(),
-                'card_number': cardNumber,
-                'card_month': cardMonth,
-                'card_year': cardYear,
-                'card_cvc': cardCVC
-            },
+            data,
             function( data ) {
             if(data.status == 'success'){
                 $('.bookPaymentWrap').css('border-top','none');
