@@ -1663,6 +1663,7 @@ $(document).ready(function () {
             $(form).find('.weekly').attr('disabled',false);
             $(form).find('.Daily').attr('disabled',false);
         }
+        $('.additionalTime').prop('disabled',false);
         calculate_price();
     });
     $(document).on('click','.Single',function(){
@@ -1817,7 +1818,16 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on('click','a.additionalTime', function (e) {
+    $(document).on('click','div.messageDate>a',function(e){
+       e.preventDefault();
+       $(this).parent().find('input').focus();
+    });
+    $(document).on('click','div.date_marker>span.date-ico',function(e){
+       e.preventDefault();
+       $(this).parent().find('input').focus();
+    });
+
+    $(document).on('click','.additionalTime', function (e) {
         e.preventDefault();
         var $that =$(this);
         var dlast = $('.cdate').last().clone();
@@ -2125,15 +2135,15 @@ $(document).ready(function () {
     });
 
     $('#theCarousel1').on('slide.bs.carousel', function () {
-      var _this = $(this)
-      var data_id = $('#theCarousel_users').children()
-      var peopleBox = $('.peopleBox').children()
-      $(this).removeClass('active')
+      var _this = $(this);
+      var data_id = $('#theCarousel_users').children();
+      var peopleBox = $('.peopleBox').children();
+      $(this).removeClass('active');
 
-      peopleBox.removeClass('activeImg')
+      peopleBox.removeClass('activeImg');
 
       setTimeout(function () {
-        current_id = parseInt(_this.find('.active').attr('id').replace(/[^1-9]/g, ''))
+        var current_id = parseInt(_this.find('.active').attr('id').replace(/[^1-9]/g, ''))
         $.each( data_id, function( key, value ) {
           if(parseInt($(this).attr('data-id')) === current_id){
             $(this).children().addClass('activeImg')

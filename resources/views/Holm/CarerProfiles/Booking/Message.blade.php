@@ -191,10 +191,10 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="additionalTime">
+                        <button disabled href="#" class="additionalTime">
                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                             ADD ADDITIONAL APPOINTMENT
-                        </a>
+                        </button>
 
 
                     </div>
