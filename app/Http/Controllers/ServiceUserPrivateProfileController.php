@@ -41,6 +41,10 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
         $this->title = 'Holm Care';
 
         if (!$this->user) {
+            if(request()->has('referUserProfilePublic')){
+                $cookie = Cookie::make('referUserProfilePublic', request()->get('referUserProfilePublic'),2);
+                return redirect()->route('session_timeout')->withCookie($cookie);
+            }
             return redirect('/');
         } else {
 

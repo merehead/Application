@@ -32,7 +32,7 @@
                         <h1  style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700; font-size: 16px; color: #272c2b;  text-transform: uppercase;">DEAR {{( $sendTo == 'carer') ? $carer->like_name : $purchaser->like_name}}</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             @if($sendTo == 'carer')
-                                <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{$serviceUser->first_name}}</a>
+                                <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}?referUserProfilePublic={{$serviceUser->id}}">{{$serviceUser->first_name}}</a>
                                 would like to book you
                                 on {{$booking->date_start}} - {{$booking->date_end}}.
                                 Please click the button below to accept or reject the booking request.
@@ -100,7 +100,7 @@
                                     <td align="center" style="text-align:left;">
                                         @if($sendTo == 'carer')
                                         <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
-                                            <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}" style=" color: #6178fc;">
+                                            <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}?referUserProfilePublic={{$serviceUser->id}}" style=" color: #6178fc;">
                                                 {{$serviceUser->first_name}}</a><span style="display: block;">Booked you</span></p>
                                     @else
                                             <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">

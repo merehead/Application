@@ -60,7 +60,7 @@
                             DEAR {{( $sendTo == 'carer') ? $carer->like_name : $purchaser->like_name}}</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             @if($sendTo == 'carer')
-                                <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{$serviceUser->first_name}}</a>
+                                <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}?referUserProfilePublic={{$serviceUser->id}}">{{$serviceUser->first_name}}</a>
                                 offered an alternative time. Please click the button below to accept or reject the
                                 alternative time request.
                             @else

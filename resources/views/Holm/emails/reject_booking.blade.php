@@ -60,7 +60,7 @@
                             DEAR {{( $sendTo == 'carer') ? $carer->like_name : $serviceUser->like_name}}</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             @if($sendTo == 'carer')
-                                <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{ucfirst($serviceUser->first_name)}}</a>
+                                <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}?referUserProfilePublic={{$serviceUser->id}}">{{ucfirst($serviceUser->first_name)}}</a>
                                 has cancelled the following <a href="{{route('carerBooking',['status'=>'canceled'])}}?bookingFilterCanceled={{$booking->id}}">booking</a>.
                             @else
                                 <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{ucfirst($carer->first_name)}}</a>
@@ -128,7 +128,7 @@
                                     <td align="center" style="text-align:left;">
                                         @if($sendTo == 'carer')
                                             <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
-                                                <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}"
+                                                <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}?referUserProfilePublic={{$serviceUser->id}}"
                                                    style=" color: #6178fc;">
                                                     {{$serviceUser->like_name}}</a></p>
                                         @else
