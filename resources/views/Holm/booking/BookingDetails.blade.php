@@ -123,7 +123,7 @@
                             <p>{{strtoupper(str_replace('single', 'once', $row->name))}}</p>
                         </div>
                         <div class="summary-extra">
-                            <p>{{strtoupper($row->times)}} times</p>
+                            <p>{{ date("h:i A", strtotime(str_replace('.', ':', $row->time_from))) }} - {{ date("h:i A", strtotime(str_replace('.', ':', $row->time_to))) }}</p>
                         </div>
                     </div>
                 @endforeach
