@@ -180,8 +180,19 @@ class BookingsController extends FrontController implements Constants
             $carerProfile = $booking->bookingCarer()->first()->userCarerProfile()->first();
             $this->vars = array_add($this->vars, 'carerProfile', $carerProfile);
 
+            $sql = 'SELECT at.name as s_name, min(a.date_start) as date_start, max(a.date_start) as date_end,  p.name, count(a.id) as times FROM assistance_types at
+                  JOIN appointments_assistance_types aat ON at.id = aat.assistance_type_id
+                  JOIN appointments a ON a.id = aat.appointment_id
+                  JOIN bookings b ON b.id = a.booking_id
+                  JOIN periodicities p
+                WHERE b.id = '.$booking->id.' AND a.periodicity = p.name
+                GROUP BY at.name, p.name;';
+            $res = DB::select($sql);
+            $this->vars = array_add($this->vars, 'summary', $res);
+
             $this->content = view(config('settings.frontTheme') . '.booking.BookingDetails')->with($this->vars)->render();
         }
+
 
 
         return $this->renderOutput();
