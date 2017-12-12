@@ -41,11 +41,11 @@
                         </div>
                     </div>
                     <div class="bookings-more">
-                        @foreach($appointments as $appointment)
-                            <?php $ii=0;?>
+                        <?php $ii=0;?>
+                    @foreach($appointments as $appointment)
                         <div class="messageGroup">
                             <h2 class="ordinaryTitle">
-                                <span class="ordinaryTitle__text">Type of care</span>
+                                <span class="ordinaryTitle__text">Type of care {{$ii}}</span>
                             </h2>
                             <div class="messageCheckbox">
                                 @foreach($appointment->assistance_types as $care)
@@ -58,7 +58,7 @@
                                 @endforeach
                             </div>
                         </div>
-                                <?php $ii++;?>
+                                <?php $ii=$ii+1;?>
                         <div class="messageGroup cdate">
                             <h2 class="ordinaryTitle">
                               <span class="ordinaryTitle__text ordinaryTitle__text--smaller rtext">
