@@ -403,12 +403,14 @@ class BookingsController extends FrontController implements Constants
     public function cancel(Booking $booking)
     {
         $cancelBooking = true;
-        foreach ($booking->appointments as $appointment){
-            if($appointment->cancelable){
-                $appointment->status_id = self::APPOINTMENT_STATUS_CANCELLED;
-                $appointment->save();
-            } else {
-                $cancelBooking = false;
+        if($booking->status_id != self::AWAITING_CONFIRMATION) {
+            foreach ($booking->appointments as $appointment) {
+                if ($appointment->cancelable) {
+                    $appointment->status_id = self::APPOINTMENT_STATUS_CANCELLED;
+                    $appointment->save();
+                } else {
+                    $cancelBooking = false;
+                }
             }
         }
 
