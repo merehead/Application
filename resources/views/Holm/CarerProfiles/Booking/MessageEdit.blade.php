@@ -42,6 +42,7 @@
                     </div>
                     <div class="bookings-more">
                         @foreach($appointments as $appointment)
+                            <?php $ii=0;?>
                         <div class="messageGroup">
                             <h2 class="ordinaryTitle">
                                 <span class="ordinaryTitle__text">Type of care</span>
@@ -50,13 +51,14 @@
                                 @foreach($appointment->assistance_types as $care)
                                     <div class="checkBox_item">
 
-                                        {!! Form::checkbox('bookings[0][appointments]['.($loop->index-1).'][assistance_types][]', $care->id, $care->id,
+                                        {!! Form::checkbox('bookings[0][appointments]['.$ii.'][assistance_types][]', $care->id, $care->id,
                                                     array('class' => 'customCheckbox assistance_types','onclick'=>'return false;','id'=>'assistance_types'.$care->id)) !!}
                                         <label for="assistance_types{{$care->id}}">{{$care->name}}</label>
                                     </div>
                                 @endforeach
                             </div>
                         </div>
+                                <?php $ii++;?>
                         <div class="messageGroup cdate">
                             <h2 class="ordinaryTitle">
                               <span class="ordinaryTitle__text ordinaryTitle__text--smaller rtext">

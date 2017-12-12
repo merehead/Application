@@ -46,7 +46,8 @@
                     @foreach($holiday as $item)
                         <tr>
                             <td>
-                                <p>{{$item->name}}</p>
+                                <input type="text" class="formItem formItem--input formItem--date-ico"
+                                       placeholder="Name" value="{{$item->name}}" name="holiday[name][]">
                             </td>
                             <td>
                                 <div class="formField formField--fixed">
@@ -67,7 +68,7 @@
                                         <i class="fa fa-plus"></i>
                                     </button>
                                     @endif
-                                    <button class="action-box__btn action-box__btn--remove">
+                                    <button class="action-box__btn action-box__btn--remove btn--remove">
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
@@ -99,9 +100,13 @@
                 yearRange: "0:+10"
             });
         });
-        $(".addBtn").on('click',function(){
+        $(document).on('click',".addBtn",function(e){
+            e.preventDefault();
             var row = $('.adminTable tbody tr:last').clone();
-            $('.adminTable tbody tr:last')
+            $('.adminTable tbody tr:last').find('.addBtn').remove();
+            $('.adminTable tbody tr:last').find('.btn--remove').remove();
+            $('.adminTable tbody tr:last').after(row);
+
         });
     });
 </script>
