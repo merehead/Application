@@ -1837,10 +1837,8 @@ $(document).ready(function () {
             $(this).attr('id', 'assistance_types' +  t);
             $(this).parent().find('label').attr('for','assistance_types' +  t);
             $(this).prop('checked',false);
-
             t=t+1;
         });
-
 
         $(dlast).find('.mypicker').each(function () {
             var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);

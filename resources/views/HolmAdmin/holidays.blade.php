@@ -22,6 +22,11 @@
                     <span class="td-title td-title--time">
                       date
                     </span>
+                        </td>
+                        <td class=" ordninary-td  ">
+                    <span class="td-title td-title--actions">
+                      Actions
+                    </span>
 
                         </td>
                     </tr>
@@ -33,8 +38,8 @@
                         <td>
                         </td>
                         <td>
-
                         </td>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -53,6 +58,18 @@
                                         <span class="field-ico"><i class="fa fa-calendar"></i></span>
                                         <input type="hidden" name="holiday[id][]" value="{{$item->id}}">
                                     </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action-box">
+                                    @if($loop->last)
+                                    <button class="action-box__btn addBtn">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                    @endif
+                                    <button class="action-box__btn action-box__btn--remove">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -82,5 +99,9 @@
                 yearRange: "0:+10"
             });
         });
-    })
+        $(".addBtn").on('click',function(){
+            var row = $('.adminTable tbody tr:last').clone();
+            $('.adminTable tbody tr:last')
+        });
+    });
 </script>
