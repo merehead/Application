@@ -113,42 +113,20 @@
                 <h2 class="ordinaryTitle">
                     <span class="ordinaryTitle__text ordinaryTitle__text--bigger">Booking summary:</span>
                 </h2>
-                <div class="summary-row">
-                    <div class="summary-info">
-                        <p>Personal care</p>
-                        <span>Dec 21, 2017 - Dec 30, 2017</span>
+                @foreach($summary as $row)
+                    <div class="summary-row">
+                        <div class="summary-info">
+                            <p>{{$row->s_name}}</p>
+                            <span>{{date("M d, Y", strtotime($row->date_start))}} - {{date("M d, Y", strtotime($row->date_end))}} </span>
+                        </div>
+                        <div class="summary-extra">
+                            <p>{{strtoupper($row->name)}}</p>
+                        </div>
+                        <div class="summary-extra">
+                            <p>{{strtoupper($row->times)}} times</p>
+                        </div>
                     </div>
-                    <div class="summary-extra">
-                        <p>Daily</p>
-                    </div>
-                    <div class="summary-extra">
-                        <p>1 times</p>
-                    </div>
-                </div>
-                <div class="summary-row">
-                    <div class="summary-info">
-                        <p>Dementia care</p>
-                        <span>Dec 21, 2017 - Dec 30, 2017</span>
-                    </div>
-                    <div class="summary-extra">
-                        <p>Once</p>
-                    </div>
-                    <div class="summary-extra">
-                        <p>1 times</p>
-                    </div>
-                </div>
-                <div class="summary-row">
-                    <div class="summary-info">
-                        <p>Dementia care</p>
-                        <span>Dec 21, 2017 - Dec 30, 2017</span>
-                    </div>
-                    <div class="summary-extra">
-                        <p>Weeckly</p>
-                    </div>
-                    <div class="summary-extra">
-                        <p>3 times</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
         </div>
