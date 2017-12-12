@@ -123,7 +123,7 @@
                             <p>{{strtoupper(str_replace('single', 'once', $row->name))}}</p>
                         </div>
                         <div class="summary-extra">
-                            <p>{{strtoupper($row->times)}} times</p>
+                            <p>{{ date("h:i A", strtotime(str_replace('.', ':', $row->time_from))) }} - {{ date("h:i A", strtotime(str_replace('.', ':', $row->time_to))) }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -282,7 +282,7 @@
                         <div class="app-btn">
                             @if($user->user_type_id !== 4)
                                 @php($field = $user->user_type_id == 1 ? 'purchaser_status_id' : 'carer_status_id')
-                                <button data-appointment_id="{{$appointment->id}}" {{$booking->status_id != 5 || $appointment->status_id == 5 || !in_array($appointment->{$field}, [1])  || !$appointment->is_past  ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "reject"  class="changeAppointmentStatus app-btn__item">
+                                <button data-appointment_id="{{$appointment->id}}" {{$booking->status_id != 5 || $appointment->status_id == 5 || !in_array($appointment->{$field}, [1])  || (!$appointment->cancelable && !$appointment->is_past)  ? 'disabled' : ''}}  data-appointment_id = "{{$appointment->id}}" data-status = "reject"  class="changeAppointmentStatus app-btn__item">
                                     @if($appointment->cancelable)
                                         Cancel
                                     @else
