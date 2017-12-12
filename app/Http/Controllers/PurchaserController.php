@@ -180,6 +180,10 @@ class PurchaserController extends FrontController implements Constants
                 $cookie = Cookie::make('bookingFilterPurchaser', 1,2);
                 return redirect()->route('session_timeout')->withCookie($cookie);
             }
+            if(request()->has('purchaserbookingFilterCanceled')){
+                $cookie = Cookie::make('purchaserbookingFilterCanceled', 1,2);
+                return redirect()->route('session_timeout')->withCookie($cookie);
+            }
             return redirect('/');
             //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
         } else {

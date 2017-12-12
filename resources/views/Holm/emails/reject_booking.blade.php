@@ -61,10 +61,10 @@
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             @if($sendTo == 'carer')
                                 <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{ucfirst($serviceUser->first_name)}}</a>
-                                has cancelled the following <a href="{{route('carerBooking',['status'=>'canceled'])}}?bookingFilterCanceled={{$booking->id}}">booking</a>
+                                has cancelled the following <a href="{{route('carerBooking',['status'=>'canceled'])}}?bookingFilterCanceled={{$booking->id}}">booking</a>.
                             @else
                                 <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{ucfirst($carer->like_name)}}</a>
-                                has cancelled the following <a href="{{route('purchaserBookingStatus',['status'=>'canceled'])}}?purchaserbookingFilterCanceled={{$booking->id}}">booking</a>
+                                has cancelled the following <a href="{{route('purchaserBookingStatus',['status'=>'canceled'])}}?purchaserbookingFilterCanceled={{$booking->id}}">booking</a>.
                             @endif
                         </p>
 
@@ -179,7 +179,7 @@
             <table cellpadding="0" cellspacing="0" border="0" style="    margin: 0; " width="100%" class="t-content">
 
                 <tr>
-                    <td style="color:#272c2b;padding: 10px 40px; background: #fff; " valign="top" class="">
+                    <td style="color:#272c2b;padding: 0px 40px; background: #fff; " valign="top" class="">
             <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                 @if ($sendTo == 'carer')
                     Please <a href="{{route('ContactPage')}}">contact us</a> if you have any concerns.
