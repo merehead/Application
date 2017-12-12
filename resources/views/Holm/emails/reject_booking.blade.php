@@ -63,7 +63,7 @@
                                 <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{ucfirst($serviceUser->first_name)}}</a>
                                 has cancelled the following <a href="{{route('carerBooking',['status'=>'canceled'])}}?bookingFilterCanceled={{$booking->id}}">booking</a>.
                             @else
-                                <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{ucfirst($carer->like_name)}}</a>
+                                <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{ucfirst($carer->first_name)}}</a>
                                 has cancelled the following <a href="{{route('purchaserBookingStatus',['status'=>'canceled'])}}?purchaserbookingFilterCanceled={{$booking->id}}">booking</a>.
                             @endif
                         </p>
@@ -134,7 +134,7 @@
                                         @else
                                             <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
                                                 <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}"
-                                                   style="color: #6178fc; font-weight: 900;">{{$carer->like_name}}</a>
+                                                   style="color: #6178fc; font-weight: 900;">{{$carer->first_name}}</a>
                                             </p>
                                     @endif
 
