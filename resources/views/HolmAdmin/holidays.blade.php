@@ -46,14 +46,14 @@
                     @foreach($holiday as $item)
                         <tr>
                             <td>
-                                <input type="text" class="formItem formItem--input formItem--date-ico"
+                                <input required type="text" class="formItem formItem--input formItem--date-ico"
                                        placeholder="Name" value="{{$item->name}}" name="holiday[name][]">
                             </td>
                             <td>
                                 <div class="formField formField--fixed">
                                     <div class="fieldWrap">
-                                        <input type="text"
-                                               class="formItem formItem--input formItem--date-ico date-input "
+                                        <input required type="text"
+                                               class="formItem formItem--input formItem--date-ico date-input"
                                                placeholder="06/06/2017" value="{{date('Y-m-d',strtotime
                                         ($item->date))}}" name="holiday[date][]">
                                         <span class="field-ico"><i class="fa fa-calendar"></i></span>
@@ -68,7 +68,7 @@
                                         <i class="fa fa-plus"></i>
                                     </button>
                                     @endif
-                                    <button class="action-box__btn action-box__btn--remove btn--remove">
+                                    <button data-id="{{$item->id}}" class="action-box__btn action-box__btn--remove btn--remove">
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
@@ -78,10 +78,10 @@
                     </tbody>
                 </table>
                 <div class="settingBtn settingBtn--centered">
-                    <a href="#" onclick="event.preventDefault();document.getElementById('holidays-form').submit();"
+                    <button type="submit" href="#"
                        class="actionsBtn actionsBtn--accept actionsBtn--big actionsBtn--no-centered">
                         save
-                    </a>
+                    </button>
                 </div>
             </form>
         </div>
@@ -100,13 +100,51 @@
                 yearRange: "0:+10"
             });
         });
+        $(document).on('click',".btn--remove",function(e){
+            var id=$(this).attr('data-id');
+            if($(this).parent().find('.addBtn').length>0){
+               var addBtn = $(this).parent().find('.addBtn').clone();
+               $(this).parent().parent().parent().remove();
+                $('.adminTable tbody tr:last').find('.btn--remove').before(addBtn);
+            }else
+            $(this).parent().parent().parent().remove();
+
+            if(parseInt(id)>0)
+                $.ajax({
+                    url: '/admin/holidays/delete/'+id,
+                    data: {id:id},
+                    type: 'POST',
+                    dataType: "json",
+                    success: function (response) {
+                        if(response.status == 'true'){
+                            var notify = $.notify('<strong>Deleting</strong> success...', {
+                                type: 'success',
+                                allow_dismiss: true
+                            });
+                        }else{
+                            var notify = $.notify(data.message, {
+                                type: 'success',
+                                allow_dismiss: true
+                            });
+                        }
+                    }
+                });
+        });
+
         $(document).on('click',".addBtn",function(e){
             e.preventDefault();
             var row = $('.adminTable tbody tr:last').clone();
             $('.adminTable tbody tr:last').find('.addBtn').remove();
-            $('.adminTable tbody tr:last').find('.btn--remove').remove();
             $('.adminTable tbody tr:last').after(row);
-
+            $('.adminTable tbody tr:last').find('input').val('');
+            $('.adminTable tbody tr:last').find('input').removeClass("hasDatepicker").removeAttr('id');
+            $(".date-input").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "yy-mm-dd",
+                showAnim: "slideDown",
+                yearRange: "0:+10"
+            });
         });
     });
 </script>

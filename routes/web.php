@@ -161,6 +161,7 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],
     Route::post('/fees','FeesController@update')->name('feespost');
     Route::get('/holidays','HolidaysController@index')->name('holidays');
     Route::post('/holidays','HolidaysController@update')->name('holidaysPost');
+    Route::post('/holidays/delete/{id}','HolidaysController@delete')->name('holidaysDeletePost');
 
     Route::get('/settings','SettingsController@index')->name('settingsAdmin');
     Route::post('/settings','SettingsController@update')->name('settingsAdminPost');
