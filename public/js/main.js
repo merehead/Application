@@ -1771,6 +1771,14 @@ $(document).ready(function () {
                 $('#message-booking').remove();
                 $('body').append(response);
                 $('.needCare__item').click();
+                $('#message-booking').modal('show');
+                $('input[name="bookings[0][appointments][0][date_start]"]').datepicker();
+                var datestartDate = $('input[name="bookings[0][appointments][0][date_start]"]').datepicker( "getDate" );
+                var inWeek = new Date();
+                var in90Day = new Date();
+                inWeek.setDate(datestartDate.getDate()+7);
+                in90Day.setDate(datestartDate.getDate()+75);
+                $('.datepicker_message').removeClass("hasDatepicker").removeAttr('id');
                 $(".datepicker_message").datepicker({
                     beforeShow: function(input, inst) {
                         inst.dpDiv.css({"z-index":"2000!important;"});
@@ -1781,7 +1789,7 @@ $(document).ready(function () {
                     dateFormat: "dd/mm/yy",
                     showAnim: "slideDown",
                     minDate: "+0D",
-                    maxDate: "+50Y",
+                    maxDate: in90Day,
                     yearRange: "0:+50"
                 });
                 $('.timepicker_message').timepicker({
@@ -1800,7 +1808,6 @@ $(document).ready(function () {
                     dropdown: true,
                     scrollbar: true
                 });
-                $('#message-booking').modal('show');
                 $('.needCare__item').click();
             },
             error: function (response) {
