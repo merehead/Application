@@ -612,8 +612,8 @@ $(document).ready(function () {
         if(hours==0 && $(that).hasClass('start')) {
             var minutes = start_time.getMinutes();
             hours = current_time.getHours() + 1;
-            if(hours>12) hours=hours-12;
             $('.checkbox-date').prop('checked',hours>11);
+            if(hours>12) hours=hours-12;
             var timeAMPM = ($('.checkbox-date').is(':checked'))?'PM':'AM';
         }
 

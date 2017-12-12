@@ -70,7 +70,9 @@ class SearchController extends FrontController
 
         $perPage = 5;
         $where = '';
+        $having = '';
         if ($request->get('language')) {
+            $having = ' having sum(cl.language_id)=' . array_sum(array_keys($request->get('language'))).' ';
             $where .= 'inner join carer_profile_language cl on cl.carer_profile_id = cp.id and cl.language_id in (' . implode(',',
                     array_keys($request->get('language'))) . ')';
         }
@@ -174,7 +176,7 @@ class SearchController extends FrontController
         $sql = 'select cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview,postcode
                   from carers_profiles cp ' . $where . ' 
                 group by cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview,postcode
-                order by ' . implode(',', $order) . " limit $start,$perPage";
+                '.$having.' order by ' . implode(',', $order) . " limit $start,$perPage";
         //if (Auth::check() && Auth::user()->isAdmin()) {
         //echo($sql);
         $carerResult = DB::select($sql); //раскоментить
@@ -190,8 +192,8 @@ class SearchController extends FrontController
         //if (Auth::check() && Auth::user()->isAdmin()){
         $countAllResult = DB::select('SELECT cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview
                   FROM carers_profiles cp ' . $where . '
-                GROUP BY cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview
-                ORDER BY ' . implode(',', $order));
+                GROUP BY cp.id,first_name,family_name,sentence_yourself,town,avg_total,creview 
+                '.$having.' ORDER BY ' . implode(',', $order));
         //}
         $countAll = count($countAllResult);
 
