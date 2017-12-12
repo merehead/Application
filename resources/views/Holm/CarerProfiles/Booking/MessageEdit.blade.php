@@ -50,7 +50,7 @@
                                 @foreach($appointment->assistance_types as $care)
                                     <div class="checkBox_item">
 
-                                        {!! Form::checkbox('bookings[0][appointments][0][assistance_types][]', $care->id, $care->id,
+                                        {!! Form::checkbox('bookings[0][appointments]['.($loop->index-1).'][assistance_types][]', $care->id, $care->id,
                                                     array('class' => 'customCheckbox assistance_types','onclick'=>'return false;','id'=>'assistance_types'.$care->id)) !!}
                                         <label for="assistance_types{{$care->id}}">{{$care->name}}</label>
                                     </div>
