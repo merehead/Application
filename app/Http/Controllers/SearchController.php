@@ -139,9 +139,17 @@ class SearchController extends FrontController
                 $postCode .= ' ';
 //                $where .= " AND (SELECT COUNT(*) FROM postcodes p WHERE p.name = LEFT('" . $postCode . "', POSITION(' ' IN '" . $postCode . "')) and  p.name = LEFT(cp.postcode, POSITION(' ' IN '" . $postCode . "')))>0";
 //            } else {
+            }else{
+
+                $carerCode = CarersProfile::where('postcode','=',$postCode)->get();
+                if($carerCode->count()==0){
+                    $postCode = substr($postCode,0,strpos($postCode, ' ')+1);
+                }
+
             }
             $where .= " AND cp.postcode like '" . $postCode . "%'";
         }
+
         if ($request->get('load-more', 0) == 1) {
             $page = $request->get('page');
         }
