@@ -613,7 +613,7 @@ $(document).ready(function () {
             var minutes = start_time.getMinutes();
             hours = current_time.getHours() + 1;
             if(hours>12) hours=hours-12;
-            $('.checkbox-date').prop('checked',current_time.getHours()>11);
+            $('.checkbox-date').prop('checked',hours>11);
             var timeAMPM = ($('.checkbox-date').is(':checked'))?'PM':'AM';
         }
 
