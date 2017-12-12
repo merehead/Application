@@ -36,11 +36,7 @@ class HolidaysController extends AdminController
             $holidays->date = $request->holiday['date'][$key];
             $holidays->save();
         }
-        $data = Holiday::all();
-        $this->vars['holiday'] = $data;
-        $this->content = view(config('settings.theme') . '.holidays')->with($this->vars)->render();
-
-        return $this->renderOutput();
+        return redirect()->back();
     }
 
     public function delete(Request $request, $id)
