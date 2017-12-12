@@ -86,7 +86,7 @@ class CarerController extends FrontController implements Constants
         } else {
             $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('purchaser_id', Auth::user()->id)->get();
             $this->vars = array_add($this->vars, 'newBookings', $newBookings);
-
+            $this->vars = array_add($this->vars, 'countBookings', $newBookings->count());
             if(!empty($id) && Auth::user()->user_type_id==4) { //админ
                 $carerProfile = CarersProfile::findOrFail($id);
             } else {
@@ -267,6 +267,7 @@ class CarerController extends FrontController implements Constants
         $newBookings = Booking::whereIn('status_id', [self::AWAITING_CONFIRMATION])->where('carer_id', $user->id)->skip($start)->take($perPage)->get();
         $this->vars = array_add($this->vars, 'newBookings', $newBookings);
         $this->vars = array_add($this->vars, 'newBookingsAll', $newBookingsAll);
+        $this->vars = array_add($this->vars, 'countBookings', $newBookingsAll->count());
 
         if($request->ajax()&&$status=='new'){
             $this->content = view(config('settings.frontTheme') . '.CarerProfiles.Booking.BookingRowNewAjax')->with($this->vars)->render();

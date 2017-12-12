@@ -25,5 +25,5 @@
 
 <div class="bookingSwitcher">
     <a href="{{route('carerSettings')}}" class="bookingSwitcher__link bookingSwitcher__link--active">Profile settings</a>
-    <a href="{{route('carerBooking')}}" class="bookingSwitcher__link">My bookings {!! $newBookings->count() ? '<span>+'.$newBookings->count().'</span>' : '' !!}</a>
+    <a href="{{route('carerBooking')}}" class="bookingSwitcher__link">My bookings {!! $countBookings ? '<span>+'.$countBookings.'</span>' : '' !!}</a>
 </div>
