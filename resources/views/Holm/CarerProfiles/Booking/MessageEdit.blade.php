@@ -45,7 +45,7 @@
                     @foreach($appointments as $appointment)
                         <div class="messageGroup">
                             <h2 class="ordinaryTitle">
-                                <span class="ordinaryTitle__text">Type of care {{$ii}}</span>
+                                <span class="ordinaryTitle__text">Type of care</span>
                             </h2>
                             <div class="messageCheckbox">
                                 @foreach($appointment->assistance_types as $care)
