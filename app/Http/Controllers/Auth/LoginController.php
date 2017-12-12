@@ -79,7 +79,7 @@ class LoginController extends Controller
 
         if( Cookie::get('bookingView')) {
             $id = Cookie::get('bookingView');
-            Cookie::forget('bookingFilter');
+            Cookie::forget('bookingView');
             return '/bookings/'.$id.'/details';
         }
 

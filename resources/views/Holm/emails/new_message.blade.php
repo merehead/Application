@@ -71,7 +71,7 @@
                     <td style="padding: 30px 40px; background: #f9f9f9; font-family: 'Roboto', sans-serif; line-height: 1.5; "
                         valign="top" class="">
                         <h1 style="display: inline-block;font-family: 'Lato', sans-serif; margin-bottom: 20px; font-weight: 700; font-size: 16px; color: #272c2b;  text-transform: uppercase;">
-                            DEAR, {{($sender=='carer')?$server_users->first_name:$carer->first_name}}!
+                            DEAR {{($sender=='carer')?$server_users->first_name:$carer->first_name}}
                         </h1>
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0; font-size: 16px;">
