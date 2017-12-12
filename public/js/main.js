@@ -1685,13 +1685,13 @@ $(document).ready(function () {
             $(label).show();
             $(datetime).removeClass("hasDatepicker").removeAttr('id');
             var datestart = $(datetime).attr('name').substring(0,$(datetime).attr('name').length - 10)+'[date_start]';
+            var datestartWeek = $('input[name="'+datestart+'"]').datepicker( "getDate" );
             var datestartDate = $('input[name="bookings[0][appointments][0][date_start]"]').datepicker( "getDate" );
             var inWeek = new Date();
             var in90Day = new Date();
-            inWeek.setDate(datestartDate.getDate()+7);
+            inWeek.setDate(datestartWeek.getDate()+7);
             in90Day.setDate(datestartDate.getDate()+75);
 
-            console.log(inWeek);
             $(datetime).datepicker({
                 beforeShow: function (input, inst) {
                     inst.dpDiv.css({"z-index": "2000!important;"});
@@ -1735,11 +1735,11 @@ $(document).ready(function () {
             var form = $(this).parent().parent();
             var in90Day = new Date();
             var datestart = $(datetime).attr('name').substring(0,$(datetime).attr('name').length - 10)+'[date_start]';
-            //var datestartDate = $('input[name="'+datestart+'"]').datepicker( "getDate" );
+            var datestartDay = $('input[name="'+datestart+'"]').datepicker( "getDate" );
             var datestartDate = $('input[name="bookings[0][appointments][0][date_start]"]').datepicker( "getDate" );
 
             if(datestartDate!=null) {
-                inDay.setDate(datestartDate.getDate() + 2);
+                inDay.setDate(datestartDay.getDate() + 2);
                 in90Day.setDate(datestartDate.getDate() + 75);
                 $(datetime).datepicker({
                     beforeShow: function (input, inst) {
