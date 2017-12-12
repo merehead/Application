@@ -72,8 +72,16 @@
                     <td style="padding: 30px 40px; color:#272c2b;background: #f9f9f9; " valign="top" class="">
                         <h1  style="display: inline-block;font-family: 'Lato', sans-serif;  font-size: 16px;margin-bottom: 20px; font-weight: 700;  color: #272c2b;  text-transform: uppercase;">
                             Dear {{$user_like_name}}</h1>
-                        <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">{{$user_name}} has cancelled
-                            the following <a href="{{route('viewBookingDetails',[$booking->id])}}?refer={{$booking->id}}">booking</a>:<br/></p>
+                        <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
+                            @if($sendTo == 'carer')
+                                <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$booking->service_user_id])}}?referUserProfilePublic={{$booking->service_user_id}}"
+                                   style=" color: #6178fc;">
+                                    {{$user_name}}</a>
+                            @else
+                                <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$booking->carer_id])}}"
+                                   style="color: #6178fc; font-weight: 900;">{{$user_name}}</a>
+                            @endif
+                            has cancelled the following <a href="{{route('viewBookingDetails',[$booking->id])}}?refer={{$booking->id}}">booking</a>.<br/></p>
                     </td>
                 </tr>
             </table>
@@ -119,7 +127,7 @@
                                             <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
                                                 <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$booking->service_user_id])}}?referUserProfilePublic={{$booking->service_user_id}}"
                                                    style=" color: #6178fc;">
-                                                    {{$user_name}}</a>{{--<span style="display: block;">Booked you</span>--}}
+                                                    {{$user_name}}</a><span style="display: block;">Booked you</span>
                                             </p>
                                         @else
                                             <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
