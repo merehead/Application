@@ -1710,6 +1710,7 @@ $(document).ready(function () {
     $(document).on('click','.delete',function(){
         var that = $(this);
         var cur = $(that).attr('data-id');
+        $(that).parent().parent().prev('span.error-booking').remove();
         $(that).parent().parent().prev('div').remove();
         $(that).parent().parent().remove();
 
@@ -1879,7 +1880,7 @@ $(document).ready(function () {
             $(this).val('');
         });
 
-        $($that).before('<br><h2 class="ordinaryTitle d'+appointments+'">\n' +
+        $($that).before('<h2 style="margin-top: 15px;" class="ordinaryTitle d'+appointments+'">\n' +
             '                                <span class="ordinaryTitle__text">Type of care</span>\n' +
             '                            </h2>');
         appointments=appointments+1;
@@ -2308,6 +2309,7 @@ $(document).ready(function () {
     // --  Add booking Carer -------
     $(document).on('click', 'button.bookBtn__item', function (e) {
         e.preventDefault();
+        $(this).prop('disabled',true);
         var form = $('#bookings__form');
         var token = $(form).find('input[name="_token"]').val();
         $('.error-booking').remove();
@@ -2323,6 +2325,7 @@ $(document).ready(function () {
             type: $(form).attr('method'),
             dataType: "application/json",
             success: function (response) {
+                $(this).prop('disabled',false);
                 if(response.responseText.indexOf('success')){
                     if($(form).attr('method')=='PUT')
                         window.refresh();
@@ -2330,6 +2333,7 @@ $(document).ready(function () {
                 }
             },
             error: function (response) {
+                $(this).prop('disabled',false);
                 if(response.responseText.indexOf('success')){
                     if($(form).attr('method')=='PUT')
                         location.reload();
@@ -2350,6 +2354,7 @@ $(document).ready(function () {
                 }
             }
         });
+        $(this).prop('disabled',false);
     });
 
     // -- Save Carer Profile -------
