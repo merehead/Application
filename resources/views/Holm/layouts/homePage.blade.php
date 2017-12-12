@@ -34,13 +34,12 @@
     });*/
     var pos = 1;
     $('.peopleBox').on('click', function (e) {
-        e.preventDefault();
-        var $this =  $(this);
-        var id = $(this).attr('data-id');
-        $('.special-slide').find('.active').removeClass('active');
+        $('.testimonialSlider__item').removeClass('active');
         $('.profilePhoto').removeClass('activeImg');
-        $(this).find('.profilePhoto').addClass('activeImg')
-        $('.special-slide').find('#testimonialSlider__item'+id).addClass('active');
+        e.preventDefault();
+        var id = $(this).attr('data-id');
+        $(this).find('.profilePhoto').addClass('activeImg');
+        $('#testimonialSlider__item'+id).addClass('active');
         pos=parseInt(id);
     });
 
@@ -50,7 +49,8 @@
         $('.profilePhoto').removeClass('activeImg');
         $('.peopleBox[data-id="'+pos+'"]').find('.profilePhoto').addClass('activeImg');
         console.log(pos);
-    })
+    });
+
     $('.sliderControl--left').on('click',function(){
         pos = pos-1;
         if(pos>=3) pos=1;
