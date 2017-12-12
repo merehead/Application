@@ -120,7 +120,7 @@
                             <span>{{date("M d, Y", strtotime($row->date_start))}} - {{date("M d, Y", strtotime($row->date_end))}} </span>
                         </div>
                         <div class="summary-extra">
-                            <p>{{strtoupper($row->name)}}</p>
+                            <p>{{strtoupper(str_replace('single', 'once', $row->name))}}</p>
                         </div>
                         <div class="summary-extra">
                             <p>{{strtoupper($row->times)}} times</p>
