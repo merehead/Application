@@ -60,20 +60,14 @@
                             DEAR {{( $sendTo == 'carer') ? $carer->like_name : $serviceUser->like_name}}</h1>
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             @if($sendTo == 'carer')
-                                <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{ucfirst($serviceUser->like_name)}}</a>
+                                <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}">{{ucfirst($serviceUser->first_name)}}</a>
                                 has cancelled the following <a href="{{route('carerBooking',['status'=>'canceled'])}}?bookingFilterCanceled={{$booking->id}}">booking</a>
                             @else
                                 <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{ucfirst($carer->like_name)}}</a>
                                 has cancelled the following <a href="{{route('purchaserBookingStatus',['status'=>'canceled'])}}?purchaserbookingFilterCanceled={{$booking->id}}">booking</a>
                             @endif
                         </p>
-                        <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
-                            @if ($sendTo == 'carer')
-                                Please <a href="{{route('ContactPage')}}">contact us</a> if you have any concerns.
-                            @else
-                                Our sincerest apologies. You can book another carer by searching through our <a href="{{route('searchPage')}}">list of carers</a>.
-                            @endif
-                        </p>
+
                     </td>
                 </tr>
             </table>
@@ -140,7 +134,7 @@
                                         @else
                                             <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
                                                 <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}"
-                                                   style="color: #6178fc; font-weight: 900;">{{$carer->first_name}}</a>
+                                                   style="color: #6178fc; font-weight: 900;">{{$carer->like_name}}</a>
                                             </p>
                                     @endif
 
@@ -182,7 +176,19 @@
     </tr>
     <tr>
         <td valign="top" align="left" bgcolor="#ffffff" style="font-family: 'Roboto', sans-serif;">
+            <table cellpadding="0" cellspacing="0" border="0" style="    margin: 0; " width="100%" class="t-content">
 
+                <tr>
+                    <td style="color:#272c2b;padding: 30px 40px; background: #fff; " valign="top" class="">
+            <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
+                @if ($sendTo == 'carer')
+                    Please <a href="{{route('ContactPage')}}">contact us</a> if you have any concerns.
+                @else
+                    Our sincerest apologies. You can book another carer by searching through our <a href="{{route('searchPage')}}">list of carers</a>.
+                @endif
+            </p>
+                    </td>
+                </tr>
         </td>
     </tr>
     <tr>

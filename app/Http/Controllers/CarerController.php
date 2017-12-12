@@ -226,6 +226,10 @@ class CarerController extends FrontController implements Constants
                 $cookie = Cookie::make('bookingFilter', 1,2);
                 return redirect()->route('session_timeout')->withCookie($cookie);
             }
+            if(request()->has('bookingFilterCanceled')){
+                $cookie = Cookie::make('bookingFilterCanceled', 1,2);
+                return redirect()->route('session_timeout')->withCookie($cookie);
+            }
             return redirect('/');
             //$this->content = view(config('settings.frontTheme') . '.ImCarer.ImCarer')->render();
         }
