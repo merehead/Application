@@ -179,7 +179,7 @@
             <table cellpadding="0" cellspacing="0" border="0" style="    margin: 0; " width="100%" class="t-content">
 
                 <tr>
-                    <td style="color:#272c2b;padding: 30px 40px; background: #fff; " valign="top" class="">
+                    <td style="color:#272c2b;padding: 10px 40px; background: #fff; " valign="top" class="">
             <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                 @if ($sendTo == 'carer')
                     Please <a href="{{route('ContactPage')}}">contact us</a> if you have any concerns.
