@@ -63,8 +63,8 @@
                                 <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}?referUserProfilePublic={{$serviceUser->id}}">{{ucfirst($serviceUser->first_name)}}</a>
                                 has cancelled the following <a href="{{route('carerBooking',['status'=>'canceled'])}}?bookingFilterCanceled={{$booking->id}}">booking</a>.
                             @else
-                                <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{ucfirst($carer->first_name)}}</a>
-                                has cancelled the following <a href="{{route('purchaserBookingStatus',['status'=>'canceled'])}}?purchaserbookingFilterCanceled={{$booking->id}}">booking</a>.
+                                We’re sorry, but <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{ucfirst($carer->first_name)}}</a>
+                                was unable to accept your <a href="{{route('viewBookingDetails',['booking'=>$booking])}}?refer={{$booking->id}}">booking</a>.
                             @endif
                         </p>
 
