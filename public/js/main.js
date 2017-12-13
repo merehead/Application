@@ -626,6 +626,7 @@ $(document).ready(function () {
                 else  $(this).attr('disabled', false);
             });
         setTime(that,hours,minutes,timeAMPM);
+        calculate_price();
     });
 
     $(document).on('click','.payment__item',function(e){e.preventDefault(); return false;});
