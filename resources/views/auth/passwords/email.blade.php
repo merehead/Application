@@ -26,20 +26,19 @@
                         </h2>
                     </div>
                     <p class="forgot-p forgot-p--center">
+                        @if (!$errors->has('email'))
                         Please enter the email address of your account
+                        @else
+                        Sorry, we do not recognise the email address. Please check and try again.
+                        @endif
                     </p>
                     <form class="forgotPass__form" method="POST" action="{{ route('password.email') }}">
                         {{ csrf_field() }}
                         <div class="formField">
                             <div class="inputWrap">
-                                <input type="text" name="email" class="formInput forgotPass__input" placeholder="Your email">
+                                <input type="text" name="email" value="{{ old('email') }}" class="formInput forgotPass__input" placeholder="Your email">
                                 <span class="forgotPass__ico inputIco"><i class="fa fa-envelope"></i></span>
                             </div>
-                            @if ($errors->has('email'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                            @endif
                         </div>
                         <div class="roundedBtn roundedBtn--center roundedBtn--margin-top">
                             <button class="roundedBtn__item roundedBtn__item--contact">
