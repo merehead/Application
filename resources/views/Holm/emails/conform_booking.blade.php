@@ -33,13 +33,13 @@
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0;">
                             @if($sendTo == 'carer')
                                 You’re booking with <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}?referUserProfilePublic={{$serviceUser->id}}">{{$serviceUser->first_name}}</a> has been confirmed.
-                                The first booking will be on {{date('m/d/Y',strtotime($booking->appointments()->get()->first()->date_start))}} {{date('H:i  A',strtotime($booking->appointments()->get()->first()->time_from))}}.
+                                The first booking will be on {{date('m/d/Y',strtotime($booking->appointments()->get()->first()->date_start))}} {{date('h:i  A',strtotime($booking->appointments()->get()->first()->time_from))}}.
                                 Click <a href="{{route('viewBookingDetails',['booking'=>$booking->id])}}?refer={{$booking->id}}">here</a> to view your appointment booking.
                             @else
                                 You’re booking with <a href="{{route('carerPublicProfile',['user_id'=>$carer->id])}}">{{$carer->first_name}}</a> has been
                                 confirmed. The
                                 first
-                                booking will be on {{date('m/d/Y',strtotime($booking->appointments()->get()->first()->date_start))}} {{date('H:i A',strtotime($booking->appointments()->get()->first()->time_from))}}.
+                                booking will be on {{date('m/d/Y',strtotime($booking->appointments()->get()->first()->date_start))}} {{date('h:i A',strtotime($booking->appointments()->get()->first()->time_from))}}.
                                 Click <a href="{{route('viewBookingDetails',['booking'=>$booking->id])}}?refer={{$booking->id}}">here</a> to view your appointment booking.
                             @endif
                         </p>
