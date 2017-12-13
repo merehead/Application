@@ -254,7 +254,7 @@
                     <span class="app-number">#{{$i}}</span>
                     <h2 class="appointment-status {{$class}}">
                         {{in_array($appointment->status_id, [4]) ? 'completed' : ''}}
-                        {{in_array($appointment->status_id, [5]) && ($appointment->carer_status_id == $appointment->purchaser_status_id)  ? 'canceled' : ''}}
+                        {{in_array($appointment->status_id, [5]) && ($appointment->carer_status_id == $appointment->purchaser_status_id)  ? 'cancelled' : ''}}
                         {{in_array($appointment->status_id, [5]) && ($appointment->carer_status_id != $appointment->purchaser_status_id) ? 'rejected' : ''}}
                         {{in_array($appointment->status_id, [3]) ? 'in dispute' : ''}}
                         @if(in_array($appointment->status_id, [1, 2]))
@@ -371,7 +371,7 @@
                                 @elseif(strtolower($message->new_status) == 'completed')
                                     booking completed
                                 @elseif(strtolower($message->new_status) == 'canceled')
-                                    booking canceled
+                                    booking cancelled
                                 @endif
                             </h2>
                             <p class="bookConfirm__time">
