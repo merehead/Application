@@ -61,7 +61,7 @@
                         <a href="{{route('ServiceUserCreate')}}" class="roundedBtn__item roundedBtn__item--accept">
                             ADD SERVICE USER
                         </a>
-                        @if(!$serviceUsers->contains('care_for','Myself'))
+                        @if($showDropDown)
                         <ul class="service-drop__item">
 
                             <li><a href="{{route('ServiceUserCreate',['type'=>'Myself'])}}">Myself</a></li>

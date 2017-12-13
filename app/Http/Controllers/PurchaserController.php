@@ -51,6 +51,11 @@ class PurchaserController extends FrontController implements Constants
             $this->vars = array_add($this->vars, 'user', $this->user);
             $this->vars = array_add($this->vars, 'purchaserProfile', $purchaserProfile);
             $this->vars = array_add($this->vars, 'serviceUsers', $serviceUsers);
+            $serviceUsersNotDeletes = array();
+            $serviceUsersNotDeletes = $serviceUsers->filter(function ($serviceUsers) {
+                return ($serviceUsers->deleted !='Yes'&&$serviceUsers->care_for=='Myself');
+            });
+            $this->vars = array_add($this->vars, 'showDropDown', $serviceUsersNotDeletes->count()==0);
 
             $header = view(config('settings.frontTheme').'.headers.baseHeader')->render();
             $footer = view(config('settings.frontTheme').'.footers.baseFooter')->render();
