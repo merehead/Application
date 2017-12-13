@@ -207,7 +207,7 @@
               </div>
             `);
             } else {
-                showErrorModal({title: 'Payment Error', description: 'Please check your payment details'});
+                showErrorModal({title: 'Payment Error', description: 'We’re sorry, but you do not have enough credits in your bonus wallet.<br>Please use an alternative form of payment.'});
             }
             hideSpinner();
             var padding = ($(document).height()-$('header').outerHeight()-$('section').outerHeight()-$('footer').outerHeight()-20)/2;
