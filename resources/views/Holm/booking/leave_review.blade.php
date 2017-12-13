@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="reviewText">
-                    <p><a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarerProfile()->first()->short_name}}</a> has completed their appointment on {{$booking->date_start}} - {{$booking->date_end}} with <a href="/serviceUser-settings/{{$booking->bookingServiceUser()->first()->id}}">{{$booking->bookingServiceUser()->first()->short_full_name}}</a> </p>
+                    <p><a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarerProfile()->first()->short_name}}</a> has completed their appointment on {{$booking->date_start}} - {{$booking->date_end}} with <a href="/serviceUser/profile/{{$booking->bookingServiceUser()->first()->id}}">{{$booking->bookingServiceUser()->first()->short_full_name}}</a> </p>
                     <p>Please leave your ratings and any additional comments. </p>
                     <p>Thank you!</p>
 
@@ -79,7 +79,7 @@
                         <div class="userRating__item">
 
                             <p class="userRating__name">
-                                <span>FRIENDLINESS</span>s
+                                <span>FRIENDLINESS</span>
                             </p>
                             <div class="profileRating ">
                     <span class="profileRating__item active" id="friendliness_1">

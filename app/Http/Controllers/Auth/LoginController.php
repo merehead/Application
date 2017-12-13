@@ -40,7 +40,9 @@ class LoginController extends Controller
         $this->performLogout($request);
         if(strpos($request->headers->get('referer'),'leave_review')!==false)
             return redirect()->route('mainHomePage');
-        return redirect()->back();
+        if(strpos($request->headers->get('referer'),'enter')!==false)
+            return redirect()->route('mainHomePage')->withCookie(Cookie::forget('adminPanelEnter'));
+        return redirect()->back()->withCookie(Cookie::forget('adminPanelEnter'));
     }
 
     protected function redirectTo()
@@ -73,7 +75,12 @@ class LoginController extends Controller
         }
         if( Cookie::get('referUserProfilePublic')) {
             $url = route('ServiceUserProfilePublic',['serviceUserProfile'=> Cookie::get('referUserProfilePublic')]);
-            Cookie::forget('referUserProfilePublic');
+            Cookie::queue(Cookie::forget('referUserProfilePublic'));
+            return $url;
+        }
+        if( Cookie::get('adminPanelEnter')) {
+            $url =  Cookie::get('adminPanelEnter');
+            $cookie = Cookie::forget('adminPanelEnter');
             return $url;
         }
 

@@ -62,7 +62,7 @@
             <div class="userRating__item">
 
                 <p class="userRating__name">
-                    <span>Friendliness</span>s
+                    <span>Friendliness</span>
                 </p>
                 <div class="profileRating ">
                     @for($i = 1; $i <= 5; $i++)

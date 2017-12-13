@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class AdminMiddleware
 {
@@ -15,15 +17,19 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->check())
+        if (Auth::check())
         {
-
-            if ( ! $this->auth->user()->isAdmin() ) {
-
+            if ( ! Auth::user()->isAdmin() ) {
                 Auth::logout();
-                return redirect()->guest('/куда-надо');
+                return redirect()->route('mainHomePage')->withCookie(Cookie::forget('adminPanelEnter','/',
+                    $_SERVER['SERVER_NAME']));
             }
+        }else{
+            $url = $request->path();
+            $cookie = Cookie::make('adminPanelEnter', $url,1,'/login',$_SERVER['SERVER_NAME']);
+            return redirect()->route('session_timeout')->withCookie($cookie);
         }
+
         return $next($request);
     }
 }
