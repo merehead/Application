@@ -76,11 +76,9 @@
 
                         <p style=" text-align: justify; font-weight: 300; margin: 10px 0; font-size: 16px;">
                             @if($sender=='carer')
-                                You have a new message from {{$carer->short_name}} in regards to a
-                                <a href="{{route('viewBookingDetails',['booking'=>$booking])}}?refer={{$booking->id}}">booking</a>.
+                                {{$carer->short_name}} has sent you a message. You can check it by going to your <a href="{{route('viewBookingDetails',['booking'=>$booking])}}?refer={{$booking->id}}">booking</a> page.
                             @else
-                                You have a new message from {{$server_users->short_full_name}} in regards to a
-                                <a href="{{route('viewBookingDetails',['booking'=>$booking])}}?refer={{$booking->id}}">booking</a>.
+                                {{$server_users->short_full_name}} has sent you a message. You can check it by going to your <a href="{{route('viewBookingDetails',['booking'=>$booking])}}?refer={{$booking->id}}">booking</a> page.
                             @endif
                         </p>
                     </td>
