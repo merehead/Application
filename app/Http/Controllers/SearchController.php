@@ -149,7 +149,7 @@ class SearchController extends FrontController
                 }
 
             }
-            $where .= " AND cp.postcode like '" . $postCode . "%'";
+            //$where .= " AND cp.postcode like '" . $postCode . "%'";
         }
 
         if ($request->get('load-more', 0) == 1) {
