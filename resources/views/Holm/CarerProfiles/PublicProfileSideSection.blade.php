@@ -189,7 +189,7 @@
                         {{$review->comment}}
                     </p>
                 </div>
-                <span class="singleReview__date">{{$review->created_at}} </span>
+                <span class="singleReview__date">{{Carbon\Carbon::parse($review->created_at)->format("d/m/Y")}} </span>
             </div>
         </div>
 
