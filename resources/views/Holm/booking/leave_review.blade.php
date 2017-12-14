@@ -59,7 +59,7 @@
                                 <span>Punctuality</span>
                             </p>
                             <div class="profileRating">
-                    <span class="profileRating__item active" id="punctuality_1">
+                    <span class="profileRating__item" id="punctuality_1">
                       <i class="fa fa-heart"></i>
                     </span>
                     <span class="profileRating__item" id="punctuality_2">
@@ -82,7 +82,7 @@
                                 <span>FRIENDLINESS</span>s
                             </p>
                             <div class="profileRating ">
-                    <span class="profileRating__item active" id="friendliness_1">
+                    <span class="profileRating__item" id="friendliness_1">
                       <i class="fa fa-heart"></i>
                     </span>
                     <span class="profileRating__item" id="friendliness_2">
@@ -105,7 +105,7 @@
                                 <span>Communication</span>
                             </p>
                             <div class="profileRating ">
-                    <span class="profileRating__item active" id="communication_1">
+                    <span class="profileRating__item" id="communication_1">
                       <i class="fa fa-heart"></i>
                     </span>
                     <span class="profileRating__item" id="communication_2">
@@ -128,7 +128,7 @@
                                 <span>Performance</span>
                             </p>
                             <div class="profileRating ">
-                    <span class="profileRating__item active" id="performance_1">
+                    <span class="profileRating__item" id="performance_1">
                       <i class="fa fa-heart"></i>
                     </span>
                     <span class="profileRating__item" id="performance_2">
@@ -148,10 +148,10 @@
                     </div>
 
                     <form class="reviewForm" method="post" action="/bookings/{{$booking->id}}/review">
-                        <input type="hidden" name="punctuality" value="1">
-                        <input type="hidden" name="friendliness" value="1">
-                        <input type="hidden" name="communication" value="1">
-                        <input type="hidden" name="performance" value="1">
+                        <input type="hidden" name="punctuality" value="0">
+                        <input type="hidden" name="friendliness" value="0">
+                        <input type="hidden" name="communication" value="0">
+                        <input type="hidden" name="performance" value="0">
                         <div class="formField">
                             <textarea class="formArea formArea--review " placeholder="Type your comment" name="comment" maxlength="150"></textarea>
 
