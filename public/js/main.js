@@ -1833,6 +1833,20 @@ $(document).ready(function () {
         else
             $(this).parent().find('input').blur();
     });
+    // $(document).on('change','.date_start',function(e){
+    //     console.log($(this).parent().parent().find('.date_end'));
+    //     var date_end = $(this).parent().parent().parent().parent().find('input.date_end');
+    //     var date_start = $(this).parent().parent().parent().parent().find('input.date_start');
+    //     $(date_end).removeClass("hasDatepicker").removeAttr('id');
+    //     var datestartDate = $('input[name="bookings[0][appointments][0][date_start]"]').datepicker( "getDate" );
+    //     if($(this).parent().parent().parent().parent().find('.weekly').is(':checked')) {
+    //         $(this).parent().parent().parent().parent().find('.weekly').click();
+    //     }
+    //     if($(this).parent().parent().parent().parent().find('.daily').is(':checked')) {
+    //         $(this).parent().parent().parent().parent().find('.daily').click();
+    //     }
+    //
+    // });
 
     $(document).on('click','.additionalTime', function (e) {
         e.preventDefault();

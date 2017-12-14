@@ -152,32 +152,26 @@
                     </div>
                 </div>
 
-                <div class="card error-text result {{count($carerResult)>0 ||!$carerResultArea?"nhide":""}}">
+                <div class="card error-text result {{count($carerResult)>0 ||$carerResultArea?"nhide":""}}">
                     <div class="card-block">
                     <p class="text-uppercase">Sorry</p>
                         <p class="text-left">
+                            <h3>
                             No Carers meet your exact criteria.
                             Please try again by deselecting the least important requirements,
                             or <a href="{{route('ContactPage')}}">contact us</a> if you need further help
+                        </h3>
                         </p>
-                        {{--<p>Hi!</p>--}}
-                        {{--<p>We’re sorry, but we’re not yet currently taking bookings.--}}
-                            {{--You’ll be able to see the best professional carers on this page once we are ready.--}}
-                            {{--Please feel free to <a href="/contact">contact us</a> and we’ll let you know when you can find a great carer.--}}
-                        {{--</p>--}}
-                        {{--<p>See you soon!</p>--}}
-                        {{--<p>The Holm Team</p>--}}
                     </div>
                 </div>
-                <div class="card error-text result {{($carerResultArea)?"nhide":""}}">
+                <div class="card error-text result {{(!$carerResultArea)?"nhide":""}}">
                     <div class="card-block">
                     <p class="text-uppercase">Sorry</p>
-                        <p>Sorry Holm is not yet available in this area. Please
-                            <a href="/contact">contact us</a> to request Holm in your area. Many thanks!
-                        </p>
+                         <h3 style="font-size: 24px;">Holm is not yet available in this area. Please <a href="/contact">contact us</a>
+                            to request Holm in your area. Many thanks!
+                         </h3>
                     </div>
                 </div>
-
                 <div class="carer-result">
                 @foreach($carerResult as $carerProfile)
                     <div class="result">

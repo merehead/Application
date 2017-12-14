@@ -126,7 +126,7 @@
                             <div class="messageInputs datetime">
                                 <div class="messageInputs__field messageDate">
                                     <input  onchange="calculate_price()" type="text" name="bookings[0][appointments][0][date_start]" required
-                                           class="messageInput datepicker datepicker_message" placeholder="">
+                                           class="messageInput datepicker datepicker_message date_start" placeholder="">
 
                                     <a href="#" class="messageIco centeredLink">
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -176,8 +176,8 @@
                                 </div>
                                 <br>
                                 <label class="checkBox_item ordinaryTitle correct nhide" for="date_end">Continue until</label>
-                                <div class="messageInputs__field messageDate correct3 nhide">
-                                    <input  onchange="calculate_price()" type="text" class="messageInput datepicker datepicker_message" id="date_end" onchange="calculate_price()"
+                                <div class="messageInputs__field messageDate correct3 nhide date_end">
+                                    <input  onchange="calculate_price()" type="text" class="messageInput datepicker datepicker_message date_end" id="date_end" onchange="calculate_price()"
                                            name="bookings[0][appointments][0][date_end]" placeholder="">
                                     <a href="#" class="messageIco centeredLink">
                                         <i class="fa fa-calendar" aria-hidden="true"></i>

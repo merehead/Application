@@ -210,10 +210,17 @@ class SearchController extends FrontController
         $load_more = $request->get('load_more');
         if (!$request->get('carerSearchAjax')) {
             if ($request->get('postCode') && !empty($request->get('postCode'))) {
+                $postCode=substr($postCode,0,strpos($postCode, ' ')+1);
                 if ($this->isExsistPostCode($postCode) == false) {
                     $this->vars['carerResult']=array();
                     $this->vars['countAll'] = 0;
-                    $this->vars = array_add($this->vars, 'carerResultArea', true);
+                    $this->vars['page'] = 0;
+                    $this->vars['perPage'] = $perPage;
+                    $this->vars['start'] = $start;
+                    $this->vars['carerResultArea']= true;
+                    $this->vars['page'] =  $page;
+                    $this->vars['id'] = (ceil($countAll / $perPage) > $page) ? $carerResult[count($carerResult) - 1]->id : 0;
+                    $this->vars['count'] =  count($carerResult);
                 }
             }
             $this->content = view(config('settings.frontTheme') . '.homePage.searchPage', $this->vars)->render();
@@ -224,7 +231,18 @@ class SearchController extends FrontController
             if ($request->get('postCode') && !empty($request->get('postCode'))) {
                 if ($this->isExsistPostCode($postCode) == false) {
                     $post_ = false;
-                    $html = '<p>Sorry Holm is not yet available in this area. Please <a href="/contact">contact us</a> to request Holm in your area. Many thanks!</p>';
+                    $countAll=0;
+                    $carerResult=[];
+                    $this->vars['carerResult']=array();
+                    $this->vars['countAll'] = 0;
+                    $this->vars['page'] = 0;
+                    $this->vars['perPage'] = $perPage;
+                    $this->vars['start'] = $start;
+                    $this->vars['carerResultArea']= true;
+                    $this->vars['page'] =  $page;
+                    $this->vars['id'] = (ceil($countAll / $perPage) > $page) ? $carerResult[count($carerResult) - 1]->id : 0;
+                    $this->vars['count'] =  count($carerResult);
+                    $html = '<h3  style="font-size: 24px;"><p>Sorry</p> Holm is not yet available in this area. Please <a href="/contact">contact us</a> to request Holm in your area. Many thanks!</h3>';
                 }
             }
             //var_dump($carerResult[count($carerResult)-1]->id);
@@ -235,7 +253,6 @@ class SearchController extends FrontController
                 'load-more' => isset($load_more) && !empty($load_more) ? 1 : 0,
                 'html' => $html,
                 'post_' => $post_,
-                'sql' => $sql,
                 'start' => $start,
                 'page' => $page,
                 'id' => (ceil($countAll / $perPage) > $page) ? $carerResult[count($carerResult) - 1]->id : 0,
