@@ -167,6 +167,8 @@ class BookingsController extends FrontController implements Constants
         if (!$this->user) {
             return redirect('/');
         } else {
+            $appointments = $booking->appointments()->orderBy('date_start', 'asc')->orderBy('time_from', 'asc')->get();
+            $this->vars = array_add($this->vars, 'appointments', $appointments);
             $this->vars = array_add($this->vars, 'user', $this->user);
             $this->vars = array_add($this->vars, 'booking', $booking);
             $bookingMessage = BookingsMessage::where('booking_id', $booking->id)->orderByDesc('id')->get();

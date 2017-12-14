@@ -20,7 +20,7 @@
         <div class="review">
             <div class="review__item">
                 <h2 class="review__title">
-                    Leave a review
+                    Please Leave a review
                 </h2>
                 <div class="generalInfo">
                     <div class="profilePhoto profilePhoto--review">
@@ -39,9 +39,11 @@
                     </div>
                 </div>
                 <div class="reviewText">
-                    <p><a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarerProfile()->first()->short_name}}</a> has completed their appointment on {{$booking->date_start}} - {{$booking->date_end}} with <a href="/serviceUser/profile/{{$booking->bookingServiceUser()->first()->id}}">{{$booking->bookingServiceUser()->first()->short_full_name}}</a> </p>
-                    <p>Please leave your ratings and any additional comments. </p>
+                    <p>Thank you for confirming <a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarerProfile()->first()->short_name}}</a> has completed the appointment. </p>
+{{--                    <p><a href="{{$booking->bookingCarer()->first()->profile_link}}">{{$booking->bookingCarerProfile()->first()->short_name}}</a> has completed their appointment on {{$booking->date_start}} - {{$booking->date_end}} with <a href="/serviceUser/profile/{{$booking->bookingServiceUser()->first()->id}}">{{$booking->bookingServiceUser()->first()->short_full_name}}</a> </p>--}}
+                    <p>Please leave your ratings and additional comments. </p>
                     <p>Thank you!</p>
+                    <p>The Holm Team</p>
 
                 </div>
             </div>
@@ -171,8 +173,7 @@
                           <i class="fa fa-check" aria-hidden="true"></i>
                         </span>
                         <p class="info-p">
-                            Your review will be visible on carer profile.
-
+                            Your review will soon be visible on {{$booking->bookingCarerProfile()->first()->first_name}}’s personal profile.
                         </p>
                     </div>
                 @endif

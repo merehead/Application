@@ -140,7 +140,7 @@ class CarersProfile extends Model
                     FROM booking_overviews o
                     LEFT JOIN bookings b  ON o.booking_id = b.id
                     LEFT JOIN users c ON b.carer_id = c.id
-                    WHERE c.id = '.$this->id);
+                    WHERE c.id = '.$this->id.' AND o.accept = 1');
         $data = $res[0];
         return $data;
     }

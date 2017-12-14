@@ -139,6 +139,7 @@ class CarerController extends FrontController implements Constants
 /*        if(Auth::check()) {
             //TODO карер может смотреть свой профиль и никого другого
             //todo Нет, не так!!! Публичный профиль могут смотреь все без каких либо ограничений
+            //todo кто вы?
             if (Auth::user()->user_type_id == 3&&Auth::user()->id!=$user_id) {
                 return \redirect('welcome-carer');
             }

@@ -239,7 +239,7 @@
         </div>
 
         @php($i = 1)
-        @foreach($booking->appointments as $appointment)
+        @foreach($appointments as $appointment)
             @if(in_array($appointment->status_id, [1, 2, 3]))
                 @if($appointment->is_past)
                     @php($class = 'appointment-status--progress')
