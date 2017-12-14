@@ -225,7 +225,7 @@ $documents['other_relevant_qualification']->count()>0)
     </h2>
     <div class="profileAdvantages">
         <div class="profileAdvantages__row">
-            <div class="advantageColumn">
+            <div class="advantages-label">
                 @foreach($languages as $item)
                     <p class="advantage_label">
                         <i class="fa fa-check"></i>
@@ -255,7 +255,7 @@ $documents['other_relevant_qualification']->count()>0)
     <div class="profileAdvantages">
         <div class="profileAdvantages__row">
             @if($carerProfile->use_car=='Yes')
-            <div class="advantageColumn advantageColumn--transport">
+            <div class="advantages-label advantageColumn--transport">
 
                 <p class="advantage_label">
                     <i class="fa fa-check "></i>
