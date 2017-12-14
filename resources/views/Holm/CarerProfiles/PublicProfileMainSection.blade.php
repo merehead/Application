@@ -235,12 +235,8 @@ $documents['other_relevant_qualification']->count()>0)
                             Language additional:  {{$carerProfile->language_additional}}
                         @endif
                     </p>
-                    @if($loop->iteration%3==0)
-            </div> <div class="advantageColumn">
-                @endif
+
                 @endforeach
-
-
             </div>
 
         </div>
@@ -263,7 +259,7 @@ $documents['other_relevant_qualification']->count()>0)
                 </p>
             </div>
             @endif
-            <div class="advantageColumn wider">
+            <div class="advantages-label wider">
                 @if($carerProfile->have_car=='Yes')
                 <p class="advantage_label">
                     <i class="fa fa-check "></i>
