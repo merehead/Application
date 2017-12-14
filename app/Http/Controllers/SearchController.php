@@ -205,10 +205,18 @@ class SearchController extends FrontController
         $this->vars = array_add($this->vars, 'page', $page);
         $this->vars = array_add($this->vars, 'requestSearch', $request->all());
         $this->vars = array_add($this->vars, 'countAll', $countAll);
+        $this->vars = array_add($this->vars, 'carerResultArea', false);
 
         $load_more = $request->get('load_more');
-        $this->content = view(config('settings.frontTheme') . '.homePage.searchPage', $this->vars)->render();
         if (!$request->get('carerSearchAjax')) {
+            if ($request->get('postCode') && !empty($request->get('postCode'))) {
+                if ($this->isExsistPostCode($postCode) == false) {
+                    $this->vars['carerResult']=array();
+                    $this->vars['countAll'] = 0;
+                    $this->vars = array_add($this->vars, 'carerResultArea', true);
+                }
+            }
+            $this->content = view(config('settings.frontTheme') . '.homePage.searchPage', $this->vars)->render();
             return $this->renderOutput();
         } else {
             $html = view(config('settings.frontTheme') . '.homePage.searchPageAjax', $this->vars)->render();

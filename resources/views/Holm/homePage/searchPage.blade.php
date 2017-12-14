@@ -151,7 +151,8 @@
                             @endif
                     </div>
                 </div>
-                <div class="card error-text result {{count($carerResult)>0?"nhide":""}}">
+
+                <div class="card error-text result {{count($carerResult)>0 ||!$carerResultArea?"nhide":""}}">
                     <div class="card-block">
                     <p class="text-uppercase">Sorry</p>
                         <p class="text-left">
@@ -166,6 +167,14 @@
                         {{--</p>--}}
                         {{--<p>See you soon!</p>--}}
                         {{--<p>The Holm Team</p>--}}
+                    </div>
+                </div>
+                <div class="card error-text result {{($carerResultArea)?"nhide":""}}">
+                    <div class="card-block">
+                    <p class="text-uppercase">Sorry</p>
+                        <p>Sorry Holm is not yet available in this area. Please
+                            <a href="/contact">contact us</a> to request Holm in your area. Many thanks!
+                        </p>
                     </div>
                 </div>
 
