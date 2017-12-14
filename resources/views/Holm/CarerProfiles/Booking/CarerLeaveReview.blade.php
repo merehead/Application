@@ -77,7 +77,7 @@
                     <div class="userRating__item">
 
                         <p class="userRating__name">
-                            <span>FRIENDLINESS</span>s
+                            <span>FRIENDLINESS</span>
                         </p>
                         <div class="profileRating ">
                 <span class="profileRating__item active">

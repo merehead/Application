@@ -130,10 +130,10 @@
                                             <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
                                                 <a href="{{route('ServiceUserProfilePublic',['serviceUserProfile'=>$serviceUser->id])}}?referUserProfilePublic={{$serviceUser->id}}"
                                                    style=" color: #6178fc;">
-                                                    {{$serviceUser->like_name}}</a></p>
+                                                    {{$serviceUser->like_name}}</a><span style="display: block;">Booked you</span></p>
                                         @else
                                             <p style=" margin-top: 10px;font-family: 'Lato', sans-serif;font-weight: 900; text-transform: uppercase;">
-                                                <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}"
+                                                <span style="display: block;">You booked</span><a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}"
                                                    style="color: #6178fc; font-weight: 900;">{{$carer->first_name}}</a>
                                             </p>
                                     @endif

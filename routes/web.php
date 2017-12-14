@@ -139,7 +139,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
-Route::group(['prefix' => 'admin','middleware'=> 'auth','namespace' => 'Admin'],function() {
+Route::group(['prefix' => 'admin','middleware'=> 'admin','namespace' => 'Admin'],function() {
 
     Route::get('/', 'AdminController@adminHomePage')->name('adminHomePage');
 
