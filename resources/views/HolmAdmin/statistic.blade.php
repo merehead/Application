@@ -795,7 +795,7 @@
               <span class="statisticHead__ico">
                 <i class="fa fa-line-chart" aria-hidden="true"></i>
               </span>
-                Number of Transactions on Graff by month
+                Number of Transactions by month
             </h2>
 
         </div>
