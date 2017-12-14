@@ -512,7 +512,7 @@ $(document).ready(function () {
     $(document).on('change','.hour',function(e){
         var hour = $(this).val();
         var seconds = $('.seconds').val();
-        var input = $(this).parent().parent().parent().parent().prev('div').find('input');
+        var input = $(this).parent().parent().parent().parent().parent().find('input');
         var time = ($('.checkbox-date').is(':checked'))?'PM':'AM';
         setTime(input,hour,seconds,time);
         calculate_price();
@@ -521,7 +521,7 @@ $(document).ready(function () {
     $(document).on('change','.checkbox-date',function(e){
         var seconds = $('.seconds').val();
         var hour = $('.hour').val();
-        var input = $(this).parent().parent().parent().parent().parent().prev('div').find('input');
+        var input = $(this).parent().parent().parent().parent().parent().parent().find('input');
         var time = ($('.checkbox-date').is(':checked'))?'PM':'AM';
         setTime(input,hour,seconds,time);
         calculate_price();
@@ -530,7 +530,7 @@ $(document).ready(function () {
     $(document).on('change','.seconds',function(e){
         var seconds = $(this).val();
         var hour = $('.hour').val();
-        var input = $(this).parent().parent().parent().parent().prev('div').find('input');
+        var input = $(this).parent().parent().parent().parent().parent().find('input');
         var time = ($('.checkbox-date').is(':checked'))?'PM':'AM';
         setTime(input,hour,seconds,time);
         // $('.date-drop').remove();
@@ -545,7 +545,7 @@ $(document).ready(function () {
             $('.mypicker').removeClass('active_picker');
         }
         $(that).addClass('active_picker');
-        $(that).parent().after('<div class="date-drop">\n' +
+        $(that).after('<div class="date-drop">\n' +
             '      <div class="date-drop__item">\n' +
             '        <div class="date-drop__body">\n' +
             '          <div class="date-select">\n' +
@@ -600,14 +600,14 @@ $(document).ready(function () {
             if(i<1){second='00';} else {second=i*15;}
             $('.seconds').append(new Option(second, second));
         }
-        var start_time = $(that).parent().parent().parent().find('.picker-box')[0];
+        //var start_time = $(that).parent().parent().parent().find('.picker-box')[0];
         var current_time = new Date();
         var time = toDate($(that).val().substring(0, 5),"h:m");
         var minutes = time.getMinutes();
         var hours = time.getHours();
         $('.checkbox-date').prop('checked',$(that).val().indexOf('PM')>0);
         var timeAMPM = ($('.checkbox-date').is(':checked'))?'PM':'AM';
-        start_time = toDate($(start_time).find('input.start').val().substring(0, 5),"h:m");
+        var start_time = toDate( $(that).parent().parent().find('input.start').val().substring(0, 5),"h:m");
 
         if(hours==0 && $(that).hasClass('start')) {
             var minutes = start_time.getMinutes();
@@ -1670,20 +1670,16 @@ $(document).ready(function () {
     $(document).on('click','.Single',function(){
         var that = $(this);
         if( $(that).is(':checked')) {
-            var datetime = $(that).parent().parent().find('.datepicker_message');
-            var label = $(that).parent().parent().find('.correct');
-            $(datetime).parent().hide();
-            $(label).hide();
+
+            $(that).parent().parent().parent().find('.until').hide();
         }
     });
     $(document).on('click','.weekly',function(){
         var that = $(this);
         if( $(that).is(':checked')) {
-            var datetime = $(that).parent().parent().find('.datepicker_message');
-            var label = $(that).parent().parent().find('.correct');
-            $(datetime).parent().show();
+            var datetime = $(that).parent().parent().parent().find('.until>div>div>input.datepicker');
+            $(that).parent().parent().parent().find('.until').show();
             $(datetime).val('');
-            $(label).show();
             $(datetime).removeClass("hasDatepicker").removeAttr('id');
             var datestart = $(datetime).attr('name').substring(0,$(datetime).attr('name').length - 10)+'[date_start]';
             var datestartWeek = $('input[name="'+datestart+'"]').datepicker( "getDate" );
@@ -1726,14 +1722,11 @@ $(document).ready(function () {
     $(document).on('click','.Daily',function(){
         var that = $(this);
         if( $(that).is(':checked')) {
-            var datetime = $(that).parent().parent().find('.datepicker_message');
-            var label = $(that).parent().parent().find('.correct');
-            $(datetime).parent().show();
-            $(label).show();
+            var datetime = $(that).parent().parent().parent().find('.until>div>div>input.datepicker');
+            $(that).parent().parent().parent().find('.until').show();
             $(datetime).val('');
             $(datetime).removeClass("hasDatepicker").removeAttr('id');
             var inDay = new Date();
-            var form = $(this).parent().parent();
             var in90Day = new Date();
             var datestart = $(datetime).attr('name').substring(0,$(datetime).attr('name').length - 10)+'[date_start]';
             var datestartDay = $('input[name="'+datestart+'"]').datepicker( "getDate" );
@@ -1833,30 +1826,43 @@ $(document).ready(function () {
         else
             $(this).parent().find('input').blur();
     });
-    // $(document).on('change','.date_start',function(e){
-    //     console.log($(this).parent().parent().find('.date_end'));
-    //     var date_end = $(this).parent().parent().parent().parent().find('input.date_end');
-    //     var date_start = $(this).parent().parent().parent().parent().find('input.date_start');
-    //     $(date_end).removeClass("hasDatepicker").removeAttr('id');
-    //     var datestartDate = $('input[name="bookings[0][appointments][0][date_start]"]').datepicker( "getDate" );
-    //     if($(this).parent().parent().parent().parent().find('.weekly').is(':checked')) {
-    //         $(this).parent().parent().parent().parent().find('.weekly').click();
-    //     }
-    //     if($(this).parent().parent().parent().parent().find('.daily').is(':checked')) {
-    //         $(this).parent().parent().parent().parent().find('.daily').click();
-    //     }
-    //
-    // });
+    $(document).on('change','.date_start',function(e){
+        console.log($(this).parent().parent().find('.date_end'));
+        var date_end = $(this).parent().parent().parent().find('input.date_end');
+        var date_start = $(this).parent().parent().parent().find('input.date_start');
+        $(date_end).removeClass("hasDatepicker").removeAttr('id');
+        var datestartDate = $('input[name="bookings[0][appointments][0][date_start]"]').datepicker( "getDate" );
+        var inWeek = new Date();
+        var in90Day = new Date();
+        if($(this).parent().parent().parent().find('input.weekly').is(':checked'))
+        inWeek.setDate(datestartDate.getDate()+7);
+        if($(this).parent().parent().parent().find('input.Daily').is(':checked'))
+            inWeek.setDate(datestartDate.getDate()+2);
+        in90Day.setDate(datestartDate.getDate()+75);
+        $(date_end).val('');
+        $(date_end).datepicker({
+            beforeShow: function(input, inst) {
+                inst.dpDiv.css({"z-index":"9999!important"});
+                if ($(input).attr('readonly')) { return false; }
+            },
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            showAnim: "slideDown",
+            minDate: inWeek,
+            maxDate: in90Day,
+            yearRange: "0:+50"
+        });
+    });
 
     $(document).on('click','.additionalTime', function (e) {
         e.preventDefault();
         var $that =$(this);
-        var dlast = $('.cdate').last().clone();
-        var typeCareAll = $('.typeCareAll').last().clone();
-        var clast = $('.checktime').last().clone();
-        $(dlast).find('.error-booking').remove();
-        $(clast).find('.error-booking').remove();
-        $(dlast).find('.datepicker').each(function () {
+        var appointment = $('.booking-info-group').last().clone();
+
+        $(appointment).find('.error-booking').remove();
+        $(appointment).find('.error-booking').remove();
+        $(appointment).find('.datepicker').each(function () {
             var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
             var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
             $(this).attr('name', input_name + '[' + appointments + input_name_p);
@@ -1865,7 +1871,7 @@ $(document).ready(function () {
             $(this).val('');
         });
         var t=$('.assistance_types').length+1;
-        $(typeCareAll).find('.assistance_types').each(function(){
+        $(appointment).find('.assistance_types').each(function(){
             //bookings[0][appointments][0][assistance_types][]
             //bookings[0][appointments][0][date_start]
             //var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf(']')-1);
@@ -1879,7 +1885,7 @@ $(document).ready(function () {
             t=t+1;
         });
 
-        $(dlast).find('.mypicker').each(function () {
+        $(appointment).find('.mypicker').each(function () {
             var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
             var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
             $(this).attr('name', input_name + '[' +appointments+ input_name_p);
@@ -1889,7 +1895,7 @@ $(document).ready(function () {
             $(this).val('');
         });
 
-        $(clast).find('.periodicity').each(function () {
+        $(appointment).find('.periodicity').each(function () {
             var input_name3 = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
             var input_name_p3 = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
             $(this).attr('name', input_name3 + '[' + appointments + input_name_p3);
@@ -1903,7 +1909,7 @@ $(document).ready(function () {
             periodicity++;
         });
 
-        $(clast).find('.datepicker').each(function () {
+        $(appointment).find('.datepicker').each(function () {
             var input_name = $(this).attr('name').substring(0, $(this).attr('name').indexOf('][')+15);
             var input_name_p = $(this).attr('name').substring($(this).attr('name').indexOf('][')+17, $(this).attr('name').length);
             $(this).attr('name', input_name + '[' + appointments + input_name_p);
@@ -1911,13 +1917,9 @@ $(document).ready(function () {
             $(this).val('');
         });
 
-        $($that).before('<h2 style="margin-top: 15px;" class="ordinaryTitle d'+appointments+'">\n' +
-            '                                <span class="ordinaryTitle__text">Type of care</span>\n' +
-            '                            </h2>');
         appointments=appointments+1;
-        $($that).before(typeCareAll);
-        $($that).before(dlast);
-        $($that).before(clast);
+
+        $($that).before(appointment);
         $('.rtext').last().remove();
 
         $('.datepicker_message').removeClass("hasDatepicker").removeAttr('id');
@@ -1960,8 +1962,8 @@ $(document).ready(function () {
             scrollbar: true
         });
         calculate_price();
-        $('.datepicker_message').last().parent().hide();
-        $('.datepicker_message').last().parent().parent().find('label.correct').hide();
+         $(appointment).find('.until').hide();
+        // $('.datepicker_message').last().parent().parent().find('label.correct').hide();
         return false;
     });
 

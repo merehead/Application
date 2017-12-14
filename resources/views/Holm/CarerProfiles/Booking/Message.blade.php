@@ -1,25 +1,25 @@
 {{--<link rel="stylesheet" href="/css/jquery-ui-timepicker-addon.css">--}}
 {{--<script src="/js/jquery-ui-timepicker-addon.js"></script>--}}
 <script>
-    function resizeMap()
-    {
-        google.maps.event.trigger(map,'resize');
-        map.setZoom( map.getZoom() );
+    function resizeMap() {
+        google.maps.event.trigger(map, 'resize');
+        map.setZoom(map.getZoom());
     }
+
     $(document).ready(function () {
 
-        $('.needCare__item').on('click',function(){
+        $('.needCare__item').on('click', function () {
             map = new google.maps.Map(document.getElementById('map_canvas_booking'), {
                 zoom: 17,
                 center: {lat: -34.397, lng: 150.644}
             });
             var geocoder = new google.maps.Geocoder();
-           var that = $(this).find('input');
+            var that = $(this).find('input');
             var addr = $(that).attr('data_address_line1');
-            var address = $(that).attr('data-town')+' '+ addr;
-            geocoder.geocode({'address': address}, function(results, status) {
+            var address = $(that).attr('data-town') + ' ' + addr;
+            geocoder.geocode({'address': address}, function (results, status) {
                 if (status === 'OK') {
-                    if(marker)marker.setMap(null);
+                    if (marker) marker.setMap(null);
                     marker = new google.maps.Marker({
                         map: map,
                         position: results[0].geometry.location
@@ -61,7 +61,6 @@
                 {{--<input type="hidden" name="town" value="{{$carerProfile->town}}">--}}
                 {{--<input type="hidden" name="address_line1" value="{{$carerProfile->address_line1}}">--}}
                 {{csrf_field()}}
-
                 <div class="message__body">
                     <div class="messageGroup">
                         <h2 class="ordinaryTitle ordinaryTitle--smaller">
@@ -86,7 +85,8 @@
                                                            class="needCare__item centeredLink btn btn-default">
                                                             {!! $serviceUser->first_name.' '.mb_substr($serviceUser->family_name,0,1).'.' !!}
                                                             <input type="radio" id="q{{$serviceUser->id}}"
-                                                                   name="service_user_id" data-town="{{$serviceUser->town}}"
+                                                                   name="service_user_id"
+                                                                   data-town="{{$serviceUser->town}}"
                                                                    data_address_line1="{{$serviceUser->address_line1}}"
                                                                    value="{{$serviceUser->id}}" {{$i == 1 ? 'checked' : ''}}/>
                                                         </a>
@@ -96,108 +96,199 @@
                                                 @endif
                             </div>
                             <div class="messageMap map">
-                                <div id="map_canvas_booking" style="clear:both;width: 370px; height:200px;overflow:visible;"></div>
+                                <div id="map_canvas_booking"
+                                     style="clear:both;width: 370px; height:200px;overflow:visible;"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="bookings-more">
-                        <div class="messageGroup">
+                    {{--<div class="bookings-more">--}}
+                    {{--<div class="messageGroup">--}}
 
-                            <h2 class="ordinaryTitle">
-                                <span class="ordinaryTitle__text">Type of care</span>
-                            </h2>
-                            <div class="messageCheckbox typeCareAll">
-                                @foreach($typeCareAll as $care)
-                                    <div class="checkBox_item">
+                    {{--<h2 class="ordinaryTitle">--}}
+                    {{--<span class="ordinaryTitle__text">Type of care</span>--}}
+                    {{--</h2>--}}
+                    {{--<div class="messageCheckbox typeCareAll">--}}
+                    {{--@foreach($typeCareAll as $care)--}}
+                    {{--<div class="checkBox_item">--}}
 
-                                        {!! Form::checkbox('bookings[0][appointments][0][assistance_types][]', $care->id, null,
-                                                    array('class' => 'customCheckbox assistance_types','onclick'=>'calculate_price();','id'=>'assistance_types'.$care->id)) !!}
-                                        <label for="assistance_types{{$care->id}}">{{$care->name}}</label>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        <div class="messageGroup cdate">
-                            <h2 class="ordinaryTitle">
-                              <span class="ordinaryTitle__text ordinaryTitle__text--smaller rtext">
-                                select date and time
-                             </span>
-                            </h2>
-                            <div class="messageInputs datetime">
-                                <div class="messageInputs__field messageDate">
-                                    <input  onchange="calculate_price()" type="text" name="bookings[0][appointments][0][date_start]" required
-                                           class="messageInput datepicker datepicker_message date_start" placeholder="">
+                    {{--{!! Form::checkbox('bookings[0][appointments][0][assistance_types][]', $care->id, null,--}}
+                    {{--array('class' => 'customCheckbox assistance_types','onclick'=>'calculate_price();','id'=>'assistance_types'.$care->id)) !!}--}}
+                    {{--<label for="assistance_types{{$care->id}}">{{$care->name}}</label>--}}
+                    {{--</div>--}}
+                    {{--@endforeach--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="messageGroup cdate">--}}
+                    {{--<h2 class="ordinaryTitle">--}}
+                    {{--<span class="ordinaryTitle__text ordinaryTitle__text--smaller rtext">--}}
+                    {{--select date and time--}}
+                    {{--</span>--}}
+                    {{--</h2>--}}
+                    {{--<div class="messageInputs datetime">--}}
+                    {{--<div class="messageInputs__field messageDate">--}}
+                    {{--<input  onchange="calculate_price()" type="text" name="bookings[0][appointments][0][date_start]" required--}}
+                    {{--class="messageInput datepicker datepicker_message date_start" placeholder="">--}}
 
-                                    <a href="#" class="messageIco centeredLink">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <label class="checkBox_item correct2" for="date_end">Start</label>
+                    {{--<a href="#" class="messageIco centeredLink">--}}
+                    {{--<i class="fa fa-calendar" aria-hidden="true"></i>--}}
+                    {{--</a>--}}
+                    {{--</div>--}}
+                    {{--<label class="checkBox_item correct2" for="date_end">Start</label>--}}
 
-                                <div class="picker-box">
-                                    <div class="field-wrap date_marker">
-                                        <input type="text" name="bookings[0][appointments][0][time_from]" class="date-field mypicker start" placeholder="" >
-                                        <span class="date-ico"><i class="fa fa-clock-o"></i></span>
-                                    </div>
-                                </div>
+                    {{--<div class="picker-box">--}}
+                    {{--<div class="field-wrap date_marker">--}}
+                    {{--<input type="text" name="bookings[0][appointments][0][time_from]" class="date-field mypicker start" placeholder="" >--}}
+                    {{--<span class="date-ico"><i class="fa fa-clock-o"></i></span>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
 
-                                <label class="checkBox_item correct2" for="date_end">End</label>
-                                <div class="picker-box">
-                                    <div class="field-wrap date_marker">
-                                        <input type="text" name="bookings[0][appointments][0][time_to]" class="date-field mypicker end" placeholder="">
-                                        <span class="date-ico"><i class="fa fa-clock-o"></i></span>
-                                    </div>
-                                </div>
-                                <i class="fa fa-close checkBox_item delete nhide" data-id="d0" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        <div class="messageGroup ">
-                            <h2 class="ordinaryTitle">
-                                <span class="ordinaryTitl__text">How often</span>
-                            </h2>
-                            <div class="messageCheckbox checktime" data-id="d0">
-                                <div class="checkBox_item">
-                                    <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Daily"
-                                           class="customCheckbox periodicity Daily" onclick="calculate_price()"
-                                           id="boxD1">
-                                    <label for="boxD1">Daily</label>
-                                </div>
-                                <div class="checkBox_item">
-                                    <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Weekly"
-                                           class="customCheckbox periodicity weekly" onclick="calculate_price()"
-                                           id="boxD2">
-                                    <label for="boxD2">weekly</label>
-                                </div>
-                                <div class="checkBox_item">
-                                    <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single"
-                                           class="customCheckbox periodicity Single" onclick="calculate_price()"
-                                           id="boxD3">
-                                    <label for="boxD3">Once</label>
-                                </div>
-                                <br>
-                                <label class="checkBox_item ordinaryTitle correct nhide" for="date_end">Continue until</label>
-                                <div class="messageInputs__field messageDate correct3 nhide date_end">
-                                    <input  onchange="calculate_price()" type="text" class="messageInput datepicker datepicker_message date_end" id="date_end" onchange="calculate_price()"
-                                           name="bookings[0][appointments][0][date_end]" placeholder="">
-                                    <a href="#" class="messageIco centeredLink">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="checkBox_item nhide">
-                                    <input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single" required
-                                           class="customCheckbox periodicity Single"
-                                           id="boxD3">
-                                    <label for="boxD3">Single</label>
-                                </div>
-                            </div>
-                        </div>
-                        <button disabled href="#" class="additionalTime">
-                            <i class="fa fa-clock-o" aria-hidden="true"></i>
-                            ADD ADDITIONAL APPOINTMENT
+                    {{--<label class="checkBox_item correct2" for="date_end">End</label>--}}
+                    {{--<div class="picker-box">--}}
+                    {{--<div class="field-wrap date_marker">--}}
+                    {{--<input type="text" name="bookings[0][appointments][0][time_to]" class="date-field mypicker end" placeholder="">--}}
+                    {{--<span class="date-ico"><i class="fa fa-clock-o"></i></span>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<i class="fa fa-close checkBox_item delete nhide" data-id="d0" aria-hidden="true"></i>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="messageGroup ">--}}
+                    {{--<h2 class="ordinaryTitle">--}}
+                    {{--<span class="ordinaryTitl__text">How often</span>--}}
+                    {{--</h2>--}}
+                    {{--<div class="messageCheckbox checktime" data-id="d0">--}}
+                    {{--<div class="checkBox_item">--}}
+                    {{--<input type="radio" name="bookings[0][appointments][0][periodicity]" value="Daily"--}}
+                    {{--class="customCheckbox periodicity Daily" onclick="calculate_price()"--}}
+                    {{--id="boxD1">--}}
+                    {{--<label for="boxD1">Daily</label>--}}
+                    {{--</div>--}}
+                    {{--<div class="checkBox_item">--}}
+                    {{--<input type="radio" name="bookings[0][appointments][0][periodicity]" value="Weekly"--}}
+                    {{--class="customCheckbox periodicity weekly" onclick="calculate_price()"--}}
+                    {{--id="boxD2">--}}
+                    {{--<label for="boxD2">weekly</label>--}}
+                    {{--</div>--}}
+                    {{--<div class="checkBox_item">--}}
+                    {{--<input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single"--}}
+                    {{--class="customCheckbox periodicity Single" onclick="calculate_price()"--}}
+                    {{--id="boxD3">--}}
+                    {{--<label for="boxD3">Once</label>--}}
+                    {{--</div>--}}
+                    {{--<br>--}}
+                    {{--<label class="checkBox_item ordinaryTitle correct nhide" for="date_end">Continue until</label>--}}
+                    {{--<div class="messageInputs__field messageDate correct3 nhide date_end">--}}
+                    {{--<input  onchange="calculate_price()" type="text" class="messageInput datepicker datepicker_message date_end" id="date_end" onchange="calculate_price()"--}}
+                    {{--name="bookings[0][appointments][0][date_end]" placeholder="">--}}
+                    {{--<a href="#" class="messageIco centeredLink">--}}
+                    {{--<i class="fa fa-calendar" aria-hidden="true"></i>--}}
+                    {{--</a>--}}
+                    {{--</div>--}}
+                    {{--<div class="checkBox_item nhide">--}}
+                    {{--<input type="radio" name="bookings[0][appointments][0][periodicity]" value="Single" required--}}
+                    {{--class="customCheckbox periodicity Single"--}}
+                    {{--id="boxD3">--}}
+                    {{--<label for="boxD3">Single</label>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<button disabled href="#" class="additionalTime">--}}
+                    {{--<i class="fa fa-clock-o" aria-hidden="true"></i>--}}
+                    {{--ADD ADDITIONAL APPOINTMENT--}}
+                    {{--</button>--}}
+
+
+                    {{--</div>--}}
+                    <div class="booking-info-group">
+                        <h2 class="ordinaryTitle">
+                            <span class="ordinaryTitle__text">Type of care</span>
+                        </h2>
+                        <button class="booking-close">
+                            <i class="fa fa-times"></i>
                         </button>
+                        <div class="messageCheckbox">
+                            @foreach($typeCareAll as $care)
+                                <div class="checkBox_item">
 
+                                    {!! Form::checkbox('bookings[0][appointments][0][assistance_types][]', $care->id, null,
+                                    array('class' => 'customCheckbox assistance_types','onclick'=>'calculate_price();','id'=>'assistance_types'.$care->id)) !!}
+                                    <label for="assistance_types{{$care->id}}">{{$care->name}}</label>
+                                </div>
+                            @endforeach
+                        </div>
 
+                        <h2 class="ordinaryTitle">
+                          <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
+                            select date and time
+                          </span>
+                        </h2>
+                        <div class="messageInputs">
+                            <div class="messageInputs__field messageDate">
+                                <input  onchange="calculate_price()" type="text" name="bookings[0][appointments][0][date_start]" required
+                                class="messageInput datepicker datepicker_message date_start" placeholder="">
+                                <span class="messageIco  centeredLink">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <label for="date_end" class="checkBox_item correct2">Start</label>
+
+                            <div class="messageInputs__field messageDate date1">
+                                <input type="text" name="bookings[0][appointments][0][time_from]" class="messageInput date-field mypicker start" placeholder="" >
+                                <span class="messageIco  centeredLink">
+                                  <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <label for="date_end" class="checkBox_item correct2">End</label>
+
+                            <div class="messageInputs__field messageDate date2">
+                                <input type="text" name="bookings[0][appointments][0][time_to]" class="messageInput date-field mypicker end" placeholder="">
+                                <span class="messageIco  centeredLink">
+                                  <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                </span>
+
+                            </div>
+
+                        </div>
+                        <h2 class="ordinaryTitle">
+                            <span class="ordinaryTitl__text">How often</span>
+                        </h2>
+                        <div class="messageCheckbox">
+                            <div class="checkBox_item">
+                                <input type="radio" name="bookings[0][appointments][0][periodicity]" id="boxD1" value="Daily"
+                                class="customCheckbox periodicity Daily" onclick="calculate_price()" required>
+                                <label for="boxD1">Daily</label>
+                            </div>
+                            <div class="checkBox_item">
+                                <input type="radio" name="bookings[0][appointments][0][periodicity]" id="boxD2" value="weekly"
+                                class="customCheckbox periodicity weekly" onclick="calculate_price()" required>
+                                <label for="boxD2">weekly</label>
+                            </div>
+                            <div class="checkBox_item">
+                                <input id="boxD3" type="radio" name="bookings[0][appointments][0][periodicity]" value="Single"
+                                class="customCheckbox periodicity Single" onclick="calculate_price()" required>
+                                <label for="boxD3">Once</label>
+                            </div>
+                        </div>
+                        <div class="messageInputs nhide until">
+                            <div class="input-block">
+                                <span class="input-block__title">
+                                  Continue until
+                                </span>
+                                <div class="messageInputs__field messageTime ">
+                                    <input  onchange="calculate_price()" type="text" class="messageInput datepicker datepicker_message date_end" id="date_end" onchange="calculate_price()"
+                                    name="bookings[0][appointments][0][date_end]" placeholder="">
+                                    <span class="messageIco  centeredLink">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <button disabled href="#" class="additionalTime">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        ADD ADDITIONAL APPOINTMENT
+                    </button>
                     <div class="moreBtn nhide">
                         <a href="#" class="moreBtn__item moreBtn__item--withIco centeredLink ">
                             <span>+</span> add more bookings
@@ -207,8 +298,11 @@
                 <div class="message__footer">
                     <div class="messageTotal">
                         <div class="bookBtn">
-                            <input type="checkbox" class="customCheckbox" name="confirm-terms" id="confirm-terms" required>
-                            <label for="confirm-terms">I accept Holm’s <a href="{{route('TermsPage')}}" target="_blank">Terms & Conditions</a> and <a href="{{route('privacy_policy')}}" target="_blank">privacy policy</a> for this booking</label>
+                            <input type="checkbox" class="customCheckbox" name="confirm-terms" id="confirm-terms"
+                                   required>
+                            <label for="confirm-terms">I accept Holm’s <a href="{{route('TermsPage')}}" target="_blank">Terms
+                                    & Conditions</a> and <a href="{{route('privacy_policy')}}" target="_blank">privacy
+                                    policy</a> for this booking</label>
                             <button type="submit" disabled id="book-carer" style="margin-top: 12px;"
                                     class="bookBtn__item bookBtn__item--big centeredLink">
                                 book carer
@@ -264,5 +358,10 @@
 </div>
 
 <script>
-
+$('#bookings__form').on('submit',function(){
+    if($('input.periodicity:checked').length!=appointments)
+        return false;
+    else
+        return true;
+});
 </script>
