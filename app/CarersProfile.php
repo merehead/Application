@@ -2,11 +2,12 @@
 
 namespace App;
 
+use App\Interfaces\Constants;
 use DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class CarersProfile extends Model
+class CarersProfile extends Model implements Constants
 {
     public function user()
     {
@@ -210,17 +211,17 @@ WHERE `carer_id` = ".$this->id." and accept = 1 order by `booking_overviews`.`cr
     public function getWageAttribute(){
         if($this->CarerWage)
             return $this->CarerWage->hour_rate;
-        return 10;
+        return self::CARER_RATE_DAY;
     }
     public function getNightWageAttribute(){
         if($this->CarerWage)
             return $this->CarerWage->hour_rate * 1.2;
-        return 10 * 1.2;
+        return $this->wage * 1.2;
     }
     public function getHolidayWageAttribute(){
         if($this->CarerWage)
             return $this->CarerWage->hour_rate * 1.5;
-        return 10 * 1.2;
+        return $this->wage * 1.2;
     }
 
     //prices (purchaser pay)
@@ -230,7 +231,7 @@ WHERE `carer_id` = ".$this->id." and accept = 1 order by `booking_overviews`.`cr
             return $fee->carer_rate + $fee->amount;
         }
 
-        return 12;
+        return self::PURCHASER_RATE_DAY;
     }
     public function getNightPriceAttribute(){
         $fee = Fees::find(2);
@@ -238,7 +239,7 @@ WHERE `carer_id` = ".$this->id." and accept = 1 order by `booking_overviews`.`cr
             return $fee->carer_rate + $fee->amount;
         }
 
-        return 14.4;
+        return self::PURCHASER_RATE_NIGHT;
     }
     public function getHolidayPriceAttribute(){
         $fee = Fees::find(3);
@@ -246,7 +247,7 @@ WHERE `carer_id` = ".$this->id." and accept = 1 order by `booking_overviews`.`cr
             return $fee->carer_rate + $fee->amount;
         }
 
-        return 18;
+        return self::PURCHASER_RATE_HOLIDAYS;
     }
 }
 

@@ -26,8 +26,12 @@ class AppointmentsController extends Controller implements Constants
             //Purchaser
             if($appointment->cancelable){
                 $appointment->status_id = self::APPOINTMENT_STATUS_CANCELLED;
+                $message = 'Sorry. '.$appointment->booking->bookingServiceUser->full_name.' has cancelled your appointment for  '.$appointment->formatted_date_start.' '.$appointment->formatted_time_from.'. Please check your account for more details. The Holm Team';
+                SmsTools::sendSmsToCarer($message, $appointment->booking->bookingCarerProfile);
             } elseif($appointment->carer_status_id == self::APPOINTMENT_USER_STATUS_NEW){
                 $appointment->purchaser_status_id = self::APPOINTMENT_USER_STATUS_REJECTED;
+                $message = 'Sorry. '.$appointment->booking->bookingServiceUser->full_name.' has cancelled your appointment for  '.$appointment->formatted_date_start.' '.$appointment->formatted_time_from.'. Please check your account for more details. The Holm Team';
+                SmsTools::sendSmsToCarer($message, $appointment->booking->bookingCarerProfile);
             } elseif($appointment->carer_status_id == self::APPOINTMENT_USER_STATUS_COMPLETED) {
                 $appointment->status_id = self::APPOINTMENT_STATUS_DISPUTE;
                 $appointment->purchaser_status_id = self::APPOINTMENT_USER_STATUS_REJECTED;
@@ -37,9 +41,9 @@ class AppointmentsController extends Controller implements Constants
             } elseif ($appointment->carer_status_id == self::APPOINTMENT_USER_STATUS_REJECTED){
                 $appointment->status_id = self::APPOINTMENT_STATUS_CANCELLED;
                 $appointment->purchaser_status_id = self::APPOINTMENT_USER_STATUS_REJECTED;
+                $message = 'Sorry. '.$appointment->booking->bookingServiceUser->full_name.' has cancelled your appointment for  '.$appointment->formatted_date_start.' '.$appointment->formatted_time_from.'. Please check your account for more details. The Holm Team';
+                SmsTools::sendSmsToCarer($message, $appointment->booking->bookingCarerProfile);
             }
-            $message = 'Sorry. '.$appointment->booking->bookingServiceUser->full_name.' has cancelled your appointment for  '.$appointment->formatted_date_start.' '.$appointment->formatted_time_from.'. Please check your account for more details. The Holm Team';
-            SmsTools::sendSmsToCarer($message, $appointment->booking->bookingCarerProfile);
         }
 
         $appointment->save();

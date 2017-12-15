@@ -123,10 +123,10 @@
                             <span class="extraTitle">to</span>
                         </td>
                         <td class="">
-                            <span class="extraTitle">purchaser <br /> appointment <br /> value</span>
+                            <span class="extraTitle">purchaser <br /> appointment <br /> value, <i class="fa fa-gbp" aria-hidden="true"></i></span>
                         </td>
                         <td class="">
-                            <span class="extraTitle">carer <br /> appointment <br /> value</span>
+                            <span class="extraTitle">carer <br /> appointment <br /> value, <i class="fa fa-gbp" aria-hidden="true"></i></span>
                         </td>
                         <td class=" ">
                             <span class="extraTitle">status</span>
