@@ -215,13 +215,13 @@ WHERE `carer_id` = ".$this->id." and accept = 1 order by `booking_overviews`.`cr
     }
     public function getNightWageAttribute(){
         if($this->CarerWage)
-            return $this->CarerWage->hour_rate * 1.2;
+            return $this->wage * 1.2;
         return $this->wage * 1.2;
     }
     public function getHolidayWageAttribute(){
         if($this->CarerWage)
-            return $this->CarerWage->hour_rate * 1.5;
-        return $this->wage * 1.2;
+            return $this->wage * 1.5;
+        return self::CARER_RATE_HOLIDAYS;
     }
 
     //prices (purchaser pay)

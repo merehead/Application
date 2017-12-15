@@ -104,10 +104,15 @@ class Booking extends Model
 
     public function getPriceAttribute(){
         $price = 0;
+        $user = Auth::user();
         $appointments = $this->appointments()->get();
-        foreach ($appointments as $appointment)
-            $price += $appointment->price;
+        foreach ($appointments as $appointment){
+            if($user && $user->user_type_id == 3)
+                $price += $appointment->carer_price;
+            else
+                $price += $appointment->purchaser_price;
 
+        }
         return round($price, 2);
     }
 

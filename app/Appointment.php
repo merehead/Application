@@ -150,7 +150,7 @@ class Appointment extends Model implements Constants
             if ($this->isDayHoliday($date)) {
                 return isset($carerProfile->holiday_price)?$carerProfile->holiday_price:0;
             } elseif($this->isHourNight($hour)){
-                return isset($carerProfile->holiday_price)?$carerProfile->holiday_price:0;
+                return isset($carerProfile->night_price)?$carerProfile->night_price:0;
             } else {
                return isset($carerProfile->price)?$carerProfile->price:0;
             }
@@ -162,7 +162,7 @@ class Appointment extends Model implements Constants
         if ($this->isDayHoliday($date)) {
             return $carerProfile->holiday_wage;
         } elseif($this->isHourNight($hour)){
-            return $carerProfile->holiday_wage;
+            return $carerProfile->night_wage;
         } else {
             return $carerProfile->wage;
         }
@@ -174,7 +174,7 @@ class Appointment extends Model implements Constants
         if ($this->isDayHoliday($date)) {
             return $carerProfile->holiday_price;
         } elseif($this->isHourNight($hour)){
-            return $carerProfile->holiday_price;
+            return $carerProfile->night_price;
         } else {
             return $carerProfile->price;
         }
