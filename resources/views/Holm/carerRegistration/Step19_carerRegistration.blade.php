@@ -2,10 +2,11 @@
     <div class="registration__full">
 
         <p class="info-p info-p--roboto">
-            <span class="accent-p">Upload documents</span>       </p>
+            <span class="accent-p">Upload documents</span> - <span style="color:red">You have not completed the application yet!</span> </p>
         <p class="info-p info-p--roboto">
 
-            Thank you for completing the online application process. Please could you upload photos of the following original documents (where applicable):
+            There is one more page.<br>
+            After submitting your application, please remember to upload photos of the following original documents (where applicable):
 
         </p>
 
@@ -16,9 +17,11 @@
         <p class="info-p info-p--roboto">- car Insurance;</p>
         <p class="info-p info-p--roboto">- your CV.</p>
 
+        <p class="info-p info-p--roboto">
+        You do this by clicking on your name at the top right corner, going to your personal profile, pressing edit for the relevant section, uploading the image, and pressing save
+        </p>
 
-
-        <p class="info-p info-p--roboto"s>
+        <p class="info-p info-p--roboto">
             If you have any problems uploading them, you can also email them to <a href="mailto:info@holm.care">info@holm.care</a>. Once we have received and checked all your documents, we will add your profile to the website for clients to book you.
         </p>
 
