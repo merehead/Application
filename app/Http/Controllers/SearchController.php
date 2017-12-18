@@ -127,13 +127,15 @@ class SearchController extends FrontController
         if ($request->get('postCode') && !empty($request->get('postCode'))) {
             $postCode = trim($request->get('postCode'));
             if(strlen($postCode)>1){
-
-                $code = PostCodes::where('code', '=' ,$postCode)->first();
+                $pCode='';
+                if (strpos($postCode, ' ') === false) $pCode = $postCode.' ';
+                $pCode = substr($postCode,0,strpos($postCode, ' ')+1);
+                $code = PostCodes::where('code', '=' ,$pCode)->first();
                 if(isset($code->code)){
                     $code->amount=$code->amount+1;
                     $code->save();
                 }else{
-                    $data=['code'=>$postCode,'amount'=>1,'frequency'=>0];
+                    $data=['code'=>$pCode,'amount'=>1,'frequency'=>0];
                     PostCodes::create($data);
                 }
             }
