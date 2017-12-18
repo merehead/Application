@@ -253,6 +253,7 @@ class SearchController extends FrontController
                 'load-more' => isset($load_more) && !empty($load_more) ? 1 : 0,
                 'html' => $html,
                 'post_' => $post_,
+                'sql'=>$sql,
                 'start' => $start,
                 'page' => $page,
                 'id' => (ceil($countAll / $perPage) > $page) ? $carerResult[count($carerResult) - 1]->id : 0,

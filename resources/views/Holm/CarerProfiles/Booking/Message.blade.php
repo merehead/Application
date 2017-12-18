@@ -65,7 +65,7 @@
                     <div class="messageGroup">
                         <h2 class="ordinaryTitle ordinaryTitle--smaller">
                             <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                                Please select person needing care
+                                Please select person needing care<span class="requireIco">*</span>
                             </span>
                         </h2>
                         <div class="needCareContainer">
@@ -201,7 +201,7 @@
                     {{--</div>--}}
                     <div class="booking-info-group">
                         <h2 class="ordinaryTitle">
-                            <span class="ordinaryTitle__text">Type of care</span>
+                            <span class="ordinaryTitle__text">Type of care<span class="requireIco">*</span></span>
                         </h2>
                         <button class="booking-close">
                             <i class="fa fa-times"></i>
@@ -219,7 +219,7 @@
 
                         <h2 class="ordinaryTitle">
                           <span class="ordinaryTitle__text ordinaryTitle__text--smaller">
-                            select date and time
+                            select date and time<span class="requireIco">*</span>
                           </span>
                         </h2>
                         <div class="messageInputs">
@@ -250,7 +250,7 @@
 
                         </div>
                         <h2 class="ordinaryTitle">
-                            <span class="ordinaryTitl__text">How often</span>
+                            <span class="ordinaryTitl__text">How often<span class="requireIco">*</span></span>
                         </h2>
                         <div class="messageCheckbox">
                             <div class="checkBox_item">
