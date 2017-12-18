@@ -226,7 +226,7 @@
                             <div class="messageInputs__field messageDate">
                                 <input  onchange="calculate_price()" type="text" name="bookings[0][appointments][0][date_start]" required
                                 class="messageInput datepicker datepicker_message date_start" placeholder="">
-                                <span class="messageIco  centeredLink">
+                                <span class="messageIco date-ico centeredLink">
                                     <i class="fa fa-calendar" aria-hidden="true"></i>
                                 </span>
                             </div>
@@ -234,7 +234,7 @@
 
                             <div class="messageInputs__field messageDate date1">
                                 <input type="text" name="bookings[0][appointments][0][time_from]" class="messageInput date-field mypicker start" placeholder="" >
-                                <span class="messageIco  centeredLink">
+                                <span class="messageIco date-time-ico centeredLink">
                                   <i class="fa fa-clock-o" aria-hidden="true"></i>
                                 </span>
                             </div>
@@ -242,7 +242,7 @@
 
                             <div class="messageInputs__field messageDate date2">
                                 <input type="text" name="bookings[0][appointments][0][time_to]" class="messageInput date-field mypicker end" placeholder="">
-                                <span class="messageIco  centeredLink">
+                                <span class="messageIco date-time-ico centeredLink">
                                   <i class="fa fa-clock-o" aria-hidden="true"></i>
                                 </span>
 
@@ -277,7 +277,7 @@
                                 <div class="messageInputs__field messageTime ">
                                     <input  onchange="calculate_price()" type="text" class="messageInput datepicker datepicker_message date_end" id="date_end" onchange="calculate_price()"
                                     name="bookings[0][appointments][0][date_end]" placeholder="">
-                                    <span class="messageIco  centeredLink">
+                                    <span class="messageIco date-ico centeredLink">
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                     </span>
                                 </div>

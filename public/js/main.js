@@ -1827,14 +1827,14 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on('click','div.messageDate>a',function(e){
+    $(document).on('click','div.messageDate>span.date-time-ico',function(e){
        e.preventDefault();
         if(!$(this).parent().find('input').is(":focus"))
             $(this).parent().find('input').focus();
         else
             $(this).parent().find('input').blur();
     });
-    $(document).on('click','div.date_marker>span.date-ico',function(e){
+    $(document).on('click','div.messageDate>span.date-ico',function(e){
        e.preventDefault();
         if(!$(this).parent().find('input').is(":focus"))
             $(this).parent().find('input').focus();
