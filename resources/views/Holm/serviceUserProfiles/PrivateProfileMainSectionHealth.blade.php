@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div class="profileRow depend_from_consent" {!!  ($serviceUsersProfile->consent != 'Yes' || is_null($serviceUsersProfile->consent) )? ' style="display:none"' : ''!!}>
+    <div class="profileRow depend_from_consent" {!!  (!$serviceUsersProfile->ServiceUserConditions->contains('id', 5))? '' : ''!!}>
         <div class="profileField profileField--full-width">
             <h2 class="profileField__title ordinaryTitle"><span
                         class="ordinaryTitle__text ordinaryTitle__text--smaller">LONG TERM MEDICAL CONDITIONS</span></h2>

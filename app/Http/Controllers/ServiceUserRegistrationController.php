@@ -8,6 +8,7 @@ use App\Floor;
 use App\Http\Controllers\Repo\ServiceUserRegistration;
 use App\Language;
 use App\MailError;
+use App\PurchasersProfile;
 use App\ServiceType;
 use App\ServiceUserCondition;
 use App\ServiceUsersProfile;
@@ -215,14 +216,14 @@ class ServiceUserRegistrationController extends FrontController
         }
 
         $serviceProfile = ServiceUsersProfile::findOrFail($id);
-
+        $purchaser = PurchasersProfile::find($serviceProfile->purchaser_id);
         $serviceProfile->profiles_status_id = 2;
         $serviceProfile->registration_status = 'completed';
         $serviceProfile->update();
 
         $text = view(config('settings.frontTheme') . '.emails.complete_sign_up_service')->with([
             'user' => $user,
-            'like_name'=>$serviceProfile->like_name
+            'like_name'=>($serviceProfile->care_for=='Myself')?$purchaser->like_name:$serviceProfile->like_name
         ])->render();
 
         DB::table('mails')
