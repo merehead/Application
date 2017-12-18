@@ -726,6 +726,21 @@ $(document).ready(function () {
     });
 
 
+    $(".digitFilter07").keyup(function (e) {
+        var help = $(".digitFilter07").parent().next('span.help-block');
+        if($(".digitFilter07").val().length>10&&help.length>0){
+            $(".digitFilter07").parent().next('span.help-block').hide();
+            return;
+        }else if(help.length>0){
+            $(".digitFilter07").parent().next('span.help-block').show();
+            return;
+        }else if($(".digitFilter07").val().length<10&&help.length==0){
+            $(".digitFilter07").parent().after('<span class="help-block">' +
+                '                                        <strong>The mobile number format is invalid. Exemple: 07xxxxxxxxx </strong>' +
+                '                                    </span>');
+        }
+    });
+
     $(".digitFilter07").keydown(function (e) {
         // Allow: backspace, delete, tab, escape, enter and .
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||

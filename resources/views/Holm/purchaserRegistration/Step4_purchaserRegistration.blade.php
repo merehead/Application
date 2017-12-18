@@ -108,12 +108,12 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
 
                                <?php
                                 $style = 'formInput personalForm__input ';
-                                $style.=($purchasersProfile->purchasing_care_for == 'Myself')? " digitFilter07": ' digitFilter0';
+                                $style.=($purchasersProfile->purchasing_care_for == 'Myself')? " digitFilter07": ' digitFilter07';
                                 ?>
 
 
                                 {!! Form::text('mobile_number',null,
-                                ['class'=>$style,'placeholder'=>'Your mobile number','maxlength'=>"11"]) !!}
+                                ['class'=>$style,'placeholder'=>'Your mobile number','maxlength'=>"11",'minlength'=>"11"]) !!}
                             </div>
                             @if ($errors->has('mobile_number'))
                                 <span class="help-block">
