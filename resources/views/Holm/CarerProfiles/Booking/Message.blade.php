@@ -203,7 +203,7 @@
                         <h2 class="ordinaryTitle">
                             <span class="ordinaryTitle__text">Type of care<span class="requireIco">*</span></span>
                         </h2>
-                        <button class="booking-close">
+                        <button class="booking-close delete" style="display: none">
                             <i class="fa fa-times"></i>
                         </button>
                         <div class="messageCheckbox">

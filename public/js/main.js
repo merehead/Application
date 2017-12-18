@@ -1723,12 +1723,12 @@ $(document).ready(function () {
     $(document).on('click','.delete',function(){
         var that = $(this);
         var cur = $(that).attr('data-id');
-        $(that).parent().parent().prev('span.error-booking').remove();
-        $(that).parent().parent().prev('div').remove();
-        $(that).parent().parent().remove();
-
-        $('div[data-id="'+cur+'"]').remove();
-        $('.'+cur).remove();
+        $(that).parent().remove();
+        // $(that).parent().parent().prev('div').remove();
+        // $(that).parent().parent().remove();
+        //
+        // $('div[data-id="'+cur+'"]').remove();
+        // $('.'+cur).remove();
         appointments=appointments-1;
         if(appointments<=1)$('.delete').hide();
         calculate_price();
@@ -1874,7 +1874,6 @@ $(document).ready(function () {
         e.preventDefault();
         var $that =$(this);
         var appointment = $('.booking-info-group').last().clone();
-
         $(appointment).find('.error-booking').remove();
         $(appointment).find('.error-booking').remove();
         $(appointment).find('.datepicker').each(function () {
@@ -1978,6 +1977,7 @@ $(document).ready(function () {
         });
         calculate_price();
          $(appointment).find('.until').hide();
+         $(appointment).find('.booking-close').show();
         // $('.datepicker_message').last().parent().parent().find('label.correct').hide();
         return false;
     });
