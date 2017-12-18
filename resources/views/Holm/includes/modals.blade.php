@@ -60,7 +60,7 @@
                                name="password">
                     </div>
                 </div>
-                <span class="error-block">
+                <span class="error-block-text">
                     <h3><strong></strong></h3>
                 </span>
                 <span class="success-block">

@@ -311,7 +311,7 @@ function login_ajax(form) {
     $('.login__body').hide();
     $('.loader').show();
     var token = $(form).find('input[name=_token]').val();
-    $(form).find('.error-block h3 strong').html('');
+    $(form).find('.error-block-text h3 strong').html('');
     $.ajax({
         url: $(form).attr('action'),
         headers: {'X-CSRF-TOKEN': token},
@@ -322,7 +322,7 @@ function login_ajax(form) {
             $('.login__body').show();
             $('.loader').hide();
             if (response.status != 200) {
-                $(form).find('.error-block strong').html(response.email);
+                $(form).find('.error-block-text strong').html(response.email);
             } else {
                 window.refresh();
             }
@@ -333,8 +333,8 @@ function login_ajax(form) {
             $('.loader').hide();
             if (response.status != 200) {
                 var data = $.parseJSON(response.responseText);
-                $(form).find('.error-block h3 strong').html(data.email);
-                $(form).find('.error-block h3 strong').html(data.password);
+                $(form).find('.error-block-text h3 strong').html(data.email);
+                $(form).find('.error-block-text h3 strong').html(data.password);
                 $('.btry').show();
             } else {
                 $(form).find('.success-block h3 strong').html('Login success');
@@ -347,7 +347,7 @@ function login_ajax(form) {
 }
 
 function refreshLoginForm(form) {
-    $(form).find('.error-block strong').html('');
+    $(form).find('.error-block-text strong').html('');
     $('.blogin').show();
     $(form).find('.formField').show();
 }

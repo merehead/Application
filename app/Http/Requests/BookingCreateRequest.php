@@ -52,6 +52,7 @@ class BookingCreateRequest extends FormRequest
             'bookings.*.appointments.*.date_start' => 'required',
             'bookings.*.appointments.*.time_from' => 'required',
             'bookings.*.appointments.*.time_to' => 'required',
+            'bookings.*.appointments.*.periodicity' => 'required',
         ];
     }
 }
