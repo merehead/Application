@@ -162,7 +162,7 @@
                              {{$booking->hours}}h /
                             </span>
                                             <span style=" font-weight: 900;color:#80cb2d;">
-                             £{{$booking->price}}
+                             £{{number_format($booking->price,2,'.',' ')}}
                             </span>
                                         </p>
                                 </tr>

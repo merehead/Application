@@ -223,7 +223,7 @@
                             <p>Total </p>
                             <span>{{$booking->hours}} hours</span>
                         </div>
-                        <p class="totalPrice">£{{$booking->price}}</p>
+                        <p class="totalPrice">£{{number_format($booking->price,2,'.',' ')}}</p>
                     </div>
                 </div>
 

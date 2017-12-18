@@ -16,7 +16,7 @@
         <div class="bookInfo__date">
             <span class="bookDate">{{$booking->appointments()->get()->count()}} Appointment{{$booking->appointments()->get()->count() > 1 ? 's':''}}</span>
             <p class="hourPrice">
-                {{$booking->hours}}h / <span>£{{$booking->price}}</span>
+                {{$booking->hours}}h / <span>£{{number_format($booking->price,2,'.',' ')}}</span>
             </p>
             <div class="roundedBtn">
                 <button {{$booking->overviews()->get()->count() ? 'disabled' : ''}} onclick="location.replace('{{url('/bookings/'.$booking->id.'/leave_review')}}')" class="roundedBtn__item roundedBtn__item--smalest roundedBtn__item--forReview">
