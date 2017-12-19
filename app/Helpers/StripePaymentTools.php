@@ -60,7 +60,7 @@ class StripePaymentTools implements PaymentToolsInterface
                 "amount" => $amount,
                 "currency" => 'gbp',
                 "source" => $cardToken,
-                "description" => "Charging carer"
+                "description" => "Charging purchaser"
             ));
         } catch (\Exception $ex){
             throw $ex;
@@ -90,7 +90,7 @@ class StripePaymentTools implements PaymentToolsInterface
             $res = $response  = Charge::create(array(
                 "amount" => $amount,
                 "currency" => 'gbp',
-                "description" => "Charging carer",
+                "description" => "Charging purchaser",
                 "customer" => $costumerToken,
             ));
         } catch (\Exception $ex){

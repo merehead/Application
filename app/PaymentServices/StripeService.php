@@ -70,7 +70,7 @@ class StripeService {
             "amount" => $amount,
             "currency" => 'gbp',
             "source" => $cardToken,
-            "description" => "Charging carer"
+            "description" => "Charging purchaser"
         ));
 
         return $res;
