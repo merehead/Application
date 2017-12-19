@@ -446,6 +446,9 @@ class BookingsController extends FrontController implements Constants
                 $text = view(config('settings.frontTheme') . '.emails.reject_booking')->with([
                     'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'purchaser'
                 ])->render();
+
+                $message = 'Sorry. Carer '.$carerProfile->full_name.' has rejected your booking request  '.$booking->id.'. The Holm Team';
+                SmsTools::sendSmsToPurchaser($message, $purchaserProfile);
             }
             if(Auth::user()->isPurchaser()){
                 //message for purchaser
