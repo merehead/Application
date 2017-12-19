@@ -26,23 +26,9 @@
         .src='/img/no_photo.png'" alt="">--}}
 
                 <div class="profileRating popularCard__rating">
-
-
-                <span class="profileRating__item {{ ($topCarer->rate->avg_total>0)? 'active' : ''  }}">
-                  <i class="fa fa-heart"></i>
-                </span>
-                  <span class="profileRating__item {{ ($topCarer->rate->avg_total>=1)? 'active' : ''  }}">
-                  <i class="fa fa-heart"></i>
-                </span>
-                  <span class="profileRating__item {{ ($topCarer->rate->avg_total>=2)? 'active' : ''  }}">
-                  <i class="fa fa-heart"></i>
-                </span>
-                  <span class="profileRating__item {{ ($topCarer->rate->avg_total>=3)? 'active' : ''  }}">
-                  <i class="fa fa-heart"></i>
-                </span>
-                  <span class="profileRating__item {{ ($topCarer->rate->avg_total>=4)? 'active' : ''  }}">
-                  <i class="fa fa-heart"></i>
-                </span>
+                    @for($i = 1; $i <= 5; $i++)
+                        <span class="profileRating__item {{$topCarer->rate->avg_total >= $i ? 'active' : ''}}"><i class="fa fa-heart"></i></span>
+                    @endfor
                 </div>
                 <h2 class="profileName">
                   <a href="{{route('carerPublicProfile',[$topCarer->id])}}">
