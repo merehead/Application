@@ -129,7 +129,13 @@
                         </td>
                         <td>
                           <span>
-                            {{$bonusPayout->user->referral_code ? $bonusPayout->user->referral_code : 'REGISTER'}}
+                            @if($bonusPayout->user->referral_code)
+                                  {{$bonusPayout->user->referral_code}}
+                              @elseif($bonusPayout->user->use_register_code)
+                                  REGISTER
+                              @else
+                                  -
+                              @endif
                           </span>
                         </td>
                         <td>
