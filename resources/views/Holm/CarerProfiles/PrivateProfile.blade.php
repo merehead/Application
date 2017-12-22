@@ -46,6 +46,8 @@
             $('#post_code_profile').autocomplete({serviceUrl:'/noaddress/'});
             @if(Auth::user()->isAdmin())
                 $('input,select').removeAttr('data-edit');
+                if($('#driving_license').val()=="No")
+                    $('#driving_license').attr('data-edit',false);
             @endif
         });
     </script>
