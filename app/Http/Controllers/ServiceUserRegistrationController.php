@@ -223,7 +223,8 @@ class ServiceUserRegistrationController extends FrontController
 
         $text = view(config('settings.frontTheme') . '.emails.complete_sign_up_service')->with([
             'user' => $user,
-            'like_name'=>($serviceProfile->care_for=='Myself')?$purchaser->like_name:$serviceProfile->like_name
+//            'like_name'=>($serviceProfile->care_for == 'Myself')?$purchaser->like_name:$serviceProfile->like_name
+            'like_name'=>$purchaser->like_name
         ])->render();
 
         DB::table('mails')

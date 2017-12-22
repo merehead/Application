@@ -47,7 +47,7 @@ class BookingsController extends FrontController implements Constants
         DB::beginTransaction();
 
         $booking = $this->createBooking($request);
-        $price = $booking->price;
+        $price = number_format($booking->price, 2);
         $hours = $booking->hours;
 
         DB::rollBack();
@@ -229,7 +229,8 @@ class BookingsController extends FrontController implements Constants
                                 'exp_month' => $request->card_month,
                                 'exp_year' => $request->card_year,
                                 'cvc' => $request->card_cvc,
-                            ]
+                            ],
+                            'description' => 'Credit Card of '.$user->full_name.' (ID: '.$user->id.') user.'
                         ));
                         $stripeCustomer = StripeCostumer::create([
                             'purchaser_id' => $user->id,
@@ -287,12 +288,8 @@ class BookingsController extends FrontController implements Constants
 
         //sms to carer
         $message = 'Hi. ' . $booking->bookingServiceUser->full_name . ' would like to book you. Please log into your account to accept or reject the booking request. The Holm Team';
-        try {
-
         SmsTools::sendSmsToCarer($message, $booking->bookingCarerProfile);
-        }catch(MessenteException $e){
-            //todo need logged
-        }
+
         return response(['status' => 'success']);
     }
 
@@ -409,6 +406,10 @@ class BookingsController extends FrontController implements Constants
                     'time_to_send' => Carbon::now(),
                     'status' => 'new'
                 ]);
+
+        //sms to purchaser
+        $message = 'Sorry. ' . $carerProfile->full_name . ' rejected your booking request. The Holm Team';
+        SmsTools::sendSmsToCarer($message, $purchaserProfile);
 
         return response(['status' => 'success']);
     }

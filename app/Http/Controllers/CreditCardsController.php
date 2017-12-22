@@ -23,6 +23,7 @@ class CreditCardsController extends FrontController
                     'exp_year' => $request->exp_year,
                     'cvc' => $request->cvc,
                 ],
+                'description' => 'Credit Card of '.$user->full_name.' (ID: '.$user->id.') user.'
             ));
 
             $stripeCustomer = StripeCostumer::create([
