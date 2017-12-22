@@ -229,7 +229,8 @@ class BookingsController extends FrontController implements Constants
                                 'exp_month' => $request->card_month,
                                 'exp_year' => $request->card_year,
                                 'cvc' => $request->card_cvc,
-                            ]
+                            ],
+                            'description' => 'Credit Card of '.$user->full_name.' (ID: '.$user->id.') user.'
                         ));
                         $stripeCustomer = StripeCostumer::create([
                             'purchaser_id' => $user->id,
@@ -405,6 +406,10 @@ class BookingsController extends FrontController implements Constants
                     'time_to_send' => Carbon::now(),
                     'status' => 'new'
                 ]);
+
+        //sms to purchaser
+        $message = 'Sorry. ' . $carerProfile->full_name . ' rejected your booking request. The Holm Team';
+        SmsTools::sendSmsToCarer($message, $purchaserProfile);
 
         return response(['status' => 'success']);
     }
