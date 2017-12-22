@@ -113,7 +113,7 @@ class Booking extends Model
                 $price += $appointment->purchaser_price;
 
         }
-        return round($price, 2);
+        return number_format(round($price, 2));
     }
 
     public function getCarerPriceAttribute(){
