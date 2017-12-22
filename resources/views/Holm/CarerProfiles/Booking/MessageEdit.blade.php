@@ -74,9 +74,7 @@
                                 value="{{date('d/m/Y',strtotime($appointment->date_start))}}"
                                 >
 
-                                <a href="#" class="messageIco centeredLink">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                </a>
+                                <span class="date-ico date-time"><i class="fa fa-calendar"></i></span>
                             </div>
                             <label class="checkBox_item correct2" for="date_end">Start</label>
 
@@ -90,9 +88,9 @@
                             {{--</div>--}}
 
                             <div class="picker-box">
-                                <div class="field-wrap date_marker">
+                                <div class="field-wrap date_marker messageDate">
                                     <input type="text" name="bookings[0][appointments][{{$loop->index}}][time_from]" value="{{$appointment->time_from}}" class="date-field mypicker start" placeholder="" >
-                                    <span class="date-ico"><i class="fa fa-clock-o"></i></span>
+                                    <span class="date-ico date-time-ico"><i class="fa fa-clock-o"></i></span>
                                 </div>
                             </div>
 
@@ -106,9 +104,9 @@
                                 {{--</a>--}}
                             {{--</div>--}}
                             <div class="picker-box">
-                                <div class="field-wrap date_marker">
+                                <div class="field-wrap messageDate date_marker">
                                     <input type="text" value="{{$appointment->time_to}}" name="bookings[0][appointments][{{$loop->index}}][time_to]" class="date-field mypicker end" placeholder="">
-                                    <span class="date-ico"><i class="fa fa-clock-o"></i></span>
+                                    <span class="date-ico date-time-ico"><i class="fa fa-clock-o"></i></span>
                                 </div>
                             </div>
 
