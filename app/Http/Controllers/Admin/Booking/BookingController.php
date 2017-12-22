@@ -46,10 +46,13 @@ class BookingController extends AdminController
         $userName = (isset($input['userName'])) ? $input['userName'] : false;
         if (!empty($userName))
             $bookings = $bookings->filter(function ($item) use ($userName) {
-
+                $appointmentsIds = array_pluck($item->appointments, 'id');
                 if (strpos(strtolower($item->bookingServiceUser->first_name), strtolower($userName)) !== false
                     || strpos(strtolower($item->bookingCarerProfile->first_name), strtolower($userName)) !== false
-                    || strpos(strtolower($item->bookingPurchaserProfile->first_name), strtolower($userName)) !== false)
+                    || strpos(strtolower($item->bookingPurchaserProfile->first_name), strtolower($userName)) !== false
+                    || $item->id == (int)$userName
+                    || in_array((int)$userName, $appointmentsIds)
+                    )
                     return true;
             });
 

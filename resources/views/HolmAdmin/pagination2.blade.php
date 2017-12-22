@@ -2,7 +2,8 @@
 $search = '';
 if(isset($profileTypeFilter)&&!empty($profileTypeFilter)) $search.='&profileType='.$profileTypeFilter;
 if(isset($statusTypeFilter)&&!empty($statusTypeFilter)) $search.='&statusType='.$statusTypeFilter;
-if(isset($queryString)&& !empty($queryString)) $search = '&'.$queryString;
+//if(isset($queryString)&& !empty($queryString)) $search = '&'.$queryString;
+$search = '';
 ?>
 
 @if($pages>1)
