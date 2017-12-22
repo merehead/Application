@@ -55,12 +55,16 @@ class StripePaymentTools implements PaymentToolsInterface
 
     public function createCharge(int $amount, string $cardToken, int $bookingId) : string
     {
+        $booking = Booking::find($bookingId);
+        $purchaser = User::find($booking->purchaser_id);
+        $carer = User::find($booking->carer_id);
+
         try {
             $res = $response = Charge::create(array(
                 "amount" => $amount,
                 "currency" => 'gbp',
                 "source" => $cardToken,
-                "description" => "Charging purchaser"
+                "description" => "Charging purchaser ".$purchaser->full_name." (".$purchaser->id.") for booking (".$booking->id.") to Carer ".$carer->full_name."(".$carer->id.")",
             ));
         } catch (\Exception $ex){
             throw $ex;
@@ -86,11 +90,15 @@ class StripePaymentTools implements PaymentToolsInterface
 
     public function createCustomerCharge(int $amount, string $costumerToken, int $bookingId) : string
     {
+        $booking = Booking::find($bookingId);
+        $purchaser = User::find($booking->purchaser_id);
+        $carer = User::find($booking->carer_id);
+
         try {
             $res = $response  = Charge::create(array(
                 "amount" => $amount,
                 "currency" => 'gbp',
-                "description" => "Charging purchaser",
+                "description" => "Charging purchaser ".$purchaser->full_name." (".$purchaser->id.") for booking (".$booking->id.") to Carer ".$carer->full_name."(".$carer->id.")",
                 "customer" => $costumerToken,
             ));
         } catch (\Exception $ex){
