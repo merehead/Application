@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\Bookings;
 use App\Appointment;
+use App\CarersProfile;
 use App\DisputePayout;
 use App\Events\AppointmentCompletedEvent;
 use App\Http\Controllers\Controller;
 use App\Interfaces\Constants;
+use App\PurchasersProfile;
+use App\ServiceUsersProfile;
 use Auth;
 use SmsTools;
+use DB;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
@@ -15,6 +20,12 @@ class AppointmentsController extends Controller implements Constants
 {
     public function reject(Appointment $appointment){
         $user = Auth::user();
+        $booking = $appointment->booking;
+        $email = $user->email;
+        $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
+        $carerProfile = CarersProfile::find($booking->carer_id);
+        $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
+
         if($user->user_type_id == 3){
             //Carer
             $appointment->status_id = self::APPOINTMENT_STATUS_CANCELLED;
@@ -25,6 +36,23 @@ class AppointmentsController extends Controller implements Constants
 
             $message = 'Sorry. '.$appointment->booking->bookingCarerProfile->full_name.' has cancelled your appointment for  '.$appointment->formatted_date_start.' '.$appointment->formatted_time_from.'. Please check your account for more details. The Holm Team';
             SmsTools::sendSmsToPurchaser($message, $appointment->booking->bookingPurchaserProfile);
+
+
+            $text = view(config('settings.frontTheme') . '.emails.appointment_cancelled')->with([
+                'purchaser' => $purchaserProfile, 'booking' => $booking, 'appointment' => $appointment, 'serviceUser' => $serviceUser, 'carer' =>
+                    $carerProfile, 'sendTo' => 'purchaser', 'user_like_name' => $purchaserProfile->like_name, 'user_name' => 'user_name'
+            ])->render();
+
+            DB::table('mails')
+                ->insert(
+                    [
+                        'email' => $email,
+                        'subject' => 'Cancelling appointment on HOLM',
+                        'text' => $text,
+                        'time_to_send' => Carbon::now(),
+                        'status' => 'new'
+                    ]);
+
         } else {
             //Purchaser
             if($appointment->cancelable){
@@ -48,6 +76,20 @@ class AppointmentsController extends Controller implements Constants
                 SmsTools::sendSmsToCarer($message, $appointment->booking->bookingCarerProfile);
             }
         }
+
+        $text = view(config('settings.frontTheme') . '.emails.appointment_cancelled')->with([
+            'purchaser' => $purchaserProfile, 'booking' => $booking, 'appointment' => $appointment, 'serviceUser' => $serviceUser, 'carer' =>
+                $carerProfile, 'sendTo' => 'carer', 'user_like_name' => $carerProfile->full_name
+        ])->render();
+        DB::table('mails')
+            ->insert(
+                [
+                    'email' => $email,
+                    'subject' => 'Cancelling appointment on HOLM',
+                    'text' => $text,
+                    'time_to_send' => Carbon::now(),
+                    'status' => 'new'
+                ]);
 
         $appointment->save();
 
