@@ -124,6 +124,7 @@ class SearchController extends FrontController
             $where .= ' and cp.id in (' . implode(',', array_values($carerId)) . ') ';
         }
 
+
         if ($request->get('postCode') && !empty($request->get('postCode'))) {
             $postCode = trim($request->get('postCode'));
             if(strlen($postCode)>1){

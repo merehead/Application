@@ -100,6 +100,7 @@ Route::get('/bookings/{booking}/leave_review', 'Bookings\BookingsController@leav
 Route::post('/bookings/{booking}/review', 'Bookings\BookingsController@createReview');
 
 Route::post('/appointments/{appointment}/reject', 'Bookings\AppointmentsController@reject');
+Route::post('/appointments/{appointment}/cancel', 'Bookings\AppointmentsController@cancelled');
 Route::post('/appointments/{appointment}/completed', 'Bookings\AppointmentsController@completed');
 
 Route::post('/document/upload/{user_id?}','DocumentsController@upload')->name('UploadDocument');
