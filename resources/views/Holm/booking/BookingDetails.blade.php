@@ -304,13 +304,14 @@
         <div class="comments">
             @if($user->user_type_id !== 4)
             <div class="comments__forMessage">
-                <form method="post" action="{{url('bookings/'.$booking->id.'/message')}}">
+                <form method="post" action="{{url('bookings/'.$booking->id.'/message')}}" onsubmit="return messageLengthCheck(this)">
                     <div class="messageBox">
                         <h2 class="formLabel">
                             <a name="comments"></a>
                             Your Message
                         </h2>
                         <textarea name="message" class="messageBox__item doNotCount"  placeholder="Type your message"></textarea>
+                        <span id="two-chars-error" class="help-block" style="display: none"><strong>Please enter at least 2 characters</strong></span>
                         <div class="roundedBtn roundedBtn--center">
                             <button type="submit" class=" roundedBtn__item roundedBtn__item--send
                       roundedBtn__item--smaller">
@@ -478,4 +479,15 @@
             }
         });
     });
+
+    function messageLengthCheck(form) {
+        var messageText = $(form).find('textarea[name="message"]').val();
+        if(messageText.length < 2){
+            $('#two-chars-error').show();
+            return false;
+        } else{
+            $('#two-chars-error').hide();
+            return true;
+        }
+    }
 </script>
