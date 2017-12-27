@@ -396,6 +396,10 @@
             if(data.status == 'success'){
                 location.reload();
             }
+        }).done(function( msg ) {
+            console.debug(msg);
+        }).fail(function( jqXHR, textStatus ) {
+            console.debug( jqXHR );
         });
     });
 

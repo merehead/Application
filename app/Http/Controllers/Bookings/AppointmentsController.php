@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Bookings;
 use App\Appointment;
+use App\Booking;
 use App\CarersProfile;
 use App\DisputePayout;
 use App\Events\AppointmentCompletedEvent;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Interfaces\Constants;
 use App\PurchasersProfile;
 use App\ServiceUsersProfile;
+use App\User;
 use Auth;
 use SmsTools;
 use DB;
@@ -21,7 +23,14 @@ class AppointmentsController extends Controller implements Constants
     public function reject(Appointment $appointment){
         $user = Auth::user();
         $booking = $appointment->booking;
-        $email = $user->email;
+
+        //$email = $user->email;// ALEXX (продублировать для кэнсел)
+        $receiver = DB::table('bookings')
+            ->leftJoin('users', 'users.id', '=', 'bookings.purchaser_id')
+            ->where('bookings.id', $booking->id)
+            ->get();
+        $email = $receiver[0]->email;
+
         $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
         $carerProfile = CarersProfile::find($booking->carer_id);
         $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
@@ -100,7 +109,15 @@ class AppointmentsController extends Controller implements Constants
     public function cancelled(Appointment $appointment){
         $user = Auth::user();
         $booking = $appointment->booking;
-        $email = $user->email;
+
+        //$email = $user->email;//ALEXX
+
+        $receiver = DB::table('bookings')
+            ->leftJoin('users', 'users.id', '=', 'bookings.purchaser_id')
+            ->where('bookings.id', $booking->id)
+            ->get();
+        $email = $receiver[0]->email;
+
         $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
         $carerProfile = CarersProfile::find($booking->carer_id);
         $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
