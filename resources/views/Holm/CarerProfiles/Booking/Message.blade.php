@@ -274,8 +274,8 @@
                                 <span class="input-block__title">
                                   Continue until
                                 </span>
-                                <div class="messageInputs__field messageTime ">
-                                    <input  onchange="calculate_price()" type="text" class="messageInput datepicker datepicker_message date_end" id="date_end" onchange="calculate_price()"
+                                <div class="messageInputs__field messageTime " id="dp" onclick="$('#dp').datepicker('show');">
+                                    <input  onchange="calculate_price()" type="text" class="messageInput datepicker datepicker_message date_end" id="date_end"
                                     name="bookings[0][appointments][0][date_end]" placeholder="">
                                     <span class="messageIco date-ico centeredLink">
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -364,4 +364,5 @@ $('#bookings__form').on('submit',function(){
     else
         return true;
 });
+
 </script>
