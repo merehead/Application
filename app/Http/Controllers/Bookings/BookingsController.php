@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use Carbon\Carbon;
 use PaymentTools;
-use SmsTools;
+use SmsTools ;
 
 class BookingsController extends FrontController implements Constants
 {
@@ -385,18 +385,21 @@ class BookingsController extends FrontController implements Constants
             $user = User::find($booking->purchaser_id);
             $email =  $user->email;
             $text = view(config('settings.frontTheme') . '.emails.reject_booking')->with([
-                'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'purchaser'
+                'purchaserProfile' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => 'purchaser'
             ])->render();
         }
+        /*ALEXX changed variable from purchaser to purchaserProfile*/
+
         if(Auth::user()->isPurchaser()){
             //message for purchaser
             $user = User::find($booking->carer_id);
             $email = $user->email;
             $text = view(config('settings.frontTheme') . '.emails.reject_booking')->with([
-                'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' =>
+                'purchaserProfile' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' =>
                     $carerProfile, 'sendTo' => 'carer'
             ])->render();
         }
+
         DB::table('mails')
             ->insert(
                 [
@@ -409,7 +412,7 @@ class BookingsController extends FrontController implements Constants
 
         //sms to purchaser
         $message = 'Sorry. ' . $carerProfile->full_name . ' rejected your booking request. The Holm Team';
-        SmsTools::sendSmsToCarer($message, $purchaserProfile);
+        SmsTools::sendSmsToPurchaser($message, $purchaserProfile);
 
         return response(['status' => 'success']);
     }

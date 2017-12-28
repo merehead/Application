@@ -127,7 +127,7 @@
                              {{$booking->hours}}h /
                             </span>
                                             <span style=" font-weight: 900;color:#80cb2d;">
-                             £{{($sendTo == 'carer')? $booking->carer_price : $booking->purchaser_price}}
+                             £{{($sendTo == 'carer')? number_format($booking->carer_price,2,'.',' ') : number_format($booking->purchaser_price,2,'.',' ')}}
                             </span>
                                         </p>
                                 </tr>

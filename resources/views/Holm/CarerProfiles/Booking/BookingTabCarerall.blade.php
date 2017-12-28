@@ -268,6 +268,7 @@
             }
             hideSpinner();
         });
+
     });
 
     $('#moreBtnNewBookings').on('click', function(e){
