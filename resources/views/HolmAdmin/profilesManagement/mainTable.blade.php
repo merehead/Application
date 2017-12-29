@@ -6,7 +6,6 @@
                   <span class="td-title td-title--mint">
                   user
                   </span>
-
             </td>
             <td class="ordninary-td">
                   <span class="td-title td-title--dark-mint ">
@@ -59,7 +58,9 @@
 
         <tbody>
         @foreach($userList as $item)
-            @include(config('settings.theme').'.profilesManagement.mainTableRow')
+            <?php try{ ?>
+                @include(config('settings.theme').'.profilesManagement.mainTableRow')
+            <?php } catch(Exception $e){ echo 'Caught exception: ';   }?>
         @endforeach
         </tbody>
     </table>

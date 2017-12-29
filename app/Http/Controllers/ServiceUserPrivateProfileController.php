@@ -36,7 +36,6 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
     public function index($serviceUserProfile)
     {
 
-
         $this->template = config('settings.frontTheme') . '.templates.serviceUserPrivateProfileTemplate';
         $this->title = 'Holm Care';
 
@@ -704,6 +703,7 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
             if (isset($input[ 'dementia_detail'                         ])) $serviceUsersProfile-> dementia_detail                         = $input[ 'dementia_detail'                         ];else $serviceUsersProfile->dementia_detail =null;
             if (isset($input[ 'preferences_of_food_requirements'        ])) $serviceUsersProfile-> preferences_of_food_requirements        = $input[ 'preferences_of_food_requirements'        ];else $serviceUsersProfile->preferences_of_food_requirements =null;
             if (isset($input[ 'long_term_conditions'                    ])) $serviceUsersProfile->long_term_conditions        = $input[ 'long_term_conditions'        ];else $serviceUsersProfile->long_term_conditions =null;
+            if (isset($input[ 'conditions_detail'                    ])) $serviceUsersProfile->conditions_detail        = $input[ 'conditions_detail'        ];else $serviceUsersProfile->conditions_detail =null;
 
 
 
