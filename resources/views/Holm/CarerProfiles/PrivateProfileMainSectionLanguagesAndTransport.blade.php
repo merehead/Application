@@ -98,7 +98,8 @@
                 null,['class'=>'profileField__select profileField__select--greyBg','disabled','data-edit'=>'false',
                 'id'=>'driving_license'])!!}
             </div>
-            <div class="profileField hiding_profile profileField--full-width"
+
+            <div class="profileField hiding_profile profileField--full-width driving-license-togglable"
                     {!!  ($carerProfile->driving_licence == 'No' || is_null($carerProfile->driving_licence) )? 'style="display:none"' : ''!!}>
                 <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ">Car for Work</span>
                 </h2>
@@ -121,7 +122,7 @@
                 </div>
             @endif
         </div>
-        <div class="profileField hiding_profile profileField-mr"
+        <div class="profileField hiding_profile profileField-mr driving-license-togglable"
                 {!!  ($carerProfile->driving_licence == 'No' || is_null($carerProfile->driving_licence) )? 'style="display:none"' : ''!!}>
             <div class="profileField profileField--full-width">
                 <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ">UK\EEA Driving licence photo</span></h2>
@@ -140,7 +141,7 @@
                 </div>
 
             </div>
-            <div class="profileField profileField--full-width">
+            <div class="profileField profileField--full-width driving-license-togglable">
                 <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ">UK\EEA Driving licence Number</span></h2>
                 {!! Form::text('DBS_number',null,['class'=>'profileField__input profileField__input--greyBg','placeholder'=>'Driving licence number','readonly','data-edit'=>'false']) !!}
                 {{--<input type="text" class="profileField__input profileField__input--greyBg" noPlaceholder="UK\EEA Driving licence Number">--}}
@@ -149,7 +150,7 @@
                 <h2 class="profileField__title ordinaryTitle"><span class="ordinaryTitle__text ">Valid until</span></h2>
 
                 @if($carerProfile->driver_licence_valid_until === "01/01/1970")
-                    <input name="driver_licence_valid_until" id="datepicker_driver_licence" class="profileField__input"
+                    <input name="driver_licence_valid_until" id="datepicker_driver_licence" class="profileField__input driving-license-togglable"
                            noPlaceholder="Valid until date" type="text">
                 @else
                     {!! Form::text('driver_licence_valid_until',null,['id'=>'datepicker_driver_licence','class'=>'profileField__input','placeholder'=>'Valid until date']) !!}
