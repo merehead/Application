@@ -15,11 +15,7 @@
                 <a href="{{route('CarerRegistration')}}" class="who-you-are__item">
                     A Care Worker?
                 </a>
-                <a href="{{route('PurchaserRegistration')}}" class="who-you-are__item"
-                   @if(env('APP_ENV') == 'production')
-                    data-toggle="modal" data-target="#PurchaserMessage"
-                   @endif
-                >
+                <a href="{{route('PurchaserRegistration')}}" class="who-you-are__item">
                     Buying Care?
                 </a>
             </div>
@@ -137,10 +133,9 @@
         <div class="who-you-are">
             <div class="who-you-are__box">
                 <span>
-                    <p>Sorry.</p>
-                    <p>Our service is not yet available. Please use our <a href="/contact">contact form</a>
-                        and we will let you know when you can register.
-                    </p>
+                    <p>Please note:</p>
+                    <p>We are not yet taking booking for carers.</p>
+                    <p>We will contact all registered users when we are open.</p>
                     <p>Best wishes</p>
                     <p>The Holm Team</p>
                 </span>
@@ -166,5 +161,4 @@
         </div>
     </div>
 </div>
-
 

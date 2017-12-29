@@ -13,6 +13,7 @@
 @yield('modals')
 
 <script>
+
     $('.footerSocial a, .headerSocial a').click(function(e) {
         e.preventDefault();
         var href = $(this).attr('href');
