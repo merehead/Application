@@ -170,7 +170,17 @@
         var quote = $(this).find('.people_quote').text().trim()
         $('#testimonialSlider__item p').text(quote)
     })*/
-
+    $(function () {
+        $("#datepicker_date_sertificate").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            showAnim: "slideDown",
+            minDate: "-120Y",
+            maxDate: "0",
+            yearRange: "-120:+0"
+        });
+    });
 </script>
 
 </body>
