@@ -109,9 +109,8 @@
                 null,$atrr) !!}
             </div>
 
-            @if(($carerProfile->driving_licence == 'No' || is_null($carerProfile->driving_licence)))
-            @else
-                <div class="profileField hiding_profile profileField--full-width driving-license-togglable-secondary"
+
+                <div id="sss" class="profileField hiding_profile profileField--full-width driving-license-togglable-secondary"
                         {!!  ($carerProfile->driving_licence == 'No' || is_null($carerProfile->driving_licence) )? 'style="display:none"' : ''!!}>
                     <h2 class="profileField__title ordinaryTitle"><span
                                 class="ordinaryTitle__text ">Transport clients</span></h2>
@@ -120,7 +119,7 @@
                     {!! Form::select('use_car',['Yes'=>'Can transport clients','No'=>'Can not transport clients'],
                     null,$atrr) !!}
                 </div>
-            @endif
+
         </div>
         <div class="profileField hiding_profile profileField-mr driving-license-togglable"
                 {!!  ($carerProfile->driving_licence == 'No' || is_null($carerProfile->driving_licence) )? 'style="display:none"' : ''!!}>
@@ -215,3 +214,15 @@
 </div>
 
 {{ Form::close() }}
+
+<script>
+    $('#type_car_work').on('change', function(){
+       if($('#type_car_work').val() == 'Yes'){
+           //$('#sss').show();
+           $("#sss").css("display", "block");
+       } else{
+           //$('#sss').hide();
+           $("#sss").css("display", "none");
+        }
+    });
+</script>
