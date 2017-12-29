@@ -116,11 +116,13 @@ function calculate_price() {
     });
 };
 
-function carerSearchAjax(){
-    // if(!is_admin) {
-    //     $('#findMessage').modal();
-    //     return false;
-    // }
+function carerSearchAjax(env = 'production') {
+    if (env == 'production'){
+      if (!is_admin) {
+        $('#findMessage').modal();
+        return false;
+      }
+    }
     var form = $('#carerSearchForm');
     var token = $(form).find('input[name=_token]').val();
     if($('#load-more').val()==0||$('#load-more').val()==undefined){

@@ -15,8 +15,11 @@
                 <a href="{{route('CarerRegistration')}}" class="who-you-are__item">
                     A Care Worker?
                 </a>
-                <a href="{{route('PurchaserRegistration')}}" class="who-you-are__item">
-                    {{--/*data-toggle="modal" data-target="#PurchaserMessage"*/--}}
+                <a href="{{route('PurchaserRegistration')}}" class="who-you-are__item"
+                   @if(env('APP_ENV') == 'production')
+                    data-toggle="modal" data-target="#PurchaserMessage"
+                   @endif
+                >
                     Buying Care?
                 </a>
             </div>

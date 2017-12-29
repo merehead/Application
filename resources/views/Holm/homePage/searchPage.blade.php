@@ -10,7 +10,6 @@
             maxDate: "+20Y",
             yearRange: "0:+10"
         });
-
     });
 </script>
 <section class="searchSection">
@@ -56,7 +55,7 @@
                                 <div class="checkBox_item">
 
                                     {!! Form::checkbox('typeCare['.$care->id.']', null,((isset($requestSearch['typeCare']))&&in_array($care->id,$requestSearch['typeCare'])? 1 : null),
-                                                array('class' => 'customCheckbox ','id'=>'typeCarebox'.$care->id,'onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
+                                                array('class' => 'customCheckbox ','id'=>'typeCarebox'.$care->id,'onclick'=>"$('#load-more').val(0);carerSearchAjax('".env('APP_ENV')."')")) !!}
                                     <label for="typeCarebox{{$care->id}}">{{$care->name}}</label>
                                 </div>
                             @endforeach
@@ -72,24 +71,24 @@
                         <div class="filterGroup__box filterGroup__box--active">
                             <div class="checkBox_item">
                                 {!! Form::checkbox('gender[Male]', null,((isset($requestSearch['gender']))&&in_array('Male',$requestSearch['gender'])? 1 : null),
-                                                array('class' => 'customCheckbox ','id'=>'boxgender1','onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
+                                                array('class' => 'customCheckbox ','id'=>'boxgender1','onclick'=>"$('#load-more').val(0);carerSearchAjax('".env('APP_ENV')."')")) !!}
                                 <label for="boxgender1">male</label>
                             </div>
                             <div class="checkBox_item">
 
                                 {!! Form::checkbox('gender[Female]', null,((isset($requestSearch['gender']))&&in_array('Female',$requestSearch['gender'])? 1 : null),
-                                                array('class' => 'customCheckbox ','id'=>'boxgender2','onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
+                                                array('class' => 'customCheckbox ','id'=>'boxgender2','onclick'=>"$('#load-more').val(0);carerSearchAjax('".env('APP_ENV')."')")) !!}
                                 <label for="boxgender2">female</label>
                             </div>
                             <div class="checkBox_item">
 
                                 {!! Form::checkbox('have_car', null,((isset($requestSearch['have_car']))? 1 : null),
-                                               array('class' => 'customCheckbox ','id'=>'have_car','onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
+                                               array('class' => 'customCheckbox ','id'=>'have_car','onclick'=>"$('#load-more').val(0);carerSearchAjax('".env('APP_ENV')."')")) !!}
                                 <label for="have_car">HAS OWN TRANSPORT</label>
                             </div>
                             <div class="checkBox_item">
                                 {!! Form::checkbox('work_with_pets', null,((isset($requestSearch['work_with_pets']))? 1 : null),
-                                               array('class' => 'customCheckbox ','id'=>'work_with_pets','onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
+                                               array('class' => 'customCheckbox ','id'=>'work_with_pets','onclick'=>"$('#load-more').val(0);carerSearchAjax('".env('APP_ENV')."')")) !!}
                                 <label for="work_with_pets">WORKS WITH PETS</label>
                             </div>
                         </div>
@@ -106,7 +105,7 @@
                                 @foreach($languages as $lang)
                                     <div class="checkBox_item">
                                         {!! Form::checkbox('language['.$lang->id.']', null,((isset($requestSearch['language']))&&in_array($lang->id,$requestSearch['language'])? 1 : null),
-                                               array('class' => 'customCheckbox ','id'=>'languagebox'.$lang->id,'onclick'=>"$('#load-more').val(0);carerSearchAjax()")) !!}
+                                               array('class' => 'customCheckbox ','id'=>'languagebox'.$lang->id,'onclick'=>"$('#load-more').val(0);carerSearchAjax('".env('APP_ENV')."')")) !!}
 
                                         <label for="languagebox{{$lang->id}}">{{$lang->carer_language}} </label>
                                     </div>
@@ -121,15 +120,15 @@
                     <a href="#" class="sortLinkXs">sort by <span><i class="fa fa-angle-down"></i></span></a>
                     <div class="sortFilters hiddenSort hiddenSort--visible">
                         <div class="sortFilters__item">
-                            {!! Form::text('postCode',(isset($requestSearch['postCode'])?$requestSearch['postCode']:''),['class'=>'sortField disable','placeholder'=>'POST CODE','maxlength'=>16,'onkeydown'=>"if(event.keyCode==13){carerSearchAjax();}"]) !!}
+                            {!! Form::text('postCode',(isset($requestSearch['postCode'])?$requestSearch['postCode']:''),['class'=>'sortField disable','placeholder'=>'POST CODE','maxlength'=>16,'onkeydown'=>"if(event.keyCode==13){carerSearchAjax('".env('APP_ENV')."');}"]) !!}
                             <span class="fieldIco"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
                         </div>
                         <div class="sortFilters__item">
-                            <input type="text" name="findDate" onchange="carerSearchAjax();" class="sortField datepicker" placeholder="DATE">
+                            <input type="text" name="findDate" onchange="carerSearchAjax({{env('APP_ENV')}});" class="sortField datepicker" placeholder="DATE">
                             <span class="fieldIco"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                         </div>
                         <div class="sortFilters__item">
-                            {!! Form::select('typeService',[''=>'TYPE OF SERVICE','1'=>'SINGLE / REGULAR VISITS','2'=>'LIVE IN CARE','3'=>'RESPITE CARE'],null,['id'=>'typeService','class'=>'formSelect','onchange'=>"$('#load-more').val(0);carerSearchAjax()"]) !!}
+                            {!! Form::select('typeService',[''=>'TYPE OF SERVICE','1'=>'SINGLE / REGULAR VISITS','2'=>'LIVE IN CARE','3'=>'RESPITE CARE'],null,['id'=>'typeService','class'=>'formSelect','onchange'=>"$('#load-more').val(0);carerSearchAjax('".env('APP_ENV')."')"]) !!}
                         </div>
                     </div>
                 </div>
@@ -172,69 +171,89 @@
                          </h3>
                     </div>
                 </div>
-                <div class="carer-result">
-                @foreach($carerResult as $carerProfile)
-                    <div class="result">
-                        <a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}" class="profilePhoto profilePhoto2">
-                            <img id="profile_photo" class="set_preview_profile_photo"
-                                 @if (file_exists(public_path('img/profile_photos/' . $carerProfile->id . '.png')))
-                                   src="img/profile_photos/{{$carerProfile->id}}.png"
-                                 @else
-                                 src="/img/no_photo.png"
-                                 @endif />
+                @if(env('APP_ENV') == 'production')
+                <div class="card error-text result">
+                    <div class="card-block">
+                        {{--<p class="text-uppercase">Sorry</p>--}}
+                        {{--<p class="text-left">--}}
+                        {{--No Carers meet your exact criteria.--}}
+                        {{--Please try again by deselecting the least important requirements,--}}
+                        {{--or <a href="{{route('ContactPage')}}">contact us</a> if you need further help--}}
+                        {{--</p>--}}
+                        <p>Hi!</p>
+                        <p>We’re sorry, but we’re not yet currently taking bookings.
+                            You’ll be able to see the best professional carers on this page once we are ready.
+                            Please feel free to <a href="/contact">contact us</a> and we’ll let you know when you can find a great carer.
+                        </p>
+                        <p>See you soon!</p>
+                        <p>The Holm Team</p>
+                    </div>
+                </div>
+                @else
+                    <div class="carer-result">
+                        @foreach($carerResult as $carerProfile)
+                            <div class="result">
+                                <a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}" class="profilePhoto profilePhoto2">
+                                    <img id="profile_photo" class="set_preview_profile_photo"
+                                         @if (file_exists(public_path('img/profile_photos/' . $carerProfile->id . '.png')))
+                                         src="img/profile_photos/{{$carerProfile->id}}.png"
+                                         @else
+                                         src="/img/no_photo.png"
+                                            @endif />
 
-                        </a>
-                        <div class="result__info">
-                            <div class="justifyContainer">
-                                <h2 class="profileName profileName--biger"><a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}"> {{$carerProfile->first_name}} {{mb_substr($carerProfile->family_name,0,1)}}.</a></h2>
-                                <p class="hourPrice hourPrice">
+                                </a>
+                                <div class="result__info">
+                                    <div class="justifyContainer">
+                                        <h2 class="profileName profileName--biger"><a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}"> {{$carerProfile->first_name}} {{mb_substr($carerProfile->family_name,0,1)}}.</a></h2>
+                                        <p class="hourPrice hourPrice">
                                      <span class="hourPrice__price">From £  {{Auth::check() && Auth::user()->id == $carerProfile->id ?
                      \App\CarersProfile::find($carerProfile->id)->first()->wage :
                      \App\CarersProfile::find($carerProfile->id)->first()->price}}</span>
-                                    <span class="hourPrice__timing">/hour</span>
-                                </p>
-                            </div>
-                            <p class="info-p">
-                                {{$carerProfile->sentence_yourself}}
-                            </p>
-                            <div class="justifyContainer justifyContainer--smColumn ">
-                                <div class="result__city">
-                                    <p class="location">
+                                            <span class="hourPrice__timing">/hour</span>
+                                        </p>
+                                    </div>
+                                    <p class="info-p">
+                                        {{$carerProfile->sentence_yourself}}
+                                    </p>
+                                    <div class="justifyContainer justifyContainer--smColumn ">
+                                        <div class="result__city">
+                                            <p class="location">
                                     <span class="location__value location__value--autoWidth">
                                        {{$carerProfile->town}}
                                     </span>
-                                    </p>
-                                    <span class="subLabel">city</span>
-                                </div>
-                                @if(isset($carerProfile->distance))
-                                <div class="result__distance">
-                                    <p class="location">
+                                            </p>
+                                            <span class="subLabel">city</span>
+                                        </div>
+                                        @if(isset($carerProfile->distance))
+                                            <div class="result__distance">
+                                                <p class="location">
                                     <span class="location__value location__value--autoWidth">
                                        {{$carerProfile->distance}}
                                     </span>
-                                    </p>
-                                    <span class="subLabel">distance</span>
-                                </div>
-                                @endif
-                                <div class="result__rate">
-                                    <div class="profileRating ">
-                                        @for($i = 1; $i <= 5; $i++)
-                                            <span class="profileRating__item {{$carerProfile->avg_total >= $i ? 'active' : ''}}"><i class="fa fa-heart"></i></span>
-                                        @endfor
-                                    </div>
-                                    <span class="subLabel">({{$carerProfile->creview*1}} reviews)</span>
-                                </div>
+                                                </p>
+                                                <span class="subLabel">distance</span>
+                                            </div>
+                                        @endif
+                                        <div class="result__rate">
+                                            <div class="profileRating ">
+                                                @for($i = 1; $i <= 5; $i++)
+                                                    <span class="profileRating__item {{$carerProfile->avg_total >= $i ? 'active' : ''}}"><i class="fa fa-heart"></i></span>
+                                                @endfor
+                                            </div>
+                                            <span class="subLabel">({{$carerProfile->creview*1}} reviews)</span>
+                                        </div>
 
-                                <div class="bookBtn">
-                                    <a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}" class="bookBtn__item bookBtn__item--smaller centeredLink">
-                                        view carer
-                                    </a>
+                                        <div class="bookBtn">
+                                            <a href="{{route('carerPublicProfile',['user_id'=>$carerProfile->id])}}" class="bookBtn__item bookBtn__item--smaller centeredLink">
+                                                view carer
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
-                </div>
+                @endif
                 <div class="loader" id="loader-search" style="display: none"></div>
                 {{--@for ($pages = 1; $pages <= ceil($carerResultCount/$perPage); $pages++)--}}
                     {{--<a class="sortLink__item {{($pages==$page)?'active':''}} " href="/search/page/{{ $pages }}">--}}

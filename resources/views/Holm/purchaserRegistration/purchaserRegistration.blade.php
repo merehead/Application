@@ -4,4 +4,3 @@
         {!! $step !!}
     </div>
 </section>
-
