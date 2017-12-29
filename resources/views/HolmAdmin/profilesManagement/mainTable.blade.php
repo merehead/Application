@@ -59,7 +59,9 @@
         <tbody>
 
         @foreach($userList as $item)
+            <?php try{ ?>
             @include(config('settings.theme').'.profilesManagement.mainTableRow')
+            <?php } catch(Exception $e){echo 'exception caught';}?>
         @endforeach
         </tbody>
     </table>

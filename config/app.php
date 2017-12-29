@@ -182,8 +182,6 @@ return [
 
         App\Providers\PaymentToolsServiceProvider::class,
         App\Providers\SmsToolsServiceProvider::class,
-
-        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
@@ -238,8 +236,6 @@ return [
         'Plupload' => JildertMiedema\LaravelPlupload\Facades\Plupload::class,
         'PaymentTools' => \App\Helpers\Facades\PaymentTools::class,
         'SmsTools' => \App\Helpers\Facades\SmsTools::class,
-
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
