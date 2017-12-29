@@ -10,12 +10,12 @@
 
         </p>
 
-        <p class="info-p info-p--roboto">- DBS certificate;</p>
-        <p class="info-p info-p--roboto">- training certificates;</p>
-        <p class="info-p info-p--roboto">- proof of ID (eg. Passport/Driving Licence);</p>
-        <p class="info-p info-p--roboto">- driving Licence;</p>
-        <p class="info-p info-p--roboto">- car Insurance;</p>
-        <p class="info-p info-p--roboto">- your CV.</p>
+        <p class="info-p info-p--roboto info-p--less-padding">- DBS certificate;</p>
+        <p class="info-p info-p--roboto info-p--less-padding">- training certificates;</p>
+        <p class="info-p info-p--roboto info-p--less-padding">- proof of ID (eg. Passport/Driving Licence);</p>
+        <p class="info-p info-p--roboto info-p--less-padding">- driving Licence;</p>
+        <p class="info-p info-p--roboto info-p--less-padding">- car Insurance;</p>
+        <p class="info-p info-p--roboto info-p--less-padding">- your CV.</p>
 
         <p class="info-p info-p--roboto">
         You do this by clicking on your name at the top right corner, going to your personal profile, pressing edit for the relevant section, uploading the image, and pressing save
