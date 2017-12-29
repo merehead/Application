@@ -52,13 +52,14 @@
             }
             @endif
 
+            //Alexx show-hide driving data depending on driving license availability
             $('#driving_license').on('change', function(){
                 if($('#driving_license').val()=="No"){
                     $('.driving-license-togglable').hide();
-                    console.log('no');
+                    $('.driving-license-togglable-secondary').hide();
+                    $('#type_car_work').val('');
                 } else{
                     $('.driving-license-togglable').show();
-                    console.log('yes');
                 }
             });
         });

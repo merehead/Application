@@ -111,7 +111,7 @@
 
             @if(($carerProfile->driving_licence == 'No' || is_null($carerProfile->driving_licence)))
             @else
-                <div class="profileField hiding_profile profileField--full-width"
+                <div class="profileField hiding_profile profileField--full-width driving-license-togglable-secondary"
                         {!!  ($carerProfile->driving_licence == 'No' || is_null($carerProfile->driving_licence) )? 'style="display:none"' : ''!!}>
                     <h2 class="profileField__title ordinaryTitle"><span
                                 class="ordinaryTitle__text ">Transport clients</span></h2>
@@ -162,7 +162,7 @@
 
 
 
-        <div class="profileField car-block hiding_profile_car_insurance profileField-mr "
+        <div class="profileField car-block hiding_profile_car_insurance profileField-mr driving-license-togglable-secondary"
                 {!!  ($carerProfile->driving_licence == 'No' || is_null($carerProfile->driving_licence) ||
                  $carerProfile->have_car == 'No' || is_null($carerProfile->have_car) )? 'style="display:none"' : ''!!}>
             <div class="profileField profileField--full-width">
