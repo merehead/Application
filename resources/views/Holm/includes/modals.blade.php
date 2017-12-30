@@ -110,9 +110,8 @@
             <div class="who-you-are__box">
                 <span>
                     <p>Hi!</p>
-                    <p>We’re sorry, but we’re not yet currently taking bookings.
-                    You’ll be able to see the best professional carers on this page once we are ready.
-                    Please feel free to <a href="/contact">contact us</a> and we’ll let you know when you can find a great carer.
+                    <p>
+                        Please note: We are not yet taking booking for carers. We will contact all registered users when we are open. You can register by pressing the sign up button at the top of the screen.
                     </p>
                     <p>See you soon!</p>
                     <p>The Holm Team</p>
