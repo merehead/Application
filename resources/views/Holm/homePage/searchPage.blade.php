@@ -151,6 +151,7 @@
                     </div>
                 </div>
 
+                @if(env('APP_ENV') != 'production')
                 <div class="card error-text result {{count($carerResult)>0 ||$carerResultArea?"nhide":""}}">
                     <div class="card-block">
                     <p class="text-uppercase">Sorry</p>
@@ -163,6 +164,7 @@
                         </p>
                     </div>
                 </div>
+                @endif
                 <div class="card error-text result {{(!$carerResultArea)?"nhide":""}}">
                     <div class="card-block">
                     <p class="text-uppercase">Sorry</p>
