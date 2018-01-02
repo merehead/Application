@@ -33,6 +33,10 @@ class ServiceUsersProfilePolicy
                 //If Carer has bookings from ServiceUser
                 return $user->hasBookingsWith($profile);
                 break;
+
+            case 4:
+                //User is Admin
+                return true;
         }
     }
 }
