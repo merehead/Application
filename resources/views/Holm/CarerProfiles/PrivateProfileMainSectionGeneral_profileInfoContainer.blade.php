@@ -4,7 +4,7 @@
           <div class="formField">
             </div>
 
-            <input disabled class="pickfiles_profile_photo--change" accept=".jpg,.jpeg,.png" type="file" />
+            <input disabled class="pickfiles_profile_photo--change"  />
             <img id="profile_photo" alt="avatar"
               @if (file_exists(public_path('/img/profile_photos/' . $carerProfile->id . '.png')))
                 src="/img/profile_photos/{{$carerProfile->id}}.png"
