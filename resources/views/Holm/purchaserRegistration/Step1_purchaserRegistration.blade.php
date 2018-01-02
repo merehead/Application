@@ -156,4 +156,14 @@
 </div>
 
 
+@if(env('APP_ENV') == 'production')
+    <script type="text/javascript">
+
+        $(window).on('load',function(){
+            $('#PurchaserMessage').modal('show');
+        });
+    </script>
+@endif
+
+
 

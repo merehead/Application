@@ -1,3 +1,4 @@
+@if(env('APP_ENV') != 'production')
 <div class="card error-text result {{count($carerResult)>0?"nhide":""}}">
     <div class="card-block">
         <p class="text-uppercase">Sorry</p>
@@ -15,6 +16,7 @@
         {{--<p>The Holm Team</p>--}}
     </div>
 </div>
+@endif
 
 @foreach($carerResult as $carerProfile)
     <div class="result">

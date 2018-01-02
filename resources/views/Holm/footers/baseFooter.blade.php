@@ -103,7 +103,7 @@
         </div>
     </div>
 </div>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.0/masonry.pkgd.min.js"></script>
 <script src="{{asset('js/jquery-ui.min.js')}}"></script>
 <script src="{{asset('js/owl.carousel.min.js')}}" defer ></script>
