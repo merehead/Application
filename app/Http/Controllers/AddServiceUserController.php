@@ -31,7 +31,6 @@ class AddServiceUserController extends FrontController
         $serviceUsersProfile->save();
 
         return redirect('/service-registration/'.$serviceUsersProfile->id);
-
     }
 
 

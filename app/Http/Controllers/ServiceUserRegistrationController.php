@@ -42,7 +42,6 @@ class ServiceUserRegistrationController extends FrontController
             return redirect('/');
 
 
-
         if ($serviceUserProfile->registration_status == 'completed')
             return redirect(route('ServiceUserSetting',['serviceUserProfile'=>$serviceUserProfile->id]));
 
@@ -99,7 +98,6 @@ class ServiceUserRegistrationController extends FrontController
 
         $this->vars = array_add($this->vars,'activeStep',$this->serviceUserProfile->getActiveStep($serviceUserProfileId));
         $this->vars = array_add($this->vars,'activeSubStep',$this->serviceUserProfile->getActiveSubStep($serviceUserProfileId));
-
 
         if($this->serviceUserProfile->getNextStep($serviceUserProfileId)=='Step4_1_purchaserRegistration'
         || $this->serviceUserProfile->getNextStep($serviceUserProfileId)=='Step4_1_2_purchaserRegistration') {

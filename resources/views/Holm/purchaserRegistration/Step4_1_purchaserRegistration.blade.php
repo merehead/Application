@@ -109,7 +109,11 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                             <div class="inputWrap">
                                 <?php
                                 $style = 'formInput personalForm__input ';
-                                $style.=($purchasersProfile->purchasing_care_for == 'Myself')? " digitFilter07": ' digitFilter0';
+                                if(isset($purchasersProfile)){
+                                    $style.=($purchasersProfile->purchasing_care_for == 'Myself')? " digitFilter07": ' digitFilter0';
+                                } elseif(isset($serviceUserProfile)){//Fix HOLM-1215
+                                    $style.=($serviceUserProfile->care_for == 'Myself')? " digitFilter07": ' digitFilter0';
+                                }
                                 ?>
                                 {!! Form::text('mobile_number',null,['class'=> $style,'placeholder'=>'Phone number','maxlength'=>"11"]) !!}
                             </div>
