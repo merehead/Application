@@ -104,6 +104,23 @@
                             </form>
                         @endif
                     @endif
+                    <!-- IF Rejected has been clicked show recover -->
+                    @if($item->profileStatus->name == 'Rejected')
+                        @if ($item instanceof \App\CarersProfile)
+                            <a href="{{ route('user.update',$item['id']) }}" class="actionsBtn actionsBtn--reject"
+                               onclick="event.preventDefault();document.getElementById('recover-form{{$item['id']}}').submit();">
+                                recover
+                            </a>
+                            <form id="recover-form{{$item['id']}}" action="{{ route('user.update',$item['id']) }}"
+                                  method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="_method" value="put"/>
+                                <input type="hidden" name="action" value="recover"/>
+                                <input type="hidden" name="user_type" value={{$item->user_type}} />
+                            </form>
+                        @endif
+                    @endif
+                    <!-- / IF Rejected has been clicked show recover -->
                 </td>
                 <td>
                     @if($item->user_type != 'service')

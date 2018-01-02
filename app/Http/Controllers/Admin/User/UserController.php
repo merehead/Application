@@ -162,6 +162,8 @@ class UserController extends AdminController
                 case 'block':
                     $profile->profiles_status_id = 5;
                     break;
+                case 'recover':
+                    $profile->profiles_status_id = 1;
             }
         } else {
             dd($request->all());
