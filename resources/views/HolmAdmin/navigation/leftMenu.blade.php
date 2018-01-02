@@ -76,7 +76,7 @@
                   <i class="fa fa-money" aria-hidden="true"></i>
                 </span>
                 <span class="adminNav__text">
-                  Payouts to purchasers
+                  Payments  to purchasers
                 </span>
             </a>
         </li>
