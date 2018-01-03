@@ -12,8 +12,8 @@
             <div class="filterBox">
                 <div class="formField formField--fix-biger">
                     <div class="fieldWrap">
-
-                        {!! Form::text('userName',null,['class'=>'formItem formItem--input formItem--search','maxlength'=>'60','placeholder'=>'Search name']) !!}
+                        <input class="formItem formItem--input formItem--search" type="text" name="userName" placeholder="Search name" value="@if(isset($_GET["userName"])){{$_GET["userName"]}}@endif">
+                        {{--{!! Form::text('userName',null,['class'=>'formItem formItem--input formItem--search','maxlength'=>'60','placeholder'=>'Search name']) !!}--}}
                     </div>
                 </div>
             </div>

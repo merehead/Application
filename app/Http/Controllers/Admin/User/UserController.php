@@ -49,7 +49,7 @@ class UserController extends AdminController
 
         $userList = $this->siteUsers->getUserList($profileTypeFilter,$statusTypeFilter,$userNameFilter);
         $page = $request->get('page',1);
-        $perPage = 9;
+        $perPage = 1;
         $start = ($page - 1) * $perPage;
         if($page==1) $start = 0;
         $count = count($userList);
@@ -64,6 +64,7 @@ class UserController extends AdminController
         $this->vars = array_add($this->vars, 'profileType', $profileType);
         $this->vars = array_add($this->vars, 'profileTypeFilter', $profileTypeFilter);
         $this->vars = array_add($this->vars, 'statusTypeFilter', $statusTypeFilter);
+        $this->vars = array_add($this->vars, 'userName', $userNameFilter);
         $this->vars = array_add($this->vars, 'nextPage', $nextPage);
         $this->vars = array_add($this->vars, 'previousPage', $previousPage);
         $this->vars = array_add($this->vars, 'count', $count);
