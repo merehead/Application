@@ -18,8 +18,7 @@ class ProfilePhotosController extends Controller
         $image = new \Imagick('img/profile_photos/'.$carerId.'.png');
         $this->autoRotateImage($image);
         $image->writeImage('img/profile_photos/'.$carerId.'.png');
-        //return response(['status' => 'success']);
-
+        return response(['status' => 'success']);
     }
 
     public function uploadServiceUserProfilePhoto(Request $request){
