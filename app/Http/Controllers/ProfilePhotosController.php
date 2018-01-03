@@ -9,16 +9,17 @@ use Auth;
 
 class ProfilePhotosController extends Controller
 {
-    public function uploadUserProfilePhoto(Request $request){
-        $user = Auth::user();
+    public function uploadUserProfilePhoto(Request $request, $carerId){
+        //$user = Auth::user();
 //        $user = User::find(1);
         $base64 = $request->image;
         $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64));
-        file_put_contents('img/profile_photos/'.$user->id.'.png', $data);
-        $image = new \Imagick('img/profile_photos/'.$user->id.'.png');
+        file_put_contents('img/profile_photos/'.$carerId.'.png', $data);
+        $image = new \Imagick('img/profile_photos/'.$carerId.'.png');
         $this->autoRotateImage($image);
-        $image->writeImage('img/profile_photos/'.$user->id.'.png');
-        return response(['status' => 'success']);
+        $image->writeImage('img/profile_photos/'.$carerId.'.png');
+        //return response(['status' => 'success']);
+
     }
 
     public function uploadServiceUserProfilePhoto(Request $request){

@@ -2462,14 +2462,14 @@ $(document).ready(function () {
               $(idLoadFiles).find('.addInfo__input').attr("disabled", true);
               $(idLoadFiles).find('.profilePhoto__ico').attr("style", 'display: none');
               // $('input[name="postcode"],input[name="address_line1"]').autocomplete('disable');
-
+                // Stores/updates carer photo
               if (arrFilesProfilePhoto.length > 0) {
-                  var url = '/profile-photo'
+                  var url = '/profile-photo/'+carerId
                   axios.post(
                       url,
                       arrFilesProfilePhoto[0]
                   ).then(function (response) {
-                      // console.log(response)
+                      console.log(response);
                   })
               }
               if (ProfilePhotoSeviceUser.length > 0) {

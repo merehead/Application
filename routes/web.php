@@ -106,7 +106,7 @@ Route::post('/appointments/{appointment}/completed', 'Bookings\AppointmentsContr
 Route::post('/document/upload/{user_id?}','DocumentsController@upload')->name('UploadDocument');
 Route::get('/document/{document}/download','DocumentsController@download')->name('DownloadDocument');
 Route::get('/documents/{user_id?}','DocumentsController@GetDocuments')->name('GetDocuments');
-Route::post('/profile-photo','ProfilePhotosController@uploadUserProfilePhoto');
+Route::post('/profile-photo/{carerId}','ProfilePhotosController@uploadUserProfilePhoto');
 Route::post('/service-user-profile-photo','ProfilePhotosController@uploadServiceUserProfilePhoto');
 
 Route::post('/credit_card','CreditCardsController@store')->name('CreditCards');
