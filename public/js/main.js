@@ -2473,7 +2473,7 @@ $(document).ready(function () {
                   })
               }
               if (ProfilePhotoSeviceUser.length > 0) {
-                      url = '/service-user-profile-photo'
+                      url = '/service-user-profile-photo/'+carerId
                   axios.post(
                       url,
                       ProfilePhotoSeviceUser[0]

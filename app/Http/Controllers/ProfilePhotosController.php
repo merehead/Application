@@ -21,14 +21,14 @@ class ProfilePhotosController extends Controller
         return response(['status' => 'success']);
     }
 
-    public function uploadServiceUserProfilePhoto(Request $request){
-        $serviceUser = ServiceUsersProfile::find($request->service_user_id);
+    public function uploadServiceUserProfilePhoto(Request $request, $serviceUserId){
+
         $base64 = $request->image;
         $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64));
-        file_put_contents('img/service_user_profile_photos/'.$serviceUser->id.'.png', $data);
-        $image = new \Imagick('img/service_user_profile_photos/'.$serviceUser->id.'.png');
+        file_put_contents('img/service_user_profile_photos/'.$serviceUserId.'.png', $data);
+        $image = new \Imagick('img/service_user_profile_photos/'.$serviceUserId.'.png');
         $this->autoRotateImage($image);
-        $image->writeImage('img/service_user_profile_photos/'.$serviceUser->id.'.png');
+        $image->writeImage('img/service_user_profile_photos/'.$serviceUserId.'.png');
         return response(['status' => 'success']);
     }
 
