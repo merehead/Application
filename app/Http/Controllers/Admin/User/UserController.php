@@ -49,7 +49,7 @@ class UserController extends AdminController
 
         $userList = $this->siteUsers->getUserList($profileTypeFilter,$statusTypeFilter,$userNameFilter);
         $page = $request->get('page',1);
-        $perPage = 1;
+        $perPage = 9;
         $start = ($page - 1) * $perPage;
         if($page==1) $start = 0;
         $count = count($userList);
