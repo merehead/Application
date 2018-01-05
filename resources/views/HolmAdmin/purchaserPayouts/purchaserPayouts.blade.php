@@ -3,7 +3,7 @@
           <span class="categoryTitle__ico">
             <i class="fa fa-money" aria-hidden="true"></i>
           </span>
-        payments to purshasers
+        PAYMENTS TO PURCHASERS
     </h2>
     <div class="panelHead">
         {!! Form::open(['method'=>'GET','route'=>'PayoutsToPurchasers']) !!}
