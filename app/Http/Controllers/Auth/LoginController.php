@@ -109,12 +109,12 @@ class LoginController extends Controller
                 $serviceUserProfile = ServiceUsersProfile::where('purchaser_id', $purchaserId)->
                     orderBy('id', 'desc')->first();
 
-                if($purchaserProfile->registration_status == 'new'){
+                /*if($purchaserProfile->registration_status == 'new'){
                     return '/purchaser-registration';
                 }
-                elseif($serviceUserProfile->registration_status == 'new') {
+                elseif($serviceUserProfile->registration_status == 'new') {*/
                     return '/service-registration/'.$serviceUserProfile->id;
-                }
+               /* }*/
             }
             case 3 : {
 

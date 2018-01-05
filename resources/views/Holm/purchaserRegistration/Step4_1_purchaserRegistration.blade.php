@@ -245,7 +245,6 @@ null,['class'=>'formSelect','placeholder'=>'Please select']) !!}
                     continue later
                 </a>--}}
             </div>
-
             <a href="next" class="registrationBtns__item"
                onclick="event.preventDefault();document.getElementById('step').submit();"
             >
