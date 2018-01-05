@@ -156,6 +156,13 @@
         </table>
     </td>
 
+    <td>
+        <div class="profStatus">
+                {{date("d-m-Y", strtotime($item->created_at))}}
+        </div>
+    </td>
+
+
 </tr>
 
 

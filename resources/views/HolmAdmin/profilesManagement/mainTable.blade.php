@@ -22,6 +22,11 @@
                     ACTIONS
                   </span>
             </td>
+            <td class="ordninary-td">
+                  <span class="td-title td-title--light-blue ">
+                    Date of sign up
+                  </span>
+            </td>
         </tr>
 
         <tr class="extra-tr">
@@ -43,6 +48,9 @@
                         <td>
                             <span class="extraTitle">completed hours</span>
                         </td>
+                        <td>
+
+                        </td>
                     </tr>
 
                 </table>
@@ -51,6 +59,7 @@
             <td></td>
             <td></td>
             <td></td>
+
         </tr>
 
 
