@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
+use Mockery\Exception;
 use Swift_TransportException;
 
 class PurchaserRegistrationController extends FrontController
@@ -27,7 +28,6 @@ class PurchaserRegistrationController extends FrontController
 
     public function index()
     {
-
         if (request()->has('ref')){
 
             $ref_code = $this->checkReferCode(request()->get('ref'));
@@ -50,11 +50,9 @@ class PurchaserRegistrationController extends FrontController
         $user = Auth::user();
 
 
-
-
         if (!$user) {
             if(request()->has('refer')){
-                $cookie = Cookie::make('PurchaserRegistratiol', 1,2);
+                $cookie = Cookie::make('PurchaserRegistration', 1,2);
                 return redirect()->route('session_timeout')->withCookie($cookie);
             }
             $step = view(config('settings.frontTheme').'.purchaserRegistration.Step1_purchaserRegistration')->with($this->vars)->render();
@@ -62,9 +60,7 @@ class PurchaserRegistrationController extends FrontController
             $this->vars = array_add($this->vars,'activeSubStep',0);
         } else {
 
-
             $purchasersProfile = PurchasersProfile::findOrFail($user->id);
-
 
             if ($purchasersProfile->registration_status == 'completed' && !$purchasersProfile->is_uncompleted_service_user) {
                 return redirect(route('purchaserSettings'));
@@ -75,6 +71,7 @@ class PurchaserRegistrationController extends FrontController
             $this->vars = array_add($this->vars, 'purchasersProfile', $purchasersProfile);
 
             if ($this->purchaserProfile->getNextStep() == 'Step4_purchaserRegistration') {
+
                 $this->vars = array_add($this->vars, 'user', $this->user);
             }
             if ($this->purchaserProfile->getNextStep() == 'Step4_1_purchaserRegistration') {

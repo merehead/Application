@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\CarersProfile;
 use App\Http\Controllers\Controller;
+use App\PurchasersProfile;
+use App\ServiceUsersProfile;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -99,7 +102,20 @@ class LoginController extends Controller
         $user = Auth::user();
 
         switch ($user->user_type_id) {
-            case 1 : return '/';
+            case 1: {
+                $purchaserProfile =  PurchasersProfile::findOrFail($user->id);
+                $purchaserId = $purchaserProfile->id;
+
+                $serviceUserProfile = ServiceUsersProfile::where('purchaser_id', $purchaserId)->
+                    orderBy('id', 'desc')->first();
+
+                if($purchaserProfile->registration_status == 'new'){
+                    return '/purchaser-registration';
+                }
+                elseif($serviceUserProfile->registration_status == 'new') {
+                    return '/service-registration/'.$serviceUserProfile->id;
+                }
+            }
             case 3 : {
 
                 $carerProfile =  CarersProfile::findOrFail($user->id);

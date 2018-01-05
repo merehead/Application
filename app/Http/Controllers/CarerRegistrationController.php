@@ -62,8 +62,6 @@ class CarerRegistrationController extends FrontController
 
         $user = Auth::user();
 
-        //dd('CarerRegistrationController index' , $user);
-
 
         if (!$user) {
 
@@ -76,15 +74,11 @@ class CarerRegistrationController extends FrontController
             $this->vars = array_add($this->vars, 'activeStep', 1);
         } else {
 
-            //dd($this->user, $this->carersProfile->getID(),$this->carersProfile->getNextStep());
             $carersProfile = CarersProfile::find($user->id);
 
             if (!$carersProfile) {
                 return redirect('/');
             }
-
-
-            //dd($carersProfile->registration_progress);
 
             if ($carersProfile->registration_status != 'new') {
                 return redirect('/carer-settings');
@@ -116,16 +110,12 @@ class CarerRegistrationController extends FrontController
                 $this->vars = array_add($this->vars, 'languages', $languages);
             }
 
-            /*            if ($this->carersProfile->getNextStep($stepback) == 'Step13_carerRegistration') {
-                            $languages = Language::all();
-                            $this->vars = array_add($this->vars, 'languages', $languages);
-                        }*/
 
             $this->vars = array_add($this->vars, 'activeStep', $this->carersProfile->getActiveStep($user->id));
 
             $step = view(config('settings.frontTheme') . '.carerRegistration.' . $this->carersProfile->getNextStep($stepback))->with($this->vars)->render();
         }
-        //dd($assistanceTypes);
+
 
         $this->vars = array_add($this->vars, 'step', $step);
 
