@@ -2367,8 +2367,7 @@ $(document).ready(function () {
         var token = $(form).find('input[name="_token"]').val();
         $('.error-booking').remove();
         var errorText = '<span class="help-block error-booking">\n' +
-            '             <strong>The field(s) can not be empty. \n' +
-            'Enter a value or select an option</strong>\n' +
+            '             <strong>This section has not been completed</strong>\n' +
             '          </span>';
         console.log(form.serialize());
         $.ajax({
