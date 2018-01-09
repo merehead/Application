@@ -20,14 +20,13 @@ class CarerWagesController extends AdminController
 
     public function index(CarersProfile $wages)
     {
-
         //$data = CarersProfile::with('CarerWages')->get();
         $model = $wages;
         $data = $model::with('CarerWages')->select('*')->where('profiles_status_id','=',2)->paginate(Config::get('settings.AdminUserPagination'));
 
         $this->vars['carers'] = $data;
         $this->content = view(config('settings.theme') . '.CarerWages')->with($this->vars)->render();
-
+        dd($data);
         return $this->renderOutput();
     }
 
@@ -42,6 +41,21 @@ class CarerWagesController extends AdminController
         $wages->save();
 
         return  new JsonResponse(['status'=>'ok']);
+
+    }
+
+    public function filterCarerWages($carerId, $filter){
+        if($filter == null) return;//Если фильтр не задан, не продолжаем
+        $data = CarerWages::where('profiles_status_id',2)->
+            where('id', $carerId)->
+            where(function ($q) use ($filter) {
+                $q->where('id', $filter)->orWhere('first_name', $filter)->orWhere('family_name', $filter);
+            })->toSql();
+        return $data;
+        if (Request::ajax()) {
+            return Response::json(View::make('carerWagesTableBody', array('data' => $data))->render());
+        }
+        return View::make('carerWagesTableBody', array('data' => $data));
 
     }
 }

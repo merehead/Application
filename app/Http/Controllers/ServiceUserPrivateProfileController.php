@@ -46,9 +46,6 @@ class ServiceUserPrivateProfileController extends FrontController implements Con
             }
             return redirect('/');
         } else {
-
-
-
             $serviceUsersProfile = ServiceUsersProfile::findOrFail($serviceUserProfile);
 
             $purchaser = PurchasersProfile::find($serviceUsersProfile->purchaser_id);

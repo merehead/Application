@@ -190,6 +190,9 @@ Route::group(['prefix' => 'admin','middleware'=> 'admin','namespace' => 'Admin']
     Route::get('/bonuses-purchasers', 'BonusController@getBonusesPurchaser')->name('BonusesPurchasers');
     Route::post('/payout-bonus/{bonus_id}', 'BonusController@payoutBonus');
     Route::post('/cancel-bonus/{bonus_id}', 'BonusController@cancelBonus');
+
+    //alexx
+    Route::get('/filterCarerWages/{carerId}/{filter}', 'CarerWagesController@filterCarerWages');
 });
 
 Route::get('/test_document_upload', function (){

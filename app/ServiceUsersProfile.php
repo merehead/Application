@@ -35,7 +35,7 @@ class ServiceUsersProfile extends Model
 
     public function ServiceUserConditions()
     {
-        return $this->belongsToMany('App\ServiceUserCondition', 'servuserprofile_servusercondition', 'service_user_profile_id', 'service_user_conditions_id');
+        return $this->belongsToMany('App\ServiceUserCondition', 'servUserProfile_servUserCondition', 'service_user_profile_id', 'service_user_conditions_id');
     }
     public function Languages()
     {

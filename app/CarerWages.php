@@ -13,4 +13,5 @@ class CarerWages extends Model
     {
         return $this->belongsToMany('App\CarersProfile', 'carers_profiles', 'id', 'carer_id');
     }
+
 }

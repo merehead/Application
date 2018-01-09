@@ -96,7 +96,8 @@
 
                 </thead>
 
-                <tbody>
+                <tbody id="carer-wages-table-body">
+
                 @foreach($carers as $carer)
 
                 <tr>
@@ -186,14 +187,22 @@
 
         });
         $("#search").keyup(function(){
-            _this = this;
+            var filter = $('#search').val();
+            var carerId = {{$carer->id}}
+            $.get( "/admin/filterCarerWages/"+carerId+'/'+filter, function( data ) {
+                console.log('success');
+                $('#carer-wages-table-body').html(data);
+            }).fail( function(xhr, textStatus, errorThrown) {
+                console.log(textStatus.getme);
+            });
 
+            /*_this = this;
             $.each($("#Carer-wages tbody tr"), function() {
                 if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1) {
                     $(this).hide();
                 } else {
                     $(this).show();
-                }});
+                }});*/
         });
 
         $('#print').click(function(e) {
