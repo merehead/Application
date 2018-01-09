@@ -47,7 +47,7 @@
                                 Card Number
                             </h2>
                             <div class="inputWrap">
-                                <input type="text" class="formInput" id="cardNumber" placeholder="4534 3333 3333 3333 3333">
+                                <input type="text" class="formInput" id="cardNumber" placeholder="4534 3333 3333 3333 3333" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="16">
                                 <span class="bookPayment__ico"><img src="{{asset("img/visa.png")}}" alt=""></span>
                                 <span style="right: 42px;" class="bookPayment__ico"><img src="{{asset("img/mc2.png")}}"
                                                                               alt=""></span>

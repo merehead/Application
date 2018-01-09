@@ -2402,7 +2402,7 @@ $(document).ready(function () {
                     console.debug(arr);
 
                     $.each(arr, function (key, val) {
-                        if(key == (arr.length-1)) {//Костыль , чтоб отображать только самую нижнюю надпись
+                        if(key === 0 || key === (arr.length-1)) {//Костыль , чтоб отображать только самую нижнюю надпись
                             console.log(val);
                             $('input[name*="' + val + '"').last().parent().parent().after(errorText);
                         }

@@ -144,7 +144,7 @@
                     Card Number
                 </h2>
                 <div class="inputWrap">
-                    <input type="text"  name="number" class="formInput" placeholder="">
+                    <input type="text"  name="number" class="formInput" placeholder="" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="16">
                     <span class="bookPayment__ico bookPayment__ico--first">
                     <img src="/img/mc2.png" alt="">
                   </span>
