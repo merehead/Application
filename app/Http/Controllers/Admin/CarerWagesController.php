@@ -26,7 +26,7 @@ class CarerWagesController extends AdminController
 
         $this->vars['carers'] = $data;
         $this->content = view(config('settings.theme') . '.CarerWages')->with($this->vars)->render();
-        
+
         return $this->renderOutput();
     }
 
