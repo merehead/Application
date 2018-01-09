@@ -605,6 +605,7 @@ $(document).ready(function () {
         //var start_time = $(that).parent().parent().parent().find('.picker-box')[0];
         var current_time = new Date();
         var time = toDate($(that).val().substring(0, 5),"h:m");
+
         var minutes = time.getMinutes();
         var hours = time.getHours();
         $('.checkbox-date').prop('checked',$(that).val().indexOf('PM')>0);
@@ -614,7 +615,9 @@ $(document).ready(function () {
         if(hours==0 && $(that).hasClass('start')) {
             var minutes = start_time.getMinutes();
             hours = current_time.getHours() + 1;
-            $('.checkbox-date').prop('checked',hours>11);
+            var pm = (hours > 11 && hours !== 24);//if > 11 and not 23, then pm
+            
+            $('.checkbox-date').prop('checked', pm);
             if(hours>12) hours=hours-12;
             var timeAMPM = ($('.checkbox-date').is(':checked'))?'PM':'AM';
         }
