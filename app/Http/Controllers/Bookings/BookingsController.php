@@ -34,6 +34,7 @@ class BookingsController extends FrontController implements Constants
 
         if ($request->ajax()) // This is what i am needing.
         {
+
             return 'bookings/' . $booking->id . '/purchase';
         }
 

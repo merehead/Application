@@ -32,16 +32,24 @@ class BookingController extends AdminController
 
         $filter = FALSE;
         //$orderDirection = 'desc';
-
-        if (isset($input['filter']) && $input['filter'] != 0)
-            $filter_status = $input['filter']; else $filter_status = FALSE;
-        
-        if (isset($input['userName'])) $filter = ['first_name', '=', $input['userName']]; else $filter = FALSE;
+        //Проверка, указан ли фильтр менюшки
+        if (isset($input['filter']) && $input['filter'] != 0){
+            $filter_status = $input['filter'];
+        } else {
+            $filter_status = FALSE;
+        }
+        //Проверка указан ли имя пользователя
+        if (isset($input['userName'])) {
+            $filter = ['first_name', '=', $input['userName']];
+        } else {
+            $filter = FALSE;
+        }
 
         $this->title = 'Admin Bookings Details';
 
-//        $bookings = $this->booking->get('*', FALSE, true,  $filter, ['id','desc']);
+//      $bookings = $this->booking->get('*', FALSE, true,  $filter, ['id','desc']);
         $bookings = Booking::with('bookingServiceUser')->with('bookingCarerProfile')->with('bookingPurchaserProfile')->get();
+
 
         $userName = (isset($input['userName'])) ? $input['userName'] : false;
         if (!empty($userName))
@@ -50,7 +58,13 @@ class BookingController extends AdminController
                 if (strpos(strtolower($item->bookingServiceUser->first_name), strtolower($userName)) !== false
                     || strpos(strtolower($item->bookingCarerProfile->first_name), strtolower($userName)) !== false
                     || strpos(strtolower($item->bookingPurchaserProfile->first_name), strtolower($userName)) !== false
+                    || strpos(strtolower($item->bookingServiceUser->family_name), strtolower($userName)) !== false
+                    || strpos(strtolower($item->bookingCarerProfile->family_name), strtolower($userName)) !== false
+                    || strpos(strtolower($item->bookingPurchaserProfile->family_name), strtolower($userName)) !== false
                     || $item->id == (int)$userName
+                    || $item->bookingServiceUser->id == (int)$userName
+                    || $item->bookingCarerProfile->id == (int)$userName
+                    || $item->bookingPurchaserProfile->id == (int)$userName
                     || in_array((int)$userName, $appointmentsIds)
                     )
                     return true;
