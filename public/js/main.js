@@ -2397,9 +2397,13 @@ $(document).ready(function () {
                     var arr = $.map(data, function (key, el) {
                         return el.replace('.', '][').replace('.', '][').replace('.', '][').replace('.', '][').replace('bookings]', 'bookings') + ']'
                     });
+                    console.debug(arr);
+
                     $.each(arr, function (key, val) {
-                        console.log(val);
-                        $('input[name*="' + val + '"').last().parent().parent().after(errorText);
+                        if(key == (arr.length-1)) {//Костыль , чтоб отображать только самую нижнюю надпись
+                            console.log(val);
+                            $('input[name*="' + val + '"').last().parent().parent().after(errorText);
+                        }
                     });
                 }
             }
