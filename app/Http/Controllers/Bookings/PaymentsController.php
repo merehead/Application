@@ -7,12 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\FrontController;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\Comparator\Book;
 
 class PaymentsController extends FrontController
 {
     public function payment_form(Request $request, Booking $booking){
-        if($booking->status_id != 1)
+        if($booking->purchaser_id != Auth::user()->id)
             return redirect()->route('mainHomePage');
         $this->template = config('settings.frontTheme') . '.templates.bookings';
         $this->title = 'Payment';

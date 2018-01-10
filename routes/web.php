@@ -135,7 +135,7 @@ Route::get('/unsubscribe/{id}', 'HomePageController@unsubscribe')->name('unsubsc
 Route::group(['middleware' => ['auth']], function () {
     //todo все роуты, на которые не могут заходить не залогиненные должны быть в этой группе
     //todo а не дублировать проверку на каждой странице
-    Route::get('/bookings/{booking}/purchase', 'Bookings\PaymentsController@payment_form');
+    Route::get('/bookings/{booking}/purchase', 'Bookings\PaymentsController@payment_form')->name('bookingPurchase');
 });
 
 

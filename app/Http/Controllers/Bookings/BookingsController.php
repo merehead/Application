@@ -296,6 +296,10 @@ class BookingsController extends FrontController implements Constants
 
     public function accept(Booking $booking, StripeService $stripeService)
     {
+
+        $purchaser = User::find($booking->purchaser_id);
+        $carer_users = User::find($booking->carer_id);
+
         if ($booking->payment_method == 'credit_card') {
             try {
                 if(substr($booking->card_token, 0, 3) == 'cus'){
@@ -304,8 +308,77 @@ class BookingsController extends FrontController implements Constants
                     $purchase = PaymentTools::createCharge($booking->purchaser_price * 100, $booking->card_token, $booking->id);
                 }
 
+
+                //Set prices for appointments
+                $appointments = $booking->appointments()->get();
+                foreach ($appointments as $appointment) {
+                    $appointment->price_for_purchaser = $appointment->purchaser_price;
+                    $appointment->price_for_carer = $appointment->carer_price;
+                    $appointment->save();
+                }
+
+                //Messages for workroom
+                BookingsMessage::create([
+                    'booking_id' => $booking->id,
+                    'type' => 'status_change',
+                    'new_status' => 'in_progress',
+                ]);
+
+                //Set status of booking "in progress"
+                $booking->status_id = $booking->carer_status_id = $booking->purchaser_status_id = self::IN_PROGRESS;
+                $booking->save();
+
+                $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
+                $carerProfile = CarersProfile::find($booking->carer_id);
+                $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
+
+                $text = view(config('settings.frontTheme') . '.emails.conform_booking')->with([
+                    'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => (Auth::user()->user_type_id == 3 ? 'purchaser':'carer'),
+                    'first_appointment_day'=>$booking->appointments()->get()->first()->date_start, 'date', 'time'
+                ])->render();
+
+                DB::table('mails')
+                    ->insert(
+                        [
+                            'email' => (Auth::user()->user_type_id == 3 ? $purchaser->email:$carer_users->email),
+                            'subject' => 'Booking confirmed',
+                            'text' => $text,
+                            'time_to_send' => Carbon::now(),
+                            'status' => 'new'
+                        ]);
+
+                return response(['status' => 'success']);
+
+
             } catch (\Exception $ex) {
-                return response($this->formatResponse('error', $ex->getMessage()));
+
+                $text = view(config('settings.frontTheme') . '.emails.booking_payment_failed')->with([
+                    'purchaser' => $purchaser, 'booking' => $booking])->render();
+
+                DB::table('mails')
+                    ->insert(
+                        [
+                            'email' => $purchaser->email,
+                            'subject' => 'Not enough money|bonuses on wallet (stripe errors)',
+                            'text' => $text,
+                            'time_to_send' => Carbon::now(),
+                            'status' => 'new'
+                        ]);
+
+                $text = view(config('settings.frontTheme') . '.emails.booking_payment_failed')->with([
+                    'purchaser' => $purchaser, 'carer' => $carer_users, 'booking' => $booking])->render();
+
+                DB::table('mails')
+                    ->insert(
+                        [
+                            'email' => 'nik@holm.care',
+                            'subject' => 'Not enough money|bonuses on wallet (stripe errors)',
+                            'text' => $text,
+                            'time_to_send' => Carbon::now(),
+                            'status' => 'new'
+                        ]);
+
+                return response($this->formatResponse('error', 'Sorry. But there has been an error with the booking and it is not confirmed. You might receive another message for you to confirm at some point.'));
             }
         } else {
             try {
@@ -314,48 +387,6 @@ class BookingsController extends FrontController implements Constants
                 return response($this->formatResponse('error', $ex->getMessage()));
             }
         }
-
-        //Set prices for appointments
-        $appointments = $booking->appointments()->get();
-        foreach ($appointments as $appointment) {
-            $appointment->price_for_purchaser = $appointment->purchaser_price;
-            $appointment->price_for_carer = $appointment->carer_price;
-            $appointment->save();
-        }
-
-        //Messages for workroom
-        BookingsMessage::create([
-            'booking_id' => $booking->id,
-            'type' => 'status_change',
-            'new_status' => 'in_progress',
-        ]);
-
-        //Set status of booking "in progress"
-        $booking->status_id = $booking->carer_status_id = $booking->purchaser_status_id = self::IN_PROGRESS;
-        $booking->save();
-
-        $purchaser = User::find($booking->purchaser_id);
-        $carer_users = User::find($booking->carer_id);
-        $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
-        $carerProfile = CarersProfile::find($booking->carer_id);
-        $serviceUser = ServiceUsersProfile::find($booking->service_user_id);
-
-        $text = view(config('settings.frontTheme') . '.emails.conform_booking')->with([
-            'purchaser' => $purchaserProfile, 'booking' => $booking, 'serviceUser' => $serviceUser, 'carer' => $carerProfile, 'sendTo' => (Auth::user()->user_type_id == 3 ? 'purchaser':'carer'),
-            'first_appointment_day'=>$booking->appointments()->get()->first()->date_start, 'date', 'time'
-        ])->render();
-
-        DB::table('mails')
-            ->insert(
-                [
-                    'email' => (Auth::user()->user_type_id == 3 ? $purchaser->email:$carer_users->email),
-                    'subject' => 'Booking confirmed',
-                    'text' => $text,
-                    'time_to_send' => Carbon::now(),
-                    'status' => 'new'
-                ]);
-
-        return response(['status' => 'success']);
     }
 
     public function reject(Booking $booking)

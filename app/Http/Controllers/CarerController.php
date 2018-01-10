@@ -220,7 +220,6 @@ class CarerController extends FrontController implements Constants
 
     public function bookingFilter($status = 'all',Request $request)
     {
-
         //todo костыль на логаут
         if (!Auth::check()) {
             if(request()->has('refer')){
