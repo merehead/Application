@@ -226,26 +226,26 @@ WHERE `carer_id` = ".$this->id." and accept = 1 order by `booking_overviews`.`cr
 
     //prices (purchaser pay)
     public function getPriceAttribute(){
-        $fee = Fees::find(1);
-        if($fee){
-            return $fee->carer_rate + $fee->amount;
-        }
+//        $fee = Fees::find(1);
+//        if($fee){
+//            return $fee->carer_rate + $fee->amount;
+//        }
 
         return self::PURCHASER_RATE_DAY;
     }
     public function getNightPriceAttribute(){
-        $fee = Fees::find(2);
-        if($fee){
-            return $fee->carer_rate + $fee->amount;
-        }
+//        $fee = Fees::find(2);
+//        if($fee){
+//            return $fee->carer_rate + $fee->amount;
+//        }
 
         return self::PURCHASER_RATE_NIGHT;
     }
     public function getHolidayPriceAttribute(){
-        $fee = Fees::find(3);
-        if($fee){
-            return $fee->carer_rate + $fee->amount;
-        }
+//        $fee = Fees::find(3);
+//        if($fee){
+//            return $fee->carer_rate + $fee->amount;
+//        }
 
         return self::PURCHASER_RATE_HOLIDAYS;
     }
