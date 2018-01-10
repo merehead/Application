@@ -144,7 +144,7 @@
                     Card Number
                 </h2>
                 <div class="inputWrap">
-                    <input type="text"  name="number" class="formInput" placeholder="" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="16">
+                    <input type="text"  name="number" class="formInput" placeholder="" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="19">
                     <span class="bookPayment__ico bookPayment__ico--first">
                     <img src="/img/mc2.png" alt="">
                   </span>
@@ -161,12 +161,12 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="inputWrap">
-                                <input type="text" name="exp_month" class="formInput" placeholder="MM">
+                                <input type="text" name="exp_month" class="formInput" placeholder="MM" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="2">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="inputWrap inputWrap--md-margin">
-                                <input type="text" name="exp_year" class="formInput" placeholder="YY">
+                                <input type="text" name="exp_year" class="formInput" placeholder="YY" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="2">
                             </div>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
                         CVC CODE
                     </h2>
                     <div class="inputWrap">
-                        <input type="text" name="cvc" class="formInput" placeholder="">
+                        <input type="text" name="cvc" class="formInput" placeholder="" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="3">
                     </div>
                 </div>
             </div>

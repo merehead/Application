@@ -47,7 +47,7 @@
                                 Card Number
                             </h2>
                             <div class="inputWrap">
-                                <input type="text" class="formInput" id="cardNumber" placeholder="4534 3333 3333 3333 3333" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="16">
+                                <input type="text" class="formInput" id="cardNumber" placeholder="4534 3333 3333 3333 3333" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="19">
                                 <span class="bookPayment__ico"><img src="{{asset("img/visa.png")}}" alt=""></span>
                                 <span style="right: 42px;" class="bookPayment__ico"><img src="{{asset("img/mc2.png")}}"
                                                                               alt=""></span>
@@ -62,14 +62,14 @@
                                     <div class="bookPayment__halfColumn">
                                         <div class="formField">
                                             <div class="inputWrap">
-                                                <input type="text" id="cardMonth" class="formInput" placeholder="MM">
+                                                <input type="text" id="cardMonth" class="formInput" placeholder="MM" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="2">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="bookPayment__halfColumn">
                                         <div class="formField">
                                             <div class="inputWrap">
-                                                <input type="text" id="cardYear" class="formInput" placeholder="YY">
+                                                <input type="text" id="cardYear" class="formInput" placeholder="YY" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="2">
                                             </div>
                                         </div>
                                     </div>
@@ -82,7 +82,7 @@
                                         cvc code
                                     </h2>
                                     <div class="inputWrap">
-                                        <input type="text" id="cardCVC" class="formInput" placeholder="202">
+                                        <input type="text" id="cardCVC" class="formInput" placeholder="202" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="3">
                                     </div>
                                 </div>
                             </div>
@@ -265,4 +265,5 @@
             hideSpinner();
         });
     });
+
 </script>
