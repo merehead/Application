@@ -146,7 +146,7 @@
                        class="t-content">
                     <tr>
                         <td style="color:#272c2b;padding: 30px 10px; background: #f9f9f9; " valign="top" class="">
-                            <a href="{{route('carerBooking',['status'=>'new'])}}?refer=booking" class=""
+                            <a href="{{route('viewBookingDetails',['booking'=>$booking->id])}}" class=""
                                style="
                     display: block;
                     width: 240px;
