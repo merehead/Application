@@ -40,7 +40,7 @@
                             @else
                                 You booked <a href="{{route('carerPublicProfile',['carerPublicProfile'=>$carer->id])}}">{{$carer->first_name}}</a>
                                 on {{$booking->date_start}} - {{$booking->date_end}}.
-                                You can check your booking details by going to your <a href="{{env('APP_URL')}}bookings/{{$booking->id}}/details">bookings page</a>.
+                                You can check your booking details by going to your <a href="{{route('viewBookingDetails',['booking'=>$booking->id])}}">bookings page</a>.
                             @endif
                         </p>
                     </td>
