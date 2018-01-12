@@ -59,17 +59,21 @@ class PurchaserRegistrationController extends FrontController
             $this->vars = array_add($this->vars,'activeStep',1);
             $this->vars = array_add($this->vars,'activeSubStep',0);
         } else {
-
             $purchasersProfile = PurchasersProfile::findOrFail($user->id);
+            $serviceUsersProfile = $purchasersProfile->serviceUsers->first();
+            //Оба урла как для залогиненного так и для разлогиненного пурчейсера работают правильно
+            //По умолчанию в письме генерится урл для разлогиненного, но если пурчейсер залогинен, то редиректим его по своему урлу
+            return redirect(route('ServiceUserRegistration', ['serviceUserProfile'=>$serviceUsersProfile->id]));
 
             if ($purchasersProfile->registration_status == 'completed' && !$purchasersProfile->is_uncompleted_service_user) {
-                return redirect(route('purchaserSettings'));
+                //return redirect(route('purchaserSettings'));
+
             }
 
 
             $this->vars = array_add($this->vars, 'purchasersProfileID', $purchasersProfile->id);
             $this->vars = array_add($this->vars, 'purchasersProfile', $purchasersProfile);
-
+            //dd($this->purchaserProfile->getNextStep());//Step4_1_2_1_Thank__you_Sign_up
             if ($this->purchaserProfile->getNextStep() == 'Step4_purchaserRegistration') {
 
                 $this->vars = array_add($this->vars, 'user', $this->user);
@@ -119,7 +123,8 @@ class PurchaserRegistrationController extends FrontController
                 $this->vars = array_add($this->vars, 'user', $this->user);
                 $this->vars = array_add($this->vars, 'serviceUsersProfile', $serviceUsersProfile);
             }
-
+            //dd($this->purchaserProfile->getActiveStep($user->id));//2
+            //dd($this->purchaserProfile->getActiveSubStep($user->id));//4
             $this->vars = array_add($this->vars,'activeStep',$this->purchaserProfile->getActiveStep($user->id));
             $this->vars = array_add($this->vars,'activeSubStep',$this->purchaserProfile->getActiveSubStep($user->id));
 

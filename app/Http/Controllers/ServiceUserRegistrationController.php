@@ -33,7 +33,6 @@ class ServiceUserRegistrationController extends FrontController
     }
 
     public function index($serviceUserProfileId){
-
         if(!Auth::check()) return redirect('/purchaser-registration');
 
         $serviceUserProfile = ServiceUsersProfile::findOrFail($serviceUserProfileId);
@@ -140,9 +139,12 @@ class ServiceUserRegistrationController extends FrontController
 
         $user = Auth::user();
 
+        $continueRegistrationLink = '';
+
         if(!$user) {
             return redirect('/');
         }
+
 
         $this->title = 'Purchaser Registration';
 
@@ -160,9 +162,12 @@ class ServiceUserRegistrationController extends FrontController
         $serviceProfile = ServiceUsersProfile::findOrFail($id);
 
 
+
+
         $text = view(config('settings.frontTheme') . '.emails.continue_sign_up_service_user')->with([
             'user' => $user,
-            'like_name'=>$serviceProfile->like_name
+            'like_name'=>$serviceProfile->like_name,
+            'serviceUserId' => $serviceProfile->id
         ])->render();
 
         DB::table('mails')

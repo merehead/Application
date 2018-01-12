@@ -76,6 +76,8 @@
                   color: #7bb7dc;
                   font-weight: 700;
                   text-decoration: underline;">
+
+
                             Please click here to complete your registration.
                         </a>
                     </td>

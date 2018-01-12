@@ -52,9 +52,7 @@
         <td style="color:#272c2b;padding:40px ;">
             <table cellpadding="0" cellspacing="0" border="0" style="overflow-x: auto;border: 1px solid rgb(225, 225, 225);box-shadow: 0px 0px 26.73px 0.27px rgba(0, 0, 0, 0.11);border-collapse: collapse;   margin: 0; " width="100%" class="t-content">
                 <tr>
-
-
-
+                    
                     <?php
 
                     //$patchToPurchaserAvatar = getcwd().'/img/profile_photos/'.$purchaserProfile->id.'.png';
@@ -146,7 +144,7 @@
                        class="t-content">
                     <tr>
                         <td style="color:#272c2b;padding: 30px 10px; background: #f9f9f9; " valign="top" class="">
-                            <a href="{{route('viewBookingDetails',['booking'=>$booking->id])}}" class=""
+                            <a href="{{route('carerBooking',['status'=>'new'])}}?refer=booking" class=""
                                style="
                     display: block;
                     width: 240px;
