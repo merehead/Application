@@ -112,11 +112,7 @@ class AppointmentsController extends Controller implements Constants
 
         //$email = $user->email;//ALEXX
 
-        $receiver = DB::table('bookings')
-            ->leftJoin('users', 'users.id', '=', 'bookings.purchaser_id')
-            ->where('bookings.id', $booking->id)
-            ->get();
-        $email = $receiver[0]->email;
+
 
         $purchaserProfile = PurchasersProfile::find($booking->purchaser_id);
         $carerProfile = CarersProfile::find($booking->carer_id);
@@ -124,6 +120,13 @@ class AppointmentsController extends Controller implements Constants
 
         if($user->user_type_id == 3){
             //If Carer
+
+            $receiver = DB::table('bookings')
+                ->leftJoin('users', 'users.id', '=', 'bookings.purchaser_id')
+                ->where('bookings.id', $booking->id)
+                ->get();
+            $email = $receiver[0]->email;
+
             $appointment->status_id = self::APPOINTMENT_STATUS_CANCELLED;
             if(!$appointment->cancelable)
                 $appointment->carer_status_id =  self::APPOINTMENT_USER_STATUS_REJECTED;
@@ -171,23 +174,31 @@ class AppointmentsController extends Controller implements Constants
                 $message = 'Sorry. '.$appointment->booking->bookingServiceUser->full_name.' has cancelled your appointment for  '.$appointment->formatted_date_start.' '.$appointment->formatted_time_from.'. Please check your account for more details. The Holm Team';
                 SmsTools::sendSmsToCarer($message, $appointment->booking->bookingCarerProfile);
             }
+
+            $receiver = DB::table('bookings')
+                ->leftJoin('users', 'users.id', '=', 'bookings.carer_id')
+                ->where('bookings.id', $booking->id)
+                ->get();
+            $email = $receiver[0]->email;
+
+            $text = view(config('settings.frontTheme') . '.emails.appointment_cancelled')->with([
+                'purchaser' => $purchaserProfile, 'booking' => $booking, 'appointment' => $appointment, 'serviceUser' => $serviceUser, 'carer' =>
+                    $carerProfile, 'sendTo' => 'carer', 'user_like_name' => $carerProfile->full_name
+            ])->render();
+            DB::table('mails')
+                ->insert(
+                    [
+                        'email' => $email,
+                        'subject' => 'Cancelling appointment on HOLM',
+                        'text' => $text,
+                        'time_to_send' => Carbon::now(),
+                        'status' => 'new'
+                    ]);
         }
 
-        /* ALEXX - задубленное?
-        $text = view(config('settings.frontTheme') . '.emails.appointment_cancelled')->with([
-            'purchaser' => $purchaserProfile, 'booking' => $booking, 'appointment' => $appointment, 'serviceUser' => $serviceUser, 'carer' =>
-                $carerProfile, 'sendTo' => 'carer', 'user_like_name' => $carerProfile->full_name
-        ])->render();
-        DB::table('mails')
-            ->insert(
-                [
-                    'email' => $email,
-                    'subject' => 'Cancelling appointment on HOLM',
-                    'text' => $text,
-                    'time_to_send' => Carbon::now(),
-                    'status' => 'new'
-                ]);
-        */
+
+
+
         $appointment->save();
 
         return response(['status' => 'success']);
