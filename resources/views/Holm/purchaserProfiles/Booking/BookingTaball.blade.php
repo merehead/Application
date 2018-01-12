@@ -50,7 +50,7 @@
                         <div class="totalTitle">
                             <p>Total </p>
                         </div>
-                        <p class="totalPrice totalPrice--smaller">£{{$completedAmount}}</p>
+                        <p class="totalPrice totalPrice--smaller">£{{number_format($completedAmount,2,'.',' ')}}</p>
                     </div>
                 </div>
             @endif
