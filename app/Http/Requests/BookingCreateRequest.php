@@ -34,8 +34,7 @@ class BookingCreateRequest extends FormRequest
      */
     public function authorize()
     {
-        $purchaser = Auth::user();
-        return $purchaser && $purchaser->user_type_id = 1;
+        return true;
     }
 
     /**

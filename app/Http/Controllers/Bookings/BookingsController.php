@@ -44,7 +44,6 @@ class BookingsController extends FrontController implements Constants
 
     public function calculateBookingPrice(BookingCreateRequest $request)
     {
-
         DB::beginTransaction();
 
         $booking = $this->createBooking($request);

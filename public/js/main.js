@@ -93,7 +93,7 @@ function isHTML(str) {
 function calculate_price() {
     var form = $('#bookings__form');
     var token = $(form).find('input[name="_token"]').val();
-    console.log(form.serialize());
+
     $.ajax({
         url: '/bookings/calculate_price',
         headers: {'X-CSRF-TOKEN': token},
