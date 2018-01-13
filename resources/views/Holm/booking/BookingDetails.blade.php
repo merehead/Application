@@ -477,13 +477,13 @@
     $('.changeBookingStatus').click(function () {
         var booking_id = $(this).attr('data-booking_id');
         var status = $(this).attr('data-status');
-        console.log(booking_id+' '+status);/*
+
         $.post('/bookings/'+booking_id+'/'+status, function (data) {
             if(data.status == 'success'){
                 location.reload();
             }
         });
-        */
+
     });
 
     function messageLengthCheck(form) {
